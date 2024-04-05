@@ -4,7 +4,8 @@
     "baseUrl": ".", // if i'm not using baseUrl option i have to add . in every single path beginning as EX : "paths":{ "@/":["./app/*"]} || see no dot in /app/*
     "paths": {
       "@/*": ["app/*"],
-      "@components/*": ["app/components/*"]
+      "@components/*": ["app/components/*"],
+      "@styles/*": ["app/styles/*"]
     }
   }
 }

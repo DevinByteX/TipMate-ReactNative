@@ -9,6 +9,7 @@ module.exports = {
         alias: {
           '@': './app',
           "@components": "./app/components",
+          "@styles": "./app/styles"
         }
       }
     ]
