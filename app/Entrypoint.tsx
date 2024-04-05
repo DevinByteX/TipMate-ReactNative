@@ -1,8 +1,13 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {CustomText} from '@/components';
 
 const Entrypoint = () => {
-  return <View style={styles.mainContainer}></View>;
+  return (
+    <View style={styles.mainContainer}>
+      <CustomText />
+    </View>
+  );
 };
 
 export default Entrypoint;
