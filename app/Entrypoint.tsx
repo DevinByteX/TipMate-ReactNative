@@ -1,15 +1,16 @@
 import React from 'react';
 import {Pressable, Text, View} from 'react-native';
-import {CustomText} from '@/components';
 import {
   UnistylesRuntime,
   createStyleSheet,
   useStyles,
 } from 'react-native-unistyles';
 import '@styles/uniStyles';
+import {lightTheme} from '@styles/themes';
+import {CustomText} from '@components';
 
 const Entrypoint = () => {
-  const {styles} = useStyles(stylesheet);
+  const {styles, theme} = useStyles(stylesheet);
 
   return (
     <View style={styles.mainContainer}>
@@ -22,6 +23,10 @@ const Entrypoint = () => {
         }>
         <Text>Switch theme</Text>
       </Pressable>
+      <Text style={{color: theme.colors.typography}}>
+        {JSON.stringify(lightTheme)}
+      </Text>
+      <CustomText />
     </View>
   );
 };
