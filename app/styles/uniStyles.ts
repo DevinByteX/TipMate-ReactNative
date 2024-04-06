@@ -1,4 +1,4 @@
-import { UnistylesRegistry } from 'react-native-unistyles'
+import { UnistylesRegistry } from 'react-native-unistyles';
 import { breakpoints } from './breakpoints';
 import { lightTheme, darkTheme, premiumTheme } from './themes';
 
@@ -26,10 +26,3 @@ UnistylesRegistry
     .addConfig({
         adaptiveThemes: true
     })
-
-export {
-    lightTheme,
-    darkTheme,
-    premiumTheme,
-    breakpoints
-}
