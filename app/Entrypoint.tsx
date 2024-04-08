@@ -8,26 +8,29 @@ import {
 import '@styles/uniStyles';
 import {lightTheme} from '@styles/themes';
 import {CustomText} from '@components';
+import {NavigationContainer} from '@react-navigation/native';
 
 const Entrypoint = () => {
   const {styles, theme} = useStyles(stylesheet);
 
   return (
-    <View style={styles.mainContainer}>
-      <Pressable
-        style={styles.button}
-        onPress={() =>
-          UnistylesRuntime.setTheme(
-            UnistylesRuntime.themeName === 'light' ? 'dark' : 'light',
-          )
-        }>
-        <Text>Switch theme</Text>
-      </Pressable>
-      <Text style={{color: theme.colors.typography}}>
-        {JSON.stringify(lightTheme)}
-      </Text>
-      <CustomText />
-    </View>
+    <NavigationContainer>
+      <View style={styles.mainContainer}>
+        <Pressable
+          style={styles.button}
+          onPress={() =>
+            UnistylesRuntime.setTheme(
+              UnistylesRuntime.themeName === 'light' ? 'dark' : 'light',
+            )
+          }>
+          <Text>Switch theme</Text>
+        </Pressable>
+        <Text style={{color: theme.colors.typography}}>
+          {JSON.stringify(lightTheme)}
+        </Text>
+        <CustomText />
+      </View>
+    </NavigationContainer>
   );
 };
 
