@@ -5,7 +5,8 @@
     "paths": {
       "@/*": ["app/*"],
       "@components": ["app/components/index"], // if you are refering common index file in folder you should add "/index" end of the path
-      "@styles/*": ["app/styles/*"] // if we want to import all the files in particular folder we should use "*", end of the path
+      "@styles/*": ["app/styles/*"], // if we want to import all the files in particular folder we should use "*", end of the path
+      "@navigation/*": ["app/navigation/*"]
     }
   }
 }
