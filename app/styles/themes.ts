@@ -3,7 +3,8 @@ const sharedColors = {
     blood: '#ff6b6b',
     sky: '#48dbfb',
     primary_light: '#E3E9EC',
-    primary_dark: '#333333'
+    primary_dark: '#333333',
+    primary_accent: '#F4AB41'
 }
 
 export const lightTheme = {
@@ -12,7 +13,7 @@ export const lightTheme = {
         backgroundColor: sharedColors.primary_light,
         headerBGColor: sharedColors.primary_light,
         typography: '#000000',
-        accent: sharedColors.blood
+        accent: sharedColors.primary_accent
     },
     margins: {
         sm: 2,
@@ -29,7 +30,7 @@ export const darkTheme = {
         backgroundColor: sharedColors.primary_dark,
         headerBGColor: sharedColors.primary_dark,
         typography: '#ffffff',
-        accent: sharedColors.barbie
+        accent: sharedColors.primary_accent
     },
     margins: {
         sm: 2,
@@ -46,7 +47,7 @@ export const premiumTheme = {
         backgroundColor: sharedColors.sky,
         headerBGColor: sharedColors.sky,
         typography: '#76278f',
-        accent: '#000000'
+        accent: sharedColors.barbie
     },
     margins: {
         sm: 2,
