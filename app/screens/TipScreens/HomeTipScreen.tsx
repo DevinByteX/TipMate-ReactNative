@@ -1,10 +1,12 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import {View, Text} from 'react-native';
+// custom component
+import {StyledHeader} from '@/components';
 
 const HomeTipScreen = () => {
   return (
     <View>
-      <Text>HomeTipScreen</Text>
+      <StyledHeader />
     </View>
   );
 };
