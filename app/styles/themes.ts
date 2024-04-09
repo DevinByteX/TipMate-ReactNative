@@ -9,7 +9,7 @@ const sharedColors = {
 export const lightTheme = {
     colors: {
         ...sharedColors,
-        backgroundColor: '#ffffff',
+        backgroundColor: sharedColors.primary_light,
         headerBGColor: sharedColors.primary_light,
         typography: '#000000',
         accent: sharedColors.blood
@@ -26,7 +26,7 @@ export const lightTheme = {
 export const darkTheme = {
     colors: {
         ...sharedColors,
-        backgroundColor: '#000000',
+        backgroundColor: sharedColors.primary_dark,
         headerBGColor: sharedColors.primary_dark,
         typography: '#ffffff',
         accent: sharedColors.barbie
@@ -43,7 +43,7 @@ export const darkTheme = {
 export const premiumTheme = {
     colors: {
         ...sharedColors,
-        backgroundColor: sharedColors.barbie,
+        backgroundColor: sharedColors.sky,
         headerBGColor: sharedColors.sky,
         typography: '#76278f',
         accent: '#000000'
