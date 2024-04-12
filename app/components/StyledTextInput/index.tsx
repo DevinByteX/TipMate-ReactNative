@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  KeyboardType,
-  ReturnKeyType,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { TextInput, TextInputProps, View } from 'react-native';
 import {
   UnistylesRuntime,
   createStyleSheet,
@@ -14,14 +8,11 @@ import {
 
 type styledTextInputProps = {
   placeholderText?: string;
-  keyboardType?: KeyboardType;
-  returnKeyType?: ReturnKeyType;
-};
+} & TextInputProps;
 
 export const StyledTextInput = ({
   placeholderText = 'Tap to Enter Your Bill Amount',
-  keyboardType,
-  returnKeyType,
+  ...restProps
 }: styledTextInputProps) => {
   const { styles } = useStyles(stylesheet);
 
@@ -30,8 +21,7 @@ export const StyledTextInput = ({
       <TextInput
         style={styles.textInputStyles}
         placeholder={placeholderText}
-        keyboardType={keyboardType}
-        returnKeyType={returnKeyType}
+        {...restProps}
       />
     </View>
   );
