@@ -17,7 +17,11 @@ const HomeTipScreen = () => {
         {/* Total Amount container */}
         <View style={styles.totalAmountContainer}>
           <Text style={styles.titleText}>TOTAL AMOUNT</Text>
-          <StyledTextInput keyboardType="numeric" returnKeyType="done" />
+          <StyledTextInput
+            placeholderText={'Tap to Enter Your Bill Amount'}
+            returnKeyType={'done'}
+            keyboardType={'numeric'}
+          />
         </View>
       </View>
     </>
