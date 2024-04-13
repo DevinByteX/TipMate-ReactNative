@@ -47,13 +47,13 @@ const HomeTipScreen = () => {
             <View
               style={{
                 flex: 1,
-                paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+                paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
+                paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
               }}>
               <Text
                 style={{
                   fontSize: 40,
                   fontWeight: '800',
-                  paddingEnd: (UnistylesRuntime.screen.width * 3) / 100,
                   color: 'white',
                 }}
                 adjustsFontSizeToFit={true}
@@ -61,7 +61,7 @@ const HomeTipScreen = () => {
                 numberOfLines={1}>
                 $973.69
               </Text>
-              <Text style={{ fontSize: 14, fontWeight: '600', color: 'white' }}>
+              <Text style={{ fontSize: 12, fontWeight: '600', color: 'white' }}>
                 Total
               </Text>
             </View>
@@ -69,8 +69,133 @@ const HomeTipScreen = () => {
             <View
               style={{
                 flex: 1,
-                paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
-              }}></View>
+                paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+                paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+              }}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'flex-start',
+                  marginHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+                }}>
+                <Text
+                  style={{ fontSize: 12, fontWeight: '600', color: 'white' }}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  SUBTOTAL
+                </Text>
+                <Text
+                  style={{ fontSize: 14, fontWeight: '800', color: 'white' }}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  $84.95
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'flex-end',
+                  marginHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+                }}>
+                <Text
+                  style={{ fontSize: 12, fontWeight: '600', color: 'white' }}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  TIP
+                </Text>
+                <Text
+                  style={{ fontSize: 14, fontWeight: '800', color: 'white' }}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  $12.74
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        {/* Total Bill Container */}
+        <View style={styles.perPersonBillAmounts}>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '100%',
+            }}>
+            <View
+              style={{
+                flex: 1,
+                paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
+                paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+              }}>
+              <Text
+                style={{
+                  fontSize: 40,
+                  fontWeight: '800',
+                  color: 'white',
+                }}
+                adjustsFontSizeToFit={true}
+                allowFontScaling={false}
+                numberOfLines={1}>
+                $973.69
+              </Text>
+              <Text style={{ fontSize: 12, fontWeight: '600', color: 'white' }}>
+                Total
+              </Text>
+            </View>
+            <VerticalDevider />
+            <View
+              style={{
+                flex: 1,
+                paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+                paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+              }}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'flex-start',
+                  marginHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+                }}>
+                <Text
+                  style={{ fontSize: 12, fontWeight: '600', color: 'white' }}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  SUBTOTAL
+                </Text>
+                <Text
+                  style={{ fontSize: 14, fontWeight: '800', color: 'white' }}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  $84.95
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'flex-end',
+                  marginHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+                }}>
+                <Text
+                  style={{ fontSize: 12, fontWeight: '600', color: 'white' }}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  TIP
+                </Text>
+                <Text
+                  style={{ fontSize: 14, fontWeight: '800', color: 'white' }}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  $12.74
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
       </View>
@@ -101,13 +226,13 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     width: '100%',
     backgroundColor: '#444444',
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   perPersonBillAmountsTitleText: {
     color: colors.primary_accent,
     fontSize: 14,
     fontWeight: '800',
+    paddingStart: (UnistylesRuntime.screen.width * 3) / 100,
   },
 }));
 
