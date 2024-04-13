@@ -115,7 +115,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   mainInnerContainer: {
     flexDirection: 'row',
     width: '100%',
-    minHeight: (UnistylesRuntime.screen.height * 10) / 100,
+    minHeight: (UnistylesRuntime.screen.height * 10.5) / 100,
   },
   totalAmountsContainer: {
     flex: 1,
