@@ -47,7 +47,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     width: '100%',
     backgroundColor: '#444444',
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   totalAmountTitleText: {
