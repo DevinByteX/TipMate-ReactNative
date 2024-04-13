@@ -8,15 +8,8 @@ import {
 
 // Vertical Devider Component
 const VerticalDevider = () => {
-  return (
-    <View
-      style={{
-        backgroundColor: '#4b4b4b',
-        height: '100%',
-        width: StyleSheet.hairlineWidth * 8,
-      }}
-    />
-  );
+  const { styles, theme } = useStyles(stylesheet);
+  return <View style={styles.verticalDeviderStyles} />;
 };
 
 type StyledBillContainer = {
@@ -44,84 +37,53 @@ export const StyledBillContainer = ({
 }: StyledBillContainer) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
-    <View style={styles.perPersonBillAmounts}>
+    <View style={styles.superMainContainer}>
       {titleVisibility ? (
-        <Text style={styles.perPersonBillAmountsTitleText}>{titleText}</Text>
+        <Text style={styles.titleText}>{`${titleText}`}</Text>
       ) : null}
-      <View
-        style={{
-          flexDirection: 'row',
-          width: '100%',
-        }}>
-        <View
-          style={{
-            flex: 1,
-            paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-            paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-          }}>
+      <View style={styles.mainInnerContainer}>
+        <View style={styles.totalAmountsContainer}>
           <Text
-            style={{
-              fontSize: 40,
-              fontWeight: '800',
-              color: 'white',
-            }}
+            style={styles.totalDigitsStyles}
             adjustsFontSizeToFit={true}
             allowFontScaling={false}
             numberOfLines={1}>
-            {currencySymbol}
-            {totalAmount}
+            {`${currencySymbol}${totalAmount}`}
           </Text>
-          <Text style={{ fontSize: 12, fontWeight: '600', color: 'white' }}>
-            {totalText}
-          </Text>
+          <Text style={styles.subTextStyles}>{totalText}</Text>
         </View>
         <VerticalDevider />
-        <View
-          style={{
-            flex: 1,
-            paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-            paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-          }}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'flex-start',
-            }}>
+        <View style={styles.subTotalAndTipAmountsContainer}>
+          <View style={styles.subTotalContainer}>
             <Text
-              style={{ fontSize: 12, fontWeight: '600', color: 'white' }}
+              style={styles.subTextStyles}
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
-              {subTotalText}
+              {`${subTotalText}`}
             </Text>
             <Text
-              style={{ fontSize: 14, fontWeight: '800', color: 'white' }}
+              style={styles.subDigitStyles}
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
-              {currencySymbol}
-              {subTotalAmount}
+              {`${currencySymbol}${subTotalAmount}`}
             </Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'flex-end',
-            }}>
+          <View style={styles.tipContainer}>
             <Text
-              style={{ fontSize: 12, fontWeight: '600', color: 'white' }}
+              style={styles.subTextStyles}
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
               {tipText}
             </Text>
             <Text
-              style={{ fontSize: 14, fontWeight: '800', color: 'white' }}
+              style={styles.subDigitStyles}
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
-              {currencySymbol}
-              {totalTipAmount}
+              {`${currencySymbol}${totalTipAmount}`}
             </Text>
           </View>
         </View>
@@ -131,17 +93,59 @@ export const StyledBillContainer = ({
 };
 
 const stylesheet = createStyleSheet(({ colors }) => ({
-  perPersonBillAmounts: {
+  superMainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: '#444444',
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
-  perPersonBillAmountsTitleText: {
+  titleText: {
     color: colors.primary_accent,
     fontSize: 14,
     fontWeight: '800',
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  mainInnerContainer: {
+    flexDirection: 'row',
+    width: '100%',
+  },
+  totalAmountsContainer: {
+    flex: 1,
+    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  totalDigitsStyles: {
+    fontSize: 40,
+    fontWeight: '800',
+    color: 'white',
+  },
+  subTextStyles: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: 'white',
+  },
+  subDigitStyles: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: 'white',
+  },
+  subTotalAndTipAmountsContainer: {
+    flex: 1,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+  },
+  subTotalContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
+  tipContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  verticalDeviderStyles: {
+    backgroundColor: '#4b4b4b',
+    height: '100%',
+    width: StyleSheet.hairlineWidth * 8,
   },
 }));
