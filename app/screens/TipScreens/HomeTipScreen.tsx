@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 // custom component
 import { StyledHeader, StyledTextInput } from '@/components';
 import {
@@ -8,20 +8,70 @@ import {
   useStyles,
 } from 'react-native-unistyles';
 
+const VerticalDevider = () => {
+  return (
+    <View
+      style={{
+        backgroundColor: '#4b4b4b',
+        height: '100%',
+        width: StyleSheet.hairlineWidth * 8,
+      }}
+    />
+  );
+};
+
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
+
   return (
     <>
       <StyledHeader />
       <View style={styles.mainContainer}>
         {/* Total Amount container */}
         <View style={styles.totalAmountContainer}>
-          <Text style={styles.titleText}>TOTAL AMOUNT</Text>
+          <Text style={styles.totalAmountTitleText}>TOTAL AMOUNT</Text>
           <StyledTextInput
             placeholderText={'Tap to Enter Your Bill Amount'}
             returnKeyType={'done'}
             keyboardType={'numeric'}
           />
+        </View>
+        {/* Per Person Bill Container */}
+        <View style={styles.perPersonBillAmounts}>
+          <Text style={styles.perPersonBillAmountsTitleText}>PER PERSON</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '100%',
+            }}>
+            <View
+              style={{
+                flex: 1,
+                paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+              }}>
+              <Text
+                style={{
+                  fontSize: 40,
+                  fontWeight: '800',
+                  paddingEnd: (UnistylesRuntime.screen.width * 3) / 100,
+                  color: 'white',
+                }}
+                adjustsFontSizeToFit={true}
+                allowFontScaling={false}
+                numberOfLines={1}>
+                $973.69
+              </Text>
+              <Text style={{ fontSize: 14, fontWeight: '600', color: 'white' }}>
+                Total
+              </Text>
+            </View>
+            <VerticalDevider />
+            <View
+              style={{
+                flex: 1,
+                paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+              }}></View>
+          </View>
         </View>
       </View>
     </>
@@ -41,7 +91,20 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
-  titleText: {
+  totalAmountTitleText: {
+    color: colors.primary_accent,
+    fontSize: 14,
+    fontWeight: '800',
+  },
+  perPersonBillAmounts: {
+    marginVertical: (UnistylesRuntime.screen.height * 2) / 100,
+    width: '100%',
+    backgroundColor: '#444444',
+    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  perPersonBillAmountsTitleText: {
     color: colors.primary_accent,
     fontSize: 14,
     fontWeight: '800',
