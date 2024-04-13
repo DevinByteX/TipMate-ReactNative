@@ -222,7 +222,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     fontWeight: '800',
   },
   perPersonBillAmounts: {
-    marginVertical: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: '#444444',
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
