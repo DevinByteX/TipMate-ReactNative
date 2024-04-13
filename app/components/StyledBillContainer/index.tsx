@@ -38,10 +38,12 @@ export const StyledBillContainer = ({
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.superMainContainer}>
+      {/* Title Text */}
       {titleVisibility ? (
         <Text style={styles.titleText}>{`${titleText}`}</Text>
       ) : null}
       <View style={styles.mainInnerContainer}>
+        {/* Total Text Content Container */}
         <View style={styles.totalAmountsContainer}>
           <Text
             style={styles.totalDigitsStyles}
@@ -52,8 +54,11 @@ export const StyledBillContainer = ({
           </Text>
           <Text style={styles.subTextStyles}>{totalText}</Text>
         </View>
+        {/* Vertical Devider */}
         <VerticalDevider />
+        {/* Sub Total & Tip Text Content Container */}
         <View style={styles.subTotalAndTipAmountsContainer}>
+          {/* Sub Total Text Container */}
           <View style={styles.subTotalContainer}>
             <Text
               style={styles.subTextStyles}
@@ -70,6 +75,7 @@ export const StyledBillContainer = ({
               {`${currencySymbol}${subTotalAmount}`}
             </Text>
           </View>
+          {/* Tip Text Container */}
           <View style={styles.tipContainer}>
             <Text
               style={styles.subTextStyles}
