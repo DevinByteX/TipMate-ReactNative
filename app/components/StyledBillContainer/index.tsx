@@ -57,7 +57,7 @@ export const StyledBillContainer = ({
           style={{
             flex: 1,
             paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-            paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+            paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
           }}>
           <Text
             style={{
@@ -68,7 +68,8 @@ export const StyledBillContainer = ({
             adjustsFontSizeToFit={true}
             allowFontScaling={false}
             numberOfLines={1}>
-            {currencySymbol}{totalAmount}
+            {currencySymbol}
+            {totalAmount}
           </Text>
           <Text style={{ fontSize: 12, fontWeight: '600', color: 'white' }}>
             {totalText}
@@ -78,14 +79,13 @@ export const StyledBillContainer = ({
         <View
           style={{
             flex: 1,
-            paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+            paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
             paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
           }}>
           <View
             style={{
               flex: 1,
               justifyContent: 'flex-start',
-              marginHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
             }}>
             <Text
               style={{ fontSize: 12, fontWeight: '600', color: 'white' }}
@@ -99,14 +99,14 @@ export const StyledBillContainer = ({
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
-              {currencySymbol}{subTotalAmount}
+              {currencySymbol}
+              {subTotalAmount}
             </Text>
           </View>
           <View
             style={{
               flex: 1,
               justifyContent: 'flex-end',
-              marginHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
             }}>
             <Text
               style={{ fontSize: 12, fontWeight: '600', color: 'white' }}
@@ -120,7 +120,8 @@ export const StyledBillContainer = ({
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
-              {currencySymbol}{totalTipAmount}
+              {currencySymbol}
+              {totalTipAmount}
             </Text>
           </View>
         </View>
@@ -141,6 +142,6 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     color: colors.primary_accent,
     fontSize: 14,
     fontWeight: '800',
-    paddingStart: (UnistylesRuntime.screen.width * 3) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
 }));
