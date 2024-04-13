@@ -29,9 +29,9 @@ const HomeTipScreen = () => {
           />
         </View>
         {/* Per Person Bill Container */}
-        <StyledBillContainer />
+        <StyledBillContainer titleVisibility titleText='PER PERSON' totalAmount={100.34}/>
         {/* Total Bill Container */}
-        <StyledBillContainer />
+        <StyledBillContainer titleVisibility titleText='TOTAL BILL' totalAmount={132.27} />
       </View>
     </>
   );
