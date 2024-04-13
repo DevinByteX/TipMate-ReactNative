@@ -1,10 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-export const CustomText = () => {
+export const StyledText = () => {
   return (
     <View>
-      <Text style={styles.textStyles}>CustomText</Text>
+      <Text style={styles.textStyles}>StyledText</Text>
     </View>
   );
 };
