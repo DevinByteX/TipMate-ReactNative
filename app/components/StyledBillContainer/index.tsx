@@ -68,8 +68,7 @@ export const StyledBillContainer = ({
             adjustsFontSizeToFit={true}
             allowFontScaling={false}
             numberOfLines={1}>
-            {currencySymbol}
-            {totalAmount}
+            {currencySymbol}{totalAmount}
           </Text>
           <Text style={{ fontSize: 12, fontWeight: '600', color: 'white' }}>
             {totalText}
@@ -100,8 +99,7 @@ export const StyledBillContainer = ({
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
-              {currencySymbol}
-              {subTotalAmount}
+              {currencySymbol}{subTotalAmount}
             </Text>
           </View>
           <View
@@ -122,8 +120,7 @@ export const StyledBillContainer = ({
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
-              {currencySymbol}
-              {totalTipAmount}
+              {currencySymbol}{totalTipAmount}
             </Text>
           </View>
         </View>
