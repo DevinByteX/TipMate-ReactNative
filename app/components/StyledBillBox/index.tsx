@@ -102,7 +102,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   superMainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
-    backgroundColor: '#444444',
+    backgroundColor: colors.card,
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
@@ -125,17 +125,17 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   totalDigitsStyles: {
     fontSize: 40,
     fontWeight: '800',
-    color: 'white',
+    color: colors.card_typography,
   },
   subTextStyles: {
     fontSize: 12,
     fontWeight: '600',
-    color: 'white',
+    color: colors.card_typography,
   },
   subDigitStyles: {
     fontSize: 14,
     fontWeight: '800',
-    color: 'white',
+    color: colors.card_typography,
   },
   subTotalAndTipAmountsContainer: {
     flex: 1,
