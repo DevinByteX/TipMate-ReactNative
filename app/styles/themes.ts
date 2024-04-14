@@ -2,11 +2,11 @@ const sharedColors = {
     barbie: '#ff9ff3',
     blood: '#ff6b6b',
     sky: '#48dbfb',
-    primary_light: '#E3E9EC',
+    primary_light: '#efefef',
     primary_dark: '#333333',
     primary_accent: '#F4AB41',
-    card_light: '#444444',
-    card_dark: '#444444'
+    card_light: '#dcdcdc',
+    card_dark: '#454545'
 }
 
 export const lightTheme = {
@@ -15,7 +15,7 @@ export const lightTheme = {
         backgroundColor: sharedColors.primary_light,
         headerBGColor: sharedColors.primary_light,
         accent: sharedColors.primary_accent,
-        card_typography: '#000000',
+        card_typography: '#292929',
         card: sharedColors.card_light
     },
     margins: {
@@ -33,7 +33,7 @@ export const darkTheme = {
         backgroundColor: sharedColors.primary_dark,
         headerBGColor: sharedColors.primary_dark,
         accent: sharedColors.primary_accent,
-        card_typography: '#ffffff',
+        card_typography: '#f6f6f6',
         card: sharedColors.card_dark
     },
     margins: {
