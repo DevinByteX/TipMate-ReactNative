@@ -12,7 +12,7 @@ const VerticalDevider = () => {
   return <View style={styles.verticalDeviderStyles} />;
 };
 
-type StyledBillContainer = {
+type StyledBillBox = {
   titleVisibility?: boolean;
   titleText?: string;
   currencySymbol?: string;
@@ -34,7 +34,7 @@ export const StyledBillBox = ({
   totalAmount = '00.00',
   subTotalAmount = '00.00',
   totalTipAmount = '00.00',
-}: StyledBillContainer) => {
+}: StyledBillBox) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.superMainContainer}>
