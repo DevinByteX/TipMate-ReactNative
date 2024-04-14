@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 // custom component
 import {
-  StyledBillContainer,
+  StyledBillBox,
   StyledHeader,
   StyledTextInput,
   StyledTipOptions,
@@ -32,13 +32,13 @@ const HomeTipScreen = () => {
         {/* Tip Percentage Option Container */}
         <StyledTipOptions />
         {/* Per Person Bill Container */}
-        <StyledBillContainer
+        <StyledBillBox
           titleVisibility
           titleText="PER PERSON"
           totalAmount={100.34}
         />
         {/* Total Bill Container */}
-        <StyledBillContainer
+        <StyledBillBox
           titleVisibility
           titleText="TOTAL BILL"
           totalAmount={132.27}

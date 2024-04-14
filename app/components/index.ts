@@ -1,5 +1,5 @@
 export { StyledText } from "./StyledText";
 export { StyledHeader } from "./StyledHeader";
 export { StyledTextInput } from "./StyledTextInput";
-export { StyledBillContainer } from "./StyledBillContainer";
+export { StyledBillBox } from "./StyledBillBox";
 export { StyledTipOptions } from "./StyledTipOptions"

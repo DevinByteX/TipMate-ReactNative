@@ -24,7 +24,7 @@ type StyledBillContainer = {
   totalTipAmount?: string | number;
 };
 
-export const StyledBillContainer = ({
+export const StyledBillBox = ({
   titleVisibility = false,
   titleText = 'PER PERSON',
   currencySymbol = '$',
