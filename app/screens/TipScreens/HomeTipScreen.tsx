@@ -56,7 +56,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   },
   totalAmountContainer: {
     width: '100%',
-    backgroundColor: '#444444',
+    backgroundColor: colors.card,
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
