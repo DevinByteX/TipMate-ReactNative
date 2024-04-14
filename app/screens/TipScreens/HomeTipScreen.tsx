@@ -5,6 +5,7 @@ import {
   StyledBillContainer,
   StyledHeader,
   StyledTextInput,
+  StyledTipOptions,
 } from '@/components';
 import {
   UnistylesRuntime,
@@ -28,10 +29,20 @@ const HomeTipScreen = () => {
             keyboardType={'numeric'}
           />
         </View>
+        {/* Tip Percentage Option Container */}
+        <StyledTipOptions />
         {/* Per Person Bill Container */}
-        <StyledBillContainer titleVisibility titleText='PER PERSON' totalAmount={100.34}/>
+        <StyledBillContainer
+          titleVisibility
+          titleText="PER PERSON"
+          totalAmount={100.34}
+        />
         {/* Total Bill Container */}
-        <StyledBillContainer titleVisibility titleText='TOTAL BILL' totalAmount={132.27} />
+        <StyledBillContainer
+          titleVisibility
+          titleText="TOTAL BILL"
+          totalAmount={132.27}
+        />
       </View>
     </>
   );
