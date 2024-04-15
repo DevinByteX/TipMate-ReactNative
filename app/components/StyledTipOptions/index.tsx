@@ -71,7 +71,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   tipPercentageCapsuleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
   },
   tipPercentageCapsule: {
     justifyContent: 'center',
@@ -85,6 +85,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     alignItems: 'center',
     backgroundColor: colors.backgroundColor,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
