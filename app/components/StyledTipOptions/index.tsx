@@ -68,7 +68,15 @@ export const StyledTipOptions = () => {
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{`${'SELECT TIP %'}`}</Text>
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={styles.titleText}>{`${'SELECT TIP '}`}</Text>
+        <Text
+          style={[
+            styles.titleText,
+            { color: theme.colors.card_typography },
+          ]}>{`${'10%'}`}</Text>
+      </View>
+
       <View style={styles.tipPercentageCapsuleContainer}>
         <TipPercentageCapsule textValue="5%" />
         <TipPercentageCapsule textValue="10%" active />
