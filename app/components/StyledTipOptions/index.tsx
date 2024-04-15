@@ -35,6 +35,35 @@ const TipPercentageCapsule = ({
   );
 };
 
+const TipPercentageCustomCapsule = ({
+  active = false,
+  textValue = '10%',
+}: {
+  active?: boolean;
+  textValue: string;
+}) => {
+  const { styles, theme } = useStyles(stylesheet);
+  return (
+    <Pressable
+      style={[
+        styles.tipPercentageCapsuleCustom,
+        {
+          backgroundColor: active
+            ? theme.colors.accent
+            : theme.colors.backgroundColor,
+        },
+      ]}>
+      <Text
+        style={[
+          styles.tipPercentageCapsuleCustomText,
+          {
+            color: active ? theme.colors.card : theme.colors.card_typography,
+          },
+        ]}>{`${textValue}`}</Text>
+    </Pressable>
+  );
+};
+
 export const StyledTipOptions = () => {
   const { styles, theme } = useStyles(stylesheet);
   return (
@@ -46,10 +75,7 @@ export const StyledTipOptions = () => {
         <TipPercentageCapsule textValue="15%" />
         <TipPercentageCapsule textValue="20%" />
       </View>
-      <Pressable style={styles.tipPercentageCapsuleCustom}>
-        <Text
-          style={styles.tipPercentageCapsuleCustomText}>{`${'Custom'}`}</Text>
-      </Pressable>
+      <TipPercentageCustomCapsule textValue="Custom" active />
     </View>
   );
 };
