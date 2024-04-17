@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import {
   StyledBillBox,
   StyledHeader,
-  StyledTextInput,
+  StyledTotalAmountInput,
   StyledTipOptions,
 } from '@/components';
 import {
@@ -21,8 +21,7 @@ const HomeTipScreen = () => {
       <StyledHeader />
       <View style={styles.mainContainer}>
         {/* Total Amount container */}
-        <StyledTextInput
-          placeholderText={'Tap to Enter Your Bill Amount'}
+        <StyledTotalAmountInput
           returnKeyType={'done'}
           keyboardType={'numeric'}
         />

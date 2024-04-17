@@ -6,29 +6,38 @@ import {
   useStyles,
 } from 'react-native-unistyles';
 
-type styledTextInputProps = {
+type styledTotalAmountInputProps = {
   titleText?: string;
-  placeholderText?: string;
+  currencyText?: string;
+  amountValue?: string;
+  maxLength?: number;
 } & TextInputProps;
 
-export const StyledTextInput = ({
+export const StyledTotalAmountInput = ({
   titleText = 'TOTAL AMOUNT',
-  placeholderText = 'Tap to Enter Your Bill Amount',
+  currencyText = '$',
+  amountValue = '00.00',
+  maxLength = 10,
   ...restProps
-}: styledTextInputProps) => {
+}: styledTotalAmountInputProps) => {
   const { styles, theme } = useStyles(stylesheet);
 
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>{`${titleText}`}</Text>
-      <TextInput
-        style={styles.textInputStyles}
-        selectionColor={theme.colors.primary_accent}
-        cursorColor={theme.colors.primary_accent}
-        placeholder={`${placeholderText}`}
-        allowFontScaling={false}
-        {...restProps}
-      />
+      <View style={styles.textInputContainer}>
+        <Text style={styles.currencyText}>{`${currencyText}`}</Text>
+        <TextInput
+          value={amountValue}
+          autoFocus
+          style={styles.textInputStyles}
+          selectionColor={theme.colors.primary_accent}
+          cursorColor={theme.colors.primary_accent}
+          allowFontScaling={false}
+          maxLength={maxLength}
+          {...restProps}
+        />
+      </View>
     </View>
   );
 };
@@ -46,10 +55,20 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     fontSize: 14,
     fontWeight: '800',
   },
-  textInputStyles: {
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
+  textInputContainer: {
+    flexDirection: 'row',
+    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  currencyText: {
     color: colors.card_typography,
-    fontSize: 20,
+    fontSize: 40,
+    fontWeight: '800',
+  },
+  textInputStyles: {
+    flex: 1,
+    width: '100%',
+    color: colors.card_typography,
+    fontSize: 40,
     fontWeight: '800',
   },
 }));
