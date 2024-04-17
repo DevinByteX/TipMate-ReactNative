@@ -21,14 +21,11 @@ const HomeTipScreen = () => {
       <StyledHeader />
       <View style={styles.mainContainer}>
         {/* Total Amount container */}
-        <View style={styles.totalAmountContainer}>
-          <Text style={styles.totalAmountTitleText}>TOTAL AMOUNT</Text>
-          <StyledTextInput
-            placeholderText={'Tap to Enter Your Bill Amount'}
-            returnKeyType={'done'}
-            keyboardType={'numeric'}
-          />
-        </View>
+        <StyledTextInput
+          placeholderText={'Tap to Enter Your Bill Amount'}
+          returnKeyType={'done'}
+          keyboardType={'numeric'}
+        />
         {/* Tip Percentage Option Container */}
         <StyledTipOptions />
         {/* Per Person Bill Container */}
@@ -53,18 +50,6 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     flex: 1,
     backgroundColor: colors.backgroundColor,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-  },
-  totalAmountContainer: {
-    width: '100%',
-    backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-  },
-  totalAmountTitleText: {
-    color: colors.primary_accent,
-    fontSize: 14,
-    fontWeight: '800',
   },
   perPersonBillAmounts: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
