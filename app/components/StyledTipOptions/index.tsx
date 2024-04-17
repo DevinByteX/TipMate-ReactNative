@@ -79,7 +79,7 @@ export const StyledTipOptions = () => {
 
       <View style={styles.tipPercentageCapsuleContainer}>
         <TipPercentageCapsule textValue="5%" />
-        <TipPercentageCapsule textValue="10%" active />
+        <TipPercentageCapsule textValue="10%" />
         <TipPercentageCapsule textValue="15%" />
         <TipPercentageCapsule textValue="20%" />
       </View>
