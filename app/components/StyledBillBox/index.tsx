@@ -7,7 +7,7 @@ import {
 } from 'react-native-unistyles';
 
 // Vertical Devider Component
-const VerticalDevider = () => {
+export const VerticalDevider = () => {
   const { styles, theme } = useStyles(stylesheet);
   return <View style={styles.verticalDeviderStyles} />;
 };
