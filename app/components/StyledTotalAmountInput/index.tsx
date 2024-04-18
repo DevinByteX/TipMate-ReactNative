@@ -70,5 +70,6 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     color: colors.card_typography,
     fontSize: 40,
     fontWeight: '800',
+    paddingVertical: 0, // To remove android hidden padding issue
   },
 }));
