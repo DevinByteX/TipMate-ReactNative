@@ -123,16 +123,16 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
-  capsuleRowContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   tipPercentageAmountsContainer: {
     flex: 1,
     justifyContent: 'space-between',
     minheight: (UnistylesRuntime.screen.height * 16) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  capsuleRowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   tipPercentageCapsule: {
     justifyContent: 'center',
@@ -141,10 +141,11 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
   },
-  tipPercentageCapsuleText: {
-    fontSize: 14,
-    fontWeight: '800',
-    color: colors.accent,
+  tipPercentageCapsuleCustom: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
   },
   tipDigitsStyles: {
     fontSize: 40,
@@ -152,11 +153,10 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     color: colors.card_typography,
     alignSelf: 'center',
   },
-  tipPercentageCapsuleCustom: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+  tipPercentageCapsuleText: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: colors.accent,
   },
   tipPercentageCapsuleCustomText: {
     fontSize: 14,
