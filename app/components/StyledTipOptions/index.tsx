@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
 import {
   UnistylesRuntime,
   createStyleSheet,
@@ -9,12 +9,12 @@ import { VerticalDevider } from '@components';
 
 const TipPercentageCapsule = ({
   active = false,
-  textValue = '10%',
+  textValue = 5,
   onTipPress,
 }: {
   active?: boolean;
-  textValue: string;
-  onTipPress?: (value: string) => void;
+  textValue: number;
+  onTipPress?: (value: number) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
@@ -36,14 +36,14 @@ const TipPercentageCapsule = ({
           {
             color: active ? theme.colors.card : theme.colors.card_typography,
           },
-        ]}>{`${textValue}`}</Text>
+        ]}>{`${textValue}%`}</Text>
     </Pressable>
   );
 };
 
 const TipPercentageCustomCapsule = ({
   active = false,
-  textValue = '10%',
+  textValue = 'custom',
   onCustomTipPress,
 }: {
   active?: boolean;
@@ -76,19 +76,48 @@ const TipPercentageCustomCapsule = ({
 };
 
 export const StyledTipOptions = () => {
+  const defaultTipValue = 5;
+
+  const [tipPercentageValue, setTipPercentageValue] =
+    useState<number>(defaultTipValue);
+
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{`SELECT TIP `}</Text>
+      <Text style={styles.titleText}>{`SELECT TIP`}</Text>
       <View style={styles.mainInnerContainer}>
         <View style={styles.tipPercentageCapsuleContainer}>
           <View style={styles.capsuleRowContainer}>
-            <TipPercentageCapsule textValue="5%" />
-            <TipPercentageCapsule textValue="10%" />
+            <TipPercentageCapsule
+              textValue={5}
+              onTipPress={value => {
+                setTipPercentageValue(value);
+              }}
+              active={tipPercentageValue == 5}
+            />
+            <TipPercentageCapsule
+              textValue={10}
+              onTipPress={value => {
+                setTipPercentageValue(value);
+              }}
+              active={tipPercentageValue == 10}
+            />
           </View>
           <View style={styles.capsuleRowContainer}>
-            <TipPercentageCapsule textValue="15%" />
-            <TipPercentageCapsule textValue="20%" />
+            <TipPercentageCapsule
+              textValue={15}
+              onTipPress={value => {
+                setTipPercentageValue(value);
+              }}
+              active={tipPercentageValue == 15}
+            />
+            <TipPercentageCapsule
+              textValue={20}
+              onTipPress={value => {
+                setTipPercentageValue(value);
+              }}
+              active={tipPercentageValue == 20}
+            />
           </View>
         </View>
         <VerticalDevider />
@@ -98,7 +127,7 @@ export const StyledTipOptions = () => {
             adjustsFontSizeToFit={true}
             allowFontScaling={false}
             numberOfLines={1}>
-            {`18%`}
+            {`${tipPercentageValue}%`}
           </Text>
           <TipPercentageCustomCapsule textValue={`Custom`} active />
         </View>
