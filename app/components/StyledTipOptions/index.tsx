@@ -75,7 +75,11 @@ const TipPercentageCustomCapsule = ({
   );
 };
 
-export const StyledTipOptions = () => {
+export const StyledTipOptions = ({
+  onSelectedTipValue,
+}: {
+  onSelectedTipValue?: (value: number) => void;
+}) => {
   const defaultTipValue = 5;
 
   const [tipPercentageValue, setTipPercentageValue] =
@@ -92,6 +96,7 @@ export const StyledTipOptions = () => {
               textValue={5}
               onTipPress={value => {
                 setTipPercentageValue(value);
+                onSelectedTipValue && onSelectedTipValue(value);
               }}
               active={tipPercentageValue == 5}
             />
@@ -99,6 +104,7 @@ export const StyledTipOptions = () => {
               textValue={10}
               onTipPress={value => {
                 setTipPercentageValue(value);
+                onSelectedTipValue && onSelectedTipValue(value);
               }}
               active={tipPercentageValue == 10}
             />
@@ -108,6 +114,7 @@ export const StyledTipOptions = () => {
               textValue={15}
               onTipPress={value => {
                 setTipPercentageValue(value);
+                onSelectedTipValue && onSelectedTipValue(value);
               }}
               active={tipPercentageValue == 15}
             />
@@ -115,6 +122,7 @@ export const StyledTipOptions = () => {
               textValue={20}
               onTipPress={value => {
                 setTipPercentageValue(value);
+                onSelectedTipValue && onSelectedTipValue(value);
               }}
               active={tipPercentageValue == 20}
             />
