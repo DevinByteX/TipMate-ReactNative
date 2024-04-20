@@ -10,9 +10,11 @@ import { VerticalDevider } from '@components';
 const TipPercentageCapsule = ({
   active = false,
   textValue = '10%',
+  onTipPress,
 }: {
   active?: boolean;
   textValue: string;
+  onTipPress?: (value: string) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
@@ -24,7 +26,10 @@ const TipPercentageCapsule = ({
             ? theme.colors.accent
             : theme.colors.backgroundColor,
         },
-      ]}>
+      ]}
+      onPress={() => {
+        onTipPress && onTipPress(textValue);
+      }}>
       <Text
         style={[
           styles.tipPercentageCapsuleText,
@@ -39,9 +44,11 @@ const TipPercentageCapsule = ({
 const TipPercentageCustomCapsule = ({
   active = false,
   textValue = '10%',
+  onCustomTipPress,
 }: {
   active?: boolean;
   textValue: string;
+  onCustomTipPress?: () => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
@@ -53,7 +60,10 @@ const TipPercentageCustomCapsule = ({
             ? theme.colors.accent
             : theme.colors.backgroundColor,
         },
-      ]}>
+      ]}
+      onPress={() => {
+        onCustomTipPress && onCustomTipPress();
+      }}>
       <Text
         style={[
           styles.tipPercentageCapsuleCustomText,
