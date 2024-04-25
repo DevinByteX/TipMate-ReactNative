@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-export const StyledHorizontalPicker = () => {
+export const StyledHorizontalSlider = () => {
   return (
     <View>
-      <Text>StyledHorizontalPicker</Text>
+      <Text>StyledHorizontalSlider</Text>
     </View>
   );
 };

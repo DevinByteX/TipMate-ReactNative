@@ -3,4 +3,4 @@ export { StyledHeader } from "./StyledHeader";
 export { StyledTotalAmountInput } from "./StyledTotalAmountInput";
 export { StyledBillBox, VerticalDevider } from "./StyledBillBox";
 export { StyledTipOptions } from "./StyledTipOptions";
-export { StyledHorizontalPicker } from "./StyledHorizontalPicker"
+export { StyledHorizontalSlider } from "./StyledHorizontalSlider"
