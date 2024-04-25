@@ -6,7 +6,6 @@ import {
   useNavigationContainerRef,
 } from '@react-navigation/native';
 import {
-  useFlipper,
   useReduxDevToolsExtension,
 } from '@react-navigation/devtools';
 import HomeTipScreen from '@/screens/TipScreens/HomeTipScreen';
@@ -15,7 +14,6 @@ const Stack = createNativeStackNavigator();
 
 const ApplicationNavigator = (props: any) => {
   const navigationRef = useNavigationContainerRef();
-  useFlipper(navigationRef);
   useReduxDevToolsExtension(navigationRef);
 
   return (
