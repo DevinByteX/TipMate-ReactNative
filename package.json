@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-community/slider": "^4.5.2",
+    "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-navigation/devtools": "^6.0.26",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
