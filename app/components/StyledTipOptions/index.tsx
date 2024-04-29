@@ -5,7 +5,7 @@ import {
   createStyleSheet,
   useStyles,
 } from 'react-native-unistyles';
-import { VerticalDevider } from '@components';
+import { StyledHorizontalSlider, VerticalDevider } from '@components';
 
 const TipPercentageCapsule = ({
   active = false,
@@ -140,6 +140,13 @@ export const StyledTipOptions = ({
           <TipPercentageCustomCapsule textValue={`Custom`} active />
         </View>
       </View>
+      <StyledHorizontalSlider
+        sliderValue={tipPercentageValue}
+        onValuesChange={value => {
+          setTipPercentageValue(value[0]);
+          onSelectedTipValue && onSelectedTipValue(value[0]);
+        }}
+      />
     </View>
   );
 };
