@@ -85,6 +85,9 @@ export const StyledTipOptions = ({
   const [tipPercentageValue, setTipPercentageValue] =
     useState<number>(defaultTipValue);
 
+  const [customSliderVisible, setCustomSliderVisible] =
+    useState<boolean>(false);
+
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.mainContainer}>
@@ -95,6 +98,7 @@ export const StyledTipOptions = ({
             <TipPercentageCapsule
               textValue={5}
               onTipPress={value => {
+                setCustomSliderVisible(false);
                 setTipPercentageValue(value);
                 onSelectedTipValue && onSelectedTipValue(value);
               }}
@@ -103,6 +107,7 @@ export const StyledTipOptions = ({
             <TipPercentageCapsule
               textValue={10}
               onTipPress={value => {
+                setCustomSliderVisible(false);
                 setTipPercentageValue(value);
                 onSelectedTipValue && onSelectedTipValue(value);
               }}
@@ -113,6 +118,7 @@ export const StyledTipOptions = ({
             <TipPercentageCapsule
               textValue={15}
               onTipPress={value => {
+                setCustomSliderVisible(false);
                 setTipPercentageValue(value);
                 onSelectedTipValue && onSelectedTipValue(value);
               }}
@@ -121,6 +127,7 @@ export const StyledTipOptions = ({
             <TipPercentageCapsule
               textValue={20}
               onTipPress={value => {
+                setCustomSliderVisible(false);
                 setTipPercentageValue(value);
                 onSelectedTipValue && onSelectedTipValue(value);
               }}
@@ -137,16 +144,24 @@ export const StyledTipOptions = ({
             numberOfLines={1}>
             {`${tipPercentageValue}%`}
           </Text>
-          <TipPercentageCustomCapsule textValue={`Custom`} active />
+          <TipPercentageCustomCapsule
+            textValue={customSliderVisible ? `Set Value` : `Custom`}
+            active
+            onCustomTipPress={() => {
+              setCustomSliderVisible(!customSliderVisible);
+            }}
+          />
         </View>
       </View>
-      <StyledHorizontalSlider
-        sliderValue={tipPercentageValue}
-        onValuesChange={value => {
-          setTipPercentageValue(value[0]);
-          onSelectedTipValue && onSelectedTipValue(value[0]);
-        }}
-      />
+      {customSliderVisible ? (
+        <StyledHorizontalSlider
+          sliderValue={tipPercentageValue}
+          onValuesChange={value => {
+            setTipPercentageValue(value[0]);
+            onSelectedTipValue && onSelectedTipValue(value[0]);
+          }}
+        />
+      ) : null}
     </View>
   );
 };

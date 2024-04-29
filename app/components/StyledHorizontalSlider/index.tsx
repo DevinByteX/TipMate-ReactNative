@@ -43,7 +43,6 @@ export const StyledHorizontalSlider = ({
 const stylesheet = createStyleSheet(({ colors }) => ({
   mainContainer: {
     backgroundColor: colors.card,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     justifyContent: 'center',
     alignItems: 'center',
   },
