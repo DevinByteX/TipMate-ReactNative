@@ -56,7 +56,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
   },
   unSelectedStyle: {
-    backgroundColor: colors.card_typography,
+    backgroundColor: colors.backgroundColor,
     height: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
   },
