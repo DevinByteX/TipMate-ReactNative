@@ -32,7 +32,7 @@ const HomeTipScreen = () => {
             setTotalAmount(text);
           }}
         />
-        {/* Tip Percentage Option Container */}
+        {/* Tip Percentage Options Container */}
         <StyledTipOptions onSelectedTipValue={text => {}} />
         {/* Slip Options Container */}
         <StyledSpiltOptions />
