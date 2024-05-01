@@ -32,7 +32,7 @@ const HomeTipScreen = () => {
           }}
         />
         {/* Tip Percentage Option Container */}
-        <StyledTipOptions />
+        <StyledTipOptions onSelectedTipValue={text => {}} />
         {/* Per Person Bill Container */}
         <StyledBillBox
           titleVisibility
