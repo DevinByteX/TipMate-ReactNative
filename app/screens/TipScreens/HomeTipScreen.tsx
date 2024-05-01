@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 // custom component
 import {
@@ -14,6 +14,8 @@ import {
 } from 'react-native-unistyles';
 
 const HomeTipScreen = () => {
+  const [totalAmount, setTotalAmount] = useState<string>();
+
   const { styles } = useStyles(stylesheet);
 
   return (
@@ -22,8 +24,12 @@ const HomeTipScreen = () => {
       <View style={styles.mainContainer}>
         {/* Total Amount container */}
         <StyledTotalAmountInput
+          amountValue={totalAmount}
           returnKeyType={'done'}
-          keyboardType={'numeric'}
+          keyboardType={'number-pad'}
+          onChangeText={text => {
+            setTotalAmount(text);
+          }}
         />
         {/* Tip Percentage Option Container */}
         <StyledTipOptions />
