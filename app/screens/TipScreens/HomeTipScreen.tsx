@@ -6,6 +6,7 @@ import {
   StyledHeader,
   StyledTotalAmountInput,
   StyledTipOptions,
+  StyledSpiltOptions,
 } from '@/components';
 import {
   UnistylesRuntime,
@@ -33,6 +34,8 @@ const HomeTipScreen = () => {
         />
         {/* Tip Percentage Option Container */}
         <StyledTipOptions onSelectedTipValue={text => {}} />
+        {/* Slip Options Container */}
+        <StyledSpiltOptions />
         {/* Per Person Bill Container */}
         <StyledBillBox
           titleVisibility
