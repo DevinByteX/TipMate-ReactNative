@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import {
   UnistylesRuntime,
   createStyleSheet,
