@@ -13,6 +13,7 @@ export const StyledSpiltOptions = (props: StyledSpiltOptionsProps) => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>{`SPLIT COUNT`}</Text>
+      <View style={styles.mainInnerContainer}></View>
     </View>
   );
 };
@@ -30,5 +31,8 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     fontSize: 14,
     fontWeight: '800',
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  mainInnerContainer: {
+    minHeight: (UnistylesRuntime.screen.height * 12) / 100,
   },
 }));
