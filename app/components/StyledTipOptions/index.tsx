@@ -30,13 +30,15 @@ const TipPercentageCapsule = ({
       onPress={() => {
         onTipPress && onTipPress(textValue);
       }}>
-      <Text
-        style={[
-          styles.tipPercentageCapsuleText,
-          {
-            color: active ? theme.colors.card : theme.colors.card_typography,
-          },
-        ]}>{`${textValue}%`}</Text>
+      <View>
+        <Text
+          style={[
+            styles.tipPercentageCapsuleText,
+            {
+              color: active ? theme.colors.card : theme.colors.card_typography,
+            },
+          ]}>{`${textValue}%`}</Text>
+      </View>
     </Pressable>
   );
 };
@@ -64,13 +66,15 @@ const TipPercentageCustomCapsule = ({
       onPress={() => {
         onCustomTipPress && onCustomTipPress();
       }}>
-      <Text
-        style={[
-          styles.tipPercentageCapsuleCustomText,
-          {
-            color: active ? theme.colors.card : theme.colors.card_typography,
-          },
-        ]}>{`${textValue}`}</Text>
+      <View>
+        <Text
+          style={[
+            styles.tipPercentageCapsuleCustomText,
+            {
+              color: active ? theme.colors.card : theme.colors.card_typography,
+            },
+          ]}>{`${textValue}`}</Text>
+      </View>
     </Pressable>
   );
 };
