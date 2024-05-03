@@ -45,8 +45,10 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     backgroundColor: colors.card,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
   },
   sliderContainerStyles: {
+    height: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
   },
   selectedStyle: {
@@ -63,6 +65,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     backgroundColor: colors.accent,
     height: (UnistylesRuntime.screen.height * 3.5) / 100,
     width: (UnistylesRuntime.screen.height * 3.5) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 3.5) / 100,
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
   },
 }));
