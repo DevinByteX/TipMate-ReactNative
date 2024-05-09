@@ -98,46 +98,42 @@ export const StyledTipOptions = ({
       <Text style={styles.titleText}>{`SELECT TIP`}</Text>
       <View style={styles.mainInnerContainer}>
         <View style={styles.tipPercentageCapsuleContainer}>
-          <View style={styles.capsuleRowContainer}>
-            <TipPercentageCapsule
-              textValue={5}
-              onTipPress={value => {
-                setCustomSliderVisible(false);
-                setTipPercentageValue(value);
-                onSelectedTipValue && onSelectedTipValue(value);
-              }}
-              active={tipPercentageValue == 5}
-            />
-            <TipPercentageCapsule
-              textValue={10}
-              onTipPress={value => {
-                setCustomSliderVisible(false);
-                setTipPercentageValue(value);
-                onSelectedTipValue && onSelectedTipValue(value);
-              }}
-              active={tipPercentageValue == 10}
-            />
-          </View>
-          <View style={styles.capsuleRowContainer}>
-            <TipPercentageCapsule
-              textValue={15}
-              onTipPress={value => {
-                setCustomSliderVisible(false);
-                setTipPercentageValue(value);
-                onSelectedTipValue && onSelectedTipValue(value);
-              }}
-              active={tipPercentageValue == 15}
-            />
-            <TipPercentageCapsule
-              textValue={20}
-              onTipPress={value => {
-                setCustomSliderVisible(false);
-                setTipPercentageValue(value);
-                onSelectedTipValue && onSelectedTipValue(value);
-              }}
-              active={tipPercentageValue == 20}
-            />
-          </View>
+          <TipPercentageCapsule
+            textValue={5}
+            onTipPress={value => {
+              setCustomSliderVisible(false);
+              setTipPercentageValue(value);
+              onSelectedTipValue && onSelectedTipValue(value);
+            }}
+            active={tipPercentageValue == 5}
+          />
+          <TipPercentageCapsule
+            textValue={10}
+            onTipPress={value => {
+              setCustomSliderVisible(false);
+              setTipPercentageValue(value);
+              onSelectedTipValue && onSelectedTipValue(value);
+            }}
+            active={tipPercentageValue == 10}
+          />
+          <TipPercentageCapsule
+            textValue={15}
+            onTipPress={value => {
+              setCustomSliderVisible(false);
+              setTipPercentageValue(value);
+              onSelectedTipValue && onSelectedTipValue(value);
+            }}
+            active={tipPercentageValue == 15}
+          />
+          <TipPercentageCapsule
+            textValue={20}
+            onTipPress={value => {
+              setCustomSliderVisible(false);
+              setTipPercentageValue(value);
+              onSelectedTipValue && onSelectedTipValue(value);
+            }}
+            active={tipPercentageValue == 20}
+          />
         </View>
         <VerticalDevider />
         <View style={styles.tipPercentageAmountsContainer}>
@@ -158,13 +154,15 @@ export const StyledTipOptions = ({
         </View>
       </View>
       {customSliderVisible ? (
-        <StyledHorizontalSlider
-          sliderValue={tipPercentageValue}
-          onValuesChange={value => {
-            setTipPercentageValue(value[0]);
-            onSelectedTipValue && onSelectedTipValue(value[0]);
-          }}
-        />
+        <View style={styles.sliderContainer}>
+          <StyledHorizontalSlider
+            sliderValue={tipPercentageValue}
+            onValuesChange={value => {
+              setTipPercentageValue(value[0]);
+              onSelectedTipValue && onSelectedTipValue(value[0]);
+            }}
+          />
+        </View>
       ) : null}
     </View>
   );
@@ -186,44 +184,40 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   },
   mainInnerContainer: {
     flexDirection: 'row',
-    minHeight: (UnistylesRuntime.screen.height * 12) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   tipPercentageCapsuleContainer: {
     flex: 1,
-    minHeight: (UnistylesRuntime.screen.height * 8) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 1.25) / 100,
-    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    minHeight: (UnistylesRuntime.screen.height * 10) / 100,
+    alignItems: 'center',
+    alignContent: 'space-around',
+    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
   },
   tipPercentageAmountsContainer: {
     flex: 1,
-    minHeight: (UnistylesRuntime.screen.height * 8) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 1.25) / 100,
-    justifyContent: 'space-between',
+    alignContent: 'center',
+    justifyContent: 'space-around',
   },
   capsuleRowContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '100%',
   },
   tipPercentageCapsule: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    width: (UnistylesRuntime.screen.width * 18) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    marginTop: (UnistylesRuntime.screen.height * 0.75) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 1) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
   },
   tipPercentageCapsuleCustom: {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+    marginHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
   },
   tipDigitsStyles: {
     fontSize: 40,
@@ -241,5 +235,8 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     fontSize: 14,
     fontWeight: '800',
     color: colors.card_typography,
+  },
+  sliderContainer: {
+    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
   },
 }));
