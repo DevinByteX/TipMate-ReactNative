@@ -200,11 +200,6 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     alignContent: 'center',
     justifyContent: 'space-around',
   },
-  capsuleRowContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   tipPercentageCapsule: {
     justifyContent: 'center',
     alignItems: 'center',
