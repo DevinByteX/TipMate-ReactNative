@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 import {
   UnistylesRuntime,
   createStyleSheet,
@@ -7,9 +7,17 @@ import {
 } from 'react-native-unistyles';
 
 // Vertical Devider Component
-export const VerticalDevider = () => {
+export const VerticalDevider = ({
+  verticalDeviderAdditionalStyles,
+}: {
+  verticalDeviderAdditionalStyles?: ViewStyle;
+}) => {
   const { styles, theme } = useStyles(stylesheet);
-  return <View style={styles.verticalDeviderStyles} />;
+  return (
+    <View
+      style={[styles.verticalDeviderStyles, verticalDeviderAdditionalStyles]}
+    />
+  );
 };
 
 type StyledBillBox = {
