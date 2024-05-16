@@ -4,7 +4,8 @@ const sharedColors = {
     sky: '#48dbfb',
     primary_light: '#efefef',
     primary_dark: '#333333',
-    primary_accent: '#F4AB41',
+    primary_accent_dark: '#F4AB41',
+    primary_accent_light: '#F3982C',
     card_light: '#dcdcdc',
     card_dark: '#454545'
 }
@@ -14,7 +15,7 @@ export const lightTheme = {
         ...sharedColors,
         backgroundColor: sharedColors.primary_light,
         headerBGColor: sharedColors.primary_light,
-        accent: sharedColors.primary_accent,
+        accent: sharedColors.primary_accent_light,
         card_typography: '#292929',
         card: sharedColors.card_light
     },
@@ -32,7 +33,7 @@ export const darkTheme = {
         ...sharedColors,
         backgroundColor: sharedColors.primary_dark,
         headerBGColor: sharedColors.primary_dark,
-        accent: sharedColors.primary_accent,
+        accent: sharedColors.primary_accent_dark,
         card_typography: '#f6f6f6',
         card: sharedColors.card_dark
     },
