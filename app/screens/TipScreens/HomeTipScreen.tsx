@@ -66,19 +66,6 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   scrollContentContainer: {
     paddingBottom: (UnistylesRuntime.screen.height * 8) / 100,
   },
-  perPersonBillAmounts: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
-    width: '100%',
-    backgroundColor: '#444444',
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-  },
-  perPersonBillAmountsTitleText: {
-    color: colors.accent,
-    fontSize: 14,
-    fontWeight: '800',
-    paddingStart: (UnistylesRuntime.screen.width * 3) / 100,
-  },
 }));
 
 export default HomeTipScreen;
