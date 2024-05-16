@@ -74,7 +74,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   perPersonBillAmountsTitleText: {
-    color: colors.primary_accent,
+    color: colors.accent,
     fontSize: 14,
     fontWeight: '800',
     paddingStart: (UnistylesRuntime.screen.width * 3) / 100,

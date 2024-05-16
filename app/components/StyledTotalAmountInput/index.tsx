@@ -31,8 +31,8 @@ export const StyledTotalAmountInput = ({
           value={amountValue}
           autoFocus
           style={styles.textInputStyles}
-          selectionColor={theme.colors.primary_accent}
-          cursorColor={theme.colors.primary_accent}
+          selectionColor={theme.colors.accent}
+          cursorColor={theme.colors.accent}
           allowFontScaling={false}
           maxLength={maxLength}
           {...restProps}
@@ -51,7 +51,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   titleText: {
-    color: colors.primary_accent,
+    color: colors.accent,
     fontSize: 14,
     fontWeight: '800',
   },

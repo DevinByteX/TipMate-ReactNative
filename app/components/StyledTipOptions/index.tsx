@@ -190,7 +190,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   titleText: {
-    color: colors.primary_accent,
+    color: colors.accent,
     fontSize: 14,
     fontWeight: '800',
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
