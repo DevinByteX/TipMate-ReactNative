@@ -169,6 +169,9 @@ export const StyledSpiltOptions = ({
         <View style={styles.sliderContainer}>
           <StyledHorizontalSlider
             sliderValue={splitValue}
+            step={1}
+            minValue={1}
+            maxValue={15}
             onValuesChange={value => {
               setSplitValue(value[0]);
               onSelectedSplitValue && onSelectedSplitValue(value[0]);
