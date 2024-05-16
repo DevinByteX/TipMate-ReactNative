@@ -11,12 +11,18 @@ import MultiSlider, {
 
 type StyledHorizontalSliderProps = {
   sliderValue?: number;
+  step?: number;
+  minValue?: number;
+  maxValue?: number;
 } & MultiSliderProps;
 
 const SliderLength = (UnistylesRuntime.screen.width * 80) / 100;
 
 export const StyledHorizontalSlider = ({
   sliderValue = 0,
+  step = 0.5,
+  minValue = 0,
+  maxValue = 80,
   ...restProps
 }: StyledHorizontalSliderProps) => {
   const { styles, theme } = useStyles(stylesheet);
@@ -24,9 +30,9 @@ export const StyledHorizontalSlider = ({
     <View style={styles.mainContainer}>
       <MultiSlider
         values={[sliderValue]}
-        step={0.5}
-        min={0}
-        max={80}
+        step={step}
+        min={minValue}
+        max={maxValue}
         snapped={true}
         sliderLength={SliderLength}
         containerStyle={styles.sliderContainerStyles}
