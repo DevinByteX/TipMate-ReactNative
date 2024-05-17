@@ -80,7 +80,7 @@ export const StyledSpiltOptions = ({
 }: {
   onSelectedSplitValue?: (value: number) => void;
 }) => {
-  const defaultSplitValue = 5;
+  const defaultSplitValue = 1;
 
   const [splitValue, setSplitValue] = useState<number>(defaultSplitValue);
 
