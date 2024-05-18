@@ -1,11 +1,18 @@
-const convertToTwoDecimalPoints = (number: number) => {
-    // Ensure the input is a number
-    if (typeof number !== 'number') {
-        throw new TypeError('The input must be a number');
+const convertToTwoDecimalPoints = (input: string) => {
+    // Remove any non-numeric characters
+    const numericValue = input.replace(/[^0-9]/g, '');
+
+    // If the numeric value is empty, return an empty string
+    if (numericValue === '') {
+        return '';
     }
-    // Convert the number to a number with 2 decimal points after dividing by 100
-    let result = (number / 100).toFixed(2);
-    return result;
+
+    // Convert the numeric value(type String) to a number and divide by 100
+    const valueWithFloatingPoints = parseFloat(numericValue) / 100;
+
+    // Format the valueWithFloatingPoints(type number) to two decimal points and return it as string(by using toFixed() method returns string)
+    return valueWithFloatingPoints.toFixed(2);
+
 }
 
 export { convertToTwoDecimalPoints };
