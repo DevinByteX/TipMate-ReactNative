@@ -31,7 +31,7 @@ export const StyledTotalAmountInput = ({
       <View style={styles.textInputContainer}>
         <Text style={styles.currencyText}>{`${currencyText}`}</Text>
         <TextInput
-          defaultValue={'00.00'}
+          defaultValue={'0.00'}
           value={textInputValue}
           autoFocus={true}
           caretHidden={true}
