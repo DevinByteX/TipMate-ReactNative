@@ -1,4 +1,5 @@
-import React from 'react';
+import { convertToTwoDecimalPoints } from '@/hooks';
+import React, { useState } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 import {
   UnistylesRuntime,
@@ -22,19 +23,26 @@ export const StyledTotalAmountInput = ({
 }: styledTotalAmountInputProps) => {
   const { styles, theme } = useStyles(stylesheet);
 
+  const [textInputValue, setTextInputValue] = useState<string>();
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>{`${titleText}`}</Text>
       <View style={styles.textInputContainer}>
         <Text style={styles.currencyText}>{`${currencyText}`}</Text>
         <TextInput
-          value={amountValue}
-          autoFocus
-          style={styles.textInputStyles}
+          defaultValue={'00.00'}
+          value={textInputValue}
+          autoFocus={true}
+          caretHidden={true}
           selectionColor={theme.colors.accent}
-          cursorColor={theme.colors.accent}
+          style={styles.textInputStyles}
           allowFontScaling={false}
           maxLength={maxLength}
+          onChangeText={text => {
+            const formatedValue = convertToTwoDecimalPoints(text);
+            setTextInputValue(formatedValue);
+          }}
           {...restProps}
         />
       </View>
