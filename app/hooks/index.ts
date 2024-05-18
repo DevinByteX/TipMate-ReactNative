@@ -1,4 +1,4 @@
-const convertToTwoDecimalPoints = (input: string) => {
+const convertToTwoDecimalPoints = (input: string): string => {
     // Remove any non-numeric characters
     const numericValue = input.replace(/[^0-9]/g, '');
 
