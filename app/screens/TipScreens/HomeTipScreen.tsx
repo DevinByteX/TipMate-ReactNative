@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React from 'react';
+import { ScrollView } from 'react-native';
 // custom component
 import {
   StyledBillBox,
@@ -15,8 +15,6 @@ import {
 } from 'react-native-unistyles';
 
 const HomeTipScreen = () => {
-  const [totalAmount, setTotalAmount] = useState<string>();
-
   const { styles } = useStyles(stylesheet);
 
   return (
@@ -29,12 +27,8 @@ const HomeTipScreen = () => {
         showsVerticalScrollIndicator={false}>
         {/* Total Amount container */}
         <StyledTotalAmountInput
-          amountValue={totalAmount}
           returnKeyType={'done'}
           keyboardType={'number-pad'}
-          onChangeText={text => {
-            setTotalAmount(text);
-          }}
         />
         {/* Tip Percentage Options Container */}
         <StyledTipOptions onSelectedTipValue={text => {}} />
