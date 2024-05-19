@@ -39,9 +39,9 @@ export const StyledBillBox = ({
   totalText = 'TOTAL',
   subTotalText = 'SUBTOTAL',
   tipText = 'TIP',
-  totalAmount = '00.00',
-  subTotalAmount = '00.00',
-  totalTipAmount = '00.00',
+  totalAmount = '0.00',
+  subTotalAmount = '0.00',
+  totalTipAmount = '0.00',
 }: StyledBillBox) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
