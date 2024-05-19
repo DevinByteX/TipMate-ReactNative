@@ -8,23 +8,28 @@ import {
   StyledTipOptions,
   StyledSpiltOptions,
 } from '@/components';
-import {
-  UnistylesRuntime,
-  createStyleSheet,
-  useStyles,
-} from 'react-native-unistyles';
+import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { BillCalculationType, calculateBillValues } from '@hooks';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
+
+  const [userInputBillAmount, setUserInputBillAmount] = useState<number>(0);
+  const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(0);
+  const [userInputSplitCount, setUserInputSplitCount] = useState<number>(1);
+
   const [billValues, setBillValues] = useState<BillCalculationType>();
 
   useEffect(() => {
-    const billValuesResults = calculateBillValues(15, 100, 4);
+    const billValuesResults = calculateBillValues(
+      userInputTipPercentage,
+      userInputBillAmount,
+      userInputSplitCount,
+    );
     setBillValues(billValuesResults);
 
     return () => {};
-  }, []);
+  }, [userInputTipPercentage, userInputBillAmount, userInputSplitCount]);
 
   return (
     <>
@@ -36,13 +41,24 @@ const HomeTipScreen = () => {
         showsVerticalScrollIndicator={false}>
         {/* Total Amount container */}
         <StyledTotalAmountInput
+          titleText="BILL AMOUNT"
           returnKeyType={'done'}
           keyboardType={'number-pad'}
+          onAmountChange={amount => setUserInputBillAmount(amount)}
         />
         {/* Tip Percentage Options Container */}
-        <StyledTipOptions onSelectedTipValue={text => {}} />
+        <StyledTipOptions
+          onSelectedTipValue={percentage => {
+            console.log(percentage);
+            setUserInputTipPercentage(percentage);
+          }}
+        />
         {/* Slip Options Container */}
-        <StyledSpiltOptions />
+        <StyledSpiltOptions
+          onSelectedSplitValue={splitCount => {
+            setUserInputSplitCount(splitCount);
+          }}
+        />
         {/* Per Person Bill Container */}
         <StyledBillBox
           titleVisibility
