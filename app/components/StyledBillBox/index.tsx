@@ -138,7 +138,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   subTextStyles: {
     fontSize: 12,
     fontWeight: '600',
-    color: colors.card_typography,
+    color: colors.accent,
   },
   subDigitStyles: {
     fontSize: 14,
