@@ -47,17 +47,17 @@ const HomeTipScreen = () => {
         <StyledBillBox
           titleVisibility
           titleText="PER PERSON"
-          totalAmount={billValues?.perPerson?.total}
-          subTotalAmount={billValues?.perPerson?.subtotal}
-          totalTipAmount={billValues?.perPerson?.tip}
+          totalAmount={billValues?.perPerson?.total?.toFixed(2)}
+          subTotalAmount={billValues?.perPerson?.subtotal?.toFixed(2)}
+          totalTipAmount={billValues?.perPerson?.tip?.toFixed(2)}
         />
         {/* Total Bill Container */}
         <StyledBillBox
           titleVisibility
           titleText="TOTAL BILL"
-          totalAmount={billValues?.overall?.total}
-          subTotalAmount={billValues?.overall?.subtotal}
-          totalTipAmount={billValues?.overall?.tip}
+          totalAmount={billValues?.overall?.total?.toFixed(2)}
+          subTotalAmount={billValues?.overall?.subtotal?.toFixed(2)}
+          totalTipAmount={billValues?.overall?.tip?.toFixed(2)}
         />
       </ScrollView>
     </>
