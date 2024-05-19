@@ -10,7 +10,12 @@ import {
   StyledRoundBox,
 } from '@/components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { BillCalculationType, calculateBillValues } from '@hooks';
+import {
+  BillCalculationType,
+  RoundingMethod,
+  RoundingMethodType,
+  calculateBillValues,
+} from '@hooks';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -18,7 +23,7 @@ const HomeTipScreen = () => {
   const [userInputBillAmount, setUserInputBillAmount] = useState<number>(0);
   const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(5);
   const [userInputSplitCount, setUserInputSplitCount] = useState<number>(1);
-  const [userInputRound, setUserInputRound] = useState<string>('NO');
+  const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
 
@@ -27,11 +32,12 @@ const HomeTipScreen = () => {
       userInputTipPercentage,
       userInputBillAmount,
       userInputSplitCount,
+      userInputRound,
     );
     setBillValues(billValuesResults);
 
     return () => {};
-  }, [userInputTipPercentage, userInputBillAmount, userInputSplitCount]);
+  }, [userInputTipPercentage, userInputBillAmount, userInputSplitCount, userInputRound]);
 
   return (
     <>
