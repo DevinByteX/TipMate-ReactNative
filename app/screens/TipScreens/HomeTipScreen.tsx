@@ -7,6 +7,7 @@ import {
   StyledTotalAmountInput,
   StyledTipOptions,
   StyledSpiltOptions,
+  StyledRoundBox,
 } from '@/components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { BillCalculationType, calculateBillValues } from '@hooks';
@@ -17,6 +18,7 @@ const HomeTipScreen = () => {
   const [userInputBillAmount, setUserInputBillAmount] = useState<number>(0);
   const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(5);
   const [userInputSplitCount, setUserInputSplitCount] = useState<number>(1);
+  const [userInputRound, setUserInputRound] = useState<string>('NO');
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
 
@@ -56,6 +58,12 @@ const HomeTipScreen = () => {
         <StyledSpiltOptions
           onSelectedSplitValue={splitCount => {
             setUserInputSplitCount(splitCount);
+          }}
+        />
+        {/* Round Options Container */}
+        <StyledRoundBox
+          onSelectedRound={roundValue => {
+            setUserInputRound(roundValue);
           }}
         />
         {/* Per Person Bill Container */}
