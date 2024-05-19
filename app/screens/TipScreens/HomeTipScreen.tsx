@@ -15,7 +15,7 @@ const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
 
   const [userInputBillAmount, setUserInputBillAmount] = useState<number>(0);
-  const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(0);
+  const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(5);
   const [userInputSplitCount, setUserInputSplitCount] = useState<number>(1);
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
