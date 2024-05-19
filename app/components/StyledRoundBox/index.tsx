@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { RoundingMethod, RoundingMethodType } from '@hooks';
 
 const RoundCapsule = ({
   active = false,
-  textValue = 'Up',
+  textValue,
   onRoundCapsulePress,
 }: {
   active?: boolean;
-  textValue: string;
-  onRoundCapsulePress?: (value: string) => void;
+  textValue: RoundingMethodType;
+  onRoundCapsulePress?: (value: RoundingMethodType) => void;
 }) => {
   const { styles, theme } = useStyles(styleSheet);
   return (
@@ -37,35 +38,38 @@ const RoundCapsule = ({
 export const StyledRoundBox = ({
   onSelectedRound,
 }: {
-  onSelectedRound?: (value: string) => void;
+  onSelectedRound?: (value: RoundingMethodType) => void;
 }) => {
   const { styles, theme } = useStyles(styleSheet);
 
-  const [roundValue, setRoundValue] = useState<string>('NO');
+  const [roundValue, setRoundValue] = useState<RoundingMethodType>(RoundingMethod.NO);
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{`SET ROUND`}</Text>
+      <Text style={styles.titleText}>{`ROUND VALUE`}</Text>
       <View style={styles.mainInnerContainer}>
         <RoundCapsule
           textValue="NO"
-          active={roundValue == 'NO'}
+          active={roundValue == RoundingMethod.NO}
           onRoundCapsulePress={value => {
             setRoundValue(value);
+            onSelectedRound && onSelectedRound(value);
           }}
         />
         <RoundCapsule
           textValue="UP"
-          active={roundValue == 'UP'}
+          active={roundValue == RoundingMethod.UP}
           onRoundCapsulePress={value => {
             setRoundValue(value);
+            onSelectedRound && onSelectedRound(value);
           }}
         />
         <RoundCapsule
           textValue="DOWN"
-          active={roundValue == 'DOWN'}
+          active={roundValue == RoundingMethod.DOWN}
           onRoundCapsulePress={value => {
             setRoundValue(value);
+            onSelectedRound && onSelectedRound(value);
           }}
         />
       </View>
