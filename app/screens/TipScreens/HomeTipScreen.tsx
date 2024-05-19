@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 // custom component
 import {
@@ -13,9 +13,18 @@ import {
   createStyleSheet,
   useStyles,
 } from 'react-native-unistyles';
+import { BillCalculationType, calculateBillValues } from '@hooks';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
+  const [billValues, setBillValues] = useState<BillCalculationType>();
+
+  useEffect(() => {
+    const billValuesResults = calculateBillValues(15, 100, 4);
+    setBillValues(billValuesResults);
+
+    return () => {};
+  }, []);
 
   return (
     <>
@@ -38,13 +47,17 @@ const HomeTipScreen = () => {
         <StyledBillBox
           titleVisibility
           titleText="PER PERSON"
-          totalAmount={100.34}
+          totalAmount={billValues?.perPerson?.total}
+          subTotalAmount={billValues?.perPerson?.subtotal}
+          totalTipAmount={billValues?.perPerson?.tip}
         />
         {/* Total Bill Container */}
         <StyledBillBox
           titleVisibility
           titleText="TOTAL BILL"
-          totalAmount={132.27}
+          totalAmount={billValues?.overall?.total}
+          subTotalAmount={billValues?.overall?.subtotal}
+          totalTipAmount={billValues?.overall?.tip}
         />
       </ScrollView>
     </>
