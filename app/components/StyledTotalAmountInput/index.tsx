@@ -12,6 +12,7 @@ type styledTotalAmountInputProps = {
   currencyText?: string;
   amountValue?: string;
   maxLength?: number;
+  onAmountChange?: (value: number) => void;
 } & TextInputProps;
 
 export const StyledTotalAmountInput = ({
@@ -19,6 +20,7 @@ export const StyledTotalAmountInput = ({
   currencyText = '$',
   amountValue = '00.00',
   maxLength = 10,
+  onAmountChange,
   ...restProps
 }: styledTotalAmountInputProps) => {
   const { styles, theme } = useStyles(stylesheet);
@@ -42,6 +44,7 @@ export const StyledTotalAmountInput = ({
           onChangeText={text => {
             const formatedValue = convertToTwoDecimalPoints(text);
             setTextInputValue(formatedValue);
+            onAmountChange && onAmountChange(parseFloat(formatedValue));
           }}
           {...restProps}
         />
