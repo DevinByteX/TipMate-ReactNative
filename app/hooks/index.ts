@@ -1,5 +1,5 @@
 import { convertToTwoDecimalPoints } from './convertToTwoDecimals';
-import { calculateBillValues, BillCalculationType } from './calculateBill';
+import { calculateBillValues, BillCalculationType, RoundingMethodType, RoundingMethod } from './calculateBill';
 
-export { convertToTwoDecimalPoints, calculateBillValues };
-export type { BillCalculationType }
+export { convertToTwoDecimalPoints, calculateBillValues, RoundingMethod };
+export type { BillCalculationType, RoundingMethodType }
