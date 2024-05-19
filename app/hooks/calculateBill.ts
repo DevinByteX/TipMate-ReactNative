@@ -27,18 +27,6 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
     // Calculate the total per person (including tip)
     const totalPerPerson = parseFloat((totalBill / numberOfPeople).toFixed(2));
 
-    console.log(`
-    perPerson: {
-        total: ${totalPerPerson},
-        tip: ${tipPerPerson},
-        subtotal: ${subtotalPerPerson}
-        },
-    overall: {
-        total: ${totalBill},
-        tip: ${tipTotal},
-        subtotal: ${billAmount}
-    }`);
-
     // Return the results
     return {
         perPerson: {
