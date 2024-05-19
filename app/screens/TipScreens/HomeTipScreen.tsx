@@ -60,13 +60,15 @@ const HomeTipScreen = () => {
           }}
         />
         {/* Per Person Bill Container */}
-        <StyledBillBox
-          titleVisibility
-          titleText="PER PERSON"
-          totalAmount={billValues?.perPerson?.total?.toFixed(2)}
-          subTotalAmount={billValues?.perPerson?.subtotal?.toFixed(2)}
-          totalTipAmount={billValues?.perPerson?.tip?.toFixed(2)}
-        />
+        {userInputSplitCount > 1 ? (
+          <StyledBillBox
+            titleVisibility
+            titleText="PER PERSON"
+            totalAmount={billValues?.perPerson?.total?.toFixed(2)}
+            subTotalAmount={billValues?.perPerson?.subtotal?.toFixed(2)}
+            totalTipAmount={billValues?.perPerson?.tip?.toFixed(2)}
+          />
+        ) : null}
         {/* Total Bill Container */}
         <StyledBillBox
           titleVisibility
