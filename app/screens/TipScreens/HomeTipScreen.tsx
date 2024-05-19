@@ -49,7 +49,6 @@ const HomeTipScreen = () => {
         {/* Tip Percentage Options Container */}
         <StyledTipOptions
           onSelectedTipValue={percentage => {
-            console.log(percentage);
             setUserInputTipPercentage(percentage);
           }}
         />
