@@ -48,6 +48,22 @@ const applyRoundingMethod = (value: number, roundingMethod: RoundingMethodType):
 }
 
 export const calculateBillValues = (tipPercentage: number, billAmount: number, numberOfPeople: number, roundingMethod: RoundingMethodType): BillCalculationType => {
+     // Check if billAmount is a valid number
+     if (isNaN(billAmount) || typeof billAmount !== 'number') {
+        return {
+            perPerson: {
+                total: 0,
+                tip: 0,
+                subtotal: 0
+            },
+            overall: {
+                total: 0,
+                tip: 0,
+                subtotal: 0
+            }
+        };
+    }
+
     // Calculate the tip amount
     const tipTotal = parseFloat(((tipPercentage / 100) * billAmount).toFixed(2));
 
