@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import {
-  UnistylesRuntime,
-  createStyleSheet,
-  useStyles,
-} from 'react-native-unistyles';
+import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, VerticalDevider } from '@components';
 
 const TipPercentageCapsule = ({
@@ -22,9 +18,7 @@ const TipPercentageCapsule = ({
       style={[
         styles.tipPercentageCapsule,
         {
-          backgroundColor: active
-            ? theme.colors.accent
-            : theme.colors.backgroundColor,
+          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
         },
       ]}
       onPress={() => {
@@ -56,9 +50,7 @@ const TipPercentageCustomCapsule = ({
       style={[
         styles.tipPercentageCapsuleCustom,
         {
-          backgroundColor: active
-            ? theme.colors.accent
-            : theme.colors.backgroundColor,
+          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
         },
       ]}
       onPress={() => {
@@ -82,11 +74,9 @@ export const StyledTipOptions = ({
 }) => {
   const defaultTipValue = 5;
 
-  const [tipPercentageValue, setTipPercentageValue] =
-    useState<number>(defaultTipValue);
+  const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
 
-  const [customSliderVisible, setCustomSliderVisible] =
-    useState<boolean>(false);
+  const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
   const { styles, theme } = useStyles(stylesheet);
   return (
