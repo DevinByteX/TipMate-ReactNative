@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import {
-  UnistylesRuntime,
-  createStyleSheet,
-  useStyles,
-} from 'react-native-unistyles';
+import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, VerticalDevider } from '@components';
 
 const SplitCapsule = ({
@@ -22,9 +18,7 @@ const SplitCapsule = ({
       style={[
         styles.splitCapsule,
         {
-          backgroundColor: active
-            ? theme.colors.accent
-            : theme.colors.backgroundColor,
+          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
         },
       ]}
       onPress={() => {
@@ -56,9 +50,7 @@ const SplitCustomCapsule = ({
       style={[
         styles.splitCapsuleCustom,
         {
-          backgroundColor: active
-            ? theme.colors.accent
-            : theme.colors.backgroundColor,
+          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
         },
       ]}
       onPress={() => {
@@ -84,8 +76,7 @@ export const StyledSpiltOptions = ({
 
   const [splitValue, setSplitValue] = useState<number>(defaultSplitValue);
 
-  const [customSliderVisible, setCustomSliderVisible] =
-    useState<boolean>(false);
+  const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
   const { styles, theme } = useStyles(stylesheet);
   return (
