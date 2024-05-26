@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledHorizontalSlider, VerticalDevider } from '@components';
+import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 
 const SplitCapsule = ({
   active = false,
@@ -62,7 +62,14 @@ const SplitCustomCapsule = ({
           {
             color: active ? theme.colors.card : theme.colors.card_typography,
           },
-        ]}>{`${textValue}`}</Text>
+        ]}>
+        {`${textValue} `}
+        <StyledIcons
+          type={'FontAwesome'}
+          name={'sliders'}
+          size={styles.splitCapsuleCustomText?.fontSize}
+        />
+      </Text>
     </Pressable>
   );
 };
