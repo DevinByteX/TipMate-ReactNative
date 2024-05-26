@@ -34,18 +34,12 @@ type IconTypesKeys = keyof typeof IconTypes;
 interface StyledIconsProps {
   type: IconTypesKeys;
   name: string;
-  color: string;
+  color?: string;
   size?: number;
   style?: TextStyle | ViewStyle;
 }
 
-export const StyledIcons: React.FC<StyledIconsProps> = ({
-  type,
-  name,
-  color,
-  size = 24,
-  style,
-}) => {
+export const StyledIcons: React.FC<StyledIconsProps> = ({ type, name, color, size, style }) => {
   const IconComponent = IconTypes[type];
   return (
     <>{type && name && <IconComponent name={name} size={size} color={color} style={style} />}</>
