@@ -2,6 +2,7 @@ import { convertToTwoDecimalPoints } from '@/hooks';
 import React, { useState } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyledIcons } from '../StyledIcons';
 
 type styledTotalAmountInputProps = {
   titleText?: string;
@@ -25,7 +26,10 @@ export const StyledTotalAmountInput = ({
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{`${titleText}`}</Text>
+      <Text style={styles.titleText}>
+        {`${titleText} `}
+        <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} />
+      </Text>
       <View style={styles.textInputContainer}>
         <Text style={styles.currencyText}>{`${currencyText}`}</Text>
         <TextInput

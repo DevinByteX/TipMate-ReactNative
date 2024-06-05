@@ -88,7 +88,10 @@ export const StyledSpiltOptions = ({
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{`SPLIT COUNT`}</Text>
+      <Text style={styles.titleText}>
+        {`SPLIT COUNT `}
+        <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} />
+      </Text>
       <View>
         <VerticalDevider
           verticalDeviderAdditionalStyles={{

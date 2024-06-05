@@ -56,7 +56,10 @@ export const StyledRoundBox = ({
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{`ROUND VALUE`}</Text>
+      <Text style={styles.titleText}>
+        {`ROUND VALUE `}
+        <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} />
+      </Text>
       <View style={styles.mainInnerContainer}>
         <RoundCapsule
           textValue="NO"

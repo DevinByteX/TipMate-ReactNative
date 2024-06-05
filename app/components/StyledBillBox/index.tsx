@@ -1,10 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ViewStyle } from 'react-native';
-import {
-  UnistylesRuntime,
-  createStyleSheet,
-  useStyles,
-} from 'react-native-unistyles';
+import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyledIcons } from '../StyledIcons';
 
 // Vertical Devider Component
 export const VerticalDevider = ({
@@ -13,11 +10,7 @@ export const VerticalDevider = ({
   verticalDeviderAdditionalStyles?: ViewStyle;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
-  return (
-    <View
-      style={[styles.verticalDeviderStyles, verticalDeviderAdditionalStyles]}
-    />
-  );
+  return <View style={[styles.verticalDeviderStyles, verticalDeviderAdditionalStyles]} />;
 };
 
 type StyledBillBox = {
@@ -48,7 +41,14 @@ export const StyledBillBox = ({
     <View style={styles.superMainContainer}>
       {/* Title Text */}
       {titleVisibility ? (
-        <Text style={styles.titleText}>{`${titleText}`}</Text>
+        <Text style={styles.titleText}>
+          {`${titleText} `}
+          <StyledIcons
+            type={'FontAwesome5'}
+            name={'info-circle'}
+            size={styles.titleText?.fontSize}
+          />
+        </Text>
       ) : null}
       <View style={styles.mainInnerContainer}>
         {/* Total Text Content Container */}

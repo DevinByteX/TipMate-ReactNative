@@ -88,7 +88,10 @@ export const StyledTipOptions = ({
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{`SELECT TIP`}</Text>
+      <Text style={styles.titleText}>
+        {`SELECT TIP `}
+        <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} />
+      </Text>
       <View>
         <VerticalDevider
           verticalDeviderAdditionalStyles={{
