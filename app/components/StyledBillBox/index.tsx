@@ -159,7 +159,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     justifyContent: 'flex-end',
   },
   verticalDeviderStyles: {
-    backgroundColor: '#4b4b4b',
+    backgroundColor: colors.devider,
     height: '100%',
     width: StyleSheet.hairlineWidth * 8,
   },
