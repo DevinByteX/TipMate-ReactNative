@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { RoundingMethod, RoundingMethodType } from '@hooks';
+import { StyledIcons } from '../StyledIcons';
 
 const RoundCapsule = ({
   active = false,
   textValue,
+  iconName = 'circle',
   onRoundCapsulePress,
 }: {
   active?: boolean;
   textValue: RoundingMethodType;
+  iconName?: string;
   onRoundCapsulePress?: (value: RoundingMethodType) => void;
 }) => {
   const { styles, theme } = useStyles(styleSheet);
@@ -30,7 +33,14 @@ const RoundCapsule = ({
           {
             color: active ? theme.colors.card : theme.colors.card_typography,
           },
-        ]}>{`${textValue}`}</Text>
+        ]}>
+        {`${textValue} `}
+        <StyledIcons
+          type={'FontAwesome'}
+          name={iconName}
+          size={styles.roundCapsuleText?.fontSize}
+        />
+      </Text>
     </Pressable>
   );
 };
@@ -51,6 +61,7 @@ export const StyledRoundBox = ({
         <RoundCapsule
           textValue="NO"
           active={roundValue == RoundingMethod.NO}
+          iconName={'dot-circle-o'}
           onRoundCapsulePress={value => {
             setRoundValue(value);
             onSelectedRound && onSelectedRound(value);
@@ -59,6 +70,7 @@ export const StyledRoundBox = ({
         <RoundCapsule
           textValue="UP"
           active={roundValue == RoundingMethod.UP}
+          iconName={'arrow-circle-o-up'}
           onRoundCapsulePress={value => {
             setRoundValue(value);
             onSelectedRound && onSelectedRound(value);
@@ -67,6 +79,7 @@ export const StyledRoundBox = ({
         <RoundCapsule
           textValue="DOWN"
           active={roundValue == RoundingMethod.DOWN}
+          iconName={'arrow-circle-o-down'}
           onRoundCapsulePress={value => {
             setRoundValue(value);
             onSelectedRound && onSelectedRound(value);
