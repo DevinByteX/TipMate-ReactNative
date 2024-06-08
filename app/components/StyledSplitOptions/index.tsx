@@ -75,8 +75,10 @@ const SplitCustomCapsule = ({
 };
 
 export const StyledSpiltOptions = ({
+  titleText = 'SPLIT COUNT',
   onSelectedSplitValue,
 }: {
+  titleText?: string;
   onSelectedSplitValue?: (value: number) => void;
 }) => {
   const defaultSplitValue = 1;
@@ -89,7 +91,7 @@ export const StyledSpiltOptions = ({
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>
-        {`SPLIT COUNT `}
+        {`${titleText} `}
         <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} />
       </Text>
       <View>

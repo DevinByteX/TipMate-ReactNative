@@ -75,8 +75,10 @@ const TipPercentageCustomCapsule = ({
 };
 
 export const StyledTipOptions = ({
+  titleText = 'SELECT TIP',
   onSelectedTipValue,
 }: {
+  titleText?: string;
   onSelectedTipValue?: (value: number) => void;
 }) => {
   const defaultTipValue = 5;
@@ -89,7 +91,7 @@ export const StyledTipOptions = ({
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>
-        {`SELECT TIP `}
+        {`${titleText} `}
         <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} />
       </Text>
       <View>

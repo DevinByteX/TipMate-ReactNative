@@ -56,18 +56,21 @@ const HomeTipScreen = () => {
         />
         {/* Tip Percentage Options Container */}
         <StyledTipOptions
+          titleText="SELECT TIP"
           onSelectedTipValue={percentage => {
             setUserInputTipPercentage(percentage);
           }}
         />
         {/* Slip Options Container */}
         <StyledSpiltOptions
+          titleText="SPLIT COUNT"
           onSelectedSplitValue={splitCount => {
             setUserInputSplitCount(splitCount);
           }}
         />
         {/* Round Options Container */}
         <StyledRoundBox
+          titleText="ROUND VALUE"
           onSelectedRound={roundValue => {
             setUserInputRound(roundValue);
           }}
