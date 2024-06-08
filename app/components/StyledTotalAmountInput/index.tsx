@@ -31,7 +31,7 @@ export const StyledTotalAmountInput = ({
         <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} />
       </Text>
       <View style={styles.textInputContainer}>
-        <Text style={styles.currencyText}>{`${currencyText}`}</Text>
+        <Text allowFontScaling={false} style={styles.currencyText}>{`${currencyText}`}</Text>
         <TextInput
           defaultValue={'0.00'}
           value={textInputValue?.length === 0 ? '0.00' : textInputValue}
