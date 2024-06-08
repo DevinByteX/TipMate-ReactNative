@@ -24,14 +24,24 @@ export const StyledHeader = ({
       <View style={styles.headerMainContainer}>
         <View style={styles.headerInnerContainer}>
           <View style={styles.innerLeftContainer}>
-            <StyledIcons type={'FontAwesome'} name={'navicon'} size={styles.headerText.fontSize} />
+            <StyledIcons
+              type={'FontAwesome'}
+              name={'navicon'}
+              size={styles.headerText.fontSize}
+              color={styles.headerSubText.color}
+            />
           </View>
           <View style={styles.innerMiddleContainer}>
             <Text style={styles.headerText}>{`${headerTitle}`}</Text>
             <Text style={styles.headerSubText}>{`${headerSubTitle}`}</Text>
           </View>
           <View style={styles.innerRightContainer}>
-            <StyledIcons type={'Ionicons'} name={'save'} size={styles.headerText.fontSize} />
+            <StyledIcons
+              type={'Ionicons'}
+              name={'save'}
+              size={styles.headerText.fontSize}
+              color={styles.headerSubText.color}
+            />
           </View>
         </View>
       </View>
