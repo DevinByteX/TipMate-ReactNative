@@ -41,7 +41,7 @@ const HomeTipScreen = () => {
 
   return (
     <>
-      <StyledHeader />
+      <StyledHeader headerTitle={'TipMate'} headerSubTitle={'Smart Tips, Easy Living'} />
       <ScrollView
         style={styles.mainContainer}
         contentContainerStyle={styles.scrollContentContainer}
