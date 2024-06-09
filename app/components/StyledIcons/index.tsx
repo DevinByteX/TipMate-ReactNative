@@ -14,7 +14,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
-export const IconTypes = {
+export const StyledIconTypes = {
   MaterialCommunityIcons,
   MaterialIcons,
   Ionicons,
@@ -29,10 +29,10 @@ export const IconTypes = {
   EvilIcons,
 };
 
-type IconTypesKeys = keyof typeof IconTypes;
+type StyledIconTypesKeys = keyof typeof StyledIconTypes;
 
 interface StyledIconsProps {
-  type: IconTypesKeys;
+  type: StyledIconTypesKeys;
   name: string;
   color?: string;
   size?: number;
@@ -40,7 +40,7 @@ interface StyledIconsProps {
 }
 
 export const StyledIcons: React.FC<StyledIconsProps> = ({ type, name, color, size, style }) => {
-  const IconComponent = IconTypes[type];
+  const IconComponent = StyledIconTypes[type];
   return (
     <>{type && name && <IconComponent name={name} size={size} color={color} style={style} />}</>
   );
