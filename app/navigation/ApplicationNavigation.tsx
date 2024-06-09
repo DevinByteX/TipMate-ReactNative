@@ -1,16 +1,12 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {
-  NavigationContainer,
-  useNavigationContainerRef,
-} from '@react-navigation/native';
-import {
-  useReduxDevToolsExtension,
-} from '@react-navigation/devtools';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import { useReduxDevToolsExtension } from '@react-navigation/devtools';
+// Screens
 import HomeTipScreen from '@/screens/TipScreens/HomeTipScreen';
 
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const ApplicationNavigator = (props: any) => {
   const navigationRef = useNavigationContainerRef();
@@ -19,9 +15,9 @@ const ApplicationNavigator = (props: any) => {
   return (
     <SafeAreaProvider>
       <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="HomeTipScreen" component={HomeTipScreen} />
-        </Stack.Navigator>
+        <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+          <Drawer.Screen name="Home" component={HomeTipScreen} />
+        </Drawer.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
   );
