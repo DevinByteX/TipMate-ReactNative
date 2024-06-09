@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledIcons } from '../StyledIcons';
+import { StyledIcons } from '@components';
 
 // Vertical Devider Component
 export const VerticalDevider = ({

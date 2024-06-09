@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledIcons } from '../StyledIcons';
+import { StyledIcons } from '@components';
 
 type styledHeaderProps = {
   headerTitle: string;

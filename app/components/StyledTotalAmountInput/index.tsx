@@ -2,7 +2,7 @@ import { convertToTwoDecimalPoints } from '@/hooks';
 import React, { useState } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledIcons } from '../StyledIcons';
+import { StyledIcons } from '@components';
 
 type styledTotalAmountInputProps = {
   titleText?: string;

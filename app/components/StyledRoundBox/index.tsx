@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { RoundingMethod, RoundingMethodType } from '@hooks';
-import { StyledIcons } from '../StyledIcons';
+import { StyledIcons } from '@components';
 
 const RoundCapsule = ({
   active = false,
