@@ -6,4 +6,8 @@ export { StyledHorizontalSlider } from "./StyledHorizontalSlider";
 export { StyledSpiltOptions } from "./StyledSplitOptions";
 export { StyledHorizontalList } from './StyledHorizontalList';
 export { StyledRoundBox } from './StyledRoundBox';
-export { StyledIcons } from './StyledIcons';
+export { StyledIcons, StyledIconTypes } from './StyledIcons';
+export { StyledDrawer } from './StyledDrawer';
+
+// types should export seperately
+export type { StyledIconTypesKeys } from './StyledIcons';

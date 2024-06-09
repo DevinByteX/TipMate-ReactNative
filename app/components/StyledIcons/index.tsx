@@ -29,7 +29,7 @@ export const StyledIconTypes = {
   EvilIcons,
 };
 
-type StyledIconTypesKeys = keyof typeof StyledIconTypes;
+export type StyledIconTypesKeys = keyof typeof StyledIconTypes;
 
 interface StyledIconsProps {
   type: StyledIconTypesKeys;
