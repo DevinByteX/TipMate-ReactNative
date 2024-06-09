@@ -30,7 +30,7 @@ const BottomButton = ({
   const { styles } = useStyles(stylesheet);
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.bottomButtonStyles}>
+    <TouchableOpacity onPress={onPress} style={styles.bottomButtonStyles} activeOpacity={0.6}>
       <StyledIcons type={iconType} name={iconName} size={iconSize} color={iconColor} />
       <Text style={styles.footerButtonText}>{label}</Text>
     </TouchableOpacity>
