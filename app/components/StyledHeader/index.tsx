@@ -1,11 +1,27 @@
 import React from 'react';
-import { StatusBar, Text, View } from 'react-native';
+import { Pressable, StatusBar, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledIcons } from '@components';
+import { StyledIconTypesKeys, StyledIcons } from '@components';
 
 type styledHeaderProps = {
   headerTitle: string;
   headerSubTitle: string;
+};
+
+type HeaderIconProps = {
+  iconType: StyledIconTypesKeys;
+  iconName: string;
+  iconSize: number;
+  iconColor?: string;
+  onPress?: () => void;
+};
+
+const HeaderIcon = ({ iconType, iconName, iconSize, iconColor, onPress }: HeaderIconProps) => {
+  return (
+    <Pressable onPress={onPress}>
+      <StyledIcons type={iconType} name={iconName} size={iconSize} color={iconColor} />
+    </Pressable>
+  );
 };
 
 export const StyledHeader = ({
@@ -24,11 +40,11 @@ export const StyledHeader = ({
       <View style={styles.headerMainContainer}>
         <View style={styles.headerInnerContainer}>
           <View style={styles.innerLeftContainer}>
-            <StyledIcons
-              type={'FontAwesome'}
-              name={'navicon'}
-              size={styles.headerText.fontSize}
-              color={styles.headerSubText.color}
+            <HeaderIcon
+              iconType={'FontAwesome'}
+              iconName={'navicon'}
+              iconSize={styles.headerText.fontSize}
+              iconColor={styles.headerSubText.color}
             />
           </View>
           <View style={styles.innerMiddleContainer}>
@@ -36,11 +52,11 @@ export const StyledHeader = ({
             <Text style={styles.headerSubText}>{`${headerSubTitle}`}</Text>
           </View>
           <View style={styles.innerRightContainer}>
-            <StyledIcons
-              type={'Ionicons'}
-              name={'save'}
-              size={styles.headerText.fontSize}
-              color={styles.headerSubText.color}
+            <HeaderIcon
+              iconType={'Ionicons'}
+              iconName={'save'}
+              iconSize={styles.headerText.fontSize}
+              iconColor={styles.headerSubText.color}
             />
           </View>
         </View>
