@@ -50,17 +50,17 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
       <View style={styles.horizontalDeviderStyles} />
       <View style={styles.bottomButtonContainer}>
         <BottomButton
-          iconType={'Ionicons'}
-          iconName={'share-social-outline'}
+          iconType={'FontAwesome'}
+          iconName={'share-alt'}
           iconColor={styles.footerButtonText.color}
-          iconSize={styles.footerButtonText.fontSize + 2}
+          iconSize={styles.footerButtonText.fontSize + 4}
           label={'Tell a Friend'}
         />
         <BottomButton
-          iconType={'Ionicons'}
-          iconName={'exit-outline'}
+          iconType={'FontAwesome'}
+          iconName={'user'}
           iconColor={styles.footerButtonText.color}
-          iconSize={styles.footerButtonText.fontSize + 2}
+          iconSize={styles.footerButtonText.fontSize + 4}
           label={'About Us'}
         />
       </View>
@@ -91,7 +91,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     alignItems: 'center',
   },
   footerButtonText: {
-    color: colors.card_typography,
+    color: colors.accent,
     fontSize: 16,
     fontWeight: '600',
     paddingStart: (UnistylesRuntime.screen.width * 2) / 100,
