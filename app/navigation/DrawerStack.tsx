@@ -14,7 +14,7 @@ const DrawerStack = () => {
       drawerContent={props => <StyledDrawer {...props} />}
       screenOptions={{ headerShown: false }}>
       <Drawer.Screen
-        name="Home"
+        name="TipScreen"
         component={HomeTipScreen}
         options={{
           drawerLabel: 'Tip & Split',
