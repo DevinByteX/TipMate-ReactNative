@@ -52,7 +52,7 @@ export const StyledHeader = ({
               iconType={'FontAwesome'}
               iconName={'navicon'}
               iconSize={styles.headerText.fontSize}
-              iconColor={styles.headerSubText.color}
+              iconColor={styles.headerText.color}
               onPress={() => {
                 navigation.toggleDrawer();
               }}
@@ -67,7 +67,7 @@ export const StyledHeader = ({
               iconType={'Ionicons'}
               iconName={'save'}
               iconSize={styles.headerText.fontSize}
-              iconColor={styles.headerSubText.color}
+              iconColor={styles.headerText.color}
             />
           </View>
         </View>
