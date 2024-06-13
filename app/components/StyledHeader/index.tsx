@@ -2,6 +2,8 @@ import React from 'react';
 import { Pressable, StatusBar, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIconTypesKeys, StyledIcons } from '@components';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 type styledHeaderProps = {
   headerTitle: string;
@@ -16,6 +18,9 @@ type HeaderIconProps = {
   onPress?: () => void;
 };
 
+// Define a general type for the drawer navigation prop
+type DrawerNavProp = DrawerNavigationProp<Record<string, object | undefined>>;
+
 const HeaderIcon = ({ iconType, iconName, iconSize, iconColor, onPress }: HeaderIconProps) => {
   return (
     <Pressable onPress={onPress}>
@@ -29,6 +34,9 @@ export const StyledHeader = ({
   headerSubTitle = 'Smart Tips, Easy Living',
 }: styledHeaderProps) => {
   const { styles, theme } = useStyles(stylesheet);
+
+  // Use the useNavigation hook with the general drawer navigation type
+  const navigation = useNavigation<DrawerNavProp>();
 
   return (
     <>
@@ -45,6 +53,9 @@ export const StyledHeader = ({
               iconName={'navicon'}
               iconSize={styles.headerText.fontSize}
               iconColor={styles.headerSubText.color}
+              onPress={() => {
+                navigation.toggleDrawer();
+              }}
             />
           </View>
           <View style={styles.innerMiddleContainer}>
