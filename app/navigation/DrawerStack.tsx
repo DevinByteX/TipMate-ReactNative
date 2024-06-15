@@ -14,13 +14,16 @@ const DrawerStack = () => {
   return (
     <Drawer.Navigator
       drawerContent={props => <StyledDrawer {...props} />}
-      screenOptions={{ headerShown: false }}>
+      screenOptions={{
+        headerShown: false,
+        drawerActiveTintColor: theme.colors.accent,
+        drawerInactiveTintColor: theme.colors.card_typography,
+      }}>
       <Drawer.Screen
         name="CalcTipScreen"
         component={HomeTipScreen}
         options={{
           drawerLabel: 'Tip & Split',
-          drawerActiveTintColor: theme.colors.accent,
         }}
       />
       <Drawer.Screen
@@ -28,7 +31,6 @@ const DrawerStack = () => {
         component={SavedTipsScreen}
         options={{
           drawerLabel: 'Saved Tips',
-          drawerActiveTintColor: theme.colors.accent,
         }}
       />
     </Drawer.Navigator>
