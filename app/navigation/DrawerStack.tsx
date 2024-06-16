@@ -30,7 +30,7 @@ const DrawerStack = () => {
         name="SavedTipScreen"
         component={SavedTipsScreen}
         options={{
-          drawerLabel: 'Saved Tips',
+          drawerLabel: 'History & Summary',
         }}
       />
     </Drawer.Navigator>
