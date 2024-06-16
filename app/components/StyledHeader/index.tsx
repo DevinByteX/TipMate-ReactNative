@@ -7,7 +7,9 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 type styledHeaderProps = {
   headerTitle: string;
-  headerSubTitle: string;
+  headerSubTitle?: string;
+  headerSubTitleVisibility?: boolean;
+  headerRightIconVisibilty?: boolean;
 };
 
 type HeaderIconProps = {
@@ -32,6 +34,8 @@ const HeaderIcon = ({ iconType, iconName, iconSize, iconColor, onPress }: Header
 export const StyledHeader = ({
   headerTitle = 'TipMate',
   headerSubTitle = 'Smart Tips, Easy Living',
+  headerSubTitleVisibility = true,
+  headerRightIconVisibilty = true,
 }: styledHeaderProps) => {
   const { styles, theme } = useStyles(stylesheet);
 
@@ -59,16 +63,28 @@ export const StyledHeader = ({
             />
           </View>
           <View style={styles.innerMiddleContainer}>
-            <Text style={styles.headerText}>{`${headerTitle}`}</Text>
-            <Text style={styles.headerSubText}>{`${headerSubTitle}`}</Text>
+            <Text
+              style={[
+                styles.headerText,
+                {
+                  color: headerSubTitleVisibility
+                    ? theme.colors.accent
+                    : theme.colors.card_typography,
+                },
+              ]}>{`${headerTitle}`}</Text>
+            {headerSubTitleVisibility && (
+              <Text style={styles.headerSubText}>{`${headerSubTitle}`}</Text>
+            )}
           </View>
           <View style={styles.innerRightContainer}>
-            <HeaderIcon
-              iconType={'Ionicons'}
-              iconName={'save'}
-              iconSize={styles.headerText.fontSize}
-              iconColor={styles.headerText.color}
-            />
+            {headerRightIconVisibilty && (
+              <HeaderIcon
+                iconType={'Ionicons'}
+                iconName={'save'}
+                iconSize={styles.headerText.fontSize}
+                iconColor={styles.headerText.color}
+              />
+            )}
           </View>
         </View>
       </View>
@@ -102,7 +118,6 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     fontSize: 22,
     fontWeight: '800',
     color: colors.accent,
-    borderColor: colors.card_typography,
   },
   headerSubText: {
     fontSize: 8,
