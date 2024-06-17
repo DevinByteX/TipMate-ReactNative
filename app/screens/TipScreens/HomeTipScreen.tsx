@@ -59,6 +59,9 @@ const HomeTipScreen = () => {
         <StyledTipOptions
           titleText="SELECT TIP"
           onSelectedTipValue={percentage => {
+            if (percentage === 0) {
+              setUserInputRound(RoundingMethod.NO);
+            }
             setUserInputTipPercentage(percentage);
           }}
         />
@@ -66,12 +69,16 @@ const HomeTipScreen = () => {
         <StyledSpiltOptions
           titleText="SPLIT COUNT"
           onSelectedSplitValue={splitCount => {
+            if (splitCount === 1) {
+              setUserInputRound(RoundingMethod.NO);
+            }
             setUserInputSplitCount(splitCount);
           }}
         />
         {/* Round Options Container */}
         <StyledRoundBox
           titleText="ROUND VALUE"
+          roundMethod={userInputRound}
           disablingRoundingMethod={billValues?.disabledRoundingMethods}
           onSelectedRound={roundValue => {
             setUserInputRound(roundValue);
