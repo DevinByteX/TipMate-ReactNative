@@ -8,11 +8,13 @@ const RoundCapsule = ({
   active = false,
   textValue,
   iconName = 'circle',
+  disabled = false,
   onRoundCapsulePress,
 }: {
   active?: boolean;
   textValue: RoundingMethodType;
   iconName?: string;
+  disabled?: boolean;
   onRoundCapsulePress?: (value: RoundingMethodType) => void;
 }) => {
   const { styles, theme } = useStyles(styleSheet);
@@ -26,12 +28,13 @@ const RoundCapsule = ({
       ]}
       onPress={() => {
         onRoundCapsulePress && onRoundCapsulePress(textValue);
-      }}>
+      }}
+      disabled={disabled}>
       <Text
         style={[
           styles.roundCapsuleText,
           {
-            color: active ? theme.colors.card : theme.colors.card_typography,
+            color: disabled ? 'grey' : active ? theme.colors.card : theme.colors.card_typography,
           },
         ]}>
         {`${textValue} `}
