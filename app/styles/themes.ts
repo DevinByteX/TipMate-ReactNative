@@ -1,3 +1,16 @@
+const sharedFonts = {
+    Montserrat_Black: 'Montserrat-Black',
+    Montserrat_Bold: 'Montserrat-Bold',
+    Montserrat_Medium: 'Montserrat-Medium',
+    Montserrat_Regular: 'Montserrat-Regular',
+    Montserrat_Semibold: 'Montserrat-Semibold',
+    Nunito_Black: 'Nunito-Black',
+    Nunito_Bold: 'Nunito-Bold',
+    Nunito_SemiBold: 'Nunito-SemiBold',
+    Nunito_Medium: 'Nunito-Medium',
+    Nunito_Regular: 'Nunito-Regular',
+};
+
 const sharedColors = {
     barbie: '#ff9ff3',
     blood: '#ff6b6b',
@@ -29,6 +42,9 @@ export const lightTheme = {
         md: 4,
         lg: 8,
         xl: 12
+    },
+    fonts: {
+        ...sharedFonts,
     }
     // add any keys/functions/objects/arrays you want!
 } as const
@@ -48,6 +64,9 @@ export const darkTheme = {
         md: 4,
         lg: 8,
         xl: 12
+    },
+    fonts: {
+        ...sharedFonts,
     }
     // add any keys/functions/objects/arrays you want!
 } as const
@@ -67,6 +86,9 @@ export const premiumTheme = {
         md: 4,
         lg: 8,
         xl: 12
+    },
+    fonts: {
+        ...sharedFonts,
     }
     // add any keys/functions/objects/arrays you want!
 } as const
