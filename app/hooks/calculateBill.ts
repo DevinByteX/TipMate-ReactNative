@@ -104,7 +104,7 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
         NO: false
     };
 
-    if (numberOfPeople === 1) {
+    if (numberOfPeople === 1 || tipPercentage === 0) {
         disabledRoundingMethods.DOWN = true;
     }
 
@@ -128,9 +128,9 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
             subtotal: roundedSubtotalPerPerson
         },
         overall: {
-            total: roundedTotalBill,
-            tip: roundedTipTotal,
-            subtotal: billAmount
+            total: roundedTotalPerPerson * numberOfPeople,
+            tip: roundedTipPerPerson * numberOfPeople,
+            subtotal: roundedSubtotalPerPerson * numberOfPeople
         },
         disabledRoundingMethods
     };
