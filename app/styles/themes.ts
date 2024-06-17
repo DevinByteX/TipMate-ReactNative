@@ -25,6 +25,10 @@ const sharedColors = {
     devider_dark: '#4b4b4b',
     card_typography_light: '#292929',
     card_typography_dark: '#f6f6f6',
+    disable_text_light: '#dcdcdc',
+    disable_text_dark: '#6d6d6d',
+    disable_button_light: '#bdbdbd',
+    disable_button_dark: '#4f4f4f'
 }
 
 export const lightTheme = {
@@ -36,6 +40,8 @@ export const lightTheme = {
         card_typography: sharedColors.card_typography_light,
         card: sharedColors.card_light,
         devider: sharedColors.devider_light,
+        disable_text: sharedColors.disable_text_light,
+        disable_button: sharedColors.disable_button_light
     },
     margins: {
         sm: 2,
@@ -58,6 +64,8 @@ export const darkTheme = {
         card_typography: sharedColors.card_typography_dark,
         card: sharedColors.card_dark,
         devider: sharedColors.devider_dark,
+        disable_text: sharedColors.disable_text_dark,
+        disable_button: sharedColors.disable_button_dark
     },
     margins: {
         sm: 2,
@@ -80,6 +88,8 @@ export const premiumTheme = {
         card_typography: '#76278f',
         card: sharedColors.blood,
         devider: '#4b4b4b',
+        disable_text: sharedColors.blood,
+        disable_button: sharedColors.sky
     },
     margins: {
         sm: 2,

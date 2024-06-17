@@ -23,7 +23,11 @@ const RoundCapsule = ({
       style={[
         styles.roundCapsuleStyle,
         {
-          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
+          backgroundColor: disabled
+            ? theme.colors.disable_button
+            : active
+            ? theme.colors.accent
+            : theme.colors.backgroundColor,
         },
       ]}
       onPress={() => {
@@ -34,7 +38,11 @@ const RoundCapsule = ({
         style={[
           styles.roundCapsuleText,
           {
-            color: disabled ? 'grey' : active ? theme.colors.card : theme.colors.card_typography,
+            color: disabled
+              ? theme.colors.disable_text
+              : active
+              ? theme.colors.card
+              : theme.colors.card_typography,
           },
         ]}>
         {`${textValue} `}
