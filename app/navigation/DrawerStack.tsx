@@ -24,6 +24,11 @@ const DrawerStack = () => {
         component={HomeTipScreen}
         options={{
           drawerLabel: 'Tip & Split',
+          drawerLabelStyle: {
+            fontFamily: theme.fonts.Montserrat_Bold,
+            fontWeight: undefined,
+            fontSize: 14,
+          },
         }}
       />
       <Drawer.Screen
@@ -31,6 +36,11 @@ const DrawerStack = () => {
         component={SavedTipsScreen}
         options={{
           drawerLabel: 'History & Summary',
+          drawerLabelStyle: {
+            fontFamily: theme.fonts.Montserrat_Bold,
+            fontWeight: undefined,
+            fontSize: 14,
+          },
         }}
       />
     </Drawer.Navigator>

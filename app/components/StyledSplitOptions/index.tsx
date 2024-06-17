@@ -186,7 +186,7 @@ export const StyledSpiltOptions = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -197,7 +197,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   titleText: {
     color: colors.accent,
     fontSize: 14,
-    fontWeight: '800',
+    fontFamily: fonts.Nunito_Black,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainInnerContainer: {
@@ -237,13 +237,13 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   },
   splitDigitsStyles: {
     fontSize: 40,
-    fontWeight: '800',
+    fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
     alignSelf: 'center',
   },
   splitCapsuleText: {
     fontSize: 14,
-    fontWeight: '800',
+    fontFamily: fonts.Montserrat_Black,
     color: colors.accent,
   },
   splitCapsuleCustomText: {

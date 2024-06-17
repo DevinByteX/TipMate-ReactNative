@@ -92,7 +92,7 @@ export const StyledHeader = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   headerMainContainer: {
     backgroundColor: colors.headerBGColor,
     paddingTop: UnistylesRuntime.statusBar.height,
@@ -116,12 +116,12 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   },
   headerText: {
     fontSize: 22,
-    fontWeight: '800',
     color: colors.accent,
+    fontFamily: fonts.Nunito_Black,
   },
   headerSubText: {
     fontSize: 8,
-    fontWeight: '400',
     color: colors.card_typography,
+    fontFamily: fonts.Montserrat_Medium,
   },
 }));

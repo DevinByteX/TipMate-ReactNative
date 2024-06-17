@@ -106,7 +106,7 @@ export const StyledBillBox = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   superMainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -117,7 +117,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   titleText: {
     color: colors.accent,
     fontSize: 14,
-    fontWeight: '800',
+    fontFamily: fonts.Nunito_Black,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainInnerContainer: {
@@ -132,17 +132,17 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   },
   totalDigitsStyles: {
     fontSize: 40,
-    fontWeight: '800',
+    fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },
   subTextStyles: {
     fontSize: 12,
-    fontWeight: '600',
+    fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
   subDigitStyles: {
     fontSize: 14,
-    fontWeight: '800',
+    fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },
   subTotalAndTipAmountsContainer: {

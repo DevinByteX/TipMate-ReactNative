@@ -53,7 +53,7 @@ export const StyledTotalAmountInput = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   mainContainer: {
     width: '100%',
     backgroundColor: colors.card,
@@ -64,7 +64,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   titleText: {
     color: colors.accent,
     fontSize: 14,
-    fontWeight: '800',
+    fontFamily: fonts.Nunito_Black,
   },
   textInputContainer: {
     flexDirection: 'row',
@@ -73,14 +73,14 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   currencyText: {
     color: colors.card_typography,
     fontSize: 40,
-    fontWeight: '800',
+    fontFamily: fonts.Montserrat_Black,
   },
   textInputStyles: {
     flex: 1,
     width: '100%',
     color: colors.card_typography,
     fontSize: 40,
-    fontWeight: '800',
+    fontFamily: fonts.Montserrat_Black,
     paddingVertical: 0, // To remove android hidden padding issue
   },
 }));

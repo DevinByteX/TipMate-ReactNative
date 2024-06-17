@@ -68,7 +68,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   mainDrawerContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -92,8 +92,8 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   },
   footerButtonText: {
     color: colors.accent,
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 14,
+    fontFamily: fonts.Montserrat_Bold,
     paddingStart: (UnistylesRuntime.screen.width * 2) / 100,
   },
 }));

@@ -95,7 +95,7 @@ export const StyledRoundBox = ({
   );
 };
 
-const styleSheet = createStyleSheet(({ colors }) => ({
+const styleSheet = createStyleSheet(({ colors, fonts }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -107,7 +107,7 @@ const styleSheet = createStyleSheet(({ colors }) => ({
   titleText: {
     color: colors.accent,
     fontSize: 14,
-    fontWeight: '800',
+    fontFamily: fonts.Nunito_Black,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainInnerContainer: {
@@ -126,7 +126,7 @@ const styleSheet = createStyleSheet(({ colors }) => ({
   },
   roundCapsuleText: {
     fontSize: 14,
-    fontWeight: '800',
+    fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },
 }));
