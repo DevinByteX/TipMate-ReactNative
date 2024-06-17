@@ -67,7 +67,7 @@ export const StyledRoundBox = ({
 }) => {
   const { styles, theme } = useStyles(styleSheet);
 
-  const [roundValue, setRoundValue] = useState<RoundingMethodType>(RoundingMethod.NO);
+  const [roundMethod, setRoundMethod] = useState<RoundingMethodType>(RoundingMethod.NO);
 
   return (
     <View style={styles.mainContainer}>
@@ -79,30 +79,30 @@ export const StyledRoundBox = ({
         <RoundCapsule
           textValue="NO"
           disabled={disablingRoundingMethod?.NO}
-          active={roundValue == RoundingMethod.NO}
+          active={roundMethod == RoundingMethod.NO}
           iconName={'dot-circle-o'}
           onRoundCapsulePress={value => {
-            setRoundValue(value);
+            setRoundMethod(value);
             onSelectedRound && onSelectedRound(value);
           }}
         />
         <RoundCapsule
           textValue="UP"
           disabled={disablingRoundingMethod?.UP}
-          active={roundValue == RoundingMethod.UP}
+          active={roundMethod == RoundingMethod.UP}
           iconName={'arrow-circle-o-up'}
           onRoundCapsulePress={value => {
-            setRoundValue(value);
+            setRoundMethod(value);
             onSelectedRound && onSelectedRound(value);
           }}
         />
         <RoundCapsule
           textValue="DOWN"
           disabled={disablingRoundingMethod?.DOWN}
-          active={roundValue == RoundingMethod.DOWN}
+          active={roundMethod == RoundingMethod.DOWN}
           iconName={'arrow-circle-o-down'}
           onRoundCapsulePress={value => {
-            setRoundValue(value);
+            setRoundMethod(value);
             onSelectedRound && onSelectedRound(value);
           }}
         />
