@@ -28,7 +28,7 @@ export const StyledTotalAmountInput = ({
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>
         {`${titleText} `}
-        <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} />
+        {/* <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} /> */}
       </Text>
       <View style={styles.textInputContainer}>
         <Text allowFontScaling={false} style={styles.currencyText}>{`${currencyText}`}</Text>

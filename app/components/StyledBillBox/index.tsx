@@ -43,11 +43,11 @@ export const StyledBillBox = ({
       {titleVisibility ? (
         <Text style={styles.titleText}>
           {`${titleText} `}
-          <StyledIcons
+          {/* <StyledIcons
             type={'FontAwesome5'}
             name={'info-circle'}
             size={styles.titleText?.fontSize}
-          />
+          /> */}
         </Text>
       ) : null}
       <View style={styles.mainInnerContainer}>

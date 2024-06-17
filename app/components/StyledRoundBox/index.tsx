@@ -67,13 +67,13 @@ export const StyledRoundBox = ({
   disablingRoundingMethod?: DisabledRoundingMethodsType;
   onSelectedRound?: (value: RoundingMethodType) => void;
 }) => {
-  const { styles, theme } = useStyles(styleSheet);
+  const { styles } = useStyles(styleSheet);
 
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>
         {`${titleText} `}
-        <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} />
+        {/* <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} /> */}
       </Text>
       <View style={styles.mainInnerContainer}>
         <RoundCapsule
