@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { RoundingMethod, RoundingMethodType } from '@hooks';
+import { RoundingMethod, RoundingMethodType, DisabledRoundingMethodsType } from '@hooks';
 import { StyledIcons } from '@components';
 
 const RoundCapsule = ({
@@ -58,9 +58,11 @@ const RoundCapsule = ({
 
 export const StyledRoundBox = ({
   titleText = 'ROUND VALUE',
+  disablingRoundingMethod,
   onSelectedRound,
 }: {
   titleText?: string;
+  disablingRoundingMethod?: DisabledRoundingMethodsType;
   onSelectedRound?: (value: RoundingMethodType) => void;
 }) => {
   const { styles, theme } = useStyles(styleSheet);
@@ -76,6 +78,7 @@ export const StyledRoundBox = ({
       <View style={styles.mainInnerContainer}>
         <RoundCapsule
           textValue="NO"
+          disabled={disablingRoundingMethod?.NO}
           active={roundValue == RoundingMethod.NO}
           iconName={'dot-circle-o'}
           onRoundCapsulePress={value => {
@@ -85,6 +88,7 @@ export const StyledRoundBox = ({
         />
         <RoundCapsule
           textValue="UP"
+          disabled={disablingRoundingMethod?.UP}
           active={roundValue == RoundingMethod.UP}
           iconName={'arrow-circle-o-up'}
           onRoundCapsulePress={value => {
@@ -94,6 +98,7 @@ export const StyledRoundBox = ({
         />
         <RoundCapsule
           textValue="DOWN"
+          disabled={disablingRoundingMethod?.DOWN}
           active={roundValue == RoundingMethod.DOWN}
           iconName={'arrow-circle-o-down'}
           onRoundCapsulePress={value => {

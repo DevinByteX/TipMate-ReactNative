@@ -72,6 +72,7 @@ const HomeTipScreen = () => {
         {/* Round Options Container */}
         <StyledRoundBox
           titleText="ROUND VALUE"
+          disablingRoundingMethod={billValues?.disabledRoundingMethods}
           onSelectedRound={roundValue => {
             setUserInputRound(roundValue);
           }}

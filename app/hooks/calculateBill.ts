@@ -9,10 +9,23 @@ export type BillCalculationType = {
         tip: number;
         subtotal: number;
     };
+    disabledRoundingMethods: {
+        UP: boolean;
+        DOWN: boolean;
+        NO: boolean;
+    };
 };
 
 // Rounding method type
 export type RoundingMethodType = 'UP' | 'DOWN' | 'NO';
+
+// DisabledRounding methods type
+export type DisabledRoundingMethodsType = {
+    UP: boolean;
+    DOWN: boolean;
+    NO: boolean;
+};
+
 
 // Rounding method enum
 export enum RoundingMethod {
@@ -60,6 +73,11 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
                 total: 0,
                 tip: 0,
                 subtotal: 0
+            },
+            disabledRoundingMethods: {
+                UP: false,
+                DOWN: false,
+                NO: false
             }
         };
     }
@@ -79,6 +97,22 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
     // Calculate the total per person (including tip)
     const totalPerPerson = parseFloat((totalBill / numberOfPeople).toFixed(2));
 
+    // Determine which rounding methods to disable
+    const disabledRoundingMethods = {
+        UP: false,
+        DOWN: false,
+        NO: false
+    };
+
+    if (numberOfPeople === 1) {
+        disabledRoundingMethods.DOWN = true;
+    }
+
+    if ((totalPerPerson === Math.floor(totalPerPerson)) && (totalBill === Math.floor(totalBill))) {
+        disabledRoundingMethods.UP = true;
+        disabledRoundingMethods.DOWN = true;
+    }
+
     // Apply rounding method
     const roundedTotalPerPerson = applyRoundingMethod(totalPerPerson, roundingMethod);
     const roundedTipPerPerson = applyRoundingMethod(tipPerPerson, roundingMethod);
@@ -97,6 +131,7 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
             total: roundedTotalBill,
             tip: roundedTipTotal,
             subtotal: billAmount
-        }
+        },
+        disabledRoundingMethods
     };
 };
