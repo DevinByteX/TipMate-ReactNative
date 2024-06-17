@@ -108,7 +108,7 @@ const styleSheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainInnerContainer: {
     flexDirection: 'row',
