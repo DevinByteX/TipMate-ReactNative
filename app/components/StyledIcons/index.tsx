@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextStyle, ViewStyle } from 'react-native';
+import { TextStyle, ViewStyle, TextProps } from 'react-native';
 // Vector Icons
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -14,6 +14,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
+// Object containing all icon types for easy reference
 export const StyledIconTypes = {
   MaterialCommunityIcons,
   MaterialIcons,
@@ -29,9 +30,11 @@ export const StyledIconTypes = {
   EvilIcons,
 };
 
+// Type representing keys of StyledIconTypes
 export type StyledIconTypesKeys = keyof typeof StyledIconTypes;
 
-interface StyledIconsProps {
+// `TextProps` ensures that all Text component properties are also accepted
+interface StyledIconsProps extends TextProps {
   type: StyledIconTypesKeys;
   name: string;
   color?: string;
@@ -39,9 +42,25 @@ interface StyledIconsProps {
   style?: TextStyle | ViewStyle;
 }
 
-export const StyledIcons: React.FC<StyledIconsProps> = ({ type, name, color, size, style }) => {
+// StyledIcons functional component
+export const StyledIcons: React.FC<StyledIconsProps> = ({
+  type,
+  name,
+  color,
+  size,
+  style,
+  ...rest // Collect the remaining props
+}) => {
+  // Get the appropriate icon component from StyledIconTypes
   const IconComponent = StyledIconTypes[type];
+
   return (
-    <>{type && name && <IconComponent name={name} size={size} color={color} style={style} />}</>
+    <IconComponent
+      name={name}
+      size={size}
+      color={color}
+      style={style}
+      {...rest} // Pass remaining props to the icon component
+    />
   );
 };
