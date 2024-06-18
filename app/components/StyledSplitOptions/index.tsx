@@ -248,7 +248,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   splitCapsuleCustomText: {
     fontSize: 14,
-    fontWeight: '800',
+    fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },
   sliderContainer: {
