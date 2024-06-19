@@ -47,7 +47,7 @@ export const StyledHeader = ({
       <StatusBar
         backgroundColor={theme.colors.headerBGColor}
         translucent={true}
-        barStyle={UnistylesRuntime.colorScheme === 'dark' ? 'light-content' : 'dark-content'}
+        barStyle={'default'}
       />
       <View style={styles.headerMainContainer}>
         <View style={styles.headerInnerContainer}>
