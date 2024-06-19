@@ -24,5 +24,6 @@ UnistylesRegistry
     })
     .addBreakpoints(breakpoints)
     .addConfig({
-        adaptiveThemes: true
+        initialTheme: 'light', // initial theme until user change it
+        adaptiveThemes: false, // adaptiveThemes will change themes according to the system
     })
