@@ -50,15 +50,15 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
       <View style={styles.horizontalDeviderStyles} />
       <View style={styles.bottomButtonContainer}>
         <BottomButton
-          iconType={'FontAwesome'}
-          iconName={'share-alt'}
+          iconType={'AntDesign'}
+          iconName={'sharealt'}
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
           label={'Tell a Friend'}
         />
         <BottomButton
-          iconType={'FontAwesome'}
-          iconName={'user'}
+          iconType={'MaterialIcons'}
+          iconName={'feedback'}
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
           label={'About Us'}
