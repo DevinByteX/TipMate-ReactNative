@@ -46,6 +46,7 @@ export const StyledTotalAmountInput = ({
             setTextInputValue(formatedValue);
             onAmountChange && onAmountChange(parseFloat(formatedValue));
           }}
+          keyboardAppearance={UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light'}
           {...restProps}
         />
       </View>
