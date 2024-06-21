@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Switch, Platform } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledIcons, StyledIconTypesKeys } from '@components';
+import { StyledIcons, StyledIconTypesKeys, StyledToggle } from '@components';
 
 interface StyledDrawerProps extends DrawerContentComponentProps {}
 
@@ -47,6 +47,19 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
+      <View style={styles.horizontalDeviderStyles} />
+      <View style={styles.preferencesButtonContainer}>
+        <Text style={styles.preferencesText}>Preferences</Text>
+        <View style={styles.themePrefContainer}>
+          <StyledToggle
+            value={UnistylesRuntime.themeName === 'dark'}
+            onValueChange={value => {
+              UnistylesRuntime.setTheme(value ? 'dark' : 'light');
+            }}
+          />
+          <Text style={styles.themePrefText}>Dark Theme</Text>
+        </View>
+      </View>
       <View style={styles.horizontalDeviderStyles} />
       <View style={styles.bottomButtonContainer}>
         <BottomButton
@@ -92,6 +105,27 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   footerButtonText: {
     color: colors.accent,
+    fontSize: 14,
+    fontFamily: fonts.Montserrat_Bold,
+    paddingStart: (UnistylesRuntime.screen.width * 2) / 100,
+  },
+  preferencesButtonContainer: {
+    paddingStart: (UnistylesRuntime.screen.width * 4) / 100,
+    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+  },
+  preferencesText: {
+    color: colors.card_typography,
+    fontSize: 16,
+    fontFamily: fonts.Nunito_Black,
+  },
+  themePrefContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  themePrefText: {
+    color: colors.card_typography,
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
     paddingStart: (UnistylesRuntime.screen.width * 2) / 100,
