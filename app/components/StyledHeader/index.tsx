@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, StatusBar, Text, View } from 'react-native';
+import { Keyboard, Pressable, StatusBar, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIconTypesKeys, StyledIcons } from '@components';
 import { useNavigation } from '@react-navigation/native';
@@ -59,6 +59,7 @@ export const StyledHeader = ({
               iconColor={styles.headerText.color}
               onPress={() => {
                 navigation.toggleDrawer();
+                Keyboard.dismiss();
               }}
             />
           </View>
