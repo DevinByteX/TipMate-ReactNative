@@ -32,7 +32,7 @@ const DrawerStack = () => {
           },
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="SavedTipScreen"
         component={SavedTipsScreen}
         options={{
@@ -43,7 +43,7 @@ const DrawerStack = () => {
             fontSize: 14,
           },
         }}
-      />
+      /> */}
       <Drawer.Screen
         name="SettingsScreen"
         component={SettingsScreen}
