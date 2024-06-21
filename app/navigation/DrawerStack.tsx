@@ -5,6 +5,7 @@ import { StyledDrawer } from '@components';
 // Screens
 import HomeTipScreen from '@/screens/TipScreens/HomeTipScreen';
 import SavedTipsScreen from '@/screens/TipScreens/SavedTipsScreen';
+import SettingsScreen from '@/screens/TipScreens/SettingsScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -36,6 +37,18 @@ const DrawerStack = () => {
         component={SavedTipsScreen}
         options={{
           drawerLabel: 'History & Summary',
+          drawerLabelStyle: {
+            fontFamily: theme.fonts.Montserrat_Bold,
+            fontWeight: undefined,
+            fontSize: 14,
+          },
+        }}
+      />
+      <Drawer.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{
+          drawerLabel: 'Settings & Preferences',
           drawerLabelStyle: {
             fontFamily: theme.fonts.Montserrat_Bold,
             fontWeight: undefined,
