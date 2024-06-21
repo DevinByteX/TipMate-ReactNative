@@ -40,7 +40,7 @@ export const StyledToggle = ({
   const thumbColor = disabled
     ? theme.colors.disable_button
     : value
-    ? theme.colors.accent
+    ? theme.colors.devider
     : theme.colors.disable_button;
 
   const trackColor = {
