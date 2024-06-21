@@ -7,6 +7,7 @@ export { StyledSpiltOptions } from "./StyledSplitOptions";
 export { StyledRoundBox } from './StyledRoundBox';
 export { StyledIcons, StyledIconTypes } from './StyledIcons';
 export { StyledDrawer } from './StyledDrawer';
+export { StyledToggle } from './StyledToggle';
 
 // types should export seperately
 export type { StyledIconTypesKeys } from './StyledIcons';
