@@ -1,4 +1,4 @@
-import { UnistylesThemes } from "react-native-unistyles";
+import { UnistylesRuntime, UnistylesThemes } from "react-native-unistyles";
 import { asyncStorageUtil } from "@hooks";
 
 // Function to fetch user preferred theme from AsyncStorage
@@ -13,7 +13,7 @@ export const getUserPreferredTheme = async (): Promise<keyof UnistylesThemes> =>
     }
 
     // Default to 'light' if theme is not valid or AsyncStorage error occurs
-    return 'light';
+    return UnistylesRuntime.themeName;
 };
 
 export const setUserPreferredTheme = async (theme: keyof UnistylesThemes): Promise<void> => {
