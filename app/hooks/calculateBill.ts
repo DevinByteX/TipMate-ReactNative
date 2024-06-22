@@ -117,8 +117,11 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
     const roundedTotalPerPerson = applyRoundingMethod(totalPerPerson, roundingMethod);
     const roundedTipPerPerson = applyRoundingMethod(tipPerPerson, roundingMethod);
     const roundedSubtotalPerPerson = applyRoundingMethod(subtotalPerPerson, roundingMethod);
-    const roundedTotalBill = applyRoundingMethod(totalBill, roundingMethod);
-    const roundedTipTotal = applyRoundingMethod(tipTotal, roundingMethod);
+
+    // Calculate the total cost based on rounded values
+    const roundedOverallTotal = roundedTotalPerPerson * numberOfPeople;
+    const roundedOverallTip = roundedTipPerPerson * numberOfPeople;
+    const roundedOverallSubtotal = roundedSubtotalPerPerson * numberOfPeople;
 
     // Return the results
     return {
@@ -128,9 +131,9 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
             subtotal: roundedSubtotalPerPerson
         },
         overall: {
-            total: roundedTotalPerPerson * numberOfPeople,
-            tip: roundedTipPerPerson * numberOfPeople,
-            subtotal: roundedSubtotalPerPerson * numberOfPeople
+            total: roundedOverallTotal,
+            tip: roundedOverallTip,
+            subtotal: roundedOverallSubtotal
         },
         disabledRoundingMethods
     };
