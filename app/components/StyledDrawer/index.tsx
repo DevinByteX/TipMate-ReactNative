@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Switch, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/drawer';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIcons, StyledIconTypesKeys, StyledToggle } from '@components';
+import { setUserPreferredTheme } from '@hooks';
 
 interface StyledDrawerProps extends DrawerContentComponentProps {}
 
@@ -40,6 +41,10 @@ const BottomButton = ({
 export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
   const { styles } = useStyles(stylesheet);
 
+  const persistUserPreferredTheme = async (value: boolean) => {
+    await setUserPreferredTheme(value ? 'dark' : 'light');
+  };
+
   return (
     <View style={styles.mainDrawerContainer}>
       <DrawerContentScrollView {...props}>
@@ -54,6 +59,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
           <StyledToggle
             value={UnistylesRuntime.themeName === 'dark'}
             onValueChange={value => {
+              persistUserPreferredTheme(value);
               UnistylesRuntime.setTheme(value ? 'dark' : 'light');
             }}
           />
