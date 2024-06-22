@@ -4,7 +4,7 @@ import { useStyles } from 'react-native-unistyles';
 import { StyledDrawer } from '@components';
 // Screens
 import HomeTipScreen from '@/screens/TipScreens/HomeTipScreen';
-import SavedTipsScreen from '@/screens/TipScreens/SavedTipsScreen';
+// import SavedTipsScreen from '@/screens/TipScreens/SavedTipsScreen';
 import SettingsScreen from '@/screens/TipScreens/SettingsScreen';
 
 const Drawer = createDrawerNavigator();
