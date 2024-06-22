@@ -9,7 +9,7 @@ export const getUserPreferredTheme = async (): Promise<keyof UnistylesThemes> =>
             return theme as keyof UnistylesThemes;
         }
     } catch (error) {
-        console.error('Error fetching user theme from AsyncStorage:', error);
+        console.log('Error fetching user theme from AsyncStorage:', error);
     }
 
     // Default to 'light' if theme is not valid or AsyncStorage error occurs
@@ -20,6 +20,6 @@ export const setUserPreferredTheme = async (theme: keyof UnistylesThemes): Promi
     try {
         await asyncStorageUtil.saveData('userPreferredTheme', theme);
     } catch (error) {
-        console.error('Error setting user theme in AsyncStorage:', error);
+        console.log('Error setting user theme in AsyncStorage:', error);
     }
 };

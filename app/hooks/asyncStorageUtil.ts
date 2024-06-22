@@ -21,7 +21,7 @@ export const asyncStorageUtil: AsyncStorageUtil = {
             await AsyncStorage.setItem(key, jsonValue);
             console.log('Data successfully saved');
         } catch (error) {
-            console.error('Error saving data', error);
+            console.log('Error saving data', error);
         }
     },
 
@@ -35,7 +35,7 @@ export const asyncStorageUtil: AsyncStorageUtil = {
             const jsonValue = await AsyncStorage.getItem(key);
             return jsonValue != null ? JSON.parse(jsonValue) : null;
         } catch (error) {
-            console.error('Error retrieving data', error);
+            console.log('Error retrieving data', error);
             return null;
         }
     },
@@ -50,7 +50,7 @@ export const asyncStorageUtil: AsyncStorageUtil = {
             await AsyncStorage.removeItem(key);
             console.log('Data successfully removed');
         } catch (error) {
-            console.error('Error removing data', error);
+            console.log('Error removing data', error);
         }
     },
 
@@ -63,7 +63,7 @@ export const asyncStorageUtil: AsyncStorageUtil = {
             await AsyncStorage.clear();
             console.log('All data cleared');
         } catch (error) {
-            console.error('Error clearing data', error);
+            console.log('Error clearing data', error);
         }
     },
 
@@ -79,7 +79,7 @@ export const asyncStorageUtil: AsyncStorageUtil = {
             await AsyncStorage.mergeItem(key, jsonValue);
             console.log('Data successfully merged');
         } catch (error) {
-            console.error('Error merging data', error);
+            console.log('Error merging data', error);
         }
     }
 };

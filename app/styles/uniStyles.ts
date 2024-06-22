@@ -48,7 +48,7 @@ UnistylesRegistry
                 adaptiveThemes: false, // Set to true if you want to adapt to system theme
             });
     } catch (error) {
-        console.error('Error setting up Unistyles:', error);
+        console.log('Error setting up Unistyles:', error);
     }
 })();
 */
