@@ -92,7 +92,7 @@ const HomeTipScreen = () => {
         ) : null}
         {/* Round Options Container */}
         <StyledRoundBox
-          titleText="ROUND TOTAL COST"
+          titleText="ROUND TOTAL"
           roundMethod={userInputRound}
           disablingRoundingMethod={billValues?.disabledRoundingMethods}
           onSelectedRound={roundValue => {
