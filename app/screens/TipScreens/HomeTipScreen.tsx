@@ -85,9 +85,9 @@ const HomeTipScreen = () => {
             titleVisibility
             titleText="PER PERSON"
             subTotalText="SUB TOTAL"
-            totalAmount={billValues?.perPerson?.total?.toFixed(2)}
-            subTotalAmount={billValues?.perPerson?.subtotal?.toFixed(2)}
-            totalTipAmount={billValues?.perPerson?.tip?.toFixed(2)}
+            totalAmount={billValues?.perPerson?.total}
+            subTotalAmount={billValues?.perPerson?.subtotal}
+            totalTipAmount={billValues?.perPerson?.tip}
           />
         ) : null}
         {/* Round Options Container */}
@@ -105,9 +105,9 @@ const HomeTipScreen = () => {
           titleText="TOTAL COST"
           subTotalText="SUB COST"
           tipText="TIP"
-          totalAmount={billValues?.overall?.total?.toFixed(2)}
-          subTotalAmount={billValues?.overall?.subtotal?.toFixed(2)}
-          totalTipAmount={billValues?.overall?.tip?.toFixed(2)}
+          totalAmount={billValues?.overall?.total}
+          subTotalAmount={billValues?.overall?.subtotal}
+          totalTipAmount={billValues?.overall?.tip}
         />
       </ScrollView>
     </>
