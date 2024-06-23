@@ -83,19 +83,19 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
     }
 
     // Calculate the tip amount
-    const tipTotal = parseFloat(((tipPercentage / 100) * billAmount).toFixed(2));
+    const tipTotal = ((tipPercentage / 100) * billAmount)
 
     // Calculate the total bill including the tip
-    const totalBill = parseFloat((billAmount + tipTotal).toFixed(2));
+    const totalBill = (billAmount + tipTotal)
 
     // Calculate the subtotal per person (without tip)
-    const subtotalPerPerson = parseFloat((billAmount / numberOfPeople).toFixed(2));
+    const subtotalPerPerson = (billAmount / numberOfPeople)
 
     // Calculate the tip per person
-    const tipPerPerson = parseFloat((tipTotal / numberOfPeople).toFixed(2));
+    const tipPerPerson = (tipTotal / numberOfPeople)
 
     // Calculate the total per person (including tip)
-    const totalPerPerson = parseFloat((totalBill / numberOfPeople).toFixed(2));
+    const totalPerPerson = (totalBill / numberOfPeople)
 
     // Determine which rounding methods to disable
     const disabledRoundingMethods = {
