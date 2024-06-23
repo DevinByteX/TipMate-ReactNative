@@ -79,15 +79,6 @@ const HomeTipScreen = () => {
             setUserInputSplitCount(splitCount);
           }}
         />
-        {/* Round Options Container */}
-        <StyledRoundBox
-          titleText="ROUND VALUE"
-          roundMethod={userInputRound}
-          disablingRoundingMethod={billValues?.disabledRoundingMethods}
-          onSelectedRound={roundValue => {
-            setUserInputRound(roundValue);
-          }}
-        />
         {/* Per Person Bill Container */}
         {userInputSplitCount > 1 ? (
           <StyledBillBox
@@ -99,6 +90,15 @@ const HomeTipScreen = () => {
             totalTipAmount={billValues?.perPerson?.tip?.toFixed(2)}
           />
         ) : null}
+        {/* Round Options Container */}
+        <StyledRoundBox
+          titleText="ROUND TOTAL COST"
+          roundMethod={userInputRound}
+          disablingRoundingMethod={billValues?.disabledRoundingMethods}
+          onSelectedRound={roundValue => {
+            setUserInputRound(roundValue);
+          }}
+        />
         {/* Total Bill Container */}
         <StyledBillBox
           titleVisibility
