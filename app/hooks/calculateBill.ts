@@ -88,15 +88,6 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
     // Calculate the total bill including the tip
     const totalBill = (billAmount + tipTotal)
 
-    // Calculate the subtotal per person (without tip)
-    const subtotalPerPerson = (billAmount / numberOfPeople)
-
-    // Calculate the tip per person
-    const tipPerPerson = (tipTotal / numberOfPeople)
-
-    // Calculate the total per person (including tip)
-    const totalPerPerson = (totalBill / numberOfPeople)
-
     // Determine which rounding methods to disable
     const disabledRoundingMethods = {
         UP: false,
@@ -108,20 +99,20 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
         disabledRoundingMethods.DOWN = true;
     }
 
-    if ((totalPerPerson === Math.floor(totalPerPerson)) && (totalBill === Math.floor(totalBill))) {
+    if (totalBill === Math.floor(totalBill)) {
         disabledRoundingMethods.UP = true;
         disabledRoundingMethods.DOWN = true;
     }
 
-    // Apply rounding method
-    const roundedTotalPerPerson = applyRoundingMethod(totalPerPerson, roundingMethod);
-    const roundedTipPerPerson = applyRoundingMethod(tipPerPerson, roundingMethod);
-    const roundedSubtotalPerPerson = applyRoundingMethod(subtotalPerPerson, roundingMethod);
-
     // Calculate the total cost based on rounded values
-    const roundedOverallTotal = roundedTotalPerPerson * numberOfPeople;
-    const roundedOverallTip = roundedTipPerPerson * numberOfPeople;
-    const roundedOverallSubtotal = roundedSubtotalPerPerson * numberOfPeople;
+    const roundedOverallTip = applyRoundingMethod(tipTotal, roundingMethod);
+    const roundedOverallSubtotal = applyRoundingMethod(billAmount, roundingMethod);
+    const roundedOverallTotal = applyRoundingMethod(totalBill, roundingMethod);
+
+    // Apply rounding method
+    const roundedTipPerPerson = roundedOverallTip / numberOfPeople;
+    const roundedSubtotalPerPerson = roundedOverallSubtotal / numberOfPeople;
+    const roundedTotalPerPerson = roundedOverallTotal / numberOfPeople;
 
     // Return the results
     return {
