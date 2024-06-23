@@ -1,13 +1,13 @@
 export type BillCalculationType = {
     perPerson: {
-        total: number;
-        tip: number;
-        subtotal: number;
+        total: string;
+        tip: string;
+        subtotal: string;
     };
     overall: {
-        total: number;
-        tip: number;
-        subtotal: number;
+        total: string;
+        tip: string;
+        subtotal: string;
     };
     disabledRoundingMethods: {
         UP: boolean;
@@ -19,13 +19,12 @@ export type BillCalculationType = {
 // Rounding method type
 export type RoundingMethodType = 'UP' | 'DOWN' | 'NO';
 
-// DisabledRounding methods type
+// Disabled rounding methods type
 export type DisabledRoundingMethodsType = {
     UP: boolean;
     DOWN: boolean;
     NO: boolean;
 };
-
 
 // Rounding method enum
 export enum RoundingMethod {
@@ -34,45 +33,51 @@ export enum RoundingMethod {
     NO = "NO"
 }
 
-const roundUp = (value: number): number => {
-    return Math.ceil(value);
-}
-
-const roundDown = (value: number): number => {
-    return Math.floor(value);
-}
-
-const noRound = (value: number): number => {
-    return value;
-}
+// Rounding functions
+const roundUp = (value: number): number => Math.ceil(value);
+const roundDown = (value: number): number => Math.floor(value);
+const noRound = (value: number): number => value;
 
 // Function to apply rounding method
 const applyRoundingMethod = (value: number, roundingMethod: RoundingMethodType): number => {
     switch (roundingMethod) {
-        case 'UP':
+        case RoundingMethod.UP:
             return roundUp(value);
-        case 'DOWN':
+        case RoundingMethod.DOWN:
             return roundDown(value);
-        case 'NO':
+        case RoundingMethod.NO:
             return noRound(value);
         default:
             throw new Error('Invalid Rounding Method');
     }
 }
 
-export const calculateBillValues = (tipPercentage: number, billAmount: number, numberOfPeople: number, roundingMethod: RoundingMethodType): BillCalculationType => {
-    // Check if billAmount is a valid number
-    if (isNaN(billAmount) || typeof billAmount !== 'number') {
+// Function to truncate a number to a fixed number of decimal places without rounding
+const toFixedWithoutRounding = (value: number, decimals: number): string => {
+    const factor = Math.pow(10, decimals);
+    const truncatedValue = Math.floor(value * factor) / factor;
+    return truncatedValue.toFixed(decimals);
+}
+
+// Main function to calculate bill values
+export const calculateBillValues = (
+    tipPercentage: number,
+    billAmount: number,
+    numberOfPeople: number,
+    roundingMethod: RoundingMethodType
+): BillCalculationType => {
+    // Validate inputs
+    if (isNaN(billAmount) || isNaN(tipPercentage) || isNaN(numberOfPeople) || numberOfPeople <= 0) {
         return {
             perPerson: {
-                total: 0,
-                tip: 0,
-                subtotal: 0
+                total: "0.00",
+                tip: "0.00",
+                subtotal: "0.00"
             },
             overall: {
-                total: 0,
-                tip: 0,
-                subtotal: 0
+                total: "0.00",
+                tip: "0.00",
+                subtotal: "0.00"
             },
             disabledRoundingMethods: {
                 UP: false,
@@ -83,48 +88,37 @@ export const calculateBillValues = (tipPercentage: number, billAmount: number, n
     }
 
     // Calculate the tip amount
-    const tipTotal = ((tipPercentage / 100) * billAmount)
-
+    const tipTotal = (tipPercentage / 100) * billAmount;
     // Calculate the total bill including the tip
-    const totalBill = (billAmount + tipTotal)
+    const totalBill = billAmount + tipTotal;
 
-    // Determine which rounding methods to disable
-    const disabledRoundingMethods = {
-        UP: false,
-        DOWN: false,
-        NO: false
-    };
-
-    if (numberOfPeople === 1 || tipPercentage === 0) {
-        disabledRoundingMethods.DOWN = true;
-    }
-
-    if (totalBill === Math.floor(totalBill)) {
-        disabledRoundingMethods.UP = true;
-        disabledRoundingMethods.DOWN = true;
-    }
-
-    // Calculate the total cost based on rounded values
+    // Apply rounding methods
     const roundedOverallTip = applyRoundingMethod(tipTotal, roundingMethod);
     const roundedOverallSubtotal = applyRoundingMethod(billAmount, roundingMethod);
     const roundedOverallTotal = applyRoundingMethod(totalBill, roundingMethod);
 
-    // Apply rounding method
+    // Calculate per person values
     const roundedTipPerPerson = roundedOverallTip / numberOfPeople;
     const roundedSubtotalPerPerson = roundedOverallSubtotal / numberOfPeople;
     const roundedTotalPerPerson = roundedOverallTotal / numberOfPeople;
 
-    // Return the results
+    // Determine disabled rounding methods
+    const disabledRoundingMethods: DisabledRoundingMethodsType = {
+        UP: totalBill === Math.ceil(totalBill),
+        DOWN: totalBill === Math.floor(totalBill) || numberOfPeople === 1 || tipPercentage === 0,
+        NO: false
+    };
+
     return {
         perPerson: {
-            total: roundedTotalPerPerson,
-            tip: roundedTipPerPerson,
-            subtotal: roundedSubtotalPerPerson
+            total: toFixedWithoutRounding(roundedTotalPerPerson, 2),
+            tip: toFixedWithoutRounding(roundedTipPerPerson, 2),
+            subtotal: toFixedWithoutRounding(roundedSubtotalPerPerson, 2)
         },
         overall: {
-            total: roundedOverallTotal,
-            tip: roundedOverallTip,
-            subtotal: roundedOverallSubtotal
+            total: toFixedWithoutRounding(roundedOverallTotal, 2),
+            tip: toFixedWithoutRounding(roundedOverallTip, 2),
+            subtotal: toFixedWithoutRounding(roundedOverallSubtotal, 2)
         },
         disabledRoundingMethods
     };
