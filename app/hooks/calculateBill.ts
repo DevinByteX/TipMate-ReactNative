@@ -1,3 +1,5 @@
+import { toFixedWithoutRounding } from "@hooks";
+
 export type BillCalculationType = {
     perPerson: {
         total: string;
@@ -50,13 +52,6 @@ const applyRoundingMethod = (value: number, roundingMethod: RoundingMethodType):
         default:
             throw new Error('Invalid Rounding Method');
     }
-}
-
-// Function to truncate a number to a fixed number of decimal places without rounding
-const toFixedWithoutRounding = (value: number, decimals: number): string => {
-    const factor = Math.pow(10, decimals);
-    const truncatedValue = Math.floor(value * factor) / factor;
-    return truncatedValue.toFixed(decimals);
 }
 
 // Main function to calculate bill values
