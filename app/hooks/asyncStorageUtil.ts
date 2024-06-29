@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Define a generic type for AsyncStorageUtil
 type AsyncStorageUtil = {
     saveData: (key: string, value: any) => Promise<void>;
     getData: <T>(key: string) => Promise<T | null>;
@@ -33,7 +34,7 @@ export const asyncStorageUtil: AsyncStorageUtil = {
     getData: async <T>(key: string): Promise<T | null> => {
         try {
             const jsonValue = await AsyncStorage.getItem(key);
-            return jsonValue != null ? JSON.parse(jsonValue) : null;
+            return jsonValue != null ? JSON.parse(jsonValue) as T : null;
         } catch (error) {
             console.log('Error retrieving data', error);
             return null;
