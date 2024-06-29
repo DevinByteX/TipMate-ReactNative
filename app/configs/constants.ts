@@ -10,4 +10,5 @@ export const Constants = {
         { place: 3, value: 5 },
         { place: 4, value: 7 },
     ] as OptionValueType[],
+    SPLIT_OPTIONS_ARRAY_STORAGE_KEY: 'splitOptionsArray'
 };

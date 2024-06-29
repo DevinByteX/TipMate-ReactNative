@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
+import { useOptionValues } from '@hooks';
+import { Constants } from '@configs';
 
 const SplitCapsule = ({
   active = false,
@@ -87,14 +89,12 @@ export const StyledSpiltOptions = ({
 
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
-  const { styles, theme } = useStyles(stylesheet);
+  const { styles } = useStyles(stylesheet);
 
-  const splitValues = [
-    { place: 1, value: 1 },
-    { place: 2, value: 3 },
-    { place: 3, value: 5 },
-    { place: 4, value: 7 },
-  ];
+  const splitOptionValuesArray = useOptionValues({
+    asyncStorageKey: Constants.SPLIT_OPTIONS_ARRAY_STORAGE_KEY,
+    defaultOptionArray: Constants.defaultSplitOptionsArray,
+  });
 
   return (
     <View style={styles.mainContainer}>
@@ -113,7 +113,7 @@ export const StyledSpiltOptions = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {splitValues.slice(0, 2).map(({ place, value }) => (
+              {splitOptionValuesArray.slice(0, 2).map(({ place, value }) => (
                 <SplitCapsule
                   key={place}
                   textValue={value}
@@ -139,7 +139,7 @@ export const StyledSpiltOptions = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {splitValues.slice(2).map(({ place, value }) => (
+              {splitOptionValuesArray.slice(2).map(({ place, value }) => (
                 <SplitCapsule
                   key={place}
                   textValue={value}
