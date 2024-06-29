@@ -88,6 +88,14 @@ export const StyledSpiltOptions = ({
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
   const { styles, theme } = useStyles(stylesheet);
+
+  const splitValues = [
+    { place: 1, value: 1 },
+    { place: 2, value: 3 },
+    { place: 3, value: 5 },
+    { place: 4, value: 7 },
+  ];
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>
@@ -105,24 +113,18 @@ export const StyledSpiltOptions = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              <SplitCapsule
-                textValue={1}
-                onSplitPress={value => {
-                  setCustomSliderVisible(false);
-                  setSplitValue(value);
-                  onSelectedSplitValue && onSelectedSplitValue(value);
-                }}
-                active={splitValue == 1}
-              />
-              <SplitCapsule
-                textValue={3}
-                onSplitPress={value => {
-                  setCustomSliderVisible(false);
-                  setSplitValue(value);
-                  onSelectedSplitValue && onSelectedSplitValue(value);
-                }}
-                active={splitValue == 3}
-              />
+              {splitValues.slice(0, 2).map(({ place, value }) => (
+                <SplitCapsule
+                  key={place}
+                  textValue={value}
+                  onSplitPress={value => {
+                    setCustomSliderVisible(false);
+                    setSplitValue(value);
+                    onSelectedSplitValue && onSelectedSplitValue(value);
+                  }}
+                  active={splitValue === value}
+                />
+              ))}
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <Text
@@ -137,24 +139,18 @@ export const StyledSpiltOptions = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              <SplitCapsule
-                textValue={5}
-                onSplitPress={value => {
-                  setCustomSliderVisible(false);
-                  setSplitValue(value);
-                  onSelectedSplitValue && onSelectedSplitValue(value);
-                }}
-                active={splitValue == 5}
-              />
-              <SplitCapsule
-                textValue={7}
-                onSplitPress={value => {
-                  setCustomSliderVisible(false);
-                  setSplitValue(value);
-                  onSelectedSplitValue && onSelectedSplitValue(value);
-                }}
-                active={splitValue == 7}
-              />
+              {splitValues.slice(2).map(({ place, value }) => (
+                <SplitCapsule
+                  key={place}
+                  textValue={value}
+                  onSplitPress={value => {
+                    setCustomSliderVisible(false);
+                    setSplitValue(value);
+                    onSelectedSplitValue && onSelectedSplitValue(value);
+                  }}
+                  active={splitValue === value}
+                />
+              ))}
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <SplitCustomCapsule

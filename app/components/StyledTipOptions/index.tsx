@@ -84,10 +84,17 @@ export const StyledTipOptions = ({
   const defaultTipValue = 5;
 
   const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
-
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
   const { styles, theme } = useStyles(stylesheet);
+
+  const tipValues = [
+    { place: 1, value: 5 },
+    { place: 2, value: 10 },
+    { place: 3, value: 15 },
+    { place: 4, value: 20 },
+  ];
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>
@@ -105,24 +112,18 @@ export const StyledTipOptions = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              <TipPercentageCapsule
-                textValue={5}
-                onTipPress={value => {
-                  setCustomSliderVisible(false);
-                  setTipPercentageValue(value);
-                  onSelectedTipValue && onSelectedTipValue(value);
-                }}
-                active={tipPercentageValue == 5}
-              />
-              <TipPercentageCapsule
-                textValue={10}
-                onTipPress={value => {
-                  setCustomSliderVisible(false);
-                  setTipPercentageValue(value);
-                  onSelectedTipValue && onSelectedTipValue(value);
-                }}
-                active={tipPercentageValue == 10}
-              />
+              {tipValues.slice(0, 2).map(({ place, value }) => (
+                <TipPercentageCapsule
+                  key={place}
+                  textValue={value}
+                  onTipPress={value => {
+                    setCustomSliderVisible(false);
+                    setTipPercentageValue(value);
+                    onSelectedTipValue && onSelectedTipValue(value);
+                  }}
+                  active={tipPercentageValue === value}
+                />
+              ))}
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <Text
@@ -137,24 +138,18 @@ export const StyledTipOptions = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              <TipPercentageCapsule
-                textValue={15}
-                onTipPress={value => {
-                  setCustomSliderVisible(false);
-                  setTipPercentageValue(value);
-                  onSelectedTipValue && onSelectedTipValue(value);
-                }}
-                active={tipPercentageValue == 15}
-              />
-              <TipPercentageCapsule
-                textValue={20}
-                onTipPress={value => {
-                  setCustomSliderVisible(false);
-                  setTipPercentageValue(value);
-                  onSelectedTipValue && onSelectedTipValue(value);
-                }}
-                active={tipPercentageValue == 20}
-              />
+              {tipValues.slice(2).map(({ place, value }) => (
+                <TipPercentageCapsule
+                  key={place}
+                  textValue={value}
+                  onTipPress={value => {
+                    setCustomSliderVisible(false);
+                    setTipPercentageValue(value);
+                    onSelectedTipValue && onSelectedTipValue(value);
+                  }}
+                  active={tipPercentageValue === value}
+                />
+              ))}
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <TipPercentageCustomCapsule
