@@ -12,6 +12,7 @@ module.exports = {
           "@styles": "./app/styles/",  // this is working either we add end "/" or not to the path, for safe side i have added end "/" to the path
           "@navigation": "./app/navigation/",
           "@hooks": "./app/hooks/index",
+          "@configs": "./app/configs/index",
         }
       }
     ],
