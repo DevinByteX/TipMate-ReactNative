@@ -20,9 +20,9 @@ export const asyncStorageUtil: AsyncStorageUtil = {
         try {
             const jsonValue = JSON.stringify(value);
             await AsyncStorage.setItem(key, jsonValue);
-            console.log('Data successfully saved');
+            console.log(`${key} Data successfully saved`);
         } catch (error) {
-            console.log('Error saving data', error);
+            console.log(`${key} Error saving data:`, error);
         }
     },
 
@@ -36,7 +36,7 @@ export const asyncStorageUtil: AsyncStorageUtil = {
             const jsonValue = await AsyncStorage.getItem(key);
             return jsonValue != null ? JSON.parse(jsonValue) as T : null;
         } catch (error) {
-            console.log('Error retrieving data', error);
+            console.log(`${key} Error retrieving data:`, error);
             return null;
         }
     },
@@ -49,9 +49,9 @@ export const asyncStorageUtil: AsyncStorageUtil = {
     removeData: async (key: string): Promise<void> => {
         try {
             await AsyncStorage.removeItem(key);
-            console.log('Data successfully removed');
+            console.log(`${key} Data successfully removed`);
         } catch (error) {
-            console.log('Error removing data', error);
+            console.log(`${key} Error removing data:`, error);
         }
     },
 
@@ -78,9 +78,9 @@ export const asyncStorageUtil: AsyncStorageUtil = {
         try {
             const jsonValue = JSON.stringify(value);
             await AsyncStorage.mergeItem(key, jsonValue);
-            console.log('Data successfully merged');
+            console.log(`${key} Data successfully merged`);
         } catch (error) {
-            console.log('Error merging data', error);
+            console.log(`${key} Error merging data`, error);
         }
     }
 };
