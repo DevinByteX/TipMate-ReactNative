@@ -7,6 +7,7 @@ type AsyncStorageUtil = {
     removeData: (key: string) => Promise<void>;
     clearAllData: () => Promise<void>;
     mergeData: (key: string, value: any) => Promise<void>;
+    printAsyncStorage: () => Promise<void>;
 };
 
 export const asyncStorageUtil: AsyncStorageUtil = {
@@ -81,6 +82,24 @@ export const asyncStorageUtil: AsyncStorageUtil = {
             console.log(`${key} Data successfully merged`);
         } catch (error) {
             console.log(`${key} Error merging data`, error);
+        }
+    },
+
+    /**
+     * Print all key-value pairs in AsyncStorage.
+     * @returns {Promise<void>}
+     */
+    printAsyncStorage: async (): Promise<void> => {
+        try {
+            const keys = await AsyncStorage.getAllKeys();
+            const stores = await AsyncStorage.multiGet(keys);
+            const asyncStorage: { [key: string]: string | null } = {};
+            stores.forEach(([key, value]) => {
+                asyncStorage[key] = value;
+            });
+            console.table(asyncStorage);
+        } catch (error) {
+            console.log('Error printing AsyncStorage:', error);
         }
     }
 };
