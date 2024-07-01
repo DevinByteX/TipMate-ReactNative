@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
+import { useOptionValues } from '@hooks';
+import { Constants } from '@configs';
 
 const TipPercentageCapsule = ({
   active = false,
@@ -86,14 +88,12 @@ export const StyledTipOptions = ({
   const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
-  const { styles, theme } = useStyles(stylesheet);
+  const { styles } = useStyles(stylesheet);
 
-  const tipValues = [
-    { place: 1, value: 5 },
-    { place: 2, value: 10 },
-    { place: 3, value: 15 },
-    { place: 4, value: 20 },
-  ];
+  const tipOptionValuesArray = useOptionValues({
+    asyncStorageKey: Constants.TIP_OPTIONS_ARRAY_STORAGE_KEY,
+    defaultOptionArray: Constants.defaultTipOptionsArray,
+  });
 
   return (
     <View style={styles.mainContainer}>
@@ -112,7 +112,7 @@ export const StyledTipOptions = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {tipValues.slice(0, 2).map(({ place, value }) => (
+              {tipOptionValuesArray.slice(0, 2).map(({ place, value }) => (
                 <TipPercentageCapsule
                   key={place}
                   textValue={value}
@@ -138,7 +138,7 @@ export const StyledTipOptions = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {tipValues.slice(2).map(({ place, value }) => (
+              {tipOptionValuesArray.slice(2).map(({ place, value }) => (
                 <TipPercentageCapsule
                   key={place}
                   textValue={value}
