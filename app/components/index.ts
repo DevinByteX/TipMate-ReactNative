@@ -8,6 +8,7 @@ export { StyledRoundBox } from './StyledRoundBox';
 export { StyledIcons, StyledIconTypes } from './StyledIcons';
 export { StyledDrawer } from './StyledDrawer';
 export { StyledToggle } from './StyledToggle';
+export { StyledTextInputCapsule } from './StyledTextInputCapsule';
 
 // types should export seperately
 export type { StyledIconTypesKeys } from './StyledIcons';
