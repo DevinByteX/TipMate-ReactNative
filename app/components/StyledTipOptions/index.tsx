@@ -1,39 +1,62 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
+import {
+  StyledHorizontalSlider,
+  StyledIcons,
+  StyledTextInputCapsule,
+  VerticalDevider,
+} from '@components';
 import { useOptionValues } from '@hooks';
 import { Constants } from '@configs';
 
 const TipPercentageCapsule = ({
   active = false,
   textValue = 5,
+  editMode = false,
+  place,
   onTipPress,
 }: {
   active?: boolean;
   textValue: number;
+  editMode?: boolean;
+  place?: number;
   onTipPress?: (value: number) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
-    <Pressable
-      style={[
-        styles.tipPercentageCapsule,
-        {
-          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
-        },
-      ]}
-      onPress={() => {
-        onTipPress && onTipPress(textValue);
-      }}>
-      <Text
-        style={[
-          styles.tipPercentageCapsuleText,
-          {
-            color: active ? theme.colors.card : theme.colors.card_typography,
-          },
-        ]}>{`${textValue}%`}</Text>
-    </Pressable>
+    <>
+      {editMode ? (
+        <StyledTextInputCapsule
+          textValue={textValue}
+          previousValue={textValue}
+          place={place}
+          suffix={'%'}
+          onValueChange={({ place, preValue, newValue }) => {
+            console.log(place, preValue, newValue);
+          }}
+        />
+      ) : (
+        <Pressable
+          style={[
+            styles.tipPercentageCapsule,
+            {
+              backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
+            },
+          ]}
+          onPress={() => {
+            onTipPress && onTipPress(textValue);
+          }}>
+          <Text
+            style={[
+              styles.tipPercentageCapsuleText,
+              {
+                color: active ? theme.colors.card : theme.colors.card_typography,
+              },
+            ]}>{`${textValue}%`}</Text>
+        </Pressable>
+      )}
+    </>
   );
 };
 
@@ -78,9 +101,11 @@ const TipPercentageCustomCapsule = ({
 
 export const StyledTipOptions = ({
   titleText = 'SELECT TIP',
+  editMode = false,
   onSelectedTipValue,
 }: {
   titleText?: string;
+  editMode?: boolean;
   onSelectedTipValue?: (value: number) => void;
 }) => {
   const defaultTipValue = 5;
@@ -116,6 +141,8 @@ export const StyledTipOptions = ({
                 <TipPercentageCapsule
                   key={place}
                   textValue={value}
+                  place={place}
+                  editMode={editMode}
                   onTipPress={value => {
                     setCustomSliderVisible(false);
                     setTipPercentageValue(value);
@@ -142,6 +169,8 @@ export const StyledTipOptions = ({
                 <TipPercentageCapsule
                   key={place}
                   textValue={value}
+                  place={place}
+                  editMode={editMode}
                   onTipPress={value => {
                     setCustomSliderVisible(false);
                     setTipPercentageValue(value);
