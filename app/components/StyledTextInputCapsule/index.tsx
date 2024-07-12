@@ -1,36 +1,58 @@
-import { View, TextInput } from 'react-native';
+import { View, TextInput, NativeSyntheticEvent, TextInputEndEditingEventData } from 'react-native';
 import React, { useState } from 'react';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 
 export const StyledTextInputCapsule = ({
   textValue = 0,
+  previousValue = 0,
+  place = 0,
   suffix = '',
+  onValueChange,
 }: {
-  textValue?: number;
+  textValue: number;
+  previousValue: number;
+  place?: number;
   suffix?: string;
+  onValueChange?: ({
+    place,
+    preValue,
+    newValue,
+  }: {
+    place: number;
+    preValue: number;
+    newValue: number;
+  }) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   const [inputFocused, setInputFocused] = useState(false);
   const [text, setText] = useState(`${textValue}${suffix}`);
 
   const handleChangeText = (inputText: string) => {
-    // Remove non-numeric characters
+    // Remove non-numeric characters and ensure the suffix is appended
     let cleanedText = inputText.replace(/[^0-9]/g, '');
-    // Ensure the suffix is appended
-    if (!cleanedText.endsWith(suffix)) {
-      cleanedText = cleanedText.replace(suffix, '');
-      setText(cleanedText + suffix);
-    } else {
-      setText(cleanedText);
+    setText(`${cleanedText}${suffix}`);
+  };
+
+  const handleFocus = () => setInputFocused(true);
+  const handleBlur = () => setInputFocused(false);
+
+  const handleEndEditing = ({
+    nativeEvent: { text },
+  }: NativeSyntheticEvent<TextInputEndEditingEventData>) => {
+    const cleanedText = text.replace(suffix, '');
+    const newValue = cleanedText === '' ? previousValue : parseInt(cleanedText, 10);
+
+    if (cleanedText === '') {
+      setText(`${previousValue}${suffix}`);
     }
-  };
 
-  const handleFocus = () => {
-    setInputFocused(true);
-  };
-
-  const handleBlur = () => {
-    setInputFocused(false);
+    if (onValueChange) {
+      onValueChange({
+        place,
+        preValue: previousValue,
+        newValue,
+      });
+    }
   };
 
   return (
@@ -49,14 +71,16 @@ export const StyledTextInputCapsule = ({
             color: inputFocused ? theme.colors.card : theme.colors.card_typography,
           },
         ]}
-        contextMenuHidden={true}
+        contextMenuHidden
         keyboardType="numeric"
         maxLength={suffix.length + 2} // Adjust maxLength to include suffix length
         selectionColor={theme.colors.card}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        value={text} // Use controlled component pattern
+        onEndEditing={handleEndEditing}
+        value={text}
         onChangeText={handleChangeText}
+        returnKeyType="done"
       />
     </View>
   );
