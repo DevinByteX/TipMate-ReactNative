@@ -10,53 +10,23 @@ import {
 import { useOptionValues } from '@hooks';
 import { Constants } from '@configs';
 
-const TipPercentageCapsule = ({
-  active = false,
+const TipPercentageEditCapsule = ({
   textValue = 5,
-  editMode = false,
   place,
-  onTipPress,
 }: {
-  active?: boolean;
   textValue: number;
-  editMode?: boolean;
   place?: number;
-  onTipPress?: (value: number) => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
   return (
-    <>
-      {editMode ? (
-        <StyledTextInputCapsule
-          textValue={textValue}
-          previousValue={textValue}
-          place={place}
-          suffix={'%'}
-          onValueChange={({ place, preValue, newValue }) => {
-            console.log(place, preValue, newValue);
-          }}
-        />
-      ) : (
-        <Pressable
-          style={[
-            styles.tipPercentageCapsule,
-            {
-              backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
-            },
-          ]}
-          onPress={() => {
-            onTipPress && onTipPress(textValue);
-          }}>
-          <Text
-            style={[
-              styles.tipPercentageCapsuleText,
-              {
-                color: active ? theme.colors.card : theme.colors.card_typography,
-              },
-            ]}>{`${textValue}%`}</Text>
-        </Pressable>
-      )}
-    </>
+    <StyledTextInputCapsule
+      textValue={textValue}
+      previousValue={textValue}
+      place={place}
+      suffix={'%'}
+      onValueChange={({ place, preValue, newValue }) => {
+        console.log(place, preValue, newValue);
+      }}
+    />
   );
 };
 
@@ -101,7 +71,6 @@ const TipPercentageCustomCapsule = ({
 
 export const StyledTipOptionsEditMode = ({
   titleText = 'SELECT TIP',
-  editMode = false,
   onSelectedTipValue,
 }: {
   titleText?: string;
@@ -138,46 +107,16 @@ export const StyledTipOptionsEditMode = ({
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
               {tipOptionValuesArray.slice(0, 2).map(({ place, value }) => (
-                <TipPercentageCapsule
-                  key={place}
-                  textValue={value}
-                  place={place}
-                  editMode={editMode}
-                  onTipPress={value => {
-                    setCustomSliderVisible(false);
-                    setTipPercentageValue(value);
-                    onSelectedTipValue && onSelectedTipValue(value);
-                  }}
-                  active={tipPercentageValue === value}
-                />
+                <TipPercentageEditCapsule key={place} textValue={value} place={place} />
               ))}
             </View>
-            <View style={styles.secondColumnContainerStyles}>
-              <Text
-                style={styles.tipDigitsStyles}
-                adjustsFontSizeToFit={true}
-                allowFontScaling={false}
-                numberOfLines={1}>
-                {`${tipPercentageValue}%`}
-              </Text>
-            </View>
+            <View style={styles.secondColumnContainerStyles}></View>
           </View>
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
               {tipOptionValuesArray.slice(2).map(({ place, value }) => (
-                <TipPercentageCapsule
-                  key={place}
-                  textValue={value}
-                  place={place}
-                  editMode={editMode}
-                  onTipPress={value => {
-                    setCustomSliderVisible(false);
-                    setTipPercentageValue(value);
-                    onSelectedTipValue && onSelectedTipValue(value);
-                  }}
-                  active={tipPercentageValue === value}
-                />
+                <TipPercentageEditCapsule key={place} textValue={value} place={place} />
               ))}
             </View>
             <View style={styles.secondColumnContainerStyles}>
