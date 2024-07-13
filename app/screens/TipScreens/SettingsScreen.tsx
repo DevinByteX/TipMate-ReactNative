@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledHeader, StyledTipOptions } from '@components';
+import { StyledHeader, StyledTipOptionsEditMode } from '@components';
 
 const SettingsScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -17,7 +17,7 @@ const SettingsScreen = () => {
         contentContainerStyle={styles.scrollContentContainer}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}>
-        <StyledTipOptions titleText="CUSTOMISE YOUR TIPS" editMode={true} />
+        <StyledTipOptionsEditMode titleText="CUSTOMISE YOUR TIPS" />
       </ScrollView>
     </>
   );
