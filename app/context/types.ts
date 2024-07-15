@@ -14,11 +14,14 @@ export interface AppState {
 }
 
 export type TipAction =
-    | { type: 'SET_TIP_OPTIONS'; payload: TipOptionState }
-    | { type: 'UPDATE_TIP_OPTIONS'; payload: TipOptionState };
+    | { type: 'UPDATE_TIP_OPTIONS'; payload: TipOptionState }
+    | { type: 'LOAD_TIP_OPTIONS'; payload: TipOptionState[] };
 
 export type SplitAction =
-    | { type: 'SET_SPLIT_OPTIONS'; payload: SplitOptionState }
-    | { type: 'UPDATE_SPLIT_OPTIONS'; payload: SplitOptionState };
+    | { type: 'UPDATE_SPLIT_OPTIONS'; payload: SplitOptionState }
+    | { type: 'LOAD_SPLIT_OPTIONS'; payload: SplitOptionState[] };
 
-export type AppAction = TipAction | SplitAction;
+export type AppAction =
+    | TipAction
+    | SplitAction
+    | { type: 'LOAD_PERSISTED_STATE'; payload: AppState }; // Include LOAD_PERSISTED_STATE

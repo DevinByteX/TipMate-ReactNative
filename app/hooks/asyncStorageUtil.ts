@@ -97,7 +97,7 @@ export const asyncStorageUtil: AsyncStorageUtil = {
             stores.forEach(([key, value]) => {
                 asyncStorage[key] = value;
             });
-            console.table(asyncStorage);
+            console.log(asyncStorage);
         } catch (error) {
             console.log('Error printing AsyncStorage:', error);
         }
