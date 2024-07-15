@@ -8,6 +8,7 @@ import {
   VerticalDevider,
 } from '@components';
 import { AppContext } from '@/context/AppContext';
+import { TipOptionState } from '@/context/types';
 
 const TipPercentageEditCapsule = ({
   textValue = 5,
@@ -16,6 +17,10 @@ const TipPercentageEditCapsule = ({
   textValue: number;
   place?: number;
 }) => {
+
+  const { state, dispatch } = useContext(AppContext);
+
+
   return (
     <StyledTextInputCapsule
       textValue={textValue}
@@ -23,7 +28,9 @@ const TipPercentageEditCapsule = ({
       place={place}
       suffix={'%'}
       onValueChange={({ place, preValue, newValue }) => {
-        console.log(place, preValue, newValue);
+        const updatedTipOption: TipOptionState = { place: place, value: newValue }; // Example updated tip option
+        console.log('updatedTipOption',updatedTipOption)
+        dispatch({ type: 'UPDATE_TIP_OPTIONS', payload: updatedTipOption });
       }}
     />
   );
