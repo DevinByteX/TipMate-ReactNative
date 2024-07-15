@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
-import { useOptionValues } from '@hooks';
-import { Constants } from '@configs';
+import { AppContext } from '@/context/AppContext';
 
 const SplitCapsule = ({
   active = false,
@@ -83,6 +82,8 @@ export const StyledSpiltOptions = ({
   titleText?: string;
   onSelectedSplitValue?: (value: number) => void;
 }) => {
+  const { state, dispatch } = useContext(AppContext);
+
   const defaultSplitValue = 1;
 
   const [splitValue, setSplitValue] = useState<number>(defaultSplitValue);
@@ -90,11 +91,6 @@ export const StyledSpiltOptions = ({
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
   const { styles } = useStyles(stylesheet);
-
-  const splitOptionValuesArray = useOptionValues({
-    asyncStorageKey: Constants.SPLIT_OPTIONS_ARRAY_STORAGE_KEY,
-    defaultOptionArray: Constants.defaultSplitOptionsArray,
-  });
 
   return (
     <View style={styles.mainContainer}>
@@ -113,7 +109,7 @@ export const StyledSpiltOptions = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {splitOptionValuesArray.slice(0, 2).map(({ place, value }) => (
+              {state.splits.slice(0, 2).map(({ place, value }) => (
                 <SplitCapsule
                   key={place}
                   textValue={value}
@@ -139,7 +135,7 @@ export const StyledSpiltOptions = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {splitOptionValuesArray.slice(2).map(({ place, value }) => (
+              {state.splits.slice(2).map(({ place, value }) => (
                 <SplitCapsule
                   key={place}
                   textValue={value}

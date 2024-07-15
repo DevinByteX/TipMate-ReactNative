@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
-import { useOptionValues } from '@hooks';
-import { Constants } from '@configs';
+import { AppContext } from '@/context/AppContext';
 
 const TipPercentageCapsule = ({
   active = false,
@@ -83,17 +82,14 @@ export const StyledTipOptions = ({
   titleText?: string;
   onSelectedTipValue?: (value: number) => void;
 }) => {
+  const { state, dispatch } = useContext(AppContext);
+
   const defaultTipValue = 5;
 
   const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
   const { styles } = useStyles(stylesheet);
-
-  const tipOptionValuesArray = useOptionValues({
-    asyncStorageKey: Constants.TIP_OPTIONS_ARRAY_STORAGE_KEY,
-    defaultOptionArray: Constants.defaultTipOptionsArray,
-  });
 
   return (
     <View style={styles.mainContainer}>
@@ -112,7 +108,7 @@ export const StyledTipOptions = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {tipOptionValuesArray.slice(0, 2).map(({ place, value }) => (
+              {state.tips.slice(0, 2).map(({ place, value }) => (
                 <TipPercentageCapsule
                   key={place}
                   textValue={value}
@@ -138,7 +134,7 @@ export const StyledTipOptions = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {tipOptionValuesArray.slice(2).map(({ place, value }) => (
+              {state.tips.slice(2).map(({ place, value }) => (
                 <TipPercentageCapsule
                   key={place}
                   textValue={value}

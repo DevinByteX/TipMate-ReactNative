@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
@@ -7,8 +7,7 @@ import {
   StyledTextInputCapsule,
   VerticalDevider,
 } from '@components';
-import { useOptionValues } from '@hooks';
-import { Constants } from '@configs';
+import { AppContext } from '@/context/AppContext';
 
 const TipPercentageEditCapsule = ({
   textValue = 5,
@@ -77,17 +76,14 @@ export const StyledTipOptionsEditMode = ({
   editMode?: boolean;
   onSelectedTipValue?: (value: number) => void;
 }) => {
+  const { state, dispatch } = useContext(AppContext);
+
   const defaultTipValue = 5;
 
   const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
   const { styles } = useStyles(stylesheet);
-
-  const tipOptionValuesArray = useOptionValues({
-    asyncStorageKey: Constants.TIP_OPTIONS_ARRAY_STORAGE_KEY,
-    defaultOptionArray: Constants.defaultTipOptionsArray,
-  });
 
   return (
     <View style={styles.mainContainer}>
@@ -106,7 +102,7 @@ export const StyledTipOptionsEditMode = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {tipOptionValuesArray.slice(0, 2).map(({ place, value }) => (
+              {state.tips.slice(0, 2).map(({ place, value }) => (
                 <TipPercentageEditCapsule key={place} textValue={value} place={place} />
               ))}
             </View>
@@ -115,7 +111,7 @@ export const StyledTipOptionsEditMode = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {tipOptionValuesArray.slice(2).map(({ place, value }) => (
+              {state.tips.slice(2).map(({ place, value }) => (
                 <TipPercentageEditCapsule key={place} textValue={value} place={place} />
               ))}
             </View>
