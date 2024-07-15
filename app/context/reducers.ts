@@ -10,6 +10,10 @@ export const tipReducer = (state: TipOptionState[], action: TipAction): TipOptio
             );
             saveState({ ...state, tips: updatedTips }); // Save updated state to AsyncStorage
             return updatedTips;
+        case 'RESET_TIP_OPTIONS_TO_DEFAULT':
+            const defaultTipOptionsPayload = action.payload;
+            saveState({ ...state, tips: defaultTipOptionsPayload });
+            return defaultTipOptionsPayload;
         default:
             return state;
     }
@@ -23,6 +27,10 @@ export const splitReducer = (state: SplitOptionState[], action: SplitAction): Sp
             );
             saveState({ ...state, splits: updatedSplits }); // Save updated state to AsyncStorage
             return updatedSplits;
+        case 'RESET_SPLIT_OPTIONS_TO_DEFAULT':
+            const defaultSplitOptionsPayload = action.payload;
+            saveState({ ...state, splits: defaultSplitOptionsPayload });
+            return defaultSplitOptionsPayload;
         default:
             return state;
     }
