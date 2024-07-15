@@ -4,9 +4,11 @@ import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unis
 import {
   StyledHorizontalSlider,
   StyledIcons,
+  StyledIconTypesKeys,
   StyledTextInputCapsule,
   VerticalDevider,
 } from '@components';
+import { Constants } from '@configs';
 import { AppContext } from '@/context/AppContext';
 import { TipOptionState } from '@/context/types';
 
@@ -17,10 +19,7 @@ const TipPercentageEditCapsule = ({
   textValue: number;
   place?: number;
 }) => {
-
   const { state, dispatch } = useContext(AppContext);
-
-
   return (
     <StyledTextInputCapsule
       textValue={textValue}
@@ -28,8 +27,8 @@ const TipPercentageEditCapsule = ({
       place={place}
       suffix={'%'}
       onValueChange={({ place, preValue, newValue }) => {
-        const updatedTipOption: TipOptionState = { place: place, value: newValue }; // Example updated tip option
-        console.log('updatedTipOption',updatedTipOption)
+        // TODO Validations to be added
+        const updatedTipOption: TipOptionState = { place: place, value: newValue }; // Updated tip option
         dispatch({ type: 'UPDATE_TIP_OPTIONS', payload: updatedTipOption });
       }}
     />
@@ -40,10 +39,14 @@ const TipPercentageCustomCapsule = ({
   active = false,
   textValue = 'custom',
   onCustomTipPress,
+  iconType = 'FontAwesome',
+  iconName = 'sliders',
 }: {
   active?: boolean;
   textValue: string;
   onCustomTipPress?: () => void;
+  iconType?: StyledIconTypesKeys;
+  iconName?: string;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
@@ -66,8 +69,8 @@ const TipPercentageCustomCapsule = ({
         ]}>
         {`${textValue} `}
         <StyledIcons
-          type={'FontAwesome'}
-          name={'sliders'}
+          type={iconType}
+          name={iconName}
           size={styles.tipPercentageCapsuleCustomText?.fontSize}
         />
       </Text>
@@ -113,7 +116,21 @@ export const StyledTipOptionsEditMode = ({
                 <TipPercentageEditCapsule key={place} textValue={value} place={place} />
               ))}
             </View>
-            <View style={styles.secondColumnContainerStyles}></View>
+            <View style={styles.secondColumnContainerStyles}>
+              <TipPercentageCustomCapsule
+                textValue={`Reset`}
+                active
+                iconType={'FontAwesome'}
+                iconName={'sliders'}
+                onCustomTipPress={() => {
+                  // TODO Confirm pop up before dispatch
+                  dispatch({
+                    type: 'RESET_TIP_OPTIONS_TO_DEFAULT',
+                    payload: Constants.defaultTipOptionsArray,
+                  });
+                }}
+              />
+            </View>
           </View>
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
@@ -126,6 +143,8 @@ export const StyledTipOptionsEditMode = ({
               <TipPercentageCustomCapsule
                 textValue={customSliderVisible ? `Set Value` : `Custom`}
                 active
+                iconType={'FontAwesome'}
+                iconName={'undo'}
                 onCustomTipPress={() => {
                   setCustomSliderVisible(!customSliderVisible);
                 }}
