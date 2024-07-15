@@ -16,4 +16,5 @@ export const Constants = {
         { place: 3, value: 15 },
         { place: 4, value: 20 },
     ] as OptionValueType[],
+    APP_STATE_ASYNCSTORAGE_KEY: 'APPSTATE' as string
 };

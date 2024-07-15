@@ -22,7 +22,11 @@ const AppContext = createContext<{
 });
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
-  const [state, dispatch] = usePersistedReducer(rootReducer, initialState, 'appState');
+  const [state, dispatch] = usePersistedReducer(
+    rootReducer,
+    initialState,
+    Constants.APP_STATE_ASYNCSTORAGE_KEY,
+  );
 
   return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 };

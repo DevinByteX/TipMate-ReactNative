@@ -1,3 +1,4 @@
+import { Constants } from '@configs';
 import { SplitOptionState, SplitAction, TipOptionState, TipAction } from './types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -30,7 +31,7 @@ export const splitReducer = (state: SplitOptionState[], action: SplitAction): Sp
 // Function to save state to AsyncStorage
 const saveState = async (partialState: Partial<{ tips: TipOptionState[], splits: SplitOptionState[] }>) => {
     try {
-        const currentState = await AsyncStorage.getItem('appState');
+        const currentState = await AsyncStorage.getItem(Constants.APP_STATE_ASYNCSTORAGE_KEY);
         if (currentState) {
             const currentStateObject = JSON.parse(currentState) as { tips: TipOptionState[], splits: SplitOptionState[] };
             const newState = { ...currentStateObject, ...partialState };
