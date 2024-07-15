@@ -15,12 +15,10 @@ export interface AppState {
 
 export type TipAction =
     | { type: 'UPDATE_TIP_OPTIONS'; payload: TipOptionState }
-    | { type: 'LOAD_TIP_OPTIONS'; payload: TipOptionState[] }
     | { type: 'RESET_TIP_OPTIONS_TO_DEFAULT'; payload: TipOptionState[] };
 
 export type SplitAction =
     | { type: 'UPDATE_SPLIT_OPTIONS'; payload: SplitOptionState }
-    | { type: 'LOAD_SPLIT_OPTIONS'; payload: SplitOptionState[] }
     | { type: 'RESET_SPLIT_OPTIONS_TO_DEFAULT'; payload: SplitOptionState[] };
 
 export type AppAction =

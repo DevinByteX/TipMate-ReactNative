@@ -11,7 +11,6 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
             };
 
         case 'UPDATE_TIP_OPTIONS':
-        case 'LOAD_TIP_OPTIONS':
             return {
                 ...state,
                 tips: tipReducer(state.tips, action),
@@ -23,11 +22,11 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
             };
 
         case 'UPDATE_SPLIT_OPTIONS':
-        case 'LOAD_SPLIT_OPTIONS':
             return {
                 ...state,
                 splits: splitReducer(state.splits, action),
             };
+
         case 'RESET_SPLIT_OPTIONS_TO_DEFAULT':
             return {
                 ...state,
