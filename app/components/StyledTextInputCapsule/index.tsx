@@ -1,14 +1,8 @@
 import { View, TextInput, NativeSyntheticEvent, TextInputEndEditingEventData } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 
-export const StyledTextInputCapsule = ({
-  textValue = 0,
-  previousValue = 0,
-  place = 0,
-  suffix = '',
-  onValueChange,
-}: {
+type StyledTextInputCapsuleProps = {
   textValue: number;
   previousValue: number;
   place?: number;
@@ -22,10 +16,23 @@ export const StyledTextInputCapsule = ({
     preValue: number;
     newValue: number;
   }) => void;
-}) => {
+};
+
+export const StyledTextInputCapsule = ({
+  textValue = 0,
+  previousValue = 0,
+  place = 0,
+  suffix = '',
+  onValueChange,
+}: StyledTextInputCapsuleProps) => {
   const { styles, theme } = useStyles(stylesheet);
   const [inputFocused, setInputFocused] = useState(false);
   const [text, setText] = useState(`${textValue}${suffix}`);
+
+  // Synchronise text state with textValue prop
+  useEffect(() => {
+    setText(`${textValue}${suffix}`);
+  }, [textValue, suffix]);
 
   const handleChangeText = (inputText: string) => {
     // Remove non-numeric characters and ensure the suffix is appended
@@ -42,10 +49,12 @@ export const StyledTextInputCapsule = ({
     const cleanedText = text.replace(suffix, '');
     const newValue = cleanedText === '' ? previousValue : parseInt(cleanedText, 10);
 
+    // Restore previousValue if input is empty
     if (cleanedText === '') {
       setText(`${previousValue}${suffix}`);
     }
 
+    // Call onValueChange if provided
     if (onValueChange) {
       onValueChange({
         place,
