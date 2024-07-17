@@ -9,6 +9,7 @@ export { StyledIcons, StyledIconTypes } from './StyledIcons';
 export { StyledDrawer } from './StyledDrawer';
 export { StyledToggle } from './StyledToggle';
 export { StyledTipOptionsEditMode } from "./StyledTipOptionsEditMode";
+export { StyledSplitOptionsEditMode } from "./StyledSplitOptionsEditMode";
 export { StyledTextInputCapsule } from './StyledTextInputCapsule';
 
 // types should export seperately
