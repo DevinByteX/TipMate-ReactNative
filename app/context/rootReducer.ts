@@ -30,7 +30,7 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
         case 'RESET_SPLIT_OPTIONS_TO_DEFAULT':
             return {
                 ...state,
-                tips: splitReducer(action.payload, action),
+                splits: splitReducer(action.payload, action),
             };
 
         default:
