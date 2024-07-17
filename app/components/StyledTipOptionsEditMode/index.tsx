@@ -121,7 +121,7 @@ export const StyledTipOptionsEditMode = ({
                 textValue={`Reset`}
                 active
                 iconType={'FontAwesome'}
-                iconName={'sliders'}
+                iconName={'undo'}
                 onCustomTipPress={() => {
                   // TODO Confirm pop up before dispatch
                   dispatch({
@@ -144,7 +144,7 @@ export const StyledTipOptionsEditMode = ({
                 textValue={customSliderVisible ? `Set Value` : `Custom`}
                 active
                 iconType={'FontAwesome'}
-                iconName={'undo'}
+                iconName={'sliders'}
                 onCustomTipPress={() => {
                   setCustomSliderVisible(!customSliderVisible);
                 }}
