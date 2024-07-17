@@ -143,8 +143,8 @@ export const StyledTipOptionsEditMode = ({
               <TipPercentageCustomCapsule
                 textValue={customSliderVisible ? `Set Value` : `Custom`}
                 active
-                iconType={'FontAwesome'}
-                iconName={'sliders'}
+                iconType={'FontAwesome5'}
+                iconName={'sliders-h'}
                 onCustomTipPress={() => {
                   setCustomSliderVisible(!customSliderVisible);
                 }}

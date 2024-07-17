@@ -66,8 +66,8 @@ const SplitCustomCapsule = ({
         ]}>
         {`${textValue} `}
         <StyledIcons
-          type={'FontAwesome'}
-          name={'sliders'}
+          type={'FontAwesome5'}
+          name={'sliders-h'}
           size={styles.splitCapsuleCustomText?.fontSize}
         />
       </Text>

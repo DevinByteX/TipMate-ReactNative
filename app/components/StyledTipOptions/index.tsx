@@ -66,8 +66,8 @@ const TipPercentageCustomCapsule = ({
         ]}>
         {`${textValue} `}
         <StyledIcons
-          type={'FontAwesome'}
-          name={'sliders'}
+          type={'FontAwesome5'}
+          name={'sliders-h'}
           size={styles.tipPercentageCapsuleCustomText?.fontSize}
         />
       </Text>
