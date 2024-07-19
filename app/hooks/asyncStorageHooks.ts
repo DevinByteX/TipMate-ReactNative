@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
 import { UnistylesRuntime, UnistylesThemes } from "react-native-unistyles";
 import { asyncStorageUtil } from "@hooks";
-import { OptionValueType } from '@configs';
 
 // Function to fetch user preferred theme from AsyncStorage
 export const getUserPreferredTheme = async (): Promise<keyof UnistylesThemes> => {
