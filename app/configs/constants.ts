@@ -1,7 +1,4 @@
-export type OptionValueType = {
-    place: number;
-    value: number;
-};
+import { SplitOptionState, TipOptionState } from "@/context/types";
 
 export const Constants = {
     defaultSplitOptionsArray: [
@@ -9,12 +6,12 @@ export const Constants = {
         { place: 2, value: 3 },
         { place: 3, value: 5 },
         { place: 4, value: 7 },
-    ] as OptionValueType[],
+    ] as SplitOptionState[],
     defaultTipOptionsArray: [
         { place: 1, value: 5 },
         { place: 2, value: 10 },
         { place: 3, value: 15 },
         { place: 4, value: 20 },
-    ] as OptionValueType[],
-    APP_STATE_ASYNCSTORAGE_KEY: 'APPSTATE' as string
+    ] as TipOptionState[],
+    APP_STATE_ASYNCSTORAGE_KEY: 'APPSTATE' as string,
 };
