@@ -8,6 +8,17 @@ export interface SplitOptionState {
     value: number;
 }
 
+export interface TipSliderConfigValues {
+    min: number;
+    max: number;
+    step: number;
+}
+
+export interface SplitSliderConfigValues {
+    min: number;
+    max: number;
+    step: number;
+}
 export interface AppState {
     tips: TipOptionState[];
     splits: SplitOptionState[];

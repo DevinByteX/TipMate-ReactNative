@@ -1,4 +1,4 @@
-import { SplitOptionState, TipOptionState } from "@/context/types";
+import { SplitOptionState, SplitSliderConfigValues, TipOptionState, TipSliderConfigValues } from "@/context/types";
 
 export const Constants = {
     defaultSplitOptionsArray: [
@@ -18,10 +18,10 @@ export const Constants = {
         min: 1,
         max: 15,
         step: 1
-    },
+    } as SplitSliderConfigValues,
     defaultTipSliderConfigValues: {
         min: 0,
         max: 80,
         step: 5
-    }
+    } as TipSliderConfigValues
 };
