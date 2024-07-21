@@ -152,6 +152,7 @@ export const StyledSplitOptionsEditMode = ({
           <Text style={styles.titleText}>{`SET SLIDER CONFIGS `}</Text>
           <View style={styles.sliderConfigMainView}>
             <StyledConfigInput
+              autoFocus
               title="Min :"
               textValue={1}
               previousValue={1}
