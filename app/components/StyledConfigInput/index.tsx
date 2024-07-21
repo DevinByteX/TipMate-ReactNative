@@ -13,6 +13,7 @@ type StyledConfigInputProps = {
   title: string;
   textValue: number;
   previousValue: number;
+  suffix?: string;
   onValueChange?: ({ preValue, newValue }: { preValue: number; newValue: number }) => void;
 } & TextInputProps;
 
@@ -20,22 +21,23 @@ export const StyledConfigInput = ({
   title = 'Max :',
   textValue = 10,
   previousValue = 0,
+  suffix = '',
   onValueChange,
   ...TextInputProps
 }: StyledConfigInputProps) => {
   const { styles, theme } = useStyles(stylesheet);
   const [inputFocused, setInputFocused] = useState(false);
-  const [text, setText] = useState(`${textValue}`);
+  const [text, setText] = useState(`${textValue}${suffix}`);
 
   // Synchronise text state with textValue prop
   useEffect(() => {
-    setText(`${textValue}`);
-  }, [textValue]);
+    setText(`${textValue}${suffix}`);
+  }, [textValue, suffix]);
 
   const handleChangeText = (inputText: string) => {
     // Remove non-numeric characters and ensure the suffix is appended
     let cleanedText = inputText.replace(/[^0-9]/g, '');
-    setText(`${cleanedText}`);
+    setText(`${cleanedText}${suffix}`);
   };
 
   const handleFocus = () => setInputFocused(true);
@@ -44,11 +46,14 @@ export const StyledConfigInput = ({
   const handleEndEditing = ({
     nativeEvent: { text },
   }: NativeSyntheticEvent<TextInputEndEditingEventData>) => {
-    const newValue = text === '' ? previousValue : parseInt(text, 10);
+    const cleanedText = text.replace(suffix, '');
+    const newValue = cleanedText === '' ? previousValue : parseInt(cleanedText, 10);
+
     // Restore previousValue if input is empty
-    if (text === '') {
-      setText(`${previousValue}`);
+    if (cleanedText === '') {
+      setText(`${previousValue}${suffix}`);
     }
+
     // Call onValueChange if provided
     if (onValueChange) {
       onValueChange({
@@ -68,10 +73,10 @@ export const StyledConfigInput = ({
       ]}>
       <Text style={styles.configBoxText}>{`${title}`}</Text>
       <TextInput
-        selection={{ start: text.length, end: text.length }}
+        selection={{ start: text.length - suffix.length, end: text.length - suffix.length }}
         selectionColor={theme.colors.accent}
         style={styles.configBoxTextInput}
-        maxLength={2}
+        maxLength={suffix.length + 2} // Adjust maxLength to include suffix length
         contextMenuHidden
         keyboardType="numeric"
         returnKeyType="done"
