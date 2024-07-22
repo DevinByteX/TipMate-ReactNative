@@ -135,7 +135,7 @@ export const StyledSplitOptionsEditMode = ({
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <SplitPercentageCustomCapsule
-                textValue={customSliderConfigVisible ? `Set Value` : `Config`}
+                textValue={customSliderConfigVisible ? `Set Configs` : `Configs`}
                 active
                 iconType={'FontAwesome5'}
                 iconName={'sliders-h'}
