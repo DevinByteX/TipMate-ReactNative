@@ -22,6 +22,8 @@ export interface SplitSliderConfigValues {
 export interface AppState {
     tips: TipOptionState[];
     splits: SplitOptionState[];
+    tipSliderConfig: TipSliderConfigValues;
+    splitSliderConfig: SplitSliderConfigValues;
 }
 
 export type TipAction =

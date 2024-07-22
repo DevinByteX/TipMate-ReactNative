@@ -7,6 +7,8 @@ import { usePersistedReducer } from '@hooks';
 const initialState: AppState = {
   tips: Constants.defaultTipOptionsArray,
   splits: Constants.defaultSplitOptionsArray,
+  tipSliderConfig: Constants.defaultTipSliderConfigValues,
+  splitSliderConfig: Constants.defaultSplitSliderConfigValues,
 };
 
 interface AppProviderProps {
