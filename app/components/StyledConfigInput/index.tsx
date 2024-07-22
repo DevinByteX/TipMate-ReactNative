@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  View,
   Text,
   TextInput,
   TextInputProps,
   NativeSyntheticEvent,
   TextInputEndEditingEventData,
+  Pressable,
 } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 
@@ -25,6 +25,7 @@ export const StyledConfigInput = ({
   onValueChange,
   ...TextInputProps
 }: StyledConfigInputProps) => {
+  const TextInputRef = useRef<TextInput>(null);
   const { styles, theme } = useStyles(stylesheet);
   const [inputFocused, setInputFocused] = useState(false);
   const [text, setText] = useState(`${textValue}${suffix}`);
@@ -64,7 +65,8 @@ export const StyledConfigInput = ({
   };
 
   return (
-    <View
+    <Pressable
+      onPress={() => TextInputRef.current?.focus()}
       style={[
         styles.configInputBox,
         {
@@ -73,6 +75,7 @@ export const StyledConfigInput = ({
       ]}>
       <Text style={styles.configBoxText}>{`${title}`}</Text>
       <TextInput
+        ref={TextInputRef}
         selection={{ start: text.length - suffix.length, end: text.length - suffix.length }}
         selectionColor={theme.colors.accent}
         style={styles.configBoxTextInput}
@@ -87,7 +90,7 @@ export const StyledConfigInput = ({
         onChangeText={handleChangeText}
         {...TextInputProps}
       />
-    </View>
+    </Pressable>
   );
 };
 
