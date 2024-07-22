@@ -100,7 +100,6 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
     borderColor: colors.backgroundColor,
     borderWidth: (UnistylesRuntime.screen.width * 0.5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
   },
   configBoxText: {
     fontSize: 14,
@@ -111,6 +110,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
+    paddingVertical: (UnistylesRuntime.screen.height * 0.75) / 100,
     paddingHorizontal: (UnistylesRuntime.screen.width * 1) / 100,
   },
 }));
