@@ -153,7 +153,7 @@ export const StyledSplitOptionsEditMode = ({
           <View style={styles.sliderConfigMainView}>
             <StyledConfigInput
               autoFocus
-              title="Min :"
+              title={`Min :`}
               textValue={state.splitSliderConfig.min}
               previousValue={state.splitSliderConfig.min}
               onValueChange={({ preValue, newValue }) => {
@@ -161,7 +161,7 @@ export const StyledSplitOptionsEditMode = ({
               }}
             />
             <StyledConfigInput
-              title="Max :"
+              title={`Max :`}
               textValue={state.splitSliderConfig.max}
               previousValue={state.splitSliderConfig.max}
               onValueChange={({ preValue, newValue }) => {
@@ -169,7 +169,7 @@ export const StyledSplitOptionsEditMode = ({
               }}
             />
             <StyledConfigInput
-              title="Step :"
+              title={`Step :`}
               textValue={state.splitSliderConfig.step}
               previousValue={state.splitSliderConfig.step}
               onValueChange={({ preValue, newValue }) => {
