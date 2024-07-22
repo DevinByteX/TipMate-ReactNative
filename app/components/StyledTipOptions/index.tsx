@@ -163,6 +163,9 @@ export const StyledTipOptions = ({
         <View style={styles.sliderContainer}>
           <StyledHorizontalSlider
             sliderValue={tipPercentageValue}
+            step={5}
+            minValue={5}
+            maxValue={80}
             onValuesChange={value => {
               setTipPercentageValue(value[0]);
               onSelectedTipValue && onSelectedTipValue(value[0]);
