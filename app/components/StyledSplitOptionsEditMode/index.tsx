@@ -134,7 +134,7 @@ export const StyledSplitOptionsEditMode = ({
               ))}
             </View>
             <View style={styles.secondColumnContainerStyles}>
-              <SplitPercentageCustomCapsule
+              {/* <SplitPercentageCustomCapsule
                 textValue={customSliderConfigVisible ? `Set Configs` : `Configs`}
                 active
                 iconType={'FontAwesome5'}
@@ -142,7 +142,7 @@ export const StyledSplitOptionsEditMode = ({
                 onCustomSplitPress={() => {
                   setCustomSliderConfigVisible(!customSliderConfigVisible);
                 }}
-              />
+              /> */}
             </View>
           </View>
         </View>
