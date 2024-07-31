@@ -140,7 +140,7 @@ export const StyledTipOptionsEditMode = ({
               ))}
             </View>
             <View style={styles.secondColumnContainerStyles}>
-              <TipPercentageCustomCapsule
+              {/* <TipPercentageCustomCapsule
                 textValue={customSliderVisible ? `Set Value` : `Custom`}
                 active
                 iconType={'FontAwesome5'}
@@ -148,7 +148,7 @@ export const StyledTipOptionsEditMode = ({
                 onCustomTipPress={() => {
                   setCustomSliderVisible(!customSliderVisible);
                 }}
-              />
+              /> */}
             </View>
           </View>
         </View>
