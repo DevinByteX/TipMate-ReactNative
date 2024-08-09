@@ -26,6 +26,8 @@ const SplitPercentageEditCapsule = ({
       previousValue={textValue}
       place={place}
       optionsArray={state?.splits}
+      minValidateValue={1}
+      maxValidateValue={15}
       onValueChange={({ place, preValue, newValue }) => {
         const updatedSplitOption: SplitOptionState = { place: place, value: newValue }; // Update split option value
         dispatch({ type: 'UPDATE_SPLIT_OPTIONS', payload: updatedSplitOption });

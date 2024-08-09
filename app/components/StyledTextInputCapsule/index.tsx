@@ -19,6 +19,8 @@ type StyledTextInputCapsuleProps = {
     newValue: number;
   }) => void;
   optionsArray: SplitOptionState[] | TipOptionState[];
+  minValidateValue: number;
+  maxValidateValue: number;
 };
 
 export const StyledTextInputCapsule = ({
@@ -28,6 +30,8 @@ export const StyledTextInputCapsule = ({
   suffix = '',
   onValueChange,
   optionsArray,
+  minValidateValue,
+  maxValidateValue,
 }: StyledTextInputCapsuleProps) => {
   const { styles, theme } = useStyles(stylesheet);
   const [inputFocused, setInputFocused] = useState(false);
@@ -62,8 +66,8 @@ export const StyledTextInputCapsule = ({
       place,
       newValue,
       optionsArray,
-      minValue: 0,
-      maxValue: 100,
+      minValue: minValidateValue,
+      maxValue: maxValidateValue,
     });
 
     // If there are validation errors, dispatch an error message
