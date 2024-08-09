@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
-  StyledHorizontalSlider,
+  StyledConfigInput,
   StyledIcons,
   StyledIconTypesKeys,
   StyledTextInputCapsule,
@@ -93,7 +93,7 @@ export const StyledTipOptionsEditMode = ({
   const defaultTipValue = 5;
 
   const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
-  const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
+  const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
 
   const { styles } = useStyles(stylesheet);
 
@@ -143,27 +143,48 @@ export const StyledTipOptionsEditMode = ({
             </View>
             <View style={styles.secondColumnContainerStyles}>
               {/* <TipPercentageCustomCapsule
-                textValue={customSliderVisible ? `Set Value` : `Custom`}
+                textValue={customSliderConfigVisible ? `Set Value` : `Custom`}
                 active
                 iconType={'FontAwesome5'}
                 iconName={'sliders-h'}
                 onCustomTipPress={() => {
-                  setCustomSliderVisible(!customSliderVisible);
+                  setCustomSliderConfigVisible(!customSliderConfigVisible);
                 }}
               /> */}
             </View>
           </View>
         </View>
       </View>
-      {customSliderVisible ? (
-        <View style={styles.sliderContainer}>
-          <StyledHorizontalSlider
-            sliderValue={tipPercentageValue}
-            onValuesChange={value => {
-              setTipPercentageValue(value[0]);
-              onSelectedTipValue && onSelectedTipValue(value[0]);
-            }}
-          />
+      {customSliderConfigVisible ? (
+        <View style={styles.sliderConfigMainContainer}>
+          <Text style={styles.titleText}>{`SET SLIDER CONFIGS `}</Text>
+          <View style={styles.sliderConfigMainView}>
+            <StyledConfigInput
+              autoFocus
+              title={`Min :`}
+              textValue={state.tipSliderConfig.min}
+              previousValue={state.tipSliderConfig.min}
+              onValueChange={({ preValue, newValue }) => {
+                console.log(`Min`, `P ${preValue}`, `N ${newValue}`);
+              }}
+            />
+            <StyledConfigInput
+              title={`Max :`}
+              textValue={state.tipSliderConfig.max}
+              previousValue={state.tipSliderConfig.max}
+              onValueChange={({ preValue, newValue }) => {
+                console.log(`Max`, `P ${preValue}`, `N ${newValue}`);
+              }}
+            />
+            <StyledConfigInput
+              title={`Step :`}
+              textValue={state.tipSliderConfig.step}
+              previousValue={state.tipSliderConfig.step}
+              onValueChange={({ preValue, newValue }) => {
+                console.log(`Step`, `P ${preValue}`, `N ${newValue}`);
+              }}
+            />
+          </View>
         </View>
       ) : null}
     </View>
@@ -235,7 +256,33 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },
-  sliderContainer: {
+  sliderConfigMainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  sliderConfigMainView: {
+    flexDirection: 'row',
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+    justifyContent: 'space-between',
+    gap: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  configInputBox: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderColor: colors.backgroundColor,
+    borderWidth: (UnistylesRuntime.screen.width * 0.5) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  configBoxText: {
+    fontSize: 14,
+    fontFamily: fonts.Montserrat_Bold,
+    color: colors.accent,
+  },
+  configBoxTextInput: {
+    fontSize: 14,
+    fontFamily: fonts.Montserrat_Bold,
+    color: colors.card_typography,
   },
 }));
