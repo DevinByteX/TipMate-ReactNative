@@ -26,9 +26,9 @@ const TipPercentageEditCapsule = ({
       previousValue={textValue}
       place={place}
       suffix={'%'}
+      optionsArray={state?.tips}
       onValueChange={({ place, preValue, newValue }) => {
-        // TODO Validations to be added
-        const updatedTipOption: TipOptionState = { place: place, value: newValue }; // Updated tip option
+        const updatedTipOption: TipOptionState = { place: place, value: newValue }; // Updated tip option value
         dispatch({ type: 'UPDATE_TIP_OPTIONS', payload: updatedTipOption });
       }}
     />
