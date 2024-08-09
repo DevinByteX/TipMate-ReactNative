@@ -1,6 +1,8 @@
 import { View, TextInput, NativeSyntheticEvent, TextInputEndEditingEventData } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { SplitOptionState, TipOptionState } from '@/context/types';
+import { validateOptionValues } from '@hooks';
 
 type StyledTextInputCapsuleProps = {
   textValue: number;
@@ -16,6 +18,7 @@ type StyledTextInputCapsuleProps = {
     preValue: number;
     newValue: number;
   }) => void;
+  optionsArray: SplitOptionState[] | TipOptionState[];
 };
 
 export const StyledTextInputCapsule = ({
@@ -24,6 +27,7 @@ export const StyledTextInputCapsule = ({
   place = 0,
   suffix = '',
   onValueChange,
+  optionsArray,
 }: StyledTextInputCapsuleProps) => {
   const { styles, theme } = useStyles(stylesheet);
   const [inputFocused, setInputFocused] = useState(false);
@@ -54,7 +58,22 @@ export const StyledTextInputCapsule = ({
       setText(`${previousValue}${suffix}`);
     }
 
-    // Call onValueChange if provided
+    const validateMessages = validateOptionValues({
+      place,
+      newValue,
+      optionsArray,
+      minValue: 0,
+      maxValue: 100,
+    });
+
+    // If there are validation errors, dispatch an error message
+    if (validateMessages?.length > 0) {
+      setText(`${previousValue}${suffix}`);
+      console.log(validateMessages?.join(' '));
+      return;
+    }
+
+    // Call onValueChange if provided and if validation passed
     if (onValueChange) {
       onValueChange({
         place,
