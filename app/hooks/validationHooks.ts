@@ -4,8 +4,8 @@ export const validateOptionValues = ({
     place,
     newValue,
     optionsArray,
-    minValue = 0,
-    maxValue = 100,
+    minValue,
+    maxValue,
 }: {
     place: number;
     newValue: number;
