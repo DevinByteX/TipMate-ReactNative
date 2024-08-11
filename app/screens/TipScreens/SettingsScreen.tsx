@@ -17,8 +17,8 @@ const SettingsScreen = () => {
         contentContainerStyle={styles.scrollContentContainer}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}>
-        <StyledTipOptionsEditMode titleText="CUSTOMISE YOUR TIPS" />
-        <StyledSplitOptionsEditMode titleText="CUSTOMISE YOUR SPLITS" />
+        <StyledTipOptionsEditMode />
+        <StyledSplitOptionsEditMode />
       </ScrollView>
     </>
   );

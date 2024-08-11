@@ -79,12 +79,7 @@ const SplitPercentageCustomCapsule = ({
   );
 };
 
-export const StyledSplitOptionsEditMode = ({
-  titleText = 'CUSTOMISE SPLIT',
-}: {
-  titleText?: string;
-  editMode?: boolean;
-}) => {
+export const StyledSplitOptionsEditMode = () => {
   const { state, dispatch } = useContext(AppContext);
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
@@ -94,7 +89,7 @@ export const StyledSplitOptionsEditMode = ({
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>
-        {`${titleText} `}
+        {`${'CUSTOMISE YOUR SPLITS'} `}
         {/* <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} /> */}
       </Text>
       <View>

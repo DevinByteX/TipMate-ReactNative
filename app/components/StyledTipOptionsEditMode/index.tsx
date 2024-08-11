@@ -80,19 +80,9 @@ const TipPercentageCustomCapsule = ({
   );
 };
 
-export const StyledTipOptionsEditMode = ({
-  titleText = 'SELECT TIP',
-  onSelectedTipValue,
-}: {
-  titleText?: string;
-  editMode?: boolean;
-  onSelectedTipValue?: (value: number) => void;
-}) => {
+export const StyledTipOptionsEditMode = () => {
   const { state, dispatch } = useContext(AppContext);
 
-  const defaultTipValue = 5;
-
-  const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
 
   const { styles } = useStyles(stylesheet);
@@ -100,7 +90,7 @@ export const StyledTipOptionsEditMode = ({
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>
-        {`${titleText} `}
+        {`${'CUSTOMISE YOUR TIPS'} `}
         {/* <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} /> */}
       </Text>
       <View>
