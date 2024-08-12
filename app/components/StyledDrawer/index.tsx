@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -98,7 +98,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   horizontalDeviderStyles: {
     backgroundColor: colors.devider,
     width: '100%',
-    height: StyleSheet.hairlineWidth * 8,
+    height: UnistylesRuntime.hairlineWidth * 8,
   },
   bottomButtonContainer: {
     paddingStart: (UnistylesRuntime.screen.width * 4) / 100,
