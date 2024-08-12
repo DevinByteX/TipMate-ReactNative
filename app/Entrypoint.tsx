@@ -3,12 +3,13 @@ import '@styles/uniStyles'; // This should always be imported in the root file o
 import ApplicationNavigator from '@navigation/ApplicationNavigation';
 import Toast from 'react-native-toast-message';
 import { AppProvider } from './context/AppContext';
+import { toastConfig } from '@styles/toastConfig';
 
 const Entrypoint = () => {
   return (
     <AppProvider>
       <ApplicationNavigator />
-      <Toast />
+      <Toast config={toastConfig} />
     </AppProvider>
   );
 };
