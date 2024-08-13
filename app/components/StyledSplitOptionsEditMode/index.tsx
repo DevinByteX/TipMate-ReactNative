@@ -92,6 +92,14 @@ export const StyledSplitOptionsEditMode = () => {
         {`${'CUSTOMISE YOUR SPLITS'} `}
         {/* <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} /> */}
       </Text>
+      <Text style={styles.instructionText}>
+        <StyledIcons
+          type={'FontAwesome5'}
+          name={'info-circle'}
+          size={styles.instructionText?.fontSize}
+        />
+        {` ${'To customise the options, simply begin typing in the split option UI fields.'}`}
+      </Text>
       <View>
         <VerticalDevider
           verticalDeviderAdditionalStyles={{
@@ -192,6 +200,13 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  instructionText: {
+    fontSize: 10,
+    color: colors.card_typography,
+    fontFamily: fonts.Montserrat_Medium,
+    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainInnerContainer: {
