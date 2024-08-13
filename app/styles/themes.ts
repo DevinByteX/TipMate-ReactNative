@@ -33,6 +33,14 @@ const sharedColors = {
     error_toast_dark: '#f93a69',
 }
 
+const hexToRGBA = (hex: string, opacity: number) => {
+    const rgb = hex
+        .replace('#', '')
+        .split(/(?=(?:..)*$)/)
+        .map(x => parseInt(x, 16));
+    return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${opacity})`;
+};
+
 export const lightTheme = {
     colors: {
         ...sharedColors,
@@ -54,6 +62,9 @@ export const lightTheme = {
     },
     fonts: {
         ...sharedFonts,
+    },
+    utils: {
+        hexToRGBA
     }
     // add any keys/functions/objects/arrays you want!
 } as const
@@ -79,6 +90,9 @@ export const darkTheme = {
     },
     fonts: {
         ...sharedFonts,
+    },
+    utils: {
+        hexToRGBA
     }
     // add any keys/functions/objects/arrays you want!
 } as const
@@ -104,6 +118,9 @@ export const premiumTheme = {
     },
     fonts: {
         ...sharedFonts,
+    },
+    utils: {
+        hexToRGBA
     }
     // add any keys/functions/objects/arrays you want!
 } as const
