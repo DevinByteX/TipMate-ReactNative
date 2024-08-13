@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { Text, View, ViewStyle } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 
@@ -161,6 +161,6 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   verticalDeviderStyles: {
     backgroundColor: colors.devider,
     height: '100%',
-    width: StyleSheet.hairlineWidth * 8,
+    width: UnistylesRuntime.hairlineWidth * 8,
   },
 }));
