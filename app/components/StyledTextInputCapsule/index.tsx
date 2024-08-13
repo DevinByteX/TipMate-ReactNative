@@ -1,6 +1,9 @@
 import { View, TextInput, NativeSyntheticEvent, TextInputEndEditingEventData } from 'react-native';
 import React, { useEffect, useState } from 'react';
+// Third party libs
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import Toast from 'react-native-toast-message';
+// Custom configs
 import { SplitOptionState, TipOptionState } from '@/context/types';
 import { validateOptionValues } from '@hooks';
 
@@ -70,10 +73,14 @@ export const StyledTextInputCapsule = ({
       maxValue: maxValidateValue,
     });
 
-    // If there are validation errors, dispatch an error message
+    // If there are validation errors, set previous value in the text input
     if (validateMessages?.length > 0) {
       setText(`${previousValue}${suffix}`);
-      console.log(validateMessages?.join(' '));
+      Toast.show({
+        type: 'error',
+        text1: `${validateMessages?.join(' ')}`,
+        visibilityTime: 5000,
+      });
       return;
     }
 
