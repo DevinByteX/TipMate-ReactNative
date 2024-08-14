@@ -8,6 +8,8 @@ type StyledPopUpTypes = {
   modalSubtitle?: string;
   lineButtonText?: string;
   solidButtonText?: string;
+  onLineButtonPress?: () => void;
+  onSolidButtonPress?: () => void;
 };
 
 export const StyledPopUp = ({
@@ -16,22 +18,30 @@ export const StyledPopUp = ({
   modalSubtitle,
   lineButtonText,
   solidButtonText,
+  onLineButtonPress,
+  onSolidButtonPress,
 }: StyledPopUpTypes) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.centeredView}>
-      <Modal visible={popUpVisibility} transparent={true} animationType={'slide'}>
+      <Modal visible={popUpVisibility} transparent={true} animationType={'fade'}>
         <View style={styles.centeredView}>
           <View style={styles.modalContents}>
             <Text style={styles.modalTitle}>{`${modalTitle}`}</Text>
-            <Text style={styles.modalSubtitle}>
-              {`${modalSubtitle}`}
-            </Text>
+            <Text style={styles.modalSubtitle}>{`${modalSubtitle}`}</Text>
             <View style={styles.buttonContainer}>
-              <Pressable style={styles.lineButton}>
+              <Pressable
+                style={styles.lineButton}
+                onPress={() => {
+                  onLineButtonPress && onLineButtonPress();
+                }}>
                 <Text style={styles.lineButtonText}>{`${lineButtonText}`}</Text>
               </Pressable>
-              <Pressable style={styles.solidButton}>
+              <Pressable
+                style={styles.solidButton}
+                onPress={() => {
+                  onSolidButtonPress && onSolidButtonPress();
+                }}>
                 <Text style={styles.solidButtonText}>{`${solidButtonText}`}</Text>
               </Pressable>
             </View>
