@@ -5,6 +5,7 @@ import {
   StyledConfigInput,
   StyledIcons,
   StyledIconTypesKeys,
+  StyledPopUp,
   StyledTextInputCapsule,
   VerticalDevider,
 } from '@components';
@@ -86,6 +87,7 @@ export const StyledSplitOptionsEditMode = () => {
   const { state, dispatch } = useContext(AppContext);
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
+  const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);
 
   const { styles } = useStyles(stylesheet);
 
@@ -125,11 +127,7 @@ export const StyledSplitOptionsEditMode = () => {
                 iconType={'FontAwesome'}
                 iconName={'undo'}
                 onCustomSplitPress={() => {
-                  // TODO Confirm pop up before dispatch
-                  dispatch({
-                    type: 'RESET_SPLIT_OPTIONS_TO_DEFAULT',
-                    payload: Constants.defaultSplitOptionsArray,
-                  });
+                  setConfirmPopUpVisibility(true);
                 }}
               />
             </View>
@@ -187,6 +185,23 @@ export const StyledSplitOptionsEditMode = () => {
           </View>
         </View>
       ) : null}
+      <StyledPopUp
+        popUpVisibility={confirmPopUpVisibility}
+        modalTitle={`${'Confirm Reset'}`}
+        modalSubtitle={`${'Are you sure you want to reset all option values? This action cannot be undone.'}`}
+        lineButtonText={`${'Cancel'}`}
+        solidButtonText={`${'Reset'}`}
+        onLineButtonPress={() => {
+          setConfirmPopUpVisibility(false);
+        }}
+        onSolidButtonPress={() => {
+          dispatch({
+            type: 'RESET_SPLIT_OPTIONS_TO_DEFAULT',
+            payload: Constants.defaultSplitOptionsArray,
+          });
+          setConfirmPopUpVisibility(false);
+        }}
+      />
     </View>
   );
 };
