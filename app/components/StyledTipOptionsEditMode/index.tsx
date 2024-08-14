@@ -5,6 +5,7 @@ import {
   StyledConfigInput,
   StyledIcons,
   StyledIconTypesKeys,
+  StyledPopUp,
   StyledTextInputCapsule,
   VerticalDevider,
 } from '@components';
@@ -185,6 +186,15 @@ export const StyledTipOptionsEditMode = () => {
           </View>
         </View>
       ) : null}
+      <StyledPopUp
+        popUpVisibility={true}
+        modalTitle={'Confirm Reset'}
+        modalSubtitle={
+          'Are you sure you want to reset all option values? This action cannot be undone.'
+        }
+        lineButtonText={'Cancel'}
+        solidButtonText={'Reset'}
+      />
     </View>
   );
 };

@@ -2,23 +2,37 @@ import React from 'react';
 import { View, Text, Modal, Pressable } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 
-export const StyledPopUp = () => {
+type StyledPopUpTypes = {
+  popUpVisibility?: boolean;
+  modalTitle?: string;
+  modalSubtitle?: string;
+  lineButtonText?: string;
+  solidButtonText?: string;
+};
+
+export const StyledPopUp = ({
+  popUpVisibility = false,
+  modalTitle,
+  modalSubtitle,
+  lineButtonText,
+  solidButtonText,
+}: StyledPopUpTypes) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.centeredView}>
-      <Modal visible={true} transparent={true} animationType={'slide'}>
+      <Modal visible={popUpVisibility} transparent={true} animationType={'slide'}>
         <View style={styles.centeredView}>
           <View style={styles.modalContents}>
-            <Text style={styles.modalTitle}>{`${'Confirm Reset'}`}</Text>
+            <Text style={styles.modalTitle}>{`${modalTitle}`}</Text>
             <Text style={styles.modalSubtitle}>
-              {`${'Are you sure you want to reset all option values? This action cannot be undone.'}`}
+              {`${modalSubtitle}`}
             </Text>
             <View style={styles.buttonContainer}>
               <Pressable style={styles.lineButton}>
-                <Text style={styles.lineButtonText}>{`${'Cancel'}`}</Text>
+                <Text style={styles.lineButtonText}>{`${lineButtonText}`}</Text>
               </Pressable>
               <Pressable style={styles.solidButton}>
-                <Text style={styles.solidButtonText}>{`${'Reset'}`}</Text>
+                <Text style={styles.solidButtonText}>{`${solidButtonText}`}</Text>
               </Pressable>
             </View>
           </View>
@@ -33,7 +47,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: utils.hexToRGBA(colors.backgroundColor, 0.75),
+    backgroundColor: utils.hexToRGBA(colors.backgroundColor, 0.85),
   },
   modalContents: {
     backgroundColor: colors.card,
