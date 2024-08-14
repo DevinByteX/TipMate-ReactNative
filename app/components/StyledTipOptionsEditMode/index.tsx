@@ -88,6 +88,7 @@ export const StyledTipOptionsEditMode = () => {
   const { state, dispatch } = useContext(AppContext);
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
+  const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);
 
   const { styles } = useStyles(stylesheet);
 
@@ -127,11 +128,7 @@ export const StyledTipOptionsEditMode = () => {
                 iconType={'FontAwesome'}
                 iconName={'undo'}
                 onCustomTipPress={() => {
-                  // TODO Confirm pop up before dispatch
-                  dispatch({
-                    type: 'RESET_TIP_OPTIONS_TO_DEFAULT',
-                    payload: Constants.defaultTipOptionsArray,
-                  });
+                  setConfirmPopUpVisibility(true);
                 }}
               />
             </View>
@@ -190,13 +187,21 @@ export const StyledTipOptionsEditMode = () => {
         </View>
       ) : null}
       <StyledPopUp
-        popUpVisibility={true}
-        modalTitle={'Confirm Reset'}
-        modalSubtitle={
-          'Are you sure you want to reset all option values? This action cannot be undone.'
-        }
-        lineButtonText={'Cancel'}
-        solidButtonText={'Reset'}
+        popUpVisibility={confirmPopUpVisibility}
+        modalTitle={`${'Confirm Reset'}`}
+        modalSubtitle={`${'Are you sure you want to reset all option values? This action cannot be undone.'}`}
+        lineButtonText={`${'Cancel'}`}
+        solidButtonText={`${'Reset'}`}
+        onLineButtonPress={() => {
+          setConfirmPopUpVisibility(false);
+        }}
+        onSolidButtonPress={() => {
+          dispatch({
+            type: 'RESET_TIP_OPTIONS_TO_DEFAULT',
+            payload: Constants.defaultTipOptionsArray,
+          });
+          setConfirmPopUpVisibility(false);
+        }}
       />
     </View>
   );
