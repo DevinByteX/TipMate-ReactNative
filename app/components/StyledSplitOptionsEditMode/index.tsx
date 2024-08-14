@@ -10,6 +10,7 @@ import {
   VerticalDevider,
 } from '@components';
 import { Constants } from '@configs';
+import { areOptionArraysSame } from '@hooks';
 import { AppContext } from '@/context/AppContext';
 import { SplitOptionState } from '@/context/types';
 
@@ -123,7 +124,12 @@ export const StyledSplitOptionsEditMode = () => {
             <View style={styles.secondColumnContainerStyles}>
               <SplitPercentageCustomCapsule
                 textValue={`Reset`}
-                active
+                active={
+                  !areOptionArraysSame({
+                    firstArray: state.splits,
+                    secondArray: Constants.defaultSplitOptionsArray,
+                  })
+                }
                 iconType={'FontAwesome'}
                 iconName={'undo'}
                 onCustomSplitPress={() => {
