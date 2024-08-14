@@ -52,6 +52,7 @@ const SplitPercentageCustomCapsule = ({
   const { styles, theme } = useStyles(stylesheet);
   return (
     <Pressable
+      disabled={!active}
       style={[
         styles.splitPercentageCapsuleCustom,
         {
@@ -65,7 +66,9 @@ const SplitPercentageCustomCapsule = ({
         style={[
           styles.splitPercentageCapsuleCustomText,
           {
-            color: active ? theme.colors.card : theme.colors.card_typography,
+            color: active
+              ? theme.colors.card
+              : theme.utils.hexToRGBA(theme.colors.card_typography, 0.2),
           },
         ]}>
         {`${textValue} `}
