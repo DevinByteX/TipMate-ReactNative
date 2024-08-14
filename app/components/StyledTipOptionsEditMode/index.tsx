@@ -10,6 +10,7 @@ import {
   VerticalDevider,
 } from '@components';
 import { Constants } from '@configs';
+import { areOptionArraysSame } from '@hooks';
 import { AppContext } from '@/context/AppContext';
 import { TipOptionState } from '@/context/types';
 
@@ -124,7 +125,12 @@ export const StyledTipOptionsEditMode = () => {
             <View style={styles.secondColumnContainerStyles}>
               <TipPercentageCustomCapsule
                 textValue={`Reset`}
-                active
+                active={
+                  !areOptionArraysSame({
+                    firstArray: state.tips,
+                    secondArray: Constants.defaultTipOptionsArray,
+                  })
+                }
                 iconType={'FontAwesome'}
                 iconName={'undo'}
                 onCustomTipPress={() => {
