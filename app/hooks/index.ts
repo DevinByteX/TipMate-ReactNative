@@ -4,7 +4,7 @@ import { asyncStorageUtil } from './asyncStorageUtil';
 import { getUserPreferredTheme, setUserPreferredTheme } from './asyncStorageHooks';
 import { toFixedWithoutRounding } from './tofixedWithoutRounding';
 import { usePersistedReducer } from './usePersistedReducer';
-import { validateOptionValues } from './validationHooks';
+import { validateOptionValues, areOptionArraysSame } from './validationHooks';
 
-export { convertToTwoDecimalPoints, calculateBillValues, RoundingMethod, toFixedWithoutRounding, asyncStorageUtil, getUserPreferredTheme, setUserPreferredTheme, usePersistedReducer, validateOptionValues };
+export { convertToTwoDecimalPoints, calculateBillValues, RoundingMethod, toFixedWithoutRounding, asyncStorageUtil, getUserPreferredTheme, setUserPreferredTheme, usePersistedReducer, validateOptionValues, areOptionArraysSame };
 export type { BillCalculationType, RoundingMethodType, DisabledRoundingMethodsType }
