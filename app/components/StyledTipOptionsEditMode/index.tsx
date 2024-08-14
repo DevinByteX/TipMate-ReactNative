@@ -54,6 +54,7 @@ const TipPercentageCustomCapsule = ({
   const { styles, theme } = useStyles(stylesheet);
   return (
     <Pressable
+      disabled={!active}
       style={[
         styles.tipPercentageCapsuleCustom,
         {
