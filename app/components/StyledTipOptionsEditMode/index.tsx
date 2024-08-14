@@ -68,7 +68,9 @@ const TipPercentageCustomCapsule = ({
         style={[
           styles.tipPercentageCapsuleCustomText,
           {
-            color: active ? theme.colors.card : theme.colors.card_typography,
+            color: active
+              ? theme.colors.card
+              : theme.utils.hexToRGBA(theme.colors.card_typography, 0.2),
           },
         ]}>
         {`${textValue} `}
