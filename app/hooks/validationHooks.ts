@@ -27,3 +27,22 @@ export const validateOptionValues = ({
 
     return errorMessages;
 };
+
+export const areOptionArraysSame = ({ firstArray, secondArray }: {
+    firstArray: SplitOptionState[] | TipOptionState[];
+    secondArray: SplitOptionState[] | TipOptionState[];
+}): boolean => {
+    if (firstArray.length !== secondArray.length) {
+        return false;
+    }
+
+    // Sort the arrays by a unique property to ensure order doesn't matter
+    const sortedFirstArray = firstArray.sort((a, b) => a.place - b.place);
+    const sortedSecondArray = secondArray.sort((a, b) => a.place - b.place);
+
+    // Compare each object deeply
+    return sortedFirstArray.every((obj1, index) => {
+        const obj2 = sortedSecondArray[index];
+        return JSON.stringify(obj1) === JSON.stringify(obj2);
+    });
+};
