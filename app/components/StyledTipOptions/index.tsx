@@ -93,9 +93,14 @@ export const StyledTipOptions = ({
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>
-        {`${titleText} `}
-        {/* <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} /> */}
+      <Text style={styles.titleText}>{`${titleText}`}</Text>
+      <Text style={styles.instructionText}>
+        <StyledIcons
+          type={'FontAwesome5'}
+          name={'info-circle'}
+          size={styles.instructionText?.fontSize}
+        />
+        {` ${'Feeling generous? Choose your tip percentage and watch the magic happen.'}`}
       </Text>
       <View>
         <VerticalDevider
@@ -189,6 +194,13 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  instructionText: {
+    fontSize: 10,
+    color: colors.card_typography,
+    fontFamily: fonts.Montserrat_Medium,
+    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainInnerContainer: {
