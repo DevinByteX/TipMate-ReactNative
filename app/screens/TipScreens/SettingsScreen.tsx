@@ -19,12 +19,14 @@ const SettingsScreen = () => {
         showsVerticalScrollIndicator={false}>
         <StyledTipOptionsEditMode
           title={'CUSTOMISE YOUR TIPS'}
-          description={'To customise the options, simply begin typing in the tip option UI fields.'}
+          description={
+            'Personalise Your Tips: Adjust your default tip by typing in the fields. It’s quick and easy!'
+          }
         />
         <StyledSplitOptionsEditMode
           title={'CUSTOMISE YOUR SPLITS'}
           description={
-            'To customise the options, simply begin typing in the split option UI fields.'
+            'Set Your Splits: Enter your split preferences in the fields to customise how the bill is divided'
           }
         />
       </ScrollView>
