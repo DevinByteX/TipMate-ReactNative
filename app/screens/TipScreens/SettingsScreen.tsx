@@ -17,8 +17,16 @@ const SettingsScreen = () => {
         contentContainerStyle={styles.scrollContentContainer}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}>
-        <StyledTipOptionsEditMode />
-        <StyledSplitOptionsEditMode />
+        <StyledTipOptionsEditMode
+          title={'CUSTOMISE YOUR TIPS'}
+          description={'To customise the options, simply begin typing in the tip option UI fields.'}
+        />
+        <StyledSplitOptionsEditMode
+          title={'CUSTOMISE YOUR SPLITS'}
+          description={
+            'To customise the options, simply begin typing in the split option UI fields.'
+          }
+        />
       </ScrollView>
     </>
   );
