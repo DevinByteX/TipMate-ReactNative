@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { RoundingMethod, RoundingMethodType, DisabledRoundingMethodsType } from '@hooks';
@@ -71,9 +71,14 @@ export const StyledRoundBox = ({
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>
-        {`${titleText} `}
-        {/* <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} /> */}
+      <Text style={styles.titleText}>{`${titleText}`}</Text>
+      <Text style={styles.instructionText}>
+        <StyledIcons
+          type={'FontAwesome5'}
+          name={'info-circle'}
+          size={styles.instructionText?.fontSize}
+        />
+        {` ${'Prefer a neat number? Round up or down to make your total picture-perfect.'}`}
       </Text>
       <View style={styles.mainInnerContainer}>
         <RoundCapsule
@@ -121,6 +126,13 @@ const styleSheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  instructionText: {
+    fontSize: 10,
+    color: colors.card_typography,
+    fontFamily: fonts.Montserrat_Medium,
+    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainInnerContainer: {

@@ -92,10 +92,7 @@ export const StyledSplitOptionsEditMode = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>
-        {`${'CUSTOMISE YOUR SPLITS'} `}
-        {/* <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} /> */}
-      </Text>
+      <Text style={styles.titleText}>{`${'CUSTOMISE YOUR SPLITS'} `}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
           type={'FontAwesome5'}

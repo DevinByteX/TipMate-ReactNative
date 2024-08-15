@@ -40,16 +40,15 @@ export const StyledBillBox = ({
   return (
     <View style={styles.superMainContainer}>
       {/* Title Text */}
-      {titleVisibility ? (
-        <Text style={styles.titleText}>
-          {`${titleText} `}
-          {/* <StyledIcons
-            type={'FontAwesome5'}
-            name={'info-circle'}
-            size={styles.titleText?.fontSize}
-          /> */}
-        </Text>
-      ) : null}
+      {titleVisibility ? <Text style={styles.titleText}>{`${titleText} `}</Text> : null}
+      <Text style={styles.instructionText}>
+        <StyledIcons
+          type={'FontAwesome5'}
+          name={'info-circle'}
+          size={styles.instructionText?.fontSize}
+        />
+        {` ${'Voilà! Here’s your final amount, with the tip and any rounding all taken care of.'}`}
+      </Text>
       <View style={styles.mainInnerContainer}>
         {/* Total Text Content Container */}
         <View style={styles.totalAmountsContainer}>
@@ -118,6 +117,13 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  instructionText: {
+    fontSize: 10,
+    color: colors.card_typography,
+    fontFamily: fonts.Montserrat_Medium,
+    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainInnerContainer: {

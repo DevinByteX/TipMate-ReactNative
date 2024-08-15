@@ -93,10 +93,7 @@ export const StyledTipOptionsEditMode = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>
-        {`${'CUSTOMISE YOUR TIPS'} `}
-        {/* <StyledIcons type={'FontAwesome5'} name={'info-circle'} size={styles.titleText?.fontSize} /> */}
-      </Text>
+      <Text style={styles.titleText}>{`${'CUSTOMISE YOUR TIPS'}`}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
           type={'FontAwesome5'}
