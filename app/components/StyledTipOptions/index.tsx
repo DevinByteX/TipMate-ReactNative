@@ -77,9 +77,11 @@ const TipPercentageCustomCapsule = ({
 
 export const StyledTipOptions = ({
   titleText = 'SELECT TIP',
+  description,
   onSelectedTipValue,
 }: {
   titleText?: string;
+  description?: string;
   onSelectedTipValue?: (value: number) => void;
 }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -100,7 +102,7 @@ export const StyledTipOptions = ({
           name={'info-circle'}
           size={styles.instructionText?.fontSize}
         />
-        {` ${'Feeling generous? Choose your tip percentage and watch the magic happen.'}`}
+        {` ${description}`}
       </Text>
       <View>
         <VerticalDevider

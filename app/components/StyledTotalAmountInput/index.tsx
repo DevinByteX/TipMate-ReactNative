@@ -6,6 +6,7 @@ import { StyledIcons } from '@components';
 
 type styledTotalAmountInputProps = {
   titleText?: string;
+  description?: string;
   currencyText?: string;
   amountValue?: string;
   maxLength?: number;
@@ -14,6 +15,7 @@ type styledTotalAmountInputProps = {
 
 export const StyledTotalAmountInput = ({
   titleText = 'TOTAL AMOUNT',
+  description,
   currencyText = '$',
   amountValue = '00.00',
   maxLength = 10,
@@ -33,7 +35,7 @@ export const StyledTotalAmountInput = ({
           name={'info-circle'}
           size={styles.instructionText?.fontSize}
         />
-        {` ${'Pop in the total bill amount here – let’s get started!'}`}
+        {` ${description}`}
       </Text>
       <View style={styles.textInputContainer}>
         <Text allowFontScaling={false} style={styles.currencyText}>{`${currencyText}`}</Text>

@@ -54,14 +54,16 @@ const HomeTipScreen = () => {
         showsVerticalScrollIndicator={false}>
         {/* Total Amount container */}
         <StyledTotalAmountInput
-          titleText="BILL AMOUNT"
+          titleText={'BILL AMOUNT'}
+          description={'Pop in the total bill amount here – let’s get started!'}
           returnKeyType={'done'}
           keyboardType={'number-pad'}
           onAmountChange={amount => setUserInputBillAmount(amount)}
         />
         {/* Tip Percentage Options Container */}
         <StyledTipOptions
-          titleText="SELECT TIP"
+          titleText={'SELECT TIP'}
+          description={'Feeling generous? Choose your tip percentage and watch the magic happen.'}
           onSelectedTipValue={percentage => {
             if (percentage === 0) {
               setUserInputRound(RoundingMethod.NO);
@@ -71,7 +73,10 @@ const HomeTipScreen = () => {
         />
         {/* Slip Options Container */}
         <StyledSpiltOptions
-          titleText="SPLIT COUNT"
+          titleText={'SPLIT COUNT'}
+          description={
+            'Dining with friends? Let us know how many, and we’ll split the bill for you.'
+          }
           onSelectedSplitValue={splitCount => {
             if (splitCount === 1) {
               setUserInputRound(RoundingMethod.NO);
@@ -83,8 +88,9 @@ const HomeTipScreen = () => {
         {userInputSplitCount > 1 ? (
           <StyledBillBox
             titleVisibility
-            titleText="PER PERSON"
-            subTotalText="SUB TOTAL"
+            titleText={'PER PERSON'}
+            description={'Curious about the split? Here’s the amount each person will chip in.'}
+            subTotalText={'SUB TOTAL'}
             totalAmount={billValues?.perPerson?.total}
             subTotalAmount={billValues?.perPerson?.subtotal}
             totalTipAmount={billValues?.perPerson?.tip}
@@ -92,7 +98,8 @@ const HomeTipScreen = () => {
         ) : null}
         {/* Round Options Container */}
         <StyledRoundBox
-          titleText="ROUND TOTAL"
+          titleText={'ROUND TOTAL'}
+          description={'Prefer a neat number? Round up or down to make your total picture-perfect.'}
           roundMethod={userInputRound}
           disablingRoundingMethod={billValues?.disabledRoundingMethods}
           onSelectedRound={roundValue => {
@@ -102,9 +109,12 @@ const HomeTipScreen = () => {
         {/* Total Bill Container */}
         <StyledBillBox
           titleVisibility
-          titleText="TOTAL COST"
-          subTotalText="SUB COST"
-          tipText="TIP"
+          titleText={'TOTAL COST'}
+          description={
+            'Voilà! Here’s your final amount, with the tip and any rounding all taken care of.'
+          }
+          subTotalText={'SUB COST'}
+          tipText={'TIP'}
           totalAmount={billValues?.overall?.total}
           subTotalAmount={billValues?.overall?.subtotal}
           totalTipAmount={billValues?.overall?.tip}
