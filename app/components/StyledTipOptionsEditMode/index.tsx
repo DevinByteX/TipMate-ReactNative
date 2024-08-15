@@ -59,7 +59,7 @@ const TipPercentageCustomCapsule = ({
       style={[
         styles.tipPercentageCapsuleCustom,
         {
-          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
+          backgroundColor: active ? theme.colors.accent : theme.colors.disable_button,
         },
       ]}
       onPress={() => {
@@ -69,9 +69,7 @@ const TipPercentageCustomCapsule = ({
         style={[
           styles.tipPercentageCapsuleCustomText,
           {
-            color: active
-              ? theme.colors.card
-              : theme.utils.hexToRGBA(theme.colors.card_typography, 0.2),
+            color: active ? theme.colors.card : theme.colors.disable_text,
           },
         ]}>
         {`${textValue} `}
