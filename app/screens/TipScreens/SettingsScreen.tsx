@@ -20,7 +20,7 @@ const SettingsScreen = () => {
         <StyledTipOptionsEditMode
           title={'CUSTOMISE YOUR TIPS'}
           description={
-            'Personalise Your Tips: Adjust your default tip by typing in the fields. It’s quick and easy!'
+            'Personalise Your Tips: Adjust your default tips by typing in the fields. It’s quick and easy!'
           }
         />
         <StyledSplitOptionsEditMode
