@@ -77,9 +77,11 @@ const SplitCustomCapsule = ({
 
 export const StyledSpiltOptions = ({
   titleText = 'SPLIT COUNT',
+  description,
   onSelectedSplitValue,
 }: {
   titleText?: string;
+  description?: string;
   onSelectedSplitValue?: (value: number) => void;
 }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -101,7 +103,7 @@ export const StyledSpiltOptions = ({
           name={'info-circle'}
           size={styles.instructionText?.fontSize}
         />
-        {` ${'Dining with friends? Let us know how many, and we’ll split the bill for you.'}`}
+        {` ${description}`}
       </Text>
       <View>
         <VerticalDevider

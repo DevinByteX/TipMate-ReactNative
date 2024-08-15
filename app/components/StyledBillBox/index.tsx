@@ -16,6 +16,7 @@ export const VerticalDevider = ({
 type StyledBillBox = {
   titleVisibility?: boolean;
   titleText?: string;
+  description?: string;
   currencySymbol?: string;
   totalText?: string;
   subTotalText?: string;
@@ -28,6 +29,7 @@ type StyledBillBox = {
 export const StyledBillBox = ({
   titleVisibility = false,
   titleText = 'PER PERSON',
+  description,
   currencySymbol = '$',
   totalText = 'TOTAL',
   subTotalText = 'SUBTOTAL',
@@ -36,7 +38,7 @@ export const StyledBillBox = ({
   subTotalAmount = '0.00',
   totalTipAmount = '0.00',
 }: StyledBillBox) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return (
     <View style={styles.superMainContainer}>
       {/* Title Text */}
@@ -47,7 +49,7 @@ export const StyledBillBox = ({
           name={'info-circle'}
           size={styles.instructionText?.fontSize}
         />
-        {` ${'Voilà! Here’s your final amount, with the tip and any rounding all taken care of.'}`}
+        {` ${description}`}
       </Text>
       <View style={styles.mainInnerContainer}>
         {/* Total Text Content Container */}
