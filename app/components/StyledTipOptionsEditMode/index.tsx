@@ -13,6 +13,7 @@ import { Constants } from '@configs';
 import { areOptionArraysSame } from '@hooks';
 import { AppContext } from '@/context/AppContext';
 import { TipOptionState } from '@/context/types';
+import Toast from 'react-native-toast-message';
 
 const TipPercentageEditCapsule = ({
   textValue = 5,
@@ -196,7 +197,7 @@ export const StyledTipOptionsEditMode = ({
       <StyledPopUp
         popUpVisibility={confirmPopUpVisibility}
         modalTitle={`${'Confirm Reset'}`}
-        modalSubtitle={`${'Are you sure you want to reset all option values? This action cannot be undone.'}`}
+        modalSubtitle={`${`Are you sure you want to reset all your tip options? This change can't be undone!`}`}
         lineButtonText={`${'Cancel'}`}
         solidButtonText={`${'Reset'}`}
         onLineButtonPress={() => {
@@ -206,6 +207,11 @@ export const StyledTipOptionsEditMode = ({
           dispatch({
             type: 'RESET_TIP_OPTIONS_TO_DEFAULT',
             payload: Constants.defaultTipOptionsArray,
+          });
+          Toast.show({
+            type: 'success',
+            text1: `Tip options refreshed! You're all set with the default values`,
+            visibilityTime: 5000,
           });
           setConfirmPopUpVisibility(false);
         }}
