@@ -58,11 +58,13 @@ const RoundCapsule = ({
 
 export const StyledRoundBox = ({
   titleText = 'ROUND VALUE',
+  description,
   roundMethod = RoundingMethod.NO,
   disablingRoundingMethod,
   onSelectedRound,
 }: {
   titleText?: string;
+  description: string;
   roundMethod?: RoundingMethodType;
   disablingRoundingMethod?: DisabledRoundingMethodsType;
   onSelectedRound?: (value: RoundingMethodType) => void;
@@ -78,7 +80,7 @@ export const StyledRoundBox = ({
           name={'info-circle'}
           size={styles.instructionText?.fontSize}
         />
-        {` ${'Prefer a neat number? Round up or down to make your total picture-perfect.'}`}
+        {` ${description}`}
       </Text>
       <View style={styles.mainInnerContainer}>
         <RoundCapsule
