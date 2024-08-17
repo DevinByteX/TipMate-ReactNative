@@ -24,6 +24,7 @@ export const toastConfig = {
         style={styles.successToastStyle}
         contentContainerStyle={styles.successToastContainerStyle}
         text1Style={styles.successText1}
+        text1NumberOfLines={2}
       />
     );
   },
@@ -40,6 +41,7 @@ export const toastConfig = {
         style={styles.errorToastStyle}
         contentContainerStyle={styles.errorToastContainerStyle}
         text1Style={styles.errorText1}
+        text1NumberOfLines={2}
       />
     );
   },
