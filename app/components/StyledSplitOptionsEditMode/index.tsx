@@ -86,9 +86,19 @@ const SplitPercentageCustomCapsule = ({
 export const StyledSplitOptionsEditMode = ({
   title,
   description,
+  modalTitle,
+  modalSubtitle,
+  lineButtonText,
+  solidButtonText,
+  resetSuccessToastText,
 }: {
   title: string;
   description: string;
+  modalTitle: string;
+  modalSubtitle: string;
+  lineButtonText: string;
+  solidButtonText: string;
+  resetSuccessToastText: string;
 }) => {
   const { state, dispatch } = useContext(AppContext);
 
@@ -195,10 +205,10 @@ export const StyledSplitOptionsEditMode = ({
       ) : null}
       <StyledPopUp
         popUpVisibility={confirmPopUpVisibility}
-        modalTitle={`${'Confirm Reset'}`}
-        modalSubtitle={`${`Are you sure you want to reset all your split options? This change can't be undone!`}`}
-        lineButtonText={`${'Cancel'}`}
-        solidButtonText={`${'Reset'}`}
+        modalTitle={`${modalTitle}`}
+        modalSubtitle={`${modalSubtitle}`}
+        lineButtonText={`${lineButtonText}`}
+        solidButtonText={`${solidButtonText}`}
         onLineButtonPress={() => {
           setConfirmPopUpVisibility(false);
         }}
@@ -209,7 +219,7 @@ export const StyledSplitOptionsEditMode = ({
           });
           Toast.show({
             type: 'success',
-            text1: `Split options refreshed! You're all set with the default values`,
+            text1: `${resetSuccessToastText}`,
             visibilityTime: 5000,
           });
           setConfirmPopUpVisibility(false);

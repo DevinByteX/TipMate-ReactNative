@@ -22,12 +22,22 @@ const SettingsScreen = () => {
           description={
             'Personalise Your Tips: Adjust your default tips by typing in the fields. It’s quick and easy!'
           }
+          modalTitle={`${'Confirm Reset'}`}
+          modalSubtitle={`${`Are you sure you want to reset all your tip options? This change can't be undone!`}`}
+          lineButtonText={`${'Cancel'}`}
+          solidButtonText={`${'Reset'}`}
+          resetSuccessToastText={`${`Tip options refreshed! You're all set with the default values`}`}
         />
         <StyledSplitOptionsEditMode
           title={'CUSTOMISE YOUR SPLITS'}
           description={
             'Set Your Splits: Enter your split preferences in the fields to customise how the bill is divided'
           }
+          modalTitle={`${'Confirm Reset'}`}
+          modalSubtitle={`${`Are you sure you want to reset all your split options? This change can't be undone!`}`}
+          lineButtonText={`${'Cancel'}`}
+          solidButtonText={`${'Reset'}`}
+          resetSuccessToastText={`${`Split options refreshed! You're all set with the default values`}`}
         />
       </ScrollView>
     </>
