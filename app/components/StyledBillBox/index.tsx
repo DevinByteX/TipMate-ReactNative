@@ -170,5 +170,6 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     backgroundColor: colors.devider,
     height: '100%',
     width: UnistylesRuntime.hairlineWidth * 8,
+    borderRadius: UnistylesRuntime.hairlineWidth * 8,
   },
 }));
