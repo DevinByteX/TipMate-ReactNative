@@ -15,8 +15,8 @@ const sharedColors = {
     barbie: '#ff9ff3',
     blood: '#ff6b6b',
     sky: '#48dbfb',
-    primary_light: '#efefef',
-    primary_dark: '#333333',
+    background_light: '#efefef',
+    background_dark: '#333333',
     primary_accent_light: '#009688',
     primary_accent_dark: '#10b981',
     // primary_accent_light: '#F3982C',
@@ -46,8 +46,8 @@ const hexToRGBA = (hex: string, opacity: number) => {
 export const lightTheme = {
     colors: {
         ...sharedColors,
-        backgroundColor: sharedColors.primary_light,
-        headerBGColor: sharedColors.primary_light,
+        backgroundColor: sharedColors.background_light,
+        headerBGColor: sharedColors.background_light,
         accent: sharedColors.primary_accent_light,
         card_typography: sharedColors.card_typography_light,
         card: sharedColors.card_light,
@@ -74,8 +74,8 @@ export const lightTheme = {
 export const darkTheme = {
     colors: {
         ...sharedColors,
-        backgroundColor: sharedColors.primary_dark,
-        headerBGColor: sharedColors.primary_dark,
+        backgroundColor: sharedColors.background_dark,
+        headerBGColor: sharedColors.background_dark,
         accent: sharedColors.primary_accent_dark,
         card_typography: sharedColors.card_typography_dark,
         card: sharedColors.card_dark,
