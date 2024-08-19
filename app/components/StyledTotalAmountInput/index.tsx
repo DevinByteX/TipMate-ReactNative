@@ -55,9 +55,14 @@ export const StyledTotalAmountInput = ({
           allowFontScaling={false}
           maxLength={maxLength}
           onChangeText={text => {
-            const formatedValue = acceptNumbersAndDecimals(text);
-            setTextInputValue(formatedValue);
-            onAmountChange && onAmountChange(parseFloat(formatedValue));
+            const formattedValue = acceptNumbersAndDecimals(text);
+            setTextInputValue(formattedValue);
+            // Parse the formatted value to a float; default to 0.00 if empty
+            const parsedValue = formattedValue.length > 0 ? parseFloat(formattedValue) : 0.0;
+            // Invoke the callback with the parsed value, if the callback exists
+            if (onAmountChange) {
+              onAmountChange(parsedValue);
+            }
           }}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
