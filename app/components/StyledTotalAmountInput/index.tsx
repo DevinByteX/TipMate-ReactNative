@@ -43,7 +43,9 @@ export const StyledTotalAmountInput = ({
         <TextInput
           placeholder={'0.00'}
           placeholderTextColor={
-            isFocused ? theme.colors.backgroundColor : styles.textInputStyles.color
+            isFocused
+              ? theme.utils.hexToRGBA(styles.textInputStyles.color, 0.5)
+              : styles.textInputStyles.color
           }
           value={textInputValue}
           autoFocus={true}
