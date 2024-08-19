@@ -19,6 +19,8 @@ const sharedColors = {
     primary_dark: '#333333',
     primary_accent_light: '#009688',
     primary_accent_dark: '#10b981',
+    // primary_accent_light: '#F3982C',
+    // primary_accent_dark: '#F4AB41',
     card_light: '#dcdcdc',
     card_dark: '#454545',
     devider_light: '#4b4b4b',
