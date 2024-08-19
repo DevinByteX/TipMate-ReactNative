@@ -13,6 +13,7 @@ export { StyledSplitOptionsEditMode } from "./StyledSplitOptionsEditMode";
 export { StyledTextInputCapsule } from './StyledTextInputCapsule';
 export { StyledConfigInput } from './StyledConfigInput'
 export { StyledPopUp } from './StyledPopUp';
+export { StyledThemeBox } from './StyledThemeBox';
 
 // types should export seperately
 export type { StyledIconTypesKeys } from './StyledIcons';
