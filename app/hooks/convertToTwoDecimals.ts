@@ -15,14 +15,15 @@ export const convertToTwoDecimalPoints = (input: string): string => {
 
 }
 
-// Function to format and validate the input value
 export const acceptNumbersAndDecimals = (input: string): string => {
-    // Remove any non-numeric characters except the decimal point
-    let formattedValue = input.replace(/[^0-9.]/g, '');
+    // Remove leading zeros that are followed by a digit
+    // Ensure numbers like ".05" remain "0.05" by adding a leading zero
+    let formattedValue = input.replace(/^0+(?=\d)/g, '').replace(/^(\.)/, '0$1');
 
-    // Ensure only one decimal point is allowed
+    // Split the string by the decimal point to handle multiple decimal points
     const parts = formattedValue.split('.');
     if (parts.length > 2) {
+        // If there are multiple decimal points, join the parts back into a single decimal point
         formattedValue = parts[0] + '.' + parts.slice(1).join('');
     }
 
