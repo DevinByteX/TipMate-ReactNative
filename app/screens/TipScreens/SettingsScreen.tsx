@@ -45,7 +45,7 @@ const SettingsScreen = () => {
           resetSuccessToastText={`${`Split options refreshed! You're all set with the default values`}`}
         />
         <StyledThemeBox
-          title={'CHANGE YOUR THEME'}
+          title={'CUSTOMISE YOUR THEME'}
           description={
             'Switch Up Your Style: Choose from our vibrant themes to make your app experience uniquely yours!'
           }
