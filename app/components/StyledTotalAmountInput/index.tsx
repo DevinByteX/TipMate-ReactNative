@@ -1,8 +1,8 @@
-import { convertToTwoDecimalPoints } from '@/hooks';
 import React, { useState } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
+import { acceptNumbersAndDecimals } from '@hooks';
 
 type styledTotalAmountInputProps = {
   titleText?: string;
@@ -25,6 +25,7 @@ export const StyledTotalAmountInput = ({
   const { styles, theme } = useStyles(stylesheet);
 
   const [textInputValue, setTextInputValue] = useState<string>();
+  const [isFocused, setIsFocused] = useState<boolean>();
 
   return (
     <View style={styles.mainContainer}>
@@ -40,19 +41,24 @@ export const StyledTotalAmountInput = ({
       <View style={styles.textInputContainer}>
         <Text allowFontScaling={false} style={styles.currencyText}>{`${currencyText}`}</Text>
         <TextInput
-          defaultValue={'0.00'}
-          value={textInputValue?.length === 0 ? '0.00' : textInputValue}
+          placeholder={'0.00'}
+          placeholderTextColor={
+            isFocused ? theme.colors.backgroundColor : styles.textInputStyles.color
+          }
+          value={textInputValue}
           autoFocus={true}
-          caretHidden={true}
+          caretHidden={false}
           selectionColor={theme.colors.accent}
           style={styles.textInputStyles}
           allowFontScaling={false}
           maxLength={maxLength}
           onChangeText={text => {
-            const formatedValue = convertToTwoDecimalPoints(text);
+            const formatedValue = acceptNumbersAndDecimals(text);
             setTextInputValue(formatedValue);
             onAmountChange && onAmountChange(parseFloat(formatedValue));
           }}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           keyboardAppearance={UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light'}
           {...restProps}
         />
