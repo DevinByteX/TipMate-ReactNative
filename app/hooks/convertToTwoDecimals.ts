@@ -14,3 +14,22 @@ export const convertToTwoDecimalPoints = (input: string): string => {
     return valueWithFloatingPoints.toFixed(2);
 
 }
+
+// Function to format and validate the input value
+export const acceptNumbersAndDecimals = (input: string): string => {
+    // Remove any non-numeric characters except the decimal point
+    let formattedValue = input.replace(/[^0-9.]/g, '');
+
+    // Ensure only one decimal point is allowed
+    const parts = formattedValue.split('.');
+    if (parts.length > 2) {
+        formattedValue = parts[0] + '.' + parts.slice(1).join('');
+    }
+
+    // Ensure the value does not start with a decimal point
+    if (formattedValue.startsWith('.')) {
+        formattedValue = '0' + formattedValue;
+    }
+
+    return formattedValue;
+};
