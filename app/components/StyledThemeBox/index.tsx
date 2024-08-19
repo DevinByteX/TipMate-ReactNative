@@ -4,7 +4,34 @@ import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unis
 import { StyledIcons } from '@components';
 
 export const StyledThemeBox = ({ title, description }: { title: string; description: string }) => {
-  const { styles } = useStyles(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
+
+  const ThemeColorBox = ({
+    active = false,
+    buttonColor,
+  }: {
+    active?: boolean;
+    buttonColor?: string;
+  }) => {
+    return (
+      <View
+        style={[
+          styles.themeColorBox,
+          { backgroundColor: active ? theme.colors.card_typography : theme.colors.card },
+        ]}>
+        <View
+          style={[
+            styles.themeColorInnerBox,
+            { backgroundColor: buttonColor || theme.colors.accent },
+          ]}>
+          {active ? (
+            <StyledIcons type={'Octicons'} name={'check'} style={styles.themeColorIcon} />
+          ) : null}
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>{`${title}`}</Text>
@@ -16,6 +43,12 @@ export const StyledThemeBox = ({ title, description }: { title: string; descript
         />
         {` ${description}`}
       </Text>
+      <View style={styles.mainInnerContainer}>
+        <ThemeColorBox active />
+        <ThemeColorBox />
+        <ThemeColorBox />
+        <ThemeColorBox />
+      </View>
     </View>
   );
 };
@@ -40,5 +73,35 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontFamily: fonts.Montserrat_Medium,
     marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  mainInnerContainer: {
+    flexDirection: 'row',
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
+  },
+  themeColorBox: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.card_typography,
+    width: '100%',
+    height: (UnistylesRuntime.screen.height * 4) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    padding: UnistylesRuntime.hairlineWidth * 2,
+  },
+  themeColorInnerBox: {
+    backgroundColor: colors.accent,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderWidth: UnistylesRuntime.hairlineWidth * 4,
+    borderColor: colors.card,
+  },
+  themeColorIcon: {
+    color: colors.card_typography,
+    fontSize: 16,
   },
 }));
