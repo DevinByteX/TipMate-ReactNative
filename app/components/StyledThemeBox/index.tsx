@@ -6,13 +6,9 @@ import { StyledIcons } from '@components';
 export const StyledThemeBox = ({ title, description }: { title: string; description: string }) => {
   const { styles, theme } = useStyles(stylesheet);
 
-  const ThemeColorBox = ({
-    active = false,
-    buttonColor,
-  }: {
-    active?: boolean;
-    buttonColor?: string;
-  }) => {
+  const ThemeColorBox = ({ buttonColor }: { buttonColor?: string }) => {
+    const active = buttonColor == theme.colors.accent;
+
     return (
       <View
         style={[
@@ -44,8 +40,8 @@ export const StyledThemeBox = ({ title, description }: { title: string; descript
         {` ${description}`}
       </Text>
       <View style={styles.mainInnerContainer}>
-        <ThemeColorBox active />
-        <ThemeColorBox />
+        <ThemeColorBox buttonColor={theme.colors.accent} />
+        <ThemeColorBox buttonColor={theme.colors.accent_second} />
         <ThemeColorBox />
         <ThemeColorBox />
       </View>
