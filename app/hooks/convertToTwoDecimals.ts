@@ -16,21 +16,21 @@ export const convertToTwoDecimalPoints = (input: string): string => {
 }
 
 export const acceptNumbersAndDecimals = (input: string): string => {
-    // Remove leading zeros that are followed by a digit
-    // Ensure numbers like ".05" remain "0.05" by adding a leading zero
-    let formattedValue = input.replace(/^0+(?=\d)/g, '').replace(/^(\.)/, '0$1');
+    // Remove all characters except digits and decimal points
+    let formatted = input.replace(/[^\d.]/g, '');
 
-    // Split the string by the decimal point to handle multiple decimal points
-    const parts = formattedValue.split('.');
+    // Ensure only one decimal point is present
+    const parts = formatted.split('.');
     if (parts.length > 2) {
-        // If there are multiple decimal points, join the parts back into a single decimal point
-        formattedValue = parts[0] + '.' + parts.slice(1).join('');
+        // If there are multiple decimal points, keep only the first
+        formatted = parts[0] + '.' + parts.slice(1).join('');
     }
 
-    // Ensure the value does not start with a decimal point
-    if (formattedValue.startsWith('.')) {
-        formattedValue = '0' + formattedValue;
-    }
+    // Remove leading zeros (except for decimal point)
+    formatted = formatted.replace(/^0+(?!\d)/, '');
 
-    return formattedValue;
+    // Ensure a leading zero if the input starts with a decimal point
+    formatted = formatted.replace(/^(\.)/, '0$1');
+
+    return formatted;
 };
