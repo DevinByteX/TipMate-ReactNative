@@ -96,8 +96,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    borderWidth: UnistylesRuntime.hairlineWidth * 4,
+    borderRadius: (UnistylesRuntime.screen.height * 0.9) / 100,
+    borderWidth: UnistylesRuntime.hairlineWidth * 6,
     borderColor: colors.card,
   },
   themeColorIcon: {
