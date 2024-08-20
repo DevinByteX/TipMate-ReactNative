@@ -61,6 +61,7 @@ export const lightTheme = {
         disable_button: sharedColors.disable_button_light,
         error_toast: sharedColors.error_toast_light,
         // Custom theming
+        accent_first: sharedColors.primary_accent_light,
         accent_second: sharedColors.primary_accent_light_second,
         accent_third: sharedColors.primary_accent_light_third,
         accent_forth: sharedColors.primary_accent_light_fourth,
@@ -93,6 +94,7 @@ export const darkTheme = {
         disable_button: sharedColors.disable_button_dark,
         error_toast: sharedColors.error_toast_dark,
         // Custom theming
+        accent_first: sharedColors.primary_accent_dark,
         accent_second: sharedColors.primary_accent_dark_second,
         accent_third: sharedColors.primary_accent_dark_third,
         accent_forth: sharedColors.primary_accent_dark_fourth,
@@ -125,6 +127,7 @@ export const premiumTheme = {
         disable_button: sharedColors.sky,
         error_toast: sharedColors.blood,
         // Custom theming
+        accent_first: sharedColors.barbie,
         accent_second: sharedColors.blood,
         accent_third: sharedColors.sky,
         accent_forth: sharedColors.barbie,
