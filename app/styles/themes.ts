@@ -31,7 +31,9 @@ const sharedColors = {
     disable_button_dark: '#4f4f4f',
     error_toast_light: '#e61854',
     error_toast_dark: '#f93a69',
-    // Theming
+    // Custom theming
+    primary_accent_light_first: '#009688', // should be similar to the primary_accent_light
+    primary_accent_dark_first: '#10b981', // should be similar to the primary_accent_dark
     primary_accent_light_second: '#F3982C',
     primary_accent_dark_second: '#F4AB41',
     primary_accent_light_third: '#3F51B5',
@@ -61,7 +63,7 @@ export const lightTheme = {
         disable_button: sharedColors.disable_button_light,
         error_toast: sharedColors.error_toast_light,
         // Custom theming
-        accent_first: sharedColors.primary_accent_light,
+        accent_first: sharedColors.primary_accent_light_first,
         accent_second: sharedColors.primary_accent_light_second,
         accent_third: sharedColors.primary_accent_light_third,
         accent_forth: sharedColors.primary_accent_light_fourth,
@@ -94,7 +96,7 @@ export const darkTheme = {
         disable_button: sharedColors.disable_button_dark,
         error_toast: sharedColors.error_toast_dark,
         // Custom theming
-        accent_first: sharedColors.primary_accent_dark,
+        accent_first: sharedColors.primary_accent_dark_first,
         accent_second: sharedColors.primary_accent_dark_second,
         accent_third: sharedColors.primary_accent_dark_third,
         accent_forth: sharedColors.primary_accent_dark_fourth,
