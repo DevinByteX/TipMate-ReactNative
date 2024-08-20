@@ -34,6 +34,10 @@ const sharedColors = {
     // Theming
     primary_accent_light_second: '#F3982C',
     primary_accent_dark_second: '#F4AB41',
+    primary_accent_light_third: '#3F51B5',
+    primary_accent_dark_third: '#5C6BC0',
+    primary_accent_light_fourth: '#F06292',
+    primary_accent_dark_fourth: '#E91E63',
 }
 
 const hexToRGBA = (hex: string, opacity: number) => {
@@ -58,6 +62,8 @@ export const lightTheme = {
         error_toast: sharedColors.error_toast_light,
         // Custom theming
         accent_second: sharedColors.primary_accent_light_second,
+        accent_third: sharedColors.primary_accent_light_third,
+        accent_forth: sharedColors.primary_accent_light_fourth,
     },
     margins: {
         sm: 2,
@@ -87,7 +93,9 @@ export const darkTheme = {
         disable_button: sharedColors.disable_button_dark,
         error_toast: sharedColors.error_toast_dark,
         // Custom theming
-        accent_second: sharedColors.primary_accent_dark_second
+        accent_second: sharedColors.primary_accent_dark_second,
+        accent_third: sharedColors.primary_accent_dark_third,
+        accent_forth: sharedColors.primary_accent_dark_fourth,
     },
     margins: {
         sm: 2,
@@ -118,6 +126,8 @@ export const premiumTheme = {
         error_toast: sharedColors.blood,
         // Custom theming
         accent_second: sharedColors.blood,
+        accent_third: sharedColors.sky,
+        accent_forth: sharedColors.barbie,
     },
     margins: {
         sm: 2,
