@@ -108,17 +108,17 @@ const HomeTipScreen = () => {
           }}
         />
         {/* Per Person Bill Container */}
-        {userInputSplitCount > 1 ? (
-          <StyledBillBox
-            titleVisibility
-            titleText={'PER PERSON'}
-            description={'Curious about the split? Here’s the amount each person will chip in.'}
-            subTotalText={'SUB TOTAL'}
-            totalAmount={billValues?.perPerson?.total}
-            subTotalAmount={billValues?.perPerson?.subtotal}
-            totalTipAmount={billValues?.perPerson?.tip}
-          />
-        ) : null}
+        {/* {userInputSplitCount > 1 ? ( */}
+        <StyledBillBox
+          titleVisibility
+          titleText={'PER PERSON'}
+          description={'Curious about the split? Here’s the amount each person will chip in.'}
+          subTotalText={'SUB TOTAL'}
+          totalAmount={billValues?.perPerson?.total}
+          subTotalAmount={billValues?.perPerson?.subtotal}
+          totalTipAmount={billValues?.perPerson?.tip}
+        />
+        {/* ) : null} */}
       </ScrollView>
     </>
   );
