@@ -32,5 +32,10 @@ export const acceptNumbersAndDecimals = (input: string): string => {
     // Ensure a leading zero if the input starts with a decimal point
     formatted = formatted.replace(/^(\.)/, '0$1');
 
+    // Restrict to two decimal places
+    if (parts[1]?.length > 2) {
+        formatted = `${parts[0]}.${parts[1].substring(0, 2)}`;
+    }
+
     return formatted;
 };
