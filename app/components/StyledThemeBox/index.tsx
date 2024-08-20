@@ -42,8 +42,8 @@ export const StyledThemeBox = ({ title, description }: { title: string; descript
       <View style={styles.mainInnerContainer}>
         <ThemeColorBox buttonColor={theme.colors.accent} />
         <ThemeColorBox buttonColor={theme.colors.accent_second} />
-        <ThemeColorBox />
-        <ThemeColorBox />
+        <ThemeColorBox buttonColor={theme.colors.accent_third} />
+        <ThemeColorBox buttonColor={theme.colors.accent_forth} />
       </View>
     </View>
   );
