@@ -1,20 +1,29 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 
 export const StyledThemeBox = ({ title, description }: { title: string; description: string }) => {
   const { styles, theme } = useStyles(stylesheet);
 
-  const ThemeColorBox = ({ buttonColor }: { buttonColor?: string }) => {
+  const ThemeColorBox = ({
+    buttonColor,
+    onButtonPress,
+  }: {
+    buttonColor?: string;
+    onButtonPress?: () => void;
+  }) => {
     const active = buttonColor == theme.colors.accent;
 
     return (
-      <View
+      <Pressable
         style={[
           styles.themeColorBox,
           { backgroundColor: active ? theme.colors.card_typography : theme.colors.card },
-        ]}>
+        ]}
+        onPress={() => {
+          onButtonPress && onButtonPress();
+        }}>
         <View
           style={[
             styles.themeColorInnerBox,
@@ -24,7 +33,7 @@ export const StyledThemeBox = ({ title, description }: { title: string; descript
             <StyledIcons type={'Octicons'} name={'check'} style={styles.themeColorIcon} />
           ) : null}
         </View>
-      </View>
+      </Pressable>
     );
   };
 
