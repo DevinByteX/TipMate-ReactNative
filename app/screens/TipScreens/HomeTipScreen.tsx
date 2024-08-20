@@ -71,6 +71,29 @@ const HomeTipScreen = () => {
             setUserInputTipPercentage(percentage);
           }}
         />
+        {/* Round Options Container */}
+        <StyledRoundBox
+          titleText={'ROUND TOTAL'}
+          description={'Prefer a neat number? Round up or down to make your total picture-perfect.'}
+          roundMethod={userInputRound}
+          disablingRoundingMethod={billValues?.disabledRoundingMethods}
+          onSelectedRound={roundValue => {
+            setUserInputRound(roundValue);
+          }}
+        />
+        {/* Total Bill Container */}
+        <StyledBillBox
+          titleVisibility
+          titleText={'TOTAL COST'}
+          description={
+            'Voilà! Here’s your final amount, with the tip and any rounding all taken care of.'
+          }
+          subTotalText={'SUB COST'}
+          tipText={'TIP'}
+          totalAmount={billValues?.overall?.total}
+          subTotalAmount={billValues?.overall?.subtotal}
+          totalTipAmount={billValues?.overall?.tip}
+        />
         {/* Slip Options Container */}
         <StyledSpiltOptions
           titleText={'SPLIT COUNT'}
@@ -96,29 +119,6 @@ const HomeTipScreen = () => {
             totalTipAmount={billValues?.perPerson?.tip}
           />
         ) : null}
-        {/* Round Options Container */}
-        <StyledRoundBox
-          titleText={'ROUND TOTAL'}
-          description={'Prefer a neat number? Round up or down to make your total picture-perfect.'}
-          roundMethod={userInputRound}
-          disablingRoundingMethod={billValues?.disabledRoundingMethods}
-          onSelectedRound={roundValue => {
-            setUserInputRound(roundValue);
-          }}
-        />
-        {/* Total Bill Container */}
-        <StyledBillBox
-          titleVisibility
-          titleText={'TOTAL COST'}
-          description={
-            'Voilà! Here’s your final amount, with the tip and any rounding all taken care of.'
-          }
-          subTotalText={'SUB COST'}
-          tipText={'TIP'}
-          totalAmount={billValues?.overall?.total}
-          subTotalAmount={billValues?.overall?.subtotal}
-          totalTipAmount={billValues?.overall?.tip}
-        />
       </ScrollView>
     </>
   );
