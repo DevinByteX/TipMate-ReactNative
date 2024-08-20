@@ -21,16 +21,17 @@ export const acceptNumbersAndDecimals = (input: string): string => {
 
     // Ensure only one decimal point is present
     const parts = formatted.split('.');
-    if (parts.length > 2) {
-        // If there are multiple decimal points, keep only the first
-        formatted = parts[0] + '.' + parts.slice(1).join('');
+    formatted = parts[0] + (parts.length > 1 ? `.${parts.slice(1).join('')}` : '');
+
+    // Remove leading zeros (except when the input starts with "0" and has no decimal point)
+    if (!formatted.startsWith('0.') && formatted.length > 1) {
+        formatted = formatted.replace(/^0+/, '');
     }
 
-    // Remove leading zeros (except for decimal point)
-    formatted = formatted.replace(/^0+(?!\d)/, '');
-
     // Ensure a leading zero if the input starts with a decimal point
-    formatted = formatted.replace(/^(\.)/, '0$1');
+    if (formatted.startsWith('.')) {
+        formatted = '0' + formatted;
+    }
 
     // Restrict to two decimal places
     if (parts[1]?.length > 2) {
