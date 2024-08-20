@@ -71,16 +71,6 @@ const HomeTipScreen = () => {
             setUserInputTipPercentage(percentage);
           }}
         />
-        {/* Round Options Container */}
-        <StyledRoundBox
-          titleText={'ROUND TOTAL'}
-          description={'Prefer a neat number? Round up or down to make your total picture-perfect.'}
-          roundMethod={userInputRound}
-          disablingRoundingMethod={billValues?.disabledRoundingMethods}
-          onSelectedRound={roundValue => {
-            setUserInputRound(roundValue);
-          }}
-        />
         {/* Total Bill Container */}
         <StyledBillBox
           titleVisibility
@@ -94,7 +84,17 @@ const HomeTipScreen = () => {
           subTotalAmount={billValues?.overall?.subtotal}
           totalTipAmount={billValues?.overall?.tip}
         />
-        {/* Slip Options Container */}
+        {/* Round Options Container */}
+        <StyledRoundBox
+          titleText={'ROUND TOTAL'}
+          description={'Prefer a neat number? Round up or down to make your total picture-perfect.'}
+          roundMethod={userInputRound}
+          disablingRoundingMethod={billValues?.disabledRoundingMethods}
+          onSelectedRound={roundValue => {
+            setUserInputRound(roundValue);
+          }}
+        />
+        {/* Split Options Container */}
         <StyledSpiltOptions
           titleText={'SPLIT COUNT'}
           description={
