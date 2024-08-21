@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons, StyledToggle } from '@components';
-import { useThemeColorCustomiser } from '@hooks';
+import { setUserPreferredTheme, useThemeColorCustomiser } from '@hooks';
 import { CustomThemesConfig } from '@configs';
 
 export const StyledThemeBox = ({
@@ -19,6 +19,10 @@ export const StyledThemeBox = ({
   const { styles, theme } = useStyles(stylesheet);
 
   const CustomThemesData = CustomThemesConfig(theme.colors);
+
+  const persistUserPreferredTheme = async (value: boolean) => {
+    await setUserPreferredTheme(value ? 'dark' : 'light');
+  };
 
   const ThemeColorBox = ({
     buttonColor,
@@ -86,8 +90,8 @@ export const StyledThemeBox = ({
         <StyledToggle
           value={UnistylesRuntime.themeName === 'dark'}
           onValueChange={value => {
-            // persistUserPreferredTheme(value);
-            // UnistylesRuntime.setTheme(value ? 'dark' : 'light');
+            persistUserPreferredTheme(value);
+            UnistylesRuntime.setTheme(value ? 'dark' : 'light');
           }}
         />
       </View>
