@@ -56,6 +56,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
       <View style={styles.preferencesButtonContainer}>
         <Text style={styles.preferencesText}>Preferences</Text>
         <View style={styles.themePrefContainer}>
+          <Text style={styles.themePrefText}>Toggle Dark Mode</Text>
           <StyledToggle
             value={UnistylesRuntime.themeName === 'dark'}
             onValueChange={value => {
@@ -63,7 +64,6 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
               UnistylesRuntime.setTheme(value ? 'dark' : 'light');
             }}
           />
-          <Text style={styles.themePrefText}>Toggle Dark Mode</Text>
         </View>
       </View>
       <View style={styles.horizontalDeviderStyles} />
@@ -134,7 +134,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.card_typography,
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
-    paddingStart: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingEnd: (UnistylesRuntime.screen.width * 2) / 100,
   },
 }));
 
