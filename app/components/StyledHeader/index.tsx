@@ -1,5 +1,5 @@
 import React from 'react';
-import { Keyboard, Pressable, StatusBar, Text, View } from 'react-native';
+import { Keyboard, Pressable, StatusBar, Text, View, ViewStyle } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIconTypesKeys, StyledIcons } from '@components';
 import { useNavigation } from '@react-navigation/native';
@@ -12,20 +12,28 @@ type styledHeaderProps = {
   headerRightIconVisibilty?: boolean;
 };
 
-type HeaderIconProps = {
+type HeaderBarIconProps = {
   iconType: StyledIconTypesKeys;
   iconName: string;
   iconSize: number;
   iconColor?: string;
   onPress?: () => void;
+  headerBarStyles?: ViewStyle;
 };
 
 // Define a general type for the drawer navigation prop
 type DrawerNavProp = DrawerNavigationProp<Record<string, object | undefined>>;
 
-const HeaderIcon = ({ iconType, iconName, iconSize, iconColor, onPress }: HeaderIconProps) => {
+const HeaderBarIcon = ({
+  iconType,
+  iconName,
+  iconSize,
+  iconColor,
+  headerBarStyles,
+  onPress,
+}: HeaderBarIconProps) => {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable style={headerBarStyles} onPress={onPress}>
       <StyledIcons type={iconType} name={iconName} size={iconSize} color={iconColor} />
     </Pressable>
   );
@@ -52,11 +60,12 @@ export const StyledHeader = ({
       <View style={styles.headerMainContainer}>
         <View style={styles.headerInnerContainer}>
           <View style={styles.innerLeftContainer}>
-            <HeaderIcon
+            <HeaderBarIcon
               iconType={'FontAwesome'}
               iconName={'navicon'}
               iconSize={styles.headerText.fontSize}
               iconColor={styles.headerText.color}
+              headerBarStyles={styles.headerLeftButtonStyles}
               onPress={() => {
                 navigation.toggleDrawer();
                 Keyboard.dismiss();
@@ -79,7 +88,7 @@ export const StyledHeader = ({
           </View>
           <View style={styles.innerRightContainer}>
             {headerRightIconVisibilty && (
-              <HeaderIcon
+              <HeaderBarIcon
                 iconType={'Ionicons'}
                 iconName={'save'}
                 iconSize={styles.headerText.fontSize}
@@ -106,6 +115,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   innerLeftContainer: {
     flex: 1,
     justifyContent: 'center',
+  },
+  headerLeftButtonStyles: {
     paddingStart: (UnistylesRuntime.screen.width * 5) / 100,
   },
   innerMiddleContainer: { flex: 2, justifyContent: 'center', alignItems: 'center' },
@@ -113,6 +124,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
+  },
+  headerRightButtonStyles: {
     paddingEnd: (UnistylesRuntime.screen.width * 5) / 100,
   },
   headerText: {
