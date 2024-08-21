@@ -8,7 +8,8 @@
       "@styles/*": ["app/styles/*"], // if we want to import all the files in particular folder we should use "*", end of the path
       "@navigation/*": ["app/navigation/*"],
       "@hooks": ["app/hooks/index"],
-      "@configs": ["app/configs/index"]
+      "@configs": ["app/configs/index"],
+      "@plugins": ["./app/plugins/index"]
     }
   }
 }

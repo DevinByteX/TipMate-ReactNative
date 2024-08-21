@@ -13,6 +13,7 @@ module.exports = {
           "@navigation": "./app/navigation/",
           "@hooks": "./app/hooks/index",
           "@configs": "./app/configs/index",
+          "@plugins": "./app/plugins/index",
         }
       }
     ],
