@@ -1,11 +1,21 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
-import { StyledIcons } from '@components';
+import { StyledIcons, StyledToggle } from '@components';
 import { useThemeColorCustomiser } from '@hooks';
 import { CustomThemesConfig } from '@configs';
 
-export const StyledThemeBox = ({ title, description }: { title: string; description: string }) => {
+export const StyledThemeBox = ({
+  title,
+  description,
+  toggleDescription,
+  toggleText,
+}: {
+  title: string;
+  description: string;
+  toggleDescription?: string;
+  toggleText?: string;
+}) => {
   const { styles, theme } = useStyles(stylesheet);
 
   const CustomThemesData = CustomThemesConfig(theme.colors);
@@ -52,7 +62,7 @@ export const StyledThemeBox = ({ title, description }: { title: string; descript
         />
         {` ${description}`}
       </Text>
-      <View style={styles.mainInnerContainer}>
+      <View style={styles.mainBoxContainer}>
         {CustomThemesData.map(({ key, buttonColor, customisedTheme }) => (
           <ThemeColorBox
             key={key}
@@ -62,6 +72,24 @@ export const StyledThemeBox = ({ title, description }: { title: string; descript
             }}
           />
         ))}
+      </View>
+      <Text style={styles.toggleInstructionText}>
+        <StyledIcons
+          type={'FontAwesome5'}
+          name={'info-circle'}
+          size={styles.toggleInstructionText?.fontSize}
+        />
+        {` ${toggleDescription}`}
+      </Text>
+      <View style={styles.mainThemeToggleContainer}>
+        <Text style={styles.toggleText}>{`${toggleText}`}</Text>
+        <StyledToggle
+          value={UnistylesRuntime.themeName === 'dark'}
+          onValueChange={value => {
+            // persistUserPreferredTheme(value);
+            // UnistylesRuntime.setTheme(value ? 'dark' : 'light');
+          }}
+        />
       </View>
     </View>
   );
@@ -88,11 +116,30 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
-  mainInnerContainer: {
+  mainBoxContainer: {
     flexDirection: 'row',
     paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     columnGap: (UnistylesRuntime.screen.width * 2) / 100,
+  },
+  toggleInstructionText: {
+    fontSize: 10,
+    color: colors.card_typography,
+    fontFamily: fonts.Montserrat_Medium,
+    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  mainThemeToggleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  toggleText: {
+    color: colors.card_typography,
+    fontSize: 14,
+    fontFamily: fonts.Nunito_Black,
   },
   themeColorBox: {
     flex: 1,

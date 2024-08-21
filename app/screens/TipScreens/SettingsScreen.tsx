@@ -49,6 +49,8 @@ const SettingsScreen = () => {
           description={
             'Switch Up Your Style: Choose from our vibrant themes to make your app experience uniquely yours!'
           }
+          toggleDescription={'Enjoy a sleek, comfortable view by enabling Dark Mode.'}
+          toggleText={'Toggle Dark Mode'}
         />
       </ScrollView>
     </>
