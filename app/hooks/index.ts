@@ -5,6 +5,7 @@ import { getUserPreferredTheme, setUserPreferredTheme } from './asyncStorageHook
 import { toFixedWithoutRounding } from './tofixedWithoutRounding';
 import { usePersistedReducer } from './usePersistedReducer';
 import { validateOptionValues, areOptionArraysSame } from './validationHooks';
+import { useThemeColorCustomiser, CustomisedTheme } from './useThemeColorCustomiser';
 
-export { convertToTwoDecimalPoints, acceptNumbersAndDecimals, calculateBillValues, RoundingMethod, toFixedWithoutRounding, asyncStorageUtil, getUserPreferredTheme, setUserPreferredTheme, usePersistedReducer, validateOptionValues, areOptionArraysSame };
-export type { BillCalculationType, RoundingMethodType, DisabledRoundingMethodsType }
+export { convertToTwoDecimalPoints, acceptNumbersAndDecimals, calculateBillValues, RoundingMethod, toFixedWithoutRounding, asyncStorageUtil, getUserPreferredTheme, setUserPreferredTheme, usePersistedReducer, validateOptionValues, areOptionArraysSame, useThemeColorCustomiser };
+export type { BillCalculationType, RoundingMethodType, DisabledRoundingMethodsType, CustomisedTheme }

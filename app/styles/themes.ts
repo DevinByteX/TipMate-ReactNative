@@ -15,12 +15,10 @@ const sharedColors = {
     barbie: '#ff9ff3',
     blood: '#ff6b6b',
     sky: '#48dbfb',
-    primary_light: '#efefef',
-    primary_dark: '#333333',
+    background_light: '#efefef',
+    background_dark: '#333333',
     primary_accent_light: '#009688',
     primary_accent_dark: '#10b981',
-    // primary_accent_light: '#F3982C',
-    // primary_accent_dark: '#F4AB41',
     card_light: '#dcdcdc',
     card_dark: '#454545',
     devider_light: '#4b4b4b',
@@ -33,6 +31,13 @@ const sharedColors = {
     disable_button_dark: '#4f4f4f',
     error_toast_light: '#e61854',
     error_toast_dark: '#f93a69',
+    // Custom theming
+    primary_accent_light_second: '#F3982C',
+    primary_accent_dark_second: '#F4AB41',
+    primary_accent_light_third: '#3F51B5',
+    primary_accent_dark_third: '#5C6BC0',
+    primary_accent_light_fourth: '#F06292',
+    primary_accent_dark_fourth: '#E91E63',
 }
 
 const hexToRGBA = (hex: string, opacity: number) => {
@@ -46,8 +51,8 @@ const hexToRGBA = (hex: string, opacity: number) => {
 export const lightTheme = {
     colors: {
         ...sharedColors,
-        backgroundColor: sharedColors.primary_light,
-        headerBGColor: sharedColors.primary_light,
+        backgroundColor: sharedColors.background_light,
+        headerBGColor: sharedColors.background_light,
         accent: sharedColors.primary_accent_light,
         card_typography: sharedColors.card_typography_light,
         card: sharedColors.card_light,
@@ -55,6 +60,11 @@ export const lightTheme = {
         disable_text: sharedColors.disable_text_light,
         disable_button: sharedColors.disable_button_light,
         error_toast: sharedColors.error_toast_light,
+        // Custom theming
+        accent_first: sharedColors.primary_accent_light,
+        accent_second: sharedColors.primary_accent_light_second,
+        accent_third: sharedColors.primary_accent_light_third,
+        accent_forth: sharedColors.primary_accent_light_fourth,
     },
     margins: {
         sm: 2,
@@ -74,8 +84,8 @@ export const lightTheme = {
 export const darkTheme = {
     colors: {
         ...sharedColors,
-        backgroundColor: sharedColors.primary_dark,
-        headerBGColor: sharedColors.primary_dark,
+        backgroundColor: sharedColors.background_dark,
+        headerBGColor: sharedColors.background_dark,
         accent: sharedColors.primary_accent_dark,
         card_typography: sharedColors.card_typography_dark,
         card: sharedColors.card_dark,
@@ -83,6 +93,11 @@ export const darkTheme = {
         disable_text: sharedColors.disable_text_dark,
         disable_button: sharedColors.disable_button_dark,
         error_toast: sharedColors.error_toast_dark,
+        // Custom theming
+        accent_first: sharedColors.primary_accent_dark,
+        accent_second: sharedColors.primary_accent_dark_second,
+        accent_third: sharedColors.primary_accent_dark_third,
+        accent_forth: sharedColors.primary_accent_dark_fourth,
     },
     margins: {
         sm: 2,
@@ -111,6 +126,11 @@ export const premiumTheme = {
         disable_text: sharedColors.blood,
         disable_button: sharedColors.sky,
         error_toast: sharedColors.blood,
+        // Custom theming
+        accent_first: sharedColors.barbie,
+        accent_second: sharedColors.blood,
+        accent_third: sharedColors.sky,
+        accent_forth: sharedColors.barbie,
     },
     margins: {
         sm: 2,

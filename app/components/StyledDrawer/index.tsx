@@ -63,7 +63,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
               UnistylesRuntime.setTheme(value ? 'dark' : 'light');
             }}
           />
-          <Text style={styles.themePrefText}>Dark Theme</Text>
+          <Text style={styles.themePrefText}>Toggle Dark Mode</Text>
         </View>
       </View>
       <View style={styles.horizontalDeviderStyles} />

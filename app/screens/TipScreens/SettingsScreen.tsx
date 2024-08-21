@@ -1,7 +1,12 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledHeader, StyledSplitOptionsEditMode, StyledTipOptionsEditMode } from '@components';
+import {
+  StyledHeader,
+  StyledSplitOptionsEditMode,
+  StyledThemeBox,
+  StyledTipOptionsEditMode,
+} from '@components';
 
 const SettingsScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -38,6 +43,14 @@ const SettingsScreen = () => {
           lineButtonText={`${'Cancel'}`}
           solidButtonText={`${'Reset'}`}
           resetSuccessToastText={`${`Split options refreshed! You're all set with the default values`}`}
+        />
+        <StyledThemeBox
+          title={'CUSTOMISE YOUR THEME'}
+          description={
+            'Switch Up Your Style: Choose from our vibrant themes to make your app experience uniquely yours!'
+          }
+          toggleDescription={'Enjoy a sleek, comfortable view by enabling Dark Mode.'}
+          toggleText={'Toggle Dark Mode'}
         />
       </ScrollView>
     </>
