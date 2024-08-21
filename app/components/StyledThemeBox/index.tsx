@@ -2,9 +2,13 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
+import { useThemeColorCustomiser } from '@hooks';
+import { CustomThemesConfig } from '@configs';
 
 export const StyledThemeBox = ({ title, description }: { title: string; description: string }) => {
   const { styles, theme } = useStyles(stylesheet);
+
+  const CustomThemesData = CustomThemesConfig(theme.colors);
 
   const ThemeColorBox = ({
     buttonColor,
@@ -49,10 +53,15 @@ export const StyledThemeBox = ({ title, description }: { title: string; descript
         {` ${description}`}
       </Text>
       <View style={styles.mainInnerContainer}>
-        <ThemeColorBox buttonColor={theme.colors.accent} />
-        <ThemeColorBox buttonColor={theme.colors.accent_second} />
-        <ThemeColorBox buttonColor={theme.colors.accent_third} />
-        <ThemeColorBox buttonColor={theme.colors.accent_forth} />
+        {CustomThemesData.map(({ key, buttonColor, customisedTheme }) => (
+          <ThemeColorBox
+            key={key}
+            buttonColor={buttonColor}
+            onButtonPress={() => {
+              useThemeColorCustomiser(customisedTheme);
+            }}
+          />
+        ))}
       </View>
     </View>
   );
