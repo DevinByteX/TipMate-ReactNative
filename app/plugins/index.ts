@@ -1,0 +1,1 @@
+export { highContrastPlugin } from './highContrastPlugin';
