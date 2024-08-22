@@ -5,12 +5,8 @@ const StackNavigation = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="MainStack"
-        component={DrawerNavigation}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator screenOptions={{ headerShown: false, orientation: 'portrait' }}>
+      <Stack.Screen name="MainStack" component={DrawerNavigation} />
     </Stack.Navigator>
   );
 };
