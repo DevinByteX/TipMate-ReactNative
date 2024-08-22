@@ -91,7 +91,7 @@ export const StyledTipOptions = ({
   const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
-  const { styles } = useStyles(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
 
   return (
     <View style={styles.mainContainer}>
@@ -130,7 +130,15 @@ export const StyledTipOptions = ({
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <Text
-                style={styles.tipDigitsStyles}
+                style={[
+                  styles.tipDigitsStyles,
+                  {
+                    color:
+                      tipPercentageValue == 0
+                        ? theme.utils.hexToRGBA(styles.tipDigitsStyles.color, 0.5)
+                        : styles.tipDigitsStyles.color,
+                  },
+                ]}
                 adjustsFontSizeToFit={true}
                 allowFontScaling={false}
                 numberOfLines={1}>
