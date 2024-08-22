@@ -9,7 +9,7 @@ import SettingsScreen from '@/screens/TipScreens/SettingsScreen';
 
 const Drawer = createDrawerNavigator();
 
-const DrawerStack = () => {
+const DrawerNavigation = () => {
   const { theme } = useStyles();
 
   return (
@@ -60,4 +60,4 @@ const DrawerStack = () => {
   );
 };
 
-export default DrawerStack;
+export default DrawerNavigation;
