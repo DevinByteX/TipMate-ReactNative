@@ -8,10 +8,10 @@ export const Constants = {
         { place: 4, value: 7 },
     ] as SplitOptionState[],
     defaultTipOptionsArray: [
-        { place: 1, value: 5 },
-        { place: 2, value: 10 },
-        { place: 3, value: 15 },
-        { place: 4, value: 20 },
+        { place: 1, value: 0 },
+        { place: 2, value: 5 },
+        { place: 3, value: 10 },
+        { place: 4, value: 15 },
     ] as TipOptionState[],
     APP_STATE_ASYNCSTORAGE_KEY: 'APPSTATE' as string,
     defaultSplitSliderConfigValues: {
