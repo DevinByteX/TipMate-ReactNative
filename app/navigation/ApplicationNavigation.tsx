@@ -6,7 +6,7 @@ import { useReduxDevToolsExtension } from '@react-navigation/devtools';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import Toast from 'react-native-toast-message';
 // Custom Stacks
-import DrawerStack from '@navigation/DrawerStack';
+import StackNavigation from '@navigation/StackNavigation';
 // Custom Hooks
 import { getUserPreferredTheme } from '@hooks';
 import { toastConfig } from '@styles/toastConfig';
@@ -30,7 +30,7 @@ const ApplicationNavigator = (props: any) => {
   return (
     <SafeAreaProvider>
       <NavigationContainer ref={navigationRef}>
-        <DrawerStack />
+        <StackNavigation />
       </NavigationContainer>
       <Toast config={toastConfig} topOffset={UnistylesRuntime.insets.top} />
     </SafeAreaProvider>
