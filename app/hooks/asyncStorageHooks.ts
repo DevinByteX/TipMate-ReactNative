@@ -1,5 +1,6 @@
 import { UnistylesRuntime, UnistylesThemes } from "react-native-unistyles";
 import { asyncStorageUtil } from "@hooks";
+import { ThemeBox } from "@/configs";
 
 // Function to fetch user preferred theme from AsyncStorage
 export const getUserPreferredTheme = async (): Promise<keyof UnistylesThemes> => {
@@ -24,9 +25,23 @@ export const setUserPreferredTheme = async (theme: keyof UnistylesThemes): Promi
     }
 };
 
+export const getUserUpdatedThemeOption = async (themeOptions: ThemeBox[] | undefined): Promise<ThemeBox | undefined> => {
+    if (!themeOptions || themeOptions.length === 0) {
+        return undefined;
+    }
+
+    try {
+        const updatedThemeName = await asyncStorageUtil.getData('userUpdatedThemeName');
+        return themeOptions.find(datum => datum.label === updatedThemeName);
+    } catch (error) {
+        console.log('Error fetching user updated theme option from AsyncStorage:', error);
+        return undefined; // Ensure that the function always returns `undefined` in case of an error
+    }
+};
+
 export const setUserUpdatedThemeOption = async (themeName: string): Promise<void> => {
     try {
-        await asyncStorageUtil.saveData('userUpdatedThemeOption', themeName);
+        await asyncStorageUtil.saveData('userUpdatedThemeName', themeName);
     } catch (error) {
         console.log('Error setting user updated theme option in AsyncStorage:', error);
     }
