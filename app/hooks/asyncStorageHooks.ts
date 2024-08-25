@@ -23,3 +23,11 @@ export const setUserPreferredTheme = async (theme: keyof UnistylesThemes): Promi
         console.log('Error setting user theme in AsyncStorage:', error);
     }
 };
+
+export const setUserUpdatedThemeOption = async (themeName: string): Promise<void> => {
+    try {
+        await asyncStorageUtil.saveData('userUpdatedThemeOption', themeName);
+    } catch (error) {
+        console.log('Error setting user updated theme option in AsyncStorage:', error);
+    }
+};
