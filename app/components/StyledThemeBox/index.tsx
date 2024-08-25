@@ -67,9 +67,9 @@ export const StyledThemeBox = ({
         {` ${description}`}
       </Text>
       <View style={styles.mainBoxContainer}>
-        {CustomThemesData.map(({ key, buttonColor, customisedTheme }) => (
+        {CustomThemesData.map(({ label, buttonColor, customisedTheme }) => (
           <ThemeColorBox
-            key={key}
+            key={label}
             buttonColor={buttonColor}
             onButtonPress={() => {
               useThemeColorCustomiser(customisedTheme);
