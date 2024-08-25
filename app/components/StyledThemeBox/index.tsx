@@ -18,7 +18,7 @@ export const StyledThemeBox = ({
 }) => {
   const { styles, theme } = useStyles(stylesheet);
 
-  const CustomThemesData = CustomThemesConfig(theme.colors);
+  const CustomThemesData = CustomThemesConfig();
 
   const persistUserPreferredTheme = async (value: boolean) => {
     await setUserPreferredTheme(value ? 'dark' : 'light');
