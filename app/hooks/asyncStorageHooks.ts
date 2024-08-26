@@ -1,6 +1,5 @@
 import { UnistylesRuntime, UnistylesThemes } from "react-native-unistyles";
-import { asyncStorageUtil } from "@hooks";
-import { ThemeBox } from "@/configs";
+import { asyncStorageUtil, CustomisedTheme } from "@hooks";
 
 // Function to fetch user preferred theme from AsyncStorage
 export const getUserPreferredTheme = async (): Promise<keyof UnistylesThemes> => {
@@ -25,23 +24,22 @@ export const setUserPreferredTheme = async (theme: keyof UnistylesThemes): Promi
     }
 };
 
-export const getUserUpdatedThemeOption = async (themeOptions: ThemeBox[] | undefined): Promise<ThemeBox | undefined> => {
-    if (!themeOptions || themeOptions.length === 0) {
-        return undefined;
-    }
-
+export const getUserUpdatedThemeOption = async (): Promise<CustomisedTheme[]> => {
+    let updatedThemeName: CustomisedTheme[] = [];
     try {
-        const updatedThemeName = await asyncStorageUtil.getData('userUpdatedThemeName');
-        return themeOptions.find(datum => datum.label === updatedThemeName);
+        const result = await asyncStorageUtil.getData('userUpdatedTheme');
+        if (result) {
+            updatedThemeName = result as CustomisedTheme[];
+        }
     } catch (error) {
         console.log('Error fetching user updated theme option from AsyncStorage:', error);
-        return undefined; // Ensure that the function always returns `undefined` in case of an error
     }
+    return updatedThemeName;
 };
 
-export const setUserUpdatedThemeOption = async (themeName: string): Promise<void> => {
+export const setUserUpdatedThemeOption = async (themes: CustomisedTheme[]): Promise<void> => {
     try {
-        await asyncStorageUtil.saveData('userUpdatedThemeName', themeName);
+        await asyncStorageUtil.saveData('userUpdatedTheme', themes);
     } catch (error) {
         console.log('Error setting user updated theme option in AsyncStorage:', error);
     }
