@@ -30,7 +30,6 @@ const ApplicationNavigator = (props: any) => {
       }
     };
     setAppTheme();
-    return () => {};
   }, []);
 
   const navigationRef = useNavigationContainerRef();
