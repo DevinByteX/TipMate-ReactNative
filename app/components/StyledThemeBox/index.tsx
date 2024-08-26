@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons, StyledToggle } from '@components';
-import { setUserPreferredTheme, useThemeColorCustomiser } from '@hooks';
+import { setUserPreferredTheme, setUserUpdatedThemeOption, useThemeColorCustomiser } from '@hooks';
 import { CustomThemesConfig } from '@configs';
 
 export const StyledThemeBox = ({
@@ -72,7 +72,10 @@ export const StyledThemeBox = ({
             key={label}
             buttonColor={buttonColor}
             onButtonPress={() => {
+              // Setting theme option
               useThemeColorCustomiser(customisedTheme);
+              // Persisting theme option
+              setUserUpdatedThemeOption(customisedTheme);
             }}
           />
         ))}
