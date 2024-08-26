@@ -8,16 +8,25 @@ import Toast from 'react-native-toast-message';
 // Custom Stacks
 import StackNavigation from '@navigation/StackNavigation';
 // Custom Hooks
-import { getUserPreferredTheme } from '@hooks';
+import { getUserPreferredTheme, getUserUpdatedThemeOption, useThemeColorCustomiser } from '@hooks';
 import { toastConfig } from '@styles/toastConfig';
 
 const ApplicationNavigator = (props: any) => {
   useEffect(() => {
     // Setting user preferred theme or initialTheme
     const setAppTheme = async () => {
-      const preferredTheme = await getUserPreferredTheme();
-      if (!UnistylesRuntime.hasAdaptiveThemes) {
-        UnistylesRuntime.setTheme(preferredTheme);
+      try {
+        const preferredTheme = await getUserPreferredTheme();
+        const updatedThemeOption = await getUserUpdatedThemeOption();
+
+        // Ensure updatedThemeOption is an array
+        useThemeColorCustomiser(updatedThemeOption);
+
+        if (!UnistylesRuntime.hasAdaptiveThemes) {
+          UnistylesRuntime.setTheme(preferredTheme);
+        }
+      } catch (error) {
+        console.log('Error setting app theme:', error);
       }
     };
     setAppTheme();
