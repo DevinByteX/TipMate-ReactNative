@@ -56,6 +56,7 @@ const HomeTipScreen = () => {
         <StyledTotalAmountInput
           titleText={'BILL AMOUNT'}
           description={'Pop in the total bill amount here – let’s get started!'}
+          currencyText={'$'}
           returnKeyType={'done'}
           keyboardType={'decimal-pad'}
           onAmountChange={amount => setUserInputBillAmount(amount)}
@@ -78,6 +79,7 @@ const HomeTipScreen = () => {
           description={
             'Voilà! Here’s your final amount, with the tip and any rounding all taken care of.'
           }
+          currencySymbol={'$'}
           subTotalText={'SUB COST'}
           tipText={'TIP'}
           totalAmount={billValues?.overall?.total}
