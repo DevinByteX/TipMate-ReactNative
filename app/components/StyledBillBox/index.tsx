@@ -9,7 +9,7 @@ export const VerticalDevider = ({
 }: {
   verticalDeviderAdditionalStyles?: ViewStyle;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return <View style={[styles.verticalDeviderStyles, verticalDeviderAdditionalStyles]} />;
 };
 
@@ -30,7 +30,7 @@ export const StyledBillBox = ({
   titleVisibility = false,
   titleText = 'PER PERSON',
   description,
-  currencySymbol = '$',
+  currencySymbol,
   totalText = 'TOTAL',
   subTotalText = 'SUBTOTAL',
   tipText = 'TIP',
@@ -54,14 +54,25 @@ export const StyledBillBox = ({
       <View style={styles.mainInnerContainer}>
         {/* Total Text Content Container */}
         <View style={styles.totalAmountsContainer}>
-          <Text
-            style={styles.totalDigitsStyles}
-            adjustsFontSizeToFit={true}
-            allowFontScaling={false}
-            numberOfLines={1}>
-            {`${currencySymbol}${totalAmount}`}
-          </Text>
           <Text style={styles.subTextStyles}>{totalText}</Text>
+          <View style={styles.horizontalTextContainer}>
+            {currencySymbol ? (
+              <Text
+                style={styles.totalDigitsStyles}
+                adjustsFontSizeToFit={true}
+                allowFontScaling={false}
+                numberOfLines={1}>
+                {currencySymbol}
+              </Text>
+            ) : null}
+            <Text
+              style={styles.totalDigitsStyles}
+              adjustsFontSizeToFit={true}
+              allowFontScaling={false}
+              numberOfLines={1}>
+              {`${totalAmount}`}
+            </Text>
+          </View>
         </View>
         {/* Vertical Devider */}
         <VerticalDevider />
@@ -76,13 +87,24 @@ export const StyledBillBox = ({
               numberOfLines={1}>
               {`${subTotalText}`}
             </Text>
-            <Text
-              style={styles.subDigitStyles}
-              adjustsFontSizeToFit={true}
-              allowFontScaling={false}
-              numberOfLines={1}>
-              {`${currencySymbol}${subTotalAmount}`}
-            </Text>
+            <View style={styles.horizontalTextContainer}>
+              {currencySymbol ? (
+                <Text
+                  style={styles.subDigitStyles}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  {currencySymbol}
+                </Text>
+              ) : null}
+              <Text
+                style={styles.subDigitStyles}
+                adjustsFontSizeToFit={true}
+                allowFontScaling={false}
+                numberOfLines={1}>
+                {`${subTotalAmount}`}
+              </Text>
+            </View>
           </View>
           {/* Tip Text Container */}
           <View style={styles.tipContainer}>
@@ -93,13 +115,24 @@ export const StyledBillBox = ({
               numberOfLines={1}>
               {tipText}
             </Text>
-            <Text
-              style={styles.subDigitStyles}
-              adjustsFontSizeToFit={true}
-              allowFontScaling={false}
-              numberOfLines={1}>
-              {`${currencySymbol}${totalTipAmount}`}
-            </Text>
+            <View style={styles.horizontalTextContainer}>
+              {currencySymbol ? (
+                <Text
+                  style={styles.subDigitStyles}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}>
+                  {currencySymbol}
+                </Text>
+              ) : null}
+              <Text
+                style={styles.subDigitStyles}
+                adjustsFontSizeToFit={true}
+                allowFontScaling={false}
+                numberOfLines={1}>
+                {`${totalTipAmount}`}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -171,5 +204,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     height: '100%',
     width: UnistylesRuntime.hairlineWidth * 8,
     borderRadius: UnistylesRuntime.hairlineWidth * 8,
+  },
+  horizontalTextContainer: {
+    flexDirection: 'row',
   },
 }));

@@ -16,7 +16,7 @@ type styledTotalAmountInputProps = {
 export const StyledTotalAmountInput = ({
   titleText = 'TOTAL AMOUNT',
   description,
-  currencySymbol = '$',
+  currencySymbol,
   amountValue = '00.00',
   maxLength = 10,
   onAmountChange,
@@ -39,7 +39,9 @@ export const StyledTotalAmountInput = ({
         {` ${description}`}
       </Text>
       <View style={styles.textInputContainer}>
-        <Text allowFontScaling={false} style={styles.currencySymbol}>{`${currencySymbol}`}</Text>
+        {currencySymbol ? (
+          <Text allowFontScaling={false} style={styles.currencySymbol}>{`${currencySymbol}`}</Text>
+        ) : null}
         <TextInput
           placeholder={'0.00'}
           placeholderTextColor={
