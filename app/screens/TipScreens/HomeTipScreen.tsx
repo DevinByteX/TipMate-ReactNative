@@ -115,6 +115,7 @@ const HomeTipScreen = () => {
           titleVisibility
           titleText={'PER PERSON'}
           description={'Curious about the split? Here’s the amount each person will chip in.'}
+          currencySymbol={'$'}
           subTotalText={'SUB TOTAL'}
           totalAmount={billValues?.perPerson?.total}
           subTotalAmount={billValues?.perPerson?.subtotal}
