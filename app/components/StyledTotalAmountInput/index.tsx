@@ -7,7 +7,7 @@ import { acceptNumbersAndDecimals } from '@hooks';
 type styledTotalAmountInputProps = {
   titleText?: string;
   description?: string;
-  currencyText?: string;
+  currencySymbol?: string;
   amountValue?: string;
   maxLength?: number;
   onAmountChange?: (value: number) => void;
@@ -16,7 +16,7 @@ type styledTotalAmountInputProps = {
 export const StyledTotalAmountInput = ({
   titleText = 'TOTAL AMOUNT',
   description,
-  currencyText = '$',
+  currencySymbol = '$',
   amountValue = '00.00',
   maxLength = 10,
   onAmountChange,
@@ -39,7 +39,7 @@ export const StyledTotalAmountInput = ({
         {` ${description}`}
       </Text>
       <View style={styles.textInputContainer}>
-        <Text allowFontScaling={false} style={styles.currencyText}>{`${currencyText}`}</Text>
+        <Text allowFontScaling={false} style={styles.currencySymbol}>{`${currencySymbol}`}</Text>
         <TextInput
           placeholder={'0.00'}
           placeholderTextColor={
@@ -97,7 +97,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     flexDirection: 'row',
     marginTop: (UnistylesRuntime.screen.height * 1) / 100,
   },
-  currencyText: {
+  currencySymbol: {
     color: colors.card_typography,
     fontSize: 40,
     fontFamily: fonts.Montserrat_Black,
