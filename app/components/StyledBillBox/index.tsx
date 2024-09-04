@@ -67,21 +67,13 @@ export const StyledBillBox = ({
             {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
           </Text>
           <View style={styles.horizontalTextContainer}>
-            {!isLongCurrencySymbol ? (
-              <Text
-                style={styles.totalDigitsStyles}
-                adjustsFontSizeToFit={true}
-                allowFontScaling={false}
-                numberOfLines={1}>
-                {currencySymbol}
-              </Text>
-            ) : null}
             <Text
               style={styles.totalDigitsStyles}
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
-              {`${totalAmount}`}
+              {!isLongCurrencySymbol ? <Text>{currencySymbol}</Text> : null}
+              {totalAmount}
             </Text>
           </View>
         </View>
@@ -100,21 +92,13 @@ export const StyledBillBox = ({
               {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
             </Text>
             <View style={styles.horizontalTextContainer}>
-              {!isLongCurrencySymbol ? (
-                <Text
-                  style={styles.subDigitStyles}
-                  adjustsFontSizeToFit={true}
-                  allowFontScaling={false}
-                  numberOfLines={1}>
-                  {currencySymbol}
-                </Text>
-              ) : null}
               <Text
                 style={styles.subDigitStyles}
                 adjustsFontSizeToFit={true}
                 allowFontScaling={false}
                 numberOfLines={1}>
-                {`${subTotalAmount}`}
+                {!isLongCurrencySymbol ? <Text>{currencySymbol}</Text> : null}
+                {subTotalAmount}
               </Text>
             </View>
           </View>
@@ -129,21 +113,13 @@ export const StyledBillBox = ({
               {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
             </Text>
             <View style={styles.horizontalTextContainer}>
-              {!isLongCurrencySymbol ? (
-                <Text
-                  style={styles.subDigitStyles}
-                  adjustsFontSizeToFit={true}
-                  allowFontScaling={false}
-                  numberOfLines={1}>
-                  {currencySymbol}
-                </Text>
-              ) : null}
               <Text
                 style={styles.subDigitStyles}
                 adjustsFontSizeToFit={true}
                 allowFontScaling={false}
                 numberOfLines={1}>
-                {`${totalTipAmount}`}
+                {!isLongCurrencySymbol ? <Text>{currencySymbol}</Text> : null}
+                {totalTipAmount}
               </Text>
             </View>
           </View>
