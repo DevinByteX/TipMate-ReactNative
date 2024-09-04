@@ -28,6 +28,8 @@ const HomeTipScreen = () => {
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
 
+  const currencySymbol: string = '$';
+
   useEffect(() => {
     const billValuesResults = calculateBillValues(
       userInputTipPercentage,
@@ -56,7 +58,7 @@ const HomeTipScreen = () => {
         <StyledTotalAmountInput
           titleText={'BILL AMOUNT'}
           description={'Pop in the total bill amount here – let’s get started!'}
-          currencySymbol={'$'}
+          currencySymbol={currencySymbol}
           returnKeyType={'done'}
           keyboardType={'decimal-pad'}
           onAmountChange={amount => setUserInputBillAmount(amount)}
@@ -79,7 +81,7 @@ const HomeTipScreen = () => {
           description={
             'Voilà! Here’s your final amount, with the tip and any rounding all taken care of.'
           }
-          currencySymbol={'$'}
+          currencySymbol={currencySymbol}
           subTotalText={'SUB COST'}
           tipText={'TIP'}
           totalAmount={billValues?.overall?.total}
@@ -115,7 +117,7 @@ const HomeTipScreen = () => {
           titleVisibility
           titleText={'PER PERSON'}
           description={'Curious about the split? Here’s the amount each person will chip in.'}
-          currencySymbol={'$'}
+          currencySymbol={currencySymbol}
           subTotalText={'SUB TOTAL'}
           totalAmount={billValues?.perPerson?.total}
           subTotalAmount={billValues?.perPerson?.subtotal}
