@@ -34,8 +34,8 @@ const sharedColors = {
     // Custom theming
     primary_accent_light_second: '#F3982C',
     primary_accent_dark_second: '#F4AB41',
-    primary_accent_light_third: '#3F51B5',
-    primary_accent_dark_third: '#5C6BC0',
+    primary_accent_light_third: '#3D63DD',
+    primary_accent_dark_third: '#5274F2',
     primary_accent_light_fourth: '#F06292',
     primary_accent_dark_fourth: '#E91E63',
 }
