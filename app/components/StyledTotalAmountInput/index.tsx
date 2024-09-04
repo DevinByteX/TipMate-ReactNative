@@ -22,6 +22,9 @@ export const StyledTotalAmountInput = ({
   onAmountChange,
   ...restProps
 }: styledTotalAmountInputProps) => {
+  const isLongCurrencySymbol: boolean =
+    typeof currencySymbol === 'string' && currencySymbol.length > 1;
+
   const { styles, theme } = useStyles(stylesheet);
 
   const [textInputValue, setTextInputValue] = useState<string>();
@@ -29,7 +32,10 @@ export const StyledTotalAmountInput = ({
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{`${titleText}`}</Text>
+      <Text style={styles.titleText}>
+        {titleText}
+        {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
+      </Text>
       <Text style={styles.instructionText}>
         <StyledIcons
           type={'FontAwesome5'}
@@ -39,7 +45,7 @@ export const StyledTotalAmountInput = ({
         {` ${description}`}
       </Text>
       <View style={styles.textInputContainer}>
-        {currencySymbol ? (
+        {!isLongCurrencySymbol ? (
           <Text allowFontScaling={false} style={styles.currencySymbol}>{`${currencySymbol}`}</Text>
         ) : null}
         <TextInput

@@ -38,11 +38,19 @@ export const StyledBillBox = ({
   subTotalAmount = '0.00',
   totalTipAmount = '0.00',
 }: StyledBillBox) => {
+  const isLongCurrencySymbol: boolean =
+    typeof currencySymbol === 'string' && currencySymbol.length > 1;
+
   const { styles } = useStyles(stylesheet);
   return (
     <View style={styles.superMainContainer}>
       {/* Title Text */}
-      {titleVisibility ? <Text style={styles.titleText}>{`${titleText} `}</Text> : null}
+      {titleVisibility ? (
+        <Text style={styles.titleText}>
+          {titleText}
+          {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
+        </Text>
+      ) : null}
       <Text style={styles.instructionText}>
         <StyledIcons
           type={'FontAwesome5'}
@@ -54,9 +62,12 @@ export const StyledBillBox = ({
       <View style={styles.mainInnerContainer}>
         {/* Total Text Content Container */}
         <View style={styles.totalAmountsContainer}>
-          <Text style={styles.subTextStyles}>{totalText}</Text>
+          <Text style={styles.subTextStyles}>
+            {totalText}
+            {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
+          </Text>
           <View style={styles.horizontalTextContainer}>
-            {currencySymbol ? (
+            {!isLongCurrencySymbol ? (
               <Text
                 style={styles.totalDigitsStyles}
                 adjustsFontSizeToFit={true}
@@ -85,10 +96,11 @@ export const StyledBillBox = ({
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}>
-              {`${subTotalText}`}
+              {subTotalText}
+              {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
             </Text>
             <View style={styles.horizontalTextContainer}>
-              {currencySymbol ? (
+              {!isLongCurrencySymbol ? (
                 <Text
                   style={styles.subDigitStyles}
                   adjustsFontSizeToFit={true}
@@ -114,9 +126,10 @@ export const StyledBillBox = ({
               allowFontScaling={false}
               numberOfLines={1}>
               {tipText}
+              {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
             </Text>
             <View style={styles.horizontalTextContainer}>
-              {currencySymbol ? (
+              {!isLongCurrencySymbol ? (
                 <Text
                   style={styles.subDigitStyles}
                   adjustsFontSizeToFit={true}
