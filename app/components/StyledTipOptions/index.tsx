@@ -249,7 +249,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   tipDigitsStyles: {
-    fontSize: 40,
+    fontSize: 24,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
     alignSelf: 'center',
