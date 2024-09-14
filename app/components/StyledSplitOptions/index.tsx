@@ -174,7 +174,7 @@ export const StyledSpiltOptions = ({
             step={state.splitSliderConfig.step}
             minValue={state.splitSliderConfig.min}
             maxValue={state.splitSliderConfig.max}
-            onValuesChange={value => {
+            onValueChange={value => {
               setSplitValue(value[0]);
               onSelectedSplitValue && onSelectedSplitValue(value[0]);
             }}

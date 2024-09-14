@@ -181,7 +181,7 @@ export const StyledTipOptions = ({
             step={state.tipSliderConfig.step}
             minValue={state.tipSliderConfig.min}
             maxValue={state.tipSliderConfig.max}
-            onValuesChange={value => {
+            onValueChange={value => {
               setTipPercentageValue(value[0]);
               onSelectedTipValue && onSelectedTipValue(value[0]);
             }}

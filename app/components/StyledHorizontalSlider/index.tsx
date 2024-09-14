@@ -1,22 +1,14 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
-import {
-  UnistylesRuntime,
-  createStyleSheet,
-  useStyles,
-} from 'react-native-unistyles';
-import MultiSlider, {
-  MultiSliderProps,
-} from '@ptomasroos/react-native-multi-slider';
+import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { Slider, SliderProps } from '@miblanchard/react-native-slider';
 
 type StyledHorizontalSliderProps = {
   sliderValue?: number;
   step?: number;
   minValue?: number;
   maxValue?: number;
-} & MultiSliderProps;
-
-const SliderLength = (UnistylesRuntime.screen.width * 80) / 100;
+} & Omit<SliderProps, 'value' | 'minimumValue' | 'maximumValue' | 'step' | 'animationType'>; // Omit these props to avoid conflict
 
 export const StyledHorizontalSlider = ({
   sliderValue = 0,
@@ -25,22 +17,21 @@ export const StyledHorizontalSlider = ({
   maxValue = 80,
   ...restProps
 }: StyledHorizontalSliderProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { styles } = useStyles(stylesheet);
+
   return (
     <View style={styles.mainContainer}>
-      <MultiSlider
-        values={[sliderValue]}
-        step={step}
-        min={minValue}
-        max={maxValue}
-        snapped={true}
-        sliderLength={SliderLength}
+      <Slider
+        value={[sliderValue]}
+        step={step} // Prioritise props from SliderProps, fall back to defaults
+        minimumValue={minValue}
+        maximumValue={maxValue}
         containerStyle={styles.sliderContainerStyles}
-        selectedStyle={styles.selectedStyle}
-        unselectedStyle={styles.unSelectedStyle}
-        markerStyle={styles.markerStyles}
-        pressedMarkerStyle={styles.markerStyles}
-        {...restProps}
+        minimumTrackStyle={styles.minimumTrackStyle}
+        maximumTrackStyle={styles.maximumTrackStyle}
+        thumbStyle={styles.markerStyles}
+        thumbTouchSize={styles.markerStyles}
+        {...restProps} // Spread the remaining props
       />
     </View>
   );
@@ -50,19 +41,19 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   mainContainer: {
     backgroundColor: colors.card,
     justifyContent: 'center',
-    alignItems: 'center',
     paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   sliderContainerStyles: {
     height: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
   },
-  selectedStyle: {
+  minimumTrackStyle: {
     backgroundColor: colors.accent,
     height: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
   },
-  unSelectedStyle: {
+  maximumTrackStyle: {
     backgroundColor: colors.backgroundColor,
     height: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
