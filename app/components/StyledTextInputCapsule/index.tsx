@@ -120,6 +120,7 @@ export const StyledTextInputCapsule = ({
         value={text}
         onChangeText={handleChangeText}
         returnKeyType="done"
+        keyboardAppearance={UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light'}
       />
     </View>
   );
