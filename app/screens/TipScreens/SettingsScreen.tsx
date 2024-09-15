@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
+  StyledCurrencySelector,
   StyledHeader,
   StyledSplitOptionsEditMode,
   StyledThemeBox,
@@ -51,6 +52,14 @@ const SettingsScreen = () => {
           }
           toggleDescription={'Enjoy a sleek, comfortable view by enabling Dark Mode.'}
           toggleText={'Toggle Dark Mode'}
+        />
+        <StyledCurrencySelector
+          title={'CUSTOMISE YOUR CURRENCY'}
+          description={
+            'Tailor Your Currency: Pick your preferred currency for a more seamless billing experience.'
+          }
+          currencyChangeInstructionText={'Tap to select a currency'}
+          currencyText={'$'}
         />
       </ScrollView>
     </>
