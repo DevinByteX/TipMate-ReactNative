@@ -14,6 +14,7 @@ export { StyledTextInputCapsule } from './StyledTextInputCapsule';
 export { StyledConfigInput } from './StyledConfigInput'
 export { StyledPopUp } from './StyledPopUp';
 export { StyledThemeBox } from './StyledThemeBox';
+export { StyledCurrencySelector } from './StyledCurrencySelector';
 
 // types should export seperately
 export type { StyledIconTypesKeys } from './StyledIcons';
