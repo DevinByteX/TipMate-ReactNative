@@ -1,7 +1,31 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Modal, Pressable } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
+
+const CurrencyListModal = ({
+  modalVisibility,
+  closeButtonPress,
+}: {
+  modalVisibility?: boolean;
+  closeButtonPress?: () => void;
+}) => {
+  const { styles } = useStyles(stylesheet);
+
+  return (
+    <Modal visible={modalVisibility} transparent={true} animationType={'slide'}>
+      <View style={styles.modalMainContainer}>
+        <StyledIcons
+          type={'Ionicons'}
+          name={'close'}
+          size={24}
+          style={{ position: 'absolute', right: 10, top: 10 }}
+          onPress={closeButtonPress}
+        />
+      </View>
+    </Modal>
+  );
+};
 
 export const StyledCurrencySelector = ({
   title,
@@ -15,6 +39,9 @@ export const StyledCurrencySelector = ({
   currencyText: string;
 }) => {
   const { styles } = useStyles(stylesheet);
+
+  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>{`${title}`}</Text>
@@ -28,15 +55,23 @@ export const StyledCurrencySelector = ({
       </Text>
       <View style={styles.mainCurrencyChangeContainer}>
         <Text style={styles.currencyChangeText}>{`${currencyChangeInstructionText}`}</Text>
-        <View style={styles.currencyBox}>
+        <Pressable
+          style={styles.currencyBox}
+          onPress={() => setModalVisibility(prevState => !prevState)}>
           <Text style={styles.currencyText}>{`${currencyText}`}</Text>
-        </View>
+        </Pressable>
       </View>
+      <CurrencyListModal
+        modalVisibility={modalVisibility}
+        closeButtonPress={() => {
+          setModalVisibility(prevState => !prevState);
+        }}
+      />
     </View>
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -81,5 +116,15 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Black,
     color: colors.accent,
+  },
+
+  // Modal contents
+  modalMainContainer: {
+    height: (UnistylesRuntime.screen.height * 50) / 100,
+    width: '100%',
+    borderRadius: (UnistylesRuntime.screen.width * 5) / 100,
+    backgroundColor: utils.hexToRGBA(colors.card, 0.95),
+    bottom: 0,
+    position: 'absolute',
   },
 }));
