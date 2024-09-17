@@ -18,7 +18,12 @@ const CurrencyListModal = ({
         <View style={styles.modalTitleAndCloseButtonContainer}>
           <Text style={styles.modalTitle}>{`SELECT YOUR CURRENCY`}</Text>
           <Pressable onPress={closeButtonPress}>
-            <StyledIcons type={'Ionicons'} name={'close'} size={24} />
+            <StyledIcons
+              type={'Ionicons'}
+              name={'close'}
+              size={24}
+              color={styles.modalTitle.color}
+            />
           </Pressable>
         </View>
       </View>
