@@ -10,18 +10,17 @@ const CurrencyListModal = ({
   modalVisibility?: boolean;
   closeButtonPress?: () => void;
 }) => {
-  const { styles } = useStyles(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
 
   return (
     <Modal visible={modalVisibility} transparent={true} animationType={'slide'}>
       <View style={styles.modalMainContainer}>
-        <StyledIcons
-          type={'Ionicons'}
-          name={'close'}
-          size={24}
-          style={{ position: 'absolute', right: 10, top: 10 }}
-          onPress={closeButtonPress}
-        />
+        <View style={styles.modalTitleAndCloseButtonContainer}>
+          <Text style={styles.modalTitle}>{`SELECT YOUR CURRENCY`}</Text>
+          <Pressable onPress={closeButtonPress}>
+            <StyledIcons type={'Ionicons'} name={'close'} size={24} />
+          </Pressable>
+        </View>
       </View>
     </Modal>
   );
@@ -123,8 +122,21 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     height: (UnistylesRuntime.screen.height * 50) / 100,
     width: '100%',
     borderRadius: (UnistylesRuntime.screen.width * 5) / 100,
+    borderWidth: UnistylesRuntime.hairlineWidth * 2,
+    borderColor: colors.accent,
     backgroundColor: utils.hexToRGBA(colors.card, 0.95),
     bottom: 0,
     position: 'absolute',
+  },
+  modalTitleAndCloseButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
+  },
+  modalTitle: {
+    color: colors.accent,
+    fontSize: 14,
+    fontFamily: fonts.Nunito_Black,
   },
 }));
