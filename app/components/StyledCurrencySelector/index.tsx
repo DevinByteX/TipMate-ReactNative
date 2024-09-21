@@ -26,6 +26,9 @@ const CurrencyListModal = ({
             />
           </Pressable>
         </View>
+        <View style={styles.modalContentContainer}>
+          <View style={styles.modalContentButtonContainer}></View>
+        </View>
       </View>
     </Modal>
   );
@@ -143,5 +146,15 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
+  },
+  modalContentContainer: {
+    width: '100%',
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  modalContentButtonContainer: {
+    width: '100%',
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+    backgroundColor: colors.backgroundColor,
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
 }));
