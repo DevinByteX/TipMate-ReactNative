@@ -19,7 +19,21 @@ const CurrencySelectiveScroll = ({
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}>
       {currencies?.map(currency => (
-        <View key={currency.currencyId} style={[styles.modalContentCurrencyBarContainer]}>
+        <View
+          key={currency.currencyId}
+          style={[
+            styles.modalContentCurrencyBarContainer,
+            {
+              borderWidth:
+                currency?.currencyId === currencyObject?.currencyId
+                  ? UnistylesRuntime.hairlineWidth * 5
+                  : 0,
+              borderColor:
+                currency?.currencyId === currencyObject?.currencyId
+                  ? theme.colors.accent
+                  : theme.colors.backgroundColor,
+            },
+          ]}>
           <View style={styles.currencySelectiveName}>
             <Text style={styles.modalcurrencyText}>{currency.currencyName}</Text>
           </View>
