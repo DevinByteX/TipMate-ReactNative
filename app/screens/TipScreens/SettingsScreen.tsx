@@ -73,7 +73,7 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   scrollContentContainer: {
-    paddingBottom: (UnistylesRuntime.screen.height * 8) / 100,
+    paddingBottom: UnistylesRuntime.insets.bottom * 2,
   },
 }));
 

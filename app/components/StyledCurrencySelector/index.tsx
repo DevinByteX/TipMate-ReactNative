@@ -22,7 +22,7 @@ const CurrencyListModal = ({
               type={'Ionicons'}
               name={'close'}
               size={24}
-              color={styles.modalTitle.color}
+              color={theme.colors.card_typography}
             />
           </Pressable>
         </View>
