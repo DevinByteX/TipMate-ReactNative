@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
-import { type CurrencyType } from '@configs';
+import { Constants, type CurrencyType } from '@configs';
 
 const CurrencySelectiveScroll = ({
   currencies,
@@ -51,7 +51,10 @@ const CurrencyListModal = ({
     <Modal visible={modalVisibility} transparent={true} animationType={'slide'}>
       <View style={styles.modalMainContainer}>
         <View style={styles.modalTitleAndCloseButtonContainer}>
-          <Text style={styles.modalTitle}>{modalTitle}{currencyText ? <Text>{` · ${currencyText}`}</Text> : null}</Text>
+          <Text style={styles.modalTitle}>
+            {modalTitle}
+            {currencyText ? <Text>{` · ${currencyText}`}</Text> : null}
+          </Text>
           <Pressable onPress={closeButtonPress}>
             <StyledIcons
               type={'Ionicons'}
@@ -75,14 +78,12 @@ export const StyledCurrencySelector = ({
   currencyChangeInstructionText,
   currencyText,
   modalTitle,
-  currencies,
 }: {
   title: string;
   description: string;
   currencyChangeInstructionText: string;
   currencyText: string;
   modalTitle?: string;
-  currencies?: CurrencyType[];
 }) => {
   const { styles } = useStyles(stylesheet);
 
@@ -113,7 +114,7 @@ export const StyledCurrencySelector = ({
           setModalVisibility(prevState => !prevState);
         }}
         modalTitle={modalTitle}
-        currencies={currencies}
+        currencies={Constants.currencies}
         currencyText={currencyText}
       />
     </View>

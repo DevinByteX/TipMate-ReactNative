@@ -8,7 +8,6 @@ import {
   StyledThemeBox,
   StyledTipOptionsEditMode,
 } from '@components';
-import { Constants } from '@configs';
 
 const SettingsScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -62,7 +61,6 @@ const SettingsScreen = () => {
           modalTitle={'SELECT YOUR CURRENCY'}
           currencyChangeInstructionText={'Tap to select a currency'}
           currencyText={'$'}
-          currencies={Constants.currencies}
         />
       </ScrollView>
     </>
