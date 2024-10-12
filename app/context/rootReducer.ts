@@ -1,5 +1,6 @@
 import { AppState, AppAction } from './types';
-import { tipReducer, splitReducer } from './reducers';
+import { tipReducer, splitReducer, currencyConfigReducer } from './reducers';
+import { Constants } from '@configs';
 
 export const rootReducer = (state: AppState, action: AppAction): AppState => {
     switch (action.type) {
@@ -8,31 +9,18 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
                 ...state,
                 tips: action.payload.tips,
                 splits: action.payload.splits,
+                currencyConfig: action.payload.currencyConfig,
             };
-
         case 'UPDATE_TIP_OPTIONS':
-            return {
-                ...state,
-                tips: tipReducer(state.tips, action),
-            };
+            return { ...state, tips: tipReducer(state.tips, action) };
         case 'RESET_TIP_OPTIONS_TO_DEFAULT':
-            return {
-                ...state,
-                tips: tipReducer(action.payload, action),
-            };
-
+            return { ...state, tips: Constants.defaultTipOptionsArray };
         case 'UPDATE_SPLIT_OPTIONS':
-            return {
-                ...state,
-                splits: splitReducer(state.splits, action),
-            };
-
+            return { ...state, splits: splitReducer(state.splits, action) };
         case 'RESET_SPLIT_OPTIONS_TO_DEFAULT':
-            return {
-                ...state,
-                splits: splitReducer(action.payload, action),
-            };
-
+            return { ...state, splits: Constants.defaultSplitOptionsArray };
+        case 'UPDATE_CURRENCY_SIGN':
+            return { ...state, currencyConfig: currencyConfigReducer(state.currencyConfig, action) };
         default:
             return state;
     }

@@ -1,5 +1,5 @@
-import { Constants } from '@configs';
-import { SplitOptionState, SplitAction, TipOptionState, TipAction } from './types';
+import { Constants, CurrencyType } from '@configs';
+import { SplitOptionState, SplitAction, TipOptionState, TipAction, CurrencyConfigAction } from './types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const tipReducer = (state: TipOptionState[], action: TipAction): TipOptionState[] => {
@@ -36,14 +36,28 @@ export const splitReducer = (state: SplitOptionState[], action: SplitAction): Sp
     }
 };
 
+export const currencyConfigReducer = (state: CurrencyType, action: CurrencyConfigAction): CurrencyType => {
+    switch (action.type) {
+        case 'UPDATE_CURRENCY_SIGN':
+            const updatedCurrencyConfig = action.payload;
+            saveState({ currencyConfig: updatedCurrencyConfig }); // Save updated currency config to AsyncStorage
+            return updatedCurrencyConfig;
+        default:
+            return state;
+    }
+};
+
 // Function to save state to AsyncStorage
-const saveState = async (partialState: Partial<{ tips: TipOptionState[], splits: SplitOptionState[] }>) => {
+const saveState = async (partialState: Partial<{ tips: TipOptionState[], splits: SplitOptionState[], currencyConfig: CurrencyType }>) => {
     try {
         const currentState = await AsyncStorage.getItem(Constants.APP_STATE_ASYNCSTORAGE_KEY);
         if (currentState) {
-            const currentStateObject = JSON.parse(currentState) as { tips: TipOptionState[], splits: SplitOptionState[] };
+            const currentStateObject = JSON.parse(currentState) as { tips: TipOptionState[], splits: SplitOptionState[], currencyConfig: CurrencyType };
             const newState = { ...currentStateObject, ...partialState };
-            await AsyncStorage.setItem('appState', JSON.stringify(newState));
+            await AsyncStorage.setItem(Constants.APP_STATE_ASYNCSTORAGE_KEY, JSON.stringify(newState));
+        } else {
+            // If no current state exists, save the partial state directly
+            await AsyncStorage.setItem(Constants.APP_STATE_ASYNCSTORAGE_KEY, JSON.stringify(partialState));
         }
     } catch (error) {
         console.error('Failed to save state to AsyncStorage', error);
