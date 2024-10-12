@@ -4,7 +4,13 @@ import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unis
 import { StyledIcons } from '@components';
 import { type CurrencyType } from '@configs';
 
-const CurrencySelectiveScroll = ({ currencies }: { currencies: CurrencyType[] | undefined }) => {
+const CurrencySelectiveScroll = ({
+  currencies,
+  currencyText,
+}: {
+  currencies: CurrencyType[] | undefined;
+  currencyText?: string;
+}) => {
   const { styles, theme } = useStyles(stylesheet);
 
   return (
@@ -13,7 +19,7 @@ const CurrencySelectiveScroll = ({ currencies }: { currencies: CurrencyType[] | 
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}>
       {currencies?.map(currency => (
-        <View key={currency.currencyId} style={styles.modalContentCurrencyBarContainer}>
+        <View key={currency.currencyId} style={[styles.modalContentCurrencyBarContainer]}>
           <View style={styles.currencySelectiveName}>
             <Text style={styles.modalcurrencyText}>{currency.currencyName}</Text>
           </View>
@@ -27,12 +33,16 @@ const CurrencySelectiveScroll = ({ currencies }: { currencies: CurrencyType[] | 
 };
 
 const CurrencyListModal = ({
+  modalTitle,
   modalVisibility,
   currencies,
+  currencyText,
   closeButtonPress,
 }: {
+  modalTitle?: string;
   modalVisibility?: boolean;
   currencies?: CurrencyType[];
+  currencyText?: string;
   closeButtonPress?: () => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
@@ -41,7 +51,7 @@ const CurrencyListModal = ({
     <Modal visible={modalVisibility} transparent={true} animationType={'slide'}>
       <View style={styles.modalMainContainer}>
         <View style={styles.modalTitleAndCloseButtonContainer}>
-          <Text style={styles.modalTitle}>{`SELECT YOUR CURRENCY`}</Text>
+          <Text style={styles.modalTitle}>{modalTitle}</Text>
           <Pressable onPress={closeButtonPress}>
             <StyledIcons
               type={'Ionicons'}
@@ -52,7 +62,7 @@ const CurrencyListModal = ({
           </Pressable>
         </View>
         <View style={styles.modalContentContainer}>
-          <CurrencySelectiveScroll currencies={currencies} />
+          <CurrencySelectiveScroll currencies={currencies} currencyText={currencyText} />
         </View>
       </View>
     </Modal>
@@ -64,12 +74,14 @@ export const StyledCurrencySelector = ({
   description,
   currencyChangeInstructionText,
   currencyText,
+  modalTitle,
   currencies,
 }: {
   title: string;
   description: string;
   currencyChangeInstructionText: string;
   currencyText: string;
+  modalTitle?: string;
   currencies?: CurrencyType[];
 }) => {
   const { styles } = useStyles(stylesheet);
@@ -100,7 +112,9 @@ export const StyledCurrencySelector = ({
         closeButtonPress={() => {
           setModalVisibility(prevState => !prevState);
         }}
+        modalTitle={modalTitle}
         currencies={currencies}
+        currencyText={currencyText}
       />
     </View>
   );

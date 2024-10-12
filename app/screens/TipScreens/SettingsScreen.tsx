@@ -59,6 +59,7 @@ const SettingsScreen = () => {
           description={
             'Tailor Your Currency: Pick your preferred currency for a more seamless billing experience.'
           }
+          modalTitle={'SELECT YOUR CURRENCY'}
           currencyChangeInstructionText={'Tap to select a currency'}
           currencyText={'$'}
           currencies={Constants.currencies}
