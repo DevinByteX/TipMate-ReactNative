@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 // custom component
 import {
@@ -17,7 +17,7 @@ import {
   RoundingMethodType,
   calculateBillValues,
 } from '@hooks';
-import { Constants } from '@configs';
+import { AppContext } from '@/context/AppContext';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -28,8 +28,9 @@ const HomeTipScreen = () => {
   const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
+  const { state, dispatch } = useContext(AppContext);
 
-  const currencySymbol: string = Constants.defaultCurrencyObject.currencySign;
+  const currencySymbol: string = state?.currencyConfig?.currencySign;
 
   useEffect(() => {
     const billValuesResults = calculateBillValues(
