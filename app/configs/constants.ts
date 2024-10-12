@@ -72,5 +72,7 @@ export const Constants = {
         { currencyId: 'USD', currencyName: 'US Dollar', currencySign: '$' },
         { currencyId: 'VND', currencyName: 'Vietnamese Dong', currencySign: '₫' },
         { currencyId: 'ZAR', currencyName: 'South African Rand', currencySign: 'R' },
-    ] as CurrencyType[]
+    ] as CurrencyType[],
+    defaultCurrencyObject:
+        { currencyId: 'USD', currencyName: 'US Dollar', currencySign: '$' } as CurrencyType,
 };
