@@ -6,10 +6,10 @@ import { Constants, type CurrencyType } from '@configs';
 
 const CurrencySelectiveScroll = ({
   currencies,
-  currencyText,
+  currencyObject,
 }: {
   currencies: CurrencyType[] | undefined;
-  currencyText?: string;
+  currencyObject?: CurrencyType;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
 
@@ -36,13 +36,13 @@ const CurrencyListModal = ({
   modalTitle,
   modalVisibility,
   currencies,
-  currencyText,
+  currencyObject,
   closeButtonPress,
 }: {
   modalTitle?: string;
   modalVisibility?: boolean;
   currencies?: CurrencyType[];
-  currencyText?: string;
+  currencyObject?: CurrencyType;
   closeButtonPress?: () => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
@@ -53,7 +53,9 @@ const CurrencyListModal = ({
         <View style={styles.modalTitleAndCloseButtonContainer}>
           <Text style={styles.modalTitle}>
             {modalTitle}
-            {currencyText ? <Text>{` · ${currencyText}`}</Text> : null}
+            {currencyObject?.currencySign ? (
+              <Text>{` · ${currencyObject?.currencySign}`}</Text>
+            ) : null}
           </Text>
           <Pressable onPress={closeButtonPress}>
             <StyledIcons
@@ -65,7 +67,7 @@ const CurrencyListModal = ({
           </Pressable>
         </View>
         <View style={styles.modalContentContainer}>
-          <CurrencySelectiveScroll currencies={currencies} currencyText={currencyText} />
+          <CurrencySelectiveScroll currencies={currencies} currencyObject={currencyObject} />
         </View>
       </View>
     </Modal>
@@ -76,18 +78,18 @@ export const StyledCurrencySelector = ({
   title,
   description,
   currencyChangeInstructionText,
-  currencyText,
   modalTitle,
 }: {
   title: string;
   description: string;
   currencyChangeInstructionText: string;
-  currencyText: string;
   modalTitle?: string;
 }) => {
   const { styles } = useStyles(stylesheet);
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
+
+  const CurrencyObject = Constants.defaultCurrencyObject;
 
   return (
     <View style={styles.mainContainer}>
@@ -105,7 +107,7 @@ export const StyledCurrencySelector = ({
         <Pressable
           style={styles.currencyBox}
           onPress={() => setModalVisibility(prevState => !prevState)}>
-          <Text style={styles.currencyText}>{`${currencyText}`}</Text>
+          <Text style={styles.currencyText}>{`${CurrencyObject.currencySign}`}</Text>
         </Pressable>
       </View>
       <CurrencyListModal
@@ -115,7 +117,7 @@ export const StyledCurrencySelector = ({
         }}
         modalTitle={modalTitle}
         currencies={Constants.currencies}
-        currencyText={currencyText}
+        currencyObject={CurrencyObject}
       />
     </View>
   );
