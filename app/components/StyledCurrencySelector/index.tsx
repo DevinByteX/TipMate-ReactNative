@@ -8,9 +8,11 @@ import { AppContext } from '@/context/AppContext';
 const CurrencySelectiveScroll = ({
   currencies,
   currencyObject,
+  currencySelectiveBarPress,
 }: {
   currencies: CurrencyType[] | undefined;
   currencyObject?: CurrencyType;
+  currencySelectiveBarPress?: (currency: CurrencyType) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
 
@@ -20,7 +22,12 @@ const CurrencySelectiveScroll = ({
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}>
       {currencies?.map(currency => (
-        <View
+        <Pressable
+          onPress={() => {
+            if (currencySelectiveBarPress) {
+              currencySelectiveBarPress(currency);
+            }
+          }}
           key={currency.currencyId}
           style={[
             styles.modalContentCurrencyBarContainer,
@@ -41,7 +48,7 @@ const CurrencySelectiveScroll = ({
           <View style={styles.currencySelectiveSign}>
             <Text style={styles.modalcurrencyText}>{currency.currencySign}</Text>
           </View>
-        </View>
+        </Pressable>
       ))}
     </ScrollView>
   );
@@ -53,12 +60,14 @@ const CurrencyListModal = ({
   currencies,
   currencyObject,
   closeButtonPress,
+  currencySelectiveBarPress,
 }: {
   modalTitle?: string;
   modalVisibility?: boolean;
   currencies?: CurrencyType[];
   currencyObject?: CurrencyType;
   closeButtonPress?: () => void;
+  currencySelectiveBarPress?: (currency: CurrencyType) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
 
@@ -82,7 +91,11 @@ const CurrencyListModal = ({
           </Pressable>
         </View>
         <View style={styles.modalContentContainer}>
-          <CurrencySelectiveScroll currencies={currencies} currencyObject={currencyObject} />
+          <CurrencySelectiveScroll
+            currencies={currencies}
+            currencyObject={currencyObject}
+            currencySelectiveBarPress={currencySelectiveBarPress}
+          />
         </View>
       </View>
     </Modal>
@@ -134,6 +147,9 @@ export const StyledCurrencySelector = ({
         modalTitle={modalTitle}
         currencies={Constants.currencies}
         currencyObject={CurrencyObject}
+        currencySelectiveBarPress={currencyObj => {
+          dispatch({ type: 'UPDATE_CURRENCY_SIGN', payload: currencyObj });
+        }}
       />
     </View>
   );
