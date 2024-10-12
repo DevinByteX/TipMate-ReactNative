@@ -17,6 +17,7 @@ import {
   RoundingMethodType,
   calculateBillValues,
 } from '@hooks';
+import { Constants } from '@configs';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -28,7 +29,7 @@ const HomeTipScreen = () => {
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
 
-  const currencySymbol: string = '$';
+  const currencySymbol: string = Constants.defaultCurrencyObject.currencySign;
 
   useEffect(() => {
     const billValuesResults = calculateBillValues(
