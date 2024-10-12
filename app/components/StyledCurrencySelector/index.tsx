@@ -64,11 +64,13 @@ export const StyledCurrencySelector = ({
   description,
   currencyChangeInstructionText,
   currencyText,
+  currencies,
 }: {
   title: string;
   description: string;
   currencyChangeInstructionText: string;
   currencyText: string;
+  currencies?: CurrencyType[];
 }) => {
   const { styles } = useStyles(stylesheet);
 
@@ -98,6 +100,7 @@ export const StyledCurrencySelector = ({
         closeButtonPress={() => {
           setModalVisibility(prevState => !prevState);
         }}
+        currencies={currencies}
       />
     </View>
   );
