@@ -9,6 +9,7 @@ const initialState: AppState = {
   splits: Constants.defaultSplitOptionsArray,
   tipSliderConfig: Constants.defaultTipSliderConfigValues,
   splitSliderConfig: Constants.defaultSplitSliderConfigValues,
+  currencyConfig: Constants.defaultCurrencyObject,
 };
 
 interface AppProviderProps {

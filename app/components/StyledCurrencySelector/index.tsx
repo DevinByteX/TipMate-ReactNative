@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
+import { AppContext } from '@/context/AppContext';
 
 const CurrencySelectiveScroll = ({
   currencies,
@@ -99,11 +100,12 @@ export const StyledCurrencySelector = ({
   currencyChangeInstructionText: string;
   modalTitle?: string;
 }) => {
+  const { state, dispatch } = useContext(AppContext);
   const { styles } = useStyles(stylesheet);
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
-  const CurrencyObject = Constants.defaultCurrencyObject;
+  const CurrencyObject = state.currencyConfig;
 
   return (
     <View style={styles.mainContainer}>
