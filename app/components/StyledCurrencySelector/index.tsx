@@ -51,7 +51,7 @@ const CurrencyListModal = ({
     <Modal visible={modalVisibility} transparent={true} animationType={'slide'}>
       <View style={styles.modalMainContainer}>
         <View style={styles.modalTitleAndCloseButtonContainer}>
-          <Text style={styles.modalTitle}>{modalTitle}</Text>
+          <Text style={styles.modalTitle}>{modalTitle}{currencyText ? <Text>{` · ${currencyText}`}</Text> : null}</Text>
           <Pressable onPress={closeButtonPress}>
             <StyledIcons
               type={'Ionicons'}
