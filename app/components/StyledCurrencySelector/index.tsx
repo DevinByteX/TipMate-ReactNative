@@ -85,7 +85,7 @@ const CurrencyListModal = ({
             <StyledIcons
               type={'Ionicons'}
               name={'close'}
-              size={24}
+              size={styles.modalTitle.fontSize * 1.5}
               color={theme.colors.card_typography}
             />
           </Pressable>
@@ -216,6 +216,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   modalTitleAndCloseButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems:'center',
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
   },
