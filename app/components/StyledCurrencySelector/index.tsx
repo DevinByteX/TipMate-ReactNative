@@ -154,8 +154,8 @@ export const StyledCurrencySelector = ({
           dispatch({ type: 'UPDATE_CURRENCY_SIGN', payload: currencyObj });
           Toast.show({
             type: 'success',
-            text1: `${currencyChangeToastMessage} ${currencyObj.currencySign}`,
-            visibilityTime: 5000,
+            text1: `${currencyChangeToastMessage} ${currencyObj.currencyName} (${currencyObj.currencySign})`,
+            visibilityTime: 2000,
           });
         }}
       />
