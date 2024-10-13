@@ -62,7 +62,7 @@ const HomeTipScreen = () => {
           description={'Pop in the total bill amount here – let’s get started!'}
           currencySymbol={currencySymbol}
           returnKeyType={'done'}
-          keyboardType={'decimal-pad'}
+          keyboardType={'number-pad'}
           onAmountChange={amount => setUserInputBillAmount(amount)}
         />
         {/* Tip Percentage Options Container */}
