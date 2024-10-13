@@ -66,7 +66,7 @@ export const toastConfig = {
 
 const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   successToastStyle: {
-    borderLeftColor: colors.accent,
+    borderStartColor: colors.accent,
     backgroundColor: colors.backgroundColor,
     borderColor: colors.card,
     borderWidth: UnistylesRuntime.hairlineWidth,
