@@ -4,6 +4,7 @@ import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unis
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
 import { AppContext } from '@/context/AppContext';
+import Toast from 'react-native-toast-message';
 
 const CurrencySelectiveScroll = ({
   currencies,
@@ -107,11 +108,13 @@ export const StyledCurrencySelector = ({
   description,
   currencyChangeInstructionText,
   modalTitle,
+  currencyChangeToastMessage,
 }: {
   title: string;
   description: string;
   currencyChangeInstructionText: string;
   modalTitle?: string;
+  currencyChangeToastMessage?:string;
 }) => {
   const { state, dispatch } = useContext(AppContext);
   const { styles } = useStyles(stylesheet);
@@ -149,6 +152,11 @@ export const StyledCurrencySelector = ({
         currencyObject={CurrencyObject}
         currencySelectiveBarPress={currencyObj => {
           dispatch({ type: 'UPDATE_CURRENCY_SIGN', payload: currencyObj });
+          Toast.show({
+            type: 'success',
+            text1: `${currencyChangeToastMessage} ${currencyObj.currencySign}`,
+            visibilityTime: 5000,
+          });
         }}
       />
     </View>

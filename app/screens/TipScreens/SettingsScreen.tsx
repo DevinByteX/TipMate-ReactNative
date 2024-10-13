@@ -60,6 +60,7 @@ const SettingsScreen = () => {
           }
           modalTitle={'SELECT YOUR CURRENCY'}
           currencyChangeInstructionText={'Tap to select a currency'}
+          currencyChangeToastMessage={'The currency has been changed to'}
         />
       </ScrollView>
     </>
