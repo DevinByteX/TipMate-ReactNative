@@ -22,6 +22,6 @@ UnistylesRegistry
     })
     .addBreakpoints(breakpoints)
     .addConfig({
-        initialTheme: 'light', // Default initial theme (should add this if adaptiveThemes:false)
+        initialTheme: 'dark', // Default initial theme (should add this if adaptiveThemes:false)
         adaptiveThemes: false, // Change to true for system theme adaptation
     });
