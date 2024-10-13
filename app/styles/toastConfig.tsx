@@ -66,7 +66,8 @@ export const toastConfig = {
 
 const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   successToastStyle: {
-    borderStartColor: colors.accent,
+    borderStartColor: colors.accent, // for Android to change left border color
+    borderLeftColor: colors.accent, // for iOS to change left border color
     backgroundColor: colors.backgroundColor,
     borderColor: colors.card,
     borderWidth: UnistylesRuntime.hairlineWidth,
