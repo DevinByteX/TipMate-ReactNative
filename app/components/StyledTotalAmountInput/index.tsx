@@ -34,7 +34,9 @@ export const StyledTotalAmountInput = ({
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>
         {titleText}
-        {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
+        {isLongCurrencySymbol ? (
+          <Text style={{ color: theme.colors.card_typography }}>{` · ${currencySymbol}`}</Text>
+        ) : null}
       </Text>
       <Text style={styles.instructionText}>
         <StyledIcons

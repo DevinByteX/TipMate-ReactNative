@@ -41,14 +41,16 @@ export const StyledBillBox = ({
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
 
-  const { styles } = useStyles(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.superMainContainer}>
       {/* Title Text */}
       {titleVisibility ? (
         <Text style={styles.titleText}>
           {titleText}
-          {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
+          {isLongCurrencySymbol ? (
+            <Text style={{ color: theme.colors.card_typography }}>{` · ${currencySymbol}`}</Text>
+          ) : null}
         </Text>
       ) : null}
       <Text style={styles.instructionText}>
