@@ -57,6 +57,7 @@ const CurrencySelectiveScroll = ({
 
 const CurrencyListModal = ({
   modalTitle,
+  modalDescription,
   modalVisibility,
   currencies,
   currencyObject,
@@ -64,6 +65,7 @@ const CurrencyListModal = ({
   currencySelectiveBarPress,
 }: {
   modalTitle?: string;
+  modalDescription?: string;
   modalVisibility?: boolean;
   currencies?: CurrencyType[];
   currencyObject?: CurrencyType;
@@ -91,6 +93,14 @@ const CurrencyListModal = ({
             />
           </Pressable>
         </View>
+        <Text style={styles.modalInstructionText}>
+          <StyledIcons
+            type={'FontAwesome5'}
+            name={'info-circle'}
+            size={styles.modalInstructionText?.fontSize}
+          />
+          {` ${modalDescription}`}
+        </Text>
         <View style={styles.modalContentContainer}>
           <CurrencySelectiveScroll
             currencies={currencies}
@@ -108,13 +118,15 @@ export const StyledCurrencySelector = ({
   description,
   currencyChangeInstructionText,
   modalTitle,
+  modalDescription,
   currencyChangeToastMessage,
 }: {
   title: string;
   description: string;
   currencyChangeInstructionText: string;
   modalTitle?: string;
-  currencyChangeToastMessage?:string;
+  modalDescription?: string;
+  currencyChangeToastMessage?: string;
 }) => {
   const { state, dispatch } = useContext(AppContext);
   const { styles } = useStyles(stylesheet);
@@ -148,6 +160,7 @@ export const StyledCurrencySelector = ({
           setModalVisibility(prevState => !prevState);
         }}
         modalTitle={modalTitle}
+        modalDescription={modalDescription}
         currencies={Constants.currencies}
         currencyObject={CurrencyObject}
         currencySelectiveBarPress={currencyObj => {
@@ -182,6 +195,13 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  modalInstructionText: {
+    fontSize: 10,
+    color: colors.card_typography,
+    fontFamily: fonts.Montserrat_Medium,
+    marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainCurrencyChangeContainer: {
@@ -224,9 +244,10 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   modalTitleAndCloseButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center',
+    alignItems: 'center',
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
+    paddingTop: (UnistylesRuntime.screen.height * 2) / 100,
+    paddingBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
   },
   modalTitle: {
     color: colors.accent,
