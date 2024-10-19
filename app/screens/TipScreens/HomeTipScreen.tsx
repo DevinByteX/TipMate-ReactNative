@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Platform } from 'react-native';
 // custom component
 import {
   StyledBillBox,
@@ -62,7 +62,7 @@ const HomeTipScreen = () => {
           description={'Pop in the total bill amount here – let’s get started!'}
           currencySymbol={currencySymbol}
           returnKeyType={'done'}
-          keyboardType={'number-pad'}
+          keyboardType={Platform.OS === 'ios' ? 'decimal-pad' : 'number-pad'}
           onAmountChange={amount => setUserInputBillAmount(amount)}
         />
         {/* Tip Percentage Options Container */}
