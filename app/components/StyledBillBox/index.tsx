@@ -117,7 +117,10 @@ export const StyledBillBox = ({
               allowFontScaling={false}
               numberOfLines={1}>
               {tipText}
-              {isLongCurrencySymbol ? <Text>{` · ${currencySymbol}`}</Text> : null}
+              {isLongCurrencySymbol ? (
+                <Text
+                  style={{ color: theme.colors.card_typography }}>{` · ${currencySymbol}`}</Text>
+              ) : null}
             </Text>
             <View style={styles.horizontalTextContainer}>
               <Text
