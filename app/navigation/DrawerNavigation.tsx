@@ -17,6 +17,7 @@ const DrawerNavigation = () => {
       drawerContent={props => <StyledDrawer {...props} />}
       screenOptions={{
         headerShown: false,
+        drawerType: 'slide',
         drawerActiveTintColor: theme.colors.accent,
         drawerInactiveTintColor: theme.colors.card_typography,
       }}>
