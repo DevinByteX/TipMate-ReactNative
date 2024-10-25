@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  TipCalculator
+//
+//  Created by Devin Godage on 2024-10-26.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include? "tmp.xcconfig"

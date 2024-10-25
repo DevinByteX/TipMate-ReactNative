@@ -34,6 +34,7 @@
 		44145C7A2BFA85400018392C /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44145C672BFA85400018392C /* FontAwesome6_Brands.ttf */; };
 		44145C7B2BFA85400018392C /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44145C682BFA85400018392C /* Feather.ttf */; };
 		44145C7C2BFA85400018392C /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44145C692BFA85400018392C /* EvilIcons.ttf */; };
+		445CAF5E2CCC3FA2005B5F7D /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 445CAF5D2CCC3FA2005B5F7D /* Config.xcconfig */; };
 		5888B18541EB4966886B046F /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8974A390FA649B089A64998 /* Nunito-Bold.ttf */; };
 		6B82F6E3A91D4279904804ED /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C066B718A0684558AD802EF8 /* Nunito-Medium.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-TipCalculator-TipCalculatorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-TipCalculator-TipCalculatorTests.a */; };
@@ -87,6 +88,7 @@
 		44145C672BFA85400018392C /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome6_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome6_Brands.ttf"; sourceTree = "<group>"; };
 		44145C682BFA85400018392C /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		44145C692BFA85400018392C /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		445CAF5D2CCC3FA2005B5F7D /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-TipCalculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipCalculator.release.xcconfig"; path = "Target Support Files/Pods-TipCalculator/Pods-TipCalculator.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-TipCalculator-TipCalculatorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipCalculator-TipCalculatorTests.debug.xcconfig"; path = "Target Support Files/Pods-TipCalculator-TipCalculatorTests/Pods-TipCalculator-TipCalculatorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-TipCalculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TipCalculator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +223,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				445CAF5D2CCC3FA2005B5F7D /* Config.xcconfig */,
 				13B07FAE1A68108700A75B9A /* TipCalculator */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* TipCalculatorTests */,
@@ -372,6 +375,7 @@
 				876C7969D807409DB1A1EA06 /* Montserrat-Black.ttf in Resources */,
 				1D114007E8094387901B5CDF /* Montserrat-Bold.ttf in Resources */,
 				B8E6818D8E7442F9B73FA871 /* Montserrat-Medium.ttf in Resources */,
+				445CAF5E2CCC3FA2005B5F7D /* Config.xcconfig in Resources */,
 				21CE1F9DBA024A31A49C483D /* Montserrat-Regular.ttf in Resources */,
 				E83E622A6A9944E8802B86BF /* Montserrat-SemiBold.ttf in Resources */,
 				3AE4C97E846446308A81FDE0 /* Nunito-Black.ttf in Resources */,
@@ -651,6 +655,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 445CAF5D2CCC3FA2005B5F7D /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CC = "";
@@ -723,10 +728,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -736,6 +738,7 @@
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 445CAF5D2CCC3FA2005B5F7D /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CC = "";
@@ -800,10 +803,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
