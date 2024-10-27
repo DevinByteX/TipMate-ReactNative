@@ -3,12 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
     "pod-install-new-arch": "cd ios && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "android:device-list":"emulator -list-avds",
+    "ios:device-list":"xcrun xctrace list devices",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "ios:dev": "react-native run-ios --simulator 'iPhone 14 Pro'"
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.6.0",
