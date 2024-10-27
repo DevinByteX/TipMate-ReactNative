@@ -11,7 +11,10 @@
     "ios:device-list":"xcrun xctrace list devices",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "ios:dev": "react-native run-ios --simulator 'iPhone 14 Pro'"
+    "ios:dev": "react-native run-ios --scheme 'TipCalculator(Dev)'",
+    "ios:dev-release": "react-native run-ios --configuration Release --scheme 'TipCalculator(Dev)'",
+    "ios:prod": "react-native run-ios --scheme 'TipCalculator(Prod)'",
+    "ios:prod-release": "react-native run-ios --configuration Release --scheme 'TipCalculator(Prod)'"
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.6.0",
