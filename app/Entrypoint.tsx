@@ -3,7 +3,7 @@ import 'react-native-unistyles'; // Per the Unitstyles FAQ, add this configurati
 import '@styles/uniStyles'; // This should always be imported in the root file of the app, such as app.js or index.
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ApplicationNavigator from '@navigation/ApplicationNavigation';
-import { AppProvider } from './context/AppContext';
+import AppProvider from './context/AppContext';
 
 /**
  * important to keep the GestureHandlerRootView as close to the actual root view as possible.

@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, ReactNode } from 'react';
+import React, { createContext, Dispatch, ReactNode, useContext } from 'react';
 import { AppState, AppAction } from './types';
 import { rootReducer } from './rootReducer';
 import { Constants } from '@configs';
@@ -34,4 +34,14 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 };
 
-export { AppContext, AppProvider };
+const useAppContext = () => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error('useAppContext must be used within an AppProvider');
+  }
+  return context;
+};
+
+export default AppProvider;
+
+export { useAppContext };

@@ -3,7 +3,7 @@ import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
-import { AppContext } from '@/context/AppContext';
+import { useAppContext } from '@/context/AppContext';
 import Toast from 'react-native-toast-message';
 
 const CurrencySelectiveScroll = ({
@@ -128,7 +128,7 @@ export const StyledCurrencySelector = ({
   modalDescription?: string;
   currencyChangeToastMessage?: string;
 }) => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useAppContext();
   const { styles } = useStyles(stylesheet);
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);

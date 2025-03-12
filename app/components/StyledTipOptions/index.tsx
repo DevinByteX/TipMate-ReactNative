@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
-import { AppContext } from '@/context/AppContext';
+import { useAppContext } from '@/context/AppContext';
 
 const TipPercentageCapsule = ({
   active = false,
@@ -84,7 +84,7 @@ export const StyledTipOptions = ({
   description?: string;
   onSelectedTipValue?: (value: number) => void;
 }) => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useAppContext();
 
   const defaultTipValue = 5;
 

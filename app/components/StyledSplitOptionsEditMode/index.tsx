@@ -11,7 +11,7 @@ import {
 } from '@components';
 import { Constants } from '@configs';
 import { areOptionArraysSame } from '@hooks';
-import { AppContext } from '@/context/AppContext';
+import { useAppContext } from '@/context/AppContext';
 import { SplitOptionState } from '@/context/types';
 import Toast from 'react-native-toast-message';
 
@@ -22,7 +22,7 @@ const SplitPercentageEditCapsule = ({
   textValue: number;
   place?: number;
 }) => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useAppContext();
   return (
     <StyledTextInputCapsule
       textValue={textValue}
@@ -100,7 +100,7 @@ export const StyledSplitOptionsEditMode = ({
   solidButtonText: string;
   resetSuccessToastText: string;
 }) => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useAppContext();
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
   const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);

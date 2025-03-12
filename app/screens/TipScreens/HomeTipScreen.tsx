@@ -17,7 +17,7 @@ import {
   RoundingMethodType,
   calculateBillValues,
 } from '@hooks';
-import { AppContext } from '@/context/AppContext';
+import { useAppContext } from '@/context/AppContext';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -28,7 +28,7 @@ const HomeTipScreen = () => {
   const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useAppContext();
 
   const currencySymbol: string = state?.currencyConfig?.currencySign;
 

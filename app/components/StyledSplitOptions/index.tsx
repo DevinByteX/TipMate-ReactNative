@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
-import { AppContext } from '@/context/AppContext';
+import { useAppContext } from '@/context/AppContext';
 
 const SplitCapsule = ({
   active = false,
@@ -84,7 +84,7 @@ export const StyledSpiltOptions = ({
   description?: string;
   onSelectedSplitValue?: (value: number) => void;
 }) => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useAppContext();
 
   const defaultSplitValue = 1;
 
