@@ -9,8 +9,6 @@ import {
   StyledTipOptionsEditMode,
 } from '@components';
 
-// test comment
-
 const SettingsScreen = () => {
   const { styles } = useStyles(stylesheet);
   return (
