@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Platform } from 'react-native';
 // custom component
 import {
@@ -28,7 +28,7 @@ const HomeTipScreen = () => {
   const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
 
   const currencySymbol: string = state?.currencyConfig?.currencySign;
 

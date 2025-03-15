@@ -21,7 +21,7 @@ export const StyledPopUp = ({
   onLineButtonPress,
   onSolidButtonPress,
 }: StyledPopUpTypes) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { styles } = useStyles(stylesheet);
   return (
     <View style={styles.centeredView}>
       <Modal visible={popUpVisibility} transparent={true} animationType={'fade'}>

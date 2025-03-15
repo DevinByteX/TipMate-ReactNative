@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
@@ -84,7 +84,7 @@ export const StyledSpiltOptions = ({
   description?: string;
   onSelectedSplitValue?: (value: number) => void;
 }) => {
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
 
   const defaultSplitValue = 1;
 
