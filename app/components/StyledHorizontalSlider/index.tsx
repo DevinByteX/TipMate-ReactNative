@@ -63,6 +63,5 @@ const stylesheet = createStyleSheet(({ colors }) => ({
     height: (UnistylesRuntime.screen.height * 3.5) / 100,
     width: (UnistylesRuntime.screen.height * 3.5) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 3.5) / 100,
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
   },
 }));
