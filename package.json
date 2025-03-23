@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "generate:aab": "react-native build-android --mode=release"
+    "generate-android:aab": "react-native build-android --mode=release"
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.6.0",
