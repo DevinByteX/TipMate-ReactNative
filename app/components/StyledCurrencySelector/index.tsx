@@ -238,7 +238,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     borderWidth: UnistylesRuntime.hairlineWidth * 2,
     borderColor: colors.accent,
     backgroundColor: utils.hexToRGBA(colors.card, 0.95),
-    bottom: -(UnistylesRuntime.insets.bottom * 0.2), // Minus
+    bottom: -(UnistylesRuntime.insets.bottom * 1), // Minus
     position: 'absolute',
   },
   modalTitleAndCloseButtonContainer: {
@@ -284,6 +284,6 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   currencyScrollContainerStyles: {
     gap: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingBottom: UnistylesRuntime.insets.bottom * 3,
+    paddingBottom: UnistylesRuntime.insets.bottom * 5,
   },
 }));
