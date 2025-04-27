@@ -42,12 +42,12 @@ TipMate is a fast, reliable tip calculator app for quick gratuity calculations a
 
 ## Technology Stack
 
-- **Framework**: React Native
-- **Language**: TypeScript
-- **Styling**: Unistyles
-- **State Management**: React Context API
-- **Navigation**: React Navigation
-- **Storage**: AsyncStorage for persisting user preferences
+- **Framework**: [React Native](https://reactnative.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Unistyles](https://www.unistyl.es)
+- **State Management**: [React Context API](https://react.dev/learn/passing-data-deeply-with-context)
+- **Navigation**: [React Navigation](https://reactnavigation.org/)
+- **Storage**: [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
 
 ## Repository
 
@@ -110,13 +110,13 @@ TipMate-ReactNative/
 ├── app/
 │   ├── assets/             # Images, fonts, etc.
 │   ├── components/         # Reusable components
+│   ├── configs/             # Configs and Config functions
+│   ├── context/            # React Context providers
 │   ├── hooks/              # Custom React hooks
 │   ├── navigation/         # Navigation configurations
+│   ├── plugins/            # Some plugins with custom functions
 │   ├── screens/            # Screen components
-│   ├── services/           # Utility services
-│   ├── styles/             # Unistyles configurations
-│   ├── context/            # React Context providers
-│   └── utils/              # Utility functions
+│   └── styles/             # Unistyles configurations
 ├── .gitignore
 ├── package.json
 └── README.md
