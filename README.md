@@ -1,97 +1,127 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# TipMate - Tip Calculator & Bill Splitting App
 
-# Getting Started
+<p align="center">
+  <img src="external-assets/app-icon.png" width="200" style="border-radius: 20px;" alt="TipMate Logo"/>
+</p>
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+<p align="center">
+  <b>Smart Tips - Easy Living</b>
+</p>
 
-## Step 1: Start Metro
+## Description
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+TipMate is a fast, reliable tip calculator app for quick gratuity calculations and easy bill splitting. Instantly work out tips, divide expenses among friends, and customize your preferences for stress-free group payments. Built with React Native, TipMate offers a clean, intuitive interface designed to make tipping and bill splitting as effortless as possible.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Download
 
-```sh
-# Using npm
-npm start
+<a href="https://play.google.com/store/apps/details?id=com.devinapps.tips.tipcalculator">
+  <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="200" alt="Get it on Google Play"/>
+</a>
 
-# OR using Yarn
-yarn start
+## Screenshots
+
+<table>
+  <tr>
+    <td><img src="external-assets/store-image-1.png" width="200" alt="TipMate Promotional Screen" style="border-radius: 8px; margin: 10px;"/></td>
+    <td><img src="external-assets/store-image-2.png" width="200" alt="Main Calculator Screen" style="border-radius: 8px; margin: 10px;"/></td>
+    <td><img src="external-assets/store-image-3.png" width="200" alt="Customization Options" style="border-radius: 8px; margin: 10px;"/></td>
+    <td><img src="external-assets/store-image-4.png" width="200" alt="Currency Selection" style="border-radius: 8px; margin: 10px;"/></td>
+  </tr>
+</table>
+
+## Features
+
+- **Instant Tip Calculation**: Calculate tips quickly with preset percentages (0%, 5%, 10%, 15%) or custom values
+- **Easy Bill Splitting**: Divide the bill between 1 to 7 people or any custom number
+- **Rounding Options**: Round up or down for more convenient payment amounts
+- **Multi-Currency Support**: Switch between USD, EUR, GBP, JPY, and more with ease
+- **Custom Themes**: Choose from vibrant color themes to personalize your experience
+- **Dark Mode**: Enjoy a sleek, comfortable viewing experience
+- **Customizable Presets**: Save your preferred tip percentages and split options
+- **Clean Interface**: Modern, intuitive design for quick and easy use
+
+## Technology Stack
+
+- **Framework**: React Native
+- **Language**: TypeScript
+- **Styling**: Unistyles
+- **State Management**: React Context API
+- **Navigation**: React Navigation
+- **Storage**: AsyncStorage for persisting user preferences
+
+## Repository
+
+GitHub: [https://github.com/DevinByteX/TipMate-ReactNative](https://github.com/DevinByteX/TipMate-ReactNative)
+
+## Requirements
+
+- Node.js 14.0 or higher
+- npm or yarn
+- React Native CLI
+- Android Studio (for Android development)
+- JDK 11
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/DevinByteX/TipMate-ReactNative.git
+
+# Navigate to the project directory
+cd TipMate-ReactNative
+
+# Install dependencies
+npm install
+# or
+yarn install
 ```
 
-## Step 2: Build and run your app
+## Running the App
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### For Android
 
-### Android
+```bash
+# Start Metro Bundler
+npx react-native start
 
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+# Run on Android
+npx react-native run-android
 ```
 
-### iOS
+### For iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+```bash
+# Install Pod dependencies
+cd ios && pod install && cd ..
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+# Start Metro Bundler
+npx react-native start
 
-```sh
-bundle install
+# Run on iOS
+npx react-native run-ios
 ```
 
-Then, and every time you update your native dependencies, run:
+## Project Structure
 
-```sh
-bundle exec pod install
+```
+TipMate-ReactNative/
+├── android/                # Android native code
+├── ios/                    # iOS native code
+├── app/
+│   ├── assets/             # Images, fonts, etc.
+│   ├── components/         # Reusable components
+│   ├── hooks/              # Custom React hooks
+│   ├── navigation/         # Navigation configurations
+│   ├── screens/            # Screen components
+│   ├── services/           # Utility services
+│   ├── styles/             # Unistyles configurations
+│   ├── context/            # React Context providers
+│   └── utils/              # Utility functions
+├── .gitignore
+├── package.json
+└── README.md
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## License
 
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+This project is licensed under the MIT License - see the LICENSE file for details.
