@@ -45,6 +45,11 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
     await setUserPreferredTheme(value ? 'dark' : 'light');
   };
 
+  const NaviagteToAboutUsScreen = () => {
+    props.navigation.closeDrawer();
+    props.navigation.navigate('AppInfoStack', { screen: 'AboutUsScreen' });
+  };
+
   return (
     <View style={styles.mainDrawerContainer}>
       <DrawerContentScrollView {...props}>
@@ -81,6 +86,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
           label={'About Us'}
+          onPress={NaviagteToAboutUsScreen}
         />
       </View>
     </View>
