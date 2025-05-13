@@ -6,6 +6,7 @@ import { StyledDrawer } from '@components';
 import HomeTipScreen from '@/screens/TipScreens/HomeTipScreen';
 // import SavedTipsScreen from '@/screens/TipScreens/SavedTipsScreen';
 import SettingsScreen from '@/screens/TipScreens/SettingsScreen';
+import AboutUsScreen from '@/screens/AppInfoScreens/AboutUsScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -55,6 +56,13 @@ const DrawerNavigation = () => {
             fontWeight: undefined,
             fontSize: 14,
           },
+        }}
+      />
+      <Drawer.Screen
+        name="AboutUsScreen"
+        component={AboutUsScreen}
+        options={{
+          drawerItemStyle: { display: 'none' },
         }}
       />
     </Drawer.Navigator>
