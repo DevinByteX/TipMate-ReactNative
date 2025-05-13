@@ -33,7 +33,11 @@ const ApplicationNavigator = (props: any) => {
   }, []);
 
   const navigationRef = useNavigationContainerRef();
-  useReduxDevToolsExtension(navigationRef);
+  useReduxDevToolsExtension(
+    navigationRef as React.RefObject<
+      import('@react-navigation/native').NavigationContainerRef<any>
+    >,
+  );
 
   return (
     <SafeAreaProvider>
