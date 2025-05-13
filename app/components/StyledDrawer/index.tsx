@@ -47,7 +47,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
 
   const NaviagteToAboutUsScreen = () => {
     props.navigation.closeDrawer();
-    props.navigation.navigate('AppInfoStack', { screen: 'AboutUsScreen' });
+    props.navigation.navigate('AboutUsScreen');
   };
 
   return (
