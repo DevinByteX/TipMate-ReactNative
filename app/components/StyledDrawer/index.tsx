@@ -8,6 +8,7 @@ import {
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIcons, StyledIconTypesKeys, StyledToggle } from '@components';
 import { setUserPreferredTheme } from '@hooks';
+import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 
 interface StyledDrawerProps extends DrawerContentComponentProps {}
 
@@ -18,6 +19,15 @@ type BottomButtonProps = {
   iconColor?: string;
   label: string;
   onPress?: () => void;
+  isFocused?: boolean;
+};
+
+const getActiveRouteName = (route: Route<string> | undefined): string | undefined => {
+  if (!route) return undefined;
+
+  const focusedRouteName = getFocusedRouteNameFromRoute(route);
+
+  return focusedRouteName ?? route.name;
 };
 
 const BottomButton = ({
@@ -27,6 +37,7 @@ const BottomButton = ({
   iconColor,
   label,
   onPress,
+  isFocused,
 }: BottomButtonProps) => {
   const { styles } = useStyles(stylesheet);
 
@@ -40,6 +51,9 @@ const BottomButton = ({
 
 export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
   const { styles } = useStyles(stylesheet);
+
+  const activeRouteName = getActiveRouteName(props.state.routes[props.state.index]);
+  console.log('Active Route Name:', activeRouteName);
 
   const persistUserPreferredTheme = async (value: boolean) => {
     await setUserPreferredTheme(value ? 'dark' : 'light');
