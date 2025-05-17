@@ -39,12 +39,33 @@ const BottomButton = ({
   onPress,
   isFocused,
 }: BottomButtonProps) => {
-  const { styles } = useStyles(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.bottomButtonStyles} activeOpacity={0.6}>
-      <StyledIcons type={iconType} name={iconName} size={iconSize} color={iconColor} />
-      <Text style={styles.footerButtonText}>{label}</Text>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[
+        styles.bottomButtonStyles,
+        {
+          backgroundColor: isFocused
+            ? theme.utils.hexToRGBA(theme.colors.card_typography, 0.1)
+            : 'transparent',
+        },
+      ]}
+      activeOpacity={0.5}>
+      <StyledIcons
+        type={iconType}
+        name={iconName}
+        size={iconSize}
+        color={isFocused ? theme.colors.card_typography : iconColor}
+      />
+      <Text
+        style={[
+          styles.footerButtonText,
+          { color: isFocused ? theme.colors.card_typography : iconColor },
+        ]}>
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -88,18 +109,20 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
       <View style={styles.horizontalDeviderStyles} />
       <View style={styles.bottomButtonContainer}>
         <BottomButton
-          iconType={'AntDesign'}
-          iconName={'sharealt'}
+          iconType={'FontAwesome'}
+          iconName={'share-square'}
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
+          isFocused={activeRouteName === 'TellAFriendScreen'}
           label={'Tell a Friend'}
         />
         <BottomButton
-          iconType={'MaterialIcons'}
-          iconName={'feedback'}
+          iconType={'Entypo'}
+          iconName={'info-with-circle'}
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
           label={'About Us'}
+          isFocused={activeRouteName === 'AboutUsScreen'}
           onPress={NaviagteToAboutUsScreen}
         />
       </View>
@@ -121,11 +144,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     height: UnistylesRuntime.hairlineWidth * 8,
   },
   bottomButtonContainer: {
-    paddingStart: (UnistylesRuntime.screen.width * 4) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 4) / 100,
     paddingBottom: UnistylesRuntime.insets.bottom,
   },
   bottomButtonStyles: {
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1.75) / 100,
+    marginVertical: (UnistylesRuntime.screen.height * 0.25) / 100,
+    paddingStart: 16, // as per the react navigation drawer item paddingStart in the source code
+    borderRadius: 56, // as per the react navigation drawer item borderRadius in the source code
     flexDirection: 'row',
     alignItems: 'center',
   },
