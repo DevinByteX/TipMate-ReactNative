@@ -110,7 +110,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
       <View style={styles.bottomButtonContainer}>
         <BottomButton
           iconType={'FontAwesome'}
-          iconName={'share-square'}
+          iconName={'share-alt-square'}
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
           isFocused={activeRouteName === 'TellAFriendScreen'}
