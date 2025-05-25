@@ -4,6 +4,7 @@ import { StyledHeader, StyledLicenseDetailsCard } from '@components';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import licenses from '../../assets/oss-licenses.json';
+import { parsePackageName } from '@/hooks/parsePackageName';
 
 const LicensesScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -21,10 +22,7 @@ const LicensesScreen = () => {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}>
         {Object.entries(licenses).map(([packageName, details], index) => {
-          const lastAtIndex = packageName.lastIndexOf('@');
-          const name = packageName.slice(0, lastAtIndex);
-          const version = packageName.slice(lastAtIndex + 1);
-
+          const { name, version } = parsePackageName(packageName);
           return (
             <StyledLicenseDetailsCard
               key={index}
