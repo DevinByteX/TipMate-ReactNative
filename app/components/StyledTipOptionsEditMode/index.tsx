@@ -232,7 +232,6 @@ export const StyledTipOptionsEditMode = ({
 
 const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
