@@ -169,7 +169,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderColor: colors.card,
   },
   themeColorIcon: {
-    color: colors.card_typography,
+    color: colors.backgroundColor,
     fontSize: 16,
   },
 }));
