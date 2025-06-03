@@ -6,15 +6,14 @@ export interface IconBaseProps {
   width?: number | string;
   colour?: string; // For icon fill
   backgroundColour?: string; // For background
-  showBackground?: boolean;
   [key: string]: any;
 }
 
-interface Props extends SvgProps, IconBaseProps {
+interface StyledSVGIconWrapperProps extends SvgProps, IconBaseProps {
   children: React.ReactElement | React.ReactElement[];
 }
 
-export const StyledSVGIconWrapper: React.FC<Props> = ({
+export const StyledSVGIconWrapper: React.FC<StyledSVGIconWrapperProps> = ({
   width = 64,
   height = 64,
   style,

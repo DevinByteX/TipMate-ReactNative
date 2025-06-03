@@ -7,7 +7,6 @@ const AppLogo: React.FC<IconBaseProps> = ({
   height,
   colour = '#009688',
   backgroundColour = '#FFFFFF',
-  showBackground,
   ...rest
 }) => {
   return (
@@ -15,7 +14,6 @@ const AppLogo: React.FC<IconBaseProps> = ({
       width={width}
       height={height}
       backgroundColour={backgroundColour}
-      showBackground={showBackground}
       {...rest}>
       <Rect width="512" height="512" fill={backgroundColour} />
       <Path
