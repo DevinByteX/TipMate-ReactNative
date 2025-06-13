@@ -15,6 +15,7 @@ const LicensesScreen = () => {
         headerTitle={'Licenses'}
         headerSubTitle={'Third-Party Libraries'}
         headerRightIconVisibilty={false}
+        enableBackButton={true}
       />
       <ScrollView
         style={styles.mainContainer}
