@@ -10,6 +10,7 @@ type styledHeaderProps = {
   headerSubTitle?: string;
   headerSubTitleVisibility?: boolean;
   headerRightIconVisibilty?: boolean;
+  enableBackButton?: boolean;
 };
 
 type HeaderBarIconProps = {
@@ -44,6 +45,7 @@ export const StyledHeader = ({
   headerSubTitle = 'Smart Tips, Easy Living',
   headerSubTitleVisibility = true,
   headerRightIconVisibilty = true,
+  enableBackButton = false,
 }: styledHeaderProps) => {
   const { styles, theme } = useStyles(stylesheet);
 
@@ -62,12 +64,12 @@ export const StyledHeader = ({
           <View style={styles.innerLeftContainer}>
             <HeaderBarIcon
               iconType={'FontAwesome'}
-              iconName={'navicon'}
+              iconName={enableBackButton ? 'chevron-left' : 'navicon'}
               iconSize={styles.headerText.fontSize}
               iconColor={styles.headerText.color}
               headerBarStyles={styles.headerLeftButtonStyles}
               onPress={() => {
-                navigation.toggleDrawer();
+                enableBackButton ? navigation.goBack() : navigation.toggleDrawer();
                 Keyboard.dismiss();
               }}
             />
