@@ -4,12 +4,19 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { StyledHeader } from '@components';
 import { AppLogo } from '@/components/StyledSVGIcons';
+import { useNavigation } from '@react-navigation/native';
 
 export const AboutUsScreen: React.FC = () => {
   const { styles, theme } = useStyles(stylesheet);
 
+  const navigation = useNavigation();
+
   const handleLinkPress = async (url: string) => {
     await Linking.openURL(url);
+  };
+
+  const handleLicenseNavigation = () => {
+    // Navigate to the License screen
   };
 
   return (
@@ -55,26 +62,38 @@ export const AboutUsScreen: React.FC = () => {
           bugs in our app, improvements and your suggestions regarding TipMate so we can serve you
           even better.
         </Text>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Acknowledgements</Text>
-          <View style={styles.socialLinks}>
-            <TouchableOpacity activeOpacity={0.7} onPress={() => {}} style={styles.socialButton}>
-              <Text style={styles.socialButtonText}>Third Party License</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() =>
-                handleLinkPress(
-                  'https://www.freeprivacypolicy.com/live/7f96b8fd-6f24-4098-a929-443d12cb5f54',
-                )
-              }
-              style={styles.socialButton}>
-              <Text style={styles.socialButtonText}>Privacy Policy</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
       </ScrollView>
-      <Text style={styles.versionText}>App version: 1.0.0</Text>
+      <View
+        style={[
+          styles.section,
+          {
+            paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+            paddingBottom: UnistylesRuntime.insets.bottom,
+          },
+        ]}>
+        <Text style={styles.sectionTitle}>Acknowledgements</Text>
+        <View style={styles.socialLinks}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              handleLicenseNavigation();
+            }}
+            style={styles.socialButton}>
+            <Text style={styles.socialButtonText}>Third Party License</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() =>
+              handleLinkPress(
+                'https://www.freeprivacypolicy.com/live/7f96b8fd-6f24-4098-a929-443d12cb5f54',
+              )
+            }
+            style={styles.socialButton}>
+            <Text style={styles.socialButtonText}>Privacy Policy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.versionText}>App version: 1.0.0</Text>
+      </View>
     </>
   );
 };
@@ -102,6 +121,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
   section: {
+    backgroundColor: colors.backgroundColor,
     marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
   sectionTitle: {
@@ -144,12 +164,11 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
   },
   versionText: {
-    backgroundColor: colors.backgroundColor,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     fontSize: 14,
     textAlign: 'center',
-    paddingBottom: UnistylesRuntime.insets.bottom,
+    marginTop: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
 }));
 
