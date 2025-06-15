@@ -76,6 +76,7 @@ export const AboutUsScreen: React.FC = () => {
           styles.section,
           {
             paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+            marginBottom: 0,
             paddingBottom: UnistylesRuntime.insets.bottom,
           },
         ]}>
