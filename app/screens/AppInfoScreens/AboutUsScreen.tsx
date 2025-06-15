@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, Linking, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Linking, ScrollView, Alert } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { StyledHeader } from '@components';
@@ -11,8 +11,22 @@ export const AboutUsScreen: React.FC = () => {
 
   const navigation = useNavigation();
 
-  const handleLinkPress = async (url: string) => {
-    await Linking.openURL(url);
+  const handleLinkPress = (url: string) => {
+    Alert.alert(
+      'Open External Link',
+      'You are about to open an external website. Do you want to continue?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Open',
+          onPress: () => Linking.openURL(url),
+        },
+      ],
+      { cancelable: true },
+    );
   };
 
   const handleNavigation = (screenName: string) => {
