@@ -15,8 +15,9 @@ export const AboutUsScreen: React.FC = () => {
     await Linking.openURL(url);
   };
 
-  const handleLicenseNavigation = () => {
-    // Navigate to the License screen
+  const handleNavigation = (screenName: string) => {
+    // @ts-ignore
+    navigation.navigate(screenName);
   };
 
   return (
@@ -76,7 +77,7 @@ export const AboutUsScreen: React.FC = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => {
-              handleLicenseNavigation();
+              handleNavigation('LicensesScreen');
             }}
             style={styles.socialButton}>
             <Text style={styles.socialButtonText}>Third Party License</Text>
