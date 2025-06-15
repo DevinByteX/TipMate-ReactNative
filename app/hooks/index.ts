@@ -6,7 +6,7 @@ import { toFixedWithoutRounding } from './tofixedWithoutRounding';
 import { usePersistedReducer } from './usePersistedReducer';
 import { validateOptionValues, areOptionArraysSame } from './validationHooks';
 import { useThemeColorCustomiser, CustomisedTheme } from './useThemeColorCustomiser';
-import { useExternalLinkAlert } from './useExternalLinkAlert';
+import { useExternalLinkAlert, ExternalLinkAlertConfig } from './useExternalLinkAlert';
 
 export { convertToTwoDecimalPoints, acceptNumbersAndDecimals, calculateBillValues, RoundingMethod, toFixedWithoutRounding, asyncStorageUtil, getUserPreferredTheme, setUserPreferredTheme, getUserUpdatedThemeOption, setUserUpdatedThemeOption, usePersistedReducer, validateOptionValues, areOptionArraysSame, useThemeColorCustomiser, useExternalLinkAlert };
-export type { BillCalculationType, RoundingMethodType, DisabledRoundingMethodsType, CustomisedTheme }
+export type { BillCalculationType, RoundingMethodType, DisabledRoundingMethodsType, CustomisedTheme, ExternalLinkAlertConfig }
