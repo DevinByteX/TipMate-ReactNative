@@ -1,4 +1,5 @@
 import { Alert, Linking } from 'react-native';
+import { UnistylesRuntime } from 'react-native-unistyles';
 
 export type ExternalLinkAlertConfig = {
     title?: string;
@@ -31,10 +32,11 @@ export const useExternalLinkAlert = (config?: ExternalLinkAlertConfig) => {
                 },
                 {
                     text: mergedConfig.openText,
+                    isPreferred: true,
                     onPress: () => Linking.openURL(url),
                 },
             ],
-            { cancelable: true },
+            { cancelable: true, userInterfaceStyle: UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light' },
         );
     };
 
