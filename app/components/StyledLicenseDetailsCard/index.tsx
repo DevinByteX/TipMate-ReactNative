@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, Alert, Linking } from 'react-native';
+import { Text, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
+import { useExternalLinkAlert } from '@hooks';
 
 interface LicenseDetailsProps {
   name: string;
@@ -19,24 +20,7 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   licenseUrl,
 }) => {
   const { styles } = useStyles(stylesheet);
-
-  const handleLinkPress = (url: string) => {
-    Alert.alert(
-      'Open External Link',
-      'You are about to open an external website. Do you want to continue?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Open',
-          onPress: () => Linking.openURL(url),
-        },
-      ],
-      { cancelable: true },
-    );
-  };
+  const handleLinkPress = useExternalLinkAlert();
 
   return (
     <View style={styles.licenseMainContainer}>
