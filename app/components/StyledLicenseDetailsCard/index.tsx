@@ -20,14 +20,14 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   licenseUrl,
 }) => {
   const { styles } = useStyles(stylesheet);
-  const handleLinkPress = useExternalLinkAlert();
+  const openLink = useExternalLinkAlert();
 
   return (
     <View style={styles.licenseMainContainer}>
       <Text style={styles.libraryNameText}>{name}</Text>
       <Text style={styles.versionText}>Version: {version}</Text>
       <Text style={styles.licenseText}>License: {license}</Text>
-      <Text style={styles.repositoryText} onPress={() => handleLinkPress(repository)}>
+      <Text style={styles.repositoryText} onPress={() => openLink(repository)}>
         {/* Repository: {repository} */}
         {repository}
       </Text>
