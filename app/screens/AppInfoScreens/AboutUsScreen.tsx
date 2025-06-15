@@ -12,7 +12,7 @@ export const AboutUsScreen: React.FC = () => {
 
   const navigation = useNavigation();
 
-  const handleLinkPress = useExternalLinkAlert();
+  const openLink = useExternalLinkAlert();
 
   const handleNavigation = (screenName: string) => {
     // @ts-ignore
@@ -53,7 +53,15 @@ export const AboutUsScreen: React.FC = () => {
           <Text style={styles.sectionTitle}>Support</Text>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => handleLinkPress('mailto:devinforge.appsconsole@gmail.com')}>
+            onPress={() =>
+              openLink('mailto:devinforge.appsconsole@gmail.com', {
+                title: 'Contact Support',
+                message:
+                  'You are about to open your default email app to contact our support team. Do you want to continue?',
+                openText: 'Continue',
+                cancelText: 'Cancel',
+              })
+            }>
             <Text style={styles.linkText}>devinforge.appsconsole@gmail.com</Text>
           </TouchableOpacity>
         </View>
@@ -84,7 +92,7 @@ export const AboutUsScreen: React.FC = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() =>
-              handleLinkPress(
+              openLink(
                 'https://www.freeprivacypolicy.com/live/7f96b8fd-6f24-4098-a929-443d12cb5f54',
               )
             }
