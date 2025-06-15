@@ -6,6 +6,7 @@ import { StyledHeader } from '@components';
 import { AppLogo } from '@/components/StyledSVGIcons';
 import { useNavigation } from '@react-navigation/native';
 import { useExternalLinkAlert } from '@hooks';
+import { APP_LINKS, EMAILS, APP_INFO } from '@configs';
 
 export const AboutUsScreen: React.FC = () => {
   const { styles, theme } = useStyles(stylesheet);
@@ -48,9 +49,7 @@ export const AboutUsScreen: React.FC = () => {
         <View style={styles.section}>
           <Text
             style={[styles.sectionTitle, { textDecorationLine: 'underline' }]}
-            onPress={() =>
-              openLink('https://play.google.com/store/apps/dev?id=7058400265435813852')
-            }>
+            onPress={() => openLink(APP_LINKS.playStore)}>
             DevinForge Labs
           </Text>
           <Text style={styles.sectionText}>Contact us for support and feedback</Text>
@@ -60,7 +59,7 @@ export const AboutUsScreen: React.FC = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() =>
-              openLink('mailto:devinforge.appsconsole@gmail.com', {
+              openLink(`mailto:${EMAILS.support}`, {
                 title: 'Contact Support',
                 message:
                   'You are about to open your default email app to contact our support team. Do you want to continue?',
@@ -68,7 +67,7 @@ export const AboutUsScreen: React.FC = () => {
                 cancelText: 'Cancel',
               })
             }>
-            <Text style={styles.linkText}>devinforge.appsconsole@gmail.com</Text>
+            <Text style={styles.linkText}>{EMAILS.support}</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.feedbackText}>
@@ -90,16 +89,12 @@ export const AboutUsScreen: React.FC = () => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() =>
-              openLink(
-                'https://www.freeprivacypolicy.com/live/7f96b8fd-6f24-4098-a929-443d12cb5f54',
-              )
-            }
+            onPress={() => openLink(APP_LINKS.privacyPolicy)}
             style={styles.socialButton}>
             <Text style={styles.socialButtonText}>Privacy Policy</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.versionText}>App version: 1.0.0</Text>
+        <Text style={styles.versionText}>App version: {APP_INFO.version}</Text>
       </View>
     </>
   );
