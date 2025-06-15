@@ -85,7 +85,7 @@ export const AboutUsScreen: React.FC = () => {
               handleNavigation('LicensesScreen');
             }}
             style={styles.socialButton}>
-            <Text style={styles.socialButtonText}>Third Party License</Text>
+            <Text style={styles.socialButtonText}>Third-Party Licences</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
