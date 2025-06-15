@@ -46,7 +46,13 @@ export const AboutUsScreen: React.FC = () => {
           bill-splitting process smooth and hassle-free for everyone involved.
         </Text>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>DevinForge Labs</Text>
+          <Text
+            style={[styles.sectionTitle, { textDecorationLine: 'underline' }]}
+            onPress={() =>
+              openLink('https://play.google.com/store/apps/dev?id=7058400265435813852')
+            }>
+            DevinForge Labs
+          </Text>
           <Text style={styles.sectionText}>Contact us for support and feedback</Text>
         </View>
         <View style={styles.section}>
