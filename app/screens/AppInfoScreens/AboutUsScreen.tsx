@@ -71,15 +71,7 @@ export const AboutUsScreen: React.FC = () => {
           even better.
         </Text>
       </ScrollView>
-      <View
-        style={[
-          styles.section,
-          {
-            paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-            marginBottom: 0,
-            paddingBottom: UnistylesRuntime.insets.bottom,
-          },
-        ]}>
+      <View style={styles.acknowledgementsSection}>
         <Text style={styles.sectionTitle}>Acknowledgements</Text>
         <View style={styles.socialLinks}>
           <TouchableOpacity
@@ -143,6 +135,12 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     fontSize: 16,
+  },
+  acknowledgementsSection: {
+    backgroundColor: colors.backgroundColor,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+
+    paddingBottom: UnistylesRuntime.insets.bottom,
   },
   linkText: {
     color: colors.accent,
