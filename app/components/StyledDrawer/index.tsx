@@ -145,11 +145,12 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   bottomButtonContainer: {
     paddingHorizontal: (UnistylesRuntime.screen.width * 4) / 100,
+    paddingTop: UnistylesRuntime.insets.bottom / 2,
     paddingBottom: UnistylesRuntime.insets.bottom,
   },
   bottomButtonStyles: {
     paddingVertical: (UnistylesRuntime.screen.height * 1.75) / 100,
-    marginVertical: (UnistylesRuntime.screen.height * 0.25) / 100,
+    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
     paddingStart: 16, // as per the react navigation drawer item paddingStart in the source code
     borderRadius: 56, // as per the react navigation drawer item borderRadius in the source code
     flexDirection: 'row',
