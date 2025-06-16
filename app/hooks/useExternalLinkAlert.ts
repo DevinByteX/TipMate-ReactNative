@@ -11,7 +11,7 @@ export type ExternalLinkAlertConfig = {
 const defaultConfig: Required<ExternalLinkAlertConfig> = {
     title: 'Open External Link',
     message: 'You are about to open an external website. Do you want to continue?',
-    openText: 'Open',
+    openText: 'Continue',
     cancelText: 'Cancel',
 };
 
