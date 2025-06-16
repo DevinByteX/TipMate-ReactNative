@@ -11,7 +11,8 @@
     "test": "jest",
     "watchman-delete-all": "watchman watch-del-all",
     "generate-android:aab": "react-native build-android --mode=release",
-    "generate-licenses": "npm-license-crawler -onlyDirectDependencies -json ./app/assets/oss-licenses.json"
+    "generate-licenses": "npm-license-crawler -onlyDirectDependencies -json ./app/assets/oss-licenses.json",
+    "update-version": "node updateVersion.js"
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.6.0",
