@@ -108,14 +108,14 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
       </View>
       <View style={styles.horizontalDeviderStyles} />
       <View style={styles.bottomButtonContainer}>
-        <BottomButton
+        {/* <BottomButton
           iconType={'FontAwesome'}
           iconName={'share-alt-square'}
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
           isFocused={activeRouteName === 'TellAFriendScreen'}
           label={'Tell a Friend'}
-        />
+        /> */}
         <BottomButton
           iconType={'Entypo'}
           iconName={'info-with-circle'}
