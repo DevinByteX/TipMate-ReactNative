@@ -63,6 +63,13 @@ const updateVersionInfo = (versionCode, version) => {
         fs.writeFileSync(pbxprojPath, pbxprojContent, 'utf8');
         console.log(`Updated MARKETING_VERSION in project.pbxproj to "${version}"`);
 
+        // app/configs/constants.ts (APP_INFO.version)
+        const constantsPath = path.join(__dirname, 'app', 'configs', 'constants.ts');
+        let constantsContent = fs.readFileSync(constantsPath, 'utf8');
+        constantsContent = constantsContent.replace(/(APP_INFO\s*=\s*{[^}]*version:\s*')[^']*(',?)/, `$1${version}$2`);
+        fs.writeFileSync(constantsPath, constantsContent, 'utf8');
+        console.log(`Updated APP_INFO.version in constants.ts to ${version}`);
+
     } catch (error) {
         console.error('Error updating version info:', error);
     }
