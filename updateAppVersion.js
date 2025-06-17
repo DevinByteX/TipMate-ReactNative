@@ -58,7 +58,7 @@ const updateVersionInfo = (versionCode, version) => {
         let pbxprojContent = fs.readFileSync(pbxprojPath, 'utf8');
         pbxprojContent = pbxprojContent.replace(
             /(MARKETING_VERSION = )([^;\n]+)/g,
-            `$1"${version}"`
+            `$1${version}`
         );
         fs.writeFileSync(pbxprojPath, pbxprojContent, 'utf8');
         console.log(`Updated MARKETING_VERSION in project.pbxproj to "${version}"`);
