@@ -140,8 +140,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   acknowledgementsSection: {
     backgroundColor: colors.backgroundColor,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-
-    paddingBottom: UnistylesRuntime.insets.bottom,
+    paddingBottom: UnistylesRuntime.insets.bottom / 2 + UnistylesRuntime.navigationBar.height,
   },
   linkText: {
     color: colors.accent,

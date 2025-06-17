@@ -146,7 +146,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   bottomButtonContainer: {
     paddingHorizontal: (UnistylesRuntime.screen.width * 4) / 100,
     paddingTop: UnistylesRuntime.insets.bottom / 2,
-    paddingBottom: UnistylesRuntime.insets.bottom,
+    paddingBottom: UnistylesRuntime.insets.bottom / 2 + UnistylesRuntime.navigationBar.height,
   },
   bottomButtonStyles: {
     paddingVertical: (UnistylesRuntime.screen.height * 1.75) / 100,
