@@ -12,7 +12,10 @@
     "watchman-delete-all": "watchman watch-del-all",
     "generate-android:aab": "react-native build-android --mode=release",
     "generate-licenses": "npm-license-crawler -onlyDirectDependencies -json ./app/assets/oss-licenses.json",
-    "update-version": "node updateVersion.js"
+    "update-version": "node updateVersion.js",
+    "android:apk:debug": "cd android && ./gradlew assembleDebug",
+    "android:apk:release": "cd android && ./gradlew assembleRelease",
+    "android:bundle:release": "cd android && ./gradlew bundleRelease"
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.6.0",
