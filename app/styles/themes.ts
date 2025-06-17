@@ -35,9 +35,9 @@ const sharedColors = {
     primary_accent_light_second: '#F3982C',
     primary_accent_dark_second: '#F4AB41',
     primary_accent_light_third: '#3D63DD',
-    primary_accent_dark_third: '#5274F2',
-    primary_accent_light_fourth: '#F06292',
-    primary_accent_dark_fourth: '#E91E63',
+    primary_accent_dark_third: '#7FA3FA',
+    primary_accent_light_fourth: '#E94B7C',
+    primary_accent_dark_fourth: '#FE68A6',
 }
 
 const hexToRGBA = (hex: string, opacity: number) => {
