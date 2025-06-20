@@ -78,20 +78,20 @@ export const AboutUsScreen: React.FC = () => {
       </ScrollView>
       <View style={styles.acknowledgementsSection}>
         <Text style={styles.sectionTitle}>Acknowledgements</Text>
-        <View style={styles.socialLinks}>
+        <View style={styles.acknowledgementLinks}>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => {
               handleNavigation('LicensesScreen');
             }}
-            style={styles.socialButton}>
-            <Text style={styles.socialButtonText}>Third-Party Licences</Text>
+            style={styles.acknowledgementButton}>
+            <Text style={styles.acknowledgementButtonText}>Third-Party Licences</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => openLink(APP_LINKS.privacyPolicy)}
-            style={styles.socialButton}>
-            <Text style={styles.socialButtonText}>Privacy Policy</Text>
+            style={styles.acknowledgementButton}>
+            <Text style={styles.acknowledgementButtonText}>Privacy Policy</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.versionText}>App version: {APP_INFO.version}</Text>
@@ -155,17 +155,17 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     lineHeight: 20,
     marginVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
-  socialLinks: {
+  acknowledgementLinks: {
     flexDirection: 'row',
     gap: (UnistylesRuntime.screen.width * 4) / 100,
   },
-  socialButton: {
+  acknowledgementButton: {
     backgroundColor: colors.accent,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
   },
-  socialButtonText: {
+  acknowledgementButtonText: {
     color: colors.backgroundColor,
     fontFamily: fonts.Montserrat_Medium,
     fontSize: 14,
