@@ -1,5 +1,5 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { useStyles } from 'react-native-unistyles';
+import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
 // Components
 import { StyledDrawer } from '@components';
 // Screens
@@ -21,6 +21,9 @@ const DrawerNavigation = () => {
         drawerType: 'slide',
         drawerActiveTintColor: theme.colors.accent,
         drawerInactiveTintColor: theme.colors.card_typography,
+        drawerItemStyle: {
+          marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+        },
       }}>
       <Drawer.Screen
         name="CalcTipScreen"
