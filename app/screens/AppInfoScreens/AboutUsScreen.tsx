@@ -156,6 +156,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
   acknowledgementLinks: {
+    flexWrap: 'wrap',
     flexDirection: 'row',
     gap: (UnistylesRuntime.screen.width * 4) / 100,
   },
