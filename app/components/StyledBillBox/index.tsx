@@ -44,15 +44,28 @@ export const StyledBillBox = ({
   const { styles, theme } = useStyles(stylesheet);
   return (
     <View style={styles.superMainContainer}>
-      {/* Title Text */}
-      {titleVisibility ? (
-        <Text style={styles.titleText}>
-          {titleText}
-          {isLongCurrencySymbol ? (
-            <Text style={{ color: theme.colors.card_typography }}>{` · ${currencySymbol}`}</Text>
-          ) : null}
-        </Text>
-      ) : null}
+      {/* Title Row*/}
+      <View style={styles.titleRowContainer}>
+        <View style={styles.titleLeftContainer}>
+          {titleVisibility && (
+            <Text style={styles.titleText} numberOfLines={1}>
+              {titleText}
+              {isLongCurrencySymbol ? (
+                <Text style={styles.currencySymbol}>{` · ${currencySymbol}`}</Text>
+              ) : null}
+            </Text>
+          )}
+        </View>
+        <View style={styles.titleRightContainer}>
+          <StyledIcons
+            type={'Octicons'}
+            name={'share'}
+            size={styles.titleText?.fontSize + 5}
+            color={styles.titleText?.color}
+          />
+        </View>
+      </View>
+      {/* Instruction Text */}
       <Text style={styles.instructionText}>
         <StyledIcons
           type={'FontAwesome5'}
@@ -147,11 +160,27 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
+  titleRowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  titleLeftContainer: {
+    flex: 1,
+  },
+  titleRightContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingEnd: (UnistylesRuntime.screen.width * 5) / 100,
+  },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  currencySymbol: {
+    color: colors.card_typography,
   },
   instructionText: {
     fontSize: 10,
