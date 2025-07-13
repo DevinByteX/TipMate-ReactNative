@@ -18,6 +18,7 @@ import {
   calculateBillValues,
 } from '@hooks';
 import { useAppContext } from '@/context/AppContext';
+import { shareTipDetails } from '@/hooks/shareTipOption';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -43,6 +44,27 @@ const HomeTipScreen = () => {
 
     return () => {};
   }, [userInputTipPercentage, userInputBillAmount, userInputSplitCount, userInputRound]);
+
+  const handleShareTipDetails = () => {
+    if (!billValues) return;
+
+    shareTipDetails({
+      amount: userInputBillAmount,
+      tip: parseFloat(billValues.overall.tip),
+      total: parseFloat(billValues.overall.total),
+      tipPercentage: userInputTipPercentage,
+      numberOfPeople: userInputSplitCount,
+      perPerson:
+        userInputSplitCount > 1
+          ? {
+              amount: parseFloat(billValues.perPerson?.subtotal || '0'),
+              tip: parseFloat(billValues.perPerson?.tip || '0'),
+              total: parseFloat(billValues.perPerson?.total || '0'),
+            }
+          : undefined,
+      currencySymbol,
+    });
+  };
 
   return (
     <>
@@ -89,6 +111,7 @@ const HomeTipScreen = () => {
           totalAmount={billValues?.overall?.total}
           subTotalAmount={billValues?.overall?.subtotal}
           totalTipAmount={billValues?.overall?.tip}
+          shareButtonPress={handleShareTipDetails}
         />
         {/* Round Options Container */}
         <StyledRoundBox
@@ -124,6 +147,7 @@ const HomeTipScreen = () => {
             totalAmount={billValues?.perPerson?.total}
             subTotalAmount={billValues?.perPerson?.subtotal}
             totalTipAmount={billValues?.perPerson?.tip}
+            shareButtonPress={handleShareTipDetails}
           />
         ) : null}
       </ScrollView>
