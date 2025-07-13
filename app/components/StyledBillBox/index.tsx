@@ -24,6 +24,7 @@ type StyledBillBox = {
   totalAmount?: string | number;
   subTotalAmount?: string | number;
   totalTipAmount?: string | number;
+  shareButtonPress?: () => void;
 };
 
 export const StyledBillBox = ({
@@ -37,6 +38,7 @@ export const StyledBillBox = ({
   totalAmount = '0.00',
   subTotalAmount = '0.00',
   totalTipAmount = '0.00',
+  shareButtonPress,
 }: StyledBillBox) => {
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
@@ -61,7 +63,11 @@ export const StyledBillBox = ({
             type={'Octicons'}
             name={'share'}
             size={styles.titleText?.fontSize + 5}
-            color={styles.titleText?.color}
+            color={Number(totalAmount) > 0 ? styles.titleText?.color : theme.colors.disable_button}
+            disabled={Number(totalAmount) > 0 ? false : true}
+            onPress={() => {
+              shareButtonPress && shareButtonPress();
+            }}
           />
         </View>
       </View>
