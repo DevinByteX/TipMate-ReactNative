@@ -44,6 +44,14 @@ export const StyledBillBox = ({
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
 
   const { styles, theme } = useStyles(stylesheet);
+  // Extract currency symbol rendering for title
+  const renderTitleCurrencySymbol = () => {
+    if (isLongCurrencySymbol) {
+      return <Text style={styles.currencySymbol}>{` · ${currencySymbol}`}</Text>;
+    }
+    return null;
+  };
+
   return (
     <View style={styles.superMainContainer}>
       {/* Title Row*/}
@@ -52,9 +60,7 @@ export const StyledBillBox = ({
           {titleVisibility && (
             <Text style={styles.titleText} numberOfLines={1}>
               {titleText}
-              {isLongCurrencySymbol ? (
-                <Text style={styles.currencySymbol}>{` · ${currencySymbol}`}</Text>
-              ) : null}
+              {renderTitleCurrencySymbol()}
             </Text>
           )}
         </View>
