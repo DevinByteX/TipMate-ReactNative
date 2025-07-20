@@ -49,9 +49,12 @@ Shared via TipMate
 
     try {
         await Share.open(options);
-    } catch (err: any) {
-        // Optionally handle error
-        if (err && err.message !== 'User did not share') {
+    } catch (err: unknown) {
+        const message = (typeof err === 'object' && err && 'message' in err)
+            ? (err as { message?: string }).message
+            : undefined;
+
+        if (message !== 'User did not share') {
             console.log(err);
         }
     }
