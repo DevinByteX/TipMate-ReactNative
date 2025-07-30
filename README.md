@@ -55,11 +55,12 @@ GitHub: [https://github.com/DevinByteX/TipMate-ReactNative](https://github.com/D
 
 ## Requirements
 
-- Node.js 14.0 or higher
-- npm or yarn
-- React Native CLI
-- Android Studio (for Android development)
-- JDK 11
+- **Node.js** 18.0 or higher (LTS recommended)
+- **npm** (v9+) or **Yarn** (v1.22.x)
+- **React Native CLI** (install globally using `npm install -g react-native-cli`)
+- **Android Studio** (latest version, includes Android SDK and emulator)
+- **JDK** 17 (required for modern Android build tools)
+- **Xcode** 15 or higher (for iOS development on macOS)
 
 ## Installation
 
