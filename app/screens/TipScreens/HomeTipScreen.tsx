@@ -77,7 +77,9 @@ const HomeTipScreen = () => {
         style={styles.mainContainer}
         contentContainerStyle={styles.scrollContentContainer}
         showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+        keyboardDismissMode={'on-drag'}
+      >
         {/* Total Amount container */}
         <StyledTotalAmountInput
           titleText={'BILL AMOUNT'}
