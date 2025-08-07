@@ -1,12 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  Text,
-  TextInput,
-  TextInputProps,
-  NativeSyntheticEvent,
-  TextInputEndEditingEventData,
-  Pressable,
-} from 'react-native';
+import { Text, TextInput, TextInputProps, Pressable, TextInputEndEditingEvent } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 type StyledConfigInputProps = {
@@ -44,9 +37,8 @@ export const StyledConfigInput = ({
   const handleFocus = () => setInputFocused(true);
   const handleBlur = () => setInputFocused(false);
 
-  const handleEndEditing = ({
-    nativeEvent: { text },
-  }: NativeSyntheticEvent<TextInputEndEditingEventData>) => {
+  const handleEndEditing = (event: TextInputEndEditingEvent) => {
+    const { text } = event.nativeEvent;
     const cleanedText = text.replace(suffix, '');
     const newValue = cleanedText === '' ? previousValue : parseInt(cleanedText, 10);
 

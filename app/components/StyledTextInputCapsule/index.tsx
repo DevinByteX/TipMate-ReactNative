@@ -1,4 +1,4 @@
-import { View, TextInput, NativeSyntheticEvent, TextInputEndEditingEventData } from 'react-native';
+import { View, TextInput, TextInputEndEditingEvent } from 'react-native';
 import React, { useEffect, useState } from 'react';
 // Third party libs
 import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
@@ -54,9 +54,8 @@ export const StyledTextInputCapsule = ({
   const handleFocus = () => setInputFocused(true);
   const handleBlur = () => setInputFocused(false);
 
-  const handleEndEditing = ({
-    nativeEvent: { text },
-  }: NativeSyntheticEvent<TextInputEndEditingEventData>) => {
+  const handleEndEditing = (event: TextInputEndEditingEvent) => {
+    const { text } = event.nativeEvent;
     const cleanedText = text.replace(suffix, '');
     const newValue = cleanedText === '' ? previousValue : parseInt(cleanedText, 10);
 
