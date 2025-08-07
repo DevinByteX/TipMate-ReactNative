@@ -31,7 +31,8 @@ export const AboutUsScreen: React.FC = () => {
         style={styles.mainContainer}
         contentContainerStyle={styles.scrollContentContainer}
         showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.logoContainer}>
           <AppLogo
             colour={theme.colors.accent}
@@ -49,7 +50,8 @@ export const AboutUsScreen: React.FC = () => {
         <View style={styles.section}>
           <Text
             style={[styles.sectionTitle, { textDecorationLine: 'underline' }]}
-            onPress={() => openLink(APP_LINKS.playStore)}>
+            onPress={() => openLink(APP_LINKS.playStore)}
+          >
             DevinForge Labs
           </Text>
           <Text style={styles.sectionText}>Contact us for support and feedback</Text>
@@ -66,7 +68,8 @@ export const AboutUsScreen: React.FC = () => {
                 openText: 'Continue',
                 cancelText: 'Cancel',
               })
-            }>
+            }
+          >
             <Text style={styles.linkText}>{EMAILS.support}</Text>
           </TouchableOpacity>
         </View>
@@ -84,13 +87,15 @@ export const AboutUsScreen: React.FC = () => {
             onPress={() => {
               handleNavigation('LicensesScreen');
             }}
-            style={styles.acknowledgementButton}>
+            style={styles.acknowledgementButton}
+          >
             <Text style={styles.acknowledgementButtonText}>Third-Party Licences</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => openLink(APP_LINKS.privacyPolicy)}
-            style={styles.acknowledgementButton}>
+            style={styles.acknowledgementButton}
+          >
             <Text style={styles.acknowledgementButtonText}>Privacy Policy</Text>
           </TouchableOpacity>
         </View>

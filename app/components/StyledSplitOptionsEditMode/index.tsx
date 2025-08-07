@@ -64,14 +64,16 @@ const SplitPercentageCustomCapsule = ({
       ]}
       onPress={() => {
         onCustomSplitPress && onCustomSplitPress();
-      }}>
+      }}
+    >
       <Text
         style={[
           styles.splitPercentageCapsuleCustomText,
           {
             color: active ? theme.colors.card : theme.colors.disable_text,
           },
-        ]}>
+        ]}
+      >
         {`${textValue} `}
         <StyledIcons
           type={iconType}

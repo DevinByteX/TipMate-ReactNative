@@ -2,45 +2,45 @@ import { Alert, Linking } from 'react-native';
 import { UnistylesRuntime } from 'react-native-unistyles';
 
 export type ExternalLinkAlertConfig = {
-    title?: string;
-    message?: string;
-    openText?: string;
-    cancelText?: string;
+  title?: string;
+  message?: string;
+  openText?: string;
+  cancelText?: string;
 };
 
 const defaultConfig: Required<ExternalLinkAlertConfig> = {
-    title: 'Open External Link',
-    message: 'You are about to open an external website. Do you want to continue?',
-    openText: 'Continue',
-    cancelText: 'Cancel',
+  title: 'Open External Link',
+  message: 'You are about to open an external website. Do you want to continue?',
+  openText: 'Continue',
+  cancelText: 'Cancel',
 };
 
 export const useExternalLinkAlert = (config?: ExternalLinkAlertConfig) => {
-    const baseConfig = { ...defaultConfig, ...config };
+  const baseConfig = { ...defaultConfig, ...config };
 
-    const handleLinkPress = (
-        url: string,
-        overrideConfig?: ExternalLinkAlertConfig
-    ) => {
-        const mergedConfig = { ...baseConfig, ...overrideConfig };
-        Alert.alert(
-            mergedConfig.title,
-            mergedConfig.message,
-            [
-                {
-                    text: mergedConfig.cancelText,
-                },
-                {
-                    text: mergedConfig.openText,
-                    isPreferred: true,
-                    onPress: () => Linking.openURL(url),
-                },
-            ],
-            { cancelable: true, userInterfaceStyle: UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light' },
-        );
-    };
+  const handleLinkPress = (url: string, overrideConfig?: ExternalLinkAlertConfig) => {
+    const mergedConfig = { ...baseConfig, ...overrideConfig };
+    Alert.alert(
+      mergedConfig.title,
+      mergedConfig.message,
+      [
+        {
+          text: mergedConfig.cancelText,
+        },
+        {
+          text: mergedConfig.openText,
+          isPreferred: true,
+          onPress: () => Linking.openURL(url),
+        },
+      ],
+      {
+        cancelable: true,
+        userInterfaceStyle: UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light',
+      },
+    );
+  };
 
-    return handleLinkPress;
+  return handleLinkPress;
 };
 
 /*

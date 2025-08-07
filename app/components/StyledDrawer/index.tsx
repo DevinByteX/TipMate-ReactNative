@@ -52,7 +52,8 @@ const BottomButton = ({
             : 'transparent',
         },
       ]}
-      activeOpacity={0.5}>
+      activeOpacity={0.5}
+    >
       <StyledIcons
         type={iconType}
         name={iconName}
@@ -63,7 +64,8 @@ const BottomButton = ({
         style={[
           styles.footerButtonText,
           { color: isFocused ? theme.colors.card_typography : iconColor },
-        ]}>
+        ]}
+      >
         {label}
       </Text>
     </TouchableOpacity>

@@ -21,7 +21,8 @@ const LicensesScreen = () => {
         style={styles.mainContainer}
         contentContainerStyle={styles.scrollContentContainer}
         showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+      >
         {Object.entries(licenses).map(([packageName, details], index) => {
           const { name, version } = parsePackageName(packageName);
           return (

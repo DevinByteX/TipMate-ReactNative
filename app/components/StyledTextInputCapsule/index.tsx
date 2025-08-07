@@ -101,7 +101,8 @@ export const StyledTextInputCapsule = ({
         {
           backgroundColor: inputFocused ? theme.colors.accent : theme.colors.backgroundColor,
         },
-      ]}>
+      ]}
+    >
       <TextInput
         selection={{ start: text.length - suffix.length, end: text.length - suffix.length }}
         style={[

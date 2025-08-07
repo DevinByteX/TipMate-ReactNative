@@ -65,14 +65,16 @@ const TipPercentageCustomCapsule = ({
       ]}
       onPress={() => {
         onCustomTipPress && onCustomTipPress();
-      }}>
+      }}
+    >
       <Text
         style={[
           styles.tipPercentageCapsuleCustomText,
           {
             color: active ? theme.colors.card : theme.colors.disable_text,
           },
-        ]}>
+        ]}
+      >
         {`${textValue} `}
         <StyledIcons
           type={iconType}
