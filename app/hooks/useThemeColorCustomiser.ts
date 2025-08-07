@@ -1,8 +1,8 @@
-import { UnistylesRuntime, UnistylesTheme, UnistylesThemes } from 'react-native-unistyles';
+import { UnistylesRuntime, UnistylesThemes } from 'react-native-unistyles';
 
 export interface CustomisedTheme {
   themeName: keyof UnistylesThemes;
-  customColors: Partial<UnistylesTheme['colors']>;
+  customColors: Partial<UnistylesThemes[keyof UnistylesThemes]['colors']>;
 }
 
 export const useThemeColorCustomiser = (themes: CustomisedTheme[]): void => {
