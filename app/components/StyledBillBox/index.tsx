@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, ViewStyle } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { UnistylesRuntime, StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 
 // Vertical Devider Component
@@ -9,7 +9,6 @@ export const VerticalDevider = ({
 }: {
   verticalDeviderAdditionalStyles?: ViewStyle;
 }) => {
-  const { styles } = useStyles(stylesheet);
   return <View style={[styles.verticalDeviderStyles, verticalDeviderAdditionalStyles]} />;
 };
 
@@ -43,7 +42,7 @@ export const StyledBillBox = ({
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
 
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   // Extract currency symbol rendering for title
   const renderTitleCurrencySymbol = () => {
     if (isLongCurrencySymbol) {
@@ -171,7 +170,7 @@ export const StyledBillBox = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   superMainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -249,8 +248,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   verticalDeviderStyles: {
     backgroundColor: colors.devider,
     height: '100%',
-    width: UnistylesRuntime.hairlineWidth * 8,
-    borderRadius: UnistylesRuntime.hairlineWidth * 8,
+    width: StyleSheet.hairlineWidth * 8,
+    borderRadius: StyleSheet.hairlineWidth * 8,
   },
   horizontalTextContainer: {
     flexDirection: 'row',

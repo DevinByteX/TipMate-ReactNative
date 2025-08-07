@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons, StyledToggle } from '@components';
 import { setUserPreferredTheme, setUserUpdatedThemeOption, useThemeColorCustomiser } from '@hooks';
 import { CustomThemesConfig } from '@configs';
@@ -16,7 +16,7 @@ export const StyledThemeBox = ({
   toggleDescription?: string;
   toggleText?: string;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   const CustomThemesData = CustomThemesConfig();
 
@@ -104,7 +104,7 @@ export const StyledThemeBox = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -158,7 +158,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     width: '100%',
     height: (UnistylesRuntime.screen.height * 4) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    padding: UnistylesRuntime.hairlineWidth * 2,
+    padding: StyleSheet.hairlineWidth * 2,
   },
   themeColorInnerBox: {
     backgroundColor: colors.accent,
@@ -167,7 +167,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: (UnistylesRuntime.screen.height * 0.9) / 100,
-    borderWidth: UnistylesRuntime.hairlineWidth * 6,
+    borderWidth: StyleSheet.hairlineWidth * 6,
     borderColor: colors.card,
   },
   themeColorIcon: {

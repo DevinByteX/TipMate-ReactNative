@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import React from 'react';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime } from 'react-native-unistyles';
 import { Slider, SliderProps } from '@miblanchard/react-native-slider';
 
 type StyledHorizontalSliderProps = {
@@ -17,8 +17,6 @@ export const StyledHorizontalSlider = ({
   maxValue = 80,
   ...restProps
 }: StyledHorizontalSliderProps) => {
-  const { styles } = useStyles(stylesheet);
-
   return (
     <View style={styles.mainContainer}>
       <Slider
@@ -37,7 +35,7 @@ export const StyledHorizontalSlider = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }) => ({
   mainContainer: {
     backgroundColor: colors.card,
     justifyContent: 'center',

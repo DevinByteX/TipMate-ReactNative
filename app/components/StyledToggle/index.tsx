@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Switch, Platform, SwitchProps, ViewStyle } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 
 // Define props to omit from ViewStyle that are specific to the Toggle component
 type OmitViewProps =
@@ -29,7 +29,7 @@ export const StyledToggle = ({
   onValueChange,
   toggleContainerStyles,
 }: StyledToggleProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   const backgroundColor = disabled
     ? theme.colors.disable_button
@@ -66,7 +66,7 @@ export const StyledToggle = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',

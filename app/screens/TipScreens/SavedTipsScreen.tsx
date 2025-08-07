@@ -3,10 +3,9 @@ import { ScrollView } from 'react-native';
 // Custom Component
 import { StyledHeader } from '@components';
 // Styling
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime } from 'react-native-unistyles';
 
 const SavedTipsScreen = () => {
-  const { styles } = useStyles(stylesheet);
   return (
     <>
       <StyledHeader
@@ -24,7 +23,7 @@ const SavedTipsScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,

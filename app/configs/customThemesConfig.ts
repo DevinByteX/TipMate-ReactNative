@@ -1,5 +1,5 @@
 import { CustomisedTheme } from '@hooks';
-import { UnistylesThemes, useStyles } from 'react-native-unistyles';
+import { UnistylesThemes, useUnistyles } from 'react-native-unistyles';
 
 export interface ThemeBox {
   label: string;
@@ -8,7 +8,7 @@ export interface ThemeBox {
 }
 
 export const CustomThemesConfig = (): ThemeBox[] => {
-  const { theme } = useStyles();
+  const { theme } = useUnistyles();
   return [
     {
       label: 'theme_first',

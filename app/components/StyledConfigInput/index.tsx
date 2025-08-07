@@ -7,7 +7,7 @@ import {
   TextInputEndEditingEventData,
   Pressable,
 } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 
 type StyledConfigInputProps = {
   title: string;
@@ -26,7 +26,7 @@ export const StyledConfigInput = ({
   ...TextInputProps
 }: StyledConfigInputProps) => {
   const TextInputRef = useRef<TextInput>(null);
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const [inputFocused, setInputFocused] = useState(false);
   const [text, setText] = useState(`${textValue}${suffix}`);
 
@@ -95,7 +95,7 @@ export const StyledConfigInput = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   configInputBox: {
     flex: 1,
     flexDirection: 'row',

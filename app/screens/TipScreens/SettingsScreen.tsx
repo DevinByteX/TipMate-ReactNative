@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime } from 'react-native-unistyles';
 import {
   StyledCurrencySelector,
   StyledHeader,
@@ -10,7 +10,6 @@ import {
 } from '@components';
 
 const SettingsScreen = () => {
-  const { styles } = useStyles(stylesheet);
   return (
     <>
       <StyledHeader
@@ -69,7 +68,7 @@ const SettingsScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,

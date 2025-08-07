@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import {
   StyledConfigInput,
   StyledIcons,
@@ -53,7 +53,7 @@ const TipPercentageCustomCapsule = ({
   iconType?: StyledIconTypesKeys;
   iconName?: string;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   return (
     <Pressable
       disabled={!active}
@@ -107,8 +107,6 @@ export const StyledTipOptionsEditMode = ({
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
   const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);
-
-  const { styles } = useStyles(stylesheet);
 
   return (
     <View style={styles.mainContainer}>
@@ -232,7 +230,7 @@ export const StyledTipOptionsEditMode = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   mainContainer: {
     width: '100%',
     backgroundColor: colors.card,

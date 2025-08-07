@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { acceptNumbersAndDecimals } from '@hooks';
 
@@ -25,7 +25,7 @@ export const StyledTotalAmountInput = ({
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
 
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   const [textInputValue, setTextInputValue] = useState<string>();
   const [isFocused, setIsFocused] = useState<boolean>();
@@ -84,7 +84,7 @@ export const StyledTotalAmountInput = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   mainContainer: {
     width: '100%',
     backgroundColor: colors.card,

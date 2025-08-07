@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 import { useAppContext } from '@/context/AppContext';
 
@@ -13,7 +13,8 @@ const TipPercentageCapsule = ({
   textValue: number;
   onTipPress?: (value: number) => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
+
   return (
     <Pressable
       style={[
@@ -47,7 +48,7 @@ const TipPercentageCustomCapsule = ({
   textValue: string;
   onCustomTipPress?: () => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   return (
     <Pressable
       style={[
@@ -95,7 +96,7 @@ export const StyledTipOptions = ({
   const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   return (
     <View style={styles.mainContainer}>
@@ -197,7 +198,7 @@ export const StyledTipOptions = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',

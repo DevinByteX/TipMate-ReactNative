@@ -1,6 +1,6 @@
 import React from 'react';
 import { Keyboard, Pressable, StatusBar, Text, View, ViewStyle } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import { StyledIconTypesKeys, StyledIcons } from '@components';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
@@ -47,7 +47,7 @@ export const StyledHeader = ({
   headerRightIconVisibilty = true,
   enableBackButton = false,
 }: styledHeaderProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   // Use the useNavigation hook with the general drawer navigation type
   const navigation = useNavigation<DrawerNavProp>();
@@ -105,7 +105,7 @@ export const StyledHeader = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   headerMainContainer: {
     backgroundColor: colors.headerBGColor,
     paddingTop: UnistylesRuntime.statusBar.height,

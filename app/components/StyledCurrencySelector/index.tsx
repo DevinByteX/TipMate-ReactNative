@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
 import { useAppContext } from '@/context/AppContext';
@@ -15,7 +15,7 @@ const CurrencySelectiveScroll = ({
   currencyObject?: CurrencyType;
   currencySelectiveBarPress?: (currency: CurrencyType) => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   return (
     <ScrollView
@@ -36,7 +36,7 @@ const CurrencySelectiveScroll = ({
             {
               borderWidth:
                 currency?.currencyId === currencyObject?.currencyId
-                  ? UnistylesRuntime.hairlineWidth * 5
+                  ? StyleSheet.hairlineWidth * 5
                   : 0,
               borderColor:
                 currency?.currencyId === currencyObject?.currencyId
@@ -74,7 +74,7 @@ const CurrencyListModal = ({
   closeButtonPress?: () => void;
   currencySelectiveBarPress?: (currency: CurrencyType) => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   return (
     <Modal visible={modalVisibility} transparent={true} animationType={'slide'}>
@@ -131,7 +131,6 @@ export const StyledCurrencySelector = ({
   currencyChangeToastMessage?: string;
 }) => {
   const { state, dispatch } = useAppContext();
-  const { styles } = useStyles(stylesheet);
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
@@ -179,7 +178,7 @@ export const StyledCurrencySelector = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -238,7 +237,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     height: (UnistylesRuntime.screen.height * 50) / 100,
     width: '100%',
     borderRadius: (UnistylesRuntime.screen.width * 5) / 100,
-    borderWidth: UnistylesRuntime.hairlineWidth * 2,
+    borderWidth: StyleSheet.hairlineWidth * 2,
     borderColor: colors.accent,
     backgroundColor: utils.hexToRGBA(colors.card, 0.95),
     bottom: -(UnistylesRuntime.insets.bottom * 1), // Minus

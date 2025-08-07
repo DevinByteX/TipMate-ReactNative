@@ -1,5 +1,5 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 // Components
 import { StyledDrawer } from '@components';
 // Screens
@@ -11,7 +11,7 @@ import AboutUsScreen from '@/screens/AppInfoScreens/AboutUsScreen';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
-  const { theme } = useStyles();
+  const { theme } = useUnistyles();
 
   return (
     <Drawer.Navigator

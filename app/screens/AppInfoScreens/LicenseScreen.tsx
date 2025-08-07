@@ -1,14 +1,12 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { StyledHeader, StyledLicenseDetailsCard } from '@components';
-import { createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import licenses from '../../assets/oss-licenses.json';
 import { parsePackageName } from '@/hooks/parsePackageName';
 
 const LicensesScreen = () => {
-  const { styles } = useStyles(stylesheet);
-
   return (
     <>
       <StyledHeader
@@ -41,7 +39,7 @@ const LicensesScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,

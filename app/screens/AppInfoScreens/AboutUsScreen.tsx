@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Linking, ScrollView, Alert } from 'react-native';
-import { createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { StyledHeader } from '@components';
 import { AppLogo } from '@/components/StyledSVGIcons';
@@ -9,7 +9,7 @@ import { useExternalLinkAlert } from '@hooks';
 import { APP_LINKS, EMAILS, APP_INFO } from '@configs';
 
 export const AboutUsScreen: React.FC = () => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   const navigation = useNavigation();
 
@@ -105,7 +105,7 @@ export const AboutUsScreen: React.FC = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,

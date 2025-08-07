@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { useExternalLinkAlert } from '@hooks';
 
@@ -19,7 +19,6 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   repository,
   licenseUrl,
 }) => {
-  const { styles } = useStyles(stylesheet);
   const openLink = useExternalLinkAlert();
 
   return (
@@ -38,7 +37,7 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   licenseMainContainer: {
     width: '100%',
     backgroundColor: colors.card,

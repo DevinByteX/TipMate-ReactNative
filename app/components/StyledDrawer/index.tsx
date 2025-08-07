@@ -5,7 +5,7 @@ import {
   DrawerItemList,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons, StyledIconTypesKeys, StyledToggle } from '@components';
 import { setUserPreferredTheme } from '@hooks';
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
@@ -39,7 +39,7 @@ const BottomButton = ({
   onPress,
   isFocused,
 }: BottomButtonProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   return (
     <TouchableOpacity
@@ -73,8 +73,6 @@ const BottomButton = ({
 };
 
 export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
-  const { styles } = useStyles(stylesheet);
-
   const activeRouteName = getActiveRouteName(props.state.routes[props.state.index]);
   console.log('Active Route Name:', activeRouteName);
 
@@ -132,7 +130,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   mainDrawerContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -143,7 +141,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   horizontalDeviderStyles: {
     backgroundColor: colors.devider,
     width: '100%',
-    height: UnistylesRuntime.hairlineWidth * 8,
+    height: StyleSheet.hairlineWidth * 8,
   },
   bottomButtonContainer: {
     paddingHorizontal: (UnistylesRuntime.screen.width * 4) / 100,

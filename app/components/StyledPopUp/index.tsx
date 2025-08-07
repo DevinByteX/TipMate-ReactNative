@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Modal, Pressable } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime } from 'react-native-unistyles';
 
 type StyledPopUpTypes = {
   popUpVisibility?: boolean;
@@ -21,7 +21,6 @@ export const StyledPopUp = ({
   onLineButtonPress,
   onSolidButtonPress,
 }: StyledPopUpTypes) => {
-  const { styles } = useStyles(stylesheet);
   return (
     <View style={styles.centeredView}>
       <Modal visible={popUpVisibility} transparent={true} animationType={'fade'}>
@@ -54,7 +53,7 @@ export const StyledPopUp = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
   centeredView: {
     flex: 1,
     justifyContent: 'center',
@@ -67,7 +66,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.width * 2) / 100,
     borderColor: colors.backgroundColor,
-    borderWidth: UnistylesRuntime.hairlineWidth,
+    borderWidth: StyleSheet.hairlineWidth,
   },
   modalTitle: {
     fontFamily: fonts.Nunito_Black,
@@ -95,7 +94,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     height: (UnistylesRuntime.screen.height * 4) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
     borderColor: colors.card_typography,
-    borderWidth: UnistylesRuntime.hairlineWidth * 2,
+    borderWidth: StyleSheet.hairlineWidth * 2,
     justifyContent: 'center',
     alignItems: 'center',
   },

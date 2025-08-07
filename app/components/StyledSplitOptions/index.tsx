@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 import { useAppContext } from '@/context/AppContext';
 
@@ -13,7 +13,7 @@ const SplitCapsule = ({
   textValue: number;
   onSplitPress?: (value: number) => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   return (
     <Pressable
       style={[
@@ -47,7 +47,7 @@ const SplitCustomCapsule = ({
   textValue: string;
   onCustomSplitPress?: () => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   return (
     <Pressable
       style={[
@@ -95,8 +95,6 @@ export const StyledSpiltOptions = ({
   const [splitValue, setSplitValue] = useState<number>(defaultSplitValue);
 
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
-
-  const { styles } = useStyles(stylesheet);
 
   return (
     <View style={styles.mainContainer}>
@@ -190,7 +188,7 @@ export const StyledSpiltOptions = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',

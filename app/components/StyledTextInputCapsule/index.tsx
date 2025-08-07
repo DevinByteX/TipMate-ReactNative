@@ -1,7 +1,7 @@
 import { View, TextInput, NativeSyntheticEvent, TextInputEndEditingEventData } from 'react-native';
 import React, { useEffect, useState } from 'react';
 // Third party libs
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import Toast from 'react-native-toast-message';
 // Custom configs
 import { SplitOptionState, TipOptionState } from '@/context/types';
@@ -36,7 +36,7 @@ export const StyledTextInputCapsule = ({
   minValidateValue,
   maxValidateValue,
 }: StyledTextInputCapsuleProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const [inputFocused, setInputFocused] = useState(false);
   const [text, setText] = useState(`${textValue}${suffix}`);
 
@@ -127,7 +127,7 @@ export const StyledTextInputCapsule = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   tipEditViewCapsule: {
     flex: 1,
     justifyContent: 'center',

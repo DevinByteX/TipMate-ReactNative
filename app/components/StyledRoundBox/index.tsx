@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import { RoundingMethod, RoundingMethodType, DisabledRoundingMethodsType } from '@hooks';
 import { StyledIcons } from '@components';
 
@@ -17,7 +17,7 @@ const RoundCapsule = ({
   disabled?: boolean;
   onRoundCapsulePress?: (value: RoundingMethodType) => void;
 }) => {
-  const { styles, theme } = useStyles(styleSheet);
+  const { theme } = useUnistyles();
   return (
     <Pressable
       style={[
@@ -71,8 +71,6 @@ export const StyledRoundBox = ({
   disablingRoundingMethod?: DisabledRoundingMethodsType;
   onSelectedRound?: (value: RoundingMethodType) => void;
 }) => {
-  const { styles } = useStyles(styleSheet);
-
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>{`${titleText}`}</Text>
@@ -117,7 +115,7 @@ export const StyledRoundBox = ({
   );
 };
 
-const styleSheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',

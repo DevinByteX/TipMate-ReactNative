@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import {
   StyledConfigInput,
   StyledIcons,
@@ -52,7 +52,7 @@ const SplitPercentageCustomCapsule = ({
   iconType?: StyledIconTypesKeys;
   iconName?: string;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   return (
     <Pressable
       disabled={!active}
@@ -106,8 +106,6 @@ export const StyledSplitOptionsEditMode = ({
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
   const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);
-
-  const { styles } = useStyles(stylesheet);
 
   return (
     <View style={styles.mainContainer}>
@@ -231,7 +229,7 @@ export const StyledSplitOptionsEditMode = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
