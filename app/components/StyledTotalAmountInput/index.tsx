@@ -84,13 +84,13 @@ export const StyledTotalAmountInput = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   mainContainer: {
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (runtime.screen.height * 2) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
@@ -101,11 +101,11 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginVertical: (runtime.screen.height * 0.5) / 100,
   },
   textInputContainer: {
     flexDirection: 'row',
-    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+    marginTop: (runtime.screen.height * 1) / 100,
   },
   currencySymbol: {
     color: colors.card_typography,

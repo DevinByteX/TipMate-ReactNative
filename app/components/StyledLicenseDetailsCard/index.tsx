@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
-import { UnistylesRuntime } from 'react-native-unistyles';
 import { useExternalLinkAlert } from '@hooks';
 
 interface LicenseDetailsProps {
@@ -37,39 +36,39 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   licenseMainContainer: {
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
+    paddingVertical: (runtime.screen.height * 2) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
+    marginBottom: (runtime.screen.height * 2) / 100,
   },
   libraryNameText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginBottom: (runtime.screen.height * 0.5) / 100,
   },
   versionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginBottom: (runtime.screen.height * 0.5) / 100,
   },
   licenseText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginBottom: (runtime.screen.height * 0.5) / 100,
   },
   repositoryText: {
     fontSize: 10,
     color: colors.accent,
     fontFamily: fonts.Montserrat_Medium,
     textDecorationLine: 'underline',
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginBottom: (runtime.screen.height * 0.5) / 100,
   },
   licenseUrlText: {
     fontSize: 10,

@@ -2,7 +2,6 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { StyledHeader, StyledLicenseDetailsCard } from '@components';
 import { StyleSheet } from 'react-native-unistyles';
-import { UnistylesRuntime } from 'react-native-unistyles';
 import licenses from '../../assets/oss-licenses.json';
 import { parsePackageName } from '@/hooks/parsePackageName';
 
@@ -39,14 +38,14 @@ const LicensesScreen = () => {
   );
 };
 
-const styles = StyleSheet.create(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }, runtime) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
   },
   scrollContentContainer: {
-    paddingBottom: UnistylesRuntime.insets.bottom * 2,
+    paddingBottom: runtime.insets.bottom * 2,
   },
 }));
 

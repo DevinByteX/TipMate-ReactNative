@@ -130,13 +130,13 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   mainDrawerContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
   },
   drawerButtonContainer: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingHorizontal: (runtime.screen.width * 2) / 100,
   },
   horizontalDeviderStyles: {
     backgroundColor: colors.devider,
@@ -144,13 +144,13 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     height: StyleSheet.hairlineWidth * 8,
   },
   bottomButtonContainer: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 4) / 100,
-    paddingTop: UnistylesRuntime.insets.bottom / 2,
-    paddingBottom: UnistylesRuntime.insets.bottom / 2 + UnistylesRuntime.navigationBar.height,
+    paddingHorizontal: (runtime.screen.width * 4) / 100,
+    paddingTop: runtime.insets.bottom / 2,
+    paddingBottom: runtime.insets.bottom / 2 + runtime.navigationBar.height,
   },
   bottomButtonStyles: {
-    paddingVertical: (UnistylesRuntime.screen.height * 1.75) / 100,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingVertical: (runtime.screen.height * 1.75) / 100,
+    marginVertical: (runtime.screen.height * 0.5) / 100,
     paddingStart: 16, // as per the react navigation drawer item paddingStart in the source code
     borderRadius: 56, // as per the react navigation drawer item borderRadius in the source code
     flexDirection: 'row',
@@ -160,12 +160,12 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
-    paddingStart: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingStart: (runtime.screen.width * 2) / 100,
   },
   preferencesButtonContainer: {
-    paddingStart: (UnistylesRuntime.screen.width * 4) / 100,
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    paddingStart: (runtime.screen.width * 4) / 100,
+    paddingTop: (runtime.screen.height * 1) / 100,
+    paddingBottom: (runtime.screen.height * 1.5) / 100,
   },
   preferencesText: {
     color: colors.card_typography,
@@ -175,13 +175,13 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
   themePrefContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingTop: (runtime.screen.height * 1) / 100,
   },
   themePrefText: {
     color: colors.card_typography,
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
-    paddingEnd: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingEnd: (runtime.screen.width * 2) / 100,
   },
 }));
 

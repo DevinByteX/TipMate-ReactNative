@@ -105,22 +105,22 @@ export const StyledHeader = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   headerMainContainer: {
     backgroundColor: colors.headerBGColor,
-    paddingTop: UnistylesRuntime.statusBar.height,
-    paddingBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingTop: runtime.statusBar.height,
+    paddingBottom: (runtime.screen.height * 0.5) / 100,
   },
   headerInnerContainer: {
     flexDirection: 'row',
-    height: (UnistylesRuntime.screen.height * 6) / 100,
+    height: (runtime.screen.height * 6) / 100,
   },
   innerLeftContainer: {
     flex: 1,
     justifyContent: 'center',
   },
   headerLeftButtonStyles: {
-    paddingStart: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingStart: (runtime.screen.width * 5) / 100,
   },
   innerMiddleContainer: { flex: 2, justifyContent: 'center', alignItems: 'center' },
   innerRightContainer: {
@@ -129,7 +129,7 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     alignItems: 'flex-end',
   },
   headerRightButtonStyles: {
-    paddingEnd: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingEnd: (runtime.screen.width * 5) / 100,
   },
   headerText: {
     fontSize: 22,

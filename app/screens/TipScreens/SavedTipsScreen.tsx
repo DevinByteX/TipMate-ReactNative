@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 // Custom Component
 import { StyledHeader } from '@components';
 // Styling
-import { StyleSheet, UnistylesRuntime } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 
 const SavedTipsScreen = () => {
   return (
@@ -23,14 +23,14 @@ const SavedTipsScreen = () => {
   );
 };
 
-const styles = StyleSheet.create(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }, runtime) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
   },
   scrollContentContainer: {
-    paddingBottom: (UnistylesRuntime.screen.height * 8) / 100,
+    paddingBottom: (runtime.screen.height * 8) / 100,
   },
 }));
 

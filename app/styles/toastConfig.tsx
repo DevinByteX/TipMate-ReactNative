@@ -6,7 +6,7 @@ import {
   ErrorToast,
   ToastConfigParams,
 } from 'react-native-toast-message';
-import { StyleSheet, UnistylesRuntime } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 
 /*
   1. Create the config
@@ -61,7 +61,7 @@ export const toastConfig = {
   },
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   successToastStyle: {
     borderStartColor: colors.accent, // for Android to change left border color
     borderLeftColor: colors.accent, // for iOS to change left border color
@@ -70,7 +70,7 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     borderWidth: StyleSheet.hairlineWidth,
   },
   successToastContainerStyle: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
   },
   successText1: { color: colors.accent, fontFamily: fonts.Nunito_Black, fontSize: 14 },
   errorToastStyle: {
@@ -80,11 +80,11 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     borderWidth: StyleSheet.hairlineWidth,
   },
   errorToastContainerStyle: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
   },
   errorText1: { color: colors.error_toast, fontFamily: fonts.Nunito_Black, fontSize: 14 },
   tomatoToastStyle: {
-    height: (UnistylesRuntime.screen.height * 8) / 100,
+    height: (runtime.screen.height * 8) / 100,
     width: '100%',
     backgroundColor: colors.error_toast,
   },

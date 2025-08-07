@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
-import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
 import { useAppContext } from '@/context/AppContext';
@@ -178,40 +178,40 @@ export const StyledCurrencySelector = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
+const styles = StyleSheet.create(({ colors, fonts, utils }, runtime) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (runtime.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (runtime.screen.height * 2) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   instructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (runtime.screen.height * 0.5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   modalInstructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginBottom: (runtime.screen.height * 2) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   mainCurrencyChangeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingTop: (runtime.screen.height * 0.5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   currencyChangeText: {
     color: colors.card_typography,
@@ -221,10 +221,10 @@ const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
   currencyBox: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: (UnistylesRuntime.screen.width * 20) / 100,
+    width: (runtime.screen.width * 20) / 100,
     backgroundColor: colors.backgroundColor,
-    height: (UnistylesRuntime.screen.height * 4) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    height: (runtime.screen.height * 4) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
   },
   currencyText: {
     fontSize: 14,
@@ -234,22 +234,22 @@ const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
 
   // Modal contents
   modalMainContainer: {
-    height: (UnistylesRuntime.screen.height * 50) / 100,
+    height: (runtime.screen.height * 50) / 100,
     width: '100%',
-    borderRadius: (UnistylesRuntime.screen.width * 5) / 100,
+    borderRadius: (runtime.screen.width * 5) / 100,
     borderWidth: StyleSheet.hairlineWidth * 2,
     borderColor: colors.accent,
     backgroundColor: utils.hexToRGBA(colors.card, 0.95),
-    bottom: -(UnistylesRuntime.insets.bottom * 1), // Minus
+    bottom: -(runtime.insets.bottom * 1), // Minus
     position: 'absolute',
   },
   modalTitleAndCloseButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingTop: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
+    paddingTop: (runtime.screen.height * 2) / 100,
+    paddingBottom: (runtime.screen.height * 0.5) / 100,
   },
   modalTitle: {
     color: colors.accent,
@@ -258,15 +258,15 @@ const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
   },
   modalContentContainer: {
     width: '100%',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
   },
   modalContentCurrencyBarContainer: {
     flexDirection: 'row',
     width: '100%',
-    paddingVertical: (UnistylesRuntime.screen.height * 1.25) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingVertical: (runtime.screen.height * 1.25) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
     backgroundColor: colors.backgroundColor,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
   },
   modalcurrencyText: {
     fontSize: 14,
@@ -276,16 +276,16 @@ const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
   currencySelectiveName: {
     flex: 4,
     justifyContent: 'center',
-    paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingVertical: (runtime.screen.height * 0.5) / 100,
   },
   currencySelectiveSign: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingVertical: (runtime.screen.height * 0.5) / 100,
   },
   currencyScrollContainerStyles: {
-    gap: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingBottom: UnistylesRuntime.insets.bottom * 5,
+    gap: (runtime.screen.height * 1) / 100,
+    paddingBottom: runtime.insets.bottom * 5,
   },
 }));

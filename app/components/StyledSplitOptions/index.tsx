@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 import { useAppContext } from '@/context/AppContext';
 
@@ -188,61 +188,61 @@ export const StyledSpiltOptions = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (runtime.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (runtime.screen.height * 2) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   instructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (runtime.screen.height * 0.5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   mainInnerContainer: {
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
-    rowGap: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (runtime.screen.height * 1) / 100,
+    rowGap: (runtime.screen.height * 1) / 100,
   },
   mainRowContainerStyles: {
     flex: 1,
     flexDirection: 'row',
-    height: (UnistylesRuntime.screen.height * 4) / 100,
+    height: (runtime.screen.height * 4) / 100,
   },
   fistColumnContainerStyles: {
     flex: 1,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
+    columnGap: (runtime.screen.width * 2) / 100,
   },
   secondColumnContainerStyles: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
   },
   splitCapsule: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
   },
   splitCapsuleCustom: {
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     height: '100%',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
   },
   splitDigitsStyles: {
     fontSize: 24,
@@ -261,6 +261,6 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     color: colors.card_typography,
   },
   sliderContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+    marginTop: (runtime.screen.height * 1) / 100,
   },
 }));

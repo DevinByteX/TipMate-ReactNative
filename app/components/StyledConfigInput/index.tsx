@@ -7,7 +7,7 @@ import {
   TextInputEndEditingEventData,
   Pressable,
 } from 'react-native';
-import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 type StyledConfigInputProps = {
   title: string;
@@ -95,15 +95,15 @@ export const StyledConfigInput = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   configInputBox: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
     borderColor: colors.backgroundColor,
-    borderWidth: (UnistylesRuntime.screen.width * 0.5) / 100,
+    borderWidth: (runtime.screen.width * 0.5) / 100,
   },
   configBoxText: {
     fontSize: 14,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
-    paddingVertical: (UnistylesRuntime.screen.height * 0.75) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 1) / 100,
+    paddingVertical: (runtime.screen.height * 0.75) / 100,
+    paddingHorizontal: (runtime.screen.width * 1) / 100,
   },
 }));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { StyleSheet, UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { RoundingMethod, RoundingMethodType, DisabledRoundingMethodsType } from '@hooks';
 import { StyledIcons } from '@components';
 
@@ -115,41 +115,41 @@ export const StyledRoundBox = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (runtime.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingTop: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 1) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingTop: (runtime.screen.height * 2) / 100,
+    paddingBottom: (runtime.screen.height * 1) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   instructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (runtime.screen.height * 0.5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   mainInnerContainer: {
     flexDirection: 'row',
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingVertical: (runtime.screen.height * 1) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
+    columnGap: (runtime.screen.width * 2) / 100,
   },
   roundCapsuleStyle: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    height: (UnistylesRuntime.screen.height * 4) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
+    height: (runtime.screen.height * 4) / 100,
   },
   roundCapsuleText: {
     fontSize: 14,

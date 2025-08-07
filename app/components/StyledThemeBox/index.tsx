@@ -104,46 +104,46 @@ export const StyledThemeBox = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (runtime.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (runtime.screen.height * 2) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   instructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (runtime.screen.height * 0.5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   mainBoxContainer: {
     flexDirection: 'row',
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingVertical: (runtime.screen.height * 1) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
+    columnGap: (runtime.screen.width * 2) / 100,
   },
   toggleInstructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (runtime.screen.height * 0.5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   mainThemeToggleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingTop: (runtime.screen.height * 0.5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   toggleText: {
     color: colors.card_typography,
@@ -156,8 +156,8 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     alignItems: 'center',
     backgroundColor: colors.card_typography,
     width: '100%',
-    height: (UnistylesRuntime.screen.height * 4) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    height: (runtime.screen.height * 4) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
     padding: StyleSheet.hairlineWidth * 2,
   },
   themeColorInnerBox: {
@@ -166,7 +166,7 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: (UnistylesRuntime.screen.height * 0.9) / 100,
+    borderRadius: (runtime.screen.height * 0.9) / 100,
     borderWidth: StyleSheet.hairlineWidth * 6,
     borderColor: colors.card,
   },

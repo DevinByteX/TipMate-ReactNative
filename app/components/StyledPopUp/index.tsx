@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Modal, Pressable } from 'react-native';
-import { StyleSheet, UnistylesRuntime } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 
 type StyledPopUpTypes = {
   popUpVisibility?: boolean;
@@ -53,7 +53,7 @@ export const StyledPopUp = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
+const styles = StyleSheet.create(({ colors, fonts, utils }, runtime) => ({
   centeredView: {
     flex: 1,
     justifyContent: 'center',
@@ -62,9 +62,9 @@ const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
   },
   modalContents: {
     backgroundColor: colors.card,
-    width: (UnistylesRuntime.screen.width * 90) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.width * 2) / 100,
+    width: (runtime.screen.width * 90) / 100,
+    paddingVertical: (runtime.screen.height * 2) / 100,
+    borderRadius: (runtime.screen.width * 2) / 100,
     borderColor: colors.backgroundColor,
     borderWidth: StyleSheet.hairlineWidth,
   },
@@ -79,20 +79,20 @@ const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     textAlign: 'center',
-    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginTop: (runtime.screen.height * 1) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
   },
   buttonContainer: {
     flexDirection: 'row',
-    marginTop: (UnistylesRuntime.screen.height * 1.5) / 100,
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    columnGap: (UnistylesRuntime.screen.width * 5) / 100,
+    marginTop: (runtime.screen.height * 1.5) / 100,
+    marginBottom: (runtime.screen.height * 0.5) / 100,
+    marginHorizontal: (runtime.screen.width * 5) / 100,
+    columnGap: (runtime.screen.width * 5) / 100,
   },
   lineButton: {
     flex: 1,
-    height: (UnistylesRuntime.screen.height * 4) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    height: (runtime.screen.height * 4) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
     borderColor: colors.card_typography,
     borderWidth: StyleSheet.hairlineWidth * 2,
     justifyContent: 'center',
@@ -105,8 +105,8 @@ const styles = StyleSheet.create(({ colors, fonts, utils }) => ({
   },
   solidButton: {
     flex: 1,
-    height: (UnistylesRuntime.screen.height * 4) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    height: (runtime.screen.height * 4) / 100,
+    borderRadius: (runtime.screen.height * 1) / 100,
     backgroundColor: colors.accent,
     justifyContent: 'center',
     alignItems: 'center',

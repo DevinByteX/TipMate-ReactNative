@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Linking, ScrollView, Alert } from 'react-native';
-import { StyleSheet, useUnistyles } from 'react-native-unistyles';
-import { UnistylesRuntime } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { StyledHeader } from '@components';
 import { AppLogo } from '@/components/StyledSVGIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -9,8 +8,6 @@ import { useExternalLinkAlert } from '@hooks';
 import { APP_LINKS, EMAILS, APP_INFO } from '@configs';
 
 export const AboutUsScreen: React.FC = () => {
-  const { theme } = useUnistyles();
-
   const navigation = useNavigation();
 
   const openLink = useExternalLinkAlert();
@@ -35,11 +32,11 @@ export const AboutUsScreen: React.FC = () => {
       >
         <View style={styles.logoContainer}>
           <AppLogo
-            colour={theme.colors.accent}
+            colour={styles.applogo.color}
             backgroundColour={'transparent'}
             showBackground={false}
-            height={(UnistylesRuntime.screen.width * 20) / 100}
-            width={(UnistylesRuntime.screen.width * 20) / 100}
+            height={styles.applogo.height}
+            width={styles.applogo.width}
           />
         </View>
         <Text style={styles.description}>
@@ -105,19 +102,19 @@ export const AboutUsScreen: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, runtime) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
   },
   scrollContentContainer: {},
   logoContainer: {
     alignItems: 'center',
   },
   logo: {
-    width: (UnistylesRuntime.screen.width * 40) / 100,
-    height: (UnistylesRuntime.screen.width * 40) / 100,
+    width: (runtime.screen.width * 40) / 100,
+    height: (runtime.screen.width * 40) / 100,
   },
   description: {
     color: colors.card_typography,
@@ -125,17 +122,17 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     fontSize: 16,
     lineHeight: 24,
     textAlign: 'left',
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginBottom: (runtime.screen.height * 1.5) / 100,
   },
   section: {
     backgroundColor: colors.backgroundColor,
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginBottom: (runtime.screen.height * 1.5) / 100,
   },
   sectionTitle: {
     color: colors.accent,
     fontFamily: fonts.Nunito_Bold,
     fontSize: 18,
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginBottom: (runtime.screen.height * 1.5) / 100,
   },
   sectionText: {
     color: colors.card_typography,
@@ -144,8 +141,8 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
   },
   acknowledgementsSection: {
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingBottom: UnistylesRuntime.insets.bottom / 2 + UnistylesRuntime.navigationBar.height,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
+    paddingBottom: runtime.insets.bottom / 2 + runtime.navigationBar.height,
   },
   linkText: {
     color: colors.accent,
@@ -158,12 +155,12 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     fontFamily: fonts.Montserrat_Medium,
     fontSize: 14,
     lineHeight: 20,
-    marginVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginVertical: (runtime.screen.height * 1.5) / 100,
   },
   acknowledgementLinks: {
     flexWrap: 'wrap',
     flexDirection: 'row',
-    gap: (UnistylesRuntime.screen.width * 4) / 100,
+    gap: (runtime.screen.width * 4) / 100,
   },
   acknowledgementButton: {
     backgroundColor: colors.accent,
@@ -181,7 +178,12 @@ const styles = StyleSheet.create(({ colors, fonts }) => ({
     fontFamily: fonts.Montserrat_Medium,
     fontSize: 14,
     textAlign: 'center',
-    marginTop: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginTop: (runtime.screen.height * 1.5) / 100,
+  },
+  applogo: {
+    color: colors.accent,
+    width: (runtime.screen.width * 20) / 100,
+    height: (runtime.screen.width * 20) / 100,
   },
 }));
 

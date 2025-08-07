@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import React from 'react';
-import { StyleSheet, UnistylesRuntime } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { Slider, SliderProps } from '@miblanchard/react-native-slider';
 
 type StyledHorizontalSliderProps = {
@@ -35,31 +35,31 @@ export const StyledHorizontalSlider = ({
   );
 };
 
-const styles = StyleSheet.create(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }, runtime) => ({
   mainContainer: {
     backgroundColor: colors.card,
     justifyContent: 'center',
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingTop: (runtime.screen.height * 1) / 100,
+    paddingHorizontal: (runtime.screen.width * 5) / 100,
   },
   sliderContainerStyles: {
-    height: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
+    height: (runtime.screen.height * 2) / 100,
+    borderRadius: (runtime.screen.height * 2) / 100,
   },
   minimumTrackStyle: {
     backgroundColor: colors.accent,
-    height: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
+    height: (runtime.screen.height * 2) / 100,
+    borderRadius: (runtime.screen.height * 2) / 100,
   },
   maximumTrackStyle: {
     backgroundColor: colors.backgroundColor,
-    height: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
+    height: (runtime.screen.height * 2) / 100,
+    borderRadius: (runtime.screen.height * 2) / 100,
   },
   markerStyles: {
     backgroundColor: colors.accent,
-    height: (UnistylesRuntime.screen.height * 3.5) / 100,
-    width: (UnistylesRuntime.screen.height * 3.5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 3.5) / 100,
+    height: (runtime.screen.height * 3.5) / 100,
+    width: (runtime.screen.height * 3.5) / 100,
+    borderRadius: (runtime.screen.height * 3.5) / 100,
   },
 }));
