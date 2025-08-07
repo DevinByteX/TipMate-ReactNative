@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native-unistyles';
 import { breakpoints } from './breakpoints';
 import { lightTheme, darkTheme, premiumTheme } from './themes';
+import { Constants } from '@configs';
 
 type AppBreakpoints = typeof breakpoints;
 type AppThemes = {
@@ -22,7 +23,7 @@ StyleSheet.configure({
   },
   breakpoints: breakpoints,
   settings: {
-    initialTheme: 'light', // Default initial theme (should add this if adaptiveThemes:false)
+    initialTheme: Constants.defaultColorTheme, // Default initial theme (should add this if adaptiveThemes:false)
     adaptiveThemes: false, // Change to true for system theme adaptation
   },
 })

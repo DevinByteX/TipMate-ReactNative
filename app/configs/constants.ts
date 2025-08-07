@@ -4,6 +4,7 @@ import {
   TipOptionState,
   TipSliderConfigValues,
 } from '@/context/types';
+import { UnistylesThemes } from 'react-native-unistyles';
 
 export type CurrencyType = {
   currencyId: string;
@@ -86,6 +87,7 @@ export const Constants = {
     currencyName: 'US Dollar',
     currencySign: '$',
   } as CurrencyType,
+  defaultColorTheme: 'light' as keyof UnistylesThemes,
 };
 
 export const APP_LINKS = {
