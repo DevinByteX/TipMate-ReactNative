@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Linking, ScrollView, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Linking, ScrollView, Platform } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 import { StyledHeader } from '@components';
 import { AppLogo } from '@/components/StyledSVGIcons';
@@ -47,7 +47,15 @@ export const AboutUsScreen: React.FC = () => {
         <View style={styles.section}>
           <Text
             style={[styles.sectionTitle, { textDecorationLine: 'underline' }]}
-            onPress={() => openLink(APP_LINKS.playStore)}
+            onPress={() =>
+              openLink(
+                Platform.select({
+                  ios: APP_LINKS.appStore,
+                  android: APP_LINKS.playStore,
+                  default: APP_LINKS.playStore,
+                }),
+              )
+            }
           >
             DevinForge Labs
           </Text>
