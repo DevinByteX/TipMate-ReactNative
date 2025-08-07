@@ -24,14 +24,16 @@ const TipPercentageCapsule = ({
       ]}
       onPress={() => {
         onTipPress && onTipPress(textValue);
-      }}>
+      }}
+    >
       <Text
         style={[
           styles.tipPercentageCapsuleText,
           {
             color: active ? theme.colors.card : theme.colors.card_typography,
           },
-        ]}>{`${textValue}%`}</Text>
+        ]}
+      >{`${textValue}%`}</Text>
     </Pressable>
   );
 };
@@ -56,14 +58,16 @@ const TipPercentageCustomCapsule = ({
       ]}
       onPress={() => {
         onCustomTipPress && onCustomTipPress();
-      }}>
+      }}
+    >
       <Text
         style={[
           styles.tipPercentageCapsuleCustomText,
           {
             color: active ? theme.colors.card : theme.colors.card_typography,
           },
-        ]}>
+        ]}
+      >
         {`${textValue} `}
         <StyledIcons
           type={'FontAwesome5'}
@@ -141,7 +145,8 @@ export const StyledTipOptions = ({
                 ]}
                 adjustsFontSizeToFit={true}
                 allowFontScaling={false}
-                numberOfLines={1}>
+                numberOfLines={1}
+              >
                 {`${tipPercentageValue}%`}
               </Text>
             </View>

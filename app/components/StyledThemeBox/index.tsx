@@ -41,12 +41,14 @@ export const StyledThemeBox = ({
         ]}
         onPress={() => {
           onButtonPress && onButtonPress();
-        }}>
+        }}
+      >
         <View
           style={[
             styles.themeColorInnerBox,
             { backgroundColor: buttonColor || theme.colors.accent },
-          ]}>
+          ]}
+        >
           {active ? (
             <StyledIcons type={'Octicons'} name={'check'} style={styles.themeColorIcon} />
           ) : null}

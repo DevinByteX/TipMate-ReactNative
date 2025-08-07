@@ -18,7 +18,8 @@ const SavedTipsScreen = () => {
         style={styles.mainContainer}
         contentContainerStyle={styles.scrollContentContainer}
         showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}></ScrollView>
+        showsVerticalScrollIndicator={false}
+      ></ScrollView>
     </>
   );
 };

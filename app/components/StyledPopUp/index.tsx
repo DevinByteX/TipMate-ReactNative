@@ -34,14 +34,16 @@ export const StyledPopUp = ({
                 style={styles.lineButton}
                 onPress={() => {
                   onLineButtonPress && onLineButtonPress();
-                }}>
+                }}
+              >
                 <Text style={styles.lineButtonText}>{`${lineButtonText}`}</Text>
               </Pressable>
               <Pressable
                 style={styles.solidButton}
                 onPress={() => {
                   onSolidButtonPress && onSolidButtonPress();
-                }}>
+                }}
+              >
                 <Text style={styles.solidButtonText}>{`${solidButtonText}`}</Text>
               </Pressable>
             </View>

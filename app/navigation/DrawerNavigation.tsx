@@ -24,7 +24,8 @@ const DrawerNavigation = () => {
         drawerItemStyle: {
           marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
         },
-      }}>
+      }}
+    >
       <Drawer.Screen
         name="CalcTipScreen"
         component={HomeTipScreen}

@@ -83,7 +83,8 @@ export const StyledHeader = ({
                     ? theme.colors.accent
                     : theme.colors.card_typography,
                 },
-              ]}>{`${headerTitle}`}</Text>
+              ]}
+            >{`${headerTitle}`}</Text>
             {headerSubTitleVisibility && (
               <Text style={styles.headerSubText}>{`${headerSubTitle}`}</Text>
             )}

@@ -21,7 +21,8 @@ const CurrencySelectiveScroll = ({
     <ScrollView
       contentContainerStyle={styles.currencyScrollContainerStyles}
       showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}>
+      showsVerticalScrollIndicator={false}
+    >
       {currencies?.map(currency => (
         <Pressable
           onPress={() => {
@@ -42,7 +43,8 @@ const CurrencySelectiveScroll = ({
                   ? theme.colors.accent
                   : theme.colors.backgroundColor,
             },
-          ]}>
+          ]}
+        >
           <View style={styles.currencySelectiveName}>
             <Text style={styles.modalcurrencyText}>{currency.currencyName}</Text>
           </View>
@@ -150,7 +152,8 @@ export const StyledCurrencySelector = ({
         <Text style={styles.currencyChangeText}>{`${currencyChangeInstructionText}`}</Text>
         <Pressable
           style={styles.currencyBox}
-          onPress={() => setModalVisibility(prevState => !prevState)}>
+          onPress={() => setModalVisibility(prevState => !prevState)}
+        >
           <Text style={styles.currencyText}>{`${CurrencyObject.currencySign}`}</Text>
         </Pressable>
       </View>

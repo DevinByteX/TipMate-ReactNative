@@ -24,14 +24,16 @@ const SplitCapsule = ({
       ]}
       onPress={() => {
         onSplitPress && onSplitPress(textValue);
-      }}>
+      }}
+    >
       <Text
         style={[
           styles.splitCapsuleText,
           {
             color: active ? theme.colors.card : theme.colors.card_typography,
           },
-        ]}>{`${textValue}`}</Text>
+        ]}
+      >{`${textValue}`}</Text>
     </Pressable>
   );
 };
@@ -56,14 +58,16 @@ const SplitCustomCapsule = ({
       ]}
       onPress={() => {
         onCustomSplitPress && onCustomSplitPress();
-      }}>
+      }}
+    >
       <Text
         style={[
           styles.splitCapsuleCustomText,
           {
             color: active ? theme.colors.card : theme.colors.card_typography,
           },
-        ]}>
+        ]}
+      >
         {`${textValue} `}
         <StyledIcons
           type={'FontAwesome5'}
@@ -134,7 +138,8 @@ export const StyledSpiltOptions = ({
                 style={styles.splitDigitsStyles}
                 adjustsFontSizeToFit={true}
                 allowFontScaling={false}
-                numberOfLines={1}>
+                numberOfLines={1}
+              >
                 {`${splitValue}`}
               </Text>
             </View>

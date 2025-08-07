@@ -72,7 +72,8 @@ export const StyledConfigInput = ({
         {
           borderColor: inputFocused ? theme.colors.accent : theme.colors.backgroundColor,
         },
-      ]}>
+      ]}
+    >
       <Text style={styles.configBoxText}>{`${title}`}</Text>
       <TextInput
         ref={TextInputRef}

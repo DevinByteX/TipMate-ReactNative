@@ -100,7 +100,8 @@ export const StyledBillBox = ({
               style={styles.totalDigitsStyles}
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
-              numberOfLines={1}>
+              numberOfLines={1}
+            >
               {!isLongCurrencySymbol ? <Text>{currencySymbol}</Text> : null}
               {totalAmount}
             </Text>
@@ -116,11 +117,13 @@ export const StyledBillBox = ({
               style={styles.subTextStyles}
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
-              numberOfLines={1}>
+              numberOfLines={1}
+            >
               {subTotalText}
               {isLongCurrencySymbol ? (
                 <Text
-                  style={{ color: theme.colors.card_typography }}>{` · ${currencySymbol}`}</Text>
+                  style={{ color: theme.colors.card_typography }}
+                >{` · ${currencySymbol}`}</Text>
               ) : null}
             </Text>
             <View style={styles.horizontalTextContainer}>
@@ -128,7 +131,8 @@ export const StyledBillBox = ({
                 style={styles.subDigitStyles}
                 adjustsFontSizeToFit={true}
                 allowFontScaling={false}
-                numberOfLines={1}>
+                numberOfLines={1}
+              >
                 {!isLongCurrencySymbol ? <Text>{currencySymbol}</Text> : null}
                 {subTotalAmount}
               </Text>
@@ -140,11 +144,13 @@ export const StyledBillBox = ({
               style={styles.subTextStyles}
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
-              numberOfLines={1}>
+              numberOfLines={1}
+            >
               {tipText}
               {isLongCurrencySymbol ? (
                 <Text
-                  style={{ color: theme.colors.card_typography }}>{` · ${currencySymbol}`}</Text>
+                  style={{ color: theme.colors.card_typography }}
+                >{` · ${currencySymbol}`}</Text>
               ) : null}
             </Text>
             <View style={styles.horizontalTextContainer}>
@@ -152,7 +158,8 @@ export const StyledBillBox = ({
                 style={styles.subDigitStyles}
                 adjustsFontSizeToFit={true}
                 allowFontScaling={false}
-                numberOfLines={1}>
+                numberOfLines={1}
+              >
                 {!isLongCurrencySymbol ? <Text>{currencySymbol}</Text> : null}
                 {totalTipAmount}
               </Text>

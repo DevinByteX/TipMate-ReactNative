@@ -22,7 +22,8 @@ const SettingsScreen = () => {
         style={styles.mainContainer}
         contentContainerStyle={styles.scrollContentContainer}
         showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+      >
         <StyledTipOptionsEditMode
           title={'CUSTOMISE YOUR TIPS'}
           description={

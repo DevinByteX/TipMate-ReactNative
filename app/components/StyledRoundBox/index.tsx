@@ -33,7 +33,8 @@ const RoundCapsule = ({
       onPress={() => {
         onRoundCapsulePress && onRoundCapsulePress(textValue);
       }}
-      disabled={disabled}>
+      disabled={disabled}
+    >
       <Text
         style={[
           styles.roundCapsuleText,
@@ -44,7 +45,8 @@ const RoundCapsule = ({
               ? theme.colors.card
               : theme.colors.card_typography,
           },
-        ]}>
+        ]}
+      >
         {`${textValue} `}
         <StyledIcons
           type={'FontAwesome'}
