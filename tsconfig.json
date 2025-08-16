@@ -1,5 +1,7 @@
 {
   "extends": "@react-native/typescript-config",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules", "**/Pods"],
   "compilerOptions": {
     "baseUrl": ".", // if i'm not using baseUrl option i have to add . in every single path beginning as EX : "paths":{ "@/":["./app/*"]} || see no dot in /app/*
     "paths": {
