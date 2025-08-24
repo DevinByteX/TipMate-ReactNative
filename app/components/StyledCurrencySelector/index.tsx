@@ -77,7 +77,13 @@ const CurrencyListModal = ({
   const { styles, theme } = useStyles(stylesheet);
 
   return (
-    <Modal visible={modalVisibility} transparent={true} animationType={'slide'}>
+    <Modal
+      visible={modalVisibility}
+      transparent={true}
+      animationType={'slide'}
+      presentationStyle="fullScreen"
+      statusBarTranslucent={true}
+    >
       <View style={styles.modalMainContainer}>
         <View style={styles.modalTitleAndCloseButtonContainer}>
           <Text style={styles.modalTitle}>
@@ -103,13 +109,11 @@ const CurrencyListModal = ({
           />
           {` ${modalDescription}`}
         </Text>
-        <View style={styles.modalContentContainer}>
-          <CurrencySelectiveScroll
-            currencies={currencies}
-            currencyObject={currencyObject}
-            currencySelectiveBarPress={currencySelectiveBarPress}
-          />
-        </View>
+        <CurrencySelectiveScroll
+          currencies={currencies}
+          currencyObject={currencyObject}
+          currencySelectiveBarPress={currencySelectiveBarPress}
+        />
       </View>
     </Modal>
   );
@@ -241,7 +245,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     borderWidth: UnistylesRuntime.hairlineWidth * 2,
     borderColor: colors.accent,
     backgroundColor: utils.hexToRGBA(colors.card, 0.95),
-    bottom: -(UnistylesRuntime.insets.bottom * 1), // Minus
+    bottom: 0,
     position: 'absolute',
   },
   modalTitleAndCloseButtonContainer: {
@@ -256,10 +260,6 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-  },
-  modalContentContainer: {
-    width: '100%',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   modalContentCurrencyBarContainer: {
     flexDirection: 'row',
@@ -287,6 +287,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   currencyScrollContainerStyles: {
     gap: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingBottom: UnistylesRuntime.insets.bottom * 5,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingBottom: UnistylesRuntime.insets.bottom * 2,
   },
 }));
