@@ -18,4 +18,4 @@ export { StyledCurrencySelector } from './StyledCurrencySelector';
 export { StyledLicenseDetailsCard } from './StyledLicenseDetailsCard';
 
 // types should export seperately
-export type { StyledIconTypesKeys } from './StyledIcons';
+export type { StyledIconTypesKey } from './StyledIcons';

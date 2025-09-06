@@ -1,54 +1,57 @@
 import React from 'react';
 import { TextStyle, ViewStyle, TextProps } from 'react-native';
 // Vector Icons
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Feather from 'react-native-vector-icons/Feather';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Octicons from 'react-native-vector-icons/Octicons';
+import { AntDesign } from '@react-native-vector-icons/ant-design';
+import { Feather } from '@react-native-vector-icons/feather';
+import { FontAwesome6 } from '@react-native-vector-icons/fontawesome6';
+import { Foundation } from '@react-native-vector-icons/foundation';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { Lucide } from '@react-native-vector-icons/lucide';
+import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
+import { Octicons } from '@react-native-vector-icons/octicons';
 
 // Object containing all icon types for easy reference
 export const StyledIconTypes = {
-  Ionicons,
+  AntDesign,
   Feather,
-  FontAwesome,
-  FontAwesome5,
-  Entypo,
+  FontAwesome6,
+  Foundation,
+  Ionicons,
+  Lucide,
+  MaterialDesignIcons,
   Octicons,
+} as const;
+
+type IconTypeMap = {
+  AntDesign: typeof AntDesign;
+  Feather: typeof Feather;
+  FontAwesome6: typeof FontAwesome6;
+  Foundation: typeof Foundation;
+  Ionicons: typeof Ionicons;
+  Lucide: typeof Lucide;
+  MaterialDesignIcons: typeof MaterialDesignIcons;
+  Octicons: typeof Octicons;
 };
 
 // Type representing keys of StyledIconTypes
-export type StyledIconTypesKeys = keyof typeof StyledIconTypes;
+export type StyledIconTypesKey = keyof typeof StyledIconTypes;
 
-// `TextProps` ensures that all Text component properties are also accepted
-interface StyledIconsProps extends TextProps {
-  type: StyledIconTypesKeys;
-  name: string;
+interface StyledIconsProps<T extends StyledIconTypesKey> {
+  type: T;
+  name: React.ComponentProps<IconTypeMap[T]>['name'];
   color?: string;
   size?: number;
-  style?: TextStyle | ViewStyle;
 }
 
 // StyledIcons functional component
-export const StyledIcons: React.FC<StyledIconsProps> = ({
+export const StyledIcons = <T extends StyledIconTypesKey>({
   type,
   name,
   color,
   size,
-  style,
   ...rest // Collect the remaining props
-}) => {
-  // Get the appropriate icon component from StyledIconTypes
-  const IconComponent = StyledIconTypes[type];
+}: StyledIconsProps<T>) => {
+  const IconComponent = StyledIconTypes[type] as any; // Type assertion to resolve the type error
 
-  return (
-    <IconComponent
-      name={name}
-      size={size}
-      color={color}
-      style={style}
-      {...rest} // Pass remaining props to the icon component
-    />
-  );
+  return <IconComponent name={name} size={size} color={color} {...rest} />;
 };
