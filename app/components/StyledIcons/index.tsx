@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextStyle, ViewStyle, TextProps } from 'react-native';
+import { TextProps } from 'react-native';
+
 // Vector Icons
 import { AntDesign } from '@react-native-vector-icons/ant-design';
 import { Feather } from '@react-native-vector-icons/feather';
@@ -10,7 +11,9 @@ import { Lucide } from '@react-native-vector-icons/lucide';
 import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
 import { Octicons } from '@react-native-vector-icons/octicons';
 
-// Object containing all icon types for easy reference
+/**
+ * All supported icon families
+ */
 export const StyledIconTypes = {
   AntDesign,
   Feather,
@@ -22,40 +25,52 @@ export const StyledIconTypes = {
   Octicons,
 } as const;
 
-type IconTypeMap = {
-  AntDesign: typeof AntDesign;
-  Feather: typeof Feather;
-  FontAwesome6: typeof FontAwesome6;
-  Foundation: typeof Foundation;
-  Ionicons: typeof Ionicons;
-  Lucide: typeof Lucide;
-  MaterialDesignIcons: typeof MaterialDesignIcons;
-  Octicons: typeof Octicons;
-};
+/**
+ * Mapping of icon family name to component
+ */
+export type IconTypeMap = typeof StyledIconTypes;
 
-// Type representing keys of StyledIconTypes
-export type StyledIconTypesKey = keyof typeof StyledIconTypes;
+/**
+ * Keys of available icon families
+ */
+export type StyledIconTypesKey = keyof IconTypeMap;
 
-interface StyledIconsProps<T extends StyledIconTypesKey> extends TextProps {
-  type: StyledIconTypesKey;
+/**
+ * Base props for all icons
+ */
+export interface BaseIconProps<T extends StyledIconTypesKey> extends TextProps {
+  type: T;
   name: React.ComponentProps<IconTypeMap[T]>['name'];
   color?: string;
   size?: number;
-  iconStyleType?: 'solid' | 'regular' | 'brand'; // Added iconStyleType prop
 }
 
-// StyledIcons functional component
-export const StyledIcons = <T extends StyledIconTypesKey>({
+/**
+ * Props for StyledIcons component
+ */
+export type StyledIconsProps<T extends StyledIconTypesKey> = BaseIconProps<T> & {
+  /**
+   * FontAwesome6-only style
+   * Default is "solid"
+   */
+  iconStyleType?: 'solid' | 'regular' | 'brand';
+};
+
+/**
+ * Generic, type-safe icon component
+ */
+export function StyledIcons<T extends StyledIconTypesKey>({
   type,
   name,
   color,
   size,
-  iconStyleType = type == 'FontAwesome6' ? 'solid' : undefined, // Default to 'solid' for FontAwesome6
-  ...rest // Collect the remaining props
-}: StyledIconsProps<T>) => {
-  const IconComponent = StyledIconTypes[type] as any; // Type assertion to resolve the type error
+  iconStyleType,
+  ...rest
+}: StyledIconsProps<T>) {
+  const IconComponent = StyledIconTypes[type] as any;
 
-  return (
-    <IconComponent name={name} size={size} color={color} iconStyle={iconStyleType} {...rest} />
-  );
-};
+  // Only include iconStyle for FontAwesome6
+  const faProps = type === 'FontAwesome6' ? { iconStyle: iconStyleType ?? 'solid' } : {};
+
+  return <IconComponent name={name} size={size} color={color} {...faProps} {...rest} />;
+}
