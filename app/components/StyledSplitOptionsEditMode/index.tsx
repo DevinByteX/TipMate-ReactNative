@@ -4,7 +4,7 @@ import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unis
 import {
   StyledConfigInput,
   StyledIcons,
-  StyledIconTypesKeys,
+  StyledIconTypesKey,
   StyledPopUp,
   StyledTextInputCapsule,
   VerticalDevider,
@@ -43,13 +43,13 @@ const SplitPercentageCustomCapsule = ({
   active = false,
   textValue = 'custom',
   onCustomSplitPress,
-  iconType = 'FontAwesome',
+  iconType = 'FontAwesome6',
   iconName = 'sliders',
 }: {
   active?: boolean;
   textValue: string;
   onCustomSplitPress?: () => void;
-  iconType?: StyledIconTypesKeys;
+  iconType?: StyledIconTypesKey;
   iconName?: string;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
@@ -114,8 +114,8 @@ export const StyledSplitOptionsEditMode = ({
       <Text style={styles.titleText}>{`${title} `}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'info-circle'}
+          type={'FontAwesome6'}
+          name={'circle-info'}
           size={styles.instructionText?.fontSize}
         />
         {` ${description}`}
@@ -144,8 +144,8 @@ export const StyledSplitOptionsEditMode = ({
                     secondArray: Constants.defaultSplitOptionsArray,
                   })
                 }
-                iconType={'FontAwesome'}
-                iconName={'undo'}
+                iconType={'FontAwesome6'}
+                iconName={'arrow-rotate-left'}
                 onCustomSplitPress={() => {
                   setConfirmPopUpVisibility(true);
                 }}
@@ -163,8 +163,8 @@ export const StyledSplitOptionsEditMode = ({
               {/* <SplitPercentageCustomCapsule
                 textValue={customSliderConfigVisible ? `Set Configs` : `Configs`}
                 active
-                iconType={'FontAwesome5'}
-                iconName={'sliders-h'}
+                iconType={'FontAwesome6'}
+                iconName={'sliders'}
                 onCustomSplitPress={() => {
                   setCustomSliderConfigVisible(!customSliderConfigVisible);
                 }}

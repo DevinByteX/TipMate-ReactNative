@@ -36,11 +36,12 @@ type IconTypeMap = {
 // Type representing keys of StyledIconTypes
 export type StyledIconTypesKey = keyof typeof StyledIconTypes;
 
-interface StyledIconsProps<T extends StyledIconTypesKey> {
-  type: T;
+interface StyledIconsProps<T extends StyledIconTypesKey> extends TextProps {
+  type: StyledIconTypesKey;
   name: React.ComponentProps<IconTypeMap[T]>['name'];
   color?: string;
   size?: number;
+  iconStyleType?: 'solid' | 'regular' | 'brand'; // Added iconStyleType prop
 }
 
 // StyledIcons functional component
@@ -49,9 +50,12 @@ export const StyledIcons = <T extends StyledIconTypesKey>({
   name,
   color,
   size,
+  iconStyleType = type == 'FontAwesome6' ? 'solid' : undefined, // Default to 'solid' for FontAwesome6
   ...rest // Collect the remaining props
 }: StyledIconsProps<T>) => {
   const IconComponent = StyledIconTypes[type] as any; // Type assertion to resolve the type error
 
-  return <IconComponent name={name} size={size} color={color} {...rest} />;
+  return (
+    <IconComponent name={name} size={size} color={color} iconStyle={iconStyleType} {...rest} />
+  );
 };

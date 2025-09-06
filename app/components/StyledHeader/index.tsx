@@ -1,7 +1,7 @@
 import React from 'react';
 import { Keyboard, Pressable, StatusBar, Text, View, ViewStyle } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledIconTypesKeys, StyledIcons } from '@components';
+import { StyledIconTypesKey, StyledIcons } from '@components';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 
@@ -14,7 +14,7 @@ type styledHeaderProps = {
 };
 
 type HeaderBarIconProps = {
-  iconType: StyledIconTypesKeys;
+  iconType: StyledIconTypesKey;
   iconName: string;
   iconSize: number;
   iconColor?: string;
@@ -63,8 +63,8 @@ export const StyledHeader = ({
         <View style={styles.headerInnerContainer}>
           <View style={styles.innerLeftContainer}>
             <HeaderBarIcon
-              iconType={'FontAwesome'}
-              iconName={enableBackButton ? 'chevron-left' : 'navicon'}
+              iconType={'FontAwesome6'}
+              iconName={enableBackButton ? 'chevron-left' : 'bars'}
               iconSize={styles.headerText.fontSize}
               iconColor={styles.headerText.color}
               headerBarStyles={styles.headerLeftButtonStyles}
