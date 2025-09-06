@@ -40,8 +40,8 @@ export const StyledTotalAmountInput = ({
       </Text>
       <Text style={styles.instructionText}>
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'info-circle'}
+          type={'FontAwesome6'}
+          name={'circle-info'}
           size={styles.instructionText?.fontSize}
         />
         {` ${description}`}

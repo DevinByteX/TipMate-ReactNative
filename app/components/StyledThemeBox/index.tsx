@@ -62,8 +62,8 @@ export const StyledThemeBox = ({
       <Text style={styles.titleText}>{`${title}`}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'info-circle'}
+          type={'FontAwesome6'}
+          name={'circle-info'}
           size={styles.instructionText?.fontSize}
         />
         {` ${description}`}
@@ -84,8 +84,8 @@ export const StyledThemeBox = ({
       </View>
       <Text style={styles.toggleInstructionText}>
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'info-circle'}
+          type={'FontAwesome6'}
+          name={'circle-info'}
           size={styles.toggleInstructionText?.fontSize}
         />
         {` ${toggleDescription}`}

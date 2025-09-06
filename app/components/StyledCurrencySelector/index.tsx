@@ -103,8 +103,8 @@ const CurrencyListModal = ({
         </View>
         <Text style={styles.modalInstructionText}>
           <StyledIcons
-            type={'FontAwesome5'}
-            name={'info-circle'}
+            type={'FontAwesome6'}
+            name={'circle-info'}
             size={styles.modalInstructionText?.fontSize}
           />
           {` ${modalDescription}`}
@@ -146,8 +146,8 @@ export const StyledCurrencySelector = ({
       <Text style={styles.titleText}>{`${title}`}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'info-circle'}
+          type={'FontAwesome6'}
+          name={'circle-info'}
           size={styles.instructionText?.fontSize}
         />
         {` ${description}`}

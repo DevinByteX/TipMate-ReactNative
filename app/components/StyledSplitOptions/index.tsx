@@ -70,8 +70,8 @@ const SplitCustomCapsule = ({
       >
         {`${textValue} `}
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'sliders-h'}
+          type={'FontAwesome6'}
+          name={'sliders'}
           size={styles.splitCapsuleCustomText?.fontSize}
         />
       </Text>
@@ -103,8 +103,8 @@ export const StyledSpiltOptions = ({
       <Text style={styles.titleText}>{`${titleText}`}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'info-circle'}
+          type={'FontAwesome6'}
+          name={'circle-info'}
           size={styles.instructionText?.fontSize}
         />
         {` ${description}`}

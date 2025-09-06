@@ -49,7 +49,7 @@ const RoundCapsule = ({
       >
         {`${textValue} `}
         <StyledIcons
-          type={'FontAwesome'}
+          type={'FontAwesome6'}
           name={iconName}
           size={styles.roundCapsuleText?.fontSize}
         />
@@ -78,8 +78,8 @@ export const StyledRoundBox = ({
       <Text style={styles.titleText}>{`${titleText}`}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'info-circle'}
+          type={'FontAwesome6'}
+          name={'circle-info'}
           size={styles.instructionText?.fontSize}
         />
         {` ${description}`}

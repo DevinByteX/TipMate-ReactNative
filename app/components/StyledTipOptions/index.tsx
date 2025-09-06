@@ -70,8 +70,8 @@ const TipPercentageCustomCapsule = ({
       >
         {`${textValue} `}
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'sliders-h'}
+          type={'FontAwesome6'}
+          name={'sliders'}
           size={styles.tipPercentageCapsuleCustomText?.fontSize}
         />
       </Text>
@@ -102,8 +102,8 @@ export const StyledTipOptions = ({
       <Text style={styles.titleText}>{`${titleText}`}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'info-circle'}
+          type={'FontAwesome6'}
+          name={'circle-info'}
           size={styles.instructionText?.fontSize}
         />
         {` ${description}`}

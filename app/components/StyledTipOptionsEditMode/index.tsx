@@ -44,7 +44,7 @@ const TipPercentageCustomCapsule = ({
   active = false,
   textValue = 'custom',
   onCustomTipPress,
-  iconType = 'FontAwesome',
+  iconType = 'FontAwesome6',
   iconName = 'sliders',
 }: {
   active?: boolean;
@@ -115,8 +115,8 @@ export const StyledTipOptionsEditMode = ({
       <Text style={styles.titleText}>{`${title}`}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
-          type={'FontAwesome5'}
-          name={'info-circle'}
+          type={'FontAwesome6'}
+          name={'circle-info'}
           size={styles.instructionText?.fontSize}
         />
         {` ${description}`}
@@ -145,8 +145,8 @@ export const StyledTipOptionsEditMode = ({
                     secondArray: Constants.defaultTipOptionsArray,
                   })
                 }
-                iconType={'FontAwesome'}
-                iconName={'undo'}
+                iconType={'FontAwesome6'}
+                iconName={'arrow-rotate-left'}
                 onCustomTipPress={() => {
                   setConfirmPopUpVisibility(true);
                 }}
@@ -164,8 +164,8 @@ export const StyledTipOptionsEditMode = ({
               {/* <TipPercentageCustomCapsule
                 textValue={customSliderConfigVisible ? `Set Value` : `Custom`}
                 active
-                iconType={'FontAwesome5'}
-                iconName={'sliders-h'}
+                iconType={'FontAwesome6'}
+                iconName={'sliders'}
                 onCustomTipPress={() => {
                   setCustomSliderConfigVisible(!customSliderConfigVisible);
                 }}

@@ -6,14 +6,14 @@ import {
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledIcons, StyledIconTypesKeys, StyledToggle } from '@components';
+import { StyledIcons, StyledIconTypesKey, StyledToggle } from '@components';
 import { setUserPreferredTheme } from '@hooks';
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 
 interface StyledDrawerProps extends DrawerContentComponentProps {}
 
 type BottomButtonProps = {
-  iconType: StyledIconTypesKeys;
+  iconType: StyledIconTypesKey;
   iconName: string;
   iconSize: number;
   iconColor?: string;
@@ -111,16 +111,16 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
       <View style={styles.horizontalDeviderStyles} />
       <View style={styles.bottomButtonContainer}>
         {/* <BottomButton
-          iconType={'FontAwesome'}
-          iconName={'share-alt-square'}
+          iconType={'FontAwesome6'}
+          iconName={'square'}
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
           isFocused={activeRouteName === 'TellAFriendScreen'}
           label={'Tell a Friend'}
         /> */}
         <BottomButton
-          iconType={'Entypo'}
-          iconName={'info-with-circle'}
+          iconType={'FontAwesome6'}
+          iconName={'circle-info'}
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
           label={'About Us'}
