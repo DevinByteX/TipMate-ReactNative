@@ -2,22 +2,33 @@ import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { RoundingMethod, RoundingMethodType, DisabledRoundingMethodsType } from '@hooks';
-import { StyledIcons } from '@components';
+import { IconTypeMap, StyledIcons, StyledIconTypesKey } from '@components';
+
+type RoundCapsuleProps = {
+  active?: boolean;
+  textValue: RoundingMethodType;
+  iconType?: StyledIconTypesKey;
+  iconName?: React.ComponentProps<IconTypeMap[StyledIconTypesKey]>['name'];
+  disabled?: boolean;
+  onRoundCapsulePress?: (value: RoundingMethodType) => void;
+};
 
 const RoundCapsule = ({
   active = false,
   textValue,
+  iconType = 'FontAwesome6',
   iconName = 'circle',
   disabled = false,
   onRoundCapsulePress,
-}: {
-  active?: boolean;
-  textValue: RoundingMethodType;
-  iconName?: string;
-  disabled?: boolean;
-  onRoundCapsulePress?: (value: RoundingMethodType) => void;
-}) => {
+}: RoundCapsuleProps) => {
   const { styles, theme } = useStyles(styleSheet);
+
+  const TextColor = disabled
+    ? theme.colors.disable_text
+    : active
+    ? theme.colors.card
+    : theme.colors.card_typography;
+
   return (
     <Pressable
       style={[
@@ -39,19 +50,16 @@ const RoundCapsule = ({
         style={[
           styles.roundCapsuleText,
           {
-            color: disabled
-              ? theme.colors.disable_text
-              : active
-              ? theme.colors.card
-              : theme.colors.card_typography,
+            color: TextColor,
           },
         ]}
       >
         {`${textValue} `}
         <StyledIcons
-          type={'FontAwesome6'}
+          type={iconType}
           name={iconName}
           size={styles.roundCapsuleText?.fontSize}
+          color={TextColor}
         />
       </Text>
     </Pressable>
@@ -89,7 +97,8 @@ export const StyledRoundBox = ({
           textValue="NO"
           disabled={disablingRoundingMethod?.NO}
           active={roundMethod == RoundingMethod.NO}
-          iconName={'dot-circle-o'}
+          iconType="FontAwesome6"
+          iconName={'circle-dot'}
           onRoundCapsulePress={value => {
             onSelectedRound && onSelectedRound(value);
           }}
@@ -98,7 +107,8 @@ export const StyledRoundBox = ({
           textValue="UP"
           disabled={disablingRoundingMethod?.UP}
           active={roundMethod == RoundingMethod.UP}
-          iconName={'arrow-circle-o-up'}
+          iconType="FontAwesome6"
+          iconName={'circle-up'}
           onRoundCapsulePress={value => {
             onSelectedRound && onSelectedRound(value);
           }}
@@ -107,7 +117,8 @@ export const StyledRoundBox = ({
           textValue="DOWN"
           disabled={disablingRoundingMethod?.DOWN}
           active={roundMethod == RoundingMethod.DOWN}
-          iconName={'arrow-circle-o-down'}
+          iconType="FontAwesome6"
+          iconName={'circle-down'}
           onRoundCapsulePress={value => {
             onSelectedRound && onSelectedRound(value);
           }}
