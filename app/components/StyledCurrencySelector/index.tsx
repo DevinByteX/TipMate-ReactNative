@@ -149,6 +149,7 @@ export const StyledCurrencySelector = ({
           type={'FontAwesome6'}
           name={'circle-info'}
           size={styles.instructionText?.fontSize}
+          color={styles.instructionText?.color}
         />
         {` ${description}`}
       </Text>

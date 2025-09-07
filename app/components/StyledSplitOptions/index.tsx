@@ -48,6 +48,7 @@ const SplitCustomCapsule = ({
   onCustomSplitPress?: () => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const TextColor = active ? theme.colors.card : theme.colors.card_typography;
   return (
     <Pressable
       style={[
@@ -64,7 +65,7 @@ const SplitCustomCapsule = ({
         style={[
           styles.splitCapsuleCustomText,
           {
-            color: active ? theme.colors.card : theme.colors.card_typography,
+            color: TextColor,
           },
         ]}
       >
@@ -73,6 +74,7 @@ const SplitCustomCapsule = ({
           type={'FontAwesome6'}
           name={'sliders'}
           size={styles.splitCapsuleCustomText?.fontSize}
+          color={TextColor}
         />
       </Text>
     </Pressable>
@@ -106,6 +108,7 @@ export const StyledSpiltOptions = ({
           type={'FontAwesome6'}
           name={'circle-info'}
           size={styles.instructionText?.fontSize}
+          color={styles.instructionText?.color}
         />
         {` ${description}`}
       </Text>
