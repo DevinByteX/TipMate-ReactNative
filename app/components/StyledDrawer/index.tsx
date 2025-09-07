@@ -6,7 +6,7 @@ import {
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { StyledIcons, StyledIconTypesKey, StyledToggle } from '@components';
+import { IconTypeMap, StyledIcons, StyledIconTypesKey, StyledToggle } from '@components';
 import { setUserPreferredTheme } from '@hooks';
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 
@@ -14,7 +14,7 @@ interface StyledDrawerProps extends DrawerContentComponentProps {}
 
 type BottomButtonProps = {
   iconType: StyledIconTypesKey;
-  iconName: string;
+  iconName: React.ComponentProps<IconTypeMap[StyledIconTypesKey]>['name'];
   iconSize: number;
   iconColor?: string;
   label: string;

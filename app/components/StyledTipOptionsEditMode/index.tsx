@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
+  IconTypeMap,
   StyledConfigInput,
   StyledIcons,
-  StyledIconTypesKeys,
+  StyledIconTypesKey,
   StyledPopUp,
   StyledTextInputCapsule,
   VerticalDevider,
@@ -40,19 +41,21 @@ const TipPercentageEditCapsule = ({
   );
 };
 
+type TipPercentageCustomCapsuleProps = {
+  active?: boolean;
+  textValue: string;
+  onCustomTipPress?: () => void;
+  iconType?: StyledIconTypesKey;
+  iconName?: React.ComponentProps<IconTypeMap[StyledIconTypesKey]>['name'];
+};
+
 const TipPercentageCustomCapsule = ({
   active = false,
   textValue = 'custom',
   onCustomTipPress,
   iconType = 'FontAwesome6',
   iconName = 'sliders',
-}: {
-  active?: boolean;
-  textValue: string;
-  onCustomTipPress?: () => void;
-  iconType?: StyledIconTypesKeys;
-  iconName?: string;
-}) => {
+}: TipPercentageCustomCapsuleProps) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
     <Pressable

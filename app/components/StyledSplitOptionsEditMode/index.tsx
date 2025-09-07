@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
+  IconTypeMap,
   StyledConfigInput,
   StyledIcons,
   StyledIconTypesKey,
@@ -39,19 +40,21 @@ const SplitPercentageEditCapsule = ({
   );
 };
 
+type SplitPercentageCustomCapsuleProps = {
+  active?: boolean;
+  textValue: string;
+  onCustomSplitPress?: () => void;
+  iconType: StyledIconTypesKey;
+  iconName: React.ComponentProps<IconTypeMap[StyledIconTypesKey]>['name'];
+};
+
 const SplitPercentageCustomCapsule = ({
   active = false,
   textValue = 'custom',
   onCustomSplitPress,
   iconType = 'FontAwesome6',
   iconName = 'sliders',
-}: {
-  active?: boolean;
-  textValue: string;
-  onCustomSplitPress?: () => void;
-  iconType?: StyledIconTypesKey;
-  iconName?: string;
-}) => {
+}: SplitPercentageCustomCapsuleProps) => {
   const { styles, theme } = useStyles(stylesheet);
   return (
     <Pressable
