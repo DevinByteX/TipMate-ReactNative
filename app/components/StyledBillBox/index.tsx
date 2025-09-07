@@ -83,6 +83,7 @@ export const StyledBillBox = ({
           type={'FontAwesome6'}
           name={'circle-info'}
           size={styles.instructionText?.fontSize}
+          color={styles.instructionText?.color}
         />
         {` ${description}`}
       </Text>

@@ -57,6 +57,7 @@ const TipPercentageCustomCapsule = ({
   iconName = 'sliders',
 }: TipPercentageCustomCapsuleProps) => {
   const { styles, theme } = useStyles(stylesheet);
+  const TextColor = active ? theme.colors.card : theme.colors.disable_text;
   return (
     <Pressable
       disabled={!active}
@@ -74,7 +75,7 @@ const TipPercentageCustomCapsule = ({
         style={[
           styles.tipPercentageCapsuleCustomText,
           {
-            color: active ? theme.colors.card : theme.colors.disable_text,
+            color: TextColor,
           },
         ]}
       >
@@ -83,6 +84,7 @@ const TipPercentageCustomCapsule = ({
           type={iconType}
           name={iconName}
           size={styles.tipPercentageCapsuleCustomText?.fontSize}
+          color={TextColor}
         />
       </Text>
     </Pressable>
@@ -121,6 +123,7 @@ export const StyledTipOptionsEditMode = ({
           type={'FontAwesome6'}
           name={'circle-info'}
           size={styles.instructionText?.fontSize}
+          color={styles.instructionText?.color}
         />
         {` ${description}`}
       </Text>

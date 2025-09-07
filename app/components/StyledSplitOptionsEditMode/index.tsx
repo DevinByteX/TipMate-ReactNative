@@ -56,6 +56,7 @@ const SplitPercentageCustomCapsule = ({
   iconName = 'sliders',
 }: SplitPercentageCustomCapsuleProps) => {
   const { styles, theme } = useStyles(stylesheet);
+  const TextColor = active ? theme.colors.card : theme.colors.disable_text;
   return (
     <Pressable
       disabled={!active}
@@ -73,7 +74,7 @@ const SplitPercentageCustomCapsule = ({
         style={[
           styles.splitPercentageCapsuleCustomText,
           {
-            color: active ? theme.colors.card : theme.colors.disable_text,
+            color: TextColor,
           },
         ]}
       >
@@ -82,6 +83,7 @@ const SplitPercentageCustomCapsule = ({
           type={iconType}
           name={iconName}
           size={styles.splitPercentageCapsuleCustomText?.fontSize}
+          color={TextColor}
         />
       </Text>
     </Pressable>
@@ -120,6 +122,7 @@ export const StyledSplitOptionsEditMode = ({
           type={'FontAwesome6'}
           name={'circle-info'}
           size={styles.instructionText?.fontSize}
+          color={styles.instructionText?.color}
         />
         {` ${description}`}
       </Text>

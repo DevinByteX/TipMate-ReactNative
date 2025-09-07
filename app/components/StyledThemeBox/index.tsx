@@ -65,6 +65,7 @@ export const StyledThemeBox = ({
           type={'FontAwesome6'}
           name={'circle-info'}
           size={styles.instructionText?.fontSize}
+          color={styles.instructionText?.color}
         />
         {` ${description}`}
       </Text>
@@ -87,6 +88,7 @@ export const StyledThemeBox = ({
           type={'FontAwesome6'}
           name={'circle-info'}
           size={styles.toggleInstructionText?.fontSize}
+          color={styles.toggleInstructionText?.color}
         />
         {` ${toggleDescription}`}
       </Text>
@@ -171,7 +173,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderColor: colors.card,
   },
   themeColorIcon: {
-    color: colors.backgroundColor,
+    color: colors.card_typography,
     fontSize: 16,
   },
 }));
