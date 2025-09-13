@@ -51,18 +51,32 @@ export const StyledToggle = ({
   const iosBackgroundColor = disabled ? theme.colors.disable_button : theme.colors.card_typography;
 
   return (
-    <View style={[styles.buttonContainer, { backgroundColor }, toggleContainerStyles]}>
-      <Switch
-        style={styles.switchStyles}
-        disabled={disabled}
-        thumbColor={thumbColor}
-        value={value}
-        trackColor={trackColor}
-        ios_backgroundColor={iosBackgroundColor}
-        onChange={onChange}
-        onValueChange={onValueChange}
-      />
-    </View>
+    <>
+      {Platform.OS === 'ios' && Number(Platform.Version) >= 18 ? (
+        <Switch
+          style={styles.switchStyles}
+          disabled={disabled}
+          thumbColor={value ? thumbColor : iosBackgroundColor}
+          value={value}
+          trackColor={trackColor}
+          onChange={onChange}
+          onValueChange={onValueChange}
+        />
+      ) : (
+        <View style={[styles.buttonContainer, { backgroundColor }, toggleContainerStyles]}>
+          <Switch
+            style={styles.switchStyles}
+            disabled={disabled}
+            thumbColor={thumbColor}
+            value={value}
+            trackColor={trackColor}
+            ios_backgroundColor={iosBackgroundColor}
+            onChange={onChange}
+            onValueChange={onValueChange}
+          />
+        </View>
+      )}
+    </>
   );
 };
 
