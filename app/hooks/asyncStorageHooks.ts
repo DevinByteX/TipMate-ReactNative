@@ -12,7 +12,7 @@ export const getUserPreferredTheme = async (): Promise<keyof UnistylesThemes> =>
     console.log('Error fetching user theme from AsyncStorage:', error);
   }
 
-  // Default to 'light' if theme is not valid or AsyncStorage error occurs
+  // Default to 'light' in uniStyles.ts if theme is not valid or AsyncStorage error occurs
   return UnistylesRuntime.themeName;
 };
 
