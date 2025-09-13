@@ -22,9 +22,10 @@ const ApplicationNavigator = (props: any) => {
         // Ensure updatedThemeOption is an array
         useThemeColorCustomiser(updatedThemeOption);
 
-        if (!UnistylesRuntime.hasAdaptiveThemes) {
-          UnistylesRuntime.setTheme(preferredTheme);
-        }
+        console.log('Setting app theme to:', preferredTheme);
+        UnistylesRuntime.setTheme(preferredTheme);
+        // explicitly set adaptiveThemes to false to prevent system theme changes
+        UnistylesRuntime.setAdaptiveThemes(false);
       } catch (error) {
         console.log('Error setting app theme:', error);
       }
