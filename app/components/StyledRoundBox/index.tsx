@@ -55,13 +55,13 @@ const RoundCapsule = ({
         ]}
       >
         {`${textValue} `}
-        <StyledIcons
-          type={iconType}
-          name={iconName}
-          size={styles.roundCapsuleText?.fontSize}
-          color={TextColor}
-        />
       </Text>
+      <StyledIcons
+        type={iconType}
+        name={iconName}
+        size={Number(styles.roundCapsuleText?.fontSize) - 4}
+        color={TextColor}
+      />
     </Pressable>
   );
 };
@@ -159,6 +159,7 @@ const styleSheet = createStyleSheet(({ colors, fonts }) => ({
   },
   roundCapsuleStyle: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
