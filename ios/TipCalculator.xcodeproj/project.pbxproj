@@ -22,6 +22,7 @@
 		BEE1B5CA778329A3905D069E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EB50DD8BBEEA2569DDB9FB02 /* PrivacyInfo.xcprivacy */; };
 		E83E622A6A9944E8802B86BF /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 668D3DAB6AB6499ABD7797C6 /* Montserrat-SemiBold.ttf */; };
 		FF3C56E9DC7B4C3BA4AC9FD4 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF41AD666F154743803FDB33 /* Nunito-Regular.ttf */; };
+		1F16F5271B114077B22BCBD1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 509A525D29594CDEA3E88561 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		EB50DD8BBEEA2569DDB9FB02 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = TipCalculator/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F8974A390FA649B089A64998 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Bold.ttf"; path = "../app/assets/fonts/Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		509A525D29594CDEA3E88561 /* Settings.bundle */ = {isa = PBXFileReference; name = "Settings.bundle"; path = "Settings.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				EB50DD8BBEEA2569DDB9FB02 /* PrivacyInfo.xcprivacy */,
 				9431C87A2D87192200F5D13C /* AppDelegate.swift */,
+				509A525D29594CDEA3E88561 /* Settings.bundle */,
 			);
 			name = TipCalculator;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "TipCalculator" */;
 			buildPhases = (
+				D0EF8A763D13430191F481D8 /* Generate licenses with LicensePlist */,
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -283,6 +287,7 @@
 				6B82F6E3A91D4279904804ED /* Nunito-Medium.ttf in Resources */,
 				FF3C56E9DC7B4C3BA4AC9FD4 /* Nunito-Regular.ttf in Resources */,
 				ADD486AC3E5A4FA2BABE6F9B /* Nunito-SemiBold.ttf in Resources */,
+				1F16F5271B114077B22BCBD1 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +365,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TipCalculator/Pods-TipCalculator-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D0EF8A763D13430191F481D8 /* Generate licenses with LicensePlist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Generate licenses with LicensePlist";
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/LicensePlist/license-plist --add-version-numbers --output-path ./Settings.bundle";
 		};
 /* End PBXShellScriptBuildPhase section */
 
