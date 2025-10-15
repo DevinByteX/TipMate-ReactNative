@@ -42,10 +42,10 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
+    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
   libraryDetailsContainer: {
     flex: 8,
