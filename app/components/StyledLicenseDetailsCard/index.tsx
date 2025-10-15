@@ -3,37 +3,24 @@ import { Text, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { useExternalLinkAlert } from '@hooks';
+import { Library } from 'react-native-legal';
 
 interface LicenseDetailsProps {
-  name: string;
-  version: string;
-  license: string;
-  repository: string;
-  licenseUrl: string;
+  licenceDetails?: Library;
 }
 
-export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
-  name,
-  version,
-  license,
-  repository,
-  licenseUrl,
-}) => {
+export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({ licenceDetails }) => {
   const { styles } = useStyles(stylesheet);
   const openLink = useExternalLinkAlert();
+
+  if (!licenceDetails) return null;
+
+  const { name, version } = licenceDetails;
 
   return (
     <View style={styles.licenseMainContainer}>
       <Text style={styles.libraryNameText}>{name}</Text>
-      <Text style={styles.versionText}>Version: {version}</Text>
-      <Text style={styles.licenseText}>License: {license}</Text>
-      <Text style={styles.repositoryText} onPress={() => openLink(repository)}>
-        {/* Repository: {repository} */}
-        {repository}
-      </Text>
-      {/* <Text style={styles.licenseUrlText} onPress={() => handleLinkPress(licenseUrl)}>
-        License URL: {licenseUrl}
-      </Text> */}
+      <Text style={styles.versionText}>v{version}</Text>
     </View>
   );
 };
@@ -54,28 +41,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
   },
   versionText: {
-    fontSize: 10,
+    fontSize: 12,
     color: colors.card_typography,
-    fontFamily: fonts.Montserrat_Medium,
+    fontFamily: fonts.Montserrat_Bold,
     marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
-  },
-  licenseText: {
-    fontSize: 10,
-    color: colors.card_typography,
-    fontFamily: fonts.Montserrat_Medium,
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
-  },
-  repositoryText: {
-    fontSize: 10,
-    color: colors.accent,
-    fontFamily: fonts.Montserrat_Medium,
-    textDecorationLine: 'underline',
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
-  },
-  licenseUrlText: {
-    fontSize: 10,
-    color: colors.accent,
-    fontFamily: fonts.Montserrat_Medium,
-    textDecorationLine: 'underline',
   },
 }));
