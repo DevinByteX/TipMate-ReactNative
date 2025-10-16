@@ -1,14 +1,16 @@
 import React from 'react';
-import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, View, Pressable, StatusBar, Platform } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Library } from 'react-native-legal';
 import { StyledIcons } from '@components';
+import { useExternalLinkAlert } from '@hooks';
 
 const LicenseContentModalScreen: React.FC = () => {
   const { styles } = useStyles(stylesheet);
   const navigation = useNavigation();
+  const openLink = useExternalLinkAlert();
   const route = useRoute();
   const { licenceDetails } = route.params as { licenceDetails: Library };
 
@@ -19,14 +21,14 @@ const LicenseContentModalScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.backButton} onPress={handleClose}>
+        <Pressable style={styles.backButton} onPress={handleClose}>
           <StyledIcons
             type="FontAwesome6"
             name="chevron-left"
             size={20}
             color={styles.backButtonIcon.color}
           />
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>{licenceDetails.name}</Text>
           <Text style={styles.subtitleText}>v{licenceDetails.version}</Text>
@@ -38,13 +40,21 @@ const LicenseContentModalScreen: React.FC = () => {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       >
+        {licenceDetails?.website ? (
+          <Text
+            style={styles.licenseWebsiteUrl}
+            onPress={() => openLink(licenceDetails.website ?? '')}
+          >
+            {licenceDetails?.website}
+          </Text>
+        ) : null}
         <Text style={styles.licenseContentText}>{licenceDetails?.licenses[0]?.licenseContent}</Text>
       </ScrollView>
     </View>
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts }, runtime) => ({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -55,12 +65,12 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
     backgroundColor: colors.headerBGColor,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.devider,
+    borderBottomWidth: runtime.hairlineWidth * 5,
+    borderBottomColor: colors.accent,
+    marginTop: Platform.OS === 'android' ? UnistylesRuntime.insets.top : 0,
   },
   backButton: {
-    padding: 8,
-    marginRight: 16,
+    paddingEnd: (UnistylesRuntime.screen.width * 5) / 100,
   },
   backButtonIcon: {
     color: colors.accent,
@@ -72,7 +82,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 16,
     fontFamily: fonts.Nunito_Black,
     color: colors.accent,
-    marginBottom: 4,
+    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
   },
   subtitleText: {
     fontSize: 12,
@@ -87,11 +97,20 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   scrollContentContainer: {
     paddingBottom: UnistylesRuntime.insets.bottom * 2,
   },
+  licenseWebsiteUrl: {
+    color: colors.accent,
+    fontFamily: fonts.Montserrat_Bold,
+    fontSize: 14,
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+  },
   licenseContentText: {
+    paddingTop: (UnistylesRuntime.screen.height * 2) / 100,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    fontSize: 14,
-    lineHeight: 16,
+    fontSize: 12,
+    lineHeight: 14,
   },
 }));
 

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
-import { useExternalLinkAlert } from '@hooks';
 import { Library } from 'react-native-legal';
 import { StyledIcons } from '../StyledIcons';
 
@@ -20,7 +19,6 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   onPress,
 }) => {
   const { styles } = useStyles(stylesheet);
-  const openLink = useExternalLinkAlert();
 
   if (!licenceDetails) return null;
 
@@ -31,7 +29,7 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   };
 
   return (
-    <TouchableOpacity style={styles.licenseMainContainer} onPress={handleCardPress}>
+    <Pressable style={styles.licenseMainContainer} onPress={handleCardPress}>
       <View style={styles.libraryDetailsContainer}>
         <Text style={styles.libraryNameText}>{name}</Text>
         <Text style={styles.versionText}>v{version}</Text>
@@ -39,7 +37,7 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
       <View style={styles.iconContainer}>
         <StyledIcons type="FontAwesome6" name="chevron-right" size={20} style={styles.styledIcon} />
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
