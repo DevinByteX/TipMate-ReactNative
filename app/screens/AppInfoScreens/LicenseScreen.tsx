@@ -25,9 +25,13 @@ const LicensesScreen = () => {
     if (!searchQuery.trim()) {
       return libraryList;
     }
-    return libraryList.filter(library =>
-      library.name.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
+    const query = searchQuery.toLowerCase();
+    return libraryList.filter(library => {
+      const nameMatch = library.name.toLowerCase().includes(query);
+      const licenseContentMatch =
+        library.licenses?.[0]?.licenseContent?.toLowerCase().includes(query) ?? false;
+      return nameMatch || licenseContentMatch;
+    });
   }, [libraryList, searchQuery]);
 
   const handleLicensePress = (licenceDetails: Library) => {
