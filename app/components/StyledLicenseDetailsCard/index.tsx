@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { useExternalLinkAlert } from '@hooks';
@@ -8,31 +8,38 @@ import { StyledIcons } from '../StyledIcons';
 
 interface LicenseDetailsProps {
   licenceDetails?: Library;
+  onPress?: (licenceDetails: Library) => void;
 }
 
-export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({ licenceDetails }) => {
+interface LicenseDetailsProps {
+  licenceDetails?: Library;
+}
+
+export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
+  licenceDetails,
+  onPress,
+}) => {
   const { styles } = useStyles(stylesheet);
   const openLink = useExternalLinkAlert();
 
   if (!licenceDetails) return null;
 
-  const { name, version, licenses } = licenceDetails;
+  const { name, version } = licenceDetails;
+
+  const handleCardPress = () => {
+    onPress?.(licenceDetails);
+  };
 
   return (
-    <View style={styles.licenseMainContainer}>
+    <TouchableOpacity style={styles.licenseMainContainer} onPress={handleCardPress}>
       <View style={styles.libraryDetailsContainer}>
         <Text style={styles.libraryNameText}>{name}</Text>
         <Text style={styles.versionText}>v{version}</Text>
       </View>
       <View style={styles.iconContainer}>
-        <StyledIcons
-          type="Feather"
-          name="chevron-right"
-          size={20}
-          color={styles.styledIcon.color}
-        />
+        <StyledIcons type="FontAwesome6" name="chevron-right" size={20} style={styles.styledIcon} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -57,6 +64,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   styledIcon: {
     color: colors.accent,
+    marginLeft: (UnistylesRuntime.screen.width * 5) / 100,
   },
   libraryNameText: {
     color: colors.accent,

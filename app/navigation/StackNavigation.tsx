@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DrawerNavigation from '@navigation/DrawerNavigation';
 import LicensesScreen from '@/screens/AppInfoScreens/LicenseScreen';
+import LicenseContentModalScreen from '@/screens/AppInfoScreens/LicenseContentModalScreen';
 
 const StackNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -9,6 +10,14 @@ const StackNavigation = () => {
     <Stack.Navigator screenOptions={{ headerShown: false, orientation: 'portrait' }}>
       <Stack.Screen name="MainStack" component={DrawerNavigation} />
       <Stack.Screen name="LicensesScreen" component={LicensesScreen} />
+      <Stack.Screen
+        name="LicenseContentModal"
+        component={LicenseContentModalScreen}
+        options={{
+          presentation: 'modal',
+          animation: 'slide_from_bottom',
+        }}
+      />
     </Stack.Navigator>
   );
 };
