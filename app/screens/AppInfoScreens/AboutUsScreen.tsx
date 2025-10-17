@@ -89,7 +89,7 @@ export const AboutUsScreen: React.FC = () => {
             }}
             style={styles.acknowledgementButton}
           >
-            <Text style={styles.acknowledgementButtonText}>Third-Party Licences</Text>
+            <Text style={styles.acknowledgementButtonText}>Third-Party Libraries</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}

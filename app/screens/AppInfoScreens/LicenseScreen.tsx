@@ -104,7 +104,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
     fontSize: 16,
-    fontFamily: fonts.Montserrat_Medium,
+    fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
     placeholderTextColor: colors.accent,
   },
