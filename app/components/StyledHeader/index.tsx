@@ -132,7 +132,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingEnd: (UnistylesRuntime.screen.width * 5) / 100,
   },
   headerText: {
-    fontSize: 22,
+    fontSize: 20,
     color: colors.accent,
     fontFamily: fonts.Nunito_Black,
   },
