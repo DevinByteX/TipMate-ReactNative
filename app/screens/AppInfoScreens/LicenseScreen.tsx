@@ -1,18 +1,38 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { FlatList, ScrollView, Text, TextInput, View } from 'react-native';
-import { StyledHeader, StyledLicenseDetailsCard } from '@components';
+import { useEffect, useState, useMemo, useRef } from 'react';
+import {
+  FlatList,
+  Text,
+  TextInput,
+  View,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+  Pressable,
+  Animated,
+} from 'react-native';
+import { StyledHeader, StyledLicenseDetailsCard, StyledIcons } from '@components';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { useNavigation } from '@react-navigation/native';
 import { Library, ReactNativeLegal } from 'react-native-legal';
 
+/**
+ * LicensesScreen component displays a list of third-party libraries used in the app
+ * with their license information. It provides search functionality and a scroll-to-top button.
+ */
 const LicensesScreen = () => {
   const { styles } = useStyles(stylesheet);
   const navigation = useNavigation();
 
+  // State for managing library data and UI interactions
   const [libraryList, setLibraryList] = useState<Library[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
 
+  // Refs for FlatList and animation
+  const flatListRef = useRef<FlatList>(null);
+  const buttonAnimation = useRef(new Animated.Value(0)).current;
+
+  // Fetch libraries on component mount
   useEffect(() => {
     const getLibraries = async () => {
       const result = await ReactNativeLegal.getLibrariesAsync();
@@ -21,7 +41,21 @@ const LicensesScreen = () => {
     getLibraries();
   }, []);
 
-  const filteredLibraries = useMemo(() => {
+  // Animate scroll-to-top button visibility
+  useEffect(() => {
+    Animated.spring(buttonAnimation, {
+      toValue: showScrollToTop ? 1 : 0,
+      useNativeDriver: true,
+      tension: 100,
+      friction: 8,
+    }).start();
+  }, [showScrollToTop, buttonAnimation]);
+
+  /**
+   * Filters the library list based on the search query.
+   * Searches in library names and license content.
+   */
+  const getFilteredLibraries = useMemo(() => {
     if (!searchQuery.trim()) {
       return libraryList;
     }
@@ -34,17 +68,54 @@ const LicensesScreen = () => {
     });
   }, [libraryList, searchQuery]);
 
+  /**
+   * Handles navigation to the license content modal when a library is pressed.
+   */
   const handleLicensePress = (licenceDetails: Library) => {
     (navigation as any).navigate('LicenseContentModal', { licenceDetails });
   };
 
+  /**
+   * Handles scroll events to show/hide the scroll-to-top button.
+   */
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const scrollPosition = event.nativeEvent.contentOffset.y;
+    const scrollThreshold = 200; // Show button after scrolling 200px
+    setShowScrollToTop(scrollPosition > scrollThreshold);
+  };
+
+  /**
+   * Scrolls the FlatList to the top.
+   */
+  const scrollToTop = () => {
+    flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
+  };
+
+  /**
+   * Key extractor for FlatList items.
+   */
   const keyExtractor = (item: Library) => {
     return item.id;
   };
 
-  const libraryItem = ({ item }: { item: Library }) => {
+  /**
+   * Render function for individual library items in the FlatList.
+   */
+  const renderLibraryItem = ({ item }: { item: Library }) => {
     return (
       <StyledLicenseDetailsCard key={item.id} licenceDetails={item} onPress={handleLicensePress} />
+    );
+  };
+
+  /**
+   * Renders the empty state when no libraries match the search query.
+   */
+  const renderEmptyComponent = () => {
+    if (!searchQuery) return null;
+    return (
+      <View style={styles.emptyContainer}>
+        <Text style={styles.emptyText}>No libraries found matching "{searchQuery}"</Text>
+      </View>
     );
   };
 
@@ -75,19 +146,41 @@ const LicensesScreen = () => {
         />
       </View>
       <FlatList
+        ref={flatListRef}
         style={styles.mainContainer}
         contentContainerStyle={styles.scrollContentContainer}
-        data={filteredLibraries}
+        data={getFilteredLibraries}
         keyExtractor={keyExtractor}
-        renderItem={libraryItem}
-        ListEmptyComponent={
-          searchQuery ? (
-            <View style={styles.emptyContainer}>
-              <Text style={styles.emptyText}>No libraries found matching "{searchQuery}"</Text>
-            </View>
-          ) : null
-        }
+        renderItem={renderLibraryItem}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+        ListEmptyComponent={renderEmptyComponent()}
       />
+      <Animated.View
+        style={[
+          styles.scrollToTopButton,
+          {
+            opacity: buttonAnimation,
+            transform: [
+              {
+                scale: buttonAnimation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0.8, 1],
+                }),
+              },
+            ],
+          },
+        ]}
+      >
+        <Pressable onPress={scrollToTop} style={styles.scrollToTopIcon}>
+          <StyledIcons
+            type="Feather"
+            name="arrow-up"
+            size={24}
+            color={styles.scrollToTopIcon.color}
+          />
+        </Pressable>
+      </Animated.View>
     </>
   );
 };
@@ -127,6 +220,28 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontFamily: fonts.Montserrat_Medium,
     color: colors.card_typography,
     textAlign: 'center',
+  },
+  scrollToTopButton: {
+    position: 'absolute',
+    backgroundColor: colors.accent,
+    width: (UnistylesRuntime.screen.width * 12) / 100,
+    height: (UnistylesRuntime.screen.width * 12) / 100,
+    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
+    bottom: UnistylesRuntime.insets.bottom + (UnistylesRuntime.screen.height * 2) / 100,
+    right: (UnistylesRuntime.screen.width * 5) / 100,
+    elevation: 5,
+    shadowColor: colors.card_typography,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+  scrollToTopIcon: {
+    color: colors.backgroundColor,
+    width: (UnistylesRuntime.screen.width * 12) / 100,
+    height: (UnistylesRuntime.screen.width * 12) / 100,
+    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));
 
