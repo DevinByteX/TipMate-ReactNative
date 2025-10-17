@@ -10,7 +10,7 @@
     "start": "react-native start",
     "test": "jest",
     "watchman-delete-all": "watchman watch-del-all",
-    "generate-licenses": "npm-license-crawler -onlyDirectDependencies -json ./app/assets/oss-licenses.json",
+    "legal-generate": "react-native legal-generate",
     "update-version": "node updateAppVersion.js",
     "generate-android:aab": "react-native build-android --mode=release",
     "android:apk:debug": "cd android && ./gradlew assembleDebug",
