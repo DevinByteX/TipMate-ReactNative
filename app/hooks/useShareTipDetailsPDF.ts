@@ -19,7 +19,7 @@ export type TipDetailsForPDF = {
  * Generates and shares a PDF with tip details
  * Uses HTML to PDF conversion through react-native-share
  */
-export const useGenerateAndSharePDF = async (details: TipDetailsForPDF) => {
+export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
     const { amount, tip, total, tipPercentage, numberOfPeople, perPerson, currencySymbol = '$' } =
         details;
 

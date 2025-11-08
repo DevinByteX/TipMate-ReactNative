@@ -50,7 +50,7 @@ Shared via TipMate
   return message;
 };
 
-export const shareTipDetails = async ({
+export const useShareTipDetailsText = async ({
   amount,
   tip,
   total,

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { shareTipDetails, formatTipDetailsPreview } from './shareTipOption';
-import { useGenerateAndSharePDF } from './useGeneratePdfShare';
-import type { ShareTipDetailsParams } from './shareTipOption';
+import { useShareTipDetailsText, formatTipDetailsPreview } from './useShareTipDetailsText';
+import { useShareTipDetailsPDF } from './useShareTipDetailsPDF';
+import type { ShareTipDetailsParams } from './useShareTipDetailsText';
 
 type ShareTipData = Omit<ShareTipDetailsParams, 'title' | 'subject'>;
 
@@ -66,7 +66,7 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
 
         setIsPreviewVisible(false);
         try {
-            await shareTipDetails(shareData);
+            await useShareTipDetailsText(shareData);
         } catch (error) {
             console.error('Error sharing as text:', error);
             throw error;
@@ -79,7 +79,7 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
 
         setIsPreviewVisible(false);
         try {
-            await useGenerateAndSharePDF(shareData);
+            await useShareTipDetailsPDF(shareData);
         } catch (error) {
             console.error('Error sharing as PDF:', error);
             throw error;
