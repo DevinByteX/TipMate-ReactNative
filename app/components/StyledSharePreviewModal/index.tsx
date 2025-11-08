@@ -23,8 +23,9 @@ export const StyledSharePreviewModal = ({
     <Modal
       visible={isPreviewVisible}
       transparent={true}
-      animationType={'fade'}
+      animationType={'slide'}
       onRequestClose={onClose}
+      statusBarTranslucent={true}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalContents}>
@@ -64,15 +65,15 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: utils.hexToRGBA(colors.backgroundColor, 0.9),
+    backgroundColor: utils.hexToRGBA(colors.backgroundColor, 0.5),
   },
   modalContents: {
-    backgroundColor: colors.card,
+    backgroundColor: utils.hexToRGBA(colors.card, 0.9),
     width: (UnistylesRuntime.screen.width * 90) / 100,
     maxHeight: (UnistylesRuntime.screen.height * 80) / 100,
     borderRadius: (UnistylesRuntime.screen.width * 3) / 100,
     borderColor: colors.accent,
-    borderWidth: UnistylesRuntime.hairlineWidth * 2,
+    borderWidth: UnistylesRuntime.hairlineWidth * 4,
     overflow: 'hidden',
   },
   header: {
@@ -140,7 +141,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     marginTop: (UnistylesRuntime.screen.height * 1) / 100,
     marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1.2) / 100,
-    borderWidth: UnistylesRuntime.hairlineWidth * 2,
+    borderWidth: UnistylesRuntime.hairlineWidth * 3,
     borderColor: colors.card_typography,
   },
   closeButtonText: {
