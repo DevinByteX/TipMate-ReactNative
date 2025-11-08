@@ -1,16 +1,6 @@
 import Share, { ShareOptions } from 'react-native-share';
 
-export const shareTipDetails = async ({
-  amount,
-  tip,
-  total,
-  tipPercentage,
-  numberOfPeople,
-  perPerson,
-  currencySymbol = '$',
-  title = 'Share your tip summary',
-  subject = 'TipMate Summary',
-}: {
+export type ShareTipDetailsParams = {
   amount: number;
   tip: number;
   total: number;
@@ -24,7 +14,20 @@ export const shareTipDetails = async ({
   currencySymbol?: string;
   title?: string;
   subject?: string;
-}) => {
+};
+
+/**
+ * Formats the tip details into a preview message string
+ */
+export const formatTipDetailsPreview = ({
+  amount,
+  tip,
+  total,
+  tipPercentage,
+  numberOfPeople,
+  perPerson,
+  currencySymbol = '$',
+}: Omit<ShareTipDetailsParams, 'title' | 'subject'>): string => {
   const message = `
 💸 Tip Summary
 
@@ -33,17 +36,40 @@ export const shareTipDetails = async ({
 💵 Tip Amount: ${currencySymbol}${tip.toFixed(2)}
 📊 Total Amount: ${currencySymbol}${total.toFixed(2)}
 
-${
-  numberOfPeople > 1
-    ? `👥 Split Among: ${numberOfPeople} person(s)
+${numberOfPeople > 1
+      ? `👥 Split Among: ${numberOfPeople} person(s)
   • Subtotal per person: ${currencySymbol}${perPerson?.amount.toFixed(2) ?? 'N/A'}
   • Tip per person: ${currencySymbol}${perPerson?.tip.toFixed(2) ?? 'N/A'}
   • Total per person: ${currencySymbol}${perPerson?.total.toFixed(2) ?? 'N/A'}`
-    : ''
-}
+      : ''
+    }
 
 Shared via TipMate
     `.trim();
+
+  return message;
+};
+
+export const shareTipDetails = async ({
+  amount,
+  tip,
+  total,
+  tipPercentage,
+  numberOfPeople,
+  perPerson,
+  currencySymbol = '$',
+  title = 'Share your tip summary',
+  subject = 'TipMate Summary',
+}: ShareTipDetailsParams) => {
+  const message = formatTipDetailsPreview({
+    amount,
+    tip,
+    total,
+    tipPercentage,
+    numberOfPeople,
+    perPerson,
+    currencySymbol,
+  });
 
   const options: ShareOptions = {
     title,

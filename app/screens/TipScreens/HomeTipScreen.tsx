@@ -8,6 +8,7 @@ import {
   StyledTipOptions,
   StyledSpiltOptions,
   StyledRoundBox,
+  StyledSharePreviewModal,
 } from '@/components';
 // Styling
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
@@ -16,9 +17,9 @@ import {
   RoundingMethod,
   RoundingMethodType,
   calculateBillValues,
+  useShareTipPreview,
 } from '@hooks';
 import { useAppContext } from '@/context/AppContext';
-import { shareTipDetails } from '@/hooks/shareTipOption';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -45,26 +46,29 @@ const HomeTipScreen = () => {
     return () => {};
   }, [userInputTipPercentage, userInputBillAmount, userInputSplitCount, userInputRound]);
 
-  const handleShareTipDetails = () => {
-    if (!billValues) return;
+  // Prepare share data
+  const shareData = billValues
+    ? {
+        amount: userInputBillAmount,
+        tip: parseFloat(billValues.overall.tip || '0'),
+        total: parseFloat(billValues.overall.total || '0'),
+        tipPercentage: userInputTipPercentage,
+        numberOfPeople: userInputSplitCount,
+        perPerson:
+          userInputSplitCount > 1
+            ? {
+                amount: parseFloat(billValues.perPerson?.subtotal || '0'),
+                tip: parseFloat(billValues.perPerson?.tip || '0'),
+                total: parseFloat(billValues.perPerson?.total || '0'),
+              }
+            : undefined,
+        currencySymbol,
+      }
+    : null;
 
-    shareTipDetails({
-      amount: userInputBillAmount,
-      tip: parseFloat(billValues.overall.tip),
-      total: parseFloat(billValues.overall.total),
-      tipPercentage: userInputTipPercentage,
-      numberOfPeople: userInputSplitCount,
-      perPerson:
-        userInputSplitCount > 1
-          ? {
-              amount: parseFloat(billValues.perPerson?.subtotal || '0'),
-              tip: parseFloat(billValues.perPerson?.tip || '0'),
-              total: parseFloat(billValues.perPerson?.total || '0'),
-            }
-          : undefined,
-      currencySymbol,
-    });
-  };
+  // Use the share preview hook
+  const { isPreviewVisible, previewContent, openPreview, closePreview, shareAsText, shareAsPDF } =
+    useShareTipPreview(shareData);
 
   return (
     <>
@@ -113,7 +117,7 @@ const HomeTipScreen = () => {
           totalAmount={billValues?.overall?.total}
           subTotalAmount={billValues?.overall?.subtotal}
           totalTipAmount={billValues?.overall?.tip}
-          shareButtonPress={handleShareTipDetails}
+          shareButtonPress={openPreview}
         />
         {/* Round Options Container */}
         <StyledRoundBox
@@ -149,10 +153,19 @@ const HomeTipScreen = () => {
             totalAmount={billValues?.perPerson?.total}
             subTotalAmount={billValues?.perPerson?.subtotal}
             totalTipAmount={billValues?.perPerson?.tip}
-            shareButtonPress={handleShareTipDetails}
+            shareButtonPress={openPreview}
           />
         ) : null}
       </ScrollView>
+
+      {/* Share Preview Modal */}
+      <StyledSharePreviewModal
+        isPreviewVisible={isPreviewVisible}
+        onClose={closePreview}
+        onShareText={shareAsText}
+        onSharePDF={shareAsPDF}
+        previewContent={previewContent}
+      />
     </>
   );
 };
