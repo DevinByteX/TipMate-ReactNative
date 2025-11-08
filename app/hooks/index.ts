@@ -18,6 +18,9 @@ import { usePersistedReducer } from './usePersistedReducer';
 import { validateOptionValues, areOptionArraysSame } from './validationHooks';
 import { useThemeColorCustomiser, CustomisedTheme } from './useThemeColorCustomiser';
 import { useExternalLinkAlert, ExternalLinkAlertConfig } from './useExternalLinkAlert';
+import { shareTipDetails, formatTipDetailsPreview, ShareTipDetailsParams } from './shareTipOption';
+import { useGenerateAndSharePDF, TipDetailsForPDF } from './useGeneratePdfShare';
+import { useShareTipPreview } from './useShareTipPreview';
 
 export {
   convertToTwoDecimalPoints,
@@ -35,6 +38,10 @@ export {
   areOptionArraysSame,
   useThemeColorCustomiser,
   useExternalLinkAlert,
+  shareTipDetails,
+  formatTipDetailsPreview,
+  useGenerateAndSharePDF,
+  useShareTipPreview,
 };
 export type {
   BillCalculationType,
@@ -42,4 +49,6 @@ export type {
   DisabledRoundingMethodsType,
   CustomisedTheme,
   ExternalLinkAlertConfig,
+  ShareTipDetailsParams,
+  TipDetailsForPDF,
 };

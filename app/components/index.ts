@@ -16,6 +16,7 @@ export { StyledPopUp } from './StyledPopUp';
 export { StyledThemeBox } from './StyledThemeBox';
 export { StyledCurrencySelector } from './StyledCurrencySelector';
 export { StyledLicenseDetailsCard } from './StyledLicenseDetailsCard';
+export { StyledSharePreviewModal } from './StyledSharePreviewModal';
 
 // types should export seperately
 export type { IconTypeMap, StyledIconTypesKey, BaseIconProps, StyledIconsProps } from './StyledIcons';
