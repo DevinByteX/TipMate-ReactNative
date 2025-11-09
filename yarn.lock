@@ -5933,10 +5933,10 @@ react-native-screens@^4.14.1, "react-native-screens@>= 4.0.0":
     react-native-is-edge-to-edge "^1.2.1"
     warn-once "^0.1.0"
 
-react-native-share@^12.2.0:
-  version "12.2.0"
-  resolved "https://registry.npmjs.org/react-native-share/-/react-native-share-12.2.0.tgz"
-  integrity sha512-f6MB9BsKa9xVvu0DKbxq5jw4IyYHqQeqUlCNkD8eAFoJx6SD31ObPAn7SQ6NG9AOuhCy6aYuSJYJvx25DaoMZQ==
+react-native-share@12.0.11:
+  version "12.0.11"
+  resolved "https://registry.npmjs.org/react-native-share/-/react-native-share-12.0.11.tgz"
+  integrity sha512-jb9RzHjgFKvl/fVPPAiyxjmMHjnwKhKiZul6ptSUX7w7Rl7ifDYpdY7uJkipevyvwcn5DlzqXBcd8d6DPBeNVg==
 
 react-native-svg@^15.12.1:
   version "15.12.1"
