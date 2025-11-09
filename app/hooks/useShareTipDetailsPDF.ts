@@ -58,6 +58,7 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            print-color-adjust:exact !important;
           }
           body {
             font-family: 'Courier New', monospace;
