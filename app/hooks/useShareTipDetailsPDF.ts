@@ -1,6 +1,7 @@
 import Share from 'react-native-share';
 import { generatePDF } from 'react-native-html-to-pdf';
 import { Platform } from 'react-native';
+import { APP_LINKS } from '@/configs/constants';
 
 export type TipDetailsForPDF = {
     amount: number;
@@ -25,14 +26,27 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
     const { amount, tip, total, tipPercentage, numberOfPeople, perPerson, currencySymbol = '$' } =
         details;
 
-    // Get current theme colors based on theme name
-    const accentColor = '#009688';
-    const cardColor = '#862121ff';
-    const backgroundColor = '#472daeff';
-    const cardTypography = '#edd311ff';
-    const dividerColor = '#5586efff';
+    // Gradient colors matching app theme
+    const gradientStart = '#009688';
+    const gradientEnd = '#00695C';
 
-    // Generate HTML content for the PDF
+    // Platform-specific store link
+    const storeLink = Platform.OS === 'ios' ? APP_LINKS.appStore : APP_LINKS.playStore;
+
+    // Generate receipt ID based on timestamp
+    const receiptId = new Date().getTime().toString();
+    const formattedDate = new Date().toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+    });
+    const formattedTime = new Date().toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    });
+
+    // Generate HTML content for the receipt-style PDF
     const htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -46,155 +60,243 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             box-sizing: border-box;
           }
           body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, ${gradientStart} 0%, ${gradientEnd} 100%);
             padding: 40px 20px;
-            background-color: ${backgroundColor};
-            color: ${cardTypography};
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
-          .container {
-            max-width: 600px;
+          .receipt-container {
+            background: white;
+            max-width: 500px;
             margin: 0 auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
           }
-          .header {
+          .receipt-header {
+            background: linear-gradient(135deg, ${gradientStart} 0%, ${gradientEnd} 100%);
+            padding: 30px 20px 20px;
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid ${accentColor};
+            position: relative;
           }
-          .header h1 {
-            font-size: 28px;
-            color: ${accentColor};
-            margin-bottom: 8px;
-            font-weight: bold;
-          }
-          .header p {
-            font-size: 14px;
-            color: ${cardTypography};
-            opacity: 0.7;
-          }
-          .emoji {
-            font-size: 24px;
-          }
-          .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: ${cardColor};
-            border-radius: 8px;
-            border-left: 4px solid ${accentColor};
-          }
-          .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: ${accentColor};
+          .mascot {
+            font-size: 60px;
             margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+          }
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+          }
+          .receipt-title {
+            font-size: 26px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          }
+          .receipt-subtitle {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          }
+          .receipt-body {
+            padding: 30px 25px;
+            background: white;
+          }
+          .divider {
+            border-top: 2px dashed #e0e0e0;
+            margin: 20px 0;
+          }
+          .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #666;
+            gap: 15px;
+          }
+          .info-label {
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            flex-shrink: 0;
+          }
+          .info-value {
+            color: #333;
+            font-weight: bold;
+            text-align: right;
+            word-break: break-word;
+          }
+          .amount-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+          }
+          .amount-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+          }
+          .amount-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: ${gradientStart};
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          }
+          .detail-section {
+            margin: 20px 0;
+          }
+          .detail-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
           }
           .detail-row {
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
-            border-bottom: 1px solid ${dividerColor};
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
           }
           .detail-row:last-child {
             border-bottom: none;
           }
           .detail-label {
-            font-size: 14px;
-            color: ${cardTypography};
-            opacity: 0.7;
+            color: #666;
           }
           .detail-value {
-            font-size: 16px;
-            font-weight: bold;
-            color: ${cardTypography};
-          }
-          .highlight {
-            background-color: ${accentColor};
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-          }
-          .highlight .detail-label {
-            color: rgba(255, 255, 255, 0.9);
-          }
-          .highlight .detail-value {
-            color: white;
-            font-size: 20px;
+            color: #333;
+            font-weight: 600;
           }
           .footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid ${dividerColor};
-            color: ${cardTypography};
-            opacity: 0.6;
-            font-size: 12px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 2px dashed #e0e0e0;
+          }
+          .footer-text {
+            font-size: 11px;
+            color: #999;
+            line-height: 1.6;
+          }
+          .footer-link {
+            color: ${gradientStart};
+            text-decoration: none;
+            font-weight: 600;
+          }
+          .receipt-edge-top {
+            height: 15px;
+            background: white;
+            position: relative;
+          }
+          .receipt-edge-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background: radial-gradient(circle at 10px 0, transparent 10px, white 10px);
+            background-size: 20px 15px;
+            background-repeat: repeat-x;
           }
         </style>
       </head>
       <body>
-        <div class="container">
-          <!-- Header -->
-          <div class="header">
-            <h1><span class="emoji">💸</span> TipMate Summary</h1>
-            <p>Smart Tips, Easy Living</p>
+        <div class="receipt-container">
+          <!-- Receipt Header -->
+          <div class="receipt-header">
+            <div class="mascot">💸</div>
+            <div class="receipt-title">Thank you</div>
+            <div class="receipt-subtitle">Your tip calculation summary</div>
           </div>
-
-          <!-- Bill Details Section -->
-          <div class="section">
-            <div class="section-title">📋 Bill Details</div>
-            <div class="detail-row">
-              <span class="detail-label">Bill Amount</span>
-              <span class="detail-value">${currencySymbol}${amount.toFixed(2)}</span>
+          
+          <!-- Receipt Edge -->
+          <div class="receipt-edge-top"></div>
+          
+          <!-- Receipt Body -->
+          <div class="receipt-body">
+            <!-- Receipt Info -->
+            <div class="info-row">
+              <span class="info-label">Receipt ID</span>
+              <span class="info-value">${receiptId}</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Tip Percentage</span>
-              <span class="detail-value">${tipPercentage}%</span>
+            <div class="info-row">
+              <span class="info-label">Date</span>
+              <span class="info-value">${formattedDate}</span>
             </div>
-            <div class="detail-row">
-              <span class="detail-label">Tip Amount</span>
-              <span class="detail-value">${currencySymbol}${tip.toFixed(2)}</span>
+            <div class="info-row">
+              <span class="info-label">Time</span>
+              <span class="info-value">${formattedTime}</span>
             </div>
-            <div class="highlight">
+            
+            <div class="divider"></div>
+            
+            <!-- Amount Section -->
+            <div class="amount-section">
+              <div class="amount-label">Amount</div>
+              <div class="amount-value">${currencySymbol}${total.toFixed(2)}</div>
+            </div>
+            
+            <!-- Bill Details -->
+            <div class="detail-section">
+              <div class="detail-title">Bill Details</div>
               <div class="detail-row">
-                <span class="detail-label">💰 Total Amount</span>
+                <span class="detail-label">Bill Amount</span>
+                <span class="detail-value">${currencySymbol}${amount.toFixed(2)}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Tip (${tipPercentage}%)</span>
+                <span class="detail-value">${currencySymbol}${tip.toFixed(2)}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Total Amount</span>
                 <span class="detail-value">${currencySymbol}${total.toFixed(2)}</span>
               </div>
             </div>
-          </div>
-
-          ${numberOfPeople > 1 && perPerson
+            
+            ${numberOfPeople > 1 && perPerson
             ? `
-          <!-- Split Details Section -->
-          <div class="section">
-            <div class="section-title">👥 Split Details</div>
-            <div class="detail-row">
-              <span class="detail-label">Number of People</span>
-              <span class="detail-value">${numberOfPeople}</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Subtotal per Person</span>
-              <span class="detail-value">${currencySymbol}${perPerson.amount.toFixed(2)}</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Tip per Person</span>
-              <span class="detail-value">${currencySymbol}${perPerson.tip.toFixed(2)}</span>
-            </div>
-            <div class="highlight">
+            <div class="divider"></div>
+            
+            <!-- Split Details -->
+            <div class="detail-section">
+              <div class="detail-title">Split Details (${numberOfPeople} People)</div>
               <div class="detail-row">
-                <span class="detail-label">💵 Total per Person</span>
+                <span class="detail-label">Subtotal per Person</span>
+                <span class="detail-value">${currencySymbol}${perPerson.amount.toFixed(2)}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Tip per Person</span>
+                <span class="detail-value">${currencySymbol}${perPerson.tip.toFixed(2)}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Total per Person</span>
                 <span class="detail-value">${currencySymbol}${perPerson.total.toFixed(2)}</span>
               </div>
             </div>
-          </div>
-          `
+            `
             : ''
         }
-
+          </div>
+          
           <!-- Footer -->
           <div class="footer">
-            <p>Generated by TipMate</p>
-            <p>Date: ${new Date().toLocaleDateString()}</p>
+            <div class="footer-text">
+              Generated by <a href="${storeLink}" class="footer-link">TipMate</a><br>
+              Smart Tips, Easy Living
+            </div>
           </div>
         </div>
       </body>
