@@ -346,6 +346,7 @@ rename:
   "@types_hammerjs@2.0.46": '@types/hammerjs'
   "hoist-non-react-statics@3.3.2": hoist-non-react-statics
   "react-is@16.13.1": react-is
+  "react-native-html-to-pdf@1.3.0": react-native-html-to-pdf
   "react-native-legal@1.6.0": react-native-legal
   "@callstack_licenses@0.3.0": '@callstack/licenses'
   "xcode@3.0.1": xcode
@@ -1793,6 +1794,10 @@ manual:
     version: '16.13.1'
     source: https://github.com/facebook/react
     file: '../node_modules/react-is/LICENSE'
+  - name: react-native-html-to-pdf@1.3.0
+    version: '1.3.0'
+    source: https://github.com/christopherdro/react-native-html-to-pdf
+    file: '../node_modules/react-native-html-to-pdf/LICENSE'
   - name: react-native-legal@1.6.0
     version: '1.6.0'
     source: https://github.com/callstackincubator/react-native-legal

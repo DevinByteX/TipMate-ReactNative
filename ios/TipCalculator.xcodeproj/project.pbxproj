@@ -10,6 +10,7 @@
 		0C80B921A6F3F58F76C31292 /* libPods-TipCalculator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-TipCalculator.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		1D114007E8094387901B5CDF /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706A826FC32440FB8089F682 /* Montserrat-Bold.ttf */; };
+		1F16F5271B114077B22BCBD1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 509A525D29594CDEA3E88561 /* Settings.bundle */; };
 		21CE1F9DBA024A31A49C483D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87102442F32543658FB37E33 /* Montserrat-Regular.ttf */; };
 		3AE4C97E846446308A81FDE0 /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 632D4CA89D0B4434B078234F /* Nunito-Black.ttf */; };
 		5888B18541EB4966886B046F /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8974A390FA649B089A64998 /* Nunito-Bold.ttf */; };
@@ -22,7 +23,6 @@
 		BEE1B5CA778329A3905D069E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EB50DD8BBEEA2569DDB9FB02 /* PrivacyInfo.xcprivacy */; };
 		E83E622A6A9944E8802B86BF /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 668D3DAB6AB6499ABD7797C6 /* Montserrat-SemiBold.ttf */; };
 		FF3C56E9DC7B4C3BA4AC9FD4 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF41AD666F154743803FDB33 /* Nunito-Regular.ttf */; };
-		1F16F5271B114077B22BCBD1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 509A525D29594CDEA3E88561 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +49,7 @@
 		44145C672BFA85400018392C /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome6_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome6_Brands.ttf"; sourceTree = "<group>"; };
 		44145C682BFA85400018392C /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		44145C692BFA85400018392C /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		509A525D29594CDEA3E88561 /* Settings.bundle */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Settings.bundle; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-TipCalculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipCalculator.release.xcconfig"; path = "Target Support Files/Pods-TipCalculator/Pods-TipCalculator.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-TipCalculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TipCalculator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		632D4CA89D0B4434B078234F /* Nunito-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Black.ttf"; path = "../app/assets/fonts/Nunito-Black.ttf"; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		EB50DD8BBEEA2569DDB9FB02 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = TipCalculator/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F8974A390FA649B089A64998 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Bold.ttf"; path = "../app/assets/fonts/Nunito-Bold.ttf"; sourceTree = "<group>"; };
-		509A525D29594CDEA3E88561 /* Settings.bundle */ = {isa = PBXFileReference; name = "Settings.bundle"; path = "Settings.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,8 +215,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "TipCalculator" */;
 			buildPhases = (
-				D0EF8A763D13430191F481D8 /* Generate licenses with LicensePlist */,
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				D0EF8A763D13430191F481D8 /* Generate licenses with LicensePlist */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
@@ -349,6 +349,20 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D0EF8A763D13430191F481D8 /* Generate licenses with LicensePlist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate licenses with LicensePlist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/LicensePlist/license-plist --add-version-numbers --output-path ./Settings.bundle";
+		};
 		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -365,20 +379,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TipCalculator/Pods-TipCalculator-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D0EF8A763D13430191F481D8 /* Generate licenses with LicensePlist */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			name = "Generate licenses with LicensePlist";
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/LicensePlist/license-plist --add-version-numbers --output-path ./Settings.bundle";
 		};
 /* End PBXShellScriptBuildPhase section */
 
