@@ -2716,9 +2716,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-share@12.2.0</string>
+			<string>com.mono0926.LicensePlist/react-native-share@12.0.11</string>
 			<key>Title</key>
-			<string>react-native-share (12.2.0)</string>
+			<string>react-native-share (12.0.11)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
