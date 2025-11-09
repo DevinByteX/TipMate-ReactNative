@@ -4,17 +4,17 @@ import { Platform } from 'react-native';
 import { APP_LINKS } from '@/configs/constants';
 
 export type TipDetailsForPDF = {
+  amount: number;
+  tip: number;
+  total: number;
+  tipPercentage: number;
+  numberOfPeople: number;
+  perPerson?: {
     amount: number;
     tip: number;
     total: number;
-    tipPercentage: number;
-    numberOfPeople: number;
-    perPerson?: {
-        amount: number;
-        tip: number;
-        total: number;
-    };
-    currencySymbol?: string;
+  };
+  currencySymbol?: string;
 };
 
 /**
@@ -23,31 +23,31 @@ export type TipDetailsForPDF = {
  * Styling is based on the current app theme from Unistyles
  */
 export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
-    const { amount, tip, total, tipPercentage, numberOfPeople, perPerson, currencySymbol = '$' } =
-        details;
+  const { amount, tip, total, tipPercentage, numberOfPeople, perPerson, currencySymbol = '$' } =
+    details;
 
-    // Gradient colors matching app theme
-    const gradientStart = '#009688';
-    const gradientEnd = '#00695C';
+  // Gradient colors matching app theme
+  const gradientStart = '#009688';
+  const gradientEnd = '#00695C';
 
-    // Platform-specific store link
-    const storeLink = Platform.OS === 'ios' ? APP_LINKS.appStore : APP_LINKS.playStore;
+  // Platform-specific store link
+  const storeLink = Platform.OS === 'ios' ? APP_LINKS.appStore : APP_LINKS.playStore;
 
-    // Generate receipt ID based on timestamp
-    const receiptId = new Date().getTime().toString();
-    const formattedDate = new Date().toLocaleDateString('en-US', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-    });
-    const formattedTime = new Date().toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-    });
+  // Generate receipt ID based on timestamp
+  const receiptId = new Date().getTime().toString();
+  const formattedDate = new Date().toLocaleDateString('en-US', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+  const formattedTime = new Date().toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
 
-    // Generate HTML content for the receipt-style PDF
-    const htmlContent = `
+  // Generate HTML content for the receipt-style PDF
+  const htmlContent = `
     <!DOCTYPE html>
     <html>
       <head>
@@ -268,7 +268,7 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             </div>
             
             ${numberOfPeople > 1 && perPerson
-            ? `
+      ? `
             <div class="divider"></div>
             
             <!-- Split Details -->
@@ -288,8 +288,8 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
               </div>
             </div>
             `
-            : ''
-        }
+      : ''
+    }
           </div>
           
           <!-- Footer -->
@@ -304,44 +304,33 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
     </html>
   `;
 
-    try {
-        // Generate PDF from HTML
-        const pdfOptions = {
-            html: htmlContent,
-            fileName: `TipMate_Summary_${new Date().getTime()}`,
-            directory: 'Documents',
-            base64: false,
-        };
+  try {
+    // Generate PDF from HTML
+    const pdfOptions = {
+      html: htmlContent,
+      fileName: `TipMate_Summary_${new Date().getTime()}`,
+      directory: 'Documents',
+      base64: false,
+    };
 
-        const pdf = await generatePDF(pdfOptions);
+    const pdf = await generatePDF(pdfOptions);
 
-        console.log('PDF generated at:', pdf.filePath);
-
-        if (!pdf.filePath) {
-            throw new Error('PDF generation failed: No file path returned');
-        }
-
-        // Share the generated PDF
-        const shareOptions = {
-            title: 'Share TipMate Summary',
-            subject: 'TipMate Summary',
-            url: Platform.OS === 'ios' ? `file://${pdf.filePath}` : `file://${pdf.filePath}`,
-            type: 'application/pdf',
-            failOnCancel: false,
-            useInternalStorage: true,
-        };
-
-        console.log('Sharing PDF with options:', shareOptions.url);
-        await Share.open(shareOptions);
-    } catch (err: unknown) {
-        const message =
-            typeof err === 'object' && err && 'message' in err
-                ? (err as { message?: string }).message
-                : undefined;
-
-        if (message !== 'User did not share') {
-            console.error('PDF generation error:', err);
-        }
-        throw err;
+    if (!pdf.filePath) {
+      throw new Error('PDF generation failed: No file path returned');
     }
+
+    // Share the generated PDF
+    const shareOptions = {
+      title: 'Share TipMate Summary',
+      subject: 'TipMate Summary',
+      url: `file://${pdf.filePath}`,
+      type: 'application/pdf',
+      failOnCancel: false,
+      useInternalStorage: true,
+    };
+
+    await Share.open(shareOptions);
+  } catch (error: unknown) {
+    throw error;
+  }
 };
