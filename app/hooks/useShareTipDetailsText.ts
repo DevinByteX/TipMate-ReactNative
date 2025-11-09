@@ -71,22 +71,16 @@ export const useShareTipDetailsText = async ({
     currencySymbol,
   });
 
-  const options: ShareOptions = {
+  const shareOptions: ShareOptions = {
     title,
     subject,
     message,
+    failOnCancel: false,
   };
 
   try {
-    await Share.open(options);
-  } catch (err: unknown) {
-    const message =
-      typeof err === 'object' && err && 'message' in err
-        ? (err as { message?: string }).message
-        : undefined;
-
-    if (message !== 'User did not share') {
-      console.log(err);
-    }
+    await Share.open(shareOptions);
+  } catch (error: unknown) {
+    throw error;
   }
 };
