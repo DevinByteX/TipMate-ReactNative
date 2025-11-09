@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useShareTipDetailsText, formatTipDetailsPreview } from './useShareTipDetailsText';
 import { useShareTipDetailsPDF } from './useShareTipDetailsPDF';
 import type { ShareTipDetailsParams } from './useShareTipDetailsText';
+import { Platform } from 'react-native';
 
 type ShareTipData = Omit<ShareTipDetailsParams, 'title' | 'subject'>;
 
@@ -10,8 +11,9 @@ interface UseShareTipPreviewReturn {
     previewContent: string;
     openPreview: () => void;
     closePreview: () => void;
-    shareAsText: () => Promise<void>;
-    shareAsPDF: () => Promise<void>;
+    shareAsText: () => void;
+    shareAsPDF: () => void;
+    handleModalDismiss: () => void;
 }
 
 /**
@@ -38,12 +40,14 @@ interface UseShareTipPreviewReturn {
  *   openPreview,
  *   closePreview,
  *   shareAsText,
- *   shareAsPDF
+ *   shareAsPDF,
+ *   handleModalDismiss
  * } = useShareTipPreview(shareData);
  * ```
  */
 export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipPreviewReturn => {
     const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);
+    const pendingShareAction = useRef<'text' | 'pdf' | null>(null);
 
     // Generate preview content
     const previewContent = shareData ? formatTipDetailsPreview(shareData) : '';
@@ -60,30 +64,45 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
         setIsPreviewVisible(false);
     };
 
-    // Share as text
-    const shareAsText = async () => {
-        if (!shareData) return;
+    const HandlePendingShareAction = () => {
+        if (pendingShareAction.current && shareData) {
+            const action = pendingShareAction.current;
+            pendingShareAction.current = null;
 
-        setIsPreviewVisible(false);
-        try {
-            await useShareTipDetailsText(shareData);
-        } catch (error) {
-            console.error('Error sharing as text:', error);
-            throw error;
+            // Execute share action after modal has been dismissed
+            if (action === 'text') {
+                useShareTipDetailsText(shareData).catch(error => {
+                    console.error('Error sharing as text:', error);
+                });
+            } else if (action === 'pdf') {
+                useShareTipDetailsPDF(shareData).catch(error => {
+                    console.error('Error sharing as PDF:', error);
+                });
+            }
         }
+    }
+
+    // Handle modal dismiss - executes pending share action (iOS only)
+    const handleModalDismiss = () => {
+        HandlePendingShareAction();
     };
 
-    // Share as PDF
-    const shareAsPDF = async () => {
+    // Share as text - sets pending action and closes modal
+    const shareAsText = () => {
         if (!shareData) return;
-
+        pendingShareAction.current = 'text';
         setIsPreviewVisible(false);
-        try {
-            await useShareTipDetailsPDF(shareData);
-        } catch (error) {
-            console.error('Error sharing as PDF:', error);
-            throw error;
-        }
+
+        Platform.OS !== 'ios' && HandlePendingShareAction();
+    };
+
+    // Share as PDF - sets pending action and closes modal
+    const shareAsPDF = () => {
+        if (!shareData) return;
+        pendingShareAction.current = 'pdf';
+        setIsPreviewVisible(false);
+
+        Platform.OS !== 'ios' && HandlePendingShareAction();
     };
 
     return {
@@ -93,5 +112,6 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
         closePreview,
         shareAsText,
         shareAsPDF,
+        handleModalDismiss,
     };
 };

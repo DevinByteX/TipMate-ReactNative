@@ -8,6 +8,7 @@ type SharePreviewModalProps = {
   onShareText: () => void;
   onSharePDF: () => void;
   previewContent: string;
+  onDismiss?: () => void;
 };
 
 export const StyledSharePreviewModal = ({
@@ -16,6 +17,7 @@ export const StyledSharePreviewModal = ({
   onShareText,
   onSharePDF,
   previewContent,
+  onDismiss,
 }: SharePreviewModalProps) => {
   const { styles } = useStyles(stylesheet);
 
@@ -25,6 +27,7 @@ export const StyledSharePreviewModal = ({
       transparent={true}
       animationType={'slide'}
       onRequestClose={onClose}
+      onDismiss={onDismiss}
       statusBarTranslucent={true}
     >
       <View style={styles.centeredView}>

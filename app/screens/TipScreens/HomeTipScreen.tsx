@@ -67,8 +67,15 @@ const HomeTipScreen = () => {
     : null;
 
   // Use the share preview hook
-  const { isPreviewVisible, previewContent, openPreview, closePreview, shareAsText, shareAsPDF } =
-    useShareTipPreview(shareData);
+  const {
+    isPreviewVisible,
+    previewContent,
+    openPreview,
+    closePreview,
+    shareAsText,
+    shareAsPDF,
+    handleModalDismiss,
+  } = useShareTipPreview(shareData);
 
   return (
     <>
@@ -165,6 +172,7 @@ const HomeTipScreen = () => {
         onShareText={shareAsText}
         onSharePDF={shareAsPDF}
         previewContent={previewContent}
+        onDismiss={handleModalDismiss}
       />
     </>
   );
