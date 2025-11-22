@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, Pressable } from 'react-native';
+import { ScrollView, View, Text, Pressable, Alert } from 'react-native';
 import { StyledHeader, StyledBillBox, StyledIcons, StyledSharePreviewModal } from '@components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
@@ -60,8 +60,21 @@ const SavedTipDetailScreen = () => {
   } = useShareTipPreview(shareData);
 
   const handleDelete = () => {
-    deleteTip(tip.id);
-    navigation.goBack();
+    Alert.alert(
+      'Delete Tip',
+      'Are you sure you want to delete this saved tip? This action cannot be undone.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => {
+            deleteTip(tip.id);
+            navigation.goBack();
+          },
+        },
+      ],
+    );
   };
 
   return (
