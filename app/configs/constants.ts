@@ -99,5 +99,5 @@ export const EMAILS = {
 };
 
 export const APP_INFO = {
-  version: '1.2.3',
+  version: '1.2.4',
 };
