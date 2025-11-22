@@ -106,6 +106,7 @@ const CurrencyListModal = ({
             type={'FontAwesome6'}
             name={'circle-info'}
             size={styles.modalInstructionText?.fontSize}
+            color={styles.modalInstructionText?.color}
           />
           {` ${modalDescription}`}
         </Text>
