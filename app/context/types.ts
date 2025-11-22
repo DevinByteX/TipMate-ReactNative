@@ -21,12 +21,31 @@ export interface SplitSliderConfigValues {
   max: number;
   step: number;
 }
+
+export interface SavedTip {
+  id: string;
+  timestamp: number;
+  amount: number;
+  tip: number;
+  total: number;
+  tipPercentage: number;
+  numberOfPeople: number;
+  perPerson?: {
+    amount: number;
+    tip: number;
+    total: number;
+  };
+  currencySymbol: string;
+  currencyCode: string;
+}
+
 export interface AppState {
   tips: TipOptionState[];
   splits: SplitOptionState[];
   tipSliderConfig: TipSliderConfigValues;
   splitSliderConfig: SplitSliderConfigValues;
   currencyConfig: CurrencyType;
+  savedTips: SavedTip[];
 }
 
 export type TipAction =
@@ -39,8 +58,14 @@ export type SplitAction =
 
 export type CurrencyConfigAction = { type: 'UPDATE_CURRENCY_SIGN'; payload: CurrencyType };
 
+export type SavedTipAction =
+  | { type: 'SAVE_TIP'; payload: SavedTip }
+  | { type: 'DELETE_TIP'; payload: string }
+  | { type: 'CLEAR_ALL_TIPS' };
+
 export type AppAction =
   | TipAction
   | SplitAction
   | CurrencyConfigAction
+  | SavedTipAction
   | { type: 'LOAD_PERSISTED_STATE'; payload: AppState }; // Include LOAD_PERSISTED_STATE

@@ -10,6 +10,7 @@ const initialState: AppState = {
   tipSliderConfig: Constants.defaultTipSliderConfigValues,
   splitSliderConfig: Constants.defaultSplitSliderConfigValues,
   currencyConfig: Constants.defaultCurrencyObject,
+  savedTips: [],
 };
 
 interface AppProviderProps {

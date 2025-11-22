@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DrawerNavigation from '@navigation/DrawerNavigation';
 import LicensesScreen from '@/screens/AppInfoScreens/LicenseScreen';
 import LicenseContentModalScreen from '@/screens/AppInfoScreens/LicenseContentModalScreen';
+import SavedTipDetailScreen from '@/screens/TipScreens/SavedTipDetailScreen';
 
 const StackNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -9,6 +10,7 @@ const StackNavigation = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, orientation: 'portrait' }}>
       <Stack.Screen name="MainStack" component={DrawerNavigation} />
+      <Stack.Screen name="SavedTipDetailScreen" component={SavedTipDetailScreen} />
       <Stack.Screen name="LicensesScreen" component={LicensesScreen} />
       <Stack.Screen
         name="LicenseContentModal"

@@ -4,7 +4,7 @@ import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledDrawer } from '@components';
 // Screens
 import HomeTipScreen from '@/screens/TipScreens/HomeTipScreen';
-// import SavedTipsScreen from '@/screens/TipScreens/SavedTipsScreen';
+import SavedTipsScreen from '@/screens/TipScreens/SavedTipsScreen';
 import SettingsScreen from '@/screens/TipScreens/SettingsScreen';
 import AboutUsScreen from '@/screens/AppInfoScreens/AboutUsScreen';
 
@@ -38,18 +38,18 @@ const DrawerNavigation = () => {
           },
         }}
       />
-      {/* <Drawer.Screen
+      <Drawer.Screen
         name="SavedTipScreen"
         component={SavedTipsScreen}
         options={{
-          drawerLabel: 'History & Summary',
+          drawerLabel: 'Saved Tips',
           drawerLabelStyle: {
             fontFamily: theme.fonts.Montserrat_Bold,
             fontWeight: undefined,
             fontSize: 14,
           },
         }}
-      /> */}
+      />
       <Drawer.Screen
         name="SettingsScreen"
         component={SettingsScreen}

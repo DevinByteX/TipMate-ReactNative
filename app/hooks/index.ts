@@ -21,6 +21,7 @@ import { useExternalLinkAlert, ExternalLinkAlertConfig } from './useExternalLink
 import { useShareTipDetailsText, formatTipDetailsPreview, ShareTipDetailsParams } from './useShareTipDetailsText';
 import { useShareTipDetailsPDF, TipDetailsForPDF } from './useShareTipDetailsPDF';
 import { useShareTipPreview } from './useShareTipPreview';
+import { useSaveTip } from './useSaveTip';
 
 export {
   convertToTwoDecimalPoints,
@@ -42,6 +43,7 @@ export {
   formatTipDetailsPreview,
   useShareTipDetailsPDF,
   useShareTipPreview,
+  useSaveTip,
 };
 export type {
   BillCalculationType,
