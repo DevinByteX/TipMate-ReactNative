@@ -27,6 +27,7 @@ type StyledBillBox = {
   shareButtonPress?: () => void;
   saveButtonPress?: () => void;
   hideSaveButton?: boolean;
+  isSaved?: boolean;
 };
 
 export const StyledBillBox = ({
@@ -43,6 +44,7 @@ export const StyledBillBox = ({
   shareButtonPress,
   saveButtonPress,
   hideSaveButton = false,
+  isSaved = false,
 }: StyledBillBox) => {
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
@@ -69,17 +71,19 @@ export const StyledBillBox = ({
           )}
         </View>
         <View style={styles.titleRightContainer}>
-          {!hideSaveButton && saveButtonPress && (
+          {!hideSaveButton && (
             <StyledIcons
               type={'MaterialDesignIcons'}
-              name={'bookmark-outline'}
+              name={isSaved ? 'bookmark-check' : 'bookmark-outline'}
               size={styles.titleText?.fontSize + 7}
               color={
                 Number(totalAmount) > 0 ? styles.titleText?.color : theme.colors.disable_button
               }
-              disabled={Number(totalAmount) > 0 ? false : true}
+              disabled={isSaved || Number(totalAmount) <= 0}
               onPress={() => {
-                saveButtonPress && saveButtonPress();
+                if (!isSaved) {
+                  saveButtonPress && saveButtonPress();
+                }
               }}
             />
           )}
