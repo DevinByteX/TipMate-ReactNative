@@ -1,5 +1,15 @@
-import React, { useState, useMemo } from 'react';
-import { ScrollView, View, Text, FlatList, Pressable, Alert } from 'react-native';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  Pressable,
+  Alert,
+  TextInput,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+  Animated,
+} from 'react-native';
 // Custom Component
 import { StyledHeader, StyledIcons } from '@components';
 // Styling
@@ -15,7 +25,23 @@ const SavedTipsScreen = () => {
   const { deleteTip, clearAllTips } = useSaveTip();
   const navigation = useNavigation();
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+  const flatListRef = useRef<FlatList>(null);
+  const buttonAnimation = useRef(new Animated.Value(0)).current;
+
   const savedTips = useMemo(() => state.savedTips || [], [state.savedTips]);
+
+  // Animate scroll-to-top button visibility
+  useEffect(() => {
+    Animated.spring(buttonAnimation, {
+      toValue: showScrollToTop ? 1 : 0,
+      useNativeDriver: true,
+      tension: 100,
+      friction: 8,
+    }).start();
+  }, [showScrollToTop, buttonAnimation]);
 
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
@@ -27,6 +53,33 @@ const SavedTipsScreen = () => {
       minute: '2-digit',
     });
   };
+
+  // Filter tips based on search query
+  const filteredTips = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return savedTips;
+    }
+    const query = searchQuery.toLowerCase();
+    return savedTips.filter(tip => {
+      const amountMatch = tip.amount.toString().includes(query);
+      const tipMatch = tip.tip.toString().includes(query);
+      const totalMatch = tip.total.toString().includes(query);
+      const percentageMatch = tip.tipPercentage.toString().includes(query);
+      const currencyMatch = tip.currencyCode.toLowerCase().includes(query);
+      const dateMatch = formatDate(tip.timestamp).toLowerCase().includes(query);
+      const peopleMatch = tip.numberOfPeople.toString().includes(query);
+
+      return (
+        amountMatch ||
+        tipMatch ||
+        totalMatch ||
+        percentageMatch ||
+        currencyMatch ||
+        dateMatch ||
+        peopleMatch
+      );
+    });
+  }, [savedTips, searchQuery]);
 
   const handleDeleteTip = (tipId: string) => {
     Alert.alert('Delete Tip', 'Are you sure you want to delete this saved tip?', [
@@ -41,6 +94,16 @@ const SavedTipsScreen = () => {
 
   const handleTipPress = (tip: SavedTip) => {
     (navigation as any).navigate('SavedTipDetailScreen', { tip });
+  };
+
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const scrollPosition = event.nativeEvent.contentOffset.y;
+    const scrollThreshold = 200;
+    setShowScrollToTop(scrollPosition > scrollThreshold);
+  };
+
+  const scrollToTop = () => {
+    flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
   };
 
   const renderTipCard = ({ item }: { item: SavedTip }) => (
@@ -99,11 +162,15 @@ const SavedTipsScreen = () => {
         size={80}
         color={theme.colors.disable_button}
       />
-      <Text style={styles.emptyTitle}>No Saved Tips</Text>
+      <Text style={styles.emptyTitle}>{searchQuery ? 'No Results Found' : 'No Saved Tips'}</Text>
       <Text style={styles.emptyDescription}>
-        Tips you save from the calculator will appear here.
+        {searchQuery
+          ? `No tips match "${searchQuery}"`
+          : 'Tips you save from the calculator will appear here.'}
       </Text>
-      <Text style={styles.emptyHint}>Look for the bookmark icon on your calculated tips!</Text>
+      {!searchQuery && (
+        <Text style={styles.emptyHint}>Look for the bookmark icon on your calculated tips!</Text>
+      )}
     </View>
   );
 
@@ -115,25 +182,79 @@ const SavedTipsScreen = () => {
         headerRightIconVisibilty={false}
       />
       <View style={styles.mainContainer}>
-        {savedTips.length > 0 && (
+        {/* Search Input */}
+        <View style={styles.searchContainer}>
+          <TextInput
+            autoFocus={false}
+            placeholder="Search by amount, tip, date..."
+            value={searchQuery}
+            maxLength={50}
+            style={styles.searchInput}
+            selectionColor={styles.searchInput.placeholderTextColor}
+            placeholderTextColor={styles.searchInput.placeholderTextColor}
+            keyboardType="default"
+            returnKeyType="search"
+            onChangeText={setSearchQuery}
+            autoCapitalize="none"
+            autoCorrect={false}
+            clearButtonMode="while-editing"
+            keyboardAppearance={UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light'}
+          />
+        </View>
+
+        {/* Header Row */}
+        {filteredTips.length > 0 && (
           <View style={styles.headerRow}>
             <Text style={styles.countText}>
-              {savedTips.length} {savedTips.length === 1 ? 'Tip' : 'Tips'} Saved
+              {filteredTips.length} {filteredTips.length === 1 ? 'Tip' : 'Tips'}
+              {searchQuery ? ' Found' : ' Saved'}
             </Text>
-            <Pressable onPress={clearAllTips}>
-              <Text style={styles.clearAllText}>Clear All</Text>
-            </Pressable>
+            {!searchQuery && (
+              <Pressable onPress={clearAllTips}>
+                <Text style={styles.clearAllText}>Clear All</Text>
+              </Pressable>
+            )}
           </View>
         )}
         <FlatList
-          data={savedTips}
+          ref={flatListRef}
+          data={filteredTips}
           renderItem={renderTipCard}
           keyExtractor={item => item.id}
           contentContainerStyle={styles.listContainer}
           ListEmptyComponent={renderEmptyState}
           showsVerticalScrollIndicator={false}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
         />
       </View>
+
+      {/* Scroll to Top Button */}
+      <Animated.View
+        style={[
+          styles.scrollToTopButton,
+          {
+            opacity: buttonAnimation,
+            transform: [
+              {
+                scale: buttonAnimation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0.8, 1],
+                }),
+              },
+            ],
+          },
+        ]}
+      >
+        <Pressable onPress={scrollToTop} style={styles.scrollToTopIcon}>
+          <StyledIcons
+            type="Feather"
+            name="arrow-up"
+            size={24}
+            color={styles.scrollToTopIcon.color}
+          />
+        </Pressable>
+      </Animated.View>
     </>
   );
 };
@@ -143,12 +264,27 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     flex: 1,
     backgroundColor: colors.backgroundColor,
   },
+  searchContainer: {
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    backgroundColor: colors.backgroundColor,
+  },
+  searchInput: {
+    backgroundColor: colors.card,
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    fontSize: 16,
+    fontFamily: fonts.Montserrat_Bold,
+    color: colors.card_typography,
+    placeholderTextColor: colors.accent,
+  },
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
   },
   countText: {
     fontSize: 14,
@@ -271,6 +407,28 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     textAlign: 'center',
     marginTop: (UnistylesRuntime.screen.height * 1.5) / 100,
     paddingHorizontal: (UnistylesRuntime.screen.width * 10) / 100,
+  },
+  scrollToTopButton: {
+    position: 'absolute',
+    backgroundColor: colors.accent,
+    width: (UnistylesRuntime.screen.width * 12) / 100,
+    height: (UnistylesRuntime.screen.width * 12) / 100,
+    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
+    bottom: UnistylesRuntime.insets.bottom + (UnistylesRuntime.screen.height * 2) / 100,
+    right: (UnistylesRuntime.screen.width * 5) / 100,
+    elevation: 5,
+    shadowColor: colors.card_typography,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+  scrollToTopIcon: {
+    color: colors.backgroundColor,
+    width: (UnistylesRuntime.screen.width * 12) / 100,
+    height: (UnistylesRuntime.screen.width * 12) / 100,
+    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));
 
