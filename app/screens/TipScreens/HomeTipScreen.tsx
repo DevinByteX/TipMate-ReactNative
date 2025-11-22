@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { ScrollView, Platform } from 'react-native';
 // custom component
 import {
@@ -70,9 +70,24 @@ const HomeTipScreen = () => {
       }
     : null;
 
+  // Check if current tip already exists in saved tips
+  const isTipAlreadySaved = useMemo(() => {
+    if (!shareData || !state.savedTips) return false;
+
+    return state.savedTips.some(
+      savedTip =>
+        savedTip.amount === shareData.amount &&
+        savedTip.tip === shareData.tip &&
+        savedTip.total === shareData.total &&
+        savedTip.tipPercentage === shareData.tipPercentage &&
+        savedTip.numberOfPeople === shareData.numberOfPeople &&
+        savedTip.currencyCode === shareData.currencyCode,
+    );
+  }, [shareData, state.savedTips]);
+
   // Handle save tip
   const handleSaveTip = () => {
-    if (shareData) {
+    if (shareData && !isTipAlreadySaved) {
       saveTip(shareData);
     }
   };
@@ -135,6 +150,7 @@ const HomeTipScreen = () => {
           totalTipAmount={billValues?.overall?.tip}
           shareButtonPress={openPreview}
           saveButtonPress={handleSaveTip}
+          isSaved={isTipAlreadySaved}
         />
         {/* Round Options Container */}
         <StyledRoundBox
@@ -172,6 +188,7 @@ const HomeTipScreen = () => {
             totalTipAmount={billValues?.perPerson?.tip}
             shareButtonPress={openPreview}
             saveButtonPress={handleSaveTip}
+            isSaved={isTipAlreadySaved}
           />
         ) : null}
       </ScrollView>
