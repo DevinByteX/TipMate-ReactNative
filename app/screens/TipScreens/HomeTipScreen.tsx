@@ -18,6 +18,7 @@ import {
   RoundingMethodType,
   calculateBillValues,
   useShareTipPreview,
+  useSaveTip,
 } from '@hooks';
 import { useAppContext } from '@/context/AppContext';
 
@@ -31,8 +32,10 @@ const HomeTipScreen = () => {
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
   const { state } = useAppContext();
+  const { saveTip } = useSaveTip();
 
   const currencySymbol: string = state?.currencyConfig?.currencySign;
+  const currencyCode: string = state?.currencyConfig?.currencyId;
 
   useEffect(() => {
     const billValuesResults = calculateBillValues(
@@ -63,8 +66,16 @@ const HomeTipScreen = () => {
               }
             : undefined,
         currencySymbol,
+        currencyCode,
       }
     : null;
+
+  // Handle save tip
+  const handleSaveTip = () => {
+    if (shareData) {
+      saveTip(shareData);
+    }
+  };
 
   // Use the share preview hook
   const {
@@ -115,9 +126,7 @@ const HomeTipScreen = () => {
         <StyledBillBox
           titleVisibility
           titleText={'TOTAL COST'}
-          description={
-            'Voilà! Here’s your final amount, with the tip and any rounding all taken care of.'
-          }
+          description={`Voilà! Here's your final amount, with the tip and any rounding all taken care of.`}
           currencySymbol={currencySymbol}
           subTotalText={'SUB COST'}
           tipText={'TIP'}
@@ -125,6 +134,7 @@ const HomeTipScreen = () => {
           subTotalAmount={billValues?.overall?.subtotal}
           totalTipAmount={billValues?.overall?.tip}
           shareButtonPress={openPreview}
+          saveButtonPress={handleSaveTip}
         />
         {/* Round Options Container */}
         <StyledRoundBox
@@ -154,13 +164,14 @@ const HomeTipScreen = () => {
           <StyledBillBox
             titleVisibility
             titleText={'PER PERSON'}
-            description={'Curious about the split? Here’s the amount each person will chip in.'}
+            description={`Curious about the split? Here's the amount each person will chip in.`}
             currencySymbol={currencySymbol}
             subTotalText={'SUB TOTAL'}
             totalAmount={billValues?.perPerson?.total}
             subTotalAmount={billValues?.perPerson?.subtotal}
             totalTipAmount={billValues?.perPerson?.tip}
             shareButtonPress={openPreview}
+            saveButtonPress={handleSaveTip}
           />
         ) : null}
       </ScrollView>

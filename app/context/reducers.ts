@@ -5,6 +5,8 @@ import {
   TipOptionState,
   TipAction,
   CurrencyConfigAction,
+  SavedTip,
+  SavedTipAction,
 } from './types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -59,12 +61,31 @@ export const currencyConfigReducer = (
   }
 };
 
+export const savedTipsReducer = (state: SavedTip[], action: SavedTipAction): SavedTip[] => {
+  switch (action.type) {
+    case 'SAVE_TIP':
+      const newTips = [action.payload, ...state];
+      saveState({ savedTips: newTips });
+      return newTips;
+    case 'DELETE_TIP':
+      const filteredTips = state.filter(tip => tip.id !== action.payload);
+      saveState({ savedTips: filteredTips });
+      return filteredTips;
+    case 'CLEAR_ALL_TIPS':
+      saveState({ savedTips: [] });
+      return [];
+    default:
+      return state;
+  }
+};
+
 // Function to save state to AsyncStorage
 const saveState = async (
   partialState: Partial<{
     tips: TipOptionState[];
     splits: SplitOptionState[];
     currencyConfig: CurrencyType;
+    savedTips: SavedTip[];
   }>,
 ) => {
   try {
@@ -74,6 +95,7 @@ const saveState = async (
         tips: TipOptionState[];
         splits: SplitOptionState[];
         currencyConfig: CurrencyType;
+        savedTips: SavedTip[];
       };
       const newState = { ...currentStateObject, ...partialState };
       await AsyncStorage.setItem(Constants.APP_STATE_ASYNCSTORAGE_KEY, JSON.stringify(newState));

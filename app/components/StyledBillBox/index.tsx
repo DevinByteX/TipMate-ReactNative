@@ -25,6 +25,8 @@ type StyledBillBox = {
   subTotalAmount?: string | number;
   totalTipAmount?: string | number;
   shareButtonPress?: () => void;
+  saveButtonPress?: () => void;
+  hideSaveButton?: boolean;
 };
 
 export const StyledBillBox = ({
@@ -39,6 +41,8 @@ export const StyledBillBox = ({
   subTotalAmount = '0.00',
   totalTipAmount = '0.00',
   shareButtonPress,
+  saveButtonPress,
+  hideSaveButton = false,
 }: StyledBillBox) => {
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
@@ -65,6 +69,20 @@ export const StyledBillBox = ({
           )}
         </View>
         <View style={styles.titleRightContainer}>
+          {!hideSaveButton && saveButtonPress && (
+            <StyledIcons
+              type={'MaterialDesignIcons'}
+              name={'bookmark-outline'}
+              size={styles.titleText?.fontSize + 7}
+              color={
+                Number(totalAmount) > 0 ? styles.titleText?.color : theme.colors.disable_button
+              }
+              disabled={Number(totalAmount) > 0 ? false : true}
+              onPress={() => {
+                saveButtonPress && saveButtonPress();
+              }}
+            />
+          )}
           <StyledIcons
             type={'Octicons'}
             name={'share'}
@@ -190,7 +208,10 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   titleRightContainer: {
     flex: 1,
-    alignItems: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: (UnistylesRuntime.screen.width * 3) / 100,
     paddingEnd: (UnistylesRuntime.screen.width * 5) / 100,
   },
   titleText: {

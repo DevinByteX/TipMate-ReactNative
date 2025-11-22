@@ -1,5 +1,5 @@
 import { AppState, AppAction } from './types';
-import { tipReducer, splitReducer, currencyConfigReducer } from './reducers';
+import { tipReducer, splitReducer, currencyConfigReducer, savedTipsReducer } from './reducers';
 import { Constants } from '@configs';
 
 export const rootReducer = (state: AppState, action: AppAction): AppState => {
@@ -10,6 +10,7 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
         tips: action.payload.tips || state.tips,
         splits: action.payload.splits || state.splits,
         currencyConfig: action.payload.currencyConfig || state.currencyConfig,
+        savedTips: action.payload.savedTips || state.savedTips,
       };
     case 'UPDATE_TIP_OPTIONS':
       return { ...state, tips: tipReducer(state.tips, action) };
@@ -21,6 +22,10 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
       return { ...state, splits: Constants.defaultSplitOptionsArray };
     case 'UPDATE_CURRENCY_SIGN':
       return { ...state, currencyConfig: currencyConfigReducer(state.currencyConfig, action) };
+    case 'SAVE_TIP':
+    case 'DELETE_TIP':
+    case 'CLEAR_ALL_TIPS':
+      return { ...state, savedTips: savedTipsReducer(state.savedTips, action) };
     default:
       return state;
   }
