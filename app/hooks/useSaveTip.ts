@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { SavedTip } from '../context/types';
 import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 interface SaveTipParams {
     amount: number;
@@ -25,6 +26,7 @@ const generateId = (): string => {
 
 export const useSaveTip = () => {
     const { dispatch } = useAppContext();
+    const navigation = useNavigation();
 
     const saveTip = useCallback(
         (params: SaveTipParams) => {
@@ -44,7 +46,15 @@ export const useSaveTip = () => {
 
                 dispatch({ type: 'SAVE_TIP', payload: savedTip });
 
-                Alert.alert('Success', 'Tip calculation saved successfully!', [{ text: 'OK' }]);
+                Alert.alert('Success', 'Tip calculation saved successfully!', [
+                    { text: 'OK', style: 'cancel' },
+                    {
+                        text: 'View Details',
+                        onPress: () => {
+                            (navigation as any).navigate('SavedTipDetailScreen', { tip: savedTip });
+                        },
+                    },
+                ]);
             } catch (error) {
                 console.error('Error saving tip:', error);
                 Alert.alert('Error', 'Failed to save tip calculation. Please try again.', [
@@ -52,7 +62,7 @@ export const useSaveTip = () => {
                 ]);
             }
         },
-        [dispatch],
+        [dispatch, navigation],
     );
 
     const deleteTip = useCallback(
