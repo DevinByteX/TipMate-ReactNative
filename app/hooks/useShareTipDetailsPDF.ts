@@ -71,21 +71,21 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
           }
           .receipt-container {
             background: white;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 24px;
+            box-shadow: 0 24px 72px rgba(0,0,0,0.3);
             overflow: hidden;
           }
           .receipt-header {
             background: linear-gradient(135deg, ${gradientStart} 0%, ${gradientEnd} 100%);
-            padding: 30px 20px 20px;
+            padding: 36px 24px 24px;
             text-align: center;
             position: relative;
           }
           .mascot {
-            font-size: 60px;
-            margin-bottom: 15px;
+            font-size: 72px;
+            margin-bottom: 18px;
             animation: float 3s ease-in-out infinite;
           }
           @keyframes float {
@@ -93,33 +93,33 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             50% { transform: translateY(-10px); }
           }
           .receipt-title {
-            font-size: 26px;
+            font-size: 32px;
             font-weight: bold;
             color: white;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           }
           .receipt-subtitle {
-            font-size: 13px;
+            font-size: 16px;
             color: rgba(255,255,255,0.9);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           }
           .receipt-body {
-            padding: 30px 25px;
+            padding: 36px 30px;
             background: white;
           }
           .divider {
             border-top: 2px dashed #e0e0e0;
-            margin: 20px 0;
+            margin: 24px 0;
           }
           .info-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            font-size: 13px;
+            margin-bottom: 14px;
+            font-size: 16px;
             color: #666;
-            gap: 15px;
+            gap: 18px;
           }
           .info-label {
             text-transform: uppercase;
@@ -135,40 +135,40 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
           }
           .amount-section {
             background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
+            padding: 18px;
+            border-radius: 12px;
+            margin: 24px 0;
           }
           .amount-label {
-            font-size: 11px;
+            font-size: 13px;
             color: #666;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
           }
           .amount-value {
-            font-size: 32px;
+            font-size: 40px;
             font-weight: bold;
             color: ${gradientStart};
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           }
           .detail-section {
-            margin: 20px 0;
+            margin: 24px 0;
           }
           .detail-title {
-            font-size: 13px;
+            font-size: 16px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
           }
           .detail-row {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #f0f0f0;
-            font-size: 14px;
+            font-size: 17px;
           }
           .detail-row:last-child {
             border-bottom: none;
@@ -182,12 +182,12 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
           }
           .footer {
             text-align: center;
-            padding: 20px;
+            padding: 24px;
             background: #f8f9fa;
             border-top: 2px dashed #e0e0e0;
           }
           .footer-text {
-            font-size: 11px;
+            font-size: 14px;
             color: #999;
             line-height: 1.6;
           }
@@ -197,7 +197,7 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             font-weight: 600;
           }
           .receipt-edge-top {
-            height: 15px;
+            height: 18px;
             background: white;
             position: relative;
           }
@@ -207,9 +207,9 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             top: 0;
             left: 0;
             right: 0;
-            height: 15px;
-            background: radial-gradient(circle at 10px 0, transparent 10px, white 10px);
-            background-size: 20px 15px;
+            height: 18px;
+            background: radial-gradient(circle at 12px 0, transparent 12px, white 12px);
+            background-size: 24px 18px;
             background-repeat: repeat-x;
           }
         </style>
