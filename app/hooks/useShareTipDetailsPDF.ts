@@ -63,7 +63,7 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
           body {
             font-family: 'Courier New', monospace;
             background: linear-gradient(135deg, ${gradientStart} 0%, ${gradientEnd} 100%);
-            padding: 40px 20px;
+            padding: 20px 15px;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -73,19 +73,19 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             background: white;
             max-width: 600px;
             margin: 0 auto;
-            border-radius: 24px;
-            box-shadow: 0 24px 72px rgba(0,0,0,0.3);
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.3);
             overflow: hidden;
           }
           .receipt-header {
             background: linear-gradient(135deg, ${gradientStart} 0%, ${gradientEnd} 100%);
-            padding: 36px 24px 24px;
+            padding: 20px 20px 16px;
             text-align: center;
             position: relative;
           }
           .mascot {
-            font-size: 72px;
-            margin-bottom: 18px;
+            font-size: 48px;
+            margin-bottom: 8px;
             animation: float 3s ease-in-out infinite;
           }
           @keyframes float {
@@ -93,31 +93,31 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             50% { transform: translateY(-10px); }
           }
           .receipt-title {
-            font-size: 32px;
+            font-size: 24px;
             font-weight: bold;
             color: white;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           }
           .receipt-subtitle {
-            font-size: 16px;
+            font-size: 13px;
             color: rgba(255,255,255,0.9);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           }
           .receipt-body {
-            padding: 36px 30px;
+            padding: 20px 24px;
             background: white;
           }
           .divider {
             border-top: 2px dashed #e0e0e0;
-            margin: 24px 0;
+            margin: 16px 0;
           }
           .info-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
-            font-size: 16px;
+            margin-bottom: 10px;
+            font-size: 14px;
             color: #666;
             gap: 18px;
           }
@@ -135,40 +135,40 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
           }
           .amount-section {
             background: #f8f9fa;
-            padding: 18px;
+            padding: 14px;
             border-radius: 12px;
-            margin: 24px 0;
+            margin: 16px 0;
           }
           .amount-label {
-            font-size: 13px;
+            font-size: 12px;
             color: #666;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
           }
           .amount-value {
-            font-size: 40px;
+            font-size: 32px;
             font-weight: bold;
             color: ${gradientStart};
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           }
           .detail-section {
-            margin: 24px 0;
+            margin: 16px 0;
           }
           .detail-title {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
           }
           .detail-row {
             display: flex;
             justify-content: space-between;
-            padding: 12px 0;
+            padding: 9px 0;
             border-bottom: 1px solid #f0f0f0;
-            font-size: 17px;
+            font-size: 15px;
           }
           .detail-row:last-child {
             border-bottom: none;
@@ -182,14 +182,14 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
           }
           .footer {
             text-align: center;
-            padding: 24px;
+            padding: 16px;
             background: #f8f9fa;
             border-top: 2px dashed #e0e0e0;
           }
           .footer-text {
-            font-size: 14px;
+            font-size: 12px;
             color: #999;
-            line-height: 1.6;
+            line-height: 1.5;
           }
           .footer-link {
             color: ${gradientStart};
@@ -197,7 +197,7 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             font-weight: 600;
           }
           .receipt-edge-top {
-            height: 18px;
+            height: 12px;
             background: white;
             position: relative;
           }
@@ -207,9 +207,9 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
             top: 0;
             left: 0;
             right: 0;
-            height: 18px;
-            background: radial-gradient(circle at 12px 0, transparent 12px, white 12px);
-            background-size: 24px 18px;
+            height: 12px;
+            background: radial-gradient(circle at 10px 0, transparent 10px, white 10px);
+            background-size: 20px 12px;
             background-repeat: repeat-x;
           }
         </style>
