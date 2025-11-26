@@ -31,6 +31,7 @@ rl.question(`${colors.bright}Enter the ${colors.cyan}versionName: ${colors.reset
 
 const updateVersionInfo = (versionCode, version) => {
     const packageJsonPath = path.join(__dirname, 'package.json');
+    const packageLockJsonPath = path.join(__dirname, 'package-lock.json');
     const buildGradlePath = path.join(__dirname, 'android', 'app', 'build.gradle');
     const pbxprojPath = path.join(__dirname, 'ios', 'TipCalculator.xcodeproj', 'project.pbxproj');
 
@@ -53,6 +54,15 @@ const updateVersionInfo = (versionCode, version) => {
         packageJson.version = version;
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n', 'utf8');
         console.log(`Updated package.json version to ${version}`);
+
+        // package-lock.json
+        const packageLockJson = JSON.parse(fs.readFileSync(packageLockJsonPath, 'utf8'));
+        packageLockJson.version = version;
+        if (packageLockJson.packages && packageLockJson.packages['']) {
+            packageLockJson.packages[''].version = version;
+        }
+        fs.writeFileSync(packageLockJsonPath, JSON.stringify(packageLockJson, null, 2) + '\n', 'utf8');
+        console.log(`Updated package-lock.json version to ${version}`);
 
         // iOS project.pbxproj (MARKETING_VERSION)
         let pbxprojContent = fs.readFileSync(pbxprojPath, 'utf8');
