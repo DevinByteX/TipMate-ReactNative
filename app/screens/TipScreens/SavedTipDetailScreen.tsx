@@ -82,7 +82,11 @@ const SavedTipDetailScreen = () => {
       <StyledHeader
         headerTitle={'Tip Details'}
         headerSubTitle={'Saved Calculation'}
-        headerRightIconVisibilty={false}
+        headerRightIconVisibilty={true}
+        headerRightIconType={'MaterialDesignIcons'}
+        headerRightIconName={'delete'}
+        headerRightIconColor={theme.colors.error_toast}
+        onHeaderRightIconPress={handleDelete}
         enableBackButton={true}
       />
       <ScrollView
@@ -157,17 +161,6 @@ const SavedTipDetailScreen = () => {
           <Text style={styles.tipPercentageLabel}>Tip Percentage</Text>
           <Text style={styles.tipPercentageValue}>{tip.tipPercentage}%</Text>
         </View>
-
-        {/* Delete Button */}
-        <Pressable style={styles.deleteButton} onPress={handleDelete}>
-          <StyledIcons
-            type={'MaterialDesignIcons'}
-            name={'delete-outline'}
-            size={20}
-            color={'#ff4444'}
-          />
-          <Text style={styles.deleteButtonText}>Delete This Tip</Text>
-        </Pressable>
       </ScrollView>
 
       {/* Share Preview Modal */}
@@ -243,23 +236,6 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 20,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
-  },
-  deleteButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.card,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    padding: (UnistylesRuntime.screen.height * 2) / 100,
-    marginTop: (UnistylesRuntime.screen.height * 3) / 100,
-    gap: (UnistylesRuntime.screen.width * 2) / 100,
-    borderWidth: 1,
-    borderColor: '#ff4444',
-  },
-  deleteButtonText: {
-    fontSize: 16,
-    fontFamily: fonts.Nunito_Bold,
-    color: '#ff4444',
   },
 }));
 
