@@ -10,6 +10,10 @@ type styledHeaderProps = {
   headerSubTitle?: string;
   headerSubTitleVisibility?: boolean;
   headerRightIconVisibilty?: boolean;
+  headerRightIconType?: StyledIconTypesKey;
+  headerRightIconName?: string;
+  headerRightIconColor?: string;
+  onHeaderRightIconPress?: () => void;
   enableBackButton?: boolean;
 };
 
@@ -45,6 +49,10 @@ export const StyledHeader = ({
   headerSubTitle = 'Smart Tips, Easy Living',
   headerSubTitleVisibility = true,
   headerRightIconVisibilty = true,
+  headerRightIconType = 'Ionicons',
+  headerRightIconName = 'save',
+  headerRightIconColor,
+  onHeaderRightIconPress,
   enableBackButton = false,
 }: styledHeaderProps) => {
   const { styles, theme } = useStyles(stylesheet);
@@ -92,10 +100,12 @@ export const StyledHeader = ({
           <View style={styles.innerRightContainer}>
             {headerRightIconVisibilty && (
               <HeaderBarIcon
-                iconType={'Ionicons'}
-                iconName={'save'}
+                iconType={headerRightIconType}
+                iconName={headerRightIconName as any}
                 iconSize={styles.headerText.fontSize}
-                iconColor={styles.headerText.color}
+                iconColor={headerRightIconColor || styles.headerText.color}
+                headerBarStyles={styles.headerRightButtonStyles}
+                onPress={onHeaderRightIconPress}
               />
             )}
           </View>
