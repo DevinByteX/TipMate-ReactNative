@@ -80,8 +80,8 @@ const SavedTipDetailScreen = () => {
   return (
     <>
       <StyledHeader
-        headerTitle={'Tip Details'}
-        headerSubTitle={'Saved Calculation'}
+        headerTitle={'Tip Overview'}
+        headerSubTitle={'Quick glance at your result'}
         headerRightIconVisibilty={true}
         headerRightIconType={'MaterialDesignIcons'}
         headerRightIconName={'delete'}
