@@ -156,7 +156,7 @@ const SavedTipsScreen = () => {
   }, [savedTips, searchQuery, percentageFilter, peopleFilter, dateFilter]);
 
   const handleDeleteTip = (tipId: string) => {
-    Alert.alert('Delete Tip', 'Are you sure you want to delete this saved tip?', [
+    Alert.alert('Delete Tip', 'Are you sure you want to delete this tip from your summary?', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Delete',
@@ -262,14 +262,14 @@ const SavedTipsScreen = () => {
         color={theme.colors.disable_button}
       />
       <Text style={styles.emptyTitle}>
-        {searchQuery || hasActiveFilters ? 'No Results Found' : 'No Saved Tips'}
+        {searchQuery || hasActiveFilters ? 'No Results Found' : 'No Tips Yet'}
       </Text>
       <Text style={styles.emptyDescription}>
         {searchQuery
           ? `No tips match "${searchQuery}"`
           : hasActiveFilters
           ? 'No tips match the selected filters'
-          : 'Tips you save from the calculator will appear here.'}
+          : 'Your saved tips will appear here for quick review and reference.'}
       </Text>
       {!searchQuery && !hasActiveFilters && (
         <Text style={styles.emptyHint}>Look for the bookmark icon on your calculated tips!</Text>
@@ -280,8 +280,8 @@ const SavedTipsScreen = () => {
   return (
     <>
       <StyledHeader
-        headerTitle={'Saved Tips'}
-        headerSubTitle={'History & Summary'}
+        headerTitle={'Tip Summary'}
+        headerSubTitle={'Quick search and review'}
         headerRightIconVisibilty={false}
       />
       <View style={styles.mainContainer}>
