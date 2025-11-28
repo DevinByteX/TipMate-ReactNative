@@ -4,13 +4,13 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Library } from 'react-native-legal';
-import { StyledIcons } from '@components';
+import { StyledIcons, StyledAlert } from '@components';
 import { useExternalLinkAlert } from '@hooks';
 
 const LicenseContentModalScreen: React.FC = () => {
   const { styles } = useStyles(stylesheet);
   const navigation = useNavigation();
-  const openLink = useExternalLinkAlert();
+  const { handleLinkPress, alertState, confirmOpenLink, cancelOpenLink } = useExternalLinkAlert();
   const route = useRoute();
   const { licenceDetails } = route.params as { licenceDetails: Library };
 
@@ -43,13 +43,34 @@ const LicenseContentModalScreen: React.FC = () => {
         {licenceDetails?.website ? (
           <Text
             style={styles.licenseWebsiteUrl}
-            onPress={() => openLink(licenceDetails.website ?? '')}
+            onPress={() => handleLinkPress(licenceDetails.website ?? '')}
           >
             {licenceDetails?.website}
           </Text>
         ) : null}
         <Text style={styles.licenseContentText}>{licenceDetails?.licenses[0]?.licenseContent}</Text>
       </ScrollView>
+
+      {/* External Link Alert */}
+      <StyledAlert
+        visible={alertState.visible}
+        title={alertState.config.title}
+        message={alertState.config.message}
+        type="info"
+        buttons={[
+          {
+            text: alertState.config.cancelText,
+            style: 'cancel',
+            onPress: cancelOpenLink,
+          },
+          {
+            text: alertState.config.openText,
+            style: 'default',
+            onPress: confirmOpenLink,
+          },
+        ]}
+        onDismiss={cancelOpenLink}
+      />
     </View>
   );
 };

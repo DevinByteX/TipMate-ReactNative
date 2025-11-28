@@ -12,11 +12,12 @@ export { StyledTipOptionsEditMode } from './StyledTipOptionsEditMode';
 export { StyledSplitOptionsEditMode } from './StyledSplitOptionsEditMode';
 export { StyledTextInputCapsule } from './StyledTextInputCapsule';
 export { StyledConfigInput } from './StyledConfigInput';
-export { StyledPopUp } from './StyledPopUp';
 export { StyledThemeBox } from './StyledThemeBox';
 export { StyledCurrencySelector } from './StyledCurrencySelector';
 export { StyledLicenseDetailsCard } from './StyledLicenseDetailsCard';
 export { StyledSharePreviewModal } from './StyledSharePreviewModal';
+export { StyledAlert } from './StyledAlert';
+export type { AlertType, StyledAlertButton } from './StyledAlert';
 
 // types should export seperately
 export type { IconTypeMap, StyledIconTypesKey, BaseIconProps, StyledIconsProps } from './StyledIcons';

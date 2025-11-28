@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
-import { StyledHeader } from '@components';
+import { StyledHeader, StyledAlert } from '@components';
 import { AppLogo } from '@/components/StyledSVGIcons';
 import { useNavigation } from '@react-navigation/native';
 import { useExternalLinkAlert } from '@hooks';
@@ -13,7 +13,7 @@ export const AboutUsScreen: React.FC = () => {
 
   const navigation = useNavigation();
 
-  const openLink = useExternalLinkAlert();
+  const { handleLinkPress, alertState, confirmOpenLink, cancelOpenLink } = useExternalLinkAlert();
 
   const handleNavigation = (screenName: string) => {
     // @ts-ignore
@@ -51,7 +51,7 @@ export const AboutUsScreen: React.FC = () => {
           <Text
             style={[styles.sectionTitle, { textDecorationLine: 'underline' }]}
             onPress={() =>
-              openLink(Platform.OS === 'ios' ? APP_LINKS.appStore : APP_LINKS.playStore)
+              handleLinkPress(Platform.OS === 'ios' ? APP_LINKS.appStore : APP_LINKS.playStore)
             }
           >
             DevinForge Labs
@@ -63,7 +63,7 @@ export const AboutUsScreen: React.FC = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() =>
-              openLink(`mailto:${EMAILS.support}`, {
+              handleLinkPress(`mailto:${EMAILS.support}`, {
                 title: 'Contact Support',
                 message:
                   'You are about to open your default email app to contact our support team. Do you want to continue?',
@@ -95,7 +95,7 @@ export const AboutUsScreen: React.FC = () => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => openLink(APP_LINKS.privacyPolicy)}
+            onPress={() => handleLinkPress(APP_LINKS.privacyPolicy)}
             style={styles.acknowledgementButton}
           >
             <Text style={styles.acknowledgementButtonText}>Privacy Policy</Text>
@@ -103,6 +103,27 @@ export const AboutUsScreen: React.FC = () => {
         </View>
         <Text style={styles.versionText}>App version: {APP_INFO.version}</Text>
       </View>
+
+      {/* External Link Alert */}
+      <StyledAlert
+        visible={alertState.visible}
+        title={alertState.config.title}
+        message={alertState.config.message}
+        type="info"
+        buttons={[
+          {
+            text: alertState.config.cancelText,
+            style: 'cancel',
+            onPress: cancelOpenLink,
+          },
+          {
+            text: alertState.config.openText,
+            style: 'default',
+            onPress: confirmOpenLink,
+          },
+        ]}
+        onDismiss={cancelOpenLink}
+      />
     </>
   );
 };

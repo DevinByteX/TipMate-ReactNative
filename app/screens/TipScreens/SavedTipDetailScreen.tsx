@@ -1,6 +1,12 @@
-import React from 'react';
-import { ScrollView, View, Text, Pressable, Alert } from 'react-native';
-import { StyledHeader, StyledBillBox, StyledIcons, StyledSharePreviewModal } from '@components';
+import React, { useState } from 'react';
+import { ScrollView, View, Text, Pressable } from 'react-native';
+import {
+  StyledHeader,
+  StyledBillBox,
+  StyledIcons,
+  StyledSharePreviewModal,
+  StyledAlert,
+} from '@components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import { SavedTip } from '@/context/types';
@@ -59,22 +65,16 @@ const SavedTipDetailScreen = () => {
     handleModalDismiss,
   } = useShareTipPreview(shareData);
 
+  const [isDeleteAlertVisible, setIsDeleteAlertVisible] = useState(false);
+
   const handleDelete = () => {
-    Alert.alert(
-      'Delete Tip',
-      'Are you sure you want to delete this saved tip? This action cannot be undone.',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => {
-            deleteTip(tip.id);
-            navigation.goBack();
-          },
-        },
-      ],
-    );
+    setIsDeleteAlertVisible(true);
+  };
+
+  const confirmDelete = () => {
+    deleteTip(tip.id);
+    setIsDeleteAlertVisible(false);
+    navigation.goBack();
   };
 
   return (
@@ -174,6 +174,19 @@ const SavedTipDetailScreen = () => {
           onDismiss={handleModalDismiss}
         />
       )}
+
+      {/* Delete Confirmation Alert */}
+      <StyledAlert
+        visible={isDeleteAlertVisible}
+        title="Delete Tip"
+        message="Are you sure you want to delete this saved tip? This action cannot be undone."
+        type="confirm"
+        buttons={[
+          { text: 'Cancel', style: 'cancel', onPress: () => setIsDeleteAlertVisible(false) },
+          { text: 'Delete', style: 'destructive', onPress: confirmDelete },
+        ]}
+        onDismiss={() => setIsDeleteAlertVisible(false)}
+      />
     </>
   );
 };

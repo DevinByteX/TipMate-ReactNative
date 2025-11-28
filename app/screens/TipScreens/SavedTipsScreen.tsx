@@ -4,7 +4,6 @@ import {
   Text,
   FlatList,
   Pressable,
-  Alert,
   TextInput,
   NativeSyntheticEvent,
   NativeScrollEvent,
@@ -12,7 +11,7 @@ import {
   ScrollView,
 } from 'react-native';
 // Custom Component
-import { StyledHeader, StyledIcons } from '@components';
+import { StyledHeader, StyledIcons, StyledAlert } from '@components';
 // Styling
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useAppContext } from '@/context/AppContext';
@@ -27,7 +26,17 @@ type DateFilter = 'all' | 'today' | 'week' | 'month';
 const SavedTipsScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { state } = useAppContext();
-  const { deleteTip, clearAllTips } = useSaveTip();
+  const {
+    deleteTip,
+    clearAllTips,
+    confirmClearAllTips,
+    clearAllAlert,
+    setClearAllAlert,
+    deleteErrorAlert,
+    setDeleteErrorAlert,
+    clearErrorAlert,
+    setClearErrorAlert,
+  } = useSaveTip();
   const navigation = useNavigation();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,6 +45,8 @@ const SavedTipsScreen = () => {
   const [percentageFilter, setPercentageFilter] = useState<PercentageFilter>('all');
   const [peopleFilter, setPeopleFilter] = useState<PeopleFilter>('all');
   const [dateFilter, setDateFilter] = useState<DateFilter>('all');
+  const [isDeleteAlertVisible, setIsDeleteAlertVisible] = useState(false);
+  const [pendingDeleteTipId, setPendingDeleteTipId] = useState<string | null>(null);
 
   const flatListRef = useRef<FlatList>(null);
   const buttonAnimation = useRef(new Animated.Value(0)).current;
@@ -156,14 +167,16 @@ const SavedTipsScreen = () => {
   }, [savedTips, searchQuery, percentageFilter, peopleFilter, dateFilter]);
 
   const handleDeleteTip = (tipId: string) => {
-    Alert.alert('Delete Tip', 'Are you sure you want to delete this tip from your summary?', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: () => deleteTip(tipId),
-      },
-    ]);
+    setPendingDeleteTipId(tipId);
+    setIsDeleteAlertVisible(true);
+  };
+
+  const confirmDeleteTip = () => {
+    if (pendingDeleteTipId) {
+      deleteTip(pendingDeleteTipId);
+      setPendingDeleteTipId(null);
+      setIsDeleteAlertVisible(false);
+    }
   };
 
   const handleTipPress = (tip: SavedTip) => {
@@ -526,6 +539,66 @@ const SavedTipsScreen = () => {
           />
         </Pressable>
       </Animated.View>
+
+      {/* Delete Confirmation Alert */}
+      <StyledAlert
+        visible={isDeleteAlertVisible}
+        title="Delete Tip"
+        message="Are you sure you want to delete this tip from your summary?"
+        type="confirm"
+        buttons={[
+          {
+            text: 'Cancel',
+            style: 'cancel',
+            onPress: () => {
+              setPendingDeleteTipId(null);
+              setIsDeleteAlertVisible(false);
+            },
+          },
+          { text: 'Delete', style: 'destructive', onPress: confirmDeleteTip },
+        ]}
+        onDismiss={() => {
+          setPendingDeleteTipId(null);
+          setIsDeleteAlertVisible(false);
+        }}
+      />
+
+      {/* Clear All Confirmation Alert */}
+      <StyledAlert
+        visible={clearAllAlert}
+        title="Clear All Tips"
+        message="Are you sure you want to delete all saved tips? This action cannot be undone."
+        type="confirm"
+        buttons={[
+          {
+            text: 'Cancel',
+            style: 'cancel',
+            onPress: () => setClearAllAlert(false),
+          },
+          { text: 'Delete All', style: 'destructive', onPress: confirmClearAllTips },
+        ]}
+        onDismiss={() => setClearAllAlert(false)}
+      />
+
+      {/* Delete Error Alert */}
+      <StyledAlert
+        visible={deleteErrorAlert}
+        title="Error"
+        message="Failed to delete tip. Please try again."
+        type="error"
+        buttons={[{ text: 'OK', style: 'default', onPress: () => setDeleteErrorAlert(false) }]}
+        onDismiss={() => setDeleteErrorAlert(false)}
+      />
+
+      {/* Clear Error Alert */}
+      <StyledAlert
+        visible={clearErrorAlert}
+        title="Error"
+        message="Failed to clear tips. Please try again."
+        type="error"
+        buttons={[{ text: 'OK', style: 'default', onPress: () => setClearErrorAlert(false) }]}
+        onDismiss={() => setClearErrorAlert(false)}
+      />
     </>
   );
 };
