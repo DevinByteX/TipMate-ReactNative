@@ -42,7 +42,7 @@ const DrawerNavigation = () => {
         name="SavedTipScreen"
         component={SavedTipsScreen}
         options={{
-          drawerLabel: 'Saved Tips',
+          drawerLabel: 'Tip Summary',
           drawerLabelStyle: {
             fontFamily: theme.fonts.Montserrat_Bold,
             fontWeight: undefined,
