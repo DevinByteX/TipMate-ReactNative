@@ -28,6 +28,8 @@ type StyledBillBox = {
   saveButtonPress?: () => void;
   hideSaveButton?: boolean;
   isSaved?: boolean;
+  savedTipId?: string;
+  onBookmarkCheckPress?: () => void;
 };
 
 export const StyledBillBox = ({
@@ -45,6 +47,8 @@ export const StyledBillBox = ({
   saveButtonPress,
   hideSaveButton = false,
   isSaved = false,
+  savedTipId,
+  onBookmarkCheckPress,
 }: StyledBillBox) => {
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
@@ -79,9 +83,11 @@ export const StyledBillBox = ({
               color={
                 Number(totalAmount) > 0 ? styles.titleText?.color : theme.colors.disable_button
               }
-              disabled={isSaved || Number(totalAmount) <= 0}
+              disabled={Number(totalAmount) <= 0}
               onPress={() => {
-                if (!isSaved) {
+                if (isSaved && savedTipId && onBookmarkCheckPress) {
+                  onBookmarkCheckPress();
+                } else if (!isSaved) {
                   saveButtonPress && saveButtonPress();
                 }
               }}
