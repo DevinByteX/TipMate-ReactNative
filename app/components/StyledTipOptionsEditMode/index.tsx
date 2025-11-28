@@ -6,7 +6,7 @@ import {
   StyledConfigInput,
   StyledIcons,
   StyledIconTypesKey,
-  StyledPopUp,
+  StyledAlert,
   StyledTextInputCapsule,
   VerticalDevider,
 } from '@components';
@@ -212,27 +212,36 @@ export const StyledTipOptionsEditMode = ({
           </View>
         </View>
       ) : null}
-      <StyledPopUp
-        popUpVisibility={confirmPopUpVisibility}
-        modalTitle={`${modalTitle}`}
-        modalSubtitle={`${modalSubtitle}`}
-        lineButtonText={`${lineButtonText}`}
-        solidButtonText={`${solidButtonText}`}
-        onLineButtonPress={() => {
-          setConfirmPopUpVisibility(false);
-        }}
-        onSolidButtonPress={() => {
-          dispatch({
-            type: 'RESET_TIP_OPTIONS_TO_DEFAULT',
-            payload: Constants.defaultTipOptionsArray,
-          });
-          Toast.show({
-            type: 'success',
-            text1: `${resetSuccessToastText}`,
-            visibilityTime: 5000,
-          });
-          setConfirmPopUpVisibility(false);
-        }}
+      <StyledAlert
+        visible={confirmPopUpVisibility}
+        title={modalTitle}
+        message={modalSubtitle}
+        type="confirm"
+        showIcon={false}
+        buttons={[
+          {
+            text: lineButtonText,
+            style: 'cancel',
+            onPress: () => setConfirmPopUpVisibility(false),
+          },
+          {
+            text: solidButtonText,
+            style: 'default',
+            onPress: () => {
+              dispatch({
+                type: 'RESET_TIP_OPTIONS_TO_DEFAULT',
+                payload: Constants.defaultTipOptionsArray,
+              });
+              Toast.show({
+                type: 'success',
+                text1: resetSuccessToastText,
+                visibilityTime: 5000,
+              });
+              setConfirmPopUpVisibility(false);
+            },
+          },
+        ]}
+        onDismiss={() => setConfirmPopUpVisibility(false)}
       />
     </View>
   );

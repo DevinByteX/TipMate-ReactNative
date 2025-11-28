@@ -1,7 +1,6 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { SavedTip } from '../context/types';
-import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 interface SaveTipParams {
@@ -28,6 +27,15 @@ export const useSaveTip = () => {
     const { dispatch } = useAppContext();
     const navigation = useNavigation();
 
+    const [saveSuccessAlert, setSaveSuccessAlert] = useState<{
+        visible: boolean;
+        savedTip?: SavedTip;
+    }>({ visible: false });
+    const [saveErrorAlert, setSaveErrorAlert] = useState(false);
+    const [deleteErrorAlert, setDeleteErrorAlert] = useState(false);
+    const [clearAllAlert, setClearAllAlert] = useState(false);
+    const [clearErrorAlert, setClearErrorAlert] = useState(false);
+
     const saveTip = useCallback(
         (params: SaveTipParams) => {
             try {
@@ -45,24 +53,13 @@ export const useSaveTip = () => {
                 };
 
                 dispatch({ type: 'SAVE_TIP', payload: savedTip });
-
-                Alert.alert('Success', 'Tip calculation saved successfully!', [
-                    { text: 'OK', style: 'cancel' },
-                    {
-                        text: 'View Details',
-                        onPress: () => {
-                            (navigation as any).navigate('SavedTipDetailScreen', { tip: savedTip });
-                        },
-                    },
-                ]);
+                setSaveSuccessAlert({ visible: true, savedTip });
             } catch (error) {
                 console.error('Error saving tip:', error);
-                Alert.alert('Error', 'Failed to save tip calculation. Please try again.', [
-                    { text: 'OK' },
-                ]);
+                setSaveErrorAlert(true);
             }
         },
-        [dispatch, navigation],
+        [dispatch],
     );
 
     const deleteTip = useCallback(
@@ -71,33 +68,49 @@ export const useSaveTip = () => {
                 dispatch({ type: 'DELETE_TIP', payload: tipId });
             } catch (error) {
                 console.error('Error deleting tip:', error);
-                Alert.alert('Error', 'Failed to delete tip. Please try again.', [{ text: 'OK' }]);
+                setDeleteErrorAlert(true);
             }
         },
         [dispatch],
     );
 
     const clearAllTips = useCallback(() => {
-        Alert.alert(
-            'Clear All Tips',
-            'Are you sure you want to delete all saved tips? This action cannot be undone.',
-            [
-                { text: 'Cancel', style: 'cancel' },
-                {
-                    text: 'Delete All',
-                    style: 'destructive',
-                    onPress: () => {
-                        try {
-                            dispatch({ type: 'CLEAR_ALL_TIPS' });
-                        } catch (error) {
-                            console.error('Error clearing tips:', error);
-                            Alert.alert('Error', 'Failed to clear tips. Please try again.', [{ text: 'OK' }]);
-                        }
-                    },
-                },
-            ],
-        );
+        setClearAllAlert(true);
+    }, []);
+
+    const confirmClearAllTips = useCallback(() => {
+        try {
+            dispatch({ type: 'CLEAR_ALL_TIPS' });
+            setClearAllAlert(false);
+        } catch (error) {
+            console.error('Error clearing tips:', error);
+            setClearErrorAlert(true);
+        }
     }, [dispatch]);
 
-    return { saveTip, deleteTip, clearAllTips };
+    const navigateToTipDetail = useCallback(
+        (tip: SavedTip) => {
+            (navigation as any).navigate('SavedTipDetailScreen', { tip });
+            setSaveSuccessAlert({ visible: false });
+        },
+        [navigation],
+    );
+
+    return {
+        saveTip,
+        deleteTip,
+        clearAllTips,
+        confirmClearAllTips,
+        navigateToTipDetail,
+        saveSuccessAlert,
+        setSaveSuccessAlert,
+        saveErrorAlert,
+        setSaveErrorAlert,
+        deleteErrorAlert,
+        setDeleteErrorAlert,
+        clearAllAlert,
+        setClearAllAlert,
+        clearErrorAlert,
+        setClearErrorAlert,
+    };
 };

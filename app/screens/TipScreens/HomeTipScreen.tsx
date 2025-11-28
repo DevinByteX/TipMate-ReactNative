@@ -9,6 +9,7 @@ import {
   StyledSpiltOptions,
   StyledRoundBox,
   StyledSharePreviewModal,
+  StyledAlert,
 } from '@/components';
 // Styling
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
@@ -32,7 +33,14 @@ const HomeTipScreen = () => {
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
   const { state } = useAppContext();
-  const { saveTip } = useSaveTip();
+  const {
+    saveTip,
+    saveSuccessAlert,
+    setSaveSuccessAlert,
+    saveErrorAlert,
+    setSaveErrorAlert,
+    navigateToTipDetail,
+  } = useSaveTip();
 
   const currencySymbol: string = state?.currencyConfig?.currencySign;
   const currencyCode: string = state?.currencyConfig?.currencyId;
@@ -201,6 +209,38 @@ const HomeTipScreen = () => {
         onSharePDF={shareAsPDF}
         previewContent={previewContent}
         onDismiss={handleModalDismiss}
+      />
+
+      {/* Save Success Alert */}
+      <StyledAlert
+        visible={saveSuccessAlert.visible}
+        title="Success"
+        message="Tip calculation saved successfully!"
+        type="success"
+        buttons={[
+          {
+            text: 'OK',
+            style: 'cancel',
+            onPress: () => setSaveSuccessAlert({ visible: false }),
+          },
+          {
+            text: 'View Details',
+            style: 'default',
+            onPress: () =>
+              saveSuccessAlert.savedTip && navigateToTipDetail(saveSuccessAlert.savedTip),
+          },
+        ]}
+        onDismiss={() => setSaveSuccessAlert({ visible: false })}
+      />
+
+      {/* Save Error Alert */}
+      <StyledAlert
+        visible={saveErrorAlert}
+        title="Error"
+        message="Failed to save tip calculation. Please try again."
+        type="error"
+        buttons={[{ text: 'OK', style: 'default', onPress: () => setSaveErrorAlert(false) }]}
+        onDismiss={() => setSaveErrorAlert(false)}
       />
     </>
   );

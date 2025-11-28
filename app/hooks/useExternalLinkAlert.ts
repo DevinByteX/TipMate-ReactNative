@@ -1,5 +1,5 @@
-import { Alert, Linking } from 'react-native';
-import { UnistylesRuntime } from 'react-native-unistyles';
+import { useState } from 'react';
+import { Linking } from 'react-native';
 
 export type ExternalLinkAlertConfig = {
   title?: string;
@@ -17,30 +17,27 @@ const defaultConfig: Required<ExternalLinkAlertConfig> = {
 
 export const useExternalLinkAlert = (config?: ExternalLinkAlertConfig) => {
   const baseConfig = { ...defaultConfig, ...config };
+  const [alertState, setAlertState] = useState<{
+    visible: boolean;
+    url: string;
+    config: Required<ExternalLinkAlertConfig>;
+  }>({ visible: false, url: '', config: baseConfig });
 
   const handleLinkPress = (url: string, overrideConfig?: ExternalLinkAlertConfig) => {
     const mergedConfig = { ...baseConfig, ...overrideConfig };
-    Alert.alert(
-      mergedConfig.title,
-      mergedConfig.message,
-      [
-        {
-          text: mergedConfig.cancelText,
-        },
-        {
-          text: mergedConfig.openText,
-          isPreferred: true,
-          onPress: () => Linking.openURL(url),
-        },
-      ],
-      {
-        cancelable: true,
-        userInterfaceStyle: UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light',
-      },
-    );
+    setAlertState({ visible: true, url, config: mergedConfig });
   };
 
-  return handleLinkPress;
+  const confirmOpenLink = () => {
+    Linking.openURL(alertState.url);
+    setAlertState(prev => ({ ...prev, visible: false }));
+  };
+
+  const cancelOpenLink = () => {
+    setAlertState(prev => ({ ...prev, visible: false }));
+  };
+
+  return { handleLinkPress, alertState, confirmOpenLink, cancelOpenLink };
 };
 
 /*
