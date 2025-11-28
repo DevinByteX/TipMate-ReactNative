@@ -79,10 +79,12 @@ const HomeTipScreen = () => {
     : null;
 
   // Check if current tip already exists in saved tips
-  const isTipAlreadySaved = useMemo(() => {
-    if (!shareData || !state.savedTips) return false;
+  const existingSavedTip = useMemo(() => {
+    if (!shareData || !state.savedTips) {
+      return null;
+    }
 
-    return state.savedTips.some(
+    return state.savedTips.find(
       savedTip =>
         savedTip.amount === shareData.amount &&
         savedTip.tip === shareData.tip &&
@@ -93,10 +95,19 @@ const HomeTipScreen = () => {
     );
   }, [shareData, state.savedTips]);
 
+  const isTipAlreadySaved = !!existingSavedTip;
+
   // Handle save tip
   const handleSaveTip = () => {
     if (shareData && !isTipAlreadySaved) {
       saveTip(shareData);
+    }
+  };
+
+  // Handle bookmark check press - navigate to saved tip detail
+  const handleBookmarkCheckPress = () => {
+    if (existingSavedTip) {
+      navigateToTipDetail(existingSavedTip);
     }
   };
 
@@ -159,6 +170,8 @@ const HomeTipScreen = () => {
           shareButtonPress={openPreview}
           saveButtonPress={handleSaveTip}
           isSaved={isTipAlreadySaved}
+          savedTipId={existingSavedTip?.id}
+          onBookmarkCheckPress={handleBookmarkCheckPress}
         />
         {/* Round Options Container */}
         <StyledRoundBox
@@ -197,6 +210,8 @@ const HomeTipScreen = () => {
             shareButtonPress={openPreview}
             saveButtonPress={handleSaveTip}
             isSaved={isTipAlreadySaved}
+            savedTipId={existingSavedTip?.id}
+            onBookmarkCheckPress={handleBookmarkCheckPress}
           />
         ) : null}
       </ScrollView>

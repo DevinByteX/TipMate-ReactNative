@@ -54,9 +54,11 @@ export const useSaveTip = () => {
 
                 dispatch({ type: 'SAVE_TIP', payload: savedTip });
                 setSaveSuccessAlert({ visible: true, savedTip });
+                return savedTip;
             } catch (error) {
                 console.error('Error saving tip:', error);
                 setSaveErrorAlert(true);
+                return null;
             }
         },
         [dispatch],
