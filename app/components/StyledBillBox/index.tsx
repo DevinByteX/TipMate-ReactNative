@@ -186,7 +186,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     justifyContent: 'space-between',
   },
   titleLeftContainer: {
-    flex: 1,
+    flex: 2,
   },
   titleRightContainer: {
     flex: 1,
