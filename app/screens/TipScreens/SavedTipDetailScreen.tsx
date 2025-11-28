@@ -85,7 +85,7 @@ const SavedTipDetailScreen = () => {
         headerRightIconVisibilty={true}
         headerRightIconType={'MaterialDesignIcons'}
         headerRightIconName={'delete'}
-        headerRightIconColor={theme.colors.error_toast}
+        headerRightIconColor={theme.colors.accent}
         onHeaderRightIconPress={handleDelete}
         enableBackButton={true}
       />
