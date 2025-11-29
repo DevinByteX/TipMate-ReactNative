@@ -28,15 +28,15 @@ const getAlertIcon = (
 ): { iconType: StyledIconTypesKey; iconName: string } | null => {
   switch (type) {
     case 'success':
-      return { iconType: 'Ionicons', iconName: 'checkmark-circle' };
+      return { iconType: 'Ionicons', iconName: 'checkmark' };
     case 'error':
-      return { iconType: 'Ionicons', iconName: 'close-circle' };
+      return { iconType: 'Ionicons', iconName: 'close' };
     case 'warning':
       return { iconType: 'Ionicons', iconName: 'warning' };
     case 'info':
-      return { iconType: 'Ionicons', iconName: 'information-circle' };
+      return { iconType: 'Ionicons', iconName: 'information' };
     case 'confirm':
-      return { iconType: 'Ionicons', iconName: 'help-circle' };
+      return { iconType: 'Ionicons', iconName: 'help' };
     default:
       return null;
   }
@@ -88,12 +88,14 @@ export const StyledAlert = ({
           {/* Icon */}
           {iconInfo && (
             <View style={styles.iconContainer}>
-              <StyledIcons
-                type={iconInfo.iconType}
-                name={iconInfo.iconName as any}
-                size={48}
-                color={getIconColor()}
-              />
+              <View style={[styles.iconCircle, { backgroundColor: getIconColor() }]}>
+                <StyledIcons
+                  type={iconInfo.iconType}
+                  name={iconInfo.iconName as any}
+                  size={30}
+                  color={theme.colors.card}
+                />
+              </View>
             </View>
           )}
 
@@ -159,6 +161,13 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   iconContainer: {
     marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+  },
+  iconCircle: {
+    width: (UnistylesRuntime.screen.width * 12) / 100,
+    height: (UnistylesRuntime.screen.width * 12) / 100,
+    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalTitle: {
     fontFamily: fonts.Nunito_Black,
