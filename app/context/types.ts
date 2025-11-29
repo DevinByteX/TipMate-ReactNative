@@ -46,6 +46,7 @@ export interface AppState {
   splitSliderConfig: SplitSliderConfigValues;
   currencyConfig: CurrencyType;
   savedTips: SavedTip[];
+  duplicatePreventionWindow: number; // in minutes
 }
 
 export type TipAction =
@@ -63,9 +64,15 @@ export type SavedTipAction =
   | { type: 'DELETE_TIP'; payload: string }
   | { type: 'CLEAR_ALL_TIPS' };
 
+export type DuplicatePreventionAction = {
+  type: 'UPDATE_DUPLICATE_PREVENTION_WINDOW';
+  payload: number;
+};
+
 export type AppAction =
   | TipAction
   | SplitAction
   | CurrencyConfigAction
   | SavedTipAction
+  | DuplicatePreventionAction
   | { type: 'LOAD_PERSISTED_STATE'; payload: AppState }; // Include LOAD_PERSISTED_STATE

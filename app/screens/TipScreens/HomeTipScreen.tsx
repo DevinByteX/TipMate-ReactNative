@@ -78,14 +78,19 @@ const HomeTipScreen = () => {
       }
     : null;
 
-  // Check if current tip already exists in saved tips
+  // Check if current tip already exists in saved tips within the time window
   const existingSavedTip = useMemo(() => {
-    if (!shareData || !state.savedTips) {
+    // Early returns for edge cases
+    if (!shareData || !state.savedTips || state.duplicatePreventionWindow === 0) {
       return null;
     }
 
+    const currentTime = Date.now();
+    const windowMs = state.duplicatePreventionWindow * 60 * 1000;
+
     return state.savedTips.find(
       savedTip =>
+        currentTime - savedTip.timestamp < windowMs &&
         savedTip.amount === shareData.amount &&
         savedTip.tip === shareData.tip &&
         savedTip.total === shareData.total &&
@@ -93,7 +98,7 @@ const HomeTipScreen = () => {
         savedTip.numberOfPeople === shareData.numberOfPeople &&
         savedTip.currencyCode === shareData.currencyCode,
     );
-  }, [shareData, state.savedTips]);
+  }, [shareData, state.savedTips, state.duplicatePreventionWindow]);
 
   const isTipAlreadySaved = !!existingSavedTip;
 

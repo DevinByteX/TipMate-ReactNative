@@ -11,6 +11,7 @@ const initialState: AppState = {
   splitSliderConfig: Constants.defaultSplitSliderConfigValues,
   currencyConfig: Constants.defaultCurrencyObject,
   savedTips: [],
+  duplicatePreventionWindow: Constants.defaultDuplicatePreventionWindow,
 };
 
 interface AppProviderProps {

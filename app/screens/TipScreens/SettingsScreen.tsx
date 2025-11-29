@@ -7,6 +7,7 @@ import {
   StyledSplitOptionsEditMode,
   StyledThemeBox,
   StyledTipOptionsEditMode,
+  StyledDuplicatePreventionSelector,
 } from '@components';
 
 const SettingsScreen = () => {
@@ -55,6 +56,16 @@ const SettingsScreen = () => {
           modalDescription={'Pick the currency that works best for you, and we’ll handle the rest!'}
           currencyChangeInstructionText={'Tap to select a currency'}
           currencyChangeToastMessage={'The currency has been changed to'}
+        />
+        <StyledDuplicatePreventionSelector
+          title={'DUPLICATE SAVE PREVENTION'}
+          description={
+            'Set how long to wait before allowing the same tip calculation to be saved again.'
+          }
+          selectionInstructionText={'Time window'}
+          modalTitle={'DUPLICATE PREVENTION'}
+          modalDescription={'Select the time window for preventing duplicate tip saves'}
+          changeToastMessage={'Duplicate prevention window set to'}
         />
         <StyledThemeBox
           title={'CUSTOMISE YOUR THEME'}

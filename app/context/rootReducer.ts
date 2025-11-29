@@ -1,5 +1,5 @@
 import { AppState, AppAction } from './types';
-import { tipReducer, splitReducer, currencyConfigReducer, savedTipsReducer } from './reducers';
+import { tipReducer, splitReducer, currencyConfigReducer, savedTipsReducer, duplicatePreventionReducer } from './reducers';
 import { Constants } from '@configs';
 
 export const rootReducer = (state: AppState, action: AppAction): AppState => {
@@ -11,6 +11,7 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
         splits: action.payload.splits || state.splits,
         currencyConfig: action.payload.currencyConfig || state.currencyConfig,
         savedTips: action.payload.savedTips || state.savedTips,
+        duplicatePreventionWindow: action.payload.duplicatePreventionWindow || state.duplicatePreventionWindow,
       };
     case 'UPDATE_TIP_OPTIONS':
       return { ...state, tips: tipReducer(state.tips, action) };
@@ -26,6 +27,8 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
     case 'DELETE_TIP':
     case 'CLEAR_ALL_TIPS':
       return { ...state, savedTips: savedTipsReducer(state.savedTips, action) };
+    case 'UPDATE_DUPLICATE_PREVENTION_WINDOW':
+      return { ...state, duplicatePreventionWindow: duplicatePreventionReducer(state.duplicatePreventionWindow, action) };
     default:
       return state;
   }

@@ -7,6 +7,7 @@ import {
   CurrencyConfigAction,
   SavedTip,
   SavedTipAction,
+  DuplicatePreventionAction,
 } from './types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -79,6 +80,19 @@ export const savedTipsReducer = (state: SavedTip[], action: SavedTipAction): Sav
   }
 };
 
+export const duplicatePreventionReducer = (
+  state: number,
+  action: DuplicatePreventionAction,
+): number => {
+  switch (action.type) {
+    case 'UPDATE_DUPLICATE_PREVENTION_WINDOW':
+      saveState({ duplicatePreventionWindow: action.payload });
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 // Function to save state to AsyncStorage
 const saveState = async (
   partialState: Partial<{
@@ -86,6 +100,7 @@ const saveState = async (
     splits: SplitOptionState[];
     currencyConfig: CurrencyType;
     savedTips: SavedTip[];
+    duplicatePreventionWindow: number;
   }>,
 ) => {
   try {
@@ -96,6 +111,7 @@ const saveState = async (
         splits: SplitOptionState[];
         currencyConfig: CurrencyType;
         savedTips: SavedTip[];
+        duplicatePreventionWindow: number;
       };
       const newState = { ...currentStateObject, ...partialState };
       await AsyncStorage.setItem(Constants.APP_STATE_ASYNCSTORAGE_KEY, JSON.stringify(newState));
