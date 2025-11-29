@@ -11,6 +11,11 @@ export type CurrencyType = {
   currencySign: string;
 };
 
+export type DuplicatePreventionTimeOption = {
+  value: number;
+  label: string;
+};
+
 export const Constants = {
   defaultSplitOptionsArray: [
     { place: 1, value: 1 },
@@ -35,6 +40,16 @@ export const Constants = {
     max: 80,
     step: 1,
   } as TipSliderConfigValues,
+  defaultDuplicatePreventionWindow: 15 as number, // default 15 minutes
+  duplicatePreventionTimeOptions: [
+    { value: 0, label: 'No prevention' },
+    { value: 5, label: '5 minutes' },
+    { value: 10, label: '10 minutes' },
+    { value: 15, label: '15 minutes' },
+    { value: 30, label: '30 minutes' },
+    { value: 45, label: '45 minutes' },
+    { value: 60, label: '60 minutes' },
+  ] as DuplicatePreventionTimeOption[],
   currencies: [
     // Main and Famous Currencies
     { currencyId: 'USD', currencyName: 'US Dollar', currencySign: '$' },
