@@ -19,8 +19,15 @@ export { StyledLicenseDetailsCard } from './StyledLicenseDetailsCard';
 export { StyledSharePreviewModal } from './StyledSharePreviewModal';
 export { StyledAlert } from './StyledAlert';
 export { StyledSavedTipsList } from './StyledSavedTipsList';
+export { StyledFilterCapsule } from './StyledFilterCapsule';
 
 // types should export seperately
 export type { IconTypeMap, StyledIconTypesKey, BaseIconProps, StyledIconsProps } from './StyledIcons';
 export type { AlertType, StyledAlertButton } from './StyledAlert';
 export type { StyledSavedTipsListProps } from './StyledSavedTipsList';
+export type {
+    StyledFilterCapsuleProps,
+    PercentageFilter,
+    PeopleFilter,
+    DateFilter,
+} from './StyledFilterCapsule';
