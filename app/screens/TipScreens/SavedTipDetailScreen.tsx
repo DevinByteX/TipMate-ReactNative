@@ -178,6 +178,7 @@ const SavedTipDetailScreen = () => {
       {/* Delete Confirmation Alert */}
       <StyledAlert
         visible={isDeleteAlertVisible}
+        customIcon={{ iconType: 'MaterialDesignIcons', iconName: 'delete-outline' }}
         title="Delete Tip"
         message="Are you sure you want to delete this saved tip? This action cannot be undone."
         type="confirm"

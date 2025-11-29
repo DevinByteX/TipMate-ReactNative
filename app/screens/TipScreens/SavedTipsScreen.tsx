@@ -543,6 +543,7 @@ const SavedTipsScreen = () => {
       {/* Delete Confirmation Alert */}
       <StyledAlert
         visible={isDeleteAlertVisible}
+        customIcon={{ iconType: 'MaterialDesignIcons', iconName: 'delete-outline' }}
         title="Delete Tip"
         message="Are you sure you want to delete this tip from your summary?"
         type="confirm"
@@ -566,6 +567,7 @@ const SavedTipsScreen = () => {
       {/* Clear All Confirmation Alert */}
       <StyledAlert
         visible={clearAllAlert}
+        customIcon={{ iconType: 'MaterialDesignIcons', iconName: 'delete-outline' }}
         title="Clear All Tips"
         message="Are you sure you want to delete all saved tips? This action cannot be undone."
         type="confirm"
