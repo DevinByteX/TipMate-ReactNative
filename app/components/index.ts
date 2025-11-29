@@ -18,7 +18,9 @@ export { StyledDuplicatePreventionSelector } from './StyledDuplicatePreventionSe
 export { StyledLicenseDetailsCard } from './StyledLicenseDetailsCard';
 export { StyledSharePreviewModal } from './StyledSharePreviewModal';
 export { StyledAlert } from './StyledAlert';
-export type { AlertType, StyledAlertButton } from './StyledAlert';
+export { StyledSavedTipsList } from './StyledSavedTipsList';
 
 // types should export seperately
 export type { IconTypeMap, StyledIconTypesKey, BaseIconProps, StyledIconsProps } from './StyledIcons';
+export type { AlertType, StyledAlertButton } from './StyledAlert';
+export type { StyledSavedTipsListProps } from './StyledSavedTipsList';
