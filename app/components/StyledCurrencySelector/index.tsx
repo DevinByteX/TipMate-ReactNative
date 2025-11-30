@@ -81,7 +81,6 @@ const CurrencyListModal = ({
       visible={modalVisibility}
       transparent={true}
       animationType={'slide'}
-      presentationStyle="fullScreen"
       statusBarTranslucent={true}
     >
       <View style={styles.modalMainContainer}>
