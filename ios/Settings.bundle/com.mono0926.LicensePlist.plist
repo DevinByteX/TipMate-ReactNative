@@ -412,9 +412,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_runtime@7.26.0</string>
+			<string>com.mono0926.LicensePlist/@babel_runtime@7.28.4</string>
 			<key>Title</key>
-			<string>@babel/runtime (7.26.0)</string>
+			<string>@babel/runtime (7.28.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1132,9 +1132,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/brace-expansion@1.1.11</string>
+			<string>com.mono0926.LicensePlist/brace-expansion@1.1.12</string>
 			<key>Title</key>
-			<string>brace-expansion (1.1.11)</string>
+			<string>brace-expansion (1.1.12)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2020,9 +2020,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/js-yaml@3.14.1</string>
+			<string>com.mono0926.LicensePlist/js-yaml@3.14.2</string>
 			<key>Title</key>
-			<string>js-yaml (3.14.1)</string>
+			<string>js-yaml (3.14.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2644,9 +2644,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-gesture-handler@2.28.0</string>
+			<string>com.mono0926.LicensePlist/react-native-gesture-handler@2.29.1</string>
 			<key>Title</key>
-			<string>react-native-gesture-handler (2.28.0)</string>
+			<string>react-native-gesture-handler (2.29.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2876,14 +2876,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/regenerator-runtime@0.14.1</string>
-			<key>Title</key>
-			<string>regenerator-runtime (0.14.1)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/regexpu-core@6.2.0</string>
 			<key>Title</key>
 			<string>regexpu-core (6.2.0)</string>
@@ -2950,7 +2942,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/RNGestureHandler</string>
 			<key>Title</key>
-			<string>RNGestureHandler (2.28.0)</string>
+			<string>RNGestureHandler (2.29.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
