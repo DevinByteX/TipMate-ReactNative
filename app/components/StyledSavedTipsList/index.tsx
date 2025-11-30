@@ -8,6 +8,10 @@ import {
   NativeScrollEvent,
   Animated,
 } from 'react-native';
+import ReanimatedSwipeable, {
+  SwipeableMethods,
+} from 'react-native-gesture-handler/ReanimatedSwipeable';
+import { SharedValue } from 'react-native-reanimated';
 import { StyledIcons } from '@components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { SavedTip } from '@/context/types';
@@ -17,7 +21,7 @@ export interface StyledSavedTipsListProps {
   searchQuery?: string;
   hasActiveFilters?: boolean;
   onTipPress: (tip: SavedTip) => void;
-  onTipLongPress: (tipId: string) => void;
+  onItemSwipeLeft: (tipId: string) => void;
   onClearAll?: () => void;
   showScrollToTop: boolean;
   onScrollToTopChange: (show: boolean) => void;
@@ -28,7 +32,7 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
   searchQuery = '',
   hasActiveFilters = false,
   onTipPress,
-  onTipLongPress,
+  onItemSwipeLeft,
   onClearAll,
   showScrollToTop,
   onScrollToTopChange,
@@ -58,53 +62,91 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
     });
   };
 
-  const renderTipCard = ({ item }: { item: SavedTip }) => (
-    <Pressable
-      style={styles.tipCard}
-      onPress={() => onTipPress(item)}
-      onLongPress={() => onTipLongPress(item.id)}
-    >
-      <View style={styles.cardLeft}>
-        <View style={styles.cardHeader}>
-          <Text style={styles.cardDate}>{formatDate(item.timestamp)}</Text>
-          <View style={styles.peopleTag}>
-            <StyledIcons type={'Ionicons'} name={'people'} size={12} color={theme.colors.accent} />
-            <Text style={styles.peopleText}>{item.numberOfPeople}</Text>
+  const renderRightActions = (_progress: SharedValue<number>, _drag: SharedValue<number>) => {
+    return (
+      <View style={styles.deleteAction}>
+        <View style={styles.deleteButton}>
+          <StyledIcons
+            type="MaterialDesignIcons"
+            name="delete"
+            size={24}
+            color={theme.colors.backgroundColor}
+          />
+        </View>
+      </View>
+    );
+  };
+
+  const TipCard = ({ item }: { item: SavedTip }) => {
+    const swipeableRef = useRef<SwipeableMethods>(null);
+
+    const handleSwipeOpen = () => {
+      onItemSwipeLeft(item.id);
+      setTimeout(() => {
+        swipeableRef.current?.close();
+      }, 100);
+    };
+
+    return (
+      <ReanimatedSwipeable
+        ref={swipeableRef}
+        friction={2}
+        overshootRight={false}
+        renderRightActions={renderRightActions}
+        onSwipeableWillOpen={handleSwipeOpen}
+        containerStyle={styles.swipebleContainer}
+      >
+        <Pressable style={styles.tipCard} onPress={() => onTipPress(item)}>
+          <View style={styles.cardLeft}>
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardDate}>{formatDate(item.timestamp)}</Text>
+              <View style={styles.peopleTag}>
+                <StyledIcons
+                  type={'Ionicons'}
+                  name={'people'}
+                  size={12}
+                  color={theme.colors.accent}
+                />
+                <Text style={styles.peopleText}>{item.numberOfPeople}</Text>
+              </View>
+            </View>
+            <View style={styles.amountRow}>
+              <Text style={styles.amountLabel}>Bill:</Text>
+              <Text style={styles.amountValue}>
+                {item.currencySymbol}
+                {item.amount.toFixed(2)}
+              </Text>
+            </View>
+            <View style={styles.amountRow}>
+              <Text style={styles.amountLabel}>Tip ({item.tipPercentage}%):</Text>
+              <Text style={styles.tipValue}>
+                {item.currencySymbol}
+                {item.tip.toFixed(2)}
+              </Text>
+            </View>
+            <View style={styles.divider} />
+            <View style={styles.amountRow}>
+              <Text style={styles.totalLabel}>Total:</Text>
+              <Text style={styles.totalValue}>
+                {item.currencySymbol}
+                {item.total.toFixed(2)}
+              </Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.amountRow}>
-          <Text style={styles.amountLabel}>Bill:</Text>
-          <Text style={styles.amountValue}>
-            {item.currencySymbol}
-            {item.amount.toFixed(2)}
-          </Text>
-        </View>
-        <View style={styles.amountRow}>
-          <Text style={styles.amountLabel}>Tip ({item.tipPercentage}%):</Text>
-          <Text style={styles.tipValue}>
-            {item.currencySymbol}
-            {item.tip.toFixed(2)}
-          </Text>
-        </View>
-        <View style={styles.divider} />
-        <View style={styles.amountRow}>
-          <Text style={styles.totalLabel}>Total:</Text>
-          <Text style={styles.totalValue}>
-            {item.currencySymbol}
-            {item.total.toFixed(2)}
-          </Text>
-        </View>
-      </View>
-      <View style={styles.cardRight}>
-        <StyledIcons
-          type={'MaterialDesignIcons'}
-          name={'chevron-right'}
-          size={24}
-          color={theme.colors.card_typography}
-        />
-      </View>
-    </Pressable>
-  );
+          <View style={styles.cardRight}>
+            <StyledIcons
+              type={'MaterialDesignIcons'}
+              name={'chevron-right'}
+              size={24}
+              color={theme.colors.card_typography}
+            />
+          </View>
+        </Pressable>
+      </ReanimatedSwipeable>
+    );
+  };
+
+  const renderTipCard = ({ item }: { item: SavedTip }) => <TipCard item={item} />;
 
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
@@ -220,13 +262,13 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   listContainer: {
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     paddingBottom: (UnistylesRuntime.screen.height * 8) / 100,
+    gap: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
   tipCard: {
     flexDirection: 'row',
     backgroundColor: colors.card,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
     padding: (UnistylesRuntime.screen.width * 4) / 100,
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -350,5 +392,22 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  swipebleContainer: {
+    backgroundColor: colors.accent,
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  deleteAction: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  deleteButton: {
+    backgroundColor: colors.accent,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: (UnistylesRuntime.screen.width * 20) / 100,
+    height: '100%',
+    borderTopRightRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderBottomRightRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
 }));
