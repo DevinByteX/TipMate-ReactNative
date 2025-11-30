@@ -242,7 +242,7 @@ const SavedTipsScreen = () => {
           searchQuery={searchQuery}
           hasActiveFilters={hasActiveFilters}
           onTipPress={handleTipPress}
-          onTipLongPress={handleDeleteTip}
+          onItemSwipeLeft={handleDeleteTip}
           onClearAll={clearAllTips}
           showScrollToTop={showScrollToTop}
           onScrollToTopChange={setShowScrollToTop}
