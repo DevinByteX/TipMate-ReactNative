@@ -79,7 +79,7 @@ rename:
   "wrappy@1.0.2": wrappy
   "inherits@2.0.4": inherits
   "minimatch@3.1.2": minimatch
-  "brace-expansion@1.1.11": brace-expansion
+  "brace-expansion@1.1.12": brace-expansion
   "balanced-match@1.0.2": balanced-match
   "concat-map@0.0.1": concat-map
   "path-is-absolute@1.0.1": path-is-absolute
@@ -214,7 +214,7 @@ rename:
   "callsites@2.0.0": callsites
   "resolve-from@3.0.0": resolve-from
   "is-directory@0.3.1": is-directory
-  "js-yaml@3.14.1": js-yaml
+  "js-yaml@3.14.2": js-yaml
   "argparse@1.0.10": argparse
   "sprintf-js@1.0.3": sprintf-js
   "esprima@4.0.1": esprima
@@ -242,8 +242,7 @@ rename:
   "makeerror@1.0.12": makeerror
   "tmpl@1.0.5": tmpl
   "metro-runtime@0.83.1": metro-runtime
-  "@babel_runtime@7.26.0": '@babel/runtime'
-  "regenerator-runtime@0.14.1": regenerator-runtime
+  "@babel_runtime@7.28.4": '@babel/runtime'
   "metro-source-map@0.83.1": metro-source-map
   "@babel_traverse--for-generate-function-map@7.28.3": '@babel/traverse--for-generate-function-map'
   "@babel_helper-globals@7.28.0": '@babel/helper-globals'
@@ -341,7 +340,7 @@ rename:
   "regenerator-runtime@0.13.11": regenerator-runtime
   "scheduler@0.26.0": scheduler
   "whatwg-fetch@3.6.20": whatwg-fetch
-  "react-native-gesture-handler@2.28.0": react-native-gesture-handler
+  "react-native-gesture-handler@2.29.1": react-native-gesture-handler
   "@egjs_hammerjs@2.0.17": '@egjs/hammerjs'
   "@types_hammerjs@2.0.46": '@types/hammerjs'
   "hoist-non-react-statics@3.3.2": hoist-non-react-statics
@@ -727,8 +726,8 @@ manual:
     version: '3.1.2'
     source: https://github.com/isaacs/minimatch
     file: '../node_modules/minimatch/LICENSE'
-  - name: brace-expansion@1.1.11
-    version: '1.1.11'
+  - name: brace-expansion@1.1.12
+    version: '1.1.12'
     source: https://github.com/juliangruber/brace-expansion
     file: '../node_modules/minimatch/node_modules/brace-expansion/LICENSE'
   - name: balanced-match@1.0.2
@@ -1266,8 +1265,8 @@ manual:
     version: '0.3.1'
     source: jonschlinkert/is-directory
     file: '../node_modules/is-directory/LICENSE'
-  - name: js-yaml@3.14.1
-    version: '3.14.1'
+  - name: js-yaml@3.14.2
+    version: '3.14.2'
     source: nodeca/js-yaml
     file: '../node_modules/metro-config/node_modules/js-yaml/LICENSE'
   - name: argparse@1.0.10
@@ -1378,14 +1377,10 @@ manual:
     version: '0.83.1'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: '@babel_runtime@7.26.0'
-    version: '7.26.0'
+  - name: '@babel_runtime@7.28.4'
+    version: '7.28.4'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/runtime/LICENSE'
-  - name: regenerator-runtime@0.14.1
-    version: '0.14.1'
-    source: https://github.com/facebook/regenerator/tree/main/packages/runtime
-    file: '../node_modules/@babel/runtime/node_modules/regenerator-runtime/LICENSE'
   - name: metro-source-map@0.83.1
     version: '0.83.1'
     source: https://github.com/facebook/metro
@@ -1774,8 +1769,8 @@ manual:
     version: '3.6.20'
     source: github/fetch
     file: '../node_modules/whatwg-fetch/LICENSE'
-  - name: react-native-gesture-handler@2.28.0
-    version: '2.28.0'
+  - name: react-native-gesture-handler@2.29.1
+    version: '2.29.1'
     source: https://github.com/software-mansion/react-native-gesture-handler
     file: '../node_modules/react-native-gesture-handler/LICENSE'
   - name: '@egjs_hammerjs@2.0.17'
