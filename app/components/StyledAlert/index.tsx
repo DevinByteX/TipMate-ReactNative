@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Modal, Pressable } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
-import { StyledIcons, StyledIconTypesKey, IconTypeMap } from '@components';
+import { StyledIcons, StyledIconTypesKey } from '@components';
 
 export type AlertType = 'info' | 'success' | 'error' | 'warning' | 'confirm';
 
