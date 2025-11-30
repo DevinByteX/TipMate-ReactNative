@@ -7,11 +7,11 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
     case 'LOAD_PERSISTED_STATE':
       return {
         ...state,
-        tips: action.payload.tips || state.tips,
-        splits: action.payload.splits || state.splits,
-        currencyConfig: action.payload.currencyConfig || state.currencyConfig,
-        savedTips: action.payload.savedTips || state.savedTips,
-        duplicatePreventionWindow: action.payload.duplicatePreventionWindow || state.duplicatePreventionWindow,
+        tips: action.payload.tips ?? state.tips,
+        splits: action.payload.splits ?? state.splits,
+        currencyConfig: action.payload.currencyConfig ?? state.currencyConfig,
+        savedTips: action.payload.savedTips ?? state.savedTips,
+        duplicatePreventionWindow: action.payload.duplicatePreventionWindow ?? state.duplicatePreventionWindow,
       };
     case 'UPDATE_TIP_OPTIONS':
       return { ...state, tips: tipReducer(state.tips, action) };
