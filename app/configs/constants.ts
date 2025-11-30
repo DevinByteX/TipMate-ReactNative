@@ -43,6 +43,7 @@ export const Constants = {
   defaultDuplicatePreventionWindow: 15 as number, // default 15 minutes
   duplicatePreventionTimeOptions: [
     { value: 0, label: 'No prevention' },
+    { value: 2, label: '2 minutes' },
     { value: 5, label: '5 minutes' },
     { value: 10, label: '10 minutes' },
     { value: 15, label: '15 minutes' },
