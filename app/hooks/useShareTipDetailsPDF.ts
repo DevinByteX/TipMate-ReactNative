@@ -71,7 +71,8 @@ export const useShareTipDetailsPDF = async (details: TipDetailsForPDF) => {
           }
           .receipt-container {
             background: white;
-            max-width: 600px;
+            max-width: 800px;
+            width: 50%;
             margin: 0 auto;
             border-radius: 16px;
             box-shadow: 0 16px 48px rgba(0,0,0,0.3);
