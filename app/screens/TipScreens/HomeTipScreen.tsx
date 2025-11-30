@@ -88,12 +88,17 @@ const HomeTipScreen = () => {
     const currentTime = Date.now();
     const windowMs = state.duplicatePreventionWindow * 60 * 1000;
 
+    // Helper function to compare floating point numbers with epsilon tolerance
+    const areFloatsEqual = (a: number, b: number, epsilon: number = 0.001): boolean => {
+      return Math.abs(a - b) < epsilon;
+    };
+
     return state.savedTips.find(
       savedTip =>
         currentTime - savedTip.timestamp < windowMs &&
-        savedTip.amount === shareData.amount &&
-        savedTip.tip === shareData.tip &&
-        savedTip.total === shareData.total &&
+        areFloatsEqual(savedTip.amount, shareData.amount) &&
+        areFloatsEqual(savedTip.tip, shareData.tip) &&
+        areFloatsEqual(savedTip.total, shareData.total) &&
         savedTip.tipPercentage === shareData.tipPercentage &&
         savedTip.numberOfPeople === shareData.numberOfPeople &&
         savedTip.currencyCode === shareData.currencyCode,
