@@ -14,6 +14,7 @@ import ReanimatedSwipeable, {
 import { SharedValue } from 'react-native-reanimated';
 import { StyledIcons } from '@components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 import { SavedTip } from '@/context/types';
 
 export interface StyledSavedTipsListProps {
@@ -38,6 +39,7 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
   onScrollToTopChange,
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
   const flatListRef = useRef<FlatList>(null);
   const buttonAnimation = useRef(new Animated.Value(0)).current;
 
@@ -111,14 +113,16 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
               </View>
             </View>
             <View style={styles.amountRow}>
-              <Text style={styles.amountLabel}>Bill:</Text>
+              <Text style={styles.amountLabel}>{t('savedTipsList.bill')}</Text>
               <Text style={styles.amountValue}>
                 {item.currencySymbol}
                 {item.amount.toFixed(2)}
               </Text>
             </View>
             <View style={styles.amountRow}>
-              <Text style={styles.amountLabel}>Tip ({item.tipPercentage}%):</Text>
+              <Text style={styles.amountLabel}>
+                {t('savedTipsList.tipLabel', { percentage: item.tipPercentage })}
+              </Text>
               <Text style={styles.tipValue}>
                 {item.currencySymbol}
                 {item.tip.toFixed(2)}
@@ -126,7 +130,7 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
             </View>
             <View style={styles.divider} />
             <View style={styles.amountRow}>
-              <Text style={styles.totalLabel}>Total:</Text>
+              <Text style={styles.totalLabel}>{t('savedTipsList.total')}</Text>
               <Text style={styles.totalValue}>
                 {item.currencySymbol}
                 {item.total.toFixed(2)}
@@ -157,17 +161,19 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
         color={theme.colors.disable_button}
       />
       <Text style={styles.emptyTitle}>
-        {searchQuery || hasActiveFilters ? 'No Results Found' : 'No Tips Yet'}
+        {searchQuery || hasActiveFilters
+          ? t('savedTipsList.noResultsTitle')
+          : t('savedTipsList.noTipsTitle')}
       </Text>
       <Text style={styles.emptyDescription}>
         {searchQuery
-          ? `No tips match "${searchQuery}"`
+          ? t('savedTipsList.noResultsMatch', { query: searchQuery })
           : hasActiveFilters
-          ? 'No tips match the selected filters'
-          : 'Your saved tips will appear here for quick review and reference.'}
+          ? t('savedTipsList.noFiltersMatch')
+          : t('savedTipsList.emptyDescription')}
       </Text>
       {!searchQuery && !hasActiveFilters && (
-        <Text style={styles.emptyHint}>Look for the bookmark icon on your calculated tips!</Text>
+        <Text style={styles.emptyHint}>{t('savedTipsList.emptyHint')}</Text>
       )}
     </View>
   );
@@ -188,12 +194,12 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
       {tips.length > 0 && (
         <View style={styles.headerRow}>
           <Text style={styles.countText}>
-            {tips.length} {tips.length === 1 ? 'Tip' : 'Tips'}
-            {searchQuery ? ' Found' : ' Saved'}
+            {tips.length} {tips.length === 1 ? t('savedTipsList.tip') : t('savedTipsList.tips')}
+            {searchQuery ? ` ${t('savedTipsList.found')}` : ` ${t('savedTipsList.saved')}`}
           </Text>
           {!searchQuery && onClearAll && (
             <Pressable onPress={onClearAll}>
-              <Text style={styles.clearAllText}>Clear All</Text>
+              <Text style={styles.clearAllText}>{t('savedTipsList.clearAll')}</Text>
             </Pressable>
           )}
         </View>

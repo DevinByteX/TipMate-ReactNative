@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 import { useAppContext } from '@/context/AppContext';
 
@@ -92,6 +93,7 @@ export const StyledTipOptions = ({
   onSelectedTipValue?: (value: number) => void;
 }) => {
   const { state } = useAppContext();
+  const { t } = useTranslation();
 
   const defaultTipValue = 5;
 
@@ -173,7 +175,7 @@ export const StyledTipOptions = ({
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <TipPercentageCustomCapsule
-                textValue={customSliderVisible ? `Set Value` : `Custom`}
+                textValue={customSliderVisible ? t('buttons.setValue') : t('buttons.custom')}
                 active
                 onCustomTipPress={() => {
                   setCustomSliderVisible(!customSliderVisible);

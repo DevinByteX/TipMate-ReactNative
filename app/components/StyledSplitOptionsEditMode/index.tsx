@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 import {
   IconTypeMap,
   StyledConfigInput,
@@ -108,6 +109,7 @@ export const StyledSplitOptionsEditMode = ({
   resetSuccessToastText: string;
 }) => {
   const { state, dispatch } = useAppContext();
+  const { t } = useTranslation();
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
   const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);
@@ -143,7 +145,7 @@ export const StyledSplitOptionsEditMode = ({
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <SplitPercentageCustomCapsule
-                textValue={`Reset`}
+                textValue={t('buttons.reset')}
                 active={
                   !areOptionArraysSame({
                     firstArray: state.splits,

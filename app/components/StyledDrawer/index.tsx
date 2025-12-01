@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -74,6 +75,7 @@ const BottomButton = ({
 
 export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
   const { styles } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   const activeRouteName = getActiveRouteName(props.state.routes[props.state.index]);
   console.log('Active Route Name:', activeRouteName);
@@ -96,9 +98,9 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
       </DrawerContentScrollView>
       <View style={styles.horizontalDeviderStyles} />
       <View style={styles.preferencesButtonContainer}>
-        <Text style={styles.preferencesText}>Preferences</Text>
+        <Text style={styles.preferencesText}>{t('components.drawer.preferences')}</Text>
         <View style={styles.themePrefContainer}>
-          <Text style={styles.themePrefText}>Toggle Dark Mode</Text>
+          <Text style={styles.themePrefText}>{t('components.drawer.toggleDarkMode')}</Text>
           <StyledToggle
             value={UnistylesRuntime.themeName === 'dark'}
             onValueChange={value => {
@@ -123,7 +125,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
           iconName={'circle-info'}
           iconColor={styles.footerButtonText.color}
           iconSize={styles.footerButtonText.fontSize + 4}
-          label={'About Us'}
+          label={t('components.drawer.aboutUs')}
           isFocused={activeRouteName === 'AboutUsScreen'}
           onPress={NaviagteToAboutUsScreen}
         />

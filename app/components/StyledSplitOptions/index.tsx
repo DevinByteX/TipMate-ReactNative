@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 import { useAppContext } from '@/context/AppContext';
 
@@ -91,6 +92,7 @@ export const StyledSpiltOptions = ({
   onSelectedSplitValue?: (value: number) => void;
 }) => {
   const { state } = useAppContext();
+  const { t } = useTranslation();
 
   const defaultSplitValue = 1;
 
@@ -165,7 +167,7 @@ export const StyledSpiltOptions = ({
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <SplitCustomCapsule
-                textValue={customSliderVisible ? `Set Value` : `Custom`}
+                textValue={customSliderVisible ? t('buttons.setValue') : t('buttons.custom')}
                 active
                 onCustomSplitPress={() => {
                   setCustomSliderVisible(!customSliderVisible);

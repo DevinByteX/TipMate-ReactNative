@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 import {
   IconTypeMap,
   StyledConfigInput,
@@ -109,6 +110,7 @@ export const StyledTipOptionsEditMode = ({
   resetSuccessToastText: string;
 }) => {
   const { state, dispatch } = useAppContext();
+  const { t } = useTranslation();
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
   const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);
@@ -144,7 +146,7 @@ export const StyledTipOptionsEditMode = ({
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <TipPercentageCustomCapsule
-                textValue={`Reset`}
+                textValue={t('buttons.reset')}
                 active={
                   !areOptionArraysSame({
                     firstArray: state.tips,
