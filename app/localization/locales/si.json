@@ -1,0 +1,263 @@
+{
+  "common": {
+    "save": "සුරකින්න",
+    "delete": "මකන්න",
+    "cancel": "අවලංගු කරන්න",
+    "close": "වසන්න",
+    "reset": "යළි පිහිටුවන්න",
+    "confirm": "තහවුරු කරන්න",
+    "ok": "හරි",
+    "success": "සාර්ථකයි",
+    "error": "දෝෂයක්",
+    "viewDetails": "විස්තර බලන්න",
+    "yes": "ඔව්",
+    "no": "නැත"
+  },
+  "screens": {
+    "home": {
+      "title": "TipMate",
+      "tagline": "Smart Tips, Easy Living",
+      "billAmount": "බිල් මුදල",
+      "selectTip": "ටිප් තෝරන්න",
+      "totalCost": "මුළු වියදම",
+      "roundTotal": "මුළු එක වට කරන්න",
+      "splitCount": "බෙදන ගණන",
+      "perPerson": "එක් අයෙකුට",
+      "tipSaved": "ටිප් ගණනය සාර්ථකව සුරකින ලදී!",
+      "tipSaveFailed": "ටිප් ගණනය සුරැකීම අසාර්ථක විය. කරුණාකර නැවත උත්සාහ කරන්න."
+    },
+    "savedTips": {
+      "title": "ටිප් සාරාංශය",
+      "subtitle": "ඉක්මන් සෙවුම සහ සමාලෝචනය",
+      "searchPlaceholder": "මුදල, ටිප්, දිනය අනුව සොයන්න...",
+      "noTips": "තවම සුරකින ලද ටිප් නැත",
+      "noTipsDescription": "ඔබගේ සුරකින ලද ටිප් ගණනයන් මෙහි පෙන්වනු ඇත"
+    },
+    "savedTipDetail": {
+      "title": "ටිප් දළ විసඳුම",
+      "subtitle": "ඔබේ ප්‍රතිඵලය ඉක්මනින් බලන්න",
+      "totalCost": "මුළු වියදම",
+      "perPerson": "එක් අයෙකුට",
+      "tipPercentage": "ටිප් ප්‍රතිශතය",
+      "deleteTip": "ටිප් මකන්න",
+      "person": "පුද්ගලයා",
+      "people": "පුද්ගලයින්",
+      "confirmDelete": "ඔබට මෙම ටිප් එක මැකීමට අවශ්‍ය බව විශ්වාසද?",
+      "tipDeleted": "ටිප් සාර්ථකව මකා දමන ලදී"
+    },
+    "settings": {
+      "title": "සැකසුම් සහ මනාපයන්",
+      "customiseTips": "ඔබේ ටිප් අභිරුචිකරණය කරන්න",
+      "customiseSplits": "ඔබේ බෙදීම් අභිරුචිකරණය කරන්න",
+      "customiseCurrency": "ඔබේ මුදල් අභිරුචිකරණය කරන්න",
+      "customiseLanguage": "ඔබේ භාෂාව අභිරුචිකරණය කරන්න",
+      "duplicatePrevention": "අනුපිටපත් සුරැකීම් වැළැක්වීම",
+      "customiseTheme": "ඔබේ තේමාව අභිරුචිකරණය කරන්න",
+      "confirmReset": "යළි පිහිටුවීම තහවුරු කරන්න",
+      "resetMessage": "පෙරනිමි අගයන් වෙත යළි පිහිටුවීමට අවශ්‍ය බව විශ්වාසද?",
+      "resetSuccess": "යළි පිහිටුවීම සාර්ථකයි"
+    },
+    "appInfo": {
+      "title": "TipMate ගැන",
+      "ourStory": "අපගේ කතාව සහ දැක්ම",
+      "description": "TipMate යනු ටිප් ලබාදීම පහසු හා විනිවිද පෙනෙන ආකාරයෙන් කිරීමට නිර්මාණය කළ Smart Tip Calculator යෙදුමකි. ඔබ පිටතින් ආහාර ගත්තත්, කොණ්ඩය කැපුවත්, හෝ ටිප් දීම සිරිතක් වන ඕනෑම සේවාවක් සඳහා, TipMate බිල් බෙදීම සහ ටිප් ගණනය කිරීම ඉතා පහසු කරයි.",
+      "story": "TipMate යනු Smart Tip Calculator යෙදුමකි. එය ටිප් ක්‍රියාවලිය සරල කිරීමට සහ සෑම කෙනෙකුටම එය විනෝදජනක කිරීමට නිර්මාණය කර ඇත.",
+      "developerLabel": "සංවර්ධකයා",
+      "developer": "DevinForge Labs",
+      "support": "සහාය",
+      "contactSupport": "සහාය සම්බන්ධ කරන්න",
+      "contactDescription": "සහාය සහ ප්‍රතිපෝෂණ සඳහා අප හා සම්බන්ධ වන්න",
+      "contactConfirmTitle": "සහාය සම්බන්ධ කරන්න",
+      "contactConfirmMessage": "ඔබ අපගේ සහාය කණ්ඩායමට සම්බන්ධ වීමට ඔබේ පෙරනිමි ඊමේල් යෙදුම විවෘත කිරීමට සූදානම්. ඔබට ඉදිරියට යාමට අවශ්‍යද?",
+      "contactConfirmButtonContinue": "ඉදිරියට යන්න",
+      "acknowledgements": "ස්තුතිය",
+      "thirdPartyLibraries": "තෙවන පාර්ශ්ව පුස්තකාල",
+      "feedbackTitle": "ඔබේ ප්‍රතිපෝෂණය වැදගත්",
+      "feedbackDescription": "TipMate ඔබ සඳහා වඩා හොඳ කිරීමට ඔබේ ප්‍රතිපෝෂණය අපට වැදගත්. අපගේ යෙදුමේ ඕනෑම දෝෂයක් හෝ අනාගතයේදී අප එකතු කිරීමට ඔබ කැමති ඕනෑම විශේෂාංගයක් අපට වාර්තා කරන්න.",
+      "privacyPolicy": "පෞද්ගලිකත්ව ප්‍රතිපත්තිය",
+      "appVersion": "යෙදුම් අනුවාදය:"
+    },
+    "licenses": {
+      "title": "බලපත්‍ර",
+      "subtitle": "තෙවන පාර්ශ්ව පුස්තකාල",
+      "searchPlaceholder": "පුස්තකාල සොයන්න..."
+    }
+  },
+  "components": {
+    "billBox": {
+      "totalAmount": "මුළු මුදල",
+      "total": "මුළු එක",
+      "subtotal": "උප එකතුව",
+      "tip": "ටිප්",
+      "perPerson": "එක් අයෙකුට",
+      "totalDescription": "මෙන්න! ටිප් සහ ඕනෑම වට කිරීමක් ඇතුළත් ඔබේ අවසාන මුදල මෙයයි.",
+      "perPersonDescription": "බෙදීම ගැන කුතුහලයක්ද? එක් එක් අය දායක වන මුදල මෙන්න.",
+      "savedTotalDescription": "ඔබගේ සුරකින ලද ටිප් ගණනයේ සම්පූර්ණ විස්තරය මෙන්න.",
+      "savedPerPersonDescription": "බිල් සියලු දෙනා අතර බෙදූ ආකාරය මෙන්න."
+    },
+    "billInput": {
+      "description": "මුළු බිල් මුදල මෙහි ඇතුළත් කරන්න – අපි පටන් ගනිමු!"
+    },
+    "tipInput": {
+      "description": "ත්‍යාගශීලීව හිතෙනවාද? ඔබේ ටිප් ප්‍රතිශතය තෝරා මැජික් බලන්න."
+    },
+    "roundOptions": {
+      "roundValue": "අගය වට කරන්න",
+      "no": "නැත",
+      "up": "ඉහළට",
+      "down": "පහළට",
+      "description": "පිරිසිදු අංකයක් කැමතිද? ඔබේ මුළු එක පරිපූර්ණ කිරීමට ඉහළට හෝ පහළට වට කරන්න."
+    },
+    "sharePreview": {
+      "title": "බෙදාගැනීම් පෙරදසුන",
+      "subtitle": "බෙදාගැනීමට පෙර ඔබේ ටිප් සාරාංශය සමාලෝචනය කරන්න",
+      "shareAsText": "පෙළ ලෙස බෙදාගන්න",
+      "shareAsPDF": "PDF ලෙස බෙදාගන්න",
+      "cancel": "අවලංගු කරන්න"
+    },
+    "drawer": {
+      "preferences": "මනාපයන්",
+      "toggleDarkMode": "Dark Mode මාරු කරන්න",
+      "aboutUs": "අප ගැන"
+    },
+    "tipOptions": {
+      "customTip": "අභිරුචි",
+      "tipPercentage": "{{value}}%"
+    },
+    "splitOptions": {
+      "customSplit": "අභිරුචි",
+      "people": "{{count}} දෙනා",
+      "description": "යාළුවන් සමඟ කෑම කනවාද? කීදෙනෙක්ද කියන්න, අපි බිල් බෙදන්නම්."
+    },
+    "currencySelector": {
+      "selectCurrency": "මුදල් තෝරන්න",
+      "searchCurrency": "මුදල් සොයන්න...",
+      "description": "ඔබේ මුදල් අභිරුචිකරණය කරන්න: වඩාත් සුමටව බිල් කිරීමේ අත්දැකීමක් සඳහා ඔබේ මනාප මුදල් තෝරන්න.",
+      "modalDescription": "ඔබට වඩාත් හොඳ වන මුදල් තෝරන්න, අපි ඉතිරි කටයුතු බලාගන්නම්!",
+      "tapToSelect": "මුදල් තෝරන්න සඳහා ටැප් කරන්න",
+      "changeMessage": "මුදල් මෙයට වෙනස් කරන ලදී"
+    },
+    "languageSelector": {
+      "selectLanguage": "භාෂාව තෝරන්න",
+      "currentLanguage": "දැනට: {{language}}"
+    },
+    "tipOptionsEdit": {
+      "title": "ඔබේ ටිප් අභිරුචිකරණය කරන්න",
+      "description": "ඔබේ ටිප් පුද්ගලීකරණය කරන්න: ක්ෂේත්‍රවල ටයිප් කිරීමෙන් ඔබේ පෙරනිමි ටිප් සකසන්න. එය ඉක්මන් සහ පහසුයි!",
+      "resetConfirmMessage": "ඔබට ඔබගේ සියළුම ටිප් විකල්ප යළි පිහිටුවීමට අවශ්‍ය බව විශ්වාසද? මෙම වෙනස අවලංගු කළ නොහැක!",
+      "resetSuccess": "ටිප් විකල්ප නැවුම් කරන ලදී! ඔබ පෙරනිමි අගයන් සමඟ සූදානම්"
+    },
+    "splitOptionsEdit": {
+      "title": "ඔබේ බෙදීම් අභිරුචිකරණය කරන්න",
+      "description": "ඔබේ බෙදීම් සකසන්න: බිල් කෙසේ බෙදනවාද යන්න අභිරුචිකරණය කිරීමට ක්ෂේත්‍රවල ඔබේ බෙදීම් මනාපයන් ඇතුළත් කරන්න",
+      "resetConfirmMessage": "ඔබට ඔබගේ සියළුම බෙදීම් විකල්ප යළි පිහිටුවීමට අවශ්‍ය බව විශ්වාසද? මෙම වෙනස අවලංගු කළ නොහැක!",
+      "resetSuccess": "බෙදීම් විකල්ප නැවුම් කරන ලදී! ඔබ පෙරනිමි අගයන් සමඟ සූදානම්"
+    },
+    "duplicatePrevention": {
+      "description": "එකම ටිප් ගණනය නැවත සුරැකීමට ඉඩ දීමට පෙර කොපමණ කාලයක් බලා සිටිය යුතුද යන්න සකසන්න.",
+      "timeWindow": "කාල කවුළුව",
+      "modalTitle": "අනුපිටපත් වැළැක්වීම",
+      "modalDescription": "අනුපිටපත් ටිප් සුරැකීම් වැළැක්වීම සඳහා කාල කවුළුව තෝරන්න",
+      "changeMessage": "අනුපිටපත් වැළැක්වීම් කවුළුව මෙයට සකසා ඇත"
+    },
+    "themeBox": {
+      "title": "ඔබේ තේමාව අභිරුචිකරණය කරන්න",
+      "darkModeLabel": "Dark Mode මාරු කරන්න",
+      "description": "ඔබේ විලාසිතාව වෙනස් කරන්න: ඔබේ යෙදුම් අත්දැකීම අද්විතීයව ඔබගේම කිරීමට අපගේ ප්‍රබෝධමත් තේමා අතරින් තෝරන්න!",
+      "darkModeDescription": "Dark Mode සක්‍රිය කිරීමෙන් සුමට, සුවපහසු දසුනක් භුක්ති විඳින්න."
+    }
+  },
+  "navigation": {
+    "tipSplit": "ටිප් සහ බෙදීම",
+    "tipSummary": "ටිප් සාරාංශය",
+    "settingsPreferences": "සැකසුම් සහ මනාපයන්"
+  },
+  "share": {
+    "tipSummary": "ටිප් සාරාංශය",
+    "billAmount": "බිල් මුදල:",
+    "tipPercentage": "ටිප් ප්‍රතිශතය:",
+    "tipAmount": "ටිප් මුදල:",
+    "totalAmount": "මුළු මුදල:",
+    "splitAmong": "බෙදන ලද්දේ:",
+    "persons": "පුද්ගලයින්",
+    "subtotalPerPerson": "එක් අයෙකුට උප එකතුව:",
+    "tipPerPerson": "එක් අයෙකුට ටිප්:",
+    "totalPerPerson": "එක් අයෙකුට මුළු එක:",
+    "sharedVia": "TipMate හරහා බෙදාගන්නා ලදී",
+    "shareYourTip": "ඔබේ ටිප් සාරාංශය බෙදාගන්න",
+    "tipMateSummary": "TipMate සාරාංශය",
+    "receipt": "රිසිට්පත #",
+    "date": "දිනය:",
+    "time": "වේලාව:",
+    "pdf": {
+      "thankYou": "ස්තූතියි",
+      "tipSummaryDescription": "ඔබගේ ටිප් ගණනයේ සාරාංශය",
+      "amount": "මුදල",
+      "billDetails": "බිල් විස්තර",
+      "splitDetails": "බෙදීමේ විස්තර",
+      "generatedBy": "සෑකසූ කරණ ලද්දේ"
+    }
+  },
+  "messages": {
+    "restartRequired": "පිරිසැලසුම් වෙනස්කම් යෙදීමට යෙදුම නැවත ආරම්භ කිරීම අවශ්‍යයි. කරුණාකර යෙදුම වසා නැවත විවෘත කරන්න.",
+    "restartTitle": "නැවත ආරම්භ කිරීම අවශ්‍යයි",
+    "languageChanged": "භාෂාව සාර්ථකව වෙනස් කරන ලදී",
+    "languageChangeRTL": "අරබි භාෂාවට/වෙතින් මාරු වීමට නිසි පිරිසැලසුම සඳහා යෙදුම නැවත ආරම්භ කිරීම අවශ්‍යයි. කරුණාකර යෙදුම වසා නැවත විවෘත කරන්න.",
+    "networkError": "ජාල දෝෂයකි. කරුණාකර නැවත උත්සාහ කරන්න.",
+    "unknownError": "නොදන්නා දෝෂයක් ඇති විය.",
+    "clearAllTitle": "සියළුම ටිප්වල් හිස් කරන්න",
+    "clearAllMessage": "ඔබට සුරකින සියළුම ටිප්වල් මකා දැමීමට ඔබට විශ්වාසද? මෙය අවලංගු කළ නොහැක.",
+    "deleteAll": "සියල්ල මකන්න",
+    "deleteError": "ටිප් මකා දැමීම අසාර්ථක විය. කරුණාකර නැවත උත්සාහ කරන්න.",
+    "clearError": "ටිප්වල් හිස් කිරීම අසාර්ථක විය. කරුණාකර නැවත උත්සාහ කරන්න."
+  },
+  "duplicatePrevention": {
+    "noPrevention": "වැළැක්වීමක් නැත",
+    "minutes_one": "මිනිත්තු {{count}}",
+    "minutes_other": "මිනිත්තු {{count}}"
+  },
+  "filters": {
+    "tipPercent": "ටිප් %",
+    "people": "දෙනා",
+    "date": "දිනය",
+    "all": "සියල්ල",
+    "allTime": "සම්පූර්ණ කාලය",
+    "today": "අද",
+    "thisWeek": "මේ සතිය",
+    "thisMonth": "මේ මාසය",
+    "solo": "තනිව (1)",
+    "twoPlusToFour": "2-4 දෙනා",
+    "fivePlus": "5+ දෙනා",
+    "resetFilters": "පෙරහන් යළි පිහිටුවන්න"
+  },
+  "savedTipsList": {
+    "tip": "ටිප්",
+    "tips": "ටිප්වල්",
+    "found": "හමු වුණා",
+    "saved": "සුරකින ලද",
+    "clearAll": "සියල්ල හිස් කරන්න",
+    "bill": "බිල්:",
+    "tipLabel": "ටිප් ({{percentage}}%):",
+    "total": "මුළු එක:",
+    "noResultsTitle": "ප්‍රතිඵල හමු නොවීය",
+    "noTipsTitle": "තවම ටිප්වල් නැත",
+    "noResultsMatch": "\"{{query}}\" සමඟ ගැලපෙන ටිප්වල් නැත",
+    "noFiltersMatch": "තෝරාගත් පෙරහන් සමඟ ගැලපෙන ටිප්වල් නැත",
+    "emptyDescription": "ඉක්මන් සමාලෝචනය සහ යොමුව සඳහා ඔබගේ සුරකින ලද ටිප්වල් මෙහි පෙන්වනු ඇත.",
+    "emptyHint": "ඔබගේ ගණනය කළ ටිප්වල පිටු සටහන් අයිකනය සොයන්න!"
+  },
+  "accessibility": {
+    "tipInput": "ටිප් ප්‍රතිශත ආදානය",
+    "billInput": "බිල් මුදල ආදානය",
+    "splitInput": "බෙදීමට පුද්ගලයින් ගණන",
+    "saveButton": "ටිප් ගණනය සුරකින්න",
+    "shareButton": "ටිප් සාරාංශය බෙදාගන්න",
+    "deleteButton": "සුරකින ලද ටිප් මකන්න",
+    "settingsButton": "සැකසුම් විවෘත කරන්න"
+  },
+  "buttons": {
+    "custom": "අභිරුචි",
+    "setValue": "අගය සකසන්න",
+    "reset": "යළි පිහිටුවන්න"
+  }
+}

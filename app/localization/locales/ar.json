@@ -1,0 +1,263 @@
+{
+  "common": {
+    "save": "حفظ",
+    "delete": "حذف",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "reset": "إعادة تعيين",
+    "confirm": "تأكيد",
+    "ok": "موافق",
+    "success": "نجاح",
+    "error": "خطأ",
+    "viewDetails": "عرض التفاصيل",
+    "yes": "نعم",
+    "no": "لا"
+  },
+  "screens": {
+    "home": {
+      "title": "TipMate",
+      "tagline": "إكراميات ذكية، حياة سهلة",
+      "billAmount": "مبلغ الفاتورة",
+      "selectTip": "اختر الإكرامية",
+      "totalCost": "التكلفة الإجمالية",
+      "roundTotal": "تقريب المجموع",
+      "splitCount": "عدد التقسيم",
+      "perPerson": "لكل شخص",
+      "tipSaved": "تم حفظ حساب الإكرامية بنجاح!",
+      "tipSaveFailed": "فشل في حفظ حساب الإكرامية. يرجى المحاولة مرة أخرى."
+    },
+    "savedTips": {
+      "title": "ملخص الإكراميات",
+      "subtitle": "بحث سريع ومراجعة",
+      "searchPlaceholder": "البحث حسب المبلغ، الإكرامية، التاريخ...",
+      "noTips": "لا توجد إكراميات محفوظة بعد",
+      "noTipsDescription": "ستظهر حسابات الإكراميات المحفوظة هنا"
+    },
+    "savedTipDetail": {
+      "title": "نظرة عامة على الإكرامية",
+      "subtitle": "نظرة سريعة على نتيجتك",
+      "totalCost": "التكلفة الإجمالية",
+      "perPerson": "لكل شخص",
+      "tipPercentage": "نسبة الإكرامية",
+      "deleteTip": "حذف الإكرامية",
+      "person": "شخص",
+      "people": "أشخاص",
+      "confirmDelete": "هل أنت متأكد من حذف هذه الإكرامية؟",
+      "tipDeleted": "تم حذف الإكرامية بنجاح"
+    },
+    "settings": {
+      "title": "الإعدادات والتفضيلات",
+      "customiseTips": "تخصيص الإكراميات",
+      "customiseSplits": "تخصيص التقسيمات",
+      "customiseCurrency": "تخصيص العملة",
+      "customiseLanguage": "تخصيص اللغة",
+      "duplicatePrevention": "منع الحفظ المكرر",
+      "customiseTheme": "تخصيص المظهر",
+      "confirmReset": "تأكيد إعادة التعيين",
+      "resetMessage": "هل أنت متأكد من إعادة التعيين إلى القيم الافتراضية؟",
+      "resetSuccess": "تمت إعادة التعيين بنجاح"
+    },
+    "appInfo": {
+      "title": "حول TipMate",
+      "ourStory": "قصتنا ورؤيتنا",
+      "description": "TipMate هو تطبيق ذكي لحساب الإكراميات تم إنشاؤه لجعل الإكراميات أسهل وأكثر شفافية. سواء كنت تتناول الطعام في الخارج، أو تحصل على قصة شعر، أو أي خدمة يكون فيها الإكرامية عرفاً، يجعل TipMate تقسيم الفواتير وحساب الإكراميات أمراً سهلاً.",
+      "story": "TipMate هو تطبيق ذكي لحساب الإكراميات. تم إنشاؤه لتبسيط عملية الإكرامية وجعلها ممتعة للجميع.",
+      "developerLabel": "المطور",
+      "developer": "DevinForge Labs",
+      "support": "الدعم",
+      "contactSupport": "الاتصال بالدعم",
+      "contactDescription": "اتصل بنا للحصول على الدعم والتعليقات",
+      "contactConfirmTitle": "الاتصال بالدعم",
+      "contactConfirmMessage": "أنت على وشك فتح تطبيق البريد الإلكتروني الافتراضي الخاص بك للاتصال بفريق الدعم لدينا. هل تريد المتابعة؟",
+      "contactConfirmButtonContinue": "متابعة",
+      "acknowledgements": "شكر وتقدير",
+      "thirdPartyLibraries": "مكتبات الطرف الثالث",
+      "feedbackTitle": "رأيك مهم",
+      "feedbackDescription": "ملاحظاتك مهمة بالنسبة لنا لجعل TipMate أفضل لك. أبلغنا عن أي أخطاء في تطبيقنا أو أي ميزات تريد منا إضافتها في المستقبل.",
+      "privacyPolicy": "سياسة الخصوصية",
+      "appVersion": "إصدار التطبيق:"
+    },
+    "licenses": {
+      "title": "التراخيص",
+      "subtitle": "مكتبات الطرف الثالث",
+      "searchPlaceholder": "البحث في المكتبات..."
+    }
+  },
+  "components": {
+    "billBox": {
+      "totalAmount": "المبلغ الإجمالي",
+      "total": "المجموع",
+      "subtotal": "المجموع الفرعي",
+      "tip": "الإكرامية",
+      "perPerson": "لكل شخص",
+      "totalDescription": "ها هو! هذا مبلغك النهائي، شاملاً الإكرامية وأي تقريب.",
+      "perPersonDescription": "هل تريد معرفة التقسيم؟ هذا هو المبلغ الذي سيساهم به كل شخص.",
+      "savedTotalDescription": "هذا هو التوزيع الكامل لحساب الإكرامية المحفوظ لديك.",
+      "savedPerPersonDescription": "هذه هي الطريقة التي تم بها تقسيم الفاتورة بين الجميع."
+    },
+    "billInput": {
+      "description": "أدخل المبلغ الإجمالي للفاتورة هنا – هيا نبدأ!"
+    },
+    "tipInput": {
+      "description": "هل تشعر بالكرم؟ اختر نسبة الإكرامية وشاهد السحر يحدث."
+    },
+    "roundOptions": {
+      "roundValue": "تقريب القيمة",
+      "no": "لا",
+      "up": "لأعلى",
+      "down": "لأسفل",
+      "description": "تفضل رقماً مستديراً؟ قرّب لأعلى أو لأسفل لجعل مجموعك مثالياً."
+    },
+    "sharePreview": {
+      "title": "معاينة المشاركة",
+      "subtitle": "راجع ملخص الإكرامية قبل المشاركة",
+      "shareAsText": "مشاركة كنص",
+      "shareAsPDF": "مشاركة كـ PDF",
+      "cancel": "إلغاء"
+    },
+    "drawer": {
+      "preferences": "التفضيلات",
+      "toggleDarkMode": "تبديل الوضع الداكن",
+      "aboutUs": "من نحن"
+    },
+    "tipOptions": {
+      "customTip": "مخصص",
+      "tipPercentage": "{{value}}%"
+    },
+    "splitOptions": {
+      "customSplit": "مخصص",
+      "people": "{{count}} أشخاص",
+      "description": "تتناول الطعام مع الأصدقاء؟ أخبرنا بعددكم وسنقسم الفاتورة لك."
+    },
+    "currencySelector": {
+      "selectCurrency": "اختر العملة",
+      "searchCurrency": "البحث عن عملة...",
+      "description": "قم بتخصيص عملتك: اختر عملتك المفضلة لتجربة فوترة أكثر سلاسة.",
+      "modalDescription": "اختر العملة التي تناسبك، وسنتولى الباقي!",
+      "tapToSelect": "انقر لتحديد عملة",
+      "changeMessage": "تم تغيير العملة إلى"
+    },
+    "languageSelector": {
+      "selectLanguage": "اختر اللغة",
+      "currentLanguage": "الحالية: {{language}}"
+    },
+    "tipOptionsEdit": {
+      "title": "تخصيص الإكراميات",
+      "description": "قم بتخصيص إكرامياتك: اضبط إكرامياتك الافتراضية عن طريق الكتابة في الحقول. إنه سريع وسهل!",
+      "resetConfirmMessage": "هل أنت متأكد من أنك تريد إعادة تعيين جميع خيارات الإكرامية؟ لا يمكن التراجع عن هذا التغيير!",
+      "resetSuccess": "تم تحديث خيارات الإكرامية! أنت جاهز بالقيم الافتراضية"
+    },
+    "splitOptionsEdit": {
+      "title": "تخصيص التقسيمات",
+      "description": "قم بتعيين تقسيماتك: أدخل تفضيلات التقسيم الخاصة بك في الحقول لتخصيص كيفية تقسيم الفاتورة",
+      "resetConfirmMessage": "هل أنت متأكد من أنك تريد إعادة تعيين جميع خيارات التقسيم؟ لا يمكن التراجع عن هذا التغيير!",
+      "resetSuccess": "تم تحديث خيارات التقسيم! أنت جاهز بالقيم الافتراضية"
+    },
+    "duplicatePrevention": {
+      "description": "حدد المدة الزمنية للانتظار قبل السماح بحفظ نفس حساب الإكرامية مرة أخرى.",
+      "timeWindow": "النافذة الزمنية",
+      "modalTitle": "منع التكرار",
+      "modalDescription": "حدد النافذة الزمنية لمنع حفظ الإكراميات المكررة",
+      "changeMessage": "تم تعيين نافذة منع التكرار إلى"
+    },
+    "themeBox": {
+      "title": "تخصيص المظهر",
+      "darkModeLabel": "تبديل الوضع الداكن",
+      "description": "غيّر أسلوبك: اختر من بين سماتنا النابضة بالحياة لجعل تجربة التطبيق فريدة!",
+      "darkModeDescription": "استمتع بمظهر أنيق ومريح من خلال تمكين الوضع الداكن."
+    }
+  },
+  "navigation": {
+    "tipSplit": "الإكرامية والتقسيم",
+    "tipSummary": "ملخص الإكراميات",
+    "settingsPreferences": "الإعدادات والتفضيلات"
+  },
+  "share": {
+    "tipSummary": "ملخص الإكرامية",
+    "billAmount": "مبلغ الفاتورة:",
+    "tipPercentage": "نسبة الإكرامية:",
+    "tipAmount": "مبلغ الإكرامية:",
+    "totalAmount": "المبلغ الإجمالي:",
+    "splitAmong": "مقسم بين:",
+    "persons": "شخص/أشخاص",
+    "subtotalPerPerson": "المجموع الفرعي لكل شخص:",
+    "tipPerPerson": "الإكرامية لكل شخص:",
+    "totalPerPerson": "المجموع لكل شخص:",
+    "sharedVia": "تمت المشاركة عبر TipMate",
+    "shareYourTip": "شارك ملخص الإكرامية",
+    "tipMateSummary": "ملخص TipMate",
+    "receipt": "إيصال #",
+    "date": "التاريخ:",
+    "time": "الوقت:",
+    "pdf": {
+      "thankYou": "شكراً",
+      "tipSummaryDescription": "ملخص حساب الإكرامية",
+      "amount": "المبلغ",
+      "billDetails": "تفاصيل الفاتورة",
+      "splitDetails": "تفاصيل التقسيم",
+      "generatedBy": "تم إنشاؤه بواسطة"
+    }
+  },
+  "messages": {
+    "restartRequired": "يلزم إعادة تشغيل التطبيق لتطبيق تغييرات التخطيط. يرجى إغلاق التطبيق وإعادة فتحه.",
+    "restartTitle": "إعادة التشغيل مطلوبة",
+    "languageChanged": "تم تغيير اللغة بنجاح",
+    "languageChangeRTL": "يتطلب التبديل من/إلى العربية إعادة تشغيل التطبيق للحصول على التخطيط الصحيح. يرجى إغلاق التطبيق وإعادة فتحه.",
+    "networkError": "خطأ في الشبكة. يرجى المحاولة مرة أخرى.",
+    "unknownError": "حدث خطأ غير معروف.",
+    "clearAllTitle": "مسح جميع الإكراميات",
+    "clearAllMessage": "هل أنت متأكد من أنك تريد حذف جميع الإكراميات المحفوظة؟ لا يمكن التراجع عن هذا الإجراء.",
+    "deleteAll": "حذف الكل",
+    "deleteError": "فشل في حذف الإكرامية. يرجى المحاولة مرة أخرى.",
+    "clearError": "فشل في مسح الإكراميات. يرجى المحاولة مرة أخرى."
+  },
+  "duplicatePrevention": {
+    "noPrevention": "بدون منع",
+    "minutes_one": "{{count}} دقيقة",
+    "minutes_other": "{{count}} دقائق"
+  },
+  "filters": {
+    "tipPercent": "الإكرامية %",
+    "people": "الأشخاص",
+    "date": "التاريخ",
+    "all": "الكل",
+    "allTime": "كل الوقت",
+    "today": "اليوم",
+    "thisWeek": "هذا الأسبوع",
+    "thisMonth": "هذا الشهر",
+    "solo": "فردي (1)",
+    "twoPlusToFour": "2-4 أشخاص",
+    "fivePlus": "5+ أشخاص",
+    "resetFilters": "إعادة تعيين الفلاتر"
+  },
+  "savedTipsList": {
+    "tip": "إكرامية",
+    "tips": "إكراميات",
+    "found": "تم العثور عليها",
+    "saved": "محفوظة",
+    "clearAll": "مسح الكل",
+    "bill": "الفاتورة:",
+    "tipLabel": "الإكرامية ({{percentage}}%):",
+    "total": "المجموع:",
+    "noResultsTitle": "لم يتم العثور على نتائج",
+    "noTipsTitle": "لا توجد إكراميات بعد",
+    "noResultsMatch": "لا توجد إكراميات تطابق \"{{query}}\"",
+    "noFiltersMatch": "لا توجد إكراميات تطابق الفلاتر المحددة",
+    "emptyDescription": "ستظهر إكرامياتك المحفوظة هنا للمراجعة والرجوع السريع.",
+    "emptyHint": "ابحث عن أيقونة الإشارة المرجعية على إكرامياتك المحسوبة!"
+  },
+  "accessibility": {
+    "tipInput": "إدخال نسبة الإكرامية",
+    "billInput": "إدخال مبلغ الفاتورة",
+    "splitInput": "عدد الأشخاص للتقسيم",
+    "saveButton": "حفظ حساب الإكرامية",
+    "shareButton": "مشاركة ملخص الإكرامية",
+    "deleteButton": "حذف الإكرامية المحفوظة",
+    "settingsButton": "فتح الإعدادات"
+  },
+  "buttons": {
+    "custom": "مخصص",
+    "setValue": "تعيين القيمة",
+    "reset": "إعادة تعيين"
+  }
+}

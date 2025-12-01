@@ -8,6 +8,7 @@ import {
   SavedTip,
   SavedTipAction,
   DuplicatePreventionAction,
+  LanguageAction,
 } from './types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -93,6 +94,28 @@ export const duplicatePreventionReducer = (
   }
 };
 
+export interface LanguageState {
+  language: string;
+  isRTL: boolean;
+}
+
+export const languageReducer = (
+  state: LanguageState,
+  action: LanguageAction,
+): LanguageState => {
+  switch (action.type) {
+    case 'SET_LANGUAGE':
+      const newLanguageState = {
+        language: action.payload.language,
+        isRTL: action.payload.isRTL,
+      };
+      saveState(newLanguageState);
+      return newLanguageState;
+    default:
+      return state;
+  }
+};
+
 // Function to save state to AsyncStorage
 const saveState = async (
   partialState: Partial<{
@@ -101,6 +124,8 @@ const saveState = async (
     currencyConfig: CurrencyType;
     savedTips: SavedTip[];
     duplicatePreventionWindow: number;
+    language: string;
+    isRTL: boolean;
   }>,
 ) => {
   try {
@@ -112,6 +137,8 @@ const saveState = async (
         currencyConfig: CurrencyType;
         savedTips: SavedTip[];
         duplicatePreventionWindow: number;
+        language: string;
+        isRTL: boolean;
       };
       const newState = { ...currentStateObject, ...partialState };
       await AsyncStorage.setItem(Constants.APP_STATE_ASYNCSTORAGE_KEY, JSON.stringify(newState));
