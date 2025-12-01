@@ -57,6 +57,10 @@
 		<string>Lucide.ttf</string>
 		<string>MaterialDesignIcons.ttf</string>
 		<string>Octicons.ttf</string>
+		<string>NotoSansSinhala-Bold.ttf</string>
+		<string>NotoSansSinhala-Medium.ttf</string>
+		<string>NotoSansSinhala-Regular.ttf</string>
+		<string>NotoSansSinhala-SemiBold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

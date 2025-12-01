@@ -22,6 +22,22 @@
       "sha1": "201ccee5dcb1e9d38716168f3a56598a6808ed51"
     },
     {
+      "path": "app/assets/fonts/NotoSansSinhala-Bold.ttf",
+      "sha1": "3384119f4d7bf4c383101ca4a984b38640f13ce8"
+    },
+    {
+      "path": "app/assets/fonts/NotoSansSinhala-Medium.ttf",
+      "sha1": "ce335a3485a74264c6928a5e98d44d8d9dc1f400"
+    },
+    {
+      "path": "app/assets/fonts/NotoSansSinhala-Regular.ttf",
+      "sha1": "676bda26dae2b68cd0d3a52efb067234ae0482dd"
+    },
+    {
+      "path": "app/assets/fonts/NotoSansSinhala-SemiBold.ttf",
+      "sha1": "1ba33dd8c6b8f96ea48a79b06046bf324bb163c2"
+    },
+    {
       "path": "app/assets/fonts/Nunito-Black.ttf",
       "sha1": "69eb9cfb313195c2c9f5d9657a83e04a8c698a6d"
     },

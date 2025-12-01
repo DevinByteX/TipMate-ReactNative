@@ -9,15 +9,19 @@
 /* Begin PBXBuildFile section */
 		0C80B921A6F3F58F76C31292 /* libPods-TipCalculator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-TipCalculator.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		14477490B6CB421D9BD37C5C /* NotoSansSinhala-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E06484C48B448CA9C29DCE3 /* NotoSansSinhala-SemiBold.ttf */; };
 		1D114007E8094387901B5CDF /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706A826FC32440FB8089F682 /* Montserrat-Bold.ttf */; };
 		1F16F5271B114077B22BCBD1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 509A525D29594CDEA3E88561 /* Settings.bundle */; };
 		21CE1F9DBA024A31A49C483D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87102442F32543658FB37E33 /* Montserrat-Regular.ttf */; };
 		3AE4C97E846446308A81FDE0 /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 632D4CA89D0B4434B078234F /* Nunito-Black.ttf */; };
+		5595DD592AF042D3879175A7 /* NotoSansSinhala-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B404BEA9520345AFB7A62865 /* NotoSansSinhala-Regular.ttf */; };
 		5888B18541EB4966886B046F /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8974A390FA649B089A64998 /* Nunito-Bold.ttf */; };
 		6B82F6E3A91D4279904804ED /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C066B718A0684558AD802EF8 /* Nunito-Medium.ttf */; };
+		726B9B01040D407F85653F3D /* NotoSansSinhala-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 602872BA1A154664AACF71CF /* NotoSansSinhala-Bold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		876C7969D807409DB1A1EA06 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C1318B76E942ECA3FA6BDA /* Montserrat-Black.ttf */; };
 		9431C87B2D87192200F5D13C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9431C87A2D87192200F5D13C /* AppDelegate.swift */; };
+		A366F76E10D0402CA888B8F2 /* NotoSansSinhala-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5900A4C07E85492E9E139E35 /* NotoSansSinhala-Medium.ttf */; };
 		ADD486AC3E5A4FA2BABE6F9B /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 677EC2EC736D46F487362364 /* Nunito-SemiBold.ttf */; };
 		B8E6818D8E7442F9B73FA871 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3D1A34C55DA430C9AE28938 /* Montserrat-Medium.ttf */; };
 		BEE1B5CA778329A3905D069E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EB50DD8BBEEA2569DDB9FB02 /* PrivacyInfo.xcprivacy */; };
@@ -27,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* TipCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TipCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E06484C48B448CA9C29DCE3 /* NotoSansSinhala-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansSinhala-SemiBold.ttf"; path = "../app/assets/fonts/NotoSansSinhala-SemiBold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* TipCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TipCalculator/Images.xcassets; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-TipCalculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipCalculator.debug.xcconfig"; path = "Target Support Files/Pods-TipCalculator/Pods-TipCalculator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -51,7 +56,9 @@
 		44145C692BFA85400018392C /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		509A525D29594CDEA3E88561 /* Settings.bundle */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Settings.bundle; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-TipCalculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TipCalculator.release.xcconfig"; path = "Target Support Files/Pods-TipCalculator/Pods-TipCalculator.release.xcconfig"; sourceTree = "<group>"; };
+		5900A4C07E85492E9E139E35 /* NotoSansSinhala-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansSinhala-Medium.ttf"; path = "../app/assets/fonts/NotoSansSinhala-Medium.ttf"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-TipCalculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TipCalculator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		602872BA1A154664AACF71CF /* NotoSansSinhala-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansSinhala-Bold.ttf"; path = "../app/assets/fonts/NotoSansSinhala-Bold.ttf"; sourceTree = "<group>"; };
 		632D4CA89D0B4434B078234F /* Nunito-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Black.ttf"; path = "../app/assets/fonts/Nunito-Black.ttf"; sourceTree = "<group>"; };
 		668D3DAB6AB6499ABD7797C6 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../app/assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		677EC2EC736D46F487362364 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-SemiBold.ttf"; path = "../app/assets/fonts/Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -61,6 +68,7 @@
 		87102442F32543658FB37E33 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../app/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		9431C87A2D87192200F5D13C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = TipCalculator/AppDelegate.swift; sourceTree = "<group>"; };
 		B3D1A34C55DA430C9AE28938 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../app/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		B404BEA9520345AFB7A62865 /* NotoSansSinhala-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansSinhala-Regular.ttf"; path = "../app/assets/fonts/NotoSansSinhala-Regular.ttf"; sourceTree = "<group>"; };
 		C066B718A0684558AD802EF8 /* Nunito-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Medium.ttf"; path = "../app/assets/fonts/Nunito-Medium.ttf"; sourceTree = "<group>"; };
 		CF41AD666F154743803FDB33 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Regular.ttf"; path = "../app/assets/fonts/Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		EB50DD8BBEEA2569DDB9FB02 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = TipCalculator/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -100,6 +108,10 @@
 				C066B718A0684558AD802EF8 /* Nunito-Medium.ttf */,
 				CF41AD666F154743803FDB33 /* Nunito-Regular.ttf */,
 				677EC2EC736D46F487362364 /* Nunito-SemiBold.ttf */,
+				602872BA1A154664AACF71CF /* NotoSansSinhala-Bold.ttf */,
+				5900A4C07E85492E9E139E35 /* NotoSansSinhala-Medium.ttf */,
+				B404BEA9520345AFB7A62865 /* NotoSansSinhala-Regular.ttf */,
+				0E06484C48B448CA9C29DCE3 /* NotoSansSinhala-SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -288,6 +300,10 @@
 				FF3C56E9DC7B4C3BA4AC9FD4 /* Nunito-Regular.ttf in Resources */,
 				ADD486AC3E5A4FA2BABE6F9B /* Nunito-SemiBold.ttf in Resources */,
 				1F16F5271B114077B22BCBD1 /* Settings.bundle in Resources */,
+				726B9B01040D407F85653F3D /* NotoSansSinhala-Bold.ttf in Resources */,
+				A366F76E10D0402CA888B8F2 /* NotoSansSinhala-Medium.ttf in Resources */,
+				5595DD592AF042D3879175A7 /* NotoSansSinhala-Regular.ttf in Resources */,
+				14477490B6CB421D9BD37C5C /* NotoSansSinhala-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
