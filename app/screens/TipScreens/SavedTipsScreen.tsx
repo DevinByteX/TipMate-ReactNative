@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, Pressable, TextInput } from 'react-native';
+import { useTranslation } from 'react-i18next';
 // Custom Component
 import {
   StyledHeader,
@@ -17,10 +18,12 @@ import { useAppContext } from '@/context/AppContext';
 import { SavedTip } from '@/context/types';
 import { useSaveTip } from '@hooks';
 import { useNavigation } from '@react-navigation/native';
+import { getLocaleForFormatting } from '@/localization';
 
 const SavedTipsScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { state } = useAppContext();
+  const { t } = useTranslation();
   const {
     deleteTip,
     clearAllTips,
@@ -120,7 +123,7 @@ const SavedTipsScreen = () => {
         const percentageMatch = tip.tipPercentage.toString().includes(query);
         const currencyMatch = tip.currencyCode.toLowerCase().includes(query);
         const date = new Date(tip.timestamp);
-        const dateString = date.toLocaleDateString('en-US', {
+        const dateString = date.toLocaleDateString(getLocaleForFormatting(state.language), {
           month: 'short',
           day: 'numeric',
           year: 'numeric',
@@ -171,8 +174,8 @@ const SavedTipsScreen = () => {
   return (
     <>
       <StyledHeader
-        headerTitle={'Tip Summary'}
-        headerSubTitle={'Quick search and review'}
+        headerTitle={t('screens.savedTips.title')}
+        headerSubTitle={t('screens.savedTips.subtitle')}
         headerRightIconVisibilty={false}
       />
       <View style={styles.mainContainer}>
@@ -181,7 +184,7 @@ const SavedTipsScreen = () => {
           <View style={styles.searchInputWrapper}>
             <TextInput
               autoFocus={false}
-              placeholder="Search by amount, tip, date..."
+              placeholder={t('screens.savedTips.searchPlaceholder')}
               value={searchQuery}
               maxLength={50}
               style={styles.searchInput}
@@ -253,19 +256,19 @@ const SavedTipsScreen = () => {
       <StyledAlert
         visible={isDeleteAlertVisible}
         customIcon={{ iconType: 'MaterialDesignIcons', iconName: 'delete-outline' }}
-        title="Delete Tip"
-        message="Are you sure you want to delete this tip from your summary?"
+        title={t('common.delete')}
+        message={t('screens.savedTipDetail.confirmDelete')}
         type="confirm"
         buttons={[
           {
-            text: 'Cancel',
+            text: t('common.cancel'),
             style: 'cancel',
             onPress: () => {
               setPendingDeleteTipId(null);
               setIsDeleteAlertVisible(false);
             },
           },
-          { text: 'Delete', style: 'destructive', onPress: confirmDeleteTip },
+          { text: t('common.delete'), style: 'destructive', onPress: confirmDeleteTip },
         ]}
         onDismiss={() => {
           setPendingDeleteTipId(null);
@@ -277,16 +280,16 @@ const SavedTipsScreen = () => {
       <StyledAlert
         visible={clearAllAlert}
         customIcon={{ iconType: 'MaterialDesignIcons', iconName: 'delete-outline' }}
-        title="Clear All Tips"
-        message="Are you sure you want to delete all saved tips? This action cannot be undone."
+        title={t('messages.clearAllTitle')}
+        message={t('messages.clearAllMessage')}
         type="confirm"
         buttons={[
           {
-            text: 'Cancel',
+            text: t('common.cancel'),
             style: 'cancel',
             onPress: () => setClearAllAlert(false),
           },
-          { text: 'Delete All', style: 'destructive', onPress: confirmClearAllTips },
+          { text: t('messages.deleteAll'), style: 'destructive', onPress: confirmClearAllTips },
         ]}
         onDismiss={() => setClearAllAlert(false)}
       />
@@ -294,20 +297,24 @@ const SavedTipsScreen = () => {
       {/* Delete Error Alert */}
       <StyledAlert
         visible={deleteErrorAlert}
-        title="Error"
-        message="Failed to delete tip. Please try again."
+        title={t('common.error')}
+        message={t('messages.deleteError')}
         type="error"
-        buttons={[{ text: 'OK', style: 'default', onPress: () => setDeleteErrorAlert(false) }]}
+        buttons={[
+          { text: t('common.ok'), style: 'default', onPress: () => setDeleteErrorAlert(false) },
+        ]}
         onDismiss={() => setDeleteErrorAlert(false)}
       />
 
       {/* Clear Error Alert */}
       <StyledAlert
         visible={clearErrorAlert}
-        title="Error"
-        message="Failed to clear tips. Please try again."
+        title={t('common.error')}
+        message={t('messages.clearError')}
         type="error"
-        buttons={[{ text: 'OK', style: 'default', onPress: () => setClearErrorAlert(false) }]}
+        buttons={[
+          { text: t('common.ok'), style: 'default', onPress: () => setClearErrorAlert(false) },
+        ]}
         onDismiss={() => setClearErrorAlert(false)}
       />
     </>

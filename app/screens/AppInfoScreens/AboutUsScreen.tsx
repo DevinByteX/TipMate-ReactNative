@@ -7,9 +7,11 @@ import { AppLogo } from '@/components/StyledSVGIcons';
 import { useNavigation } from '@react-navigation/native';
 import { useExternalLinkAlert } from '@hooks';
 import { APP_LINKS, EMAILS, APP_INFO } from '@configs';
+import { useTranslation } from 'react-i18next';
 
 export const AboutUsScreen: React.FC = () => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   const navigation = useNavigation();
 
@@ -23,8 +25,8 @@ export const AboutUsScreen: React.FC = () => {
   return (
     <>
       <StyledHeader
-        headerTitle={'TipMate'}
-        headerSubTitle={'Our Story & Vision'}
+        headerTitle={t('screens.home.title')}
+        headerSubTitle={t('screens.appInfo.ourStory')}
         headerRightIconVisibilty={false}
       />
       <ScrollView
@@ -42,11 +44,7 @@ export const AboutUsScreen: React.FC = () => {
             width={(UnistylesRuntime.screen.width * 20) / 100}
           />
         </View>
-        <Text style={styles.description}>
-          TipMate is a Smart Tip Calculator App that helps you calculate tips and split bills
-          effortlessly. TipMate ensures convenience, accuracy, and ease of use, making the
-          bill-splitting process smooth and hassle-free for everyone involved.
-        </Text>
+        <Text style={styles.description}>{t('screens.appInfo.story')}</Text>
         <View style={styles.section}>
           <Text
             style={[styles.sectionTitle, { textDecorationLine: 'underline' }]}
@@ -54,35 +52,30 @@ export const AboutUsScreen: React.FC = () => {
               handleLinkPress(Platform.OS === 'ios' ? APP_LINKS.appStore : APP_LINKS.playStore)
             }
           >
-            DevinForge Labs
+            {t('screens.appInfo.developer')}
           </Text>
-          <Text style={styles.sectionText}>Contact us for support and feedback</Text>
+          <Text style={styles.sectionText}>{t('screens.appInfo.contactDescription')}</Text>
         </View>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Support</Text>
+          <Text style={styles.sectionTitle}>{t('screens.appInfo.support')}</Text>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() =>
               handleLinkPress(`mailto:${EMAILS.support}`, {
-                title: 'Contact Support',
-                message:
-                  'You are about to open your default email app to contact our support team. Do you want to continue?',
-                openText: 'Continue',
-                cancelText: 'Cancel',
+                title: t('screens.appInfo.contactConfirmTitle'),
+                message: t('screens.appInfo.contactConfirmMessage'),
+                openText: t('screens.appInfo.contactConfirmButtonContinue'),
+                cancelText: t('common.cancel'),
               })
             }
           >
             <Text style={styles.linkText}>{EMAILS.support}</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.feedbackText}>
-          Your feedback is important to us in order to make TipMate better for you. Report us any
-          bugs in our app, improvements and your suggestions regarding TipMate so we can serve you
-          even better.
-        </Text>
+        <Text style={styles.feedbackText}>{t('screens.appInfo.feedbackDescription')}</Text>
       </ScrollView>
       <View style={styles.acknowledgementsSection}>
-        <Text style={styles.sectionTitle}>Acknowledgements</Text>
+        <Text style={styles.sectionTitle}>{t('screens.appInfo.acknowledgements')}</Text>
         <View style={styles.acknowledgementLinks}>
           <TouchableOpacity
             activeOpacity={0.7}
@@ -91,17 +84,23 @@ export const AboutUsScreen: React.FC = () => {
             }}
             style={styles.acknowledgementButton}
           >
-            <Text style={styles.acknowledgementButtonText}>Third-Party Libraries</Text>
+            <Text style={styles.acknowledgementButtonText}>
+              {t('screens.appInfo.thirdPartyLibraries')}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => handleLinkPress(APP_LINKS.privacyPolicy)}
             style={styles.acknowledgementButton}
           >
-            <Text style={styles.acknowledgementButtonText}>Privacy Policy</Text>
+            <Text style={styles.acknowledgementButtonText}>
+              {t('screens.appInfo.privacyPolicy')}
+            </Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.versionText}>App version: {APP_INFO.version}</Text>
+        <Text style={styles.versionText}>
+          {t('screens.appInfo.appVersion')} {APP_INFO.version}
+        </Text>
       </View>
 
       {/* External Link Alert */}

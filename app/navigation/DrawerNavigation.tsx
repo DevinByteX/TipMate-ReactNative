@@ -1,5 +1,6 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 // Components
 import { StyledDrawer } from '@components';
 // Screens
@@ -12,6 +13,7 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
   const { theme } = useStyles();
+  const { t } = useTranslation();
 
   return (
     <Drawer.Navigator
@@ -30,7 +32,7 @@ const DrawerNavigation = () => {
         name="CalcTipScreen"
         component={HomeTipScreen}
         options={{
-          drawerLabel: 'Tip & Split',
+          drawerLabel: t('navigation.tipSplit'),
           drawerLabelStyle: {
             fontFamily: theme.fonts.Montserrat_Bold,
             fontWeight: undefined,
@@ -42,7 +44,7 @@ const DrawerNavigation = () => {
         name="SavedTipScreen"
         component={SavedTipsScreen}
         options={{
-          drawerLabel: 'Tip Summary',
+          drawerLabel: t('navigation.tipSummary'),
           drawerLabelStyle: {
             fontFamily: theme.fonts.Montserrat_Bold,
             fontWeight: undefined,
@@ -54,7 +56,7 @@ const DrawerNavigation = () => {
         name="SettingsScreen"
         component={SettingsScreen}
         options={{
-          drawerLabel: 'Settings & Preferences',
+          drawerLabel: t('navigation.settingsPreferences'),
           drawerLabelStyle: {
             fontFamily: theme.fonts.Montserrat_Bold,
             fontWeight: undefined,

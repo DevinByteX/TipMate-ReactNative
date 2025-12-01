@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
   StyledHeader,
   StyledBillBox,
@@ -12,6 +13,8 @@ import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import { SavedTip } from '@/context/types';
 import { useSaveTip } from '@hooks';
 import { useShareTipPreview } from '@hooks';
+import { useAppContext } from '@/context/AppContext';
+import { getLocaleForFormatting } from '@/localization';
 
 type SavedTipDetailRouteParams = {
   SavedTipDetailScreen: {
@@ -21,6 +24,8 @@ type SavedTipDetailRouteParams = {
 
 const SavedTipDetailScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
+  const { state } = useAppContext();
   const route = useRoute<RouteProp<SavedTipDetailRouteParams, 'SavedTipDetailScreen'>>();
   const navigation = useNavigation();
   const { deleteTip } = useSaveTip();
@@ -33,7 +38,7 @@ const SavedTipDetailScreen = () => {
 
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
-    return date.toLocaleDateString('en-US', {
+    return date.toLocaleDateString(getLocaleForFormatting(state.language), {
       weekday: 'long',
       month: 'long',
       day: 'numeric',
@@ -80,8 +85,8 @@ const SavedTipDetailScreen = () => {
   return (
     <>
       <StyledHeader
-        headerTitle={'Tip Overview'}
-        headerSubTitle={'Quick glance at your result'}
+        headerTitle={t('screens.savedTipDetail.title')}
+        headerSubTitle={t('screens.savedTipDetail.subtitle')}
         headerRightIconVisibilty={true}
         headerRightIconType={'MaterialDesignIcons'}
         headerRightIconName={'delete'}
@@ -109,7 +114,10 @@ const SavedTipDetailScreen = () => {
           <View style={styles.infoRow}>
             <StyledIcons type={'Ionicons'} name={'people'} size={20} color={theme.colors.accent} />
             <Text style={styles.peopleText}>
-              {tip.numberOfPeople} {tip.numberOfPeople === 1 ? 'Person' : 'People'}
+              {tip.numberOfPeople}{' '}
+              {tip.numberOfPeople === 1
+                ? t('screens.savedTipDetail.person')
+                : t('screens.savedTipDetail.people')}
             </Text>
           </View>
           <View style={styles.infoRow}>
@@ -128,11 +136,11 @@ const SavedTipDetailScreen = () => {
         {/* Total Bill Container */}
         <StyledBillBox
           titleVisibility
-          titleText={'TOTAL COST'}
-          description={'Here is the complete breakdown of your saved tip calculation.'}
+          titleText={t('screens.savedTipDetail.totalCost')}
+          description={t('components.billBox.savedTotalDescription')}
           currencySymbol={tip.currencySymbol}
-          subTotalText={'SUB COST'}
-          tipText={'TIP'}
+          subTotalText={t('components.billBox.subtotal')}
+          tipText={t('components.billBox.tip')}
           totalAmount={tip.total.toFixed(2)}
           subTotalAmount={tip.amount.toFixed(2)}
           totalTipAmount={tip.tip.toFixed(2)}
@@ -144,10 +152,10 @@ const SavedTipDetailScreen = () => {
         {tip.numberOfPeople > 1 && tip.perPerson ? (
           <StyledBillBox
             titleVisibility
-            titleText={'PER PERSON'}
-            description={'Here is how the bill was split among everyone.'}
+            titleText={t('screens.savedTipDetail.perPerson')}
+            description={t('components.billBox.savedPerPersonDescription')}
             currencySymbol={tip.currencySymbol}
-            subTotalText={'SUB TOTAL'}
+            subTotalText={t('components.billBox.subtotal')}
             totalAmount={tip.perPerson.total.toFixed(2)}
             subTotalAmount={tip.perPerson.amount.toFixed(2)}
             totalTipAmount={tip.perPerson.tip.toFixed(2)}
@@ -158,7 +166,7 @@ const SavedTipDetailScreen = () => {
 
         {/* Tip Percentage Info */}
         <View style={styles.tipPercentageCard}>
-          <Text style={styles.tipPercentageLabel}>Tip Percentage</Text>
+          <Text style={styles.tipPercentageLabel}>{t('screens.savedTipDetail.tipPercentage')}</Text>
           <Text style={styles.tipPercentageValue}>{tip.tipPercentage}%</Text>
         </View>
       </ScrollView>
@@ -179,12 +187,16 @@ const SavedTipDetailScreen = () => {
       <StyledAlert
         visible={isDeleteAlertVisible}
         customIcon={{ iconType: 'MaterialDesignIcons', iconName: 'delete-outline' }}
-        title="Delete Tip"
-        message="Are you sure you want to delete this saved tip? This action cannot be undone."
+        title={t('screens.savedTipDetail.deleteTip')}
+        message={t('screens.savedTipDetail.confirmDelete')}
         type="confirm"
         buttons={[
-          { text: 'Cancel', style: 'cancel', onPress: () => setIsDeleteAlertVisible(false) },
-          { text: 'Delete', style: 'destructive', onPress: confirmDelete },
+          {
+            text: t('common.cancel'),
+            style: 'cancel',
+            onPress: () => setIsDeleteAlertVisible(false),
+          },
+          { text: t('common.delete'), style: 'destructive', onPress: confirmDelete },
         ]}
         onDismiss={() => setIsDeleteAlertVisible(false)}
       />
