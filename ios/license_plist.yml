@@ -39,7 +39,7 @@ rename:
   "simple-swizzle@0.2.2": simple-swizzle
   "is-arrayish@0.3.2": is-arrayish
   "use-latest-callback@0.2.4": use-latest-callback
-  "use-sync-external-store@1.5.0": use-sync-external-store
+  "use-sync-external-store@1.6.0": use-sync-external-store
   "react-native-drawer-layout@4.1.12": react-native-drawer-layout
   "@react-navigation_native@7.1.17": '@react-navigation/native'
   "@react-navigation_core@7.12.4": '@react-navigation/core'
@@ -53,7 +53,12 @@ rename:
   "react-is@19.1.1": react-is
   "@react-navigation_native-stack@7.3.25": '@react-navigation/native-stack'
   "warn-once@0.1.1": warn-once
+  "i18next@25.6.3": i18next
+  "@babel_runtime@7.28.4": '@babel/runtime'
   "react@19.1.0": react
+  "react-i18next@16.3.5": react-i18next
+  "html-parse-stringify@3.0.1": html-parse-stringify
+  "void-elements@3.1.0": void-elements
   "react-native@0.81.0": react-native
   "@jest_create-cache-key-function@29.7.0": '@jest/create-cache-key-function'
   "@jest_types@29.6.3": '@jest/types'
@@ -242,7 +247,6 @@ rename:
   "makeerror@1.0.12": makeerror
   "tmpl@1.0.5": tmpl
   "metro-runtime@0.83.1": metro-runtime
-  "@babel_runtime@7.28.4": '@babel/runtime'
   "metro-source-map@0.83.1": metro-source-map
   "@babel_traverse--for-generate-function-map@7.28.3": '@babel/traverse--for-generate-function-map'
   "@babel_helper-globals@7.28.0": '@babel/helper-globals'
@@ -358,6 +362,7 @@ rename:
   "xml2js@0.6.2": xml2js
   "sax@1.4.1": sax
   "xmlbuilder@11.0.1": xmlbuilder
+  "react-native-localize@3.6.0": react-native-localize
   "react-native-reanimated@3.19.0": react-native-reanimated
   "@babel_plugin-transform-arrow-functions@7.25.9": '@babel/plugin-transform-arrow-functions'
   "@babel_plugin-transform-class-properties@7.25.9": '@babel/plugin-transform-class-properties'
@@ -566,8 +571,8 @@ manual:
     version: '0.2.4'
     source: https://github.com/satya164/use-latest-callback
     body: MIT
-  - name: use-sync-external-store@1.5.0
-    version: '1.5.0'
+  - name: use-sync-external-store@1.6.0
+    version: '1.6.0'
     source: https://github.com/facebook/react
     file: '../node_modules/use-sync-external-store/LICENSE'
   - name: react-native-drawer-layout@4.1.12
@@ -622,10 +627,30 @@ manual:
     version: '0.1.1'
     source: https://github.com/satya164/warn-once
     file: '../node_modules/warn-once/LICENSE'
+  - name: i18next@25.6.3
+    version: '25.6.3'
+    source: https://github.com/i18next/i18next
+    file: '../node_modules/i18next/LICENSE'
+  - name: '@babel_runtime@7.28.4'
+    version: '7.28.4'
+    source: https://github.com/babel/babel
+    file: '../node_modules/@babel/runtime/LICENSE'
   - name: react@19.1.0
     version: '19.1.0'
     source: https://github.com/facebook/react
     file: '../node_modules/react/LICENSE'
+  - name: react-i18next@16.3.5
+    version: '16.3.5'
+    source: https://github.com/i18next/react-i18next
+    file: '../node_modules/react-i18next/LICENSE'
+  - name: html-parse-stringify@3.0.1
+    version: '3.0.1'
+    source: https://github.com/henrikjoreteg/html-parse-stringify
+    body: MIT
+  - name: void-elements@3.1.0
+    version: '3.1.0'
+    source: pugjs/void-elements
+    file: '../node_modules/void-elements/LICENSE'
   - name: react-native@0.81.0
     version: '0.81.0'
     source: https://github.com/facebook/react-native
@@ -1377,10 +1402,6 @@ manual:
     version: '0.83.1'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: '@babel_runtime@7.28.4'
-    version: '7.28.4'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/runtime/LICENSE'
   - name: metro-source-map@0.83.1
     version: '0.83.1'
     source: https://github.com/facebook/metro
@@ -1841,6 +1862,10 @@ manual:
     version: '11.0.1'
     source: https://github.com/oozcitak/xmlbuilder-js
     file: '../node_modules/xml2js/node_modules/xmlbuilder/LICENSE'
+  - name: react-native-localize@3.6.0
+    version: '3.6.0'
+    source: https://github.com/zoontek/react-native-localize
+    file: '../node_modules/react-native-localize/LICENSE'
   - name: react-native-reanimated@3.19.0
     version: '3.19.0'
     source: https://github.com/software-mansion/react-native-reanimated

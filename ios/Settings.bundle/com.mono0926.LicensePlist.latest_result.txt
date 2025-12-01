@@ -129,6 +129,12 @@ name: RNGestureHandler, nameSpecified:
 body: The MIT License (MIT…
 version: 2.29.1
 
+name: RNLocalize, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 3.6.0
+
 name: RNReanimated, nameSpecified: 
 body: The MIT License (MIT…
 version: 3.19.0

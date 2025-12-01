@@ -2948,6 +2948,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/RNLocalize</string>
+			<key>Title</key>
+			<string>RNLocalize (3.6.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/RNReanimated</string>
 			<key>Title</key>
 			<string>RNReanimated (3.19.0)</string>
