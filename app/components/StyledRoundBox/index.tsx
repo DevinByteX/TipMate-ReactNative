@@ -29,8 +29,8 @@ const RoundCapsule = ({
   const TextColor = disabled
     ? theme.colors.disable_text
     : active
-      ? theme.colors.card
-      : theme.colors.card_typography;
+    ? theme.colors.card
+    : theme.colors.card_typography;
 
   return (
     <Pressable
@@ -40,8 +40,8 @@ const RoundCapsule = ({
           backgroundColor: disabled
             ? theme.colors.disable_button
             : active
-              ? theme.colors.accent
-              : theme.colors.backgroundColor,
+            ? theme.colors.accent
+            : theme.colors.backgroundColor,
         },
       ]}
       onPress={() => {
