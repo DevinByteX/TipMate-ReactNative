@@ -16,6 +16,37 @@ export type ShareTipDetailsParams = {
   subject?: string;
 };
 
+export type ShareTranslations = {
+  tipSummary: string;
+  billAmount: string;
+  tipPercentage: string;
+  tipAmount: string;
+  totalAmount: string;
+  splitAmong: string;
+  persons: string;
+  subtotalPerPerson: string;
+  tipPerPerson: string;
+  totalPerPerson: string;
+  sharedVia: string;
+};
+
+/**
+ * Default English translations for backward compatibility
+ */
+const defaultTranslations: ShareTranslations = {
+  tipSummary: 'Tip Summary',
+  billAmount: 'Bill Amount:',
+  tipPercentage: 'Tip Percentage:',
+  tipAmount: 'Tip Amount:',
+  totalAmount: 'Total Amount:',
+  splitAmong: 'Split Among:',
+  persons: 'person(s)',
+  subtotalPerPerson: 'Subtotal per person:',
+  tipPerPerson: 'Tip per person:',
+  totalPerPerson: 'Total per person:',
+  sharedVia: 'Shared via TipMate',
+};
+
 /**
  * Formats the tip details into a preview message string
  */
@@ -27,24 +58,26 @@ export const formatTipDetailsPreview = ({
   numberOfPeople,
   perPerson,
   currencySymbol = '$',
-}: Omit<ShareTipDetailsParams, 'title' | 'subject'>): string => {
+  translations = defaultTranslations,
+}: Omit<ShareTipDetailsParams, 'title' | 'subject'> & { translations?: ShareTranslations }): string => {
+  const t = translations;
   const message = `
-💸 Tip Summary
+💸 ${t.tipSummary}
 
-🧾 Bill Amount: ${currencySymbol}${amount.toFixed(2)}
-💰 Tip Percentage: ${tipPercentage}%
-💵 Tip Amount: ${currencySymbol}${tip.toFixed(2)}
-📊 Total Amount: ${currencySymbol}${total.toFixed(2)}
+🧾 ${t.billAmount} ${currencySymbol}${amount.toFixed(2)}
+💰 ${t.tipPercentage} ${tipPercentage}%
+💵 ${t.tipAmount} ${currencySymbol}${tip.toFixed(2)}
+📊 ${t.totalAmount} ${currencySymbol}${total.toFixed(2)}
 
 ${numberOfPeople > 1
-      ? `👥 Split Among: ${numberOfPeople} person(s)
-  • Subtotal per person: ${currencySymbol}${perPerson?.amount.toFixed(2) ?? 'N/A'}
-  • Tip per person: ${currencySymbol}${perPerson?.tip.toFixed(2) ?? 'N/A'}
-  • Total per person: ${currencySymbol}${perPerson?.total.toFixed(2) ?? 'N/A'}`
+      ? `👥 ${t.splitAmong} ${numberOfPeople} ${t.persons}
+  • ${t.subtotalPerPerson} ${currencySymbol}${perPerson?.amount.toFixed(2) ?? 'N/A'}
+  • ${t.tipPerPerson} ${currencySymbol}${perPerson?.tip.toFixed(2) ?? 'N/A'}
+  • ${t.totalPerPerson} ${currencySymbol}${perPerson?.total.toFixed(2) ?? 'N/A'}`
       : ''
     }
 
-Shared via TipMate
+${t.sharedVia}
     `.trim();
 
   return message;

@@ -1,8 +1,11 @@
 import { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useShareTipDetailsText, formatTipDetailsPreview } from './useShareTipDetailsText';
-import { useShareTipDetailsPDF } from './useShareTipDetailsPDF';
-import type { ShareTipDetailsParams } from './useShareTipDetailsText';
+import { useShareTipDetailsPDF, PDFTranslations } from './useShareTipDetailsPDF';
+import type { ShareTipDetailsParams, ShareTranslations } from './useShareTipDetailsText';
 import { Platform } from 'react-native';
+import { useAppContext } from '@/context/AppContext';
+import { getLocaleForFormatting } from '@/localization';
 
 type ShareTipData = Omit<ShareTipDetailsParams, 'title' | 'subject'>;
 
@@ -48,9 +51,50 @@ interface UseShareTipPreviewReturn {
 export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipPreviewReturn => {
     const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);
     const pendingShareAction = useRef<'text' | 'pdf' | null>(null);
+    const { t } = useTranslation();
+    const { state } = useAppContext();
+    const locale = getLocaleForFormatting(state.language);
+
+    // Build translations object from i18n
+    const shareTranslations: ShareTranslations = {
+        tipSummary: t('share.tipSummary'),
+        billAmount: t('share.billAmount'),
+        tipPercentage: t('share.tipPercentage'),
+        tipAmount: t('share.tipAmount'),
+        totalAmount: t('share.totalAmount'),
+        splitAmong: t('share.splitAmong'),
+        persons: t('share.persons'),
+        subtotalPerPerson: t('share.subtotalPerPerson'),
+        tipPerPerson: t('share.tipPerPerson'),
+        totalPerPerson: t('share.totalPerPerson'),
+        sharedVia: t('share.sharedVia'),
+    };
+
+    // Build PDF translations object from i18n
+    const pdfTranslations: PDFTranslations = {
+        thankYou: t('share.pdf.thankYou'),
+        tipSummaryDescription: t('share.pdf.tipSummaryDescription'),
+        receiptId: t('share.receipt'),
+        date: t('share.date'),
+        time: t('share.time'),
+        amount: t('share.pdf.amount'),
+        billDetails: t('share.pdf.billDetails'),
+        billAmount: t('share.billAmount').replace(':', ''),
+        tip: t('components.billBox.tip'),
+        totalAmount: t('share.totalAmount').replace(':', ''),
+        splitDetails: t('share.pdf.splitDetails'),
+        people: t('screens.savedTipDetail.people'),
+        subtotalPerPerson: t('share.subtotalPerPerson').replace(':', ''),
+        tipPerPerson: t('share.tipPerPerson').replace(':', ''),
+        totalPerPerson: t('share.totalPerPerson').replace(':', ''),
+        generatedBy: t('share.pdf.generatedBy'),
+        tagline: t('screens.home.tagline'),
+        shareTitle: t('share.shareYourTip'),
+        shareSubject: t('share.tipMateSummary'),
+    };
 
     // Generate preview content
-    const previewContent = shareData ? formatTipDetailsPreview(shareData) : '';
+    const previewContent = shareData ? formatTipDetailsPreview({ ...shareData, translations: shareTranslations }) : '';
 
     // Open the preview modal
     const openPreview = () => {
@@ -75,7 +119,7 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
                     console.error('Error sharing as text:', error);
                 });
             } else if (action === 'pdf') {
-                useShareTipDetailsPDF(shareData).catch(error => {
+                useShareTipDetailsPDF(shareData, pdfTranslations, locale).catch(error => {
                     console.error('Error sharing as PDF:', error);
                 });
             }
