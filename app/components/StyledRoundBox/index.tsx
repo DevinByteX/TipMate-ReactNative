@@ -1,12 +1,14 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 import { RoundingMethod, RoundingMethodType, DisabledRoundingMethodsType } from '@hooks';
 import { IconTypeMap, StyledIcons, StyledIconTypesKey } from '@components';
 
 type RoundCapsuleProps = {
   active?: boolean;
   textValue: RoundingMethodType;
+  textLabel?: string;
   iconType?: StyledIconTypesKey;
   iconName?: React.ComponentProps<IconTypeMap[StyledIconTypesKey]>['name'];
   disabled?: boolean;
@@ -16,6 +18,7 @@ type RoundCapsuleProps = {
 const RoundCapsule = ({
   active = false,
   textValue,
+  textLabel,
   iconType = 'FontAwesome6',
   iconName = 'circle',
   disabled = false,
@@ -26,8 +29,8 @@ const RoundCapsule = ({
   const TextColor = disabled
     ? theme.colors.disable_text
     : active
-    ? theme.colors.card
-    : theme.colors.card_typography;
+      ? theme.colors.card
+      : theme.colors.card_typography;
 
   return (
     <Pressable
@@ -37,8 +40,8 @@ const RoundCapsule = ({
           backgroundColor: disabled
             ? theme.colors.disable_button
             : active
-            ? theme.colors.accent
-            : theme.colors.backgroundColor,
+              ? theme.colors.accent
+              : theme.colors.backgroundColor,
         },
       ]}
       onPress={() => {
@@ -54,7 +57,7 @@ const RoundCapsule = ({
           },
         ]}
       >
-        {`${textValue} `}
+        {`${textLabel ?? textValue} `}
       </Text>
       <StyledIcons
         type={iconType}
@@ -80,6 +83,7 @@ export const StyledRoundBox = ({
   onSelectedRound?: (value: RoundingMethodType) => void;
 }) => {
   const { styles } = useStyles(styleSheet);
+  const { t } = useTranslation();
 
   return (
     <View style={styles.mainContainer}>
@@ -96,6 +100,7 @@ export const StyledRoundBox = ({
       <View style={styles.mainInnerContainer}>
         <RoundCapsule
           textValue="NO"
+          textLabel={t('components.roundOptions.no')}
           disabled={disablingRoundingMethod?.NO}
           active={roundMethod == RoundingMethod.NO}
           iconType="FontAwesome6"
@@ -106,6 +111,7 @@ export const StyledRoundBox = ({
         />
         <RoundCapsule
           textValue="UP"
+          textLabel={t('components.roundOptions.up')}
           disabled={disablingRoundingMethod?.UP}
           active={roundMethod == RoundingMethod.UP}
           iconType="FontAwesome6"
@@ -116,6 +122,7 @@ export const StyledRoundBox = ({
         />
         <RoundCapsule
           textValue="DOWN"
+          textLabel={t('components.roundOptions.down')}
           disabled={disablingRoundingMethod?.DOWN}
           active={roundMethod == RoundingMethod.DOWN}
           iconType="FontAwesome6"
