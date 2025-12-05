@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, Modal, Pressable, ScrollView, Alert } from 'react-native';
+import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
-import { StyledIcons } from '@components';
+import { StyledIcons, StyledAlert } from '@components';
 import { useAppContext } from '@/context/AppContext';
 import Toast from 'react-native-toast-message';
 import {
@@ -10,6 +10,7 @@ import {
   changeLanguage,
   isRTLLanguage,
   useRTL,
+  i18n,
   type LanguageConfig,
 } from '@/localization';
 
@@ -139,49 +140,49 @@ export const StyledLanguageSelector = ({
   const { shouldRestartForRTL, applyRTL } = useRTL();
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
+  const [alertVisible, setAlertVisible] = useState<boolean>(false);
+  const [pendingLanguage, setPendingLanguage] = useState<LanguageConfig | null>(null);
 
   const currentLanguage = state.language;
   const currentLangConfig = SUPPORTED_LANGUAGES.find(l => l.code === currentLanguage);
+
+  const handleRTLLanguageConfirm = useCallback(async () => {
+    if (!pendingLanguage) return;
+
+    // Apply RTL settings
+    applyRTL(pendingLanguage.code);
+
+    // Change i18n language
+    await changeLanguage(pendingLanguage.code);
+
+    // Update app state
+    dispatch({
+      type: 'SET_LANGUAGE',
+      payload: {
+        language: pendingLanguage.code,
+        isRTL: isRTLLanguage(pendingLanguage.code),
+      },
+    });
+
+    setAlertVisible(false);
+    setPendingLanguage(null);
+    setModalVisibility(false);
+
+    Toast.show({
+      type: 'info',
+      text1: i18n.t('messages.restartRequired'),
+      visibilityTime: 4000,
+    });
+  }, [pendingLanguage, applyRTL, dispatch]);
 
   const handleLanguageChange = useCallback(
     async (language: LanguageConfig) => {
       const needsRestart = shouldRestartForRTL(language.code);
 
       if (needsRestart) {
-        // Show alert for RTL change
-        Alert.alert(t('messages.restartTitle'), t('messages.languageChangeRTL'), [
-          {
-            text: t('common.cancel'),
-            style: 'cancel',
-          },
-          {
-            text: t('common.ok'),
-            onPress: async () => {
-              // Apply RTL settings
-              applyRTL(language.code);
-
-              // Change i18n language
-              await changeLanguage(language.code);
-
-              // Update app state
-              dispatch({
-                type: 'SET_LANGUAGE',
-                payload: {
-                  language: language.code,
-                  isRTL: isRTLLanguage(language.code),
-                },
-              });
-
-              setModalVisibility(false);
-
-              Toast.show({
-                type: 'info',
-                text1: t('messages.restartRequired'),
-                visibilityTime: 4000,
-              });
-            },
-          },
-        ]);
+        // Store pending language and show alert for RTL change
+        setPendingLanguage(language);
+        setAlertVisible(true);
       } else {
         // No restart needed, just change language
         await changeLanguage(language.code);
@@ -197,12 +198,12 @@ export const StyledLanguageSelector = ({
 
         Toast.show({
           type: 'success',
-          text1: `${t('messages.languageChanged')}: ${language.nativeName}`,
+          text1: `${i18n.t('messages.languageChanged')}: ${language.nativeName}`,
           visibilityTime: 2000,
         });
       }
     },
-    [dispatch, shouldRestartForRTL, applyRTL, t],
+    [dispatch, shouldRestartForRTL],
   );
 
   return (
@@ -239,6 +240,31 @@ export const StyledLanguageSelector = ({
         modalDescription={modalDescription}
         currentLanguage={currentLanguage}
         onLanguageSelect={handleLanguageChange}
+      />
+      <StyledAlert
+        visible={alertVisible}
+        title={t('messages.restartTitle')}
+        message={t('messages.languageChangeRTL')}
+        type="confirm"
+        buttons={[
+          {
+            text: t('common.cancel'),
+            style: 'cancel',
+            onPress: () => {
+              setAlertVisible(false);
+              setPendingLanguage(null);
+            },
+          },
+          {
+            text: t('common.ok'),
+            style: 'default',
+            onPress: handleRTLLanguageConfirm,
+          },
+        ]}
+        onDismiss={() => {
+          setAlertVisible(false);
+          setPendingLanguage(null);
+        }}
       />
     </View>
   );
