@@ -140,7 +140,9 @@
     },
     "languageSelector": {
       "selectLanguage": "Sélectionner la Langue",
-      "currentLanguage": "Actuel : {{language}}"
+      "currentLanguage": "Actuel : {{language}}",
+      "description": "Personnalisez Votre Expérience : Choisissez votre langue préférée pour une expérience d'application plus confortable.",
+      "modalDescription": "Sélectionnez votre langue préférée dans la liste ci-dessous. Certaines langues prennent en charge la direction du texte de droite à gauche (RTL)."
     },
     "tipOptionsEdit": {
       "title": "PERSONNALISER VOS POURBOIRES",

@@ -140,7 +140,9 @@
     },
     "languageSelector": {
       "selectLanguage": "Select Language",
-      "currentLanguage": "Current: {{language}}"
+      "currentLanguage": "Current: {{language}}",
+      "description": "Personalize Your Experience: Choose your preferred language for a more comfortable app experience.",
+      "modalDescription": "Select your preferred language from the list below. Some languages support right-to-left (RTL) text direction."
     },
     "tipOptionsEdit": {
       "title": "CUSTOMISE YOUR TIPS",

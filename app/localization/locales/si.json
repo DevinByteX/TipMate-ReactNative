@@ -139,7 +139,9 @@
     },
     "languageSelector": {
       "selectLanguage": "භාෂාව තෝරන්න",
-      "currentLanguage": "දැනට: {{language}}"
+      "currentLanguage": "දැනට: {{language}}",
+      "description": "ඔබේ අත්දැකීම පුද්ගලීකරණය කරන්න: වඩා සුවපහසු යෙදුම් අත්දැකීමක් සඳහා ඔබේ කැමති භාෂාව තෝරන්න.",
+      "modalDescription": "පහත ලැයිස්තුවෙන් ඔබේ කැමති භාෂාව තෝරන්න. සමහර භාෂා දකුණේ සිට වමට (RTL) පෙළ දිශාවට සහාය දක්වයි."
     },
     "tipOptionsEdit": {
       "title": "ඔබේ ටිප් අභිරුචිකරණය කරන්න",

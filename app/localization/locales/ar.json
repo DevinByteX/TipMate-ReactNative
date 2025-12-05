@@ -139,7 +139,9 @@
     },
     "languageSelector": {
       "selectLanguage": "اختر اللغة",
-      "currentLanguage": "الحالية: {{language}}"
+      "currentLanguage": "الحالية: {{language}}",
+      "description": "خصص تجربتك: اختر لغتك المفضلة للحصول على تجربة تطبيق أكثر راحة.",
+      "modalDescription": "اختر لغتك المفضلة من القائمة أدناه. بعض اللغات تدعم اتجاه النص من اليمين إلى اليسار (RTL)."
     },
     "tipOptionsEdit": {
       "title": "تخصيص الإكراميات",

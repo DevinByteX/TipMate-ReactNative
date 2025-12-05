@@ -122,7 +122,17 @@ const LanguageListModal = ({
   );
 };
 
-export const StyledLanguageSelector = () => {
+export const StyledLanguageSelector = ({
+  title,
+  description,
+  modalTitle,
+  modalDescription,
+}: {
+  title: string;
+  description: string;
+  modalTitle?: string;
+  modalDescription?: string;
+}) => {
   const { t } = useTranslation();
   const { state, dispatch } = useAppContext();
   const { styles } = useStyles(stylesheet);
@@ -197,7 +207,7 @@ export const StyledLanguageSelector = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{t('screens.settings.customiseLanguage')}</Text>
+      <Text style={styles.titleText}>{title}</Text>
       <Text style={styles.instructionText}>
         <StyledIcons
           type={'FontAwesome6'}
@@ -205,9 +215,7 @@ export const StyledLanguageSelector = () => {
           size={styles.instructionText?.fontSize}
           color={styles.instructionText?.color}
         />
-        {` ${t('components.languageSelector.currentLanguage', {
-          language: currentLangConfig?.nativeName || currentLanguage,
-        })}`}
+        {` ${description}`}
       </Text>
       <View style={styles.mainLanguageChangeContainer}>
         <Text style={styles.languageChangeText}>
@@ -227,10 +235,8 @@ export const StyledLanguageSelector = () => {
         closeButtonPress={() => {
           setModalVisibility(prevState => !prevState);
         }}
-        modalTitle={t('components.languageSelector.selectLanguage')}
-        modalDescription={t('components.languageSelector.currentLanguage', {
-          language: currentLangConfig?.nativeName || currentLanguage,
-        })}
+        modalTitle={modalTitle}
+        modalDescription={modalDescription}
         currentLanguage={currentLanguage}
         onLanguageSelect={handleLanguageChange}
       />

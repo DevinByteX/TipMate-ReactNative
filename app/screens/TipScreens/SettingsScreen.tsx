@@ -54,7 +54,12 @@ const SettingsScreen = () => {
           currencyChangeInstructionText={t('components.currencySelector.tapToSelect')}
           currencyChangeToastMessage={t('components.currencySelector.changeMessage')}
         />
-        <StyledLanguageSelector />
+        <StyledLanguageSelector
+          title={t('screens.settings.customiseLanguage')}
+          description={t('components.languageSelector.description')}
+          modalTitle={t('components.languageSelector.selectLanguage')}
+          modalDescription={t('components.languageSelector.modalDescription')}
+        />
         <StyledDuplicatePreventionSelector
           title={t('screens.settings.duplicatePrevention')}
           description={t('components.duplicatePrevention.description')}
