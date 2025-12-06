@@ -5,6 +5,15 @@ import { StyledIcons } from '@components';
 import { useAppContext } from '@/context/AppContext';
 import Toast from 'react-native-toast-message';
 import { Constants, DuplicatePreventionTimeOption } from '@configs';
+import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
+
+const getDuplicatePreventionLabel = (value: number, t: TFunction) => {
+  if (value === 0) {
+    return t('duplicatePrevention.noPrevention');
+  }
+  return t('duplicatePrevention.minutes', { count: value });
+};
 
 const TimeOptionsList = ({
   timeOptions,
@@ -16,6 +25,7 @@ const TimeOptionsList = ({
   onTimeOptionPress?: (option: DuplicatePreventionTimeOption) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   return (
     <ScrollView
@@ -31,6 +41,8 @@ const TimeOptionsList = ({
             }
           }}
           key={option.value}
+          accessibilityLabel={getDuplicatePreventionLabel(option.value, t)}
+          accessibilityRole="button"
           style={[
             styles.modalContentTimeOptionBarContainer,
             {
@@ -41,7 +53,9 @@ const TimeOptionsList = ({
           ]}
         >
           <View style={styles.timeOptionLabelContainer}>
-            <Text style={styles.modalTimeOptionText}>{option.label}</Text>
+            <Text style={styles.modalTimeOptionText}>
+              {getDuplicatePreventionLabel(option.value, t)}
+            </Text>
           </View>
           {option.value === selectedValue && (
             <StyledIcons
@@ -73,6 +87,7 @@ const TimeOptionsModal = ({
   onTimeOptionPress?: (option: DuplicatePreventionTimeOption) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   return (
     <Modal
@@ -86,13 +101,14 @@ const TimeOptionsModal = ({
           <Text style={styles.modalTitle}>
             {modalTitle}
             <Text style={{ color: theme.colors.card_typography }}>
-              {` · ${
-                Constants.duplicatePreventionTimeOptions.find(opt => opt.value === selectedValue)
-                  ?.label
-              }`}
+              {` · ${getDuplicatePreventionLabel(selectedValue, t)}`}
             </Text>
           </Text>
-          <Pressable onPress={closeButtonPress}>
+          <Pressable
+            onPress={closeButtonPress}
+            accessibilityLabel={t('common.close')}
+            accessibilityRole="button"
+          >
             <StyledIcons
               type={'Ionicons'}
               name={'close'}
@@ -137,13 +153,11 @@ export const StyledDuplicatePreventionSelector = ({
 }) => {
   const { state, dispatch } = useAppContext();
   const { styles } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
   const selectedValue = state.duplicatePreventionWindow;
-  const selectedOption = Constants.duplicatePreventionTimeOptions.find(
-    opt => opt.value === selectedValue,
-  );
 
   return (
     <View style={styles.mainContainer}>
@@ -162,8 +176,10 @@ export const StyledDuplicatePreventionSelector = ({
         <Pressable
           style={styles.selectionBox}
           onPress={() => setModalVisibility(prevState => !prevState)}
+          accessibilityLabel={getDuplicatePreventionLabel(selectedValue, t)}
+          accessibilityRole="button"
         >
-          <Text style={styles.selectionText}>{selectedOption?.label || '15 minutes'}</Text>
+          <Text style={styles.selectionText}>{getDuplicatePreventionLabel(selectedValue, t)}</Text>
         </Pressable>
       </View>
       <TimeOptionsModal
@@ -178,7 +194,7 @@ export const StyledDuplicatePreventionSelector = ({
           dispatch({ type: 'UPDATE_DUPLICATE_PREVENTION_WINDOW', payload: option.value });
           Toast.show({
             type: 'success',
-            text1: `${changeToastMessage} ${option.label}`,
+            text1: `${changeToastMessage} ${getDuplicatePreventionLabel(option.value, t)}`,
             visibilityTime: 2000,
           });
         }}
