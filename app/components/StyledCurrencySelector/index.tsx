@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
@@ -16,6 +17,7 @@ const CurrencySelectiveScroll = ({
   currencySelectiveBarPress?: (currency: CurrencyType) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   return (
     <ScrollView
@@ -46,7 +48,9 @@ const CurrencySelectiveScroll = ({
           ]}
         >
           <View style={styles.currencySelectiveName}>
-            <Text style={styles.modalcurrencyText}>{currency.currencyName}</Text>
+            <Text style={styles.modalcurrencyText}>
+              {t(`currencies.${currency.currencyId}`, { defaultValue: currency.currencyName })}
+            </Text>
           </View>
           <View style={styles.currencySelectiveSign}>
             <Text style={styles.modalcurrencyText}>{currency.currencySign}</Text>
@@ -136,6 +140,7 @@ export const StyledCurrencySelector = ({
 }) => {
   const { state, dispatch } = useAppContext();
   const { styles } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
@@ -175,7 +180,9 @@ export const StyledCurrencySelector = ({
           dispatch({ type: 'UPDATE_CURRENCY_SIGN', payload: currencyObj });
           Toast.show({
             type: 'success',
-            text1: `${currencyChangeToastMessage} ${currencyObj.currencyName} (${currencyObj.currencySign})`,
+            text1: `${currencyChangeToastMessage} ${t(`currencies.${currencyObj.currencyId}`, {
+              defaultValue: currencyObj.currencyName,
+            })} (${currencyObj.currencySign})`,
             visibilityTime: 2000,
           });
         }}
