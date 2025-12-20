@@ -180,10 +180,17 @@ export const StyledLanguageSelector = ({
       const needsRestart = shouldRestartForRTL(language.code);
 
       if (needsRestart) {
-        // Store pending language and show alert for RTL change
-        setPendingLanguage(language);
-        setAlertVisible(true);
+        // Close modal first, then show alert for RTL change
+        setModalVisibility(false);
+        // Small delay to ensure modal closes first
+        setTimeout(() => {
+          setPendingLanguage(language);
+          setAlertVisible(true);
+        }, 300);
       } else {
+        // Close modal
+        setModalVisibility(false);
+
         // No restart needed, just change language
         await changeLanguage(language.code);
 
