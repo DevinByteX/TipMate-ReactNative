@@ -34,14 +34,14 @@
       "tipSaveFailed": "ටිප් ගණනය සුරැකීම අසාර්ථක විය. කරුණාකර නැවත උත්සාහ කරන්න."
     },
     "savedTips": {
-      "title": "ටිප් සාරාංශය",
-      "subtitle": "ඉක්මන් සෙවුම සහ සමාලෝචනය",
+      "title": "TipMate",
+      "subtitle": "සුරකින ලද ටිප්වල් සහ සාරාංශ",
       "searchPlaceholder": "මුදල, ටිප්, දිනය අනුව සොයන්න...",
       "noTips": "තවම සුරකින ලද ටිප් නැත",
       "noTipsDescription": "ඔබගේ සුරකින ලද ටිප් ගණනයන් මෙහි පෙන්වනු ඇත"
     },
     "savedTipDetail": {
-      "title": "ටිප් දළ විసඳුම",
+      "title": "TipMate",
       "subtitle": "ඔබේ ප්‍රතිඵලය ඉක්මනින් බලන්න",
       "totalCost": "මුළු වියදම",
       "perPerson": "එක් අයෙකුට",
@@ -53,7 +53,8 @@
       "tipDeleted": "ටිප් සාර්ථකව මකා දමන ලදී"
     },
     "settings": {
-      "title": "සැකසුම් සහ මනාපයන්",
+      "title": "TipMate",
+      "subtitle": "සැකසුම් සහ මනාපයන්",
       "customiseTips": "ඔබේ ටිප් අභිරුචිකරණය කරන්න",
       "customiseSplits": "ඔබේ බෙදීම් අභිරුචිකරණය කරන්න",
       "customiseCurrency": "ඔබේ මුදල් අභිරුචිකරණය කරන්න",
@@ -85,7 +86,7 @@
       "appVersion": "යෙදුම් අනුවාදය:"
     },
     "licenses": {
-      "title": "බලපත්‍ර",
+      "title": "TipMate",
       "subtitle": "තෙවන පාර්ශ්ව පුස්තකාල",
       "searchPlaceholder": "පුස්තකාල සොයන්න..."
     }
@@ -178,7 +179,7 @@
   },
   "navigation": {
     "tipSplit": "ටිප් සහ බෙදීම",
-    "tipSummary": "ටිප් සාරාංශය",
+    "tipSummary": "සුරකින ලද ටිප්වල් සහ සාරාංශ",
     "settingsPreferences": "සැකසුම් සහ මනාපයන්"
   },
   "share": {

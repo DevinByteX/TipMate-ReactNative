@@ -34,14 +34,14 @@
       "tipSaveFailed": "Échec de l'enregistrement du calcul du pourboire. Veuillez réessayer."
     },
     "savedTips": {
-      "title": "Résumé des Pourboires",
-      "subtitle": "Recherche rapide et révision",
+      "title": "TipMate",
+      "subtitle": "Pourboires enregistrés et résumés",
       "searchPlaceholder": "Rechercher par montant, pourboire, date...",
       "noTips": "Pas encore de pourboires enregistrés",
       "noTipsDescription": "Vos calculs de pourboire enregistrés apparaîtront ici"
     },
     "savedTipDetail": {
-      "title": "Aperçu du Pourboire",
+      "title": "TipMate",
       "subtitle": "Coup d'œil rapide sur votre résultat",
       "totalCost": "COÛT TOTAL",
       "perPerson": "PAR PERSONNE",
@@ -53,7 +53,8 @@
       "tipDeleted": "Pourboire supprimé avec succès"
     },
     "settings": {
-      "title": "Paramètres et Préférences",
+      "title": "TipMate",
+      "subtitle": "Paramètres et Préférences",
       "customiseTips": "PERSONNALISER VOS POURBOIRES",
       "customiseSplits": "PERSONNALISER VOS DIVISIONS",
       "customiseCurrency": "PERSONNALISER VOTRE DEVISE",
@@ -85,7 +86,7 @@
       "appVersion": "Version de l'app :"
     },
     "licenses": {
-      "title": "Licences",
+      "title": "TipMate",
       "subtitle": "Bibliothèques Tierces",
       "searchPlaceholder": "Rechercher des bibliothèques..."
     }
@@ -179,7 +180,7 @@
   },
   "navigation": {
     "tipSplit": "Pourboire et Division",
-    "tipSummary": "Résumé des Pourboires",
+    "tipSummary": "Pourboires enregistrés et résumés",
     "settingsPreferences": "Paramètres et Préférences"
   },
   "share": {

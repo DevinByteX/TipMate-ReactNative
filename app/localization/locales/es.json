@@ -34,14 +34,14 @@
       "tipSaveFailed": "Error al guardar el cálculo de propina. Por favor, inténtalo de nuevo."
     },
     "savedTips": {
-      "title": "Resumen de Propinas",
-      "subtitle": "Búsqueda rápida y revisión",
+      "title": "TipMate",
+      "subtitle": "Propinas guardadas y resúmenes",
       "searchPlaceholder": "Buscar por monto, propina, fecha...",
       "noTips": "Aún no hay propinas guardadas",
       "noTipsDescription": "Tus cálculos de propina guardados aparecerán aquí"
     },
     "savedTipDetail": {
-      "title": "Resumen de Propina",
+      "title": "TipMate",
       "subtitle": "Vista rápida de tu resultado",
       "totalCost": "COSTO TOTAL",
       "perPerson": "POR PERSONA",
@@ -53,7 +53,8 @@
       "tipDeleted": "Propina eliminada exitosamente"
     },
     "settings": {
-      "title": "Ajustes y Preferencias",
+      "title": "TipMate",
+      "subtitle": "Ajustes y Preferencias",
       "customiseTips": "PERSONALIZA TUS PROPINAS",
       "customiseSplits": "PERSONALIZA TUS DIVISIONES",
       "customiseCurrency": "PERSONALIZA TU MONEDA",
@@ -85,7 +86,7 @@
       "appVersion": "Versión de la app:"
     },
     "licenses": {
-      "title": "Licencias",
+      "title": "TipMate",
       "subtitle": "Bibliotecas de Terceros",
       "searchPlaceholder": "Buscar bibliotecas..."
     }
@@ -179,7 +180,7 @@
   },
   "navigation": {
     "tipSplit": "Propina y División",
-    "tipSummary": "Resumen de Propinas",
+    "tipSummary": "Propinas guardadas y resúmenes",
     "settingsPreferences": "Ajustes y Preferencias"
   },
   "share": {

@@ -34,14 +34,14 @@
       "tipSaveFailed": "فشل في حفظ حساب الإكرامية. يرجى المحاولة مرة أخرى."
     },
     "savedTips": {
-      "title": "ملخص الإكراميات",
-      "subtitle": "بحث سريع ومراجعة",
+      "title": "TipMate",
+      "subtitle": "الإكراميات المحفوظة والملخصات",
       "searchPlaceholder": "البحث حسب المبلغ، الإكرامية، التاريخ...",
       "noTips": "لا توجد إكراميات محفوظة بعد",
       "noTipsDescription": "ستظهر حسابات الإكراميات المحفوظة هنا"
     },
     "savedTipDetail": {
-      "title": "نظرة عامة على الإكرامية",
+      "title": "TipMate",
       "subtitle": "نظرة سريعة على نتيجتك",
       "totalCost": "التكلفة الإجمالية",
       "perPerson": "لكل شخص",
@@ -53,7 +53,8 @@
       "tipDeleted": "تم حذف الإكرامية بنجاح"
     },
     "settings": {
-      "title": "الإعدادات والتفضيلات",
+      "title": "TipMate",
+      "subtitle": "الإعدادات والتفضيلات",
       "customiseTips": "تخصيص الإكراميات",
       "customiseSplits": "تخصيص التقسيمات",
       "customiseCurrency": "تخصيص العملة",
@@ -85,7 +86,7 @@
       "appVersion": "إصدار التطبيق:"
     },
     "licenses": {
-      "title": "التراخيص",
+      "title": "TipMate",
       "subtitle": "مكتبات الطرف الثالث",
       "searchPlaceholder": "البحث في المكتبات..."
     }
@@ -178,7 +179,7 @@
   },
   "navigation": {
     "tipSplit": "الإكرامية والتقسيم",
-    "tipSummary": "ملخص الإكراميات",
+    "tipSummary": "الإكراميات المحفوظة والملخصات",
     "settingsPreferences": "الإعدادات والتفضيلات"
   },
   "share": {

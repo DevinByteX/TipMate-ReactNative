@@ -18,8 +18,8 @@ const SettingsScreen = () => {
   return (
     <>
       <StyledHeader
-        headerTitle={t('screens.home.title')}
-        headerSubTitle={t('screens.settings.title')}
+        headerTitle={t('screens.settings.title')}
+        headerSubTitle={t('screens.settings.subtitle')}
         headerRightIconVisibilty={false}
       />
       <ScrollView

@@ -34,14 +34,14 @@
       "tipSaveFailed": "Failed to save tip calculation. Please try again."
     },
     "savedTips": {
-      "title": "Tip Summary",
-      "subtitle": "Quick search and review",
+      "title": "TipMate",
+      "subtitle": "Saved Tips & summaries",
       "searchPlaceholder": "Search by amount, tip, date...",
       "noTips": "No saved tips yet",
       "noTipsDescription": "Your saved tip calculations will appear here"
     },
     "savedTipDetail": {
-      "title": "Tip Overview",
+      "title": "TipMate",
       "subtitle": "Quick glance at your result",
       "totalCost": "TOTAL COST",
       "perPerson": "PER PERSON",
@@ -53,7 +53,8 @@
       "tipDeleted": "Tip deleted successfully"
     },
     "settings": {
-      "title": "Settings & Preferences",
+      "title": "TipMate",
+      "subtitle": "Settings & Preferences",
       "customiseTips": "CUSTOMISE YOUR TIPS",
       "customiseSplits": "CUSTOMISE YOUR SPLITS",
       "customiseCurrency": "CUSTOMISE YOUR CURRENCY",
@@ -85,7 +86,7 @@
       "appVersion": "App version:"
     },
     "licenses": {
-      "title": "Licenses",
+      "title": "TipMate",
       "subtitle": "Third-Party Libraries",
       "searchPlaceholder": "Search libraries..."
     }
@@ -179,7 +180,7 @@
   },
   "navigation": {
     "tipSplit": "Tip & Split",
-    "tipSummary": "Tip Summary",
+    "tipSummary": "Saved Tips & summaries",
     "settingsPreferences": "Settings & Preferences"
   },
   "share": {
