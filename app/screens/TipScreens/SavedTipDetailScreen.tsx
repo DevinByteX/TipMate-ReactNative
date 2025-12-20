@@ -139,6 +139,7 @@ const SavedTipDetailScreen = () => {
           titleText={t('screens.savedTipDetail.totalCost')}
           description={t('components.billBox.savedTotalDescription')}
           currencySymbol={tip.currencySymbol}
+          totalText={t('components.billBox.total')}
           subTotalText={t('components.billBox.subtotal')}
           tipText={t('components.billBox.tip')}
           totalAmount={tip.total.toFixed(2)}
@@ -155,7 +156,9 @@ const SavedTipDetailScreen = () => {
             titleText={t('screens.savedTipDetail.perPerson')}
             description={t('components.billBox.savedPerPersonDescription')}
             currencySymbol={tip.currencySymbol}
+            totalText={t('components.billBox.total')}
             subTotalText={t('components.billBox.subtotal')}
+            tipText={t('components.billBox.tip')}
             totalAmount={tip.perPerson.total.toFixed(2)}
             subTotalAmount={tip.perPerson.amount.toFixed(2)}
             totalTipAmount={tip.perPerson.tip.toFixed(2)}

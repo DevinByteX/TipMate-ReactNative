@@ -174,6 +174,7 @@ const HomeTipScreen = () => {
           titleText={t('screens.home.totalCost')}
           description={t('components.billBox.totalDescription')}
           currencySymbol={currencySymbol}
+          totalText={t('components.billBox.total')}
           subTotalText={t('components.billBox.subtotal')}
           tipText={t('components.billBox.tip')}
           totalAmount={billValues?.overall?.total}
@@ -213,7 +214,9 @@ const HomeTipScreen = () => {
             titleText={t('screens.home.perPerson')}
             description={t('components.billBox.perPersonDescription')}
             currencySymbol={currencySymbol}
+            totalText={t('components.billBox.total')}
             subTotalText={t('components.billBox.subtotal')}
+            tipText={t('components.billBox.tip')}
             totalAmount={billValues?.perPerson?.total}
             subTotalAmount={billValues?.perPerson?.subtotal}
             totalTipAmount={billValues?.perPerson?.tip}

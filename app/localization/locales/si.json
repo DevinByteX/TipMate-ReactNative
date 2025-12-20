@@ -93,7 +93,7 @@
   "components": {
     "billBox": {
       "totalAmount": "මුළු මුදල",
-      "total": "මුළු එක",
+      "total": "මුළු එකතුව",
       "subtotal": "උප එකතුව",
       "tip": "ටිප්",
       "perPerson": "එක් අයෙකුට",
