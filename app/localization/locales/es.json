@@ -11,7 +11,14 @@
     "error": "Error",
     "viewDetails": "Ver Detalles",
     "yes": "Sí",
-    "no": "No"
+    "no": "No",
+    "continue": "Continuar"
+  },
+  "externalLink": {
+    "title": "Abrir Enlace Externo",
+    "message": "Estás a punto de abrir un sitio web externo. ¿Deseas continuar?",
+    "openText": "Continuar",
+    "cancelText": "Cancelar"
   },
   "screens": {
     "home": {

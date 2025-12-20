@@ -11,7 +11,14 @@
     "error": "خطأ",
     "viewDetails": "عرض التفاصيل",
     "yes": "نعم",
-    "no": "لا"
+    "no": "لا",
+    "continue": "متابعة"
+  },
+  "externalLink": {
+    "title": "فتح رابط خارجي",
+    "message": "أنت على وشك فتح موقع ويب خارجي. هل تريد المتابعة؟",
+    "openText": "متابعة",
+    "cancelText": "إلغاء"
   },
   "screens": {
     "home": {

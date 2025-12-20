@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Linking } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 export type ExternalLinkAlertConfig = {
   title?: string;
@@ -8,14 +9,16 @@ export type ExternalLinkAlertConfig = {
   cancelText?: string;
 };
 
-const defaultConfig: Required<ExternalLinkAlertConfig> = {
-  title: 'Open External Link',
-  message: 'You are about to open an external website. Do you want to continue?',
-  openText: 'Continue',
-  cancelText: 'Cancel',
-};
-
 export const useExternalLinkAlert = (config?: ExternalLinkAlertConfig) => {
+  const { t } = useTranslation();
+
+  const defaultConfig: Required<ExternalLinkAlertConfig> = {
+    title: t('externalLink.title'),
+    message: t('externalLink.message'),
+    openText: t('externalLink.openText'),
+    cancelText: t('externalLink.cancelText'),
+  };
+
   const baseConfig = { ...defaultConfig, ...config };
   const [alertState, setAlertState] = useState<{
     visible: boolean;
