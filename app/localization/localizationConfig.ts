@@ -25,7 +25,7 @@ export const SUPPORTED_LANGUAGES: LanguageConfig[] = [
         isRTL: false,
         fontFamily: 'NotoSansSinhala',
     },
-    { code: 'ar', name: 'Arabic', nativeName: 'العربية', isRTL: true },
+    // { code: 'ar', name: 'Arabic', nativeName: 'العربية', isRTL: true },
 ];
 
 /**
