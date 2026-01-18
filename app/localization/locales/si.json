@@ -104,6 +104,7 @@
       "savedPerPersonDescription": "බිල් සියලු දෙනා අතර බෙදූ ආකාරය මෙන්න."
     },
     "billInput": {
+      "placeholder": "0.00",
       "description": "බිල්පතේ මුළු වටිනාකම මෙහි ඇතුළත් කරන්න."
     },
     "tipInput": {

@@ -104,6 +104,7 @@
       "savedPerPersonDescription": "هذه هي الطريقة التي تم بها تقسيم الفاتورة بين الجميع."
     },
     "billInput": {
+      "placeholder": "0.00",
       "description": "أدخل قيمة الفاتورة هنا، ولنبدأ!"
     },
     "tipInput": {
