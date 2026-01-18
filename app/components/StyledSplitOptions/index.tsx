@@ -69,6 +69,8 @@ const SplitCustomCapsule = ({
             color: TextColor,
           },
         ]}
+        adjustsFontSizeToFit={true}
+        numberOfLines={1}
       >
         {`${textValue} `}
         <StyledIcons
@@ -266,6 +268,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
   },
   sliderContainer: {
     marginTop: (UnistylesRuntime.screen.height * 1) / 100,
