@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
-import { StyledIcons } from '@components';
 
 type SharePreviewModalProps = {
   isPreviewVisible: boolean;
