@@ -23,27 +23,27 @@
   "screens": {
     "home": {
       "title": "TipMate",
-      "tagline": "Propinas Inteligentes, Vida Fácil",
-      "billAmount": "MONTO DE LA CUENTA",
+      "tagline": "Propinas Inteligentes, Vida Sencilla",
+      "billAmount": "TOTAL DE LA CUENTA",
       "selectTip": "SELECCIONAR PROPINA",
-      "totalCost": "COSTO TOTAL",
+      "totalCost": "TOTAL A PAGAR",
       "roundTotal": "REDONDEAR TOTAL",
       "splitCount": "DIVIDIR ENTRE",
       "perPerson": "POR PERSONA",
       "tipSaved": "¡Cálculo de propina guardado exitosamente!",
-      "tipSaveFailed": "Error al guardar el cálculo de propina. Por favor, inténtalo de nuevo."
+      "tipSaveFailed": "Error al guardar el cálculo. Por favor, inténtalo de nuevo."
     },
     "savedTips": {
       "title": "TipMate",
-      "subtitle": "Propinas guardadas y resúmenes",
+      "subtitle": "Historial de propinas y resúmenes",
       "searchPlaceholder": "Buscar por monto, propina, fecha...",
       "noTips": "Aún no hay propinas guardadas",
-      "noTipsDescription": "Tus cálculos de propina guardados aparecerán aquí"
+      "noTipsDescription": "Tus cálculos guardados aparecerán aquí"
     },
     "savedTipDetail": {
       "title": "TipMate",
-      "subtitle": "Vista rápida de tu resultado",
-      "totalCost": "COSTO TOTAL",
+      "subtitle": "Resumen rápido del resultado",
+      "totalCost": "TOTAL A PAGAR",
       "perPerson": "POR PERSONA",
       "tipPercentage": "Porcentaje de Propina",
       "deleteTip": "Eliminar Propina",
@@ -55,12 +55,12 @@
     "settings": {
       "title": "TipMate",
       "subtitle": "Ajustes y Preferencias",
-      "customiseTips": "PERSONALIZA TUS PROPINAS",
-      "customiseSplits": "PERSONALIZA TUS DIVISIONES",
-      "customiseCurrency": "PERSONALIZA TU MONEDA",
-      "customiseLanguage": "PERSONALIZA TU IDIOMA",
+      "customiseTips": "PERSONALIZAR PROPINAS",
+      "customiseSplits": "PERSONALIZAR DIVISIONES",
+      "customiseCurrency": "PERSONALIZAR MONEDA",
+      "customiseLanguage": "PERSONALIZAR IDIOMA",
       "duplicatePrevention": "PREVENCIÓN DE DUPLICADOS",
-      "customiseTheme": "PERSONALIZA TU TEMA",
+      "customiseTheme": "PERSONALIZAR TEMA",
       "confirmReset": "Confirmar Restablecimiento",
       "resetMessage": "¿Estás seguro de que quieres restablecer los valores predeterminados?",
       "resetSuccess": "Restablecimiento exitoso"
@@ -68,20 +68,20 @@
     "appInfo": {
       "title": "Acerca de TipMate",
       "ourStory": "Nuestra Historia y Visión",
-      "description": "TipMate es una aplicación inteligente de calculadora de propinas creada para hacer que dar propinas sea más fácil y transparente. Ya sea que estés cenando fuera, en la peluquería o en cualquier servicio donde se acostumbra dar propina, TipMate hace que dividir cuentas y calcular propinas sea muy fácil.",
-      "story": "TipMate es una aplicación inteligente de calculadora de propinas. Fue creada para simplificar el proceso de dar propinas y hacerlo agradable para todos.",
+      "description": "TipMate es una calculadora de propinas inteligente diseñada para facilitar y transparentar el proceso. Ya sea en una cena, en la peluquería o en cualquier lugar donde se acostumbre dar propina, TipMate hace que dividir la cuenta y calcular la propina sea pan comido.",
+      "story": "TipMate es una calculadora de propinas inteligente. Fue creada para simplificar el proceso de dar propinas y hacerlo agradable para todos.",
       "developerLabel": "Desarrollador",
       "developer": "DevinForge Labs",
       "support": "Soporte",
       "contactSupport": "Contactar Soporte",
       "contactDescription": "Contáctanos para soporte y comentarios",
       "contactConfirmTitle": "Contactar Soporte",
-      "contactConfirmMessage": "Estás a punto de abrir tu aplicación de correo predeterminada para contactar a nuestro equipo de soporte. ¿Deseas continuar?",
+      "contactConfirmMessage": "Estás a punto de abrir tu aplicación de correo para contactar a nuestro equipo de soporte. ¿Deseas continuar?",
       "contactConfirmButtonContinue": "Continuar",
       "acknowledgements": "Reconocimientos",
       "thirdPartyLibraries": "Bibliotecas de Terceros",
       "feedbackTitle": "Tu Opinión Importa",
-      "feedbackDescription": "Tus comentarios son importantes para nosotros para hacer TipMate mejor para ti. Repórtanos cualquier error en nuestra aplicación o cualquier función que te gustaría que agreguemos en el futuro.",
+      "feedbackDescription": "Tus comentarios son importantes para mejorar TipMate. Repórtanos cualquier error o función que te gustaría ver en el futuro.",
       "privacyPolicy": "Política de Privacidad",
       "appVersion": "Versión de la app:"
     },
@@ -93,33 +93,33 @@
   },
   "components": {
     "billBox": {
-      "totalAmount": "MONTO TOTAL",
+      "totalAmount": "TOTAL",
       "total": "TOTAL",
       "subtotal": "SUBTOTAL",
       "tip": "PROPINA",
       "perPerson": "POR PERSONA",
-      "totalDescription": "¡Voilà! Aquí está tu monto final, con la propina y cualquier redondeo ya incluidos.",
-      "perPersonDescription": "¿Curioso por la división? Aquí está la cantidad que cada persona aportará.",
-      "savedTotalDescription": "Aquí está el desglose completo de tu cálculo de propina guardado.",
+      "totalDescription": "¡Listo! Aquí tienes el monto final, con propina y redondeo incluidos.",
+      "perPersonDescription": "¿Curioso por la división? Esto es lo que le toca a cada uno.",
+      "savedTotalDescription": "Aquí está el desglose completo de tu cálculo guardado.",
       "savedPerPersonDescription": "Así es como se dividió la cuenta entre todos."
     },
     "billInput": {
       "placeholder": "0.00",
-      "description": "Ingresa el monto total de la cuenta aquí - ¡Comencemos!"
+      "description": "Ingresa el total de la cuenta aquí, ¡empecemos!"
     },
     "tipInput": {
-      "description": "¿Te sientes generoso? Elige tu porcentaje de propina y observa la magia."
+      "description": "¿Te sientes generoso? Elige el porcentaje y mira la magia."
     },
     "roundOptions": {
       "roundValue": "REDONDEAR VALOR",
       "no": "NO",
       "up": "ARRIBA",
       "down": "ABAJO",
-      "description": "¿Prefieres un número redondo? Redondea hacia arriba o abajo para que tu total sea perfecto."
+      "description": "¿Prefieres números redondos? Ajusta hacia arriba o abajo para un total exacto."
     },
     "sharePreview": {
       "title": "Vista Previa",
-      "subtitle": "Revisa tu resumen de propina antes de compartir",
+      "subtitle": "Revisa el resumen antes de compartir",
       "shareAsText": "Compartir como Texto",
       "shareAsPDF": "Compartir como PDF",
       "cancel": "Cancelar"
@@ -136,12 +136,12 @@
     "splitOptions": {
       "customSplit": "Personalizado",
       "people": "{{count}} personas",
-      "description": "¿Cenando con amigos? Dinos cuántos son y dividiremos la cuenta por ti."
+      "description": "¿Cenando con amigos? Dinos cuántos son y dividimos la cuenta."
     },
     "currencySelector": {
       "selectCurrency": "Seleccionar Moneda",
       "searchCurrency": "Buscar moneda...",
-      "description": "Personaliza Tu Moneda: Elige tu moneda preferida para una experiencia de facturación más fluida.",
+      "description": "Personaliza tu moneda: Elige tu favorita para una mejor experiencia.",
       "modalDescription": "¡Elige la moneda que mejor te funcione y nosotros nos encargamos del resto!",
       "tapToSelect": "Toca para seleccionar una moneda",
       "changeMessage": "La moneda ha sido cambiada a"
@@ -149,38 +149,38 @@
     "languageSelector": {
       "selectLanguage": "Seleccionar Idioma",
       "currentLanguage": "Actual: {{language}}",
-      "description": "Personaliza Tu Experiencia: Elige tu idioma preferido para una experiencia de aplicación más cómoda.",
+      "description": "Personaliza tu experiencia: Elige el idioma con el que te sientas más cómodo.",
       "modalDescription": "Selecciona tu idioma preferido de la lista a continuación. Algunos idiomas admiten la dirección de texto de derecha a izquierda (RTL)."
     },
     "tipOptionsEdit": {
-      "title": "PERSONALIZA TUS PROPINAS",
-      "description": "Personaliza Tus Propinas: Ajusta tus propinas predeterminadas escribiendo en los campos. ¡Es rápido y fácil!",
+      "title": "PERSONALIZAR PROPINAS",
+      "description": "Personaliza tus propinas: Ajusta los valores predeterminados. ¡Es rápido y fácil!",
       "resetConfirmMessage": "¿Estás seguro de que quieres restablecer todas tus opciones de propina? ¡Este cambio no se puede deshacer!",
-      "resetSuccess": "¡Opciones de propina actualizadas! Estás listo con los valores predeterminados"
+      "resetSuccess": "¡Opciones de propina actualizadas! Valores predeterminados restaurados."
     },
     "splitOptionsEdit": {
-      "title": "PERSONALIZA TUS DIVISIONES",
-      "description": "Configura Tus Divisiones: Ingresa tus preferencias de división en los campos para personalizar cómo se divide la cuenta",
+      "title": "PERSONALIZAR DIVISIONES",
+      "description": "Configura las divisiones: Ingresa tus preferencias para personalizar cómo dividir la cuenta.",
       "resetConfirmMessage": "¿Estás seguro de que quieres restablecer todas tus opciones de división? ¡Este cambio no se puede deshacer!",
-      "resetSuccess": "¡Opciones de división actualizadas! Estás listo con los valores predeterminados"
+      "resetSuccess": "¡Opciones de división actualizadas! Valores predeterminados restaurados."
     },
     "duplicatePrevention": {
-      "description": "Establece cuánto tiempo esperar antes de permitir que el mismo cálculo de propina se guarde nuevamente.",
+      "description": "Establece cuánto tiempo esperar antes de permitir guardar el mismo cálculo nuevamente.",
       "timeWindow": "Ventana de tiempo",
       "modalTitle": "PREVENCIÓN DE DUPLICADOS",
-      "modalDescription": "Selecciona la ventana de tiempo para prevenir guardados duplicados de propinas",
+      "modalDescription": "Selecciona la ventana de tiempo para prevenir guardados duplicados",
       "changeMessage": "Ventana de prevención de duplicados establecida en"
     },
     "themeBox": {
-      "title": "PERSONALIZA TU TEMA",
+      "title": "PERSONALIZAR TEMA",
       "darkModeLabel": "Alternar Modo Oscuro",
-      "description": "¡Cambia Tu Estilo: Elige entre nuestros temas vibrantes para hacer tu experiencia de aplicación única!",
+      "description": "¡Cambia tu estilo! Elige entre nuestros temas vibrantes para una experiencia única.",
       "darkModeDescription": "Disfruta de una vista elegante y cómoda habilitando el Modo Oscuro."
     }
   },
   "navigation": {
     "tipSplit": "Propina y División",
-    "tipSummary": "Propinas guardadas y resúmenes",
+    "tipSummary": "Historial y Resúmenes",
     "settingsPreferences": "Ajustes y Preferencias"
   },
   "share": {
@@ -188,21 +188,21 @@
     "billAmount": "Monto de la Cuenta:",
     "tipPercentage": "Porcentaje de Propina:",
     "tipAmount": "Monto de Propina:",
-    "totalAmount": "Monto Total:",
+    "totalAmount": "Total a Pagar:",
     "splitAmong": "Dividido Entre:",
     "persons": "persona(s)",
     "subtotalPerPerson": "Subtotal por persona:",
     "tipPerPerson": "Propina por persona:",
     "totalPerPerson": "Total por persona:",
     "sharedVia": "Compartido vía TipMate",
-    "shareYourTip": "Comparte tu resumen de propina",
+    "shareYourTip": "Comparte tu resumen",
     "tipMateSummary": "Resumen de TipMate",
     "receipt": "Recibo #",
     "date": "Fecha:",
     "time": "Hora:",
     "pdf": {
       "thankYou": "Gracias",
-      "tipSummaryDescription": "Tu resumen de cálculo de propina",
+      "tipSummaryDescription": "Resumen de tu cálculo",
       "amount": "Monto",
       "billDetails": "Detalles de la Cuenta",
       "splitDetails": "Detalles de División",
@@ -210,10 +210,10 @@
     }
   },
   "messages": {
-    "restartRequired": "Se requiere reiniciar la aplicación para aplicar los cambios de diseño. Por favor, cierra y vuelve a abrir la aplicación.",
+    "restartRequired": "Se requiere reiniciar la aplicación para aplicar los cambios. Por favor, cierra y vuelve a abrir la app.",
     "restartTitle": "Reinicio Requerido",
     "languageChanged": "Idioma cambiado exitosamente",
-    "languageChangeRTL": "Cambiar a/desde árabe requiere reiniciar la aplicación para un diseño adecuado. Por favor, cierra y vuelve a abrir la aplicación.",
+    "languageChangeRTL": "Cambiar a/desde árabe requiere reiniciar la aplicación para un diseño adecuado. Por favor, cierra y vuelve a abrir la app.",
     "networkError": "Error de red. Por favor, inténtalo de nuevo.",
     "unknownError": "Ocurrió un error desconocido.",
     "clearAllTitle": "Borrar Todas las Propinas",

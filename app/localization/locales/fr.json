@@ -23,12 +23,12 @@
   "screens": {
     "home": {
       "title": "TipMate",
-      "tagline": "Pourboires Intelligents, Vie Facile",
-      "billAmount": "MONTANT DE LA NOTE",
+      "tagline": "Pourboires malins, vie facile",
+      "billAmount": "MONTANT DE L'ADDITION",
       "selectTip": "SÉLECTIONNER LE POURBOIRE",
-      "totalCost": "COÛT TOTAL",
+      "totalCost": "TOTAL À PAYER",
       "roundTotal": "ARRONDIR LE TOTAL",
-      "splitCount": "DIVISER ENTRE",
+      "splitCount": "PARTAGER AVEC",
       "perPerson": "PAR PERSONNE",
       "tipSaved": "Calcul du pourboire enregistré avec succès !",
       "tipSaveFailed": "Échec de l'enregistrement du calcul du pourboire. Veuillez réessayer."
@@ -43,7 +43,7 @@
     "savedTipDetail": {
       "title": "TipMate",
       "subtitle": "Coup d'œil rapide sur votre résultat",
-      "totalCost": "COÛT TOTAL",
+      "totalCost": "TOTAL À PAYER",
       "perPerson": "PAR PERSONNE",
       "tipPercentage": "Pourcentage du Pourboire",
       "deleteTip": "Supprimer le Pourboire",
@@ -68,8 +68,8 @@
     "appInfo": {
       "title": "À Propos de TipMate",
       "ourStory": "Notre Histoire et Vision",
-      "description": "TipMate est une application intelligente de calcul de pourboire créée pour rendre les pourboires plus faciles et transparents. Que vous dîniez au restaurant, chez le coiffeur ou tout autre service où le pourboire est de coutume, TipMate rend le partage de l'addition et le calcul des pourboires très facile.",
-      "story": "TipMate est une application intelligente de calcul de pourboire. Elle a été créée pour simplifier le processus de pourboire et le rendre agréable pour tous.",
+      "description": "TipMate est l'application intelligente qui simplifie vos calculs de pourboire. Au restaurant, chez le coiffeur ou ailleurs, TipMate rend le partage de l'addition et le calcul du pourboire un jeu d'enfant.",
+      "story": "Née d'une volonté de simplifier la vie, TipMate transforme le casse-tête du pourboire en une expérience fluide et agréable pour tous.",
       "developerLabel": "Développeur",
       "developer": "DevinForge Labs",
       "support": "Support",
@@ -93,7 +93,7 @@
   },
   "components": {
     "billBox": {
-      "totalAmount": "MONTANT TOTAL",
+      "totalAmount": "TOTAL À PAYER",
       "total": "TOTAL",
       "subtotal": "SOUS-TOTAL",
       "tip": "POURBOIRE",
@@ -105,10 +105,10 @@
     },
     "billInput": {
       "placeholder": "0.00",
-      "description": "Entrez le montant total de la facture ici - commençons!"
+      "description": "Saisissez le montant total ici, et c'est parti !"
     },
     "tipInput": {
-      "description": "Vous vous sentez généreux ? Choisissez votre pourcentage de pourboire et regardez la magie opérer."
+      "description": "D'humeur généreuse ? Choisissez un pourcentage et voyez la magie."
     },
     "roundOptions": {
       "roundValue": "ARRONDIR LA VALEUR",
@@ -118,10 +118,10 @@
       "description": "Vous préférez un chiffre rond ? Arrondissez vers le haut ou le bas pour un total parfait."
     },
     "sharePreview": {
-      "title": "Aperçu du Partage",
+      "title": "Aperçu",
       "subtitle": "Vérifiez votre résumé de pourboire avant de partager",
-      "shareAsText": "Partager en Texte",
-      "shareAsPDF": "Partager en PDF",
+      "shareAsText": "Partager (Texte)",
+      "shareAsPDF": "Partager (PDF)",
       "cancel": "Annuler"
     },
     "drawer": {
@@ -136,7 +136,7 @@
     "splitOptions": {
       "customSplit": "Personnalisé",
       "people": "{{count}} personnes",
-      "description": "Vous dînez entre amis ? Indiquez-nous combien vous êtes et nous partagerons l'addition."
+      "description": "Vous dînez entre amis ? Dites-nous combien vous êtes et on divise."
     },
     "currencySelector": {
       "selectCurrency": "Sélectionner la Devise",
@@ -185,11 +185,11 @@
   },
   "share": {
     "tipSummary": "Résumé du Pourboire",
-    "billAmount": "Montant de la Note :",
+    "billAmount": "Montant de l'Addition :",
     "tipPercentage": "Pourcentage du Pourboire :",
     "tipAmount": "Montant du Pourboire :",
     "totalAmount": "Montant Total :",
-    "splitAmong": "Divisé Entre :",
+    "splitAmong": "Partagé Avec :",
     "persons": "personne(s)",
     "subtotalPerPerson": "Sous-total par personne :",
     "tipPerPerson": "Pourboire par personne :",
