@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { StyledIcons } from '@components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 
 export type PercentageFilter = 'all' | '0-10' | '10-15' | '15-20' | '20+';
 export type PeopleFilter = 'all' | '1' | '2-4' | '5+';
@@ -31,6 +32,7 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
   hasActiveFilters,
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   if (!visible) return null;
 
@@ -64,7 +66,7 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
             size={16}
             color={theme.colors.accent}
           />
-          <Text style={styles.filterSectionTitle}>Tip %</Text>
+          <Text style={styles.filterSectionTitle}>{t('filters.tipPercent')}</Text>
         </View>
         <ScrollView
           horizontal
@@ -72,7 +74,7 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
           contentContainerStyle={styles.filterScrollContent}
         >
           <FilterCapsule
-            label="All"
+            label={t('filters.all')}
             isActive={percentageFilter === 'all'}
             onPress={() => onPercentageFilterChange('all')}
           />
@@ -103,7 +105,7 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
       <View style={styles.filterSection}>
         <View style={styles.filterHeader}>
           <StyledIcons type={'Ionicons'} name={'people'} size={16} color={theme.colors.accent} />
-          <Text style={styles.filterSectionTitle}>People</Text>
+          <Text style={styles.filterSectionTitle}>{t('filters.people')}</Text>
         </View>
         <ScrollView
           horizontal
@@ -111,22 +113,22 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
           contentContainerStyle={styles.filterScrollContent}
         >
           <FilterCapsule
-            label="All"
+            label={t('filters.all')}
             isActive={peopleFilter === 'all'}
             onPress={() => onPeopleFilterChange('all')}
           />
           <FilterCapsule
-            label="Solo (1)"
+            label={t('filters.solo')}
             isActive={peopleFilter === '1'}
             onPress={() => onPeopleFilterChange('1')}
           />
           <FilterCapsule
-            label="2-4 People"
+            label={t('filters.twoPlusToFour')}
             isActive={peopleFilter === '2-4'}
             onPress={() => onPeopleFilterChange('2-4')}
           />
           <FilterCapsule
-            label="5+ People"
+            label={t('filters.fivePlus')}
             isActive={peopleFilter === '5+'}
             onPress={() => onPeopleFilterChange('5+')}
           />
@@ -142,7 +144,7 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
             size={16}
             color={theme.colors.accent}
           />
-          <Text style={styles.filterSectionTitle}>Date</Text>
+          <Text style={styles.filterSectionTitle}>{t('filters.date')}</Text>
         </View>
         <ScrollView
           horizontal
@@ -150,22 +152,22 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
           contentContainerStyle={styles.filterScrollContent}
         >
           <FilterCapsule
-            label="All Time"
+            label={t('filters.allTime')}
             isActive={dateFilter === 'all'}
             onPress={() => onDateFilterChange('all')}
           />
           <FilterCapsule
-            label="Today"
+            label={t('filters.today')}
             isActive={dateFilter === 'today'}
             onPress={() => onDateFilterChange('today')}
           />
           <FilterCapsule
-            label="This Week"
+            label={t('filters.thisWeek')}
             isActive={dateFilter === 'week'}
             onPress={() => onDateFilterChange('week')}
           />
           <FilterCapsule
-            label="This Month"
+            label={t('filters.thisMonth')}
             isActive={dateFilter === 'month'}
             onPress={() => onDateFilterChange('month')}
           />
@@ -181,7 +183,7 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
             size={16}
             color={theme.colors.accent}
           />
-          <Text style={styles.resetFiltersText}>Reset Filters</Text>
+          <Text style={styles.resetFiltersText}>{t('filters.resetFilters')}</Text>
         </Pressable>
       )}
     </View>

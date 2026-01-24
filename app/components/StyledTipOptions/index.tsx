@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 import { useAppContext } from '@/context/AppContext';
 
@@ -69,6 +70,8 @@ const TipPercentageCustomCapsule = ({
             color: TextColor,
           },
         ]}
+        adjustsFontSizeToFit={true}
+        numberOfLines={1}
       >
         {`${textValue} `}
         <StyledIcons
@@ -92,6 +95,7 @@ export const StyledTipOptions = ({
   onSelectedTipValue?: (value: number) => void;
 }) => {
   const { state } = useAppContext();
+  const { t } = useTranslation();
 
   const defaultTipValue = 5;
 
@@ -173,7 +177,7 @@ export const StyledTipOptions = ({
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <TipPercentageCustomCapsule
-                textValue={customSliderVisible ? `Set Value` : `Custom`}
+                textValue={customSliderVisible ? t('buttons.setValue') : t('buttons.custom')}
                 active
                 onCustomTipPress={() => {
                   setCustomSliderVisible(!customSliderVisible);
@@ -272,6 +276,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
   },
   sliderContainer: {
     marginTop: (UnistylesRuntime.screen.height * 1) / 100,

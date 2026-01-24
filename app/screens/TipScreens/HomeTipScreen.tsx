@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { ScrollView, Platform } from 'react-native';
+import { useTranslation } from 'react-i18next';
 // custom component
 import {
   StyledBillBox,
@@ -25,6 +26,7 @@ import { useAppContext } from '@/context/AppContext';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   const [userInputBillAmount, setUserInputBillAmount] = useState<number>(0);
   const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(5);
@@ -135,8 +137,8 @@ const HomeTipScreen = () => {
   return (
     <>
       <StyledHeader
-        headerTitle={'TipMate'}
-        headerSubTitle={'Smart Tips, Easy Living'}
+        headerTitle={t('screens.home.title')}
+        headerSubTitle={t('screens.home.tagline')}
         headerRightIconVisibilty={false}
       />
       <ScrollView
@@ -148,8 +150,8 @@ const HomeTipScreen = () => {
       >
         {/* Total Amount container */}
         <StyledTotalAmountInput
-          titleText={'BILL AMOUNT'}
-          description={'Pop in the total bill amount here – let’s get started!'}
+          titleText={t('screens.home.billAmount')}
+          description={t('components.billInput.description')}
           currencySymbol={currencySymbol}
           returnKeyType={'done'}
           keyboardType={Platform.OS === 'ios' ? 'decimal-pad' : 'number-pad'}
@@ -157,8 +159,8 @@ const HomeTipScreen = () => {
         />
         {/* Tip Percentage Options Container */}
         <StyledTipOptions
-          titleText={'SELECT TIP'}
-          description={'Feeling generous? Choose your tip percentage and watch the magic happen.'}
+          titleText={t('screens.home.selectTip')}
+          description={t('components.tipInput.description')}
           onSelectedTipValue={percentage => {
             if (percentage === 0) {
               setUserInputRound(RoundingMethod.NO);
@@ -169,11 +171,12 @@ const HomeTipScreen = () => {
         {/* Total Bill Container */}
         <StyledBillBox
           titleVisibility
-          titleText={'TOTAL COST'}
-          description={`Voilà! Here's your final amount, with the tip and any rounding all taken care of.`}
+          titleText={t('screens.home.totalCost')}
+          description={t('components.billBox.totalDescription')}
           currencySymbol={currencySymbol}
-          subTotalText={'SUB COST'}
-          tipText={'TIP'}
+          totalText={t('components.billBox.total')}
+          subTotalText={t('components.billBox.subtotal')}
+          tipText={t('components.billBox.tip')}
           totalAmount={billValues?.overall?.total}
           subTotalAmount={billValues?.overall?.subtotal}
           totalTipAmount={billValues?.overall?.tip}
@@ -185,8 +188,8 @@ const HomeTipScreen = () => {
         />
         {/* Round Options Container */}
         <StyledRoundBox
-          titleText={'ROUND TOTAL'}
-          description={'Prefer a neat number? Round up or down to make your total picture-perfect.'}
+          titleText={t('screens.home.roundTotal')}
+          description={t('components.roundOptions.description')}
           roundMethod={userInputRound}
           disablingRoundingMethod={billValues?.disabledRoundingMethods}
           onSelectedRound={roundValue => {
@@ -195,10 +198,8 @@ const HomeTipScreen = () => {
         />
         {/* Split Options Container */}
         <StyledSpiltOptions
-          titleText={'SPLIT COUNT'}
-          description={
-            'Dining with friends? Let us know how many, and we’ll split the bill for you.'
-          }
+          titleText={t('screens.home.splitCount')}
+          description={t('components.splitOptions.description')}
           onSelectedSplitValue={splitCount => {
             if (splitCount === 1) {
               setUserInputRound(RoundingMethod.NO);
@@ -210,10 +211,12 @@ const HomeTipScreen = () => {
         {userInputSplitCount > 1 ? (
           <StyledBillBox
             titleVisibility
-            titleText={'PER PERSON'}
-            description={`Curious about the split? Here's the amount each person will chip in.`}
+            titleText={t('screens.home.perPerson')}
+            description={t('components.billBox.perPersonDescription')}
             currencySymbol={currencySymbol}
-            subTotalText={'SUB TOTAL'}
+            totalText={t('components.billBox.total')}
+            subTotalText={t('components.billBox.subtotal')}
+            tipText={t('components.billBox.tip')}
             totalAmount={billValues?.perPerson?.total}
             subTotalAmount={billValues?.perPerson?.subtotal}
             totalTipAmount={billValues?.perPerson?.tip}
@@ -239,17 +242,17 @@ const HomeTipScreen = () => {
       {/* Save Success Alert */}
       <StyledAlert
         visible={saveSuccessAlert.visible}
-        title="Success"
-        message="Tip calculation saved successfully!"
+        title={t('common.success')}
+        message={t('screens.home.tipSaved')}
         type="success"
         buttons={[
           {
-            text: 'OK',
+            text: t('common.ok'),
             style: 'cancel',
             onPress: () => setSaveSuccessAlert({ visible: false }),
           },
           {
-            text: 'View Details',
+            text: t('common.viewDetails'),
             style: 'default',
             onPress: () =>
               saveSuccessAlert.savedTip && navigateToTipDetail(saveSuccessAlert.savedTip),
@@ -261,10 +264,12 @@ const HomeTipScreen = () => {
       {/* Save Error Alert */}
       <StyledAlert
         visible={saveErrorAlert}
-        title="Error"
-        message="Failed to save tip calculation. Please try again."
+        title={t('common.error')}
+        message={t('screens.home.tipSaveFailed')}
         type="error"
-        buttons={[{ text: 'OK', style: 'default', onPress: () => setSaveErrorAlert(false) }]}
+        buttons={[
+          { text: t('common.ok'), style: 'default', onPress: () => setSaveErrorAlert(false) },
+        ]}
         onDismiss={() => setSaveErrorAlert(false)}
       />
     </>

@@ -3,6 +3,7 @@ import { AppState, AppAction } from './types';
 import { rootReducer } from './rootReducer';
 import { Constants } from '@configs';
 import { usePersistedReducer } from '@hooks';
+import { DEFAULT_LANGUAGE } from '../localization';
 
 const initialState: AppState = {
   tips: Constants.defaultTipOptionsArray,
@@ -12,6 +13,8 @@ const initialState: AppState = {
   currencyConfig: Constants.defaultCurrencyObject,
   savedTips: [],
   duplicatePreventionWindow: Constants.defaultDuplicatePreventionWindow,
+  language: DEFAULT_LANGUAGE,
+  isRTL: false,
 };
 
 interface AppProviderProps {

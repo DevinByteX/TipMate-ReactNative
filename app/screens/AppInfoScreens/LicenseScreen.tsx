@@ -14,6 +14,7 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { useNavigation } from '@react-navigation/native';
 import { Library, ReactNativeLegal } from 'react-native-legal';
+import { useTranslation } from 'react-i18next';
 
 /**
  * LicensesScreen component displays a list of third-party libraries used in the app
@@ -21,6 +22,7 @@ import { Library, ReactNativeLegal } from 'react-native-legal';
  */
 const LicensesScreen = () => {
   const { styles } = useStyles(stylesheet);
+  const { t } = useTranslation();
   const navigation = useNavigation();
 
   // State for managing library data and UI interactions
@@ -114,7 +116,9 @@ const LicensesScreen = () => {
     if (!searchQuery) return null;
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>No libraries found matching "{searchQuery}"</Text>
+        <Text style={styles.emptyText}>
+          {t('savedTipsList.noResultsMatch', { query: searchQuery })}
+        </Text>
       </View>
     );
   };
@@ -122,15 +126,15 @@ const LicensesScreen = () => {
   return (
     <>
       <StyledHeader
-        headerTitle={'Licenses'}
-        headerSubTitle={'Third-Party Libraries'}
+        headerTitle={t('screens.licenses.title')}
+        headerSubTitle={t('screens.licenses.subtitle')}
         headerRightIconVisibilty={false}
         enableBackButton={true}
       />
       <View style={styles.searchContainer}>
         <TextInput
           autoFocus={false}
-          placeholder="Looking for a library?"
+          placeholder={t('screens.licenses.searchPlaceholder')}
           value={searchQuery}
           maxLength={50}
           style={styles.searchInput}

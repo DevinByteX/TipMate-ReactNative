@@ -13,7 +13,6 @@ export type CurrencyType = {
 
 export type DuplicatePreventionTimeOption = {
   value: number;
-  label: string;
 };
 
 export const Constants = {
@@ -42,14 +41,14 @@ export const Constants = {
   } as TipSliderConfigValues,
   defaultDuplicatePreventionWindow: 15 as number, // default 15 minutes
   duplicatePreventionTimeOptions: [
-    { value: 0, label: 'No prevention' },
-    { value: 2, label: '2 minutes' },
-    { value: 5, label: '5 minutes' },
-    { value: 10, label: '10 minutes' },
-    { value: 15, label: '15 minutes' },
-    { value: 30, label: '30 minutes' },
-    { value: 45, label: '45 minutes' },
-    { value: 60, label: '60 minutes' },
+    { value: 0 },
+    { value: 2 },
+    { value: 5 },
+    { value: 10 },
+    { value: 15 },
+    { value: 30 },
+    { value: 45 },
+    { value: 60 },
   ] as DuplicatePreventionTimeOption[],
   currencies: [
     // Main and Famous Currencies

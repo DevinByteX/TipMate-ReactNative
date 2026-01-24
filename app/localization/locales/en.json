@@ -1,0 +1,317 @@
+{
+  "common": {
+    "save": "Save",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "close": "Close",
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "ok": "OK",
+    "success": "Success",
+    "error": "Error",
+    "viewDetails": "View Details",
+    "yes": "Yes",
+    "no": "No",
+    "continue": "Continue"
+  },
+  "externalLink": {
+    "title": "Open External Link",
+    "message": "You are about to open an external website. Do you want to continue?",
+    "openText": "Continue",
+    "cancelText": "Cancel"
+  },
+  "screens": {
+    "home": {
+      "title": "TipMate",
+      "tagline": "Smart Tips, Easy Living",
+      "billAmount": "BILL AMOUNT",
+      "selectTip": "SELECT TIP",
+      "totalCost": "TOTAL COST",
+      "roundTotal": "ROUND TOTAL",
+      "splitCount": "SPLIT COUNT",
+      "perPerson": "PER PERSON",
+      "tipSaved": "Tip calculation saved successfully!",
+      "tipSaveFailed": "Failed to save tip calculation. Please try again."
+    },
+    "savedTips": {
+      "title": "TipMate",
+      "subtitle": "Saved Tips & summaries",
+      "searchPlaceholder": "Search by amount, tip, date...",
+      "noTips": "No saved tips yet",
+      "noTipsDescription": "Your saved tip calculations will appear here"
+    },
+    "savedTipDetail": {
+      "title": "TipMate",
+      "subtitle": "Quick glance at your result",
+      "totalCost": "TOTAL COST",
+      "perPerson": "PER PERSON",
+      "tipPercentage": "Tip Percentage",
+      "deleteTip": "Delete Tip",
+      "person": "Person",
+      "people": "People",
+      "confirmDelete": "Are you sure you want to delete this tip?",
+      "tipDeleted": "Tip deleted successfully"
+    },
+    "settings": {
+      "title": "TipMate",
+      "subtitle": "Settings & Preferences",
+      "customiseTips": "CUSTOMISE YOUR TIPS",
+      "customiseSplits": "CUSTOMISE YOUR SPLITS",
+      "customiseCurrency": "CUSTOMISE YOUR CURRENCY",
+      "customiseLanguage": "CUSTOMISE YOUR LANGUAGE",
+      "duplicatePrevention": "DUPLICATE SAVE PREVENTION",
+      "customiseTheme": "CUSTOMISE YOUR THEME",
+      "confirmReset": "Confirm Reset",
+      "resetMessage": "Are you sure you want to reset to default values?",
+      "resetSuccess": "Reset successful"
+    },
+    "appInfo": {
+      "title": "About TipMate",
+      "ourStory": "Our Story & Vision",
+      "description": "TipMate is a Smart Tip Calculator App created to make tipping easier and more transparent. Whether you're dining out, getting a haircut, or any service where tipping is customary, TipMate makes splitting bills and calculating tips a breeze.",
+      "story": "TipMate is a Smart Tip Calculator App. It was created to simplify the tipping process and make it enjoyable for everyone.",
+      "developerLabel": "Developer",
+      "developer": "DevinForge Labs",
+      "support": "Support",
+      "contactSupport": "Contact Support",
+      "contactDescription": "Contact us for support and feedback",
+      "contactConfirmTitle": "Contact Support",
+      "contactConfirmMessage": "You are about to open your default email app to contact our support team. Do you want to continue?",
+      "contactConfirmButtonContinue": "Continue",
+      "acknowledgements": "Acknowledgements",
+      "thirdPartyLibraries": "Third-Party Libraries",
+      "feedbackTitle": "Your Feedback Matters",
+      "feedbackDescription": "Your feedback is important to us in order to make TipMate better for you. Report us any bugs in our app, or any features you'd like us to add in the future.",
+      "privacyPolicy": "Privacy Policy",
+      "appVersion": "App version:"
+    },
+    "licenses": {
+      "title": "TipMate",
+      "subtitle": "Third-Party Libraries",
+      "searchPlaceholder": "Search libraries..."
+    }
+  },
+  "components": {
+    "billBox": {
+      "totalAmount": "TOTAL AMOUNT",
+      "total": "TOTAL",
+      "subtotal": "SUBTOTAL",
+      "tip": "TIP",
+      "perPerson": "PER PERSON",
+      "totalDescription": "Voilà! Here's your final amount, with the tip and any rounding all taken care of.",
+      "perPersonDescription": "Curious about the split? Here's the amount each person will chip in.",
+      "savedTotalDescription": "Here is the complete breakdown of your saved tip calculation.",
+      "savedPerPersonDescription": "Here is how the bill was split among everyone."
+    },
+    "billInput": {
+      "placeholder": "0.00",
+      "description": "Pop in the total bill amount here – let's get started!"
+    },
+    "tipInput": {
+      "description": "Feeling generous? Choose your tip percentage and watch the magic happen."
+    },
+    "roundOptions": {
+      "roundValue": "ROUND VALUE",
+      "no": "NO",
+      "up": "UP",
+      "down": "DOWN",
+      "description": "Prefer a neat number? Round up or down to make your total picture-perfect."
+    },
+    "splitOptions": {
+      "customSplit": "Custom",
+      "people": "{{count}} people",
+      "description": "Dining with friends? Let us know how many, and we'll split the bill for you."
+    },
+    "sharePreview": {
+      "title": "Share Preview",
+      "subtitle": "Review your tip summary before sharing",
+      "shareAsText": "Share as Text",
+      "shareAsPDF": "Share as PDF",
+      "cancel": "Cancel"
+    },
+    "drawer": {
+      "preferences": "Preferences",
+      "toggleDarkMode": "Toggle Dark Mode",
+      "aboutUs": "About Us"
+    },
+    "tipOptions": {
+      "customTip": "Custom",
+      "tipPercentage": "{{value}}%"
+    },
+    "currencySelector": {
+      "selectCurrency": "SELECT YOUR CURRENCY",
+      "searchCurrency": "Search currency...",
+      "description": "Tailor Your Currency: Pick your preferred currency for a more seamless billing experience.",
+      "modalDescription": "Pick the currency that works best for you, and we'll handle the rest!",
+      "tapToSelect": "Tap to select a currency",
+      "changeMessage": "The currency has been changed to"
+    },
+    "languageSelector": {
+      "selectLanguage": "Select Language",
+      "currentLanguage": "Current: {{language}}",
+      "description": "Personalize Your Experience: Choose your preferred language for a more comfortable app experience.",
+      "modalDescription": "Select your preferred language from the list below. Some languages support right-to-left (RTL) text direction."
+    },
+    "tipOptionsEdit": {
+      "title": "CUSTOMISE YOUR TIPS",
+      "description": "Personalise Your Tips: Adjust your default tips by typing in the fields. It's quick and easy!",
+      "resetConfirmMessage": "Are you sure you want to reset all your tip options? This change can't be undone!",
+      "resetSuccess": "Tip options refreshed! You're all set with the default values"
+    },
+    "splitOptionsEdit": {
+      "title": "CUSTOMISE YOUR SPLITS",
+      "description": "Set Your Splits: Enter your split preferences in the fields to customise how the bill is divided",
+      "resetConfirmMessage": "Are you sure you want to reset all your split options? This change can't be undone!",
+      "resetSuccess": "Split options refreshed! You're all set with the default values"
+    },
+    "duplicatePrevention": {
+      "description": "Set how long to wait before allowing the same tip calculation to be saved again.",
+      "timeWindow": "Time window",
+      "modalTitle": "DUPLICATE PREVENTION",
+      "modalDescription": "Select the time window for preventing duplicate tip saves",
+      "changeMessage": "Duplicate prevention window set to"
+    },
+    "themeBox": {
+      "title": "CUSTOMISE YOUR THEME",
+      "darkModeLabel": "Toggle Dark Mode",
+      "description": "Switch Up Your Style: Choose from our vibrant themes to make your app experience uniquely yours!",
+      "darkModeDescription": "Enjoy a sleek, comfortable view by enabling Dark Mode."
+    }
+  },
+  "navigation": {
+    "tipSplit": "Tip & Split",
+    "tipSummary": "Saved Tips & summaries",
+    "settingsPreferences": "Settings & Preferences"
+  },
+  "share": {
+    "tipSummary": "Tip Summary",
+    "billAmount": "Bill Amount:",
+    "tipPercentage": "Tip Percentage:",
+    "tipAmount": "Tip Amount:",
+    "totalAmount": "Total Amount:",
+    "splitAmong": "Split Among:",
+    "persons": "person(s)",
+    "subtotalPerPerson": "Subtotal per person:",
+    "tipPerPerson": "Tip per person:",
+    "totalPerPerson": "Total per person:",
+    "sharedVia": "Shared via TipMate",
+    "shareYourTip": "Share your tip summary",
+    "tipMateSummary": "TipMate Summary",
+    "receipt": "Receipt #",
+    "date": "Date:",
+    "time": "Time:",
+    "pdf": {
+      "thankYou": "Thank you",
+      "tipSummaryDescription": "Your tip calculation summary",
+      "amount": "Amount",
+      "billDetails": "Bill Details",
+      "splitDetails": "Split Details",
+      "generatedBy": "Generated by"
+    }
+  },
+  "messages": {
+    "restartRequired": "App restart required to apply layout changes. Please close and reopen the app.",
+    "restartTitle": "Restart Required",
+    "languageChanged": "Language changed successfully",
+    "languageChangeRTL": "Switching to/from Arabic requires an app restart for proper layout. Please close and reopen the app.",
+    "networkError": "Network error. Please try again.",
+    "unknownError": "An unknown error occurred.",
+    "clearAllTitle": "Clear All Tips",
+    "clearAllMessage": "Are you sure you want to delete all saved tips? This action cannot be undone.",
+    "deleteAll": "Delete All",
+    "deleteError": "Failed to delete tip. Please try again.",
+    "clearError": "Failed to clear tips. Please try again."
+  },
+  "duplicatePrevention": {
+    "noPrevention": "No prevention",
+    "minutes_one": "{{count}} minute",
+    "minutes_other": "{{count}} minutes"
+  },
+  "filters": {
+    "tipPercent": "Tip %",
+    "people": "People",
+    "date": "Date",
+    "all": "All",
+    "allTime": "All Time",
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "solo": "Solo (1)",
+    "twoPlusToFour": "2-4 People",
+    "fivePlus": "5+ People",
+    "resetFilters": "Reset Filters"
+  },
+  "savedTipsList": {
+    "tip": "Tip",
+    "tips": "Tips",
+    "found": "Found",
+    "saved": "Saved",
+    "clearAll": "Clear All",
+    "bill": "Bill:",
+    "tipLabel": "Tip ({{percentage}}%):",
+    "total": "Total:",
+    "noResultsTitle": "No Results Found",
+    "noTipsTitle": "No Tips Yet",
+    "noResultsMatch": "No tips match \"{{query}}\"",
+    "noFiltersMatch": "No tips match the selected filters",
+    "emptyDescription": "Your saved tips will appear here for quick review and reference.",
+    "emptyHint": "Look for the bookmark icon on your calculated tips!"
+  },
+  "accessibility": {
+    "tipInput": "Tip percentage input",
+    "billInput": "Bill amount input",
+    "splitInput": "Number of people to split",
+    "saveButton": "Save tip calculation",
+    "shareButton": "Share tip summary",
+    "deleteButton": "Delete saved tip",
+    "settingsButton": "Open settings"
+  },
+  "buttons": {
+    "custom": "Custom",
+    "setValue": "Set Value",
+    "reset": "Reset"
+  },
+  "currencies": {
+    "USD": "US Dollar",
+    "EUR": "Euro",
+    "GBP": "British Pound Sterling",
+    "JPY": "Japanese Yen",
+    "AUD": "Australian Dollar",
+    "CAD": "Canadian Dollar",
+    "CHF": "Swiss Franc",
+    "CNY": "Chinese Yuan",
+    "INR": "Indian Rupee",
+    "AED": "UAE Dirham",
+    "ARS": "Argentine Peso",
+    "BDT": "Bangladeshi Taka",
+    "BHD": "Bahraini Dinar",
+    "BRL": "Brazilian Real",
+    "CLP": "Chilean Peso",
+    "EGP": "Egyptian Pound",
+    "GHS": "Ghanaian Cedi",
+    "IDR": "Indonesian Rupiah",
+    "ILS": "Israeli New Shekel",
+    "JOD": "Jordanian Dinar",
+    "KES": "Kenyan Shilling",
+    "KRW": "South Korean Won",
+    "KWD": "Kuwaiti Dinar",
+    "LKR": "Sri Lankan Rupee",
+    "MXN": "Mexican Peso",
+    "MYR": "Malaysian Ringgit",
+    "NGN": "Nigerian Naira",
+    "NZD": "New Zealand Dollar",
+    "OMR": "Omani Rial",
+    "PHP": "Philippine Peso",
+    "PKR": "Pakistani Rupee",
+    "QAR": "Qatari Riyal",
+    "RUB": "Russian Ruble",
+    "SAR": "Saudi Riyal",
+    "SGD": "Singapore Dollar",
+    "THB": "Thai Baht",
+    "TRY": "Turkish Lira",
+    "TZS": "Tanzanian Shilling",
+    "UGX": "Ugandan Shilling",
+    "VND": "Vietnamese Dong",
+    "ZAR": "South African Rand"
+  }
+}

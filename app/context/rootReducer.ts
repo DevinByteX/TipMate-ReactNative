@@ -1,5 +1,5 @@
 import { AppState, AppAction } from './types';
-import { tipReducer, splitReducer, currencyConfigReducer, savedTipsReducer, duplicatePreventionReducer } from './reducers';
+import { tipReducer, splitReducer, currencyConfigReducer, savedTipsReducer, duplicatePreventionReducer, languageReducer } from './reducers';
 import { Constants } from '@configs';
 
 export const rootReducer = (state: AppState, action: AppAction): AppState => {
@@ -12,6 +12,8 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
         currencyConfig: action.payload.currencyConfig ?? state.currencyConfig,
         savedTips: action.payload.savedTips ?? state.savedTips,
         duplicatePreventionWindow: action.payload.duplicatePreventionWindow ?? state.duplicatePreventionWindow,
+        language: action.payload.language ?? state.language,
+        isRTL: action.payload.isRTL ?? state.isRTL,
       };
     case 'UPDATE_TIP_OPTIONS':
       return { ...state, tips: tipReducer(state.tips, action) };
@@ -29,6 +31,9 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
       return { ...state, savedTips: savedTipsReducer(state.savedTips, action) };
     case 'UPDATE_DUPLICATE_PREVENTION_WINDOW':
       return { ...state, duplicatePreventionWindow: duplicatePreventionReducer(state.duplicatePreventionWindow, action) };
+    case 'SET_LANGUAGE':
+      const newLanguageState = languageReducer({ language: state.language, isRTL: state.isRTL }, action);
+      return { ...state, ...newLanguageState };
     default:
       return state;
   }

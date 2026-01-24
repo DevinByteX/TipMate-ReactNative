@@ -14,6 +14,7 @@ export { StyledTextInputCapsule } from './StyledTextInputCapsule';
 export { StyledConfigInput } from './StyledConfigInput';
 export { StyledThemeBox } from './StyledThemeBox';
 export { StyledCurrencySelector } from './StyledCurrencySelector';
+export { StyledLanguageSelector } from './StyledLanguageSelector';
 export { StyledDuplicatePreventionSelector } from './StyledDuplicatePreventionSelector';
 export { StyledLicenseDetailsCard } from './StyledLicenseDetailsCard';
 export { StyledSharePreviewModal } from './StyledSharePreviewModal';

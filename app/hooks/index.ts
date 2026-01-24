@@ -18,8 +18,8 @@ import { usePersistedReducer } from './usePersistedReducer';
 import { validateOptionValues, areOptionArraysSame } from './validationHooks';
 import { useThemeColorCustomiser, CustomisedTheme } from './useThemeColorCustomiser';
 import { useExternalLinkAlert, ExternalLinkAlertConfig } from './useExternalLinkAlert';
-import { useShareTipDetailsText, formatTipDetailsPreview, ShareTipDetailsParams } from './useShareTipDetailsText';
-import { useShareTipDetailsPDF, TipDetailsForPDF } from './useShareTipDetailsPDF';
+import { useShareTipDetailsText, formatTipDetailsPreview, ShareTipDetailsParams, ShareTranslations } from './useShareTipDetailsText';
+import { useShareTipDetailsPDF, TipDetailsForPDF, PDFTranslations } from './useShareTipDetailsPDF';
 import { useShareTipPreview } from './useShareTipPreview';
 import { useSaveTip } from './useSaveTip';
 
@@ -52,5 +52,7 @@ export type {
   CustomisedTheme,
   ExternalLinkAlertConfig,
   ShareTipDetailsParams,
+  ShareTranslations,
   TipDetailsForPDF,
+  PDFTranslations,
 };

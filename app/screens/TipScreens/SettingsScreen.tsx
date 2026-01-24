@@ -1,8 +1,10 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
   StyledCurrencySelector,
+  StyledLanguageSelector,
   StyledHeader,
   StyledSplitOptionsEditMode,
   StyledThemeBox,
@@ -12,11 +14,12 @@ import {
 
 const SettingsScreen = () => {
   const { styles } = useStyles(stylesheet);
+  const { t } = useTranslation();
   return (
     <>
       <StyledHeader
-        headerTitle={'TipMate'}
-        headerSubTitle={'Settings & Preferences'}
+        headerTitle={t('screens.settings.title')}
+        headerSubTitle={t('screens.settings.subtitle')}
         headerRightIconVisibilty={false}
       />
       <ScrollView
@@ -26,54 +29,50 @@ const SettingsScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <StyledTipOptionsEditMode
-          title={'CUSTOMISE YOUR TIPS'}
-          description={
-            'Personalise Your Tips: Adjust your default tips by typing in the fields. It’s quick and easy!'
-          }
-          modalTitle={`${'Confirm Reset'}`}
-          modalSubtitle={`${`Are you sure you want to reset all your tip options? This change can't be undone!`}`}
-          lineButtonText={`${'Cancel'}`}
-          solidButtonText={`${'Reset'}`}
-          resetSuccessToastText={`${`Tip options refreshed! You're all set with the default values`}`}
+          title={t('screens.settings.customiseTips')}
+          description={t('components.tipOptionsEdit.description')}
+          modalTitle={t('screens.settings.confirmReset')}
+          modalSubtitle={t('components.tipOptionsEdit.resetConfirmMessage')}
+          lineButtonText={t('common.cancel')}
+          solidButtonText={t('common.reset')}
+          resetSuccessToastText={t('components.tipOptionsEdit.resetSuccess')}
         />
         <StyledSplitOptionsEditMode
-          title={'CUSTOMISE YOUR SPLITS'}
-          description={
-            'Set Your Splits: Enter your split preferences in the fields to customise how the bill is divided'
-          }
-          modalTitle={`${'Confirm Reset'}`}
-          modalSubtitle={`${`Are you sure you want to reset all your split options? This change can't be undone!`}`}
-          lineButtonText={`${'Cancel'}`}
-          solidButtonText={`${'Reset'}`}
-          resetSuccessToastText={`${`Split options refreshed! You're all set with the default values`}`}
+          title={t('screens.settings.customiseSplits')}
+          description={t('components.splitOptionsEdit.description')}
+          modalTitle={t('screens.settings.confirmReset')}
+          modalSubtitle={t('components.splitOptionsEdit.resetConfirmMessage')}
+          lineButtonText={t('common.cancel')}
+          solidButtonText={t('common.reset')}
+          resetSuccessToastText={t('components.splitOptionsEdit.resetSuccess')}
         />
         <StyledCurrencySelector
-          title={'CUSTOMISE YOUR CURRENCY'}
-          description={
-            'Tailor Your Currency: Pick your preferred currency for a more seamless billing experience.'
-          }
-          modalTitle={'SELECT YOUR CURRENCY'}
-          modalDescription={'Pick the currency that works best for you, and we’ll handle the rest!'}
-          currencyChangeInstructionText={'Tap to select a currency'}
-          currencyChangeToastMessage={'The currency has been changed to'}
+          title={t('screens.settings.customiseCurrency')}
+          description={t('components.currencySelector.description')}
+          modalTitle={t('components.currencySelector.selectCurrency')}
+          modalDescription={t('components.currencySelector.modalDescription')}
+          currencyChangeInstructionText={t('components.currencySelector.tapToSelect')}
+          currencyChangeToastMessage={t('components.currencySelector.changeMessage')}
+        />
+        <StyledLanguageSelector
+          title={t('screens.settings.customiseLanguage')}
+          description={t('components.languageSelector.description')}
+          modalTitle={t('components.languageSelector.selectLanguage')}
+          modalDescription={t('components.languageSelector.modalDescription')}
         />
         <StyledDuplicatePreventionSelector
-          title={'DUPLICATE SAVE PREVENTION'}
-          description={
-            'Set how long to wait before allowing the same tip calculation to be saved again.'
-          }
-          selectionInstructionText={'Time window'}
-          modalTitle={'DUPLICATE PREVENTION'}
-          modalDescription={'Select the time window for preventing duplicate tip saves'}
-          changeToastMessage={'Duplicate prevention window set to'}
+          title={t('screens.settings.duplicatePrevention')}
+          description={t('components.duplicatePrevention.description')}
+          selectionInstructionText={t('components.duplicatePrevention.timeWindow')}
+          modalTitle={t('components.duplicatePrevention.modalTitle')}
+          modalDescription={t('components.duplicatePrevention.modalDescription')}
+          changeToastMessage={t('components.duplicatePrevention.changeMessage')}
         />
         <StyledThemeBox
-          title={'CUSTOMISE YOUR THEME'}
-          description={
-            'Switch Up Your Style: Choose from our vibrant themes to make your app experience uniquely yours!'
-          }
-          toggleDescription={'Enjoy a sleek, comfortable view by enabling Dark Mode.'}
-          toggleText={'Toggle Dark Mode'}
+          title={t('screens.settings.customiseTheme')}
+          description={t('components.themeBox.description')}
+          toggleDescription={t('components.themeBox.darkModeDescription')}
+          toggleText={t('components.themeBox.darkModeLabel')}
         />
       </ScrollView>
     </>

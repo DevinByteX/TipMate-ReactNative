@@ -47,6 +47,8 @@ export interface AppState {
   currencyConfig: CurrencyType;
   savedTips: SavedTip[];
   duplicatePreventionWindow: number; // in minutes
+  language: string; // Language code (e.g., 'en', 'es', 'ar')
+  isRTL: boolean; // RTL layout flag
 }
 
 export type TipAction =
@@ -69,10 +71,16 @@ export type DuplicatePreventionAction = {
   payload: number;
 };
 
+export type LanguageAction = {
+  type: 'SET_LANGUAGE';
+  payload: { language: string; isRTL: boolean };
+};
+
 export type AppAction =
   | TipAction
   | SplitAction
   | CurrencyConfigAction
   | SavedTipAction
   | DuplicatePreventionAction
+  | LanguageAction
   | { type: 'LOAD_PERSISTED_STATE'; payload: AppState }; // Include LOAD_PERSISTED_STATE

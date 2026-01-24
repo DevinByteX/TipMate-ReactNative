@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 
 type SharePreviewModalProps = {
   isPreviewVisible: boolean;
@@ -20,6 +21,7 @@ export const StyledSharePreviewModal = ({
   onDismiss,
 }: SharePreviewModalProps) => {
   const { styles } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   return (
     <Modal
@@ -34,8 +36,8 @@ export const StyledSharePreviewModal = ({
         <View style={styles.modalContents}>
           {/* Header */}
           <View style={styles.header}>
-            <Text style={styles.headerTitle}>Share Preview</Text>
-            <Text style={styles.headerSubtitle}>Review your tip summary before sharing</Text>
+            <Text style={styles.headerTitle}>{t('components.sharePreview.title')}</Text>
+            <Text style={styles.headerSubtitle}>{t('components.sharePreview.subtitle')}</Text>
           </View>
 
           {/* Preview Content */}
@@ -44,18 +46,19 @@ export const StyledSharePreviewModal = ({
           </ScrollView>
 
           {/* Action Buttons */}
+          {/* onShareText and onSharePDF */}
           <View style={styles.buttonContainer}>
-            <Pressable style={styles.textButton} onPress={onShareText}>
-              <Text style={styles.buttonText}>📱 Share as Text</Text>
+            <Pressable onPress={onShareText} style={styles.shareButton}>
+              <Text style={styles.shareButtonText}>{t('components.sharePreview.shareAsText')}</Text>
             </Pressable>
-            <Pressable style={styles.pdfButton} onPress={onSharePDF}>
-              <Text style={styles.buttonText}>📄 Share as PDF</Text>
+            <Pressable onPress={onSharePDF} style={styles.shareButton}>
+              <Text style={styles.shareButtonText}>{t('components.sharePreview.shareAsPDF')}</Text>
             </Pressable>
           </View>
 
           {/* Close Button */}
           <Pressable style={styles.closeButton} onPress={onClose}>
-            <Text style={styles.closeButtonText}>Cancel</Text>
+            <Text style={styles.closeButtonText}>{t('components.sharePreview.cancel')}</Text>
           </Pressable>
         </View>
       </View>
@@ -115,26 +118,23 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     paddingTop: (UnistylesRuntime.screen.height * 1.5) / 100,
     columnGap: (UnistylesRuntime.screen.width * 3) / 100,
   },
-  textButton: {
+  shareButton: {
     flex: 1,
-    height: (UnistylesRuntime.screen.height * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1.2) / 100,
-    backgroundColor: colors.accent,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  pdfButton: {
-    flex: 1,
-    height: (UnistylesRuntime.screen.height * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1.2) / 100,
     backgroundColor: colors.accent,
-    justifyContent: 'center',
-    alignItems: 'center',
+    minHeight: (UnistylesRuntime.screen.height * 5) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+    marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 1.2) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
   },
-  buttonText: {
+  shareButtonText: {
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card,
+    textAlign: 'center',
   },
   closeButton: {
     height: (UnistylesRuntime.screen.height * 5) / 100,

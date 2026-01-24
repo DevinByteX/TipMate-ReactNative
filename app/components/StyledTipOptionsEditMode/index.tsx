@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 import {
   IconTypeMap,
   StyledConfigInput,
@@ -78,6 +79,8 @@ const TipPercentageCustomCapsule = ({
             color: TextColor,
           },
         ]}
+        adjustsFontSizeToFit={true}
+        numberOfLines={1}
       >
         {`${textValue} `}
         <StyledIcons
@@ -109,6 +112,7 @@ export const StyledTipOptionsEditMode = ({
   resetSuccessToastText: string;
 }) => {
   const { state, dispatch } = useAppContext();
+  const { t } = useTranslation();
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
   const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);
@@ -144,7 +148,7 @@ export const StyledTipOptionsEditMode = ({
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <TipPercentageCustomCapsule
-                textValue={`Reset`}
+                textValue={t('buttons.reset')}
                 active={
                   !areOptionArraysSame({
                     firstArray: state.tips,
@@ -317,6 +321,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
   },
   sliderConfigMainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 1) / 100,

@@ -1,0 +1,317 @@
+{
+  "common": {
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "reset": "Réinitialiser",
+    "confirm": "Confirmer",
+    "ok": "OK",
+    "success": "Succès",
+    "error": "Erreur",
+    "viewDetails": "Voir les Détails",
+    "yes": "Oui",
+    "no": "Non",
+    "continue": "Continuer"
+  },
+  "externalLink": {
+    "title": "Ouvrir un Lien Externe",
+    "message": "Vous êtes sur le point d'ouvrir un site web externe. Voulez-vous continuer?",
+    "openText": "Continuer",
+    "cancelText": "Annuler"
+  },
+  "screens": {
+    "home": {
+      "title": "TipMate",
+      "tagline": "Pourboires malins, vie facile",
+      "billAmount": "MONTANT DE L'ADDITION",
+      "selectTip": "SÉLECTIONNER LE POURBOIRE",
+      "totalCost": "TOTAL À PAYER",
+      "roundTotal": "ARRONDIR LE TOTAL",
+      "splitCount": "PARTAGER AVEC",
+      "perPerson": "PAR PERSONNE",
+      "tipSaved": "Calcul du pourboire enregistré avec succès !",
+      "tipSaveFailed": "Échec de l'enregistrement du calcul du pourboire. Veuillez réessayer."
+    },
+    "savedTips": {
+      "title": "TipMate",
+      "subtitle": "Pourboires enregistrés et résumés",
+      "searchPlaceholder": "Rechercher par montant, pourboire, date...",
+      "noTips": "Pas encore de pourboires enregistrés",
+      "noTipsDescription": "Vos calculs de pourboire enregistrés apparaîtront ici"
+    },
+    "savedTipDetail": {
+      "title": "TipMate",
+      "subtitle": "Coup d'œil rapide sur votre résultat",
+      "totalCost": "TOTAL À PAYER",
+      "perPerson": "PAR PERSONNE",
+      "tipPercentage": "Pourcentage du Pourboire",
+      "deleteTip": "Supprimer le Pourboire",
+      "person": "Personne",
+      "people": "Personnes",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce pourboire ?",
+      "tipDeleted": "Pourboire supprimé avec succès"
+    },
+    "settings": {
+      "title": "TipMate",
+      "subtitle": "Paramètres et Préférences",
+      "customiseTips": "PERSONNALISER VOS POURBOIRES",
+      "customiseSplits": "PERSONNALISER VOS DIVISIONS",
+      "customiseCurrency": "PERSONNALISER VOTRE DEVISE",
+      "customiseLanguage": "PERSONNALISER VOTRE LANGUE",
+      "duplicatePrevention": "PRÉVENTION DES DOUBLONS",
+      "customiseTheme": "PERSONNALISER VOTRE THÈME",
+      "confirmReset": "Confirmer la Réinitialisation",
+      "resetMessage": "Êtes-vous sûr de vouloir réinitialiser aux valeurs par défaut ?",
+      "resetSuccess": "Réinitialisation réussie"
+    },
+    "appInfo": {
+      "title": "À Propos de TipMate",
+      "ourStory": "Notre Histoire et Vision",
+      "description": "TipMate est l'application intelligente qui simplifie vos calculs de pourboire. Au restaurant, chez le coiffeur ou ailleurs, TipMate rend le partage de l'addition et le calcul du pourboire un jeu d'enfant.",
+      "story": "Née d'une volonté de simplifier la vie, TipMate transforme le casse-tête du pourboire en une expérience fluide et agréable pour tous.",
+      "developerLabel": "Développeur",
+      "developer": "DevinForge Labs",
+      "support": "Support",
+      "contactSupport": "Contacter le Support",
+      "contactDescription": "Contactez-nous pour le support et les commentaires",
+      "contactConfirmTitle": "Contacter le Support",
+      "contactConfirmMessage": "Vous êtes sur le point d'ouvrir votre application de messagerie par défaut pour contacter notre équipe de support. Voulez-vous continuer ?",
+      "contactConfirmButtonContinue": "Continuer",
+      "acknowledgements": "Remerciements",
+      "thirdPartyLibraries": "Bibliothèques Tierces",
+      "feedbackTitle": "Votre Avis Compte",
+      "feedbackDescription": "Vos commentaires sont importants pour nous afin d'améliorer TipMate pour vous. Signalez-nous tout bug dans notre application ou toute fonctionnalité que vous aimeriez que nous ajoutions à l'avenir.",
+      "privacyPolicy": "Politique de Confidentialité",
+      "appVersion": "Version de l'app :"
+    },
+    "licenses": {
+      "title": "TipMate",
+      "subtitle": "Bibliothèques Tierces",
+      "searchPlaceholder": "Rechercher des bibliothèques..."
+    }
+  },
+  "components": {
+    "billBox": {
+      "totalAmount": "TOTAL À PAYER",
+      "total": "TOTAL",
+      "subtotal": "SOUS-TOTAL",
+      "tip": "POURBOIRE",
+      "perPerson": "PAR PERSONNE",
+      "totalDescription": "Voilà ! Voici votre montant final, pourboire et arrondis inclus.",
+      "perPersonDescription": "Curieux de connaître le partage ? Voici le montant que chaque personne contribuera.",
+      "savedTotalDescription": "Voici la répartition complète de votre calcul de pourboire enregistré.",
+      "savedPerPersonDescription": "Voici comment la facture a été divisée entre tout le monde."
+    },
+    "billInput": {
+      "placeholder": "0.00",
+      "description": "Saisissez le montant total ici, et c'est parti !"
+    },
+    "tipInput": {
+      "description": "D'humeur généreuse ? Choisissez un pourcentage et voyez la magie."
+    },
+    "roundOptions": {
+      "roundValue": "ARRONDIR LA VALEUR",
+      "no": "NON",
+      "up": "SUPÉRIEUR",
+      "down": "INFÉRIEUR",
+      "description": "Vous préférez un chiffre rond ? Arrondissez vers le haut ou le bas pour un total parfait."
+    },
+    "sharePreview": {
+      "title": "Aperçu",
+      "subtitle": "Vérifiez votre résumé de pourboire avant de partager",
+      "shareAsText": "Partager (Texte)",
+      "shareAsPDF": "Partager (PDF)",
+      "cancel": "Annuler"
+    },
+    "drawer": {
+      "preferences": "Préférences",
+      "toggleDarkMode": "Basculer le Mode Sombre",
+      "aboutUs": "À Propos de Nous"
+    },
+    "tipOptions": {
+      "customTip": "Personnalisé",
+      "tipPercentage": "{{value}}%"
+    },
+    "splitOptions": {
+      "customSplit": "Personnalisé",
+      "people": "{{count}} personnes",
+      "description": "Vous dînez entre amis ? Dites-nous combien vous êtes et on divise."
+    },
+    "currencySelector": {
+      "selectCurrency": "Sélectionner la Devise",
+      "searchCurrency": "Rechercher une devise...",
+      "description": "Personnalisez Votre Devise : Choisissez votre devise préférée pour une expérience de facturation plus fluide.",
+      "modalDescription": "Choisissez la devise qui vous convient le mieux, et nous nous occupons du reste !",
+      "tapToSelect": "Appuyez pour sélectionner une devise",
+      "changeMessage": "La devise a été changée en"
+    },
+    "languageSelector": {
+      "selectLanguage": "Sélectionner la Langue",
+      "currentLanguage": "Actuel : {{language}}",
+      "description": "Personnalisez Votre Expérience : Choisissez votre langue préférée pour une expérience d'application plus confortable.",
+      "modalDescription": "Sélectionnez votre langue préférée dans la liste ci-dessous. Certaines langues prennent en charge la direction du texte de droite à gauche (RTL)."
+    },
+    "tipOptionsEdit": {
+      "title": "PERSONNALISER VOS POURBOIRES",
+      "description": "Personnalisez Vos Pourboires : Ajustez vos pourboires par défaut en saisissant dans les champs. C'est rapide et facile !",
+      "resetConfirmMessage": "Êtes-vous sûr de vouloir réinitialiser toutes vos options de pourboire ? Ce changement ne peut pas être annulé !",
+      "resetSuccess": "Options de pourboire actualisées ! Vous êtes prêt avec les valeurs par défaut"
+    },
+    "splitOptionsEdit": {
+      "title": "PERSONNALISER VOS DIVISIONS",
+      "description": "Configurez Vos Divisions : Entrez vos préférences de division dans les champs pour personnaliser comment l'addition est divisée",
+      "resetConfirmMessage": "Êtes-vous sûr de vouloir réinitialiser toutes vos options de division ? Ce changement ne peut pas être annulé !",
+      "resetSuccess": "Options de division actualisées ! Vous êtes prêt avec les valeurs par défaut"
+    },
+    "duplicatePrevention": {
+      "description": "Définissez combien de temps attendre avant de permettre l'enregistrement du même calcul de pourboire à nouveau.",
+      "timeWindow": "Fenêtre de temps",
+      "modalTitle": "PRÉVENTION DES DOUBLONS",
+      "modalDescription": "Sélectionnez la fenêtre de temps pour empêcher les enregistrements de pourboire en double",
+      "changeMessage": "Fenêtre de prévention des doublons définie à"
+    },
+    "themeBox": {
+      "title": "PERSONNALISER VOTRE THÈME",
+      "darkModeLabel": "Basculer le Mode Sombre",
+      "description": "Changez Votre Style : Choisissez parmi nos thèmes vibrants pour rendre votre expérience d'application uniquement vôtre !",
+      "darkModeDescription": "Profitez d'une vue élégante et confortable en activant le Mode Sombre."
+    }
+  },
+  "navigation": {
+    "tipSplit": "Pourboire et Division",
+    "tipSummary": "Pourboires enregistrés et résumés",
+    "settingsPreferences": "Paramètres et Préférences"
+  },
+  "share": {
+    "tipSummary": "Résumé du Pourboire",
+    "billAmount": "Montant de l'Addition :",
+    "tipPercentage": "Pourcentage du Pourboire :",
+    "tipAmount": "Montant du Pourboire :",
+    "totalAmount": "Montant Total :",
+    "splitAmong": "Partagé Avec :",
+    "persons": "personne(s)",
+    "subtotalPerPerson": "Sous-total par personne :",
+    "tipPerPerson": "Pourboire par personne :",
+    "totalPerPerson": "Total par personne :",
+    "sharedVia": "Partagé via TipMate",
+    "shareYourTip": "Partagez votre résumé de pourboire",
+    "tipMateSummary": "Résumé TipMate",
+    "receipt": "Reçu #",
+    "date": "Date :",
+    "time": "Heure :",
+    "pdf": {
+      "thankYou": "Merci",
+      "tipSummaryDescription": "Votre résumé de calcul de pourboire",
+      "amount": "Montant",
+      "billDetails": "Détails de la Note",
+      "splitDetails": "Détails de Division",
+      "generatedBy": "Généré par"
+    }
+  },
+  "messages": {
+    "restartRequired": "Redémarrage de l'application requis pour appliquer les modifications de mise en page. Veuillez fermer et rouvrir l'application.",
+    "restartTitle": "Redémarrage Requis",
+    "languageChanged": "Langue changée avec succès",
+    "languageChangeRTL": "Passer à/depuis l'arabe nécessite un redémarrage de l'application pour une mise en page correcte. Veuillez fermer et rouvrir l'application.",
+    "networkError": "Erreur réseau. Veuillez réessayer.",
+    "unknownError": "Une erreur inconnue s'est produite.",
+    "clearAllTitle": "Effacer Tous les Pourboires",
+    "clearAllMessage": "Êtes-vous sûr de vouloir supprimer tous les pourboires enregistrés ? Cette action ne peut pas être annulée.",
+    "deleteAll": "Tout Supprimer",
+    "deleteError": "Échec de la suppression du pourboire. Veuillez réessayer.",
+    "clearError": "Échec de l'effacement des pourboires. Veuillez réessayer."
+  },
+  "duplicatePrevention": {
+    "noPrevention": "Pas de prévention",
+    "minutes_one": "{{count}} minute",
+    "minutes_other": "{{count}} minutes"
+  },
+  "filters": {
+    "tipPercent": "Pourboire %",
+    "people": "Personnes",
+    "date": "Date",
+    "all": "Tout",
+    "allTime": "Tout le Temps",
+    "today": "Aujourd'hui",
+    "thisWeek": "Cette Semaine",
+    "thisMonth": "Ce Mois",
+    "solo": "Solo (1)",
+    "twoPlusToFour": "2-4 Personnes",
+    "fivePlus": "5+ Personnes",
+    "resetFilters": "Réinitialiser les Filtres"
+  },
+  "savedTipsList": {
+    "tip": "Pourboire",
+    "tips": "Pourboires",
+    "found": "Trouvé",
+    "saved": "Enregistré",
+    "clearAll": "Tout Effacer",
+    "bill": "Note :",
+    "tipLabel": "Pourboire ({{percentage}}%) :",
+    "total": "Total :",
+    "noResultsTitle": "Aucun Résultat Trouvé",
+    "noTipsTitle": "Pas Encore de Pourboires",
+    "noResultsMatch": "Aucun pourboire ne correspond à \"{{query}}\"",
+    "noFiltersMatch": "Aucun pourboire ne correspond aux filtres sélectionnés",
+    "emptyDescription": "Vos pourboires enregistrés apparaîtront ici pour une révision et référence rapide.",
+    "emptyHint": "Recherchez l'icône de signet sur vos pourboires calculés !"
+  },
+  "accessibility": {
+    "tipInput": "Champ de pourcentage de pourboire",
+    "billInput": "Champ de montant de la note",
+    "splitInput": "Nombre de personnes pour diviser",
+    "saveButton": "Enregistrer le calcul du pourboire",
+    "shareButton": "Partager le résumé du pourboire",
+    "deleteButton": "Supprimer le pourboire enregistré",
+    "settingsButton": "Ouvrir les paramètres"
+  },
+  "buttons": {
+    "custom": "Personnalisé",
+    "setValue": "Définir la Valeur",
+    "reset": "Réinitialiser"
+  },
+  "currencies": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "JPY": "Yen japonais",
+    "AUD": "Dollar australien",
+    "CAD": "Dollar canadien",
+    "CHF": "Franc suisse",
+    "CNY": "Yuan chinois",
+    "INR": "Roupie indienne",
+    "AED": "Dirham des Émirats arabes unis",
+    "ARS": "Peso argentin",
+    "BDT": "Taka bangladais",
+    "BHD": "Dinar bahreïni",
+    "BRL": "Réal brésilien",
+    "CLP": "Peso chilien",
+    "EGP": "Livre égyptienne",
+    "GHS": "Cedi ghanéen",
+    "IDR": "Roupie indonésienne",
+    "ILS": "Nouveau shekel israélien",
+    "JOD": "Dinar jordanien",
+    "KES": "Shilling kényan",
+    "KRW": "Won sud-coréen",
+    "KWD": "Dinar koweïtien",
+    "LKR": "Roupie srilankaise",
+    "MXN": "Peso mexicain",
+    "MYR": "Ringgit malaisien",
+    "NGN": "Naira nigérian",
+    "NZD": "Dollar néo-zélandais",
+    "OMR": "Rial omanais",
+    "PHP": "Peso philippin",
+    "PKR": "Roupie pakistanaise",
+    "QAR": "Riyal qatari",
+    "RUB": "Rouble russe",
+    "SAR": "Riyal saoudien",
+    "SGD": "Dollar de Singapour",
+    "THB": "Baht thaïlandais",
+    "TRY": "Livre turque",
+    "TZS": "Shilling tanzanien",
+    "UGX": "Shilling ougandais",
+    "VND": "Dong vietnamien",
+    "ZAR": "Rand sud-africain"
+  }
+}
