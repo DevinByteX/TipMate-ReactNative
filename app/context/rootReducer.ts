@@ -24,6 +24,7 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
     case 'RESET_SPLIT_OPTIONS_TO_DEFAULT':
       return { ...state, splits: Constants.defaultSplitOptionsArray };
     case 'UPDATE_CURRENCY_SIGN':
+    case 'RESET_CURRENCY_TO_SYSTEM':
       return { ...state, currencyConfig: currencyConfigReducer(state.currencyConfig, action) };
     case 'SAVE_TIP':
     case 'DELETE_TIP':

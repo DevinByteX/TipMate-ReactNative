@@ -144,7 +144,9 @@
       "description": "Tailor Your Currency: Pick your preferred currency for a more seamless billing experience.",
       "modalDescription": "Pick the currency that works best for you, and we'll handle the rest!",
       "tapToSelect": "Tap to select a currency",
-      "changeMessage": "The currency has been changed to"
+      "changeMessage": "The currency has been changed to",
+      "useSystemDefault": "Use System Default ({{currency}})",
+      "systemDefaultMessage": "Using system default currency: {{currency}}"
     },
     "languageSelector": {
       "selectLanguage": "Select Language",

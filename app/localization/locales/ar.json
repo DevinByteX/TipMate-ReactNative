@@ -144,7 +144,9 @@
       "description": "قم بتخصيص عملتك: اختر عملتك المفضلة لتجربة فوترة أكثر سلاسة.",
       "modalDescription": "اختر العملة التي تناسبك، وسنتولى الباقي!",
       "tapToSelect": "انقر لتحديد عملة",
-      "changeMessage": "تم تغيير العملة إلى"
+      "changeMessage": "تم تغيير العملة إلى",
+      "useSystemDefault": "استخدام الافتراضي للنظام ({{currency}})",
+      "systemDefaultMessage": "استخدام عملة النظام الافتراضية: {{currency}}"
     },
     "languageSelector": {
       "selectLanguage": "اختر اللغة",

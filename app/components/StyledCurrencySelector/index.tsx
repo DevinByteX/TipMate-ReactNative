@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
@@ -12,10 +12,16 @@ const CurrencySelectiveScroll = ({
   currencies,
   currencyObject,
   currencySelectiveBarPress,
+  isUsingSystemDefault,
+  onSystemDefaultPress,
+  systemDefaultCurrency,
 }: {
   currencies: CurrencyType[] | undefined;
   currencyObject?: CurrencyType;
   currencySelectiveBarPress?: (currency: CurrencyType) => void;
+  isUsingSystemDefault: boolean;
+  onSystemDefaultPress: () => void;
+  systemDefaultCurrency: CurrencyType;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
@@ -26,6 +32,32 @@ const CurrencySelectiveScroll = ({
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
     >
+      {/* System Default Option */}
+      <Pressable
+        onPress={onSystemDefaultPress}
+        style={[
+          styles.modalContentCurrencyBarContainer,
+          {
+            borderWidth: isUsingSystemDefault ? UnistylesRuntime.hairlineWidth * 5 : 0,
+            borderColor: isUsingSystemDefault ? theme.colors.accent : theme.colors.backgroundColor,
+          },
+        ]}
+      >
+        <View style={styles.currencySelectiveName}>
+          <Text style={styles.modalcurrencyText}>
+            {t('components.currencySelector.useSystemDefault', {
+              currency: t(`currencies.${systemDefaultCurrency.currencyId}`, {
+                defaultValue: systemDefaultCurrency.currencyName,
+              }),
+            })}
+          </Text>
+        </View>
+        <View style={styles.currencySelectiveSign}>
+          <Text style={styles.modalcurrencyText}>{systemDefaultCurrency.currencySign}</Text>
+        </View>
+      </Pressable>
+
+      {/* Currency List */}
       {currencies?.map(currency => (
         <Pressable
           onPress={() => {
@@ -38,11 +70,11 @@ const CurrencySelectiveScroll = ({
             styles.modalContentCurrencyBarContainer,
             {
               borderWidth:
-                currency?.currencyId === currencyObject?.currencyId
+                !isUsingSystemDefault && currency?.currencyId === currencyObject?.currencyId
                   ? UnistylesRuntime.hairlineWidth * 5
                   : 0,
               borderColor:
-                currency?.currencyId === currencyObject?.currencyId
+                !isUsingSystemDefault && currency?.currencyId === currencyObject?.currencyId
                   ? theme.colors.accent
                   : theme.colors.backgroundColor,
             },
@@ -70,6 +102,9 @@ const CurrencyListModal = ({
   currencyObject,
   closeButtonPress,
   currencySelectiveBarPress,
+  isUsingSystemDefault,
+  onSystemDefaultPress,
+  systemDefaultCurrency,
 }: {
   modalTitle?: string;
   modalDescription?: string;
@@ -78,6 +113,9 @@ const CurrencyListModal = ({
   currencyObject?: CurrencyType;
   closeButtonPress?: () => void;
   currencySelectiveBarPress?: (currency: CurrencyType) => void;
+  isUsingSystemDefault: boolean;
+  onSystemDefaultPress: () => void;
+  systemDefaultCurrency: CurrencyType;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
 
@@ -118,6 +156,9 @@ const CurrencyListModal = ({
           currencies={currencies}
           currencyObject={currencyObject}
           currencySelectiveBarPress={currencySelectiveBarPress}
+          isUsingSystemDefault={isUsingSystemDefault}
+          onSystemDefaultPress={onSystemDefaultPress}
+          systemDefaultCurrency={systemDefaultCurrency}
         />
       </View>
     </Modal>
@@ -145,8 +186,34 @@ export const StyledCurrencySelector = ({
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
-  // Use persisted currency if user has explicitly selected one, otherwise use device currency
-  const CurrencyObject = state.currencyConfig || getDeviceCurrency();
+  const systemDefaultCurrency = useMemo(() => getDeviceCurrency(), []);
+
+  console.log('Current currency in StyledCurrencySelector:', state.currencyConfig);
+  console.log('System default currency:', systemDefaultCurrency);
+
+  const isUsingSystemDefault = useMemo(
+    () => state.currencyConfig === undefined,
+    [state.currencyConfig],
+  );
+
+  const CurrencyObject = useMemo(
+    () => state.currencyConfig || systemDefaultCurrency,
+    [state.currencyConfig, systemDefaultCurrency],
+  );
+
+  const handleSystemDefaultPress = () => {
+    dispatch({ type: 'RESET_CURRENCY_TO_SYSTEM' });
+    setModalVisibility(false);
+    Toast.show({
+      type: 'success',
+      text1: t('components.currencySelector.systemDefaultMessage', {
+        currency: t(`currencies.${systemDefaultCurrency.currencyId}`, {
+          defaultValue: systemDefaultCurrency.currencyName,
+        }),
+      }),
+      visibilityTime: 2000,
+    });
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -178,8 +245,12 @@ export const StyledCurrencySelector = ({
         modalDescription={modalDescription}
         currencies={Constants.currencies}
         currencyObject={CurrencyObject}
+        isUsingSystemDefault={isUsingSystemDefault}
+        onSystemDefaultPress={handleSystemDefaultPress}
+        systemDefaultCurrency={systemDefaultCurrency}
         currencySelectiveBarPress={currencyObj => {
           dispatch({ type: 'UPDATE_CURRENCY_SIGN', payload: currencyObj });
+          setModalVisibility(false);
           Toast.show({
             type: 'success',
             text1: `${currencyChangeToastMessage} ${t(`currencies.${currencyObj.currencyId}`, {

@@ -144,7 +144,9 @@
       "description": "Personaliza tu moneda: Elige tu favorita para una mejor experiencia.",
       "modalDescription": "¡Elige la moneda que mejor te funcione y nosotros nos encargamos del resto!",
       "tapToSelect": "Toca para seleccionar una moneda",
-      "changeMessage": "La moneda ha sido cambiada a"
+      "changeMessage": "La moneda ha sido cambiada a",
+      "useSystemDefault": "Usar predeterminado del sistema ({{currency}})",
+      "systemDefaultMessage": "Usando moneda predeterminada del sistema: {{currency}}"
     },
     "languageSelector": {
       "selectLanguage": "Seleccionar Idioma",
