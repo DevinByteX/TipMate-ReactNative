@@ -1,6 +1,6 @@
 /**
  * i18next configuration for TipMate
- * Supports 9 languages with RTL support for Arabic
+ * Optimized with lazy loading and caching for better performance
  */
 
 import i18n from 'i18next';
@@ -9,26 +9,36 @@ import { getLocales } from 'react-native-localize';
 
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from './localizationConfig';
 
-// Import all translation files
-import en from './locales/en.json';
-import es from './locales/es.json';
-import fr from './locales/fr.json';
-import si from './locales/si.json';
-import ar from './locales/ar.json';
+// Cache for device language to avoid repeated detection
+let cachedDeviceLanguage: string | null = null;
 
-// Translation resources
-const resources = {
-    en: { translation: en },
-    es: { translation: es },
-    fr: { translation: fr },
-    si: { translation: si },
-    ar: { translation: ar },
+// Lazy load translation function
+const loadTranslation = (languageCode: string) => {
+    switch (languageCode) {
+        case 'en':
+            return require('./locales/en.json');
+        case 'es':
+            return require('./locales/es.json');
+        case 'fr':
+            return require('./locales/fr.json');
+        case 'si':
+            return require('./locales/si.json');
+        case 'ar':
+            return require('./locales/ar.json');
+        default:
+            return require('./locales/en.json');
+    }
 };
 
 /**
- * Get the best matching language from device locales
+ * Get the best matching language from device locales (cached)
  */
 const getDeviceLanguage = (): string => {
+    // Return cached value if available
+    if (cachedDeviceLanguage) {
+        return cachedDeviceLanguage;
+    }
+
     try {
         const locales = getLocales();
         if (locales && locales.length > 0) {
@@ -39,11 +49,13 @@ const getDeviceLanguage = (): string => {
 
                 // Check for exact match (e.g., zh-Hans)
                 if (SUPPORTED_LANGUAGES.some(lang => lang.code === fullTag)) {
+                    cachedDeviceLanguage = fullTag;
                     return fullTag;
                 }
 
                 // Check for language code match (e.g., en, es, fr)
                 if (SUPPORTED_LANGUAGES.some(lang => lang.code === langCode)) {
+                    cachedDeviceLanguage = langCode;
                     return langCode;
                 }
             }
@@ -52,15 +64,32 @@ const getDeviceLanguage = (): string => {
         console.warn('Failed to get device language:', error);
     }
 
+    cachedDeviceLanguage = DEFAULT_LANGUAGE;
     return DEFAULT_LANGUAGE;
 };
 
 /**
  * Initialize i18next with the detected or stored language
- * @param storedLanguage - Previously stored language preference from AsyncStorage
+ * Optimized with lazy loading - only loads the needed language
+ * 
+ * NOTE: This function is called with storedLanguage ONLY when user has explicitly
+ * set a language preference via the UI. Otherwise, it uses device locale without
+ * persisting it to storage.
+ * 
+ * @param storedLanguage - Previously stored language preference from AsyncStorage (user's explicit choice)
  */
 export const initializeI18n = (storedLanguage?: string): void => {
     const language = storedLanguage || getDeviceLanguage();
+
+    // Load only the required language and fallback
+    const resources: { [key: string]: { translation: any } } = {
+        [language]: { translation: loadTranslation(language) },
+    };
+
+    // Load fallback language if different from selected
+    if (language !== DEFAULT_LANGUAGE) {
+        resources[DEFAULT_LANGUAGE] = { translation: loadTranslation(DEFAULT_LANGUAGE) };
+    }
 
     i18n.use(initReactI18next).init({
         resources,
@@ -82,9 +111,17 @@ export const initializeI18n = (storedLanguage?: string): void => {
 
 /**
  * Change the current language
+ * Handles lazy loading of new language resources
  * @param languageCode - The language code to switch to
  */
 export const changeLanguage = async (languageCode: string): Promise<void> => {
+    // Check if language resources are already loaded
+    if (!i18n.hasResourceBundle(languageCode, 'translation')) {
+        // Lazy load the language resources
+        const translation = loadTranslation(languageCode);
+        i18n.addResourceBundle(languageCode, 'translation', translation);
+    }
+
     await i18n.changeLanguage(languageCode);
 };
 

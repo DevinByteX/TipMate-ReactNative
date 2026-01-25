@@ -11,6 +11,7 @@ import {
   isRTLLanguage,
   useRTL,
   i18n,
+  getCurrentLanguage,
   type LanguageConfig,
 } from '@/localization';
 
@@ -143,7 +144,8 @@ export const StyledLanguageSelector = ({
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
   const [pendingLanguage, setPendingLanguage] = useState<LanguageConfig | null>(null);
 
-  const currentLanguage = state.language;
+  // Use state.language if available, otherwise fallback to i18n's current language
+  const currentLanguage = state.language || getCurrentLanguage();
   const currentLangConfig = SUPPORTED_LANGUAGES.find(l => l.code === currentLanguage);
 
   const handleRTLLanguageConfirm = useCallback(async () => {

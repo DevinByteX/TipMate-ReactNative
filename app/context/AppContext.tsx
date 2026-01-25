@@ -1,9 +1,9 @@
-import React, { createContext, Dispatch, ReactNode, useContext } from 'react';
+import React, { createContext, Dispatch, ReactNode, useContext, useEffect } from 'react';
 import { AppState, AppAction } from './types';
 import { rootReducer } from './rootReducer';
 import { Constants } from '@configs';
 import { usePersistedReducer } from '@hooks';
-import { DEFAULT_LANGUAGE } from '../localization';
+import { changeLanguage, applyRTLSync, getCurrentLanguage } from '../localization';
 
 const initialState: AppState = {
   tips: Constants.defaultTipOptionsArray,
@@ -35,6 +35,19 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     initialState,
     Constants.APP_STATE_ASYNCSTORAGE_KEY,
   );
+
+  // Sync i18n with persisted language state
+  useEffect(() => {
+    const syncLanguage = async () => {
+      // If user has a saved language preference, apply it
+      if (state.language && state.language !== getCurrentLanguage()) {
+        await changeLanguage(state.language);
+        applyRTLSync(state.language);
+      }
+    };
+
+    syncLanguage();
+  }, [state.language]);
 
   return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 };
