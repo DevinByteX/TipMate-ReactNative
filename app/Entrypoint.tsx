@@ -6,7 +6,7 @@ import { ActivityIndicator, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ApplicationNavigator from '@navigation/ApplicationNavigation';
 import AppProvider from './context/AppContext';
-import { initializeI18n, applyRTLSync, DEFAULT_LANGUAGE } from './localization';
+import { initializeI18n, applyRTLSync, getCurrentLanguage } from './localization';
 import { Constants } from '@configs';
 
 /**
@@ -23,32 +23,26 @@ const Entrypoint = () => {
 
   const initI18n = useCallback(async () => {
     try {
-      // Start AsyncStorage read - don't block on it if possible
-      const storedStatePromise = AsyncStorage.getItem(Constants.APP_STATE_ASYNCSTORAGE_KEY);
-
-      // Initialize i18n with default first (fast path)
-      initializeI18n(DEFAULT_LANGUAGE);
-
-      // Then check for stored preference
-      const storedState = await storedStatePromise;
-      let storedLanguage = DEFAULT_LANGUAGE;
+      // Check for stored language preference first
+      const storedState = await AsyncStorage.getItem(Constants.APP_STATE_ASYNCSTORAGE_KEY);
+      let language: string | undefined;
 
       if (storedState) {
         const parsedState = JSON.parse(storedState);
-        storedLanguage = parsedState.language || DEFAULT_LANGUAGE;
-
-        // Only re-init if different from default
-        if (storedLanguage !== DEFAULT_LANGUAGE) {
-          initializeI18n(storedLanguage);
-        }
+        language = parsedState.language;
       }
 
-      // Apply RTL settings (needed for proper layout)
-      applyRTLSync(storedLanguage);
+      // Initialize i18n - uses device locale if no stored preference
+      initializeI18n(language);
+
+      // Apply RTL settings based on the actual initialized language
+      applyRTLSync(getCurrentLanguage());
       setIsI18nReady(true);
     } catch (error) {
       console.warn('Failed to initialize i18n:', error);
-      // Already initialized with default, just mark ready
+      // Initialize with device language detection on error
+      initializeI18n();
+      applyRTLSync(getCurrentLanguage());
       setIsI18nReady(true);
     }
   }, []);

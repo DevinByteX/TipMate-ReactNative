@@ -95,7 +95,7 @@ export const duplicatePreventionReducer = (
 };
 
 export interface LanguageState {
-  language: string;
+  language: string | undefined;
   isRTL: boolean;
 }
 

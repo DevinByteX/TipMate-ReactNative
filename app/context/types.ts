@@ -47,7 +47,7 @@ export interface AppState {
   currencyConfig: CurrencyType;
   savedTips: SavedTip[];
   duplicatePreventionWindow: number; // in minutes
-  language: string; // Language code (e.g., 'en', 'es', 'ar')
+  language: string | undefined; // Language code (e.g., 'en', 'es', 'ar')
   isRTL: boolean; // RTL layout flag
 }
 
