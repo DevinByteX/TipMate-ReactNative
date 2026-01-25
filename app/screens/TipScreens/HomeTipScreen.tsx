@@ -21,6 +21,7 @@ import {
   calculateBillValues,
   useShareTipPreview,
   useSaveTip,
+  getDeviceCurrency,
 } from '@hooks';
 import { useAppContext } from '@/context/AppContext';
 
@@ -44,8 +45,10 @@ const HomeTipScreen = () => {
     navigateToTipDetail,
   } = useSaveTip();
 
-  const currencySymbol: string = state?.currencyConfig?.currencySign;
-  const currencyCode: string = state?.currencyConfig?.currencyId;
+  // Use persisted currency if user has explicitly selected one, otherwise use device currency
+  const currentCurrency = state?.currencyConfig || getDeviceCurrency();
+  const currencySymbol: string = currentCurrency.currencySign;
+  const currencyCode: string = currentCurrency.currencyId;
 
   useEffect(() => {
     const billValuesResults = calculateBillValues(

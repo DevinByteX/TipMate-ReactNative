@@ -44,7 +44,7 @@ export interface AppState {
   splits: SplitOptionState[];
   tipSliderConfig: TipSliderConfigValues;
   splitSliderConfig: SplitSliderConfigValues;
-  currencyConfig: CurrencyType;
+  currencyConfig: CurrencyType | undefined; // undefined = use device currency, set = user preference
   savedTips: SavedTip[];
   duplicatePreventionWindow: number; // in minutes
   language: string | undefined; // Language code (e.g., 'en', 'es', 'ar')

@@ -10,7 +10,7 @@ const initialState: AppState = {
   splits: Constants.defaultSplitOptionsArray,
   tipSliderConfig: Constants.defaultTipSliderConfigValues,
   splitSliderConfig: Constants.defaultSplitSliderConfigValues,
-  currencyConfig: Constants.defaultCurrencyObject,
+  currencyConfig: undefined, // undefined = use device currency, persisted only when user explicitly selects
   savedTips: [],
   duplicatePreventionWindow: Constants.defaultDuplicatePreventionWindow,
   language: undefined,
