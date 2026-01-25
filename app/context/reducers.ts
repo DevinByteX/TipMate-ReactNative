@@ -58,6 +58,9 @@ export const currencyConfigReducer = (
       const updatedCurrencyConfig = action.payload;
       saveState({ currencyConfig: updatedCurrencyConfig }); // Save updated currency config to AsyncStorage
       return updatedCurrencyConfig;
+    case 'RESET_CURRENCY_TO_SYSTEM':
+      saveState({ currencyConfig: undefined }); // Reset to system default
+      return undefined;
     default:
       return state;
   }

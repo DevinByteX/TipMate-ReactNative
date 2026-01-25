@@ -59,7 +59,9 @@ export type SplitAction =
   | { type: 'UPDATE_SPLIT_OPTIONS'; payload: SplitOptionState }
   | { type: 'RESET_SPLIT_OPTIONS_TO_DEFAULT'; payload: SplitOptionState[] };
 
-export type CurrencyConfigAction = { type: 'UPDATE_CURRENCY_SIGN'; payload: CurrencyType };
+export type CurrencyConfigAction =
+  | { type: 'UPDATE_CURRENCY_SIGN'; payload: CurrencyType }
+  | { type: 'RESET_CURRENCY_TO_SYSTEM' };
 
 export type SavedTipAction =
   | { type: 'SAVE_TIP'; payload: SavedTip }

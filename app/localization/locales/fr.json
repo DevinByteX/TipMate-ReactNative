@@ -144,7 +144,9 @@
       "description": "Personnalisez Votre Devise : Choisissez votre devise préférée pour une expérience de facturation plus fluide.",
       "modalDescription": "Choisissez la devise qui vous convient le mieux, et nous nous occupons du reste !",
       "tapToSelect": "Appuyez pour sélectionner une devise",
-      "changeMessage": "La devise a été changée en"
+      "changeMessage": "La devise a été changée en",
+      "useSystemDefault": "Utiliser la valeur par défaut du système ({{currency}})",
+      "systemDefaultMessage": "Utilisation de la devise par défaut du système : {{currency}}"
     },
     "languageSelector": {
       "selectLanguage": "Sélectionner la Langue",
