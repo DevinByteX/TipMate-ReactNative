@@ -22,6 +22,7 @@ import { useShareTipDetailsText, formatTipDetailsPreview, ShareTipDetailsParams,
 import { useShareTipDetailsPDF, TipDetailsForPDF, PDFTranslations } from './useShareTipDetailsPDF';
 import { useShareTipPreview } from './useShareTipPreview';
 import { useSaveTip } from './useSaveTip';
+import { getDeviceCurrency } from './currencyUtils';
 
 export {
   convertToTwoDecimalPoints,
@@ -44,6 +45,7 @@ export {
   useShareTipDetailsPDF,
   useShareTipPreview,
   useSaveTip,
+  getDeviceCurrency,
 };
 export type {
   BillCalculationType,

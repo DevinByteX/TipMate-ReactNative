@@ -50,9 +50,9 @@ export const splitReducer = (
 };
 
 export const currencyConfigReducer = (
-  state: CurrencyType,
+  state: CurrencyType | undefined,
   action: CurrencyConfigAction,
-): CurrencyType => {
+): CurrencyType | undefined => {
   switch (action.type) {
     case 'UPDATE_CURRENCY_SIGN':
       const updatedCurrencyConfig = action.payload;
@@ -121,7 +121,7 @@ const saveState = async (
   partialState: Partial<{
     tips: TipOptionState[];
     splits: SplitOptionState[];
-    currencyConfig: CurrencyType;
+    currencyConfig: CurrencyType | undefined;
     savedTips: SavedTip[];
     duplicatePreventionWindow: number;
     language: string;
@@ -134,7 +134,7 @@ const saveState = async (
       const currentStateObject = JSON.parse(currentState) as {
         tips: TipOptionState[];
         splits: SplitOptionState[];
-        currencyConfig: CurrencyType;
+        currencyConfig: CurrencyType | undefined;
         savedTips: SavedTip[];
         duplicatePreventionWindow: number;
         language: string;

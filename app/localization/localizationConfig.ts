@@ -70,8 +70,9 @@ export const getFontFamilyForLanguage = (
 /**
  * Get locale code for date/time formatting
  * Maps language codes to proper locale codes
+ * @param code - Language code or undefined (falls back to default)
  */
-export const getLocaleForFormatting = (code: string): string => {
+export const getLocaleForFormatting = (code: string | undefined): string => {
     const localeMap: Record<string, string> = {
         en: 'en-US',
         es: 'es-ES',
@@ -79,5 +80,5 @@ export const getLocaleForFormatting = (code: string): string => {
         si: 'si-LK',
         ar: 'ar-SA',
     };
-    return localeMap[code] || 'en-US';
+    return localeMap[code || DEFAULT_LANGUAGE] || 'en-US';
 };

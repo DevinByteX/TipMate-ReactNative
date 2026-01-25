@@ -5,6 +5,7 @@ import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unis
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
 import { useAppContext } from '@/context/AppContext';
+import { getDeviceCurrency } from '@hooks';
 import Toast from 'react-native-toast-message';
 
 const CurrencySelectiveScroll = ({
@@ -144,7 +145,8 @@ export const StyledCurrencySelector = ({
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
-  const CurrencyObject = state.currencyConfig;
+  // Use persisted currency if user has explicitly selected one, otherwise use device currency
+  const CurrencyObject = state.currencyConfig || getDeviceCurrency();
 
   return (
     <View style={styles.mainContainer}>
