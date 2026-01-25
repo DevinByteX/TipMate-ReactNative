@@ -32,7 +32,7 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
     case 'UPDATE_DUPLICATE_PREVENTION_WINDOW':
       return { ...state, duplicatePreventionWindow: duplicatePreventionReducer(state.duplicatePreventionWindow, action) };
     case 'SET_LANGUAGE':
-      const newLanguageState = languageReducer({ language: state.language, isRTL: state.isRTL }, action);
+      const newLanguageState = languageReducer({ language: state.language ?? undefined, isRTL: state.isRTL }, action);
       return { ...state, ...newLanguageState };
     default:
       return state;

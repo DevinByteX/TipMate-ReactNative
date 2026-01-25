@@ -13,7 +13,7 @@ const initialState: AppState = {
   currencyConfig: Constants.defaultCurrencyObject,
   savedTips: [],
   duplicatePreventionWindow: Constants.defaultDuplicatePreventionWindow,
-  language: DEFAULT_LANGUAGE,
+  language: undefined,
   isRTL: false,
 };
 
