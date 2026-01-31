@@ -5,6 +5,7 @@ import { NavigationContainer, useNavigationContainerRef } from '@react-navigatio
 import { useReduxDevToolsExtension } from '@react-navigation/devtools';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import Toast from 'react-native-toast-message';
+import BootSplash from 'react-native-bootsplash';
 // Custom Stacks
 import StackNavigation from '@navigation/StackNavigation';
 // Custom Hooks
@@ -42,7 +43,12 @@ const ApplicationNavigator = (props: any) => {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer ref={navigationRef}>
+      <NavigationContainer
+        ref={navigationRef}
+        onReady={() => {
+          BootSplash.hide({ fade: true });
+        }}
+      >
         <StackNavigation />
       </NavigationContainer>
       <Toast config={toastConfig} topOffset={UnistylesRuntime.insets.top} />

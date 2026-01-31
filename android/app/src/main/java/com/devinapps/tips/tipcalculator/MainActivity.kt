@@ -5,6 +5,7 @@ import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
 import android.os.Bundle; // This import added for react-native-screens when configuring react navigation
+import com.zoontek.rnbootsplash.RNBootSplash
 
 class MainActivity : ReactActivity() {
 
@@ -22,6 +23,7 @@ class MainActivity : ReactActivity() {
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
 
   override fun onCreate(savedInstanceState: Bundle?) {  // react-native-screens configuration
-    super.onCreate(null)
+    RNBootSplash.init(this, R.style.BootTheme) // Initialize splash screen
+    super.onCreate(null) // react-native-screens configuration
   }
 }
