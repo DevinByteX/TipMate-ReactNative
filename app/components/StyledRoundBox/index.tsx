@@ -56,15 +56,17 @@ const RoundCapsule = ({
             color: TextColor,
           },
         ]}
+        adjustsFontSizeToFit={true}
+        numberOfLines={1}
       >
         {`${textLabel ?? textValue} `}
+        <StyledIcons
+          type={'FontAwesome6'}
+          name={'sliders'}
+          size={styles.roundCapsuleText?.fontSize - 4}
+          color={TextColor}
+        />
       </Text>
-      <StyledIcons
-        type={iconType}
-        name={iconName}
-        size={Number(styles.roundCapsuleText?.fontSize) - 4}
-        color={TextColor}
-      />
     </Pressable>
   );
 };
