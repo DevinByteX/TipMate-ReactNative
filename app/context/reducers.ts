@@ -114,6 +114,9 @@ export const languageReducer = (
       };
       saveState(newLanguageState);
       return newLanguageState;
+    case 'RESET_LANGUAGE_TO_SYSTEM':
+      saveState({ language: undefined, isRTL: false });
+      return { language: undefined, isRTL: false };
     default:
       return state;
   }

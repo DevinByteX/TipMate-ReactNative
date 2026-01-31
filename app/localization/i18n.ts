@@ -33,7 +33,7 @@ const loadTranslation = (languageCode: string) => {
 /**
  * Get the best matching language from device locales (cached)
  */
-const getDeviceLanguage = (): string => {
+export const getDeviceLanguage = (): string => {
     // Return cached value if available
     if (cachedDeviceLanguage) {
         return cachedDeviceLanguage;

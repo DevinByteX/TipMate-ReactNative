@@ -8,6 +8,7 @@ export {
     changeLanguage,
     getCurrentLanguage,
     isI18nInitialized,
+    getDeviceLanguage,
 } from './i18n';
 
 export {

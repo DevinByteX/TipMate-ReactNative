@@ -152,7 +152,9 @@
       "selectLanguage": "Select Language",
       "currentLanguage": "Current: {{language}}",
       "description": "Personalize Your Experience: Choose your preferred language for a more comfortable app experience.",
-      "modalDescription": "Select your preferred language from the list below. Some languages support right-to-left (RTL) text direction."
+      "modalDescription": "Select your preferred language from the list below. Some languages support right-to-left (RTL) text direction.",
+      "useSystemDefault": "Use System Default ({{language}})",
+      "systemDefaultMessage": "Using system default language: {{language}}"
     },
     "tipOptionsEdit": {
       "title": "CUSTOMISE YOUR TIPS",
