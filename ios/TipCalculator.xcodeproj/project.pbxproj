@@ -19,8 +19,10 @@
 		6B82F6E3A91D4279904804ED /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C066B718A0684558AD802EF8 /* Nunito-Medium.ttf */; };
 		726B9B01040D407F85653F3D /* NotoSansSinhala-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 602872BA1A154664AACF71CF /* NotoSansSinhala-Bold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		85973D90949B451EB052B98C /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70B95FB85D34E09B3796281 /* BootSplash.storyboard */; };
 		876C7969D807409DB1A1EA06 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C1318B76E942ECA3FA6BDA /* Montserrat-Black.ttf */; };
 		9431C87B2D87192200F5D13C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9431C87A2D87192200F5D13C /* AppDelegate.swift */; };
+		9DA609F8FCE74054A8F6344E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9E19BAD449A4343B056580F /* Colors.xcassets */; };
 		A366F76E10D0402CA888B8F2 /* NotoSansSinhala-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5900A4C07E85492E9E139E35 /* NotoSansSinhala-Medium.ttf */; };
 		ADD486AC3E5A4FA2BABE6F9B /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 677EC2EC736D46F487362364 /* Nunito-SemiBold.ttf */; };
 		B8E6818D8E7442F9B73FA871 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3D1A34C55DA430C9AE28938 /* Montserrat-Medium.ttf */; };
@@ -69,10 +71,12 @@
 		9431C87A2D87192200F5D13C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = TipCalculator/AppDelegate.swift; sourceTree = "<group>"; };
 		B3D1A34C55DA430C9AE28938 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../app/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		B404BEA9520345AFB7A62865 /* NotoSansSinhala-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSansSinhala-Regular.ttf"; path = "../app/assets/fonts/NotoSansSinhala-Regular.ttf"; sourceTree = "<group>"; };
+		B9E19BAD449A4343B056580F /* Colors.xcassets */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = TipCalculator/Colors.xcassets; sourceTree = "<group>"; };
 		C066B718A0684558AD802EF8 /* Nunito-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Medium.ttf"; path = "../app/assets/fonts/Nunito-Medium.ttf"; sourceTree = "<group>"; };
 		CF41AD666F154743803FDB33 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Regular.ttf"; path = "../app/assets/fonts/Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		EB50DD8BBEEA2569DDB9FB02 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = TipCalculator/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F70B95FB85D34E09B3796281 /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = TipCalculator/BootSplash.storyboard; sourceTree = "<group>"; };
 		F8974A390FA649B089A64998 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Bold.ttf"; path = "../app/assets/fonts/Nunito-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +129,8 @@
 				EB50DD8BBEEA2569DDB9FB02 /* PrivacyInfo.xcprivacy */,
 				9431C87A2D87192200F5D13C /* AppDelegate.swift */,
 				509A525D29594CDEA3E88561 /* Settings.bundle */,
+				F70B95FB85D34E09B3796281 /* BootSplash.storyboard */,
+				B9E19BAD449A4343B056580F /* Colors.xcassets */,
 			);
 			name = TipCalculator;
 			sourceTree = "<group>";
@@ -304,6 +310,8 @@
 				A366F76E10D0402CA888B8F2 /* NotoSansSinhala-Medium.ttf in Resources */,
 				5595DD592AF042D3879175A7 /* NotoSansSinhala-Regular.ttf in Resources */,
 				14477490B6CB421D9BD37C5C /* NotoSansSinhala-SemiBold.ttf in Resources */,
+				85973D90949B451EB052B98C /* BootSplash.storyboard in Resources */,
+				9DA609F8FCE74054A8F6344E /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

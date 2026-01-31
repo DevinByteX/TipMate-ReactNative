@@ -119,6 +119,12 @@ body: MIT License
 Copyrig…
 version: 1.6.0
 
+name: RNBootSplash, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 7.0.1
+
 name: RNCAsyncStorage, nameSpecified: 
 body: MIT License
 
