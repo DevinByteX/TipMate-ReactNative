@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 import { useAppContext } from '@/context/AppContext';
@@ -14,7 +14,7 @@ const TipPercentageCapsule = ({
   textValue: number;
   onTipPress?: (value: number) => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   return (
     <Pressable
       style={[
@@ -48,7 +48,7 @@ const TipPercentageCustomCapsule = ({
   textValue: string;
   onCustomTipPress?: () => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   const TextColor = active ? theme.colors.card : theme.colors.card_typography;
   return (
@@ -102,7 +102,7 @@ export const StyledTipOptions = ({
   const [tipPercentageValue, setTipPercentageValue] = useState<number>(defaultTipValue);
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   return (
     <View style={styles.mainContainer}>
@@ -205,61 +205,61 @@ export const StyledTipOptions = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   instructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   mainInnerContainer: {
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
-    rowGap: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (rt.screen.height * 1) / 100,
+    rowGap: (rt.screen.height * 1) / 100,
   },
   mainRowContainerStyles: {
     flex: 1,
     flexDirection: 'row',
-    height: (UnistylesRuntime.screen.height * 4) / 100,
+    height: (rt.screen.height * 4) / 100,
   },
   fistColumnContainerStyles: {
     flex: 1,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
+    columnGap: (rt.screen.width * 2) / 100,
   },
   secondColumnContainerStyles: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   tipPercentageCapsule: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   tipPercentageCapsuleCustom: {
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     height: '100%',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   tipDigitsStyles: {
     fontSize: 24,
@@ -276,9 +276,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingHorizontal: (rt.screen.width * 2) / 100,
   },
   sliderContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+    marginTop: (rt.screen.height * 1) / 100,
   },
 }));

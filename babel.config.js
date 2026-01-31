@@ -13,10 +13,11 @@ module.exports = {
           "@navigation": "./app/navigation/",
           "@hooks": "./app/hooks/index",
           "@configs": "./app/configs/index",
-          "@plugins": "./app/plugins/index",
         }
       }
     ],
+    // Unistyles 3.0 babel plugin - must be before reanimated
+    ['react-native-unistyles/plugin', { root: 'app' }],
     'react-native-reanimated/plugin', // has to be listed last
   ]
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, Pressable } from 'react-native';
-import { createStyleSheet, useStyles } from 'react-native-unistyles';
-import { UnistylesRuntime } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { Library } from 'react-native-legal';
 import { StyledIcons } from '../StyledIcons';
 
@@ -18,8 +17,6 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   licenceDetails,
   onPress,
 }) => {
-  const { styles } = useStyles(stylesheet);
-
   if (!licenceDetails) return null;
 
   const { name, version } = licenceDetails;
@@ -41,16 +38,16 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   licenseMainContainer: {
     width: '100%',
     flex: 1,
     flexDirection: 'row',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    paddingVertical: (rt.screen.height * 1.5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
+    marginBottom: (rt.screen.height * 1.5) / 100,
   },
   libraryDetailsContainer: {
     flex: 8,
@@ -62,18 +59,18 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   styledIcon: {
     color: colors.accent,
-    marginLeft: (UnistylesRuntime.screen.width * 5) / 100,
+    marginLeft: (rt.screen.width * 5) / 100,
   },
   libraryNameText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginBottom: (rt.screen.height * 0.5) / 100,
   },
   versionText: {
     fontSize: 12,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Bold,
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginBottom: (rt.screen.height * 0.5) / 100,
   },
 }));

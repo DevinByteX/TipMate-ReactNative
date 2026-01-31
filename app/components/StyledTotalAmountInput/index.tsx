@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { acceptNumbersAndDecimals } from '@hooks';
 
@@ -25,7 +25,7 @@ export const StyledTotalAmountInput = ({
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
 
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme, rt } = useUnistyles();
 
   const [textInputValue, setTextInputValue] = useState<string>();
   const [isFocused, setIsFocused] = useState<boolean>();
@@ -77,7 +77,7 @@ export const StyledTotalAmountInput = ({
           }}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          keyboardAppearance={UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light'}
+          keyboardAppearance={rt.themeName === 'dark' ? 'dark' : 'light'}
           {...restProps}
         />
       </View>
@@ -85,13 +85,13 @@ export const StyledTotalAmountInput = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   mainContainer: {
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (rt.screen.height * 2) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
@@ -102,11 +102,11 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginVertical: (rt.screen.height * 0.5) / 100,
   },
   textInputContainer: {
     flexDirection: 'row',
-    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+    marginTop: (rt.screen.height * 1) / 100,
   },
   currencySymbol: {
     color: colors.card_typography,

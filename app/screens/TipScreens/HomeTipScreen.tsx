@@ -13,7 +13,7 @@ import {
   StyledAlert,
 } from '@/components';
 // Styling
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import {
   BillCalculationType,
   RoundingMethod,
@@ -26,7 +26,7 @@ import {
 import { useAppContext } from '@/context/AppContext';
 
 const HomeTipScreen = () => {
-  const { styles } = useStyles(stylesheet);
+  useUnistyles();
   const { t } = useTranslation();
 
   const [userInputBillAmount, setUserInputBillAmount] = useState<number>(0);
@@ -279,14 +279,14 @@ const HomeTipScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }, rt) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   scrollContentContainer: {
-    paddingBottom: (UnistylesRuntime.screen.height * 8) / 100,
+    paddingBottom: (rt.screen.height * 8) / 100,
   },
 }));
 

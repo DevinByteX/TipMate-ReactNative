@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { useAppContext } from '@/context/AppContext';
 import Toast from 'react-native-toast-message';
@@ -24,7 +24,7 @@ const TimeOptionsList = ({
   selectedValue: number;
   onTimeOptionPress?: (option: DuplicatePreventionTimeOption) => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const { t } = useTranslation();
 
   return (
@@ -46,7 +46,7 @@ const TimeOptionsList = ({
           style={[
             styles.modalContentTimeOptionBarContainer,
             {
-              borderWidth: option.value === selectedValue ? UnistylesRuntime.hairlineWidth * 5 : 0,
+              borderWidth: option.value === selectedValue ? StyleSheet.hairlineWidth * 5 : 0,
               borderColor:
                 option.value === selectedValue ? theme.colors.accent : theme.colors.backgroundColor,
             },
@@ -86,7 +86,7 @@ const TimeOptionsModal = ({
   closeButtonPress?: () => void;
   onTimeOptionPress?: (option: DuplicatePreventionTimeOption) => void;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const { t } = useTranslation();
 
   return (
@@ -152,7 +152,7 @@ export const StyledDuplicatePreventionSelector = ({
   changeToastMessage?: string;
 }) => {
   const { state, dispatch } = useAppContext();
-  const { styles } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const { t } = useTranslation();
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
@@ -203,40 +203,40 @@ export const StyledDuplicatePreventionSelector = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const styles = StyleSheet.create(({ colors, fonts, utils }, rt) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   instructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   modalInstructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginBottom: (rt.screen.height * 2) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   mainSelectionChangeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingTop: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   selectionChangeText: {
     color: colors.card_typography,
@@ -247,11 +247,11 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   selectionBox: {
     justifyContent: 'center',
     alignItems: 'center',
-    minWidth: (UnistylesRuntime.screen.width * 30) / 100,
+    minWidth: (rt.screen.width * 30) / 100,
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
-    height: (UnistylesRuntime.screen.height * 4) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 3) / 100,
+    height: (rt.screen.height * 4) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   selectionText: {
     fontSize: 14,
@@ -261,10 +261,10 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
 
   // Modal contents
   modalMainContainer: {
-    height: (UnistylesRuntime.screen.height * 50) / 100,
+    height: (rt.screen.height * 50) / 100,
     width: '100%',
-    borderRadius: (UnistylesRuntime.screen.width * 5) / 100,
-    borderWidth: UnistylesRuntime.hairlineWidth * 2,
+    borderRadius: (rt.screen.width * 5) / 100,
+    borderWidth: StyleSheet.hairlineWidth * 2,
     borderColor: colors.accent,
     backgroundColor: utils.hexToRGBA(colors.card, 0.95),
     bottom: 0,
@@ -274,9 +274,9 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingTop: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingTop: (rt.screen.height * 2) / 100,
+    paddingBottom: (rt.screen.height * 0.5) / 100,
   },
   modalTitle: {
     color: colors.accent,
@@ -287,10 +287,10 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   modalContentTimeOptionBarContainer: {
     flexDirection: 'row',
     width: '100%',
-    paddingVertical: (UnistylesRuntime.screen.height * 1.25) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 1.25) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
     backgroundColor: colors.backgroundColor,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
     alignItems: 'center',
   },
   modalTimeOptionText: {
@@ -301,11 +301,11 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   timeOptionLabelContainer: {
     flex: 1,
     justifyContent: 'center',
-    paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingVertical: (rt.screen.height * 0.5) / 100,
   },
   timeOptionsScrollContainerStyles: {
-    gap: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingBottom: UnistylesRuntime.insets.bottom * 2,
+    gap: (rt.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingBottom: rt.insets.bottom * 2,
   },
 }));

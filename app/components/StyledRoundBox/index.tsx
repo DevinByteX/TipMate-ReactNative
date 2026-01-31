@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { RoundingMethod, RoundingMethodType, DisabledRoundingMethodsType } from '@hooks';
 import { IconTypeMap, StyledIcons, StyledIconTypesKey } from '@components';
@@ -24,7 +24,7 @@ const RoundCapsule = ({
   disabled = false,
   onRoundCapsulePress,
 }: RoundCapsuleProps) => {
-  const { styles, theme } = useStyles(styleSheet);
+  const { theme } = useUnistyles();
 
   const TextColor = disabled
     ? theme.colors.disable_text
@@ -84,7 +84,6 @@ export const StyledRoundBox = ({
   disablingRoundingMethod?: DisabledRoundingMethodsType;
   onSelectedRound?: (value: RoundingMethodType) => void;
 }) => {
-  const { styles } = useStyles(styleSheet);
   const { t } = useTranslation();
 
   return (
@@ -138,33 +137,33 @@ export const StyledRoundBox = ({
   );
 };
 
-const styleSheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingTop: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 1) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingTop: (rt.screen.height * 2) / 100,
+    paddingBottom: (rt.screen.height * 1) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   instructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   mainInnerContainer: {
     flexDirection: 'row',
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingVertical: (rt.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    columnGap: (rt.screen.width * 2) / 100,
   },
   roundCapsuleStyle: {
     flex: 1,
@@ -172,8 +171,8 @@ const styleSheet = createStyleSheet(({ colors, fonts }) => ({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    height: (UnistylesRuntime.screen.height * 4) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
+    height: (rt.screen.height * 4) / 100,
   },
   roundCapsuleText: {
     fontSize: 14,

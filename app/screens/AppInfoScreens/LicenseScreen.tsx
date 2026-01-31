@@ -10,8 +10,7 @@ import {
   Animated,
 } from 'react-native';
 import { StyledHeader, StyledLicenseDetailsCard, StyledIcons } from '@components';
-import { createStyleSheet, useStyles } from 'react-native-unistyles';
-import { UnistylesRuntime } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useNavigation } from '@react-navigation/native';
 import { Library, ReactNativeLegal } from 'react-native-legal';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +20,7 @@ import { useTranslation } from 'react-i18next';
  * with their license information. It provides search functionality and a scroll-to-top button.
  */
 const LicensesScreen = () => {
-  const { styles } = useStyles(stylesheet);
+  const { rt } = useUnistyles();
   const { t } = useTranslation();
   const navigation = useNavigation();
 
@@ -146,7 +145,7 @@ const LicensesScreen = () => {
           autoCapitalize="none"
           autoCorrect={false}
           clearButtonMode="while-editing"
-          keyboardAppearance={UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light'}
+          keyboardAppearance={rt.themeName === 'dark' ? 'dark' : 'light'}
         />
       </View>
       <FlatList
@@ -189,17 +188,17 @@ const LicensesScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   searchContainer: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 1.5) / 100,
     backgroundColor: colors.backgroundColor,
   },
   searchInput: {
     backgroundColor: colors.card,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 1.5) / 100,
     fontSize: 16,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
@@ -208,16 +207,16 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   scrollContentContainer: {
-    paddingBottom: UnistylesRuntime.insets.bottom * 2,
+    paddingBottom: rt.insets.bottom * 2,
   },
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: (UnistylesRuntime.screen.height * 10) / 100,
+    paddingVertical: (rt.screen.height * 10) / 100,
   },
   emptyText: {
     fontSize: 16,
@@ -228,11 +227,11 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   scrollToTopButton: {
     position: 'absolute',
     backgroundColor: colors.accent,
-    width: (UnistylesRuntime.screen.width * 12) / 100,
-    height: (UnistylesRuntime.screen.width * 12) / 100,
-    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
-    bottom: UnistylesRuntime.insets.bottom + (UnistylesRuntime.screen.height * 2) / 100,
-    right: (UnistylesRuntime.screen.width * 5) / 100,
+    width: (rt.screen.width * 12) / 100,
+    height: (rt.screen.width * 12) / 100,
+    borderRadius: (rt.screen.width * 12) / 100,
+    bottom: rt.insets.bottom + (rt.screen.height * 2) / 100,
+    right: (rt.screen.width * 5) / 100,
     elevation: 5,
     shadowColor: colors.card_typography,
     shadowOffset: { width: 0, height: 2 },
@@ -241,9 +240,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   scrollToTopIcon: {
     color: colors.backgroundColor,
-    width: (UnistylesRuntime.screen.width * 12) / 100,
-    height: (UnistylesRuntime.screen.width * 12) / 100,
-    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
+    width: (rt.screen.width * 12) / 100,
+    height: (rt.screen.width * 12) / 100,
+    borderRadius: (rt.screen.width * 12) / 100,
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -8,7 +8,7 @@ import {
   StyledSharePreviewModal,
   StyledAlert,
 } from '@components';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import { SavedTip } from '@/context/types';
 import { useSaveTip } from '@hooks';
@@ -23,7 +23,7 @@ type SavedTipDetailRouteParams = {
 };
 
 const SavedTipDetailScreen = () => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const { t } = useTranslation();
   const { state } = useAppContext();
   const route = useRoute<RouteProp<SavedTipDetailRouteParams, 'SavedTipDetailScreen'>>();
@@ -207,27 +207,27 @@ const SavedTipDetailScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   scrollContentContainer: {
-    paddingBottom: (UnistylesRuntime.screen.height * 8) / 100,
+    paddingBottom: (rt.screen.height * 8) / 100,
   },
   infoCard: {
     backgroundColor: colors.card,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    padding: (UnistylesRuntime.screen.width * 4) / 100,
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
-    marginBottom: (UnistylesRuntime.screen.height * 1) / 100,
-    gap: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
+    padding: (rt.screen.width * 4) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
+    marginBottom: (rt.screen.height * 1) / 100,
+    gap: (rt.screen.height * 1) / 100,
   },
   infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: (UnistylesRuntime.screen.width * 3) / 100,
+    gap: (rt.screen.width * 3) / 100,
   },
   dateText: {
     fontSize: 14,
@@ -249,9 +249,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   tipPercentageCard: {
     backgroundColor: colors.card,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    padding: (UnistylesRuntime.screen.width * 4) / 100,
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
+    padding: (rt.screen.width * 4) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

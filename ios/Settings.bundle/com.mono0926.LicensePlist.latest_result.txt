@@ -59,12 +59,6 @@ body: MIT License
 Copyrig…
 version: 5.6.0
 
-name: react-native-unistyles, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 2.43.0
-
 name: react-native-vector-icons-ant-design, nameSpecified: 
 body: MIT License
 
@@ -162,6 +156,12 @@ body: BSD License
 
 For Soc…
 version: 0.7.1
+
+name: Unistyles, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 3.0.22
 
 name: @ampproject_remapping@2.3.0, nameSpecified: @ampproject/remapping, version: 2.3.0
 body: 

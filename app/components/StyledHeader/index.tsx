@@ -1,6 +1,6 @@
 import React from 'react';
 import { Keyboard, Pressable, StatusBar, Text, View, ViewStyle } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { IconTypeMap, StyledIconTypesKey, StyledIcons } from '@components';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
@@ -55,7 +55,7 @@ export const StyledHeader = ({
   onHeaderRightIconPress,
   enableBackButton = false,
 }: styledHeaderProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme, rt } = useUnistyles();
 
   // Use the useNavigation hook with the general drawer navigation type
   const navigation = useNavigation<DrawerNavProp>();
@@ -65,7 +65,7 @@ export const StyledHeader = ({
       <StatusBar
         backgroundColor={theme.colors.headerBGColor}
         translucent={true}
-        barStyle={UnistylesRuntime.themeName === 'dark' ? 'light-content' : 'dark-content'}
+        barStyle={rt.themeName === 'dark' ? 'light-content' : 'dark-content'}
       />
       <View style={styles.headerMainContainer}>
         <View style={styles.headerInnerContainer}>
@@ -115,22 +115,22 @@ export const StyledHeader = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   headerMainContainer: {
     backgroundColor: colors.headerBGColor,
-    paddingTop: UnistylesRuntime.statusBar.height,
-    paddingBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingTop: rt.statusBar.height,
+    paddingBottom: (rt.screen.height * 0.5) / 100,
   },
   headerInnerContainer: {
     flexDirection: 'row',
-    height: (UnistylesRuntime.screen.height * 6) / 100,
+    height: (rt.screen.height * 6) / 100,
   },
   innerLeftContainer: {
     flex: 1,
     justifyContent: 'center',
   },
   headerLeftButtonStyles: {
-    paddingStart: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingStart: (rt.screen.width * 5) / 100,
   },
   innerMiddleContainer: { flex: 2, justifyContent: 'center', alignItems: 'center' },
   innerRightContainer: {
@@ -139,7 +139,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     alignItems: 'flex-end',
   },
   headerRightButtonStyles: {
-    paddingEnd: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingEnd: (rt.screen.width * 5) / 100,
   },
   headerText: {
     fontSize: 20,

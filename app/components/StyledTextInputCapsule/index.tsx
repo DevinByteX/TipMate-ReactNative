@@ -1,7 +1,7 @@
 import { View, TextInput, NativeSyntheticEvent, TextInputEndEditingEventData } from 'react-native';
 import React, { useEffect, useState } from 'react';
 // Third party libs
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import Toast from 'react-native-toast-message';
 // Custom configs
 import { SplitOptionState, TipOptionState } from '@/context/types';
@@ -36,7 +36,7 @@ export const StyledTextInputCapsule = ({
   minValidateValue,
   maxValidateValue,
 }: StyledTextInputCapsuleProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme, rt } = useUnistyles();
   const [inputFocused, setInputFocused] = useState(false);
   const [text, setText] = useState(`${textValue}${suffix}`);
 
@@ -121,19 +121,19 @@ export const StyledTextInputCapsule = ({
         value={text}
         onChangeText={handleChangeText}
         returnKeyType="done"
-        keyboardAppearance={UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light'}
+        keyboardAppearance={rt.themeName === 'dark' ? 'dark' : 'light'}
       />
     </View>
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   tipEditViewCapsule: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   tipEditViewCapsuleText: {
     fontSize: 14,

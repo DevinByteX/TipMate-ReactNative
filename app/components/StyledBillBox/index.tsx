@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, ViewStyle } from 'react-native';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 
 // Vertical Devider Component
@@ -9,7 +9,6 @@ export const VerticalDevider = ({
 }: {
   verticalDeviderAdditionalStyles?: ViewStyle;
 }) => {
-  const { styles } = useStyles(stylesheet);
   return <View style={[styles.verticalDeviderStyles, verticalDeviderAdditionalStyles]} />;
 };
 
@@ -53,7 +52,7 @@ export const StyledBillBox = ({
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
 
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   // Extract currency symbol rendering for title
   const renderTitleCurrencySymbol = () => {
     if (isLongCurrencySymbol) {
@@ -200,13 +199,13 @@ export const StyledBillBox = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   superMainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   titleRowContainer: {
     flexDirection: 'row',
@@ -221,14 +220,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    gap: (UnistylesRuntime.screen.width * 3) / 100,
-    paddingEnd: (UnistylesRuntime.screen.width * 5) / 100,
+    gap: (rt.screen.width * 3) / 100,
+    paddingEnd: (rt.screen.width * 5) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   currencySymbol: {
     color: colors.card_typography,
@@ -237,18 +236,18 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   mainInnerContainer: {
     flexDirection: 'row',
     width: '100%',
-    minHeight: (UnistylesRuntime.screen.height * 10.5) / 100,
+    minHeight: (rt.screen.height * 10.5) / 100,
   },
   totalAmountsContainer: {
     flex: 1,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 2) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   totalDigitsStyles: {
     fontSize: 40,
@@ -267,8 +266,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   subTotalAndTipAmountsContainer: {
     flex: 1,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 0.5) / 100,
   },
   subTotalContainer: {
     flex: 1,
@@ -281,8 +280,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   verticalDeviderStyles: {
     backgroundColor: colors.devider,
     height: '100%',
-    width: UnistylesRuntime.hairlineWidth * 8,
-    borderRadius: UnistylesRuntime.hairlineWidth * 8,
+    width: StyleSheet.hairlineWidth * 8,
+    borderRadius: StyleSheet.hairlineWidth * 8,
   },
   horizontalTextContainer: {
     flexDirection: 'row',

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { useReduxDevToolsExtension } from '@react-navigation/devtools';
-import { UnistylesRuntime } from 'react-native-unistyles';
+import { UnistylesRuntime, useUnistyles } from 'react-native-unistyles';
 import Toast from 'react-native-toast-message';
 import BootSplash from 'react-native-bootsplash';
 // Custom Stacks
@@ -13,6 +13,8 @@ import { getUserPreferredTheme, getUserUpdatedThemeOption, useThemeColorCustomis
 import { toastConfig } from '@styles/toastConfig';
 
 const ApplicationNavigator = (props: any) => {
+  const { rt } = useUnistyles();
+
   useEffect(() => {
     // Setting user preferred theme or initialTheme
     const setAppTheme = async () => {
@@ -51,7 +53,7 @@ const ApplicationNavigator = (props: any) => {
       >
         <StackNavigation />
       </NavigationContainer>
-      <Toast config={toastConfig} topOffset={UnistylesRuntime.insets.top} />
+      <Toast config={toastConfig} topOffset={rt.insets.top} />
     </SafeAreaProvider>
   );
 };

@@ -7,7 +7,7 @@ import {
   TextInputEndEditingEventData,
   Pressable,
 } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 type StyledConfigInputProps = {
   title: string;
@@ -26,7 +26,7 @@ export const StyledConfigInput = ({
   ...TextInputProps
 }: StyledConfigInputProps) => {
   const TextInputRef = useRef<TextInput>(null);
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const [inputFocused, setInputFocused] = useState(false);
   const [text, setText] = useState(`${textValue}${suffix}`);
 
@@ -95,15 +95,15 @@ export const StyledConfigInput = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   configInputBox: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
     borderColor: colors.backgroundColor,
-    borderWidth: (UnistylesRuntime.screen.width * 0.5) / 100,
+    borderWidth: (rt.screen.width * 0.5) / 100,
   },
   configBoxText: {
     fontSize: 14,
@@ -114,7 +114,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
-    paddingVertical: (UnistylesRuntime.screen.height * 0.75) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 1) / 100,
+    paddingVertical: (rt.screen.height * 0.75) / 100,
+    paddingHorizontal: (rt.screen.width * 1) / 100,
   },
 }));

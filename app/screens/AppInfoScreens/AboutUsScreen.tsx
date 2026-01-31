@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Platform } from 'react-native';
-import { createStyleSheet, useStyles } from 'react-native-unistyles';
-import { UnistylesRuntime } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { StyledHeader, StyledAlert } from '@components';
 import { AppLogo } from '@/components/StyledSVGIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -10,7 +9,7 @@ import { APP_LINKS, EMAILS, APP_INFO } from '@configs';
 import { useTranslation } from 'react-i18next';
 
 export const AboutUsScreen: React.FC = () => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme, rt } = useUnistyles();
   const { t } = useTranslation();
 
   const navigation = useNavigation();
@@ -40,8 +39,8 @@ export const AboutUsScreen: React.FC = () => {
             colour={theme.colors.accent}
             backgroundColour={'transparent'}
             showBackground={false}
-            height={(UnistylesRuntime.screen.width * 20) / 100}
-            width={(UnistylesRuntime.screen.width * 20) / 100}
+            height={(rt.screen.width * 20) / 100}
+            width={(rt.screen.width * 20) / 100}
           />
         </View>
         <Text style={styles.description}>{t('screens.appInfo.story')}</Text>
@@ -127,19 +126,19 @@ export const AboutUsScreen: React.FC = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   scrollContentContainer: {},
   logoContainer: {
     alignItems: 'center',
   },
   logo: {
-    width: (UnistylesRuntime.screen.width * 40) / 100,
-    height: (UnistylesRuntime.screen.width * 40) / 100,
+    width: (rt.screen.width * 40) / 100,
+    height: (rt.screen.width * 40) / 100,
   },
   description: {
     color: colors.card_typography,
@@ -147,17 +146,17 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 16,
     lineHeight: 24,
     textAlign: 'left',
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginBottom: (rt.screen.height * 1.5) / 100,
   },
   section: {
     backgroundColor: colors.backgroundColor,
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginBottom: (rt.screen.height * 1.5) / 100,
   },
   sectionTitle: {
     color: colors.accent,
     fontFamily: fonts.Nunito_Bold,
     fontSize: 18,
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginBottom: (rt.screen.height * 1.5) / 100,
   },
   sectionText: {
     color: colors.card_typography,
@@ -166,8 +165,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   acknowledgementsSection: {
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingBottom: UnistylesRuntime.insets.bottom / 2 + UnistylesRuntime.navigationBar.height,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingBottom: rt.insets.bottom / 2 + rt.navigationBar.height,
   },
   linkText: {
     color: colors.accent,
@@ -180,12 +179,12 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontFamily: fonts.Montserrat_Medium,
     fontSize: 14,
     lineHeight: 20,
-    marginVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginVertical: (rt.screen.height * 1.5) / 100,
   },
   acknowledgementLinks: {
     flexWrap: 'wrap',
     flexDirection: 'row',
-    gap: (UnistylesRuntime.screen.width * 4) / 100,
+    gap: (rt.screen.width * 4) / 100,
   },
   acknowledgementButton: {
     backgroundColor: colors.accent,
@@ -203,7 +202,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontFamily: fonts.Montserrat_Medium,
     fontSize: 14,
     textAlign: 'center',
-    marginTop: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginTop: (rt.screen.height * 1.5) / 100,
   },
 }));
 

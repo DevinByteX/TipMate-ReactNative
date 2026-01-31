@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledIcons, StyledAlert } from '@components';
 import { useAppContext } from '@/context/AppContext';
@@ -32,7 +32,7 @@ const LanguageSelectiveScroll = ({
   onSystemDefaultPress: () => void;
   systemDefaultLanguage: LanguageConfig | undefined;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const { t } = useTranslation();
 
   return (
@@ -47,7 +47,7 @@ const LanguageSelectiveScroll = ({
           style={[
             styles.modalContentLanguageBarContainer,
             {
-              borderWidth: isUsingSystemDefault ? UnistylesRuntime.hairlineWidth * 5 : 0,
+              borderWidth: isUsingSystemDefault ? StyleSheet.hairlineWidth * 5 : 0,
               borderColor: isUsingSystemDefault
                 ? theme.colors.accent
                 : theme.colors.backgroundColor,
@@ -72,7 +72,7 @@ const LanguageSelectiveScroll = ({
             {
               borderWidth:
                 !isUsingSystemDefault && language.code === currentLanguage
-                  ? UnistylesRuntime.hairlineWidth * 5
+                  ? StyleSheet.hairlineWidth * 5
                   : 0,
               borderColor:
                 !isUsingSystemDefault && language.code === currentLanguage
@@ -119,7 +119,7 @@ const LanguageListModal = ({
   onSystemDefaultPress: () => void;
   systemDefaultLanguage: LanguageConfig | undefined;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const currentLangConfig = SUPPORTED_LANGUAGES.find(l => l.code === currentLanguage);
 
   return (
@@ -179,7 +179,6 @@ export const StyledLanguageSelector = ({
 }) => {
   const { t } = useTranslation();
   const { state, dispatch } = useAppContext();
-  const { styles } = useStyles(stylesheet);
   const { shouldRestartForRTL, applyRTL } = useRTL();
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
@@ -395,40 +394,40 @@ export const StyledLanguageSelector = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const styles = StyleSheet.create(({ colors, fonts, utils }, rt) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   instructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   modalInstructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginBottom: (rt.screen.height * 2) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   mainLanguageChangeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingTop: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   languageChangeText: {
     color: colors.card_typography,
@@ -438,10 +437,10 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   languageBox: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 4) / 100,
+    paddingHorizontal: (rt.screen.width * 4) / 100,
     backgroundColor: colors.backgroundColor,
-    height: (UnistylesRuntime.screen.height * 4) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    height: (rt.screen.height * 4) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   languageText: {
     fontSize: 12,
@@ -451,10 +450,10 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
 
   // Modal contents
   modalMainContainer: {
-    height: (UnistylesRuntime.screen.height * 60) / 100,
+    height: (rt.screen.height * 60) / 100,
     width: '100%',
-    borderRadius: (UnistylesRuntime.screen.width * 5) / 100,
-    borderWidth: UnistylesRuntime.hairlineWidth * 2,
+    borderRadius: (rt.screen.width * 5) / 100,
+    borderWidth: StyleSheet.hairlineWidth * 2,
     borderColor: colors.accent,
     backgroundColor: utils.hexToRGBA(colors.card, 0.95),
     bottom: 0,
@@ -464,9 +463,9 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingTop: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingTop: (rt.screen.height * 2) / 100,
+    paddingBottom: (rt.screen.height * 0.5) / 100,
   },
   modalTitle: {
     color: colors.accent,
@@ -476,10 +475,10 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   modalContentLanguageBarContainer: {
     flexDirection: 'row',
     width: '100%',
-    paddingVertical: (UnistylesRuntime.screen.height * 1.25) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 1.25) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
     backgroundColor: colors.backgroundColor,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
     alignItems: 'center',
   },
   modalLanguageText: {
@@ -495,18 +494,18 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   languageSelectiveNativeName: {
     flex: 2,
     justifyContent: 'center',
-    paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingVertical: (rt.screen.height * 0.5) / 100,
   },
   languageSelectiveName: {
     flex: 2,
     justifyContent: 'center',
-    paddingVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingVertical: (rt.screen.height * 0.5) / 100,
   },
   rtlBadge: {
     backgroundColor: colors.accent,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 0.3) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingHorizontal: (rt.screen.width * 2) / 100,
+    paddingVertical: (rt.screen.height * 0.3) / 100,
+    borderRadius: (rt.screen.height * 0.5) / 100,
   },
   rtlBadgeText: {
     fontSize: 10,
@@ -514,9 +513,9 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     color: colors.card,
   },
   languageScrollContainerStyles: {
-    gap: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingBottom: UnistylesRuntime.insets.bottom * 2,
+    gap: (rt.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingBottom: rt.insets.bottom * 2,
   },
 }));
 

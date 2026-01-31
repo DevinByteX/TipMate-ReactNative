@@ -1,5 +1,5 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { useUnistyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 // Components
 import { StyledDrawer } from '@components';
@@ -12,7 +12,7 @@ import AboutUsScreen from '@/screens/AppInfoScreens/AboutUsScreen';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
-  const { theme } = useStyles();
+  const { theme, rt } = useUnistyles();
   const { t } = useTranslation();
 
   return (
@@ -24,7 +24,7 @@ const DrawerNavigation = () => {
         drawerActiveTintColor: theme.colors.accent,
         drawerInactiveTintColor: theme.colors.card_typography,
         drawerItemStyle: {
-          marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+          marginVertical: (rt.screen.height * 0.5) / 100,
         },
       }}
     >

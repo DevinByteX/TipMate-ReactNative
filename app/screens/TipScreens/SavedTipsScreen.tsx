@@ -13,7 +13,7 @@ import {
   type DateFilter,
 } from '@components';
 // Styling
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useAppContext } from '@/context/AppContext';
 import { SavedTip } from '@/context/types';
 import { useSaveTip } from '@hooks';
@@ -21,7 +21,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getLocaleForFormatting } from '@/localization';
 
 const SavedTipsScreen = () => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme, rt } = useUnistyles();
   const { state } = useAppContext();
   const { t } = useTranslation();
   const {
@@ -196,7 +196,7 @@ const SavedTipsScreen = () => {
               autoCapitalize="none"
               autoCorrect={false}
               clearButtonMode="while-editing"
-              keyboardAppearance={UnistylesRuntime.themeName === 'dark' ? 'dark' : 'light'}
+              keyboardAppearance={rt.themeName === 'dark' ? 'dark' : 'light'}
             />
             {savedTips.length > 0 && (
               <Pressable
@@ -321,27 +321,27 @@ const SavedTipsScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
   },
   searchContainer: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 1.5) / 100,
     backgroundColor: colors.backgroundColor,
   },
   searchInputWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: (UnistylesRuntime.screen.width * 2) / 100,
+    gap: (rt.screen.width * 2) / 100,
   },
   searchInput: {
     flex: 1,
     backgroundColor: colors.card,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 1.5) / 100,
     fontSize: 16,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
@@ -349,24 +349,24 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   filterIconButton: {
     backgroundColor: colors.accent,
-    width: (UnistylesRuntime.screen.width * 12) / 100,
-    height: (UnistylesRuntime.screen.width * 12) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    width: (rt.screen.width * 12) / 100,
+    height: (rt.screen.width * 12) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
   },
   filterIconBadge: {
     position: 'absolute',
-    top: -(UnistylesRuntime.screen.height * 0.5) / 100,
-    right: -(UnistylesRuntime.screen.width * 1) / 100,
+    top: -(rt.screen.height * 0.5) / 100,
+    right: -(rt.screen.width * 1) / 100,
     backgroundColor: colors.card,
-    minWidth: (UnistylesRuntime.screen.width * 5) / 100,
-    height: (UnistylesRuntime.screen.width * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.width * 5) / 100,
+    minWidth: (rt.screen.width * 5) / 100,
+    height: (rt.screen.width * 5) / 100,
+    borderRadius: (rt.screen.width * 5) / 100,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 1) / 100,
     borderWidth: 2,
     borderColor: colors.accent,
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import {
   StyledCurrencySelector,
   StyledLanguageSelector,
@@ -13,7 +13,7 @@ import {
 } from '@components';
 
 const SettingsScreen = () => {
-  const { styles } = useStyles(stylesheet);
+  useUnistyles();
   const { t } = useTranslation();
   return (
     <>
@@ -79,14 +79,14 @@ const SettingsScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }, rt) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   scrollContentContainer: {
-    paddingBottom: UnistylesRuntime.insets.bottom * 2,
+    paddingBottom: rt.insets.bottom * 2,
   },
 }));
 

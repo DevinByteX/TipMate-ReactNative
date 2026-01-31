@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+import { UnistylesRuntime } from 'react-native-unistyles';
 import { StyledIcons, StyledToggle } from '@components';
 import { setUserPreferredTheme, setUserUpdatedThemeOption, useThemeColorCustomiser } from '@hooks';
 import { CustomThemesConfig } from '@configs';
@@ -16,7 +17,7 @@ export const StyledThemeBox = ({
   toggleDescription?: string;
   toggleText?: string;
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme, rt } = useUnistyles();
 
   const CustomThemesData = CustomThemesConfig();
 
@@ -95,7 +96,7 @@ export const StyledThemeBox = ({
       <View style={styles.mainThemeToggleContainer}>
         <Text style={styles.toggleText}>{`${toggleText}`}</Text>
         <StyledToggle
-          value={UnistylesRuntime.themeName === 'dark'}
+          value={rt.themeName === 'dark'}
           onValueChange={value => {
             persistUserPreferredTheme(value);
             UnistylesRuntime.setTheme(value ? 'dark' : 'light');
@@ -106,46 +107,46 @@ export const StyledThemeBox = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   mainContainer: {
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
     width: '100%',
     backgroundColor: colors.card,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   titleText: {
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   instructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   mainBoxContainer: {
     flexDirection: 'row',
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingVertical: (rt.screen.height * 1) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
+    columnGap: (rt.screen.width * 2) / 100,
   },
   toggleInstructionText: {
     fontSize: 10,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    marginVertical: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   mainThemeToggleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: (UnistylesRuntime.screen.height * 0.5) / 100,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingTop: (rt.screen.height * 0.5) / 100,
+    marginHorizontal: (rt.screen.width * 5) / 100,
   },
   toggleText: {
     color: colors.card_typography,
@@ -158,9 +159,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     alignItems: 'center',
     backgroundColor: colors.card_typography,
     width: '100%',
-    height: (UnistylesRuntime.screen.height * 4) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    padding: UnistylesRuntime.hairlineWidth * 2,
+    height: (rt.screen.height * 4) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
+    padding: StyleSheet.hairlineWidth * 2,
   },
   themeColorInnerBox: {
     backgroundColor: colors.accent,
@@ -168,8 +169,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: (UnistylesRuntime.screen.height * 0.9) / 100,
-    borderWidth: UnistylesRuntime.hairlineWidth * 6,
+    borderRadius: (rt.screen.height * 0.9) / 100,
+    borderWidth: StyleSheet.hairlineWidth * 6,
     borderColor: colors.card,
   },
   themeColorIcon: {

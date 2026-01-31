@@ -13,7 +13,7 @@ import ReanimatedSwipeable, {
 } from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { SharedValue } from 'react-native-reanimated';
 import { StyledIcons } from '@components';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { SavedTip } from '@/context/types';
 
@@ -38,7 +38,7 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
   showScrollToTop,
   onScrollToTopChange,
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const { t } = useTranslation();
   const flatListRef = useRef<FlatList>(null);
   const buttonAnimation = useRef(new Animated.Value(0)).current;
@@ -247,13 +247,13 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 1) / 100,
   },
   countText: {
     fontSize: 14,
@@ -266,15 +266,15 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.accent,
   },
   listContainer: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 8) / 100,
-    gap: (UnistylesRuntime.screen.height * 1.5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingBottom: (rt.screen.height * 8) / 100,
+    gap: (rt.screen.height * 1.5) / 100,
   },
   tipCard: {
     flexDirection: 'row',
     backgroundColor: colors.card,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    padding: (UnistylesRuntime.screen.width * 4) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
+    padding: (rt.screen.width * 4) / 100,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -293,7 +293,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: (UnistylesRuntime.screen.height * 1) / 100,
+    marginBottom: (rt.screen.height * 1) / 100,
   },
   cardDate: {
     fontSize: 12,
@@ -304,9 +304,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 0.3) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingHorizontal: (rt.screen.width * 2) / 100,
+    paddingVertical: (rt.screen.height * 0.3) / 100,
+    borderRadius: (rt.screen.height * 0.5) / 100,
     gap: 4,
   },
   peopleText: {
@@ -317,7 +317,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   amountRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginBottom: (rt.screen.height * 0.5) / 100,
   },
   amountLabel: {
     fontSize: 12,
@@ -337,7 +337,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   divider: {
     height: 1,
     backgroundColor: colors.devider,
-    marginVertical: (UnistylesRuntime.screen.height * 0.8) / 100,
+    marginVertical: (rt.screen.height * 0.8) / 100,
   },
   totalLabel: {
     fontSize: 14,
@@ -353,38 +353,38 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: (UnistylesRuntime.screen.height * 10) / 100,
+    paddingVertical: (rt.screen.height * 10) / 100,
   },
   emptyTitle: {
     fontSize: 20,
     fontFamily: fonts.Nunito_Black,
     color: colors.card_typography,
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
   },
   emptyDescription: {
     fontSize: 14,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.card_typography,
     textAlign: 'center',
-    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 10) / 100,
+    marginTop: (rt.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 10) / 100,
   },
   emptyHint: {
     fontSize: 12,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.accent,
     textAlign: 'center',
-    marginTop: (UnistylesRuntime.screen.height * 1.5) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 10) / 100,
+    marginTop: (rt.screen.height * 1.5) / 100,
+    paddingHorizontal: (rt.screen.width * 10) / 100,
   },
   scrollToTopButton: {
     position: 'absolute',
     backgroundColor: colors.accent,
-    width: (UnistylesRuntime.screen.width * 12) / 100,
-    height: (UnistylesRuntime.screen.width * 12) / 100,
-    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
-    bottom: UnistylesRuntime.insets.bottom + (UnistylesRuntime.screen.height * 2) / 100,
-    right: (UnistylesRuntime.screen.width * 5) / 100,
+    width: (rt.screen.width * 12) / 100,
+    height: (rt.screen.width * 12) / 100,
+    borderRadius: (rt.screen.width * 12) / 100,
+    bottom: rt.insets.bottom + (rt.screen.height * 2) / 100,
+    right: (rt.screen.width * 5) / 100,
     elevation: 5,
     shadowColor: colors.card_typography,
     shadowOffset: { width: 0, height: 2 },
@@ -393,15 +393,15 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   scrollToTopIcon: {
     color: colors.backgroundColor,
-    width: (UnistylesRuntime.screen.width * 12) / 100,
-    height: (UnistylesRuntime.screen.width * 12) / 100,
-    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
+    width: (rt.screen.width * 12) / 100,
+    height: (rt.screen.width * 12) / 100,
+    borderRadius: (rt.screen.width * 12) / 100,
     justifyContent: 'center',
     alignItems: 'center',
   },
   swipebleContainer: {
     backgroundColor: colors.accent,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
   },
   deleteAction: {
     justifyContent: 'center',
@@ -411,9 +411,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     backgroundColor: colors.accent,
     justifyContent: 'center',
     alignItems: 'center',
-    width: (UnistylesRuntime.screen.width * 20) / 100,
+    width: (rt.screen.width * 20) / 100,
     height: '100%',
-    borderTopRightRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    borderBottomRightRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderTopRightRadius: (rt.screen.height * 1) / 100,
+    borderBottomRightRadius: (rt.screen.height * 1) / 100,
   },
 }));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Modal, Pressable } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { StyledIcons, StyledIconTypesKey } from '@components';
 
 export type AlertType = 'info' | 'success' | 'error' | 'warning' | 'confirm';
@@ -53,7 +53,7 @@ export const StyledAlert = ({
   customIcon,
   customIconColor,
 }: StyledAlertProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   const iconInfo = showIcon ? customIcon || getAlertIcon(type) : null;
 
@@ -142,7 +142,7 @@ export const StyledAlert = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const styles = StyleSheet.create(({ colors, fonts, utils }, rt) => ({
   overlay: {
     flex: 1,
     justifyContent: 'center',
@@ -151,21 +151,21 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   modalContents: {
     backgroundColor: colors.card,
-    width: (UnistylesRuntime.screen.width * 85) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 2.5) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.width * 3) / 100,
+    width: (rt.screen.width * 85) / 100,
+    paddingVertical: (rt.screen.height * 2.5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    borderRadius: (rt.screen.width * 3) / 100,
     borderColor: colors.backgroundColor,
-    borderWidth: UnistylesRuntime.hairlineWidth,
+    borderWidth: StyleSheet.hairlineWidth,
     alignItems: 'center',
   },
   iconContainer: {
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginBottom: (rt.screen.height * 1.5) / 100,
   },
   iconCircle: {
-    width: (UnistylesRuntime.screen.width * 12) / 100,
-    height: (UnistylesRuntime.screen.width * 12) / 100,
-    borderRadius: (UnistylesRuntime.screen.width * 12) / 100,
+    width: (rt.screen.width * 12) / 100,
+    height: (rt.screen.width * 12) / 100,
+    borderRadius: (rt.screen.width * 12) / 100,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -180,21 +180,21 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     textAlign: 'center',
-    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+    marginTop: (rt.screen.height * 1) / 100,
     lineHeight: 20,
   },
   buttonContainer: {
     flexDirection: 'row',
-    marginTop: (UnistylesRuntime.screen.height * 2) / 100,
+    marginTop: (rt.screen.height * 2) / 100,
     width: '100%',
-    columnGap: (UnistylesRuntime.screen.width * 3) / 100,
+    columnGap: (rt.screen.width * 3) / 100,
   },
   lineButton: {
     flex: 1,
-    height: (UnistylesRuntime.screen.height * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    height: (rt.screen.height * 5) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
     borderColor: colors.card_typography,
-    borderWidth: UnistylesRuntime.hairlineWidth * 2,
+    borderWidth: StyleSheet.hairlineWidth * 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -205,8 +205,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   solidButton: {
     flex: 1,
-    height: (UnistylesRuntime.screen.height * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    height: (rt.screen.height * 5) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
     backgroundColor: colors.accent,
     justifyContent: 'center',
     alignItems: 'center',
@@ -218,8 +218,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   destructiveButton: {
     flex: 1,
-    height: (UnistylesRuntime.screen.height * 5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    height: (rt.screen.height * 5) / 100,
+    borderRadius: (rt.screen.height * 1) / 100,
     backgroundColor: colors.error_toast,
     justifyContent: 'center',
     alignItems: 'center',

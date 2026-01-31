@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { StyledIcons } from '@components';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 
 export type PercentageFilter = 'all' | '0-10' | '10-15' | '15-20' | '20+';
@@ -31,7 +31,7 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
   onResetFilters,
   hasActiveFilters,
 }) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const { t } = useTranslation();
 
   if (!visible) return null;
@@ -190,20 +190,20 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   filtersContainer: {
     backgroundColor: colors.backgroundColor,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingBottom: (rt.screen.height * 1) / 100,
   },
   filterSection: {
-    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    marginBottom: (rt.screen.height * 1.5) / 100,
   },
   filterHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: (UnistylesRuntime.screen.width * 2) / 100,
-    marginBottom: (UnistylesRuntime.screen.height * 0.8) / 100,
+    gap: (rt.screen.width * 2) / 100,
+    marginBottom: (rt.screen.height * 0.8) / 100,
   },
   filterSectionTitle: {
     fontSize: 13,
@@ -211,13 +211,13 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.accent,
   },
   filterScrollContent: {
-    gap: (UnistylesRuntime.screen.width * 2) / 100,
+    gap: (rt.screen.width * 2) / 100,
   },
   filterCapsule: {
     backgroundColor: colors.card,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 4) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 0.8) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
+    paddingHorizontal: (rt.screen.width * 4) / 100,
+    paddingVertical: (rt.screen.height * 0.8) / 100,
+    borderRadius: (rt.screen.height * 2) / 100,
     borderWidth: 1,
     borderColor: colors.devider,
   },
@@ -237,9 +237,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: (UnistylesRuntime.screen.width * 2) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
-    marginTop: (UnistylesRuntime.screen.height * 0.5) / 100,
+    gap: (rt.screen.width * 2) / 100,
+    paddingVertical: (rt.screen.height * 1) / 100,
+    marginTop: (rt.screen.height * 0.5) / 100,
   },
   resetFiltersText: {
     fontSize: 13,

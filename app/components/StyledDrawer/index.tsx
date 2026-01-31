@@ -6,7 +6,8 @@ import {
   DrawerItemList,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+import { UnistylesRuntime } from 'react-native-unistyles';
 import { IconTypeMap, StyledIcons, StyledIconTypesKey, StyledToggle } from '@components';
 import { setUserPreferredTheme } from '@hooks';
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
@@ -40,7 +41,7 @@ const BottomButton = ({
   onPress,
   isFocused,
 }: BottomButtonProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme, rt } = useUnistyles();
 
   return (
     <TouchableOpacity
@@ -74,8 +75,8 @@ const BottomButton = ({
 };
 
 export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
-  const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
+  const { rt } = useUnistyles();
 
   const activeRouteName = getActiveRouteName(props.state.routes[props.state.index]);
   console.log('Active Route Name:', activeRouteName);
@@ -102,7 +103,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
         <View style={styles.themePrefContainer}>
           <Text style={styles.themePrefText}>{t('components.drawer.toggleDarkMode')}</Text>
           <StyledToggle
-            value={UnistylesRuntime.themeName === 'dark'}
+            value={rt.themeName === 'dark'}
             onValueChange={value => {
               persistUserPreferredTheme(value);
               UnistylesRuntime.setTheme(value ? 'dark' : 'light');
@@ -134,27 +135,27 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   mainDrawerContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
   },
   drawerButtonContainer: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingHorizontal: (rt.screen.width * 2) / 100,
   },
   horizontalDeviderStyles: {
     backgroundColor: colors.devider,
     width: '100%',
-    height: UnistylesRuntime.hairlineWidth * 8,
+    height: StyleSheet.hairlineWidth * 8,
   },
   bottomButtonContainer: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 4) / 100,
-    paddingTop: UnistylesRuntime.insets.bottom / 2,
-    paddingBottom: UnistylesRuntime.insets.bottom / 2 + UnistylesRuntime.navigationBar.height,
+    paddingHorizontal: (rt.screen.width * 4) / 100,
+    paddingTop: rt.insets.bottom / 2,
+    paddingBottom: rt.insets.bottom / 2 + rt.navigationBar.height,
   },
   bottomButtonStyles: {
-    paddingVertical: (UnistylesRuntime.screen.height * 1.75) / 100,
-    marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
+    paddingVertical: (rt.screen.height * 1.75) / 100,
+    marginVertical: (rt.screen.height * 0.5) / 100,
     paddingStart: 16, // as per the react navigation drawer item paddingStart in the source code
     borderRadius: 56, // as per the react navigation drawer item borderRadius in the source code
     flexDirection: 'row',
@@ -164,12 +165,12 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.accent,
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
-    paddingStart: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingStart: (rt.screen.width * 2) / 100,
   },
   preferencesButtonContainer: {
-    paddingStart: (UnistylesRuntime.screen.width * 4) / 100,
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+    paddingStart: (rt.screen.width * 4) / 100,
+    paddingTop: (rt.screen.height * 1) / 100,
+    paddingBottom: (rt.screen.height * 1.5) / 100,
   },
   preferencesText: {
     color: colors.card_typography,
@@ -179,13 +180,13 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   themePrefContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingTop: (rt.screen.height * 1) / 100,
   },
   themePrefText: {
     color: colors.card_typography,
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
-    paddingEnd: (UnistylesRuntime.screen.width * 2) / 100,
+    paddingEnd: (rt.screen.width * 2) / 100,
   },
 }));
 

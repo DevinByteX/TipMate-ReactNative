@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import React from 'react';
-import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { Slider, SliderProps } from '@miblanchard/react-native-slider';
 
 type StyledHorizontalSliderProps = {
@@ -17,8 +17,6 @@ export const StyledHorizontalSlider = ({
   maxValue = 80,
   ...restProps
 }: StyledHorizontalSliderProps) => {
-  const { styles } = useStyles(stylesheet);
-
   return (
     <View style={styles.mainContainer}>
       <Slider
@@ -37,31 +35,31 @@ export const StyledHorizontalSlider = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const styles = StyleSheet.create(({ colors }, rt) => ({
   mainContainer: {
     backgroundColor: colors.card,
     justifyContent: 'center',
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingTop: (rt.screen.height * 1) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   sliderContainerStyles: {
-    height: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
+    height: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 2) / 100,
   },
   minimumTrackStyle: {
     backgroundColor: colors.accent,
-    height: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
+    height: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 2) / 100,
   },
   maximumTrackStyle: {
     backgroundColor: colors.backgroundColor,
-    height: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 2) / 100,
+    height: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 2) / 100,
   },
   markerStyles: {
     backgroundColor: colors.accent,
-    height: (UnistylesRuntime.screen.height * 3.5) / 100,
-    width: (UnistylesRuntime.screen.height * 3.5) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 3.5) / 100,
+    height: (rt.screen.height * 3.5) / 100,
+    width: (rt.screen.height * 3.5) / 100,
+    borderRadius: (rt.screen.height * 3.5) / 100,
   },
 }));

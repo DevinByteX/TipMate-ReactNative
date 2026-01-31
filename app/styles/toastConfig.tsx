@@ -6,7 +6,7 @@ import {
   ErrorToast,
   ToastConfigParams,
 } from 'react-native-toast-message';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 /*
   1. Create the config
@@ -17,7 +17,7 @@ export const toastConfig = {
     by modifying the existing `BaseToast` component
   */
   success: (props: BaseToastProps) => {
-    const { styles } = useStyles(stylesheet);
+    useUnistyles();
     return (
       <BaseToast
         {...props}
@@ -34,7 +34,7 @@ export const toastConfig = {
     by modifying the existing `ErrorToast` component
   */
   error: (props: BaseToastProps) => {
-    const { styles } = useStyles(stylesheet);
+    useUnistyles();
     return (
       <ErrorToast
         {...props}
@@ -54,7 +54,7 @@ export const toastConfig = {
     *** USAGE : Toast.show({ type: 'tomatoToast', text1: `example text`, props:{ uuid :'example uuid'}, });
   */
   tomatoToast: ({ text1, props }: ToastConfigParams<any>) => {
-    const { styles } = useStyles(stylesheet);
+    useUnistyles();
     return (
       <View style={styles.tomatoToastStyle}>
         <Text>{text1}</Text>
@@ -64,30 +64,30 @@ export const toastConfig = {
   },
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const styles = StyleSheet.create(({ colors, fonts }, rt) => ({
   successToastStyle: {
     borderStartColor: colors.accent, // for Android to change left border color
     borderLeftColor: colors.accent, // for iOS to change left border color
     backgroundColor: colors.backgroundColor,
     borderColor: colors.card,
-    borderWidth: UnistylesRuntime.hairlineWidth,
+    borderWidth: StyleSheet.hairlineWidth,
   },
   successToastContainerStyle: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   successText1: { color: colors.accent, fontFamily: fonts.Nunito_Black, fontSize: 14 },
   errorToastStyle: {
     borderLeftColor: colors.error_toast,
     backgroundColor: colors.backgroundColor,
     borderColor: colors.card,
-    borderWidth: UnistylesRuntime.hairlineWidth,
+    borderWidth: StyleSheet.hairlineWidth,
   },
   errorToastContainerStyle: {
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
   },
   errorText1: { color: colors.error_toast, fontFamily: fonts.Nunito_Black, fontSize: 14 },
   tomatoToastStyle: {
-    height: (UnistylesRuntime.screen.height * 8) / 100,
+    height: (rt.screen.height * 8) / 100,
     width: '100%',
     backgroundColor: colors.error_toast,
   },

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
-import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 
 type SharePreviewModalProps = {
@@ -20,7 +20,6 @@ export const StyledSharePreviewModal = ({
   previewContent,
   onDismiss,
 }: SharePreviewModalProps) => {
-  const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
 
   return (
@@ -66,7 +65,7 @@ export const StyledSharePreviewModal = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const styles = StyleSheet.create(({ colors, fonts, utils }, rt) => ({
   centeredView: {
     flex: 1,
     justifyContent: 'center',
@@ -75,17 +74,17 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   modalContents: {
     backgroundColor: utils.hexToRGBA(colors.card, 0.9),
-    width: (UnistylesRuntime.screen.width * 90) / 100,
-    maxHeight: (UnistylesRuntime.screen.height * 80) / 100,
-    borderRadius: (UnistylesRuntime.screen.width * 3) / 100,
+    width: (rt.screen.width * 90) / 100,
+    maxHeight: (rt.screen.height * 80) / 100,
+    borderRadius: (rt.screen.width * 3) / 100,
     borderColor: colors.accent,
-    borderWidth: UnistylesRuntime.hairlineWidth * 4,
+    borderWidth: StyleSheet.hairlineWidth * 4,
     overflow: 'hidden',
   },
   header: {
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    borderBottomWidth: UnistylesRuntime.hairlineWidth,
+    paddingVertical: (rt.screen.height * 2) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.devider,
   },
   headerTitle: {
@@ -99,12 +98,12 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     textAlign: 'center',
-    marginTop: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginTop: (rt.screen.height * 0.5) / 100,
   },
   previewContainer: {
-    maxHeight: (UnistylesRuntime.screen.height * 45) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
+    maxHeight: (rt.screen.height * 45) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingVertical: (rt.screen.height * 2) / 100,
   },
   previewText: {
     fontSize: 14,
@@ -114,9 +113,9 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   buttonContainer: {
     flexDirection: 'row',
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingTop: (UnistylesRuntime.screen.height * 1.5) / 100,
-    columnGap: (UnistylesRuntime.screen.width * 3) / 100,
+    paddingHorizontal: (rt.screen.width * 5) / 100,
+    paddingTop: (rt.screen.height * 1.5) / 100,
+    columnGap: (rt.screen.width * 3) / 100,
   },
   shareButton: {
     flex: 1,
@@ -124,11 +123,11 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.accent,
-    minHeight: (UnistylesRuntime.screen.height * 5) / 100,
-    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
-    marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1.2) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
+    minHeight: (rt.screen.height * 5) / 100,
+    marginTop: (rt.screen.height * 1) / 100,
+    marginBottom: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 1.2) / 100,
+    paddingHorizontal: (rt.screen.width * 2) / 100,
   },
   shareButtonText: {
     fontSize: 14,
@@ -137,14 +136,14 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     textAlign: 'center',
   },
   closeButton: {
-    height: (UnistylesRuntime.screen.height * 5) / 100,
+    height: (rt.screen.height * 5) / 100,
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
-    marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
-    borderRadius: (UnistylesRuntime.screen.height * 1.2) / 100,
-    borderWidth: UnistylesRuntime.hairlineWidth * 3,
+    marginHorizontal: (rt.screen.width * 5) / 100,
+    marginTop: (rt.screen.height * 1) / 100,
+    marginBottom: (rt.screen.height * 2) / 100,
+    borderRadius: (rt.screen.height * 1.2) / 100,
+    borderWidth: StyleSheet.hairlineWidth * 3,
     borderColor: colors.card_typography,
   },
   closeButtonText: {
