@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,8 @@ import {
   useRTL,
   i18n,
   getCurrentLanguage,
+  getDeviceLanguage,
+  getLanguageConfig,
   type LanguageConfig,
 } from '@/localization';
 
@@ -19,12 +21,19 @@ const LanguageSelectiveScroll = ({
   languages,
   currentLanguage,
   onLanguageSelect,
+  isUsingSystemDefault,
+  onSystemDefaultPress,
+  systemDefaultLanguage,
 }: {
   languages: LanguageConfig[];
   currentLanguage: string;
   onLanguageSelect: (language: LanguageConfig) => void;
+  isUsingSystemDefault: boolean;
+  onSystemDefaultPress: () => void;
+  systemDefaultLanguage: LanguageConfig | undefined;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   return (
     <ScrollView
@@ -32,6 +41,28 @@ const LanguageSelectiveScroll = ({
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
     >
+      {systemDefaultLanguage && (
+        <Pressable
+          onPress={onSystemDefaultPress}
+          style={[
+            styles.modalContentLanguageBarContainer,
+            {
+              borderWidth: isUsingSystemDefault ? UnistylesRuntime.hairlineWidth * 5 : 0,
+              borderColor: isUsingSystemDefault
+                ? theme.colors.accent
+                : theme.colors.backgroundColor,
+            },
+          ]}
+        >
+          <View style={styles.languageSelectiveNativeName}>
+            <Text style={styles.modalLanguageText}>
+              {t('components.languageSelector.useSystemDefault', {
+                language: systemDefaultLanguage.nativeName,
+              })}
+            </Text>
+          </View>
+        </Pressable>
+      )}
       {languages.map(language => (
         <Pressable
           onPress={() => onLanguageSelect(language)}
@@ -40,9 +71,11 @@ const LanguageSelectiveScroll = ({
             styles.modalContentLanguageBarContainer,
             {
               borderWidth:
-                language.code === currentLanguage ? UnistylesRuntime.hairlineWidth * 5 : 0,
+                !isUsingSystemDefault && language.code === currentLanguage
+                  ? UnistylesRuntime.hairlineWidth * 5
+                  : 0,
               borderColor:
-                language.code === currentLanguage
+                !isUsingSystemDefault && language.code === currentLanguage
                   ? theme.colors.accent
                   : theme.colors.backgroundColor,
             },
@@ -72,6 +105,9 @@ const LanguageListModal = ({
   currentLanguage,
   closeButtonPress,
   onLanguageSelect,
+  isUsingSystemDefault,
+  onSystemDefaultPress,
+  systemDefaultLanguage,
 }: {
   modalTitle?: string;
   modalDescription?: string;
@@ -79,6 +115,9 @@ const LanguageListModal = ({
   currentLanguage: string;
   closeButtonPress?: () => void;
   onLanguageSelect: (language: LanguageConfig) => void;
+  isUsingSystemDefault: boolean;
+  onSystemDefaultPress: () => void;
+  systemDefaultLanguage: LanguageConfig | undefined;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   const currentLangConfig = SUPPORTED_LANGUAGES.find(l => l.code === currentLanguage);
@@ -118,6 +157,9 @@ const LanguageListModal = ({
           languages={SUPPORTED_LANGUAGES}
           currentLanguage={currentLanguage}
           onLanguageSelect={onLanguageSelect}
+          isUsingSystemDefault={isUsingSystemDefault}
+          onSystemDefaultPress={onSystemDefaultPress}
+          systemDefaultLanguage={systemDefaultLanguage}
         />
       </View>
     </Modal>
@@ -143,39 +185,75 @@ export const StyledLanguageSelector = ({
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
   const [pendingLanguage, setPendingLanguage] = useState<LanguageConfig | null>(null);
+  const [isResettingToSystem, setIsResettingToSystem] = useState<boolean>(false);
+
+  const systemDefaultLanguageCode = useMemo(() => getDeviceLanguage(), []);
+  const systemDefaultLanguage = useMemo(
+    () => getLanguageConfig(systemDefaultLanguageCode),
+    [systemDefaultLanguageCode],
+  );
+  const isUsingSystemDefault = useMemo(() => state.language === undefined, [state.language]);
 
   // Use state.language if available, otherwise fallback to i18n's current language
   const currentLanguage = state.language || getCurrentLanguage();
   const currentLangConfig = SUPPORTED_LANGUAGES.find(l => l.code === currentLanguage);
 
   const handleRTLLanguageConfirm = useCallback(async () => {
-    if (!pendingLanguage) return;
+    if (isResettingToSystem) {
+      // Reset to system default
+      if (!systemDefaultLanguage) return;
 
-    // Apply RTL settings
-    applyRTL(pendingLanguage.code);
+      // Apply RTL settings for system default
+      applyRTL(systemDefaultLanguage.code);
 
-    // Change i18n language
-    await changeLanguage(pendingLanguage.code);
+      // Change i18n language to system default
+      await changeLanguage(systemDefaultLanguage.code);
 
-    // Update app state
-    dispatch({
-      type: 'SET_LANGUAGE',
-      payload: {
-        language: pendingLanguage.code,
-        isRTL: isRTLLanguage(pendingLanguage.code),
-      },
-    });
+      // Update app state to reset language (undefined)
+      dispatch({
+        type: 'RESET_LANGUAGE_TO_SYSTEM',
+      });
 
-    setAlertVisible(false);
-    setPendingLanguage(null);
-    setModalVisibility(false);
+      setAlertVisible(false);
+      setIsResettingToSystem(false);
+      setModalVisibility(false);
 
-    Toast.show({
-      type: 'info',
-      text1: i18n.t('messages.restartRequired'),
-      visibilityTime: 4000,
-    });
-  }, [pendingLanguage, applyRTL, dispatch]);
+      Toast.show({
+        type: 'info',
+        text1: i18n.t('messages.restartRequired'),
+        visibilityTime: 4000,
+      });
+    } else {
+      if (!pendingLanguage) return;
+
+      // Apply RTL settings
+      applyRTL(pendingLanguage.code);
+
+      // Change i18n language
+      await changeLanguage(pendingLanguage.code);
+
+      // Update app state
+      dispatch({
+        type: 'SET_LANGUAGE',
+        payload: {
+          language: pendingLanguage.code,
+          isRTL: isRTLLanguage(pendingLanguage.code),
+        },
+      });
+
+      setAlertVisible(false);
+      setPendingLanguage(null);
+      setModalVisibility(false);
+
+      Toast.show({
+        type: 'info',
+        text1: i18n.t('messages.restartRequired'),
+        visibilityTime: 4000,
+      });
+    }
+
+    setIsResettingToSystem(false);
+  }, [pendingLanguage, isResettingToSystem, systemDefaultLanguage, applyRTL, dispatch]);
 
   const handleLanguageChange = useCallback(
     async (language: LanguageConfig) => {
@@ -215,6 +293,39 @@ export const StyledLanguageSelector = ({
     [dispatch, shouldRestartForRTL],
   );
 
+  const handleSystemDefaultPress = useCallback(async () => {
+    if (!systemDefaultLanguage) return;
+
+    const needsRestart = shouldRestartForRTL(systemDefaultLanguage.code);
+
+    if (needsRestart) {
+      // Close modal first, then show alert for RTL change
+      setModalVisibility(false);
+      // Small delay to ensure modal closes first
+      setTimeout(() => {
+        setIsResettingToSystem(true);
+        setAlertVisible(true);
+      }, 300);
+    } else {
+      // Close modal
+      setModalVisibility(false);
+
+      // No restart needed, just reset to system language
+      await changeLanguage(systemDefaultLanguage.code);
+
+      // Update app state to reset language (undefined)
+      dispatch({
+        type: 'RESET_LANGUAGE_TO_SYSTEM',
+      });
+
+      Toast.show({
+        type: 'success',
+        text1: `${i18n.t('messages.languageChanged')}: ${systemDefaultLanguage.nativeName}`,
+        visibilityTime: 2000,
+      });
+    }
+  }, [systemDefaultLanguage, shouldRestartForRTL, dispatch]);
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>{title}</Text>
@@ -249,6 +360,9 @@ export const StyledLanguageSelector = ({
         modalDescription={modalDescription}
         currentLanguage={currentLanguage}
         onLanguageSelect={handleLanguageChange}
+        isUsingSystemDefault={isUsingSystemDefault}
+        onSystemDefaultPress={handleSystemDefaultPress}
+        systemDefaultLanguage={systemDefaultLanguage}
       />
       <StyledAlert
         visible={alertVisible}
@@ -262,6 +376,7 @@ export const StyledLanguageSelector = ({
             onPress: () => {
               setAlertVisible(false);
               setPendingLanguage(null);
+              setIsResettingToSystem(false);
             },
           },
           {
@@ -273,6 +388,7 @@ export const StyledLanguageSelector = ({
         onDismiss={() => {
           setAlertVisible(false);
           setPendingLanguage(null);
+          setIsResettingToSystem(false);
         }}
       />
     </View>

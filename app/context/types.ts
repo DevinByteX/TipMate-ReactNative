@@ -73,10 +73,9 @@ export type DuplicatePreventionAction = {
   payload: number;
 };
 
-export type LanguageAction = {
-  type: 'SET_LANGUAGE';
-  payload: { language: string; isRTL: boolean };
-};
+export type LanguageAction =
+  | { type: 'SET_LANGUAGE'; payload: { language: string; isRTL: boolean } }
+  | { type: 'RESET_LANGUAGE_TO_SYSTEM' };
 
 export type AppAction =
   | TipAction
