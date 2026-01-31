@@ -188,9 +188,6 @@ export const StyledCurrencySelector = ({
 
   const systemDefaultCurrency = useMemo(() => getDeviceCurrency(), []);
 
-  console.log('Current currency in StyledCurrencySelector:', state.currencyConfig);
-  console.log('System default currency:', systemDefaultCurrency);
-
   const isUsingSystemDefault = useMemo(
     () => state.currencyConfig === undefined,
     [state.currencyConfig],
