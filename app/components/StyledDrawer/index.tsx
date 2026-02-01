@@ -145,7 +145,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   horizontalDeviderStyles: {
     backgroundColor: colors.devider,
     width: '100%',
-    height: UnistylesRuntime.hairlineWidth * 8,
+    height: UnistylesRuntime.hairlineWidth * 6,
   },
   bottomButtonContainer: {
     paddingHorizontal: (UnistylesRuntime.screen.width * 4) / 100,
@@ -186,6 +186,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
     paddingEnd: (UnistylesRuntime.screen.width * 2) / 100,
+    maxWidth: (UnistylesRuntime.screen.width * 60) / 100,
   },
 }));
 
