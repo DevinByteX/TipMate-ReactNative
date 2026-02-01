@@ -339,17 +339,21 @@ export const StyledLanguageSelector = ({
         {` ${description}`}
       </Text>
       <View style={styles.mainLanguageChangeContainer}>
-        <Text style={styles.languageChangeText}>
-          {t('components.languageSelector.selectLanguage')}
-        </Text>
-        <Pressable
-          style={styles.languageBox}
-          onPress={() => setModalVisibility(prevState => !prevState)}
-        >
-          <Text style={styles.languageText}>
-            {currentLangConfig?.nativeName || currentLanguage}
+        <View style={styles.languageChangeTextContainer}>
+          <Text style={styles.languageChangeText}>
+            {t('components.languageSelector.selectLanguage')}
           </Text>
-        </Pressable>
+        </View>
+        <View style={styles.languageBoxContainer}>
+          <Pressable
+            style={styles.languageBox}
+            onPress={() => setModalVisibility(prevState => !prevState)}
+          >
+            <Text style={styles.languageText}>
+              {currentLangConfig?.nativeName || currentLanguage}
+            </Text>
+          </Pressable>
+        </View>
       </View>
       <LanguageListModal
         modalVisibility={modalVisibility}
@@ -424,16 +428,25 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainLanguageChangeContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  languageChangeTextContainer: {
+    flex: 3,
+    justifyContent: 'center',
   },
   languageChangeText: {
     color: colors.card_typography,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
+  },
+  languageBoxContainer: {
+    flex: 2,
+    alignItems: 'flex-end',
   },
   languageBox: {
     justifyContent: 'center',

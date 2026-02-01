@@ -192,6 +192,7 @@ export const StyledDuplicatePreventionSelector = ({
         selectedValue={selectedValue}
         onTimeOptionPress={option => {
           dispatch({ type: 'UPDATE_DUPLICATE_PREVENTION_WINDOW', payload: option.value });
+          setModalVisibility(false);
           Toast.show({
             type: 'success',
             text1: `${changeToastMessage} ${getDuplicatePreventionLabel(option.value, t)}`,

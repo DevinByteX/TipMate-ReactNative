@@ -225,13 +225,17 @@ export const StyledCurrencySelector = ({
         {` ${description}`}
       </Text>
       <View style={styles.mainCurrencyChangeContainer}>
-        <Text style={styles.currencyChangeText}>{`${currencyChangeInstructionText}`}</Text>
-        <Pressable
-          style={styles.currencyBox}
-          onPress={() => setModalVisibility(prevState => !prevState)}
-        >
-          <Text style={styles.currencyText}>{`${CurrencyObject.currencySign}`}</Text>
-        </Pressable>
+        <View style={styles.currencyChangeTextContainer}>
+          <Text style={styles.currencyChangeText}>{`${currencyChangeInstructionText}`}</Text>
+        </View>
+        <View style={styles.currencyBoxContainer}>
+          <Pressable
+            style={styles.currencyBox}
+            onPress={() => setModalVisibility(prevState => !prevState)}
+          >
+            <Text style={styles.currencyText}>{`${CurrencyObject.currencySign}`}</Text>
+          </Pressable>
+        </View>
       </View>
       <CurrencyListModal
         modalVisibility={modalVisibility}
@@ -290,16 +294,25 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainCurrencyChangeContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  currencyChangeTextContainer: {
+    flex: 3,
+    justifyContent: 'center',
   },
   currencyChangeText: {
     color: colors.card_typography,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
+  },
+  currencyBoxContainer: {
+    flex: 2,
+    alignItems: 'flex-end',
   },
   currencyBox: {
     justifyContent: 'center',

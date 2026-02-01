@@ -93,14 +93,18 @@ export const StyledThemeBox = ({
         {` ${toggleDescription}`}
       </Text>
       <View style={styles.mainThemeToggleContainer}>
-        <Text style={styles.toggleText}>{`${toggleText}`}</Text>
-        <StyledToggle
-          value={UnistylesRuntime.themeName === 'dark'}
-          onValueChange={value => {
-            persistUserPreferredTheme(value);
-            UnistylesRuntime.setTheme(value ? 'dark' : 'light');
-          }}
-        />
+        <View style={styles.toggleTextContainer}>
+          <Text style={styles.toggleText}>{`${toggleText}`}</Text>
+        </View>
+        <View style={styles.toggleButtonContainer}>
+          <StyledToggle
+            value={UnistylesRuntime.themeName === 'dark'}
+            onValueChange={value => {
+              persistUserPreferredTheme(value);
+              UnistylesRuntime.setTheme(value ? 'dark' : 'light');
+            }}
+          />
+        </View>
       </View>
     </View>
   );
@@ -141,16 +145,25 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   mainThemeToggleContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  toggleTextContainer: {
+    flex: 3,
+    justifyContent: 'center',
   },
   toggleText: {
     color: colors.card_typography,
     fontSize: 14,
     fontFamily: fonts.Nunito_Black,
+  },
+  toggleButtonContainer: {
+    flex: 2,
+    alignItems: 'flex-end',
   },
   themeColorBox: {
     flex: 1,
