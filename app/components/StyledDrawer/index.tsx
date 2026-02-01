@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import {
   DrawerContentScrollView,
@@ -43,7 +43,7 @@ const BottomButton = ({
   const { styles, theme } = useStyles(stylesheet);
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
       style={[
         styles.bottomButtonStyles,
@@ -53,7 +53,6 @@ const BottomButton = ({
             : 'transparent',
         },
       ]}
-      activeOpacity={0.5}
     >
       <StyledIcons
         type={iconType}
@@ -69,7 +68,7 @@ const BottomButton = ({
       >
         {label}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

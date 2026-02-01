@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import 'react-native-unistyles'; // Per the Unitstyles FAQ, add this configuration in the root file (e.g., `app.js` or `index.js`).
 import '@styles/uniStyles'; // This should always be imported in the root file of the app, such as app.js or index.
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -21,9 +22,15 @@ import { initializeI18n, applyRTLSync, getCurrentLanguage } from './localization
 initializeI18n();
 applyRTLSync(getCurrentLanguage());
 
+const styles = StyleSheet.create({
+  gestureRoot: {
+    flex: 1,
+  },
+});
+
 const Entrypoint = () => {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.gestureRoot}>
       <AppProvider>
         <ApplicationNavigator />
       </AppProvider>

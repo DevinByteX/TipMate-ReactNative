@@ -79,7 +79,7 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
     );
   };
 
-  const TipCard = ({ item }: { item: SavedTip }) => {
+  const TipCard = React.memo(({ item }: { item: SavedTip }) => {
     const swipeableRef = useRef<SwipeableMethods>(null);
 
     const handleSwipeOpen = () => {
@@ -148,7 +148,7 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
         </Pressable>
       </ReanimatedSwipeable>
     );
-  };
+  });
 
   const renderTipCard = ({ item }: { item: SavedTip }) => <TipCard item={item} />;
 

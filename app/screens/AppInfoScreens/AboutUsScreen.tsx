@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import { View, Text, Pressable, ScrollView, Platform } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { StyledHeader, StyledAlert } from '@components';
@@ -58,8 +58,7 @@ export const AboutUsScreen: React.FC = () => {
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('screens.appInfo.support')}</Text>
-          <TouchableOpacity
-            activeOpacity={0.7}
+          <Pressable
             onPress={() =>
               handleLinkPress(`mailto:${EMAILS.support}`, {
                 title: t('screens.appInfo.contactConfirmTitle'),
@@ -70,15 +69,14 @@ export const AboutUsScreen: React.FC = () => {
             }
           >
             <Text style={styles.linkText}>{EMAILS.support}</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <Text style={styles.feedbackText}>{t('screens.appInfo.feedbackDescription')}</Text>
       </ScrollView>
       <View style={styles.acknowledgementsSection}>
         <Text style={styles.sectionTitle}>{t('screens.appInfo.acknowledgements')}</Text>
         <View style={styles.acknowledgementLinks}>
-          <TouchableOpacity
-            activeOpacity={0.7}
+          <Pressable
             onPress={() => {
               handleNavigation('LicensesScreen');
             }}
@@ -87,16 +85,15 @@ export const AboutUsScreen: React.FC = () => {
             <Text style={styles.acknowledgementButtonText}>
               {t('screens.appInfo.thirdPartyLibraries')}
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.7}
+          </Pressable>
+          <Pressable
             onPress={() => handleLinkPress(APP_LINKS.privacyPolicy)}
             style={styles.acknowledgementButton}
           >
             <Text style={styles.acknowledgementButtonText}>
               {t('screens.appInfo.privacyPolicy')}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <Text style={styles.versionText}>
           {t('screens.appInfo.appVersion')} {APP_INFO.version}
