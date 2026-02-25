@@ -51,7 +51,7 @@ const ApplicationNavigator = (props: any) => {
       >
         <StackNavigation />
       </NavigationContainer>
-      <Toast config={toastConfig} topOffset={UnistylesRuntime.insets.top} />
+      <Toast config={toastConfig} topOffset={UnistylesRuntime.statusBar.height} />
     </SafeAreaProvider>
   );
 };
