@@ -20,17 +20,25 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_code-frame@7.27.1</string>
+			<string>com.mono0926.LicensePlist/@babel_code-frame@7.10.4</string>
 			<key>Title</key>
-			<string>@babel/code-frame (7.27.1)</string>
+			<string>@babel/code-frame (7.10.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_compat-data@7.26.5</string>
+			<string>com.mono0926.LicensePlist/@babel_code-frame@7.29.0</string>
 			<key>Title</key>
-			<string>@babel/compat-data (7.26.5)</string>
+			<string>@babel/code-frame (7.29.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@babel_compat-data@7.29.0</string>
+			<key>Title</key>
+			<string>@babel/compat-data (7.29.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -44,41 +52,41 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_generator@7.28.3</string>
+			<string>com.mono0926.LicensePlist/@babel_generator@7.29.1</string>
 			<key>Title</key>
-			<string>@babel/generator (7.28.3)</string>
+			<string>@babel/generator (7.29.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-annotate-as-pure@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-annotate-as-pure@7.27.3</string>
 			<key>Title</key>
-			<string>@babel/helper-annotate-as-pure (7.25.9)</string>
+			<string>@babel/helper-annotate-as-pure (7.27.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-compilation-targets@7.26.5</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-compilation-targets@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/helper-compilation-targets (7.26.5)</string>
+			<string>@babel/helper-compilation-targets (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-create-class-features-plugin@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-create-class-features-plugin@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/helper-create-class-features-plugin (7.25.9)</string>
+			<string>@babel/helper-create-class-features-plugin (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-create-regexp-features-plugin@7.26.3</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-create-regexp-features-plugin@7.28.5</string>
 			<key>Title</key>
-			<string>@babel/helper-create-regexp-features-plugin (7.26.3)</string>
+			<string>@babel/helper-create-regexp-features-plugin (7.28.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -92,57 +100,57 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-member-expression-to-functions@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-member-expression-to-functions@7.28.5</string>
 			<key>Title</key>
-			<string>@babel/helper-member-expression-to-functions (7.25.9)</string>
+			<string>@babel/helper-member-expression-to-functions (7.28.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-module-imports@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-module-imports@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/helper-module-imports (7.25.9)</string>
+			<string>@babel/helper-module-imports (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-module-transforms@7.26.0</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-module-transforms@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/helper-module-transforms (7.26.0)</string>
+			<string>@babel/helper-module-transforms (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-optimise-call-expression@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-optimise-call-expression@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/helper-optimise-call-expression (7.25.9)</string>
+			<string>@babel/helper-optimise-call-expression (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-plugin-utils@7.26.5</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-plugin-utils@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/helper-plugin-utils (7.26.5)</string>
+			<string>@babel/helper-plugin-utils (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-replace-supers@7.26.5</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-replace-supers@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/helper-replace-supers (7.26.5)</string>
+			<string>@babel/helper-replace-supers (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-skip-transparent-expression-wrappers@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-skip-transparent-expression-wrappers@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/helper-skip-transparent-expression-wrappers (7.25.9)</string>
+			<string>@babel/helper-skip-transparent-expression-wrappers (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -156,17 +164,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-validator-identifier@7.27.1</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-validator-identifier@7.28.5</string>
 			<key>Title</key>
-			<string>@babel/helper-validator-identifier (7.27.1)</string>
+			<string>@babel/helper-validator-identifier (7.28.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_helper-validator-option@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_helper-validator-option@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/helper-validator-option (7.25.9)</string>
+			<string>@babel/helper-validator-option (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -180,9 +188,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_parser@7.28.3</string>
+			<string>com.mono0926.LicensePlist/@babel_highlight@7.25.9</string>
 			<key>Title</key>
-			<string>@babel/parser (7.28.3)</string>
+			<string>@babel/highlight (7.25.9)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@babel_parser@7.29.0</string>
+			<key>Title</key>
+			<string>@babel/parser (7.29.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -244,9 +260,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-syntax-jsx@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-syntax-jsx@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/plugin-syntax-jsx (7.25.9)</string>
+			<string>@babel/plugin-syntax-jsx (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -316,97 +332,97 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-syntax-typescript@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-syntax-typescript@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/plugin-syntax-typescript (7.25.9)</string>
+			<string>@babel/plugin-syntax-typescript (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-arrow-functions@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-arrow-functions@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-arrow-functions (7.25.9)</string>
+			<string>@babel/plugin-transform-arrow-functions (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-class-properties@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-class-properties@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-class-properties (7.25.9)</string>
+			<string>@babel/plugin-transform-class-properties (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-classes@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-classes@7.28.4</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-classes (7.25.9)</string>
+			<string>@babel/plugin-transform-classes (7.28.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-modules-commonjs@7.26.3</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-modules-commonjs@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-modules-commonjs (7.26.3)</string>
+			<string>@babel/plugin-transform-modules-commonjs (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-nullish-coalescing-operator@7.26.6</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-nullish-coalescing-operator@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-nullish-coalescing-operator (7.26.6)</string>
+			<string>@babel/plugin-transform-nullish-coalescing-operator (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-optional-chaining@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-optional-chaining@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-optional-chaining (7.25.9)</string>
+			<string>@babel/plugin-transform-optional-chaining (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-shorthand-properties@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-shorthand-properties@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-shorthand-properties (7.25.9)</string>
+			<string>@babel/plugin-transform-shorthand-properties (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-template-literals@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-template-literals@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-template-literals (7.25.9)</string>
+			<string>@babel/plugin-transform-template-literals (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-typescript@7.26.5</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-typescript@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-typescript (7.26.5)</string>
+			<string>@babel/plugin-transform-typescript (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_plugin-transform-unicode-regex@7.25.9</string>
+			<string>com.mono0926.LicensePlist/@babel_plugin-transform-unicode-regex@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/plugin-transform-unicode-regex (7.25.9)</string>
+			<string>@babel/plugin-transform-unicode-regex (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_preset-typescript@7.26.0</string>
+			<string>com.mono0926.LicensePlist/@babel_preset-typescript@7.27.1</string>
 			<key>Title</key>
-			<string>@babel/preset-typescript (7.26.0)</string>
+			<string>@babel/preset-typescript (7.27.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -420,33 +436,25 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_template@7.27.2</string>
+			<string>com.mono0926.LicensePlist/@babel_template@7.28.6</string>
 			<key>Title</key>
-			<string>@babel/template (7.27.2)</string>
+			<string>@babel/template (7.28.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_traverse--for-generate-function-map@7.28.3</string>
+			<string>com.mono0926.LicensePlist/@babel_traverse@7.29.0</string>
 			<key>Title</key>
-			<string>@babel/traverse--for-generate-function-map (7.28.3)</string>
+			<string>@babel/traverse (7.29.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_traverse@7.27.0</string>
+			<string>com.mono0926.LicensePlist/@babel_types@7.29.0</string>
 			<key>Title</key>
-			<string>@babel/traverse (7.27.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/@babel_types@7.28.2</string>
-			<key>Title</key>
-			<string>@babel/types (7.28.2)</string>
+			<string>@babel/types (7.29.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -463,6 +471,70 @@
 			<string>com.mono0926.LicensePlist/@egjs_hammerjs@2.0.17</string>
 			<key>Title</key>
 			<string>@egjs/hammerjs (2.0.17)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@expo_config-plugins@54.0.4</string>
+			<key>Title</key>
+			<string>@expo/config-plugins (54.0.4)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@expo_config-types@54.0.10</string>
+			<key>Title</key>
+			<string>@expo/config-types (54.0.10)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@expo_json-file@10.0.8</string>
+			<key>Title</key>
+			<string>@expo/json-file (10.0.8)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@expo_plist@0.4.8</string>
+			<key>Title</key>
+			<string>@expo/plist (0.4.8)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@expo_sdk-runtime-versions@1.0.0</string>
+			<key>Title</key>
+			<string>@expo/sdk-runtime-versions (1.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@img_colour@1.0.0</string>
+			<key>Title</key>
+			<string>@img/colour (1.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@img_sharp-darwin-arm64@0.34.5</string>
+			<key>Title</key>
+			<string>@img/sharp-darwin-arm64 (0.34.5)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@img_sharp-libvips-darwin-arm64@1.2.4</string>
+			<key>Title</key>
+			<string>@img/sharp-libvips-darwin-arm64 (1.2.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -588,209 +660,241 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-async-storage_async-storage@2.2.0</string>
+			<string>com.mono0926.LicensePlist/@nodelib_fs.scandir@2.1.5</string>
 			<key>Title</key>
-			<string>@react-native-async-storage/async-storage (2.2.0)</string>
+			<string>@nodelib/fs.scandir (2.1.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-vector-icons_ant-design@12.3.0</string>
+			<string>com.mono0926.LicensePlist/@nodelib_fs.stat@2.0.5</string>
 			<key>Title</key>
-			<string>@react-native-vector-icons/ant-design (12.3.0)</string>
+			<string>@nodelib/fs.stat (2.0.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-vector-icons_common@12.3.0</string>
+			<string>com.mono0926.LicensePlist/@nodelib_fs.walk@1.2.8</string>
 			<key>Title</key>
-			<string>@react-native-vector-icons/common (12.3.0)</string>
+			<string>@nodelib/fs.walk (1.2.8)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-vector-icons_feather@12.3.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-async-storage_async-storage@3.0.1</string>
 			<key>Title</key>
-			<string>@react-native-vector-icons/feather (12.3.0)</string>
+			<string>@react-native-async-storage/async-storage (3.0.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-vector-icons_fontawesome6@12.2.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-vector-icons_ant-design@12.4.1</string>
 			<key>Title</key>
-			<string>@react-native-vector-icons/fontawesome6 (12.2.0)</string>
+			<string>@react-native-vector-icons/ant-design (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-vector-icons_foundation@12.3.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-vector-icons_common@12.4.0</string>
 			<key>Title</key>
-			<string>@react-native-vector-icons/foundation (12.3.0)</string>
+			<string>@react-native-vector-icons/common (12.4.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-vector-icons_ionicons@12.3.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-vector-icons_feather@12.4.1</string>
 			<key>Title</key>
-			<string>@react-native-vector-icons/ionicons (12.3.0)</string>
+			<string>@react-native-vector-icons/feather (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-vector-icons_lucide@12.3.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-vector-icons_fontawesome6@12.3.1</string>
 			<key>Title</key>
-			<string>@react-native-vector-icons/lucide (12.3.0)</string>
+			<string>@react-native-vector-icons/fontawesome6 (12.3.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-vector-icons_material-design-icons@12.3.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-vector-icons_foundation@12.4.1</string>
 			<key>Title</key>
-			<string>@react-native-vector-icons/material-design-icons (12.3.0)</string>
+			<string>@react-native-vector-icons/foundation (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native-vector-icons_octicons@20.3.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-vector-icons_ionicons@12.4.1</string>
 			<key>Title</key>
-			<string>@react-native-vector-icons/octicons (20.3.0)</string>
+			<string>@react-native-vector-icons/ionicons (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native_assets-registry@0.81.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-vector-icons_lucide@12.4.1</string>
 			<key>Title</key>
-			<string>@react-native/assets-registry (0.81.0)</string>
+			<string>@react-native-vector-icons/lucide (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native_codegen@0.81.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-vector-icons_material-design-icons@12.4.1</string>
 			<key>Title</key>
-			<string>@react-native/codegen (0.81.0)</string>
+			<string>@react-native-vector-icons/material-design-icons (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native_community-cli-plugin@0.81.0</string>
+			<string>com.mono0926.LicensePlist/@react-native-vector-icons_octicons@20.4.1</string>
 			<key>Title</key>
-			<string>@react-native/community-cli-plugin (0.81.0)</string>
+			<string>@react-native-vector-icons/octicons (20.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native_debugger-frontend@0.81.0</string>
+			<string>com.mono0926.LicensePlist/@react-native_assets-registry@0.84.1</string>
 			<key>Title</key>
-			<string>@react-native/debugger-frontend (0.81.0)</string>
+			<string>@react-native/assets-registry (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native_dev-middleware@0.81.0</string>
+			<string>com.mono0926.LicensePlist/@react-native_codegen@0.84.1</string>
 			<key>Title</key>
-			<string>@react-native/dev-middleware (0.81.0)</string>
+			<string>@react-native/codegen (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native_gradle-plugin@0.81.0</string>
+			<string>com.mono0926.LicensePlist/@react-native_community-cli-plugin@0.84.1</string>
 			<key>Title</key>
-			<string>@react-native/gradle-plugin (0.81.0)</string>
+			<string>@react-native/community-cli-plugin (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native_js-polyfills@0.81.0</string>
+			<string>com.mono0926.LicensePlist/@react-native_debugger-frontend@0.84.1</string>
 			<key>Title</key>
-			<string>@react-native/js-polyfills (0.81.0)</string>
+			<string>@react-native/debugger-frontend (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native_normalize-colors@0.81.0</string>
+			<string>com.mono0926.LicensePlist/@react-native_debugger-shell@0.84.1</string>
 			<key>Title</key>
-			<string>@react-native/normalize-colors (0.81.0)</string>
+			<string>@react-native/debugger-shell (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-native_virtualized-lists@0.81.0</string>
+			<string>com.mono0926.LicensePlist/@react-native_dev-middleware@0.84.1</string>
 			<key>Title</key>
-			<string>@react-native/virtualized-lists (0.81.0)</string>
+			<string>@react-native/dev-middleware (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-navigation_core@7.12.4</string>
+			<string>com.mono0926.LicensePlist/@react-native_gradle-plugin@0.84.1</string>
 			<key>Title</key>
-			<string>@react-navigation/core (7.12.4)</string>
+			<string>@react-native/gradle-plugin (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-navigation_devtools@7.0.38</string>
+			<string>com.mono0926.LicensePlist/@react-native_js-polyfills@0.84.1</string>
 			<key>Title</key>
-			<string>@react-navigation/devtools (7.0.38)</string>
+			<string>@react-native/js-polyfills (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-navigation_drawer@7.5.7</string>
+			<string>com.mono0926.LicensePlist/@react-native_normalize-colors@0.84.1</string>
 			<key>Title</key>
-			<string>@react-navigation/drawer (7.5.7)</string>
+			<string>@react-native/normalize-colors (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-navigation_elements@2.6.3</string>
+			<string>com.mono0926.LicensePlist/@react-native_virtualized-lists@0.84.1</string>
 			<key>Title</key>
-			<string>@react-navigation/elements (2.6.3)</string>
+			<string>@react-native/virtualized-lists (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-navigation_native-stack@7.3.25</string>
+			<string>com.mono0926.LicensePlist/@react-navigation_core@7.15.1</string>
 			<key>Title</key>
-			<string>@react-navigation/native-stack (7.3.25)</string>
+			<string>@react-navigation/core (7.15.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-navigation_native@7.1.17</string>
+			<string>com.mono0926.LicensePlist/@react-navigation_devtools@7.0.50</string>
 			<key>Title</key>
-			<string>@react-navigation/native (7.1.17)</string>
+			<string>@react-navigation/devtools (7.0.50)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@react-navigation_routers@7.5.1</string>
+			<string>com.mono0926.LicensePlist/@react-navigation_drawer@7.9.2</string>
 			<key>Title</key>
-			<string>@react-navigation/routers (7.5.1)</string>
+			<string>@react-navigation/drawer (7.9.2)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@react-navigation_elements@2.9.8</string>
+			<key>Title</key>
+			<string>@react-navigation/elements (2.9.8)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@react-navigation_native-stack@7.14.2</string>
+			<key>Title</key>
+			<string>@react-navigation/native-stack (7.14.2)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@react-navigation_native@7.1.31</string>
+			<key>Title</key>
+			<string>@react-navigation/native (7.1.31)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/@react-navigation_routers@7.5.3</string>
+			<key>Title</key>
+			<string>@react-navigation/routers (7.5.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -940,17 +1044,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/accepts@1.3.8</string>
+			<string>com.mono0926.LicensePlist/accepts@2.0.0</string>
 			<key>Title</key>
-			<string>accepts (1.3.8)</string>
+			<string>accepts (2.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/acorn@8.14.0</string>
+			<string>com.mono0926.LicensePlist/acorn@8.16.0</string>
 			<key>Title</key>
-			<string>acorn (8.14.0)</string>
+			<string>acorn (8.16.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -975,6 +1079,14 @@
 			<string>com.mono0926.LicensePlist/ansi-regex@5.0.1</string>
 			<key>Title</key>
 			<string>ansi-regex (5.0.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/ansi-styles@3.2.1</string>
+			<key>Title</key>
+			<string>ansi-styles (3.2.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1020,14 +1132,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/async-limiter@1.0.1</string>
-			<key>Title</key>
-			<string>async-limiter (1.0.1)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/babel-jest@29.7.0</string>
 			<key>Title</key>
 			<string>babel-jest (29.7.0)</string>
@@ -1052,9 +1156,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/babel-plugin-syntax-hermes-parser@0.29.1</string>
+			<string>com.mono0926.LicensePlist/babel-plugin-syntax-hermes-parser@0.32.0</string>
 			<key>Title</key>
-			<string>babel-plugin-syntax-hermes-parser (0.29.1)</string>
+			<string>babel-plugin-syntax-hermes-parser (0.32.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1084,6 +1188,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/balanced-match@4.0.4</string>
+			<key>Title</key>
+			<string>balanced-match (4.0.4)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/base64-js@1.5.1</string>
 			<key>Title</key>
 			<string>base64-js (1.5.1)</string>
@@ -1108,14 +1220,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/boost</string>
-			<key>Title</key>
-			<string>boost (1.84.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/bplist-creator@0.1.0</string>
 			<key>Title</key>
 			<string>bplist-creator (0.1.0)</string>
@@ -1135,6 +1239,14 @@
 			<string>com.mono0926.LicensePlist/brace-expansion@1.1.12</string>
 			<key>Title</key>
 			<string>brace-expansion (1.1.12)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/brace-expansion@5.0.4</string>
+			<key>Title</key>
+			<string>brace-expansion (5.0.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1172,30 +1284,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/caller-callsite@2.0.0</string>
-			<key>Title</key>
-			<string>caller-callsite (2.0.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/caller-path@2.0.0</string>
-			<key>Title</key>
-			<string>caller-path (2.0.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/callsites@2.0.0</string>
-			<key>Title</key>
-			<string>callsites (2.0.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/camelcase@5.3.1</string>
 			<key>Title</key>
 			<string>camelcase (5.3.1)</string>
@@ -1215,6 +1303,14 @@
 			<string>com.mono0926.LicensePlist/caniuse-lite@1.0.30001695</string>
 			<key>Title</key>
 			<string>caniuse-lite (1.0.30001695)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/chalk@2.4.2</string>
+			<key>Title</key>
+			<string>chalk (2.4.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1268,9 +1364,25 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/color-convert@1.9.3</string>
+			<key>Title</key>
+			<string>color-convert (1.9.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/color-convert@2.0.1</string>
 			<key>Title</key>
 			<string>color-convert (2.0.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/color-name@1.1.3</string>
+			<key>Title</key>
+			<string>color-name (1.1.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1308,6 +1420,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/commander@14.0.3</string>
+			<key>Title</key>
+			<string>commander (14.0.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/commander@2.20.3</string>
 			<key>Title</key>
 			<string>commander (2.20.3)</string>
@@ -1340,9 +1460,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/cosmiconfig@5.2.1</string>
+			<string>com.mono0926.LicensePlist/cross-spawn@7.0.6</string>
 			<key>Title</key>
-			<string>cosmiconfig (5.2.1)</string>
+			<string>cross-spawn (7.0.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1412,6 +1532,22 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/detect-indent@6.1.0</string>
+			<key>Title</key>
+			<string>detect-indent (6.1.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/detect-libc@2.1.2</string>
+			<key>Title</key>
+			<string>detect-libc (2.1.2)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/dom-serializer@2.0.0</string>
 			<key>Title</key>
 			<string>dom-serializer (2.0.0)</string>
@@ -1439,14 +1575,6 @@
 			<string>com.mono0926.LicensePlist/domutils@3.2.2</string>
 			<key>Title</key>
 			<string>domutils (3.2.2)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/DoubleConversion</string>
-			<key>Title</key>
-			<string>DoubleConversion (1.1.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1500,14 +1628,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/error-ex@1.3.2</string>
-			<key>Title</key>
-			<string>error-ex (1.3.2)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/error-stack-parser@2.1.4</string>
 			<key>Title</key>
 			<string>error-stack-parser (2.1.4)</string>
@@ -1527,6 +1647,14 @@
 			<string>com.mono0926.LicensePlist/escape-html@1.0.3</string>
 			<key>Title</key>
 			<string>escape-html (1.0.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/escape-string-regexp@1.0.5</string>
+			<key>Title</key>
+			<string>escape-string-regexp (1.0.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1572,9 +1700,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/exponential-backoff@3.1.2</string>
+			<string>com.mono0926.LicensePlist/exponential-backoff@3.1.3</string>
 			<key>Title</key>
-			<string>exponential-backoff (3.1.2)</string>
+			<string>exponential-backoff (3.1.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1588,6 +1716,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/fast-glob@3.3.3</string>
+			<key>Title</key>
+			<string>fast-glob (3.3.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/fast-json-stable-stringify@2.1.0</string>
 			<key>Title</key>
 			<string>fast-json-stable-stringify (2.1.0)</string>
@@ -1596,9 +1732,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/fast_float</string>
+			<string>com.mono0926.LicensePlist/fastq@1.18.0</string>
 			<key>Title</key>
-			<string>fast_float (8.0.0)</string>
+			<string>fastq (1.18.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/fb-dotslash@0.5.8</string>
+			<key>Title</key>
+			<string>fb-dotslash (0.5.8)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1607,6 +1751,14 @@
 			<string>com.mono0926.LicensePlist/fb-watchman@2.0.2</string>
 			<key>Title</key>
 			<string>fb-watchman (2.0.2)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/fdir@6.5.0</string>
+			<key>Title</key>
+			<string>fdir (6.5.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1660,14 +1812,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/fmt</string>
-			<key>Title</key>
-			<string>fmt (11.0.2)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/fresh@0.5.2</string>
 			<key>Title</key>
 			<string>fresh (0.5.2)</string>
@@ -1716,25 +1860,33 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/getenv@2.0.0</string>
+			<key>Title</key>
+			<string>getenv (2.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/glob-parent@5.1.2</string>
+			<key>Title</key>
+			<string>glob-parent (5.1.2)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/glob@13.0.0</string>
+			<key>Title</key>
+			<string>glob (13.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/glob@7.2.3</string>
 			<key>Title</key>
 			<string>glob (7.2.3)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/globals@11.12.0</string>
-			<key>Title</key>
-			<string>globals (11.12.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/glog</string>
-			<key>Title</key>
-			<string>glog (0.3.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1748,6 +1900,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/has-flag@3.0.0</string>
+			<key>Title</key>
+			<string>has-flag (3.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/has-flag@4.0.0</string>
 			<key>Title</key>
 			<string>has-flag (4.0.0)</string>
@@ -1756,25 +1916,57 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/he@1.2.0</string>
+			<key>Title</key>
+			<string>he (1.2.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/hermes-compiler@250829098.0.9</string>
+			<key>Title</key>
+			<string>hermes-compiler (250829098.0.9)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/hermes-engine</string>
 			<key>Title</key>
-			<string>hermes-engine (0.81.0)</string>
+			<string>hermes-engine (250829098.0.9)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/hermes-estree@0.29.1</string>
+			<string>com.mono0926.LicensePlist/hermes-estree@0.32.0</string>
 			<key>Title</key>
-			<string>hermes-estree (0.29.1)</string>
+			<string>hermes-estree (0.32.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/hermes-parser@0.29.1</string>
+			<string>com.mono0926.LicensePlist/hermes-estree@0.33.3</string>
 			<key>Title</key>
-			<string>hermes-parser (0.29.1)</string>
+			<string>hermes-estree (0.33.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/hermes-parser@0.32.0</string>
+			<key>Title</key>
+			<string>hermes-parser (0.32.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/hermes-parser@0.33.3</string>
+			<key>Title</key>
+			<string>hermes-parser (0.33.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1804,9 +1996,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/http-errors@2.0.0</string>
+			<string>com.mono0926.LicensePlist/http-errors@2.0.1</string>
 			<key>Title</key>
-			<string>http-errors (2.0.0)</string>
+			<string>http-errors (2.0.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1820,9 +2012,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/i18next@25.6.3</string>
+			<string>com.mono0926.LicensePlist/i18next@25.8.13</string>
 			<key>Title</key>
-			<string>i18next (25.6.3)</string>
+			<string>i18next (25.8.13)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/idb@8.0.3</string>
+			<key>Title</key>
+			<string>idb (8.0.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1831,14 +2031,6 @@
 			<string>com.mono0926.LicensePlist/image-size@1.2.1</string>
 			<key>Title</key>
 			<string>image-size (1.2.1)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/import-fresh@2.0.0</string>
-			<key>Title</key>
-			<string>import-fresh (2.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1876,25 +2068,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/is-arrayish@0.2.1</string>
-			<key>Title</key>
-			<string>is-arrayish (0.2.1)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/is-arrayish@0.3.2</string>
 			<key>Title</key>
 			<string>is-arrayish (0.3.2)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/is-directory@0.3.1</string>
-			<key>Title</key>
-			<string>is-directory (0.3.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1908,9 +2084,25 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/is-extglob@2.1.1</string>
+			<key>Title</key>
+			<string>is-extglob (2.1.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/is-fullwidth-code-point@3.0.0</string>
 			<key>Title</key>
 			<string>is-fullwidth-code-point (3.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/is-glob@4.0.3</string>
+			<key>Title</key>
+			<string>is-glob (4.0.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1924,17 +2116,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/is-plain-obj@2.1.0</string>
+			<string>com.mono0926.LicensePlist/is-wsl@2.2.0</string>
 			<key>Title</key>
-			<string>is-plain-obj (2.1.0)</string>
+			<string>is-wsl (2.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/is-wsl@2.2.0</string>
+			<string>com.mono0926.LicensePlist/isexe@2.0.0</string>
 			<key>Title</key>
-			<string>is-wsl (2.2.0)</string>
+			<string>isexe (2.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2052,25 +2244,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/jsesc@3.0.2</string>
-			<key>Title</key>
-			<string>jsesc (3.0.2)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/jsesc@3.1.0</string>
 			<key>Title</key>
 			<string>jsesc (3.1.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/json-parse-better-errors@1.0.2</string>
-			<key>Title</key>
-			<string>json-parse-better-errors (1.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2094,7 +2270,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/LicensePlist</string>
 			<key>Title</key>
-			<string>LicensePlist (3.27.1)</string>
+			<string>LicensePlist (3.27.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2172,14 +2348,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/merge-options@3.0.4</string>
-			<key>Title</key>
-			<string>merge-options (3.0.4)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/merge-stream@2.0.0</string>
 			<key>Title</key>
 			<string>merge-stream (2.0.0)</string>
@@ -2188,113 +2356,121 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-babel-transformer@0.83.1</string>
+			<string>com.mono0926.LicensePlist/merge2@1.4.1</string>
 			<key>Title</key>
-			<string>metro-babel-transformer (0.83.1)</string>
+			<string>merge2 (1.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-cache-key@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-babel-transformer@0.83.4</string>
 			<key>Title</key>
-			<string>metro-cache-key (0.83.1)</string>
+			<string>metro-babel-transformer (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-cache@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-cache-key@0.83.4</string>
 			<key>Title</key>
-			<string>metro-cache (0.83.1)</string>
+			<string>metro-cache-key (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-config@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-cache@0.83.4</string>
 			<key>Title</key>
-			<string>metro-config (0.83.1)</string>
+			<string>metro-cache (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-core@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-config@0.83.4</string>
 			<key>Title</key>
-			<string>metro-core (0.83.1)</string>
+			<string>metro-config (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-file-map@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-core@0.83.4</string>
 			<key>Title</key>
-			<string>metro-file-map (0.83.1)</string>
+			<string>metro-core (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-minify-terser@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-file-map@0.83.4</string>
 			<key>Title</key>
-			<string>metro-minify-terser (0.83.1)</string>
+			<string>metro-file-map (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-resolver@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-minify-terser@0.83.4</string>
 			<key>Title</key>
-			<string>metro-resolver (0.83.1)</string>
+			<string>metro-minify-terser (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-runtime@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-resolver@0.83.4</string>
 			<key>Title</key>
-			<string>metro-runtime (0.83.1)</string>
+			<string>metro-resolver (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-source-map@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-runtime@0.83.4</string>
 			<key>Title</key>
-			<string>metro-source-map (0.83.1)</string>
+			<string>metro-runtime (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-symbolicate@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-source-map@0.83.4</string>
 			<key>Title</key>
-			<string>metro-symbolicate (0.83.1)</string>
+			<string>metro-source-map (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-transform-plugins@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-symbolicate@0.83.4</string>
 			<key>Title</key>
-			<string>metro-transform-plugins (0.83.1)</string>
+			<string>metro-symbolicate (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro-transform-worker@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-transform-plugins@0.83.4</string>
 			<key>Title</key>
-			<string>metro-transform-worker (0.83.1)</string>
+			<string>metro-transform-plugins (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/metro@0.83.1</string>
+			<string>com.mono0926.LicensePlist/metro-transform-worker@0.83.4</string>
 			<key>Title</key>
-			<string>metro (0.83.1)</string>
+			<string>metro-transform-worker (0.83.4)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/metro@0.83.4</string>
+			<key>Title</key>
+			<string>metro (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2308,17 +2484,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/mime-db@1.52.0</string>
+			<string>com.mono0926.LicensePlist/mime-db@1.54.0</string>
 			<key>Title</key>
-			<string>mime-db (1.52.0)</string>
+			<string>mime-db (1.54.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/mime-types@2.1.35</string>
+			<string>com.mono0926.LicensePlist/mime-types@3.0.2</string>
 			<key>Title</key>
-			<string>mime-types (2.1.35)</string>
+			<string>mime-types (3.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2332,9 +2508,25 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/minimatch@3.1.2</string>
+			<string>com.mono0926.LicensePlist/minimatch@10.2.4</string>
 			<key>Title</key>
-			<string>minimatch (3.1.2)</string>
+			<string>minimatch (10.2.4)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/minimatch@3.1.5</string>
+			<key>Title</key>
+			<string>minimatch (3.1.5)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/minipass@7.1.2</string>
+			<key>Title</key>
+			<string>minipass (7.1.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2372,9 +2564,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/negotiator@0.6.3</string>
+			<string>com.mono0926.LicensePlist/negotiator@1.0.0</string>
 			<key>Title</key>
-			<string>negotiator (0.6.3)</string>
+			<string>negotiator (1.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/node-html-parser@7.0.2</string>
+			<key>Title</key>
+			<string>node-html-parser (7.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2420,9 +2620,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/ob1@0.83.1</string>
+			<string>com.mono0926.LicensePlist/ob1@0.83.4</string>
 			<key>Title</key>
-			<string>ob1 (0.83.1)</string>
+			<string>ob1 (0.83.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2484,14 +2684,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/parse-json@4.0.0</string>
-			<key>Title</key>
-			<string>parse-json (4.0.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/parseurl@1.3.3</string>
 			<key>Title</key>
 			<string>parseurl (1.3.3)</string>
@@ -2516,6 +2708,22 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/path-key@3.1.1</string>
+			<key>Title</key>
+			<string>path-key (3.1.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/path-scurry@2.0.1</string>
+			<key>Title</key>
+			<string>path-scurry (2.0.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/picocolors@1.1.1</string>
 			<key>Title</key>
 			<string>picocolors (1.1.1)</string>
@@ -2532,6 +2740,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/picomatch@4.0.3</string>
+			<key>Title</key>
+			<string>picomatch (4.0.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/pirates@4.0.6</string>
 			<key>Title</key>
 			<string>pirates (4.0.6)</string>
@@ -2543,6 +2759,14 @@
 			<string>com.mono0926.LicensePlist/plist@3.1.0</string>
 			<key>Title</key>
 			<string>plist (3.1.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/prettier@3.8.1</string>
+			<key>Title</key>
+			<string>prettier (3.8.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2572,6 +2796,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/queue-microtask@1.2.3</string>
+			<key>Title</key>
+			<string>queue-microtask (1.2.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/queue@6.0.2</string>
 			<key>Title</key>
 			<string>queue (6.0.2)</string>
@@ -2588,17 +2820,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/RCT-Folly</string>
-			<key>Title</key>
-			<string>RCT-Folly (2024.11.18.00)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/React</string>
 			<key>Title</key>
-			<string>React (0.81.0)</string>
+			<string>React (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2606,7 +2830,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/React-Core</string>
 			<key>Title</key>
-			<string>React-Core (0.81.0)</string>
+			<string>React-Core (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2628,9 +2852,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-i18next@16.3.5</string>
+			<string>com.mono0926.LicensePlist/react-i18next@16.5.4</string>
 			<key>Title</key>
-			<string>react-i18next (16.3.5)</string>
+			<string>react-i18next (16.5.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2652,25 +2876,33 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-is@19.1.1</string>
+			<string>com.mono0926.LicensePlist/react-is@19.2.4</string>
 			<key>Title</key>
-			<string>react-is (19.1.1)</string>
+			<string>react-is (19.2.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-drawer-layout@4.1.12</string>
+			<string>com.mono0926.LicensePlist/react-native-bootsplash@7.1.0</string>
 			<key>Title</key>
-			<string>react-native-drawer-layout (4.1.12)</string>
+			<string>react-native-bootsplash (7.1.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-gesture-handler@2.29.1</string>
+			<string>com.mono0926.LicensePlist/react-native-drawer-layout@4.2.2</string>
 			<key>Title</key>
-			<string>react-native-gesture-handler (2.29.1)</string>
+			<string>react-native-drawer-layout (4.2.2)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/react-native-gesture-handler@2.30.0</string>
+			<key>Title</key>
+			<string>react-native-gesture-handler (2.30.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2679,14 +2911,6 @@
 			<string>com.mono0926.LicensePlist/react-native-html-to-pdf@1.3.0</string>
 			<key>Title</key>
 			<string>react-native-html-to-pdf (1.3.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-is-edge-to-edge@1.1.7</string>
-			<key>Title</key>
-			<string>react-native-is-edge-to-edge (1.1.7)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2708,17 +2932,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-localize@3.6.0</string>
+			<string>com.mono0926.LicensePlist/react-native-localize@3.7.0</string>
 			<key>Title</key>
-			<string>react-native-localize (3.6.0)</string>
+			<string>react-native-localize (3.7.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-reanimated@3.19.0</string>
+			<string>com.mono0926.LicensePlist/react-native-reanimated@4.2.2</string>
 			<key>Title</key>
-			<string>react-native-reanimated (3.19.0)</string>
+			<string>react-native-reanimated (4.2.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2726,23 +2950,23 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/react-native-safe-area-context</string>
 			<key>Title</key>
-			<string>react-native-safe-area-context (5.6.0)</string>
+			<string>react-native-safe-area-context (5.7.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-safe-area-context@5.6.0</string>
+			<string>com.mono0926.LicensePlist/react-native-safe-area-context@5.7.0</string>
 			<key>Title</key>
-			<string>react-native-safe-area-context (5.6.0)</string>
+			<string>react-native-safe-area-context (5.7.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-screens@4.14.1</string>
+			<string>com.mono0926.LicensePlist/react-native-screens@4.24.0</string>
 			<key>Title</key>
-			<string>react-native-screens (4.14.1)</string>
+			<string>react-native-screens (4.24.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2756,9 +2980,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native-svg@15.12.1</string>
+			<string>com.mono0926.LicensePlist/react-native-svg@15.15.3</string>
 			<key>Title</key>
-			<string>react-native-svg (15.12.1)</string>
+			<string>react-native-svg (15.15.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2790,7 +3014,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/react-native-vector-icons-ant-design</string>
 			<key>Title</key>
-			<string>react-native-vector-icons-ant-design (12.3.0)</string>
+			<string>react-native-vector-icons-ant-design (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2798,7 +3022,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/react-native-vector-icons-feather</string>
 			<key>Title</key>
-			<string>react-native-vector-icons-feather (12.3.0)</string>
+			<string>react-native-vector-icons-feather (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2806,7 +3030,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/react-native-vector-icons-fontawesome6</string>
 			<key>Title</key>
-			<string>react-native-vector-icons-fontawesome6 (12.2.0)</string>
+			<string>react-native-vector-icons-fontawesome6 (12.3.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2814,7 +3038,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/react-native-vector-icons-foundation</string>
 			<key>Title</key>
-			<string>react-native-vector-icons-foundation (12.3.0)</string>
+			<string>react-native-vector-icons-foundation (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2822,7 +3046,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/react-native-vector-icons-ionicons</string>
 			<key>Title</key>
-			<string>react-native-vector-icons-ionicons (12.3.0)</string>
+			<string>react-native-vector-icons-ionicons (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2830,7 +3054,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/react-native-vector-icons-lucide</string>
 			<key>Title</key>
-			<string>react-native-vector-icons-lucide (12.3.0)</string>
+			<string>react-native-vector-icons-lucide (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2838,7 +3062,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/react-native-vector-icons-material-design-icons</string>
 			<key>Title</key>
-			<string>react-native-vector-icons-material-design-icons (12.3.0)</string>
+			<string>react-native-vector-icons-material-design-icons (12.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2846,15 +3070,23 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/react-native-vector-icons-octicons</string>
 			<key>Title</key>
-			<string>react-native-vector-icons-octicons (20.3.0)</string>
+			<string>react-native-vector-icons-octicons (20.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react-native@0.81.0</string>
+			<string>com.mono0926.LicensePlist/react-native-worklets@0.7.4</string>
 			<key>Title</key>
-			<string>react-native (0.81.0)</string>
+			<string>react-native-worklets (0.7.4)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/react-native@0.84.1</string>
+			<key>Title</key>
+			<string>react-native (0.84.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2868,9 +3100,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/react@19.1.0</string>
+			<string>com.mono0926.LicensePlist/react@19.2.3</string>
 			<key>Title</key>
-			<string>react (19.1.0)</string>
+			<string>react (19.2.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2884,9 +3116,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/regenerate-unicode-properties@10.2.0</string>
+			<string>com.mono0926.LicensePlist/regenerate-unicode-properties@10.2.2</string>
 			<key>Title</key>
-			<string>regenerate-unicode-properties (10.2.0)</string>
+			<string>regenerate-unicode-properties (10.2.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2908,9 +3140,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/regexpu-core@6.2.0</string>
+			<string>com.mono0926.LicensePlist/regexpu-core@6.4.0</string>
 			<key>Title</key>
-			<string>regexpu-core (6.2.0)</string>
+			<string>regexpu-core (6.4.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2924,9 +3156,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/regjsparser@0.12.0</string>
+			<string>com.mono0926.LicensePlist/regjsparser@0.13.0</string>
 			<key>Title</key>
-			<string>regjsparser (0.12.0)</string>
+			<string>regjsparser (0.13.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2940,17 +3172,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/resolve-from@3.0.0</string>
+			<string>com.mono0926.LicensePlist/resolve-from@5.0.0</string>
 			<key>Title</key>
-			<string>resolve-from (3.0.0)</string>
+			<string>resolve-from (5.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/resolve-from@5.0.0</string>
+			<string>com.mono0926.LicensePlist/reusify@1.0.4</string>
 			<key>Title</key>
-			<string>resolve-from (5.0.0)</string>
+			<string>reusify (1.0.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2966,15 +3198,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/RNBootSplash</string>
 			<key>Title</key>
-			<string>RNBootSplash (7.0.1)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/RNCAsyncStorage</string>
-			<key>Title</key>
-			<string>RNCAsyncStorage (2.2.0)</string>
+			<string>RNBootSplash (7.1.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2982,7 +3206,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/RNGestureHandler</string>
 			<key>Title</key>
-			<string>RNGestureHandler (2.29.1)</string>
+			<string>RNGestureHandler (2.30.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2990,7 +3214,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/RNLocalize</string>
 			<key>Title</key>
-			<string>RNLocalize (3.6.0)</string>
+			<string>RNLocalize (3.7.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2998,7 +3222,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/RNReanimated</string>
 			<key>Title</key>
-			<string>RNReanimated (3.19.0)</string>
+			<string>RNReanimated (4.2.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3006,7 +3230,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/RNScreens</string>
 			<key>Title</key>
-			<string>RNScreens (4.14.1)</string>
+			<string>RNScreens (4.24.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3022,7 +3246,23 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/RNSVG</string>
 			<key>Title</key>
-			<string>RNSVG (15.12.1)</string>
+			<string>RNSVG (15.15.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/RNWorklets</string>
+			<key>Title</key>
+			<string>RNWorklets (0.7.4)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/run-parallel@1.2.0</string>
+			<key>Title</key>
+			<string>run-parallel (1.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3036,9 +3276,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/scheduler@0.26.0</string>
+			<string>com.mono0926.LicensePlist/scheduler@0.27.0</string>
 			<key>Title</key>
-			<string>scheduler (0.26.0)</string>
+			<string>scheduler (0.27.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3052,17 +3292,25 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/semver@7.7.2</string>
+			<string>com.mono0926.LicensePlist/semver@7.7.3</string>
 			<key>Title</key>
-			<string>semver (7.7.2)</string>
+			<string>semver (7.7.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/send@0.19.0</string>
+			<string>com.mono0926.LicensePlist/semver@7.7.4</string>
 			<key>Title</key>
-			<string>send (0.19.0)</string>
+			<string>semver (7.7.4)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/send@0.19.2</string>
+			<key>Title</key>
+			<string>send (0.19.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3076,9 +3324,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/serve-static@1.16.2</string>
+			<string>com.mono0926.LicensePlist/serve-static@1.16.3</string>
 			<key>Title</key>
-			<string>serve-static (1.16.2)</string>
+			<string>serve-static (1.16.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3087,6 +3335,38 @@
 			<string>com.mono0926.LicensePlist/setprototypeof@1.2.0</string>
 			<key>Title</key>
 			<string>setprototypeof (1.2.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/sf-symbols-typescript@2.2.0</string>
+			<key>Title</key>
+			<string>sf-symbols-typescript (2.2.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/sharp@0.34.5</string>
+			<key>Title</key>
+			<string>sharp (0.34.5)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/shebang-command@2.0.0</string>
+			<key>Title</key>
+			<string>shebang-command (2.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/shebang-regex@3.0.0</string>
+			<key>Title</key>
+			<string>shebang-regex (3.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3132,9 +3412,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/SocketRocket</string>
+			<string>com.mono0926.LicensePlist/slugify@1.6.6</string>
 			<key>Title</key>
-			<string>SocketRocket (0.7.1)</string>
+			<string>slugify (1.6.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3212,9 +3492,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/statuses@2.0.1</string>
+			<string>com.mono0926.LicensePlist/statuses@2.0.2</string>
 			<key>Title</key>
-			<string>statuses (2.0.1)</string>
+			<string>statuses (2.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3252,6 +3532,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/supports-color@5.5.0</string>
+			<key>Title</key>
+			<string>supports-color (5.5.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/supports-color@7.2.0</string>
 			<key>Title</key>
 			<string>supports-color (7.2.0)</string>
@@ -3268,9 +3556,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/terser@5.43.1</string>
+			<string>com.mono0926.LicensePlist/terser@5.46.0</string>
 			<key>Title</key>
-			<string>terser (5.43.1)</string>
+			<string>terser (5.46.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3287,6 +3575,14 @@
 			<string>com.mono0926.LicensePlist/throat@5.0.0</string>
 			<key>Title</key>
 			<string>throat (5.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/tinyglobby@0.2.15</string>
+			<key>Title</key>
+			<string>tinyglobby (0.2.15)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3311,6 +3607,14 @@
 			<string>com.mono0926.LicensePlist/toidentifier@1.0.1</string>
 			<key>Title</key>
 			<string>toidentifier (1.0.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/ts-dedent@2.2.0</string>
+			<key>Title</key>
+			<string>ts-dedent (2.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3356,17 +3660,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/unicode-match-property-value-ecmascript@2.2.0</string>
+			<string>com.mono0926.LicensePlist/unicode-match-property-value-ecmascript@2.2.1</string>
 			<key>Title</key>
-			<string>unicode-match-property-value-ecmascript (2.2.0)</string>
+			<string>unicode-match-property-value-ecmascript (2.2.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/unicode-property-aliases-ecmascript@2.1.0</string>
+			<string>com.mono0926.LicensePlist/unicode-property-aliases-ecmascript@2.2.0</string>
 			<key>Title</key>
-			<string>unicode-property-aliases-ecmascript (2.1.0)</string>
+			<string>unicode-property-aliases-ecmascript (2.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3468,6 +3772,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/which@2.0.2</string>
+			<key>Title</key>
+			<string>which (2.0.2)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/wrap-ansi@7.0.0</string>
 			<key>Title</key>
 			<string>wrap-ansi (7.0.0)</string>
@@ -3492,14 +3804,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/ws@6.2.3</string>
-			<key>Title</key>
-			<string>ws (6.2.3)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/ws@7.5.10</string>
 			<key>Title</key>
 			<string>ws (7.5.10)</string>
@@ -3511,6 +3815,30 @@
 			<string>com.mono0926.LicensePlist/xcode@3.0.1</string>
 			<key>Title</key>
 			<string>xcode (3.0.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/xml-formatter@3.6.7</string>
+			<key>Title</key>
+			<string>xml-formatter (3.6.7)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/xml-parser-xo@4.1.5</string>
+			<key>Title</key>
+			<string>xml-parser-xo (4.1.5)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/xml2js@0.6.0</string>
+			<key>Title</key>
+			<string>xml2js (0.6.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3551,6 +3879,14 @@
 			<string>com.mono0926.LicensePlist/yallist@3.1.1</string>
 			<key>Title</key>
 			<string>yallist (3.1.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/yaml@2.8.2</string>
+			<key>Title</key>
+			<string>yaml (2.8.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
