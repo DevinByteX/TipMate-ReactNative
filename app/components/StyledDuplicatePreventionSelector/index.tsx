@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
+import { View, Text, Modal, Pressable, ScrollView, StyleSheet } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { useAppContext } from '@/context/AppContext';
@@ -7,6 +8,7 @@ import Toast from 'react-native-toast-message';
 import { Constants, DuplicatePreventionTimeOption } from '@configs';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
+import { useBottomSheetEntrance } from '@hooks';
 
 const getDuplicatePreventionLabel = (value: number, t: TFunction) => {
   if (value === 0) {
@@ -88,15 +90,17 @@ const TimeOptionsModal = ({
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
+  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(modalVisibility ?? false);
 
   return (
     <Modal
       visible={modalVisibility}
       transparent={true}
-      animationType={'slide'}
+      animationType={'none'}
       statusBarTranslucent={true}
     >
-      <View style={styles.modalMainContainer}>
+      <Animated.View style={[styles.modalBackdrop, backdropStyle]} />
+      <Animated.View style={[styles.modalMainContainer, sheetStyle]}>
         <View style={styles.modalTitleAndCloseButtonContainer}>
           <Text style={styles.modalTitle}>
             {modalTitle}
@@ -131,7 +135,7 @@ const TimeOptionsModal = ({
           selectedValue={selectedValue}
           onTimeOptionPress={onTimeOptionPress}
         />
-      </View>
+      </Animated.View>
     </Modal>
   );
 };
@@ -261,6 +265,10 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
 
   // Modal contents
+  modalBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: utils.hexToRGBA(colors.backgroundColor, 0.5),
+  },
   modalMainContainer: {
     height: (UnistylesRuntime.screen.height * 50) / 100,
     width: '100%',

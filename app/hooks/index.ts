@@ -23,6 +23,17 @@ import { useShareTipDetailsPDF, TipDetailsForPDF, PDFTranslations } from './useS
 import { useShareTipPreview } from './useShareTipPreview';
 import { useSaveTip } from './useSaveTip';
 import { getDeviceCurrency } from './currencyUtils';
+import {
+  usePressAnimation,
+  useFadeIn,
+  useSlideIn,
+  useScaleSpring,
+  useValuePulse,
+  useBounce,
+  useVisibilityAnimation,
+  useModalEntrance,
+  useBottomSheetEntrance,
+} from './useAnimations';
 
 export {
   convertToTwoDecimalPoints,
@@ -46,6 +57,15 @@ export {
   useShareTipPreview,
   useSaveTip,
   getDeviceCurrency,
+  usePressAnimation,
+  useFadeIn,
+  useSlideIn,
+  useScaleSpring,
+  useValuePulse,
+  useBounce,
+  useVisibilityAnimation,
+  useModalEntrance,
+  useBottomSheetEntrance,
 };
 export type {
   BillCalculationType,

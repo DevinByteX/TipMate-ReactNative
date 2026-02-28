@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 import { useAppContext } from '@/context/AppContext';
+import { useScaleSpring } from '@hooks';
 
 const TipPercentageCapsule = ({
   active = false,
@@ -15,27 +17,30 @@ const TipPercentageCapsule = ({
   onTipPress?: (value: number) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { animatedStyle } = useScaleSpring(active);
   return (
-    <Pressable
-      style={[
-        styles.tipPercentageCapsule,
-        {
-          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
-        },
-      ]}
-      onPress={() => {
-        onTipPress && onTipPress(textValue);
-      }}
-    >
-      <Text
+    <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+      <Pressable
         style={[
-          styles.tipPercentageCapsuleText,
+          styles.tipPercentageCapsule,
           {
-            color: active ? theme.colors.card : theme.colors.card_typography,
+            backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
           },
         ]}
-      >{`${textValue}%`}</Text>
-    </Pressable>
+        onPress={() => {
+          onTipPress && onTipPress(textValue);
+        }}
+      >
+        <Text
+          style={[
+            styles.tipPercentageCapsuleText,
+            {
+              color: active ? theme.colors.card : theme.colors.card_typography,
+            },
+          ]}
+        >{`${textValue}%`}</Text>
+      </Pressable>
+    </Animated.View>
   );
 };
 

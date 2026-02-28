@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, Pressable, TextInput } from 'react-native';
+import Animated, { LinearTransition } from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 // Custom Component
 import {
@@ -240,16 +241,21 @@ const SavedTipsScreen = () => {
           hasActiveFilters={hasActiveFilters}
         />
 
-        <StyledSavedTipsList
-          tips={filteredTips}
-          searchQuery={searchQuery}
-          hasActiveFilters={hasActiveFilters}
-          onTipPress={handleTipPress}
-          onItemSwipeLeft={handleDeleteTip}
-          onClearAll={clearAllTips}
-          showScrollToTop={showScrollToTop}
-          onScrollToTopChange={setShowScrollToTop}
-        />
+        <Animated.View
+          layout={LinearTransition.springify().damping(20).stiffness(70)}
+          style={styles.listWrapper}
+        >
+          <StyledSavedTipsList
+            tips={filteredTips}
+            searchQuery={searchQuery}
+            hasActiveFilters={hasActiveFilters}
+            onTipPress={handleTipPress}
+            onItemSwipeLeft={handleDeleteTip}
+            onClearAll={clearAllTips}
+            showScrollToTop={showScrollToTop}
+            onScrollToTopChange={setShowScrollToTop}
+          />
+        </Animated.View>
       </View>
 
       {/* Delete Confirmation Alert */}
@@ -325,6 +331,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
+  },
+  listWrapper: {
+    flex: 1,
   },
   searchContainer: {
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,

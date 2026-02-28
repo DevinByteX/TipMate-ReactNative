@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, Modal, Pressable } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons, StyledIconTypesKey } from '@components';
+import { useModalEntrance } from '@hooks';
 
 export type AlertType = 'info' | 'success' | 'error' | 'warning' | 'confirm';
 
@@ -57,6 +59,8 @@ export const StyledAlert = ({
 
   const iconInfo = showIcon ? customIcon || getAlertIcon(type) : null;
 
+  const { animatedStyle: modalAnimStyle, backdropStyle } = useModalEntrance(visible);
+
   // Determine button layout based on count
   const cancelButton = buttons.find(b => b.style === 'cancel');
   const otherButtons = buttons.filter(b => b.style !== 'cancel');
@@ -82,9 +86,9 @@ export const StyledAlert = ({
   };
 
   return (
-    <Modal visible={visible} transparent={true} animationType={'fade'} onRequestClose={onDismiss}>
-      <View style={styles.overlay}>
-        <View style={styles.modalContents}>
+    <Modal visible={visible} transparent={true} animationType={'none'} onRequestClose={onDismiss}>
+      <Animated.View style={[styles.overlay, backdropStyle]}>
+        <Animated.View style={[styles.modalContents, modalAnimStyle]}>
           {/* Icon */}
           {iconInfo && (
             <View style={styles.iconContainer}>
@@ -136,8 +140,8 @@ export const StyledAlert = ({
               </Pressable>
             ))}
           </View>
-        </View>
-      </View>
+        </Animated.View>
+      </Animated.View>
     </Modal>
   );
 };
