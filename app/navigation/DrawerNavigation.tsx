@@ -21,6 +21,8 @@ const DrawerNavigation = () => {
       screenOptions={{
         headerShown: false,
         drawerType: 'slide',
+        overlayColor: 'rgba(0,0,0,0.3)',
+        swipeEdgeWidth: 80,
         drawerActiveTintColor: theme.colors.accent,
         drawerInactiveTintColor: theme.colors.card_typography,
         drawerItemStyle: {

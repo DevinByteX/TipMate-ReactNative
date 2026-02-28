@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
+import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
 import { StyledIcons } from '@components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
@@ -56,7 +57,11 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
   );
 
   return (
-    <View style={styles.filtersContainer}>
+    <Animated.View
+      entering={FadeInUp.duration(250).springify()}
+      exiting={FadeOutUp.duration(200)}
+      style={styles.filtersContainer}
+    >
       {/* Percentage Filter Section */}
       <View style={styles.filterSection}>
         <View style={styles.filterHeader}>
@@ -186,7 +191,7 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
           <Text style={styles.resetFiltersText}>{t('filters.resetFilters')}</Text>
         </Pressable>
       )}
-    </View>
+    </Animated.View>
   );
 };
 

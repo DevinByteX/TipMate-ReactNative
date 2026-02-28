@@ -1,11 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
+import { View, Text, Modal, Pressable, ScrollView, StyleSheet } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
 import { useAppContext } from '@/context/AppContext';
-import { getDeviceCurrency } from '@hooks';
+import { getDeviceCurrency, useBottomSheetEntrance } from '@hooks';
 import Toast from 'react-native-toast-message';
 
 const CurrencySelectiveScroll = ({
@@ -118,15 +119,17 @@ const CurrencyListModal = ({
   systemDefaultCurrency: CurrencyType;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(modalVisibility ?? false);
 
   return (
     <Modal
       visible={modalVisibility}
       transparent={true}
-      animationType={'slide'}
+      animationType={'none'}
       statusBarTranslucent={true}
     >
-      <View style={styles.modalMainContainer}>
+      <Animated.View style={[styles.modalBackdrop, backdropStyle]} />
+      <Animated.View style={[styles.modalMainContainer, sheetStyle]}>
         <View style={styles.modalTitleAndCloseButtonContainer}>
           <Text style={styles.modalTitle}>
             {modalTitle}
@@ -160,7 +163,7 @@ const CurrencyListModal = ({
           onSystemDefaultPress={onSystemDefaultPress}
           systemDefaultCurrency={systemDefaultCurrency}
         />
-      </View>
+      </Animated.View>
     </Modal>
   );
 };
@@ -329,6 +332,10 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
 
   // Modal contents
+  modalBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: utils.hexToRGBA(colors.backgroundColor, 0.5),
+  },
   modalMainContainer: {
     height: (UnistylesRuntime.screen.height * 50) / 100,
     width: '100%',

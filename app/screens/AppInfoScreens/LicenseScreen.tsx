@@ -7,10 +7,11 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   Pressable,
-  Animated,
 } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { StyledHeader, StyledLicenseDetailsCard, StyledIcons } from '@components';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useVisibilityAnimation } from '@hooks';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { useNavigation } from '@react-navigation/native';
 import { Library, ReactNativeLegal } from 'react-native-legal';
@@ -32,7 +33,7 @@ const LicensesScreen = () => {
 
   // Refs for FlatList and animation
   const flatListRef = useRef<FlatList>(null);
-  const buttonAnimation = useRef(new Animated.Value(0)).current;
+  const { animatedStyle: scrollButtonStyle } = useVisibilityAnimation(showScrollToTop);
 
   // Fetch libraries on component mount
   useEffect(() => {
@@ -42,16 +43,6 @@ const LicensesScreen = () => {
     };
     getLibraries();
   }, []);
-
-  // Animate scroll-to-top button visibility
-  useEffect(() => {
-    Animated.spring(buttonAnimation, {
-      toValue: showScrollToTop ? 1 : 0,
-      useNativeDriver: true,
-      tension: 100,
-      friction: 8,
-    }).start();
-  }, [showScrollToTop, buttonAnimation]);
 
   /**
    * Filters the library list based on the search query.
@@ -163,17 +154,7 @@ const LicensesScreen = () => {
       <Animated.View
         style={[
           styles.scrollToTopButton,
-          {
-            opacity: buttonAnimation,
-            transform: [
-              {
-                scale: buttonAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.8, 1],
-                }),
-              },
-            ],
-          },
+          scrollButtonStyle,
         ]}
       >
         <Pressable onPress={scrollToTop} style={styles.scrollToTopIcon}>

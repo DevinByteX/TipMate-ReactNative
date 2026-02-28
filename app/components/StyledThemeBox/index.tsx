@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons, StyledToggle } from '@components';
 import { setUserPreferredTheme, setUserUpdatedThemeOption, useThemeColorCustomiser } from '@hooks';
 import { CustomThemesConfig } from '@configs';
+import { useScaleSpring } from '@hooks';
 
 export const StyledThemeBox = ({
   title,
@@ -32,28 +34,31 @@ export const StyledThemeBox = ({
     onButtonPress?: () => void;
   }) => {
     const active = buttonColor == theme.colors.accent;
+    const { animatedStyle } = useScaleSpring(active);
 
     return (
-      <Pressable
-        style={[
-          styles.themeColorBox,
-          { backgroundColor: active ? theme.colors.card_typography : theme.colors.card },
-        ]}
-        onPress={() => {
-          onButtonPress && onButtonPress();
-        }}
-      >
-        <View
+      <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+        <Pressable
           style={[
-            styles.themeColorInnerBox,
-            { backgroundColor: buttonColor || theme.colors.accent },
+            styles.themeColorBox,
+            { backgroundColor: active ? theme.colors.card_typography : theme.colors.card },
           ]}
+          onPress={() => {
+            onButtonPress && onButtonPress();
+          }}
         >
-          {active ? (
-            <StyledIcons type={'Octicons'} name={'check'} style={styles.themeColorIcon} />
-          ) : null}
-        </View>
-      </Pressable>
+          <View
+            style={[
+              styles.themeColorInnerBox,
+              { backgroundColor: buttonColor || theme.colors.accent },
+            ]}
+          >
+            {active ? (
+              <StyledIcons type={'Octicons'} name={'check'} style={styles.themeColorIcon} />
+            ) : null}
+          </View>
+        </Pressable>
+      </Animated.View>
     );
   };
 

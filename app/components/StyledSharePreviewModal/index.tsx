@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
+import { useBottomSheetEntrance } from '@hooks';
 
 type SharePreviewModalProps = {
   isPreviewVisible: boolean;
@@ -22,18 +24,19 @@ export const StyledSharePreviewModal = ({
 }: SharePreviewModalProps) => {
   const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
+  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(isPreviewVisible);
 
   return (
     <Modal
       visible={isPreviewVisible}
       transparent={true}
-      animationType={'slide'}
+      animationType={'none'}
       onRequestClose={onClose}
       onDismiss={onDismiss}
       statusBarTranslucent={true}
     >
-      <View style={styles.centeredView}>
-        <View style={styles.modalContents}>
+      <Animated.View style={[styles.centeredView, backdropStyle]}>
+        <Animated.View style={[styles.modalContents, sheetStyle]}>
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.headerTitle}>{t('components.sharePreview.title')}</Text>
@@ -60,8 +63,8 @@ export const StyledSharePreviewModal = ({
           <Pressable style={styles.closeButton} onPress={onClose}>
             <Text style={styles.closeButtonText}>{t('components.sharePreview.cancel')}</Text>
           </Pressable>
-        </View>
-      </View>
+        </Animated.View>
+      </Animated.View>
     </Modal>
   );
 };

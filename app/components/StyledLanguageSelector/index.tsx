@@ -1,10 +1,12 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { View, Text, Modal, Pressable, ScrollView } from 'react-native';
+import { View, Text, Modal, Pressable, ScrollView, StyleSheet } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledIcons, StyledAlert } from '@components';
 import { useAppContext } from '@/context/AppContext';
 import Toast from 'react-native-toast-message';
+import { useBottomSheetEntrance } from '@hooks';
 import {
   SUPPORTED_LANGUAGES,
   changeLanguage,
@@ -121,15 +123,17 @@ const LanguageListModal = ({
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   const currentLangConfig = SUPPORTED_LANGUAGES.find(l => l.code === currentLanguage);
+  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(modalVisibility ?? false);
 
   return (
     <Modal
       visible={modalVisibility}
       transparent={true}
-      animationType={'slide'}
+      animationType={'none'}
       statusBarTranslucent={true}
     >
-      <View style={styles.modalMainContainer}>
+      <Animated.View style={[styles.modalBackdrop, backdropStyle]} />
+      <Animated.View style={[styles.modalMainContainer, sheetStyle]}>
         <View style={styles.modalTitleAndCloseButtonContainer}>
           <Text style={styles.modalTitle}>
             {modalTitle}
@@ -161,7 +165,7 @@ const LanguageListModal = ({
           onSystemDefaultPress={onSystemDefaultPress}
           systemDefaultLanguage={systemDefaultLanguage}
         />
-      </View>
+      </Animated.View>
     </Modal>
   );
 };
@@ -463,6 +467,10 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
 
   // Modal contents
+  modalBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: utils.hexToRGBA(colors.backgroundColor, 0.5),
+  },
   modalMainContainer: {
     height: (UnistylesRuntime.screen.height * 60) / 100,
     width: '100%',

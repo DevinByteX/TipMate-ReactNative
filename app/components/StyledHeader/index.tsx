@@ -1,9 +1,11 @@
 import React from 'react';
 import { Keyboard, Pressable, StatusBar, Text, View, ViewStyle } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { IconTypeMap, StyledIconTypesKey, StyledIcons } from '@components';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { usePressAnimation } from '@hooks';
 
 type styledHeaderProps = {
   headerTitle: string;
@@ -37,10 +39,13 @@ const HeaderBarIcon = ({
   headerBarStyles,
   onPress,
 }: HeaderBarIconProps) => {
+  const { onPressIn, onPressOut, animatedStyle } = usePressAnimation();
   return (
-    <Pressable style={headerBarStyles} onPress={onPress}>
-      <StyledIcons type={iconType} name={iconName} size={iconSize} color={iconColor} />
-    </Pressable>
+    <Animated.View style={animatedStyle}>
+      <Pressable style={headerBarStyles} onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
+        <StyledIcons type={iconType} name={iconName} size={iconSize} color={iconColor} />
+      </Pressable>
+    </Animated.View>
   );
 };
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
 import { useAppContext } from '@/context/AppContext';
+import { useScaleSpring } from '@hooks';
 
 const SplitCapsule = ({
   active = false,
@@ -15,27 +17,30 @@ const SplitCapsule = ({
   onSplitPress?: (value: number) => void;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { animatedStyle } = useScaleSpring(active);
   return (
-    <Pressable
-      style={[
-        styles.splitCapsule,
-        {
-          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
-        },
-      ]}
-      onPress={() => {
-        onSplitPress && onSplitPress(textValue);
-      }}
-    >
-      <Text
+    <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+      <Pressable
         style={[
-          styles.splitCapsuleText,
+          styles.splitCapsule,
           {
-            color: active ? theme.colors.card : theme.colors.card_typography,
+            backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
           },
         ]}
-      >{`${textValue}`}</Text>
-    </Pressable>
+        onPress={() => {
+          onSplitPress && onSplitPress(textValue);
+        }}
+      >
+        <Text
+          style={[
+            styles.splitCapsuleText,
+            {
+              color: active ? theme.colors.card : theme.colors.card_typography,
+            },
+          ]}
+        >{`${textValue}`}</Text>
+      </Pressable>
+    </Animated.View>
   );
 };
 

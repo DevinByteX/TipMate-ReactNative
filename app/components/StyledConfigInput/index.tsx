@@ -7,6 +7,11 @@ import {
   TextInputEndEditingEventData,
   Pressable,
 } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+} from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 
 type StyledConfigInputProps = {
@@ -29,6 +34,20 @@ export const StyledConfigInput = ({
   const { styles, theme } = useStyles(stylesheet);
   const [inputFocused, setInputFocused] = useState(false);
   const [text, setText] = useState(`${textValue}${suffix}`);
+
+  const focusScale = useSharedValue(1);
+
+  useEffect(() => {
+    focusScale.value = withSpring(inputFocused ? 1.03 : 1, {
+      damping: 15,
+      stiffness: 200,
+      mass: 0.6,
+    });
+  }, [inputFocused]);
+
+  const focusAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: focusScale.value }],
+  }));
 
   // Synchronise text state with textValue prop
   useEffect(() => {
@@ -74,8 +93,9 @@ export const StyledConfigInput = ({
         },
       ]}
     >
-      <Text style={styles.configBoxText}>{`${title}`}</Text>
-      <TextInput
+      <Animated.View style={[styles.configInputInner, focusAnimatedStyle]}>
+        <Text style={styles.configBoxText}>{`${title}`}</Text>
+        <TextInput
         ref={TextInputRef}
         selection={{ start: text.length - suffix.length, end: text.length - suffix.length }}
         selectionColor={theme.colors.accent}
@@ -91,6 +111,7 @@ export const StyledConfigInput = ({
         onChangeText={handleChangeText}
         {...TextInputProps}
       />
+      </Animated.View>
     </Pressable>
   );
 };
@@ -104,6 +125,11 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
     borderColor: colors.backgroundColor,
     borderWidth: (UnistylesRuntime.screen.width * 0.5) / 100,
+  },
+  configInputInner: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   configBoxText: {
     fontSize: 14,

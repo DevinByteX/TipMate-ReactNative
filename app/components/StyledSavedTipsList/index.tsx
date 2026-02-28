@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -6,8 +6,8 @@ import {
   Pressable,
   NativeSyntheticEvent,
   NativeScrollEvent,
-  Animated,
 } from 'react-native';
+import Animated, { FadeInDown, FadeIn } from 'react-native-reanimated';
 import ReanimatedSwipeable, {
   SwipeableMethods,
 } from 'react-native-gesture-handler/ReanimatedSwipeable';
@@ -16,6 +16,7 @@ import { StyledIcons } from '@components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { SavedTip } from '@/context/types';
+import { useVisibilityAnimation } from '@hooks';
 
 export interface StyledSavedTipsListProps {
   tips: SavedTip[];
@@ -41,17 +42,8 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
   const flatListRef = useRef<FlatList>(null);
-  const buttonAnimation = useRef(new Animated.Value(0)).current;
-
-  // Animate scroll-to-top button visibility
-  useEffect(() => {
-    Animated.spring(buttonAnimation, {
-      toValue: showScrollToTop ? 1 : 0,
-      useNativeDriver: true,
-      tension: 100,
-      friction: 8,
-    }).start();
-  }, [showScrollToTop, buttonAnimation]);
+  const { animatedStyle: scrollButtonStyle } = useVisibilityAnimation(showScrollToTop);
+  const [hasRendered, setHasRendered] = useState(false);
 
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
@@ -79,7 +71,7 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
     );
   };
 
-  const TipCard = React.memo(({ item }: { item: SavedTip }) => {
+  const TipCard = React.memo(({ item, index }: { item: SavedTip; index: number }) => {
     const swipeableRef = useRef<SwipeableMethods>(null);
 
     const handleSwipeOpen = () => {
@@ -90,70 +82,87 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
     };
 
     return (
-      <ReanimatedSwipeable
-        ref={swipeableRef}
-        friction={2}
-        overshootRight={false}
-        renderRightActions={renderRightActions}
-        onSwipeableWillOpen={handleSwipeOpen}
-        containerStyle={styles.swipebleContainer}
+      <Animated.View
+        entering={
+          hasRendered
+            ? undefined
+            : FadeInDown.delay(Math.min(index * 50, 300))
+                .duration(300)
+                .springify()
+        }
       >
-        <Pressable style={styles.tipCard} onPress={() => onTipPress(item)}>
-          <View style={styles.cardLeft}>
-            <View style={styles.cardHeader}>
-              <Text style={styles.cardDate}>{formatDate(item.timestamp)}</Text>
-              <View style={styles.peopleTag}>
-                <StyledIcons
-                  type={'Ionicons'}
-                  name={'people'}
-                  size={12}
-                  color={theme.colors.accent}
-                />
-                <Text style={styles.peopleText}>{item.numberOfPeople}</Text>
+        <ReanimatedSwipeable
+          ref={swipeableRef}
+          friction={2}
+          overshootRight={false}
+          renderRightActions={renderRightActions}
+          onSwipeableWillOpen={handleSwipeOpen}
+          containerStyle={styles.swipebleContainer}
+        >
+          <Pressable style={styles.tipCard} onPress={() => onTipPress(item)}>
+            <View style={styles.cardLeft}>
+              <View style={styles.cardHeader}>
+                <Text style={styles.cardDate}>{formatDate(item.timestamp)}</Text>
+                <View style={styles.peopleTag}>
+                  <StyledIcons
+                    type={'Ionicons'}
+                    name={'people'}
+                    size={12}
+                    color={theme.colors.accent}
+                  />
+                  <Text style={styles.peopleText}>{item.numberOfPeople}</Text>
+                </View>
+              </View>
+              <View style={styles.amountRow}>
+                <Text style={styles.amountLabel}>{t('savedTipsList.bill')}</Text>
+                <Text style={styles.amountValue}>
+                  {item.currencySymbol}
+                  {item.amount.toFixed(2)}
+                </Text>
+              </View>
+              <View style={styles.amountRow}>
+                <Text style={styles.amountLabel}>
+                  {t('savedTipsList.tipLabel', { percentage: item.tipPercentage })}
+                </Text>
+                <Text style={styles.tipValue}>
+                  {item.currencySymbol}
+                  {item.tip.toFixed(2)}
+                </Text>
+              </View>
+              <View style={styles.divider} />
+              <View style={styles.amountRow}>
+                <Text style={styles.totalLabel}>{t('savedTipsList.total')}</Text>
+                <Text style={styles.totalValue}>
+                  {item.currencySymbol}
+                  {item.total.toFixed(2)}
+                </Text>
               </View>
             </View>
-            <View style={styles.amountRow}>
-              <Text style={styles.amountLabel}>{t('savedTipsList.bill')}</Text>
-              <Text style={styles.amountValue}>
-                {item.currencySymbol}
-                {item.amount.toFixed(2)}
-              </Text>
+            <View style={styles.cardRight}>
+              <StyledIcons
+                type={'MaterialDesignIcons'}
+                name={'chevron-right'}
+                size={24}
+                color={theme.colors.card_typography}
+              />
             </View>
-            <View style={styles.amountRow}>
-              <Text style={styles.amountLabel}>
-                {t('savedTipsList.tipLabel', { percentage: item.tipPercentage })}
-              </Text>
-              <Text style={styles.tipValue}>
-                {item.currencySymbol}
-                {item.tip.toFixed(2)}
-              </Text>
-            </View>
-            <View style={styles.divider} />
-            <View style={styles.amountRow}>
-              <Text style={styles.totalLabel}>{t('savedTipsList.total')}</Text>
-              <Text style={styles.totalValue}>
-                {item.currencySymbol}
-                {item.total.toFixed(2)}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.cardRight}>
-            <StyledIcons
-              type={'MaterialDesignIcons'}
-              name={'chevron-right'}
-              size={24}
-              color={theme.colors.card_typography}
-            />
-          </View>
-        </Pressable>
-      </ReanimatedSwipeable>
+          </Pressable>
+        </ReanimatedSwipeable>
+      </Animated.View>
     );
   });
 
-  const renderTipCard = ({ item }: { item: SavedTip }) => <TipCard item={item} />;
+  const renderTipCard = ({ item, index }: { item: SavedTip; index: number }) => (
+    <TipCard item={item} index={index} />
+  );
 
+  const handleListRendered = () => {
+    if (!hasRendered) {
+      setHasRendered(true);
+    }
+  };
   const renderEmptyState = () => (
-    <View style={styles.emptyContainer}>
+    <Animated.View entering={FadeIn.duration(400)} style={styles.emptyContainer}>
       <StyledIcons
         type={'MaterialDesignIcons'}
         name={'bookmark-outline'}
@@ -175,7 +184,7 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
       {!searchQuery && !hasActiveFilters && (
         <Text style={styles.emptyHint}>{t('savedTipsList.emptyHint')}</Text>
       )}
-    </View>
+    </Animated.View>
   );
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -215,25 +224,11 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
         showsVerticalScrollIndicator={false}
         onScroll={handleScroll}
         scrollEventThrottle={16}
+        onLayout={handleListRendered}
       />
 
       {/* Scroll to Top Button */}
-      <Animated.View
-        style={[
-          styles.scrollToTopButton,
-          {
-            opacity: buttonAnimation,
-            transform: [
-              {
-                scale: buttonAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.8, 1],
-                }),
-              },
-            ],
-          },
-        ]}
-      >
+      <Animated.View style={[styles.scrollToTopButton, scrollButtonStyle]}>
         <Pressable onPress={scrollToTop} style={styles.scrollToTopIcon}>
           <StyledIcons
             type="Feather"

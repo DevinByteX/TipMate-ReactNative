@@ -8,7 +8,14 @@ const StackNavigation = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false, orientation: 'portrait' }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        orientation: 'portrait',
+        animation: 'ios_from_right',
+        animationDuration: 250,
+      }}
+    >
       <Stack.Screen name="MainStack" component={DrawerNavigation} />
       <Stack.Screen name="SavedTipDetailScreen" component={SavedTipDetailScreen} />
       <Stack.Screen name="LicensesScreen" component={LicensesScreen} />

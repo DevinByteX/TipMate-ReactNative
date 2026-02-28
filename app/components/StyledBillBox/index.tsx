@@ -1,7 +1,9 @@
 import React from 'react';
 import { Text, View, ViewStyle } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
+import { useValuePulse, useBounce } from '@hooks';
 
 // Vertical Devider Component
 export const VerticalDevider = ({
@@ -54,6 +56,8 @@ export const StyledBillBox = ({
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
 
   const { styles, theme } = useStyles(stylesheet);
+  const { animatedStyle: totalPulseStyle } = useValuePulse(totalAmount);
+  const { trigger: triggerBookmarkBounce, animatedStyle: bookmarkBounceStyle } = useBounce();
   // Extract currency symbol rendering for title
   const renderTitleCurrencySymbol = () => {
     if (isLongCurrencySymbol) {
@@ -76,22 +80,25 @@ export const StyledBillBox = ({
         </View>
         <View style={styles.titleRightContainer}>
           {!hideSaveButton && (
-            <StyledIcons
-              type={'MaterialDesignIcons'}
-              name={isSaved ? 'bookmark-check' : 'bookmark-outline'}
-              size={styles.titleText?.fontSize + 7}
-              color={
-                Number(totalAmount) > 0 ? styles.titleText?.color : theme.colors.disable_button
-              }
-              disabled={Number(totalAmount) <= 0}
-              onPress={() => {
-                if (isSaved && savedTipId && onBookmarkCheckPress) {
-                  onBookmarkCheckPress();
-                } else if (!isSaved) {
-                  saveButtonPress && saveButtonPress();
+            <Animated.View style={bookmarkBounceStyle}>
+              <StyledIcons
+                type={'MaterialDesignIcons'}
+                name={isSaved ? 'bookmark-check' : 'bookmark-outline'}
+                size={styles.titleText?.fontSize + 7}
+                color={
+                  Number(totalAmount) > 0 ? styles.titleText?.color : theme.colors.disable_button
                 }
-              }}
-            />
+                disabled={Number(totalAmount) <= 0}
+                onPress={() => {
+                  if (isSaved && savedTipId && onBookmarkCheckPress) {
+                    onBookmarkCheckPress();
+                  } else if (!isSaved) {
+                    triggerBookmarkBounce();
+                    saveButtonPress && saveButtonPress();
+                  }
+                }}
+              />
+            </Animated.View>
           )}
           <StyledIcons
             type={'Octicons'}
@@ -125,15 +132,15 @@ export const StyledBillBox = ({
             ) : null}
           </Text>
           <View style={styles.horizontalTextContainer}>
-            <Text
-              style={styles.totalDigitsStyles}
+            <Animated.Text
+              style={[styles.totalDigitsStyles, totalPulseStyle]}
               adjustsFontSizeToFit={true}
               allowFontScaling={false}
               numberOfLines={1}
             >
               {!isLongCurrencySymbol ? <Text>{currencySymbol}</Text> : null}
               {totalAmount}
-            </Text>
+            </Animated.Text>
           </View>
         </View>
         {/* Vertical Devider */}
