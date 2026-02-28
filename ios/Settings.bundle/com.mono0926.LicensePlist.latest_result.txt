@@ -1,28 +1,8 @@
-name: boost, nameSpecified: 
-body: Boost Software Licen…
-version: 1.84.0
-
-name: DoubleConversion, nameSpecified: 
-body: Copyright 2006-2011,…
-version: 1.1.6
-
-name: fast_float, nameSpecified: 
-body:                     …
-version: 8.0.0
-
-name: fmt, nameSpecified: 
-body: Copyright (c) 2012 -…
-version: 11.0.2
-
-name: glog, nameSpecified: 
-body: Copyright (c) 2008, …
-version: 0.3.5
-
 name: hermes-engine, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 0.81.0
+version: 250829098.0.9
 
 name: HtmlToPdf, nameSpecified: 
 body: MIT License
@@ -34,30 +14,25 @@ name: LicensePlist, nameSpecified:
 body: MIT License
 
 Copyrig…
-version: 3.27.1
-
-name: RCT-Folly, nameSpecified: 
-body: 
-                   …
-version: 2024.11.18.00
+version: 3.27.2
 
 name: React, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 0.81.0
+version: 0.84.1
 
 name: React-Core, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 0.81.0
+version: 0.84.1
 
 name: react-native-safe-area-context, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 5.6.0
+version: 5.7.0
 
 name: react-native-unistyles, nameSpecified: 
 body: MIT License
@@ -69,49 +44,49 @@ name: react-native-vector-icons-ant-design, nameSpecified:
 body: MIT License
 
 Copyrig…
-version: 12.3.0
+version: 12.4.1
 
 name: react-native-vector-icons-feather, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 12.3.0
+version: 12.4.1
 
 name: react-native-vector-icons-fontawesome6, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 12.2.0
+version: 12.3.1
 
 name: react-native-vector-icons-foundation, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 12.3.0
+version: 12.4.1
 
 name: react-native-vector-icons-ionicons, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 12.3.0
+version: 12.4.1
 
 name: react-native-vector-icons-lucide, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 12.3.0
+version: 12.4.1
 
 name: react-native-vector-icons-material-design-icons, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 12.3.0
+version: 12.4.1
 
 name: react-native-vector-icons-octicons, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 20.3.0
+version: 20.4.1
 
 name: ReactNativeLegal, nameSpecified: 
 body: MIT License
@@ -123,31 +98,25 @@ name: RNBootSplash, nameSpecified:
 body: MIT License
 
 Copyrig…
-version: 7.0.1
-
-name: RNCAsyncStorage, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 2.2.0
+version: 7.1.0
 
 name: RNGestureHandler, nameSpecified: 
 body: The MIT License (MIT…
-version: 2.29.1
+version: 2.30.0
 
 name: RNLocalize, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 3.6.0
+version: 3.7.0
 
 name: RNReanimated, nameSpecified: 
 body: The MIT License (MIT…
-version: 3.19.0
+version: 4.2.2
 
 name: RNScreens, nameSpecified: 
 body: The MIT License (MIT…
-version: 4.14.1
+version: 4.24.0
 
 name: RNShare, nameSpecified: 
 body: The MIT License (MIT…
@@ -155,24 +124,29 @@ version: 12.0.11
 
 name: RNSVG, nameSpecified: 
 body: The MIT License (MIT…
-version: 15.12.1
+version: 15.15.3
 
-name: SocketRocket, nameSpecified: 
-body: BSD License
+name: RNWorklets, nameSpecified: 
+body: MIT License
 
-For Soc…
-version: 0.7.1
+Copyrig…
+version: 0.7.4
 
 name: @ampproject_remapping@2.3.0, nameSpecified: @ampproject/remapping, version: 2.3.0
 body: 
                    …
 
-name: @babel_code-frame@7.27.1, nameSpecified: @babel/code-frame, version: 7.27.1
+name: @babel_code-frame@7.10.4, nameSpecified: @babel/code-frame, version: 7.10.4
 body: MIT License
 
 Copyrig…
 
-name: @babel_compat-data@7.26.5, nameSpecified: @babel/compat-data, version: 7.26.5
+name: @babel_code-frame@7.29.0, nameSpecified: @babel/code-frame, version: 7.29.0
+body: MIT License
+
+Copyrig…
+
+name: @babel_compat-data@7.29.0, nameSpecified: @babel/compat-data, version: 7.29.0
 body: MIT License
 
 Copyrig…
@@ -182,27 +156,27 @@ body: MIT License
 
 Copyrig…
 
-name: @babel_generator@7.28.3, nameSpecified: @babel/generator, version: 7.28.3
+name: @babel_generator@7.29.1, nameSpecified: @babel/generator, version: 7.29.1
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-annotate-as-pure@7.25.9, nameSpecified: @babel/helper-annotate-as-pure, version: 7.25.9
+name: @babel_helper-annotate-as-pure@7.27.3, nameSpecified: @babel/helper-annotate-as-pure, version: 7.27.3
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-compilation-targets@7.26.5, nameSpecified: @babel/helper-compilation-targets, version: 7.26.5
+name: @babel_helper-compilation-targets@7.28.6, nameSpecified: @babel/helper-compilation-targets, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-create-class-features-plugin@7.25.9, nameSpecified: @babel/helper-create-class-features-plugin, version: 7.25.9
+name: @babel_helper-create-class-features-plugin@7.28.6, nameSpecified: @babel/helper-create-class-features-plugin, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-create-regexp-features-plugin@7.26.3, nameSpecified: @babel/helper-create-regexp-features-plugin, version: 7.26.3
+name: @babel_helper-create-regexp-features-plugin@7.28.5, nameSpecified: @babel/helper-create-regexp-features-plugin, version: 7.28.5
 body: MIT License
 
 Copyrig…
@@ -212,37 +186,37 @@ body: MIT License
 
 Copyrig…
 
-name: @babel_helper-member-expression-to-functions@7.25.9, nameSpecified: @babel/helper-member-expression-to-functions, version: 7.25.9
+name: @babel_helper-member-expression-to-functions@7.28.5, nameSpecified: @babel/helper-member-expression-to-functions, version: 7.28.5
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-module-imports@7.25.9, nameSpecified: @babel/helper-module-imports, version: 7.25.9
+name: @babel_helper-module-imports@7.28.6, nameSpecified: @babel/helper-module-imports, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-module-transforms@7.26.0, nameSpecified: @babel/helper-module-transforms, version: 7.26.0
+name: @babel_helper-module-transforms@7.28.6, nameSpecified: @babel/helper-module-transforms, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-optimise-call-expression@7.25.9, nameSpecified: @babel/helper-optimise-call-expression, version: 7.25.9
+name: @babel_helper-optimise-call-expression@7.27.1, nameSpecified: @babel/helper-optimise-call-expression, version: 7.27.1
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-plugin-utils@7.26.5, nameSpecified: @babel/helper-plugin-utils, version: 7.26.5
+name: @babel_helper-plugin-utils@7.28.6, nameSpecified: @babel/helper-plugin-utils, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-replace-supers@7.26.5, nameSpecified: @babel/helper-replace-supers, version: 7.26.5
+name: @babel_helper-replace-supers@7.28.6, nameSpecified: @babel/helper-replace-supers, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-skip-transparent-expression-wrappers@7.25.9, nameSpecified: @babel/helper-skip-transparent-expression-wrappers, version: 7.25.9
+name: @babel_helper-skip-transparent-expression-wrappers@7.27.1, nameSpecified: @babel/helper-skip-transparent-expression-wrappers, version: 7.27.1
 body: MIT License
 
 Copyrig…
@@ -252,12 +226,12 @@ body: MIT License
 
 Copyrig…
 
-name: @babel_helper-validator-identifier@7.27.1, nameSpecified: @babel/helper-validator-identifier, version: 7.27.1
+name: @babel_helper-validator-identifier@7.28.5, nameSpecified: @babel/helper-validator-identifier, version: 7.28.5
 body: MIT License
 
 Copyrig…
 
-name: @babel_helper-validator-option@7.25.9, nameSpecified: @babel/helper-validator-option, version: 7.25.9
+name: @babel_helper-validator-option@7.27.1, nameSpecified: @babel/helper-validator-option, version: 7.27.1
 body: MIT License
 
 Copyrig…
@@ -267,7 +241,12 @@ body: MIT License
 
 Copyrig…
 
-name: @babel_parser@7.28.3, nameSpecified: @babel/parser, version: 7.28.3
+name: @babel_highlight@7.25.9, nameSpecified: @babel/highlight, version: 7.25.9
+body: MIT License
+
+Copyrig…
+
+name: @babel_parser@7.29.0, nameSpecified: @babel/parser, version: 7.29.0
 body: Copyright (C) 2012-2…
 
 name: @babel_plugin-syntax-async-generators@7.8.4, nameSpecified: @babel/plugin-syntax-async-generators, version: 7.8.4
@@ -305,7 +284,7 @@ body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-syntax-jsx@7.25.9, nameSpecified: @babel/plugin-syntax-jsx, version: 7.25.9
+name: @babel_plugin-syntax-jsx@7.28.6, nameSpecified: @babel/plugin-syntax-jsx, version: 7.28.6
 body: MIT License
 
 Copyrig…
@@ -350,62 +329,62 @@ body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-syntax-typescript@7.25.9, nameSpecified: @babel/plugin-syntax-typescript, version: 7.25.9
+name: @babel_plugin-syntax-typescript@7.28.6, nameSpecified: @babel/plugin-syntax-typescript, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-arrow-functions@7.25.9, nameSpecified: @babel/plugin-transform-arrow-functions, version: 7.25.9
+name: @babel_plugin-transform-arrow-functions@7.27.1, nameSpecified: @babel/plugin-transform-arrow-functions, version: 7.27.1
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-class-properties@7.25.9, nameSpecified: @babel/plugin-transform-class-properties, version: 7.25.9
+name: @babel_plugin-transform-class-properties@7.27.1, nameSpecified: @babel/plugin-transform-class-properties, version: 7.27.1
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-classes@7.25.9, nameSpecified: @babel/plugin-transform-classes, version: 7.25.9
+name: @babel_plugin-transform-classes@7.28.4, nameSpecified: @babel/plugin-transform-classes, version: 7.28.4
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-modules-commonjs@7.26.3, nameSpecified: @babel/plugin-transform-modules-commonjs, version: 7.26.3
+name: @babel_plugin-transform-modules-commonjs@7.28.6, nameSpecified: @babel/plugin-transform-modules-commonjs, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-nullish-coalescing-operator@7.26.6, nameSpecified: @babel/plugin-transform-nullish-coalescing-operator, version: 7.26.6
+name: @babel_plugin-transform-nullish-coalescing-operator@7.27.1, nameSpecified: @babel/plugin-transform-nullish-coalescing-operator, version: 7.27.1
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-optional-chaining@7.25.9, nameSpecified: @babel/plugin-transform-optional-chaining, version: 7.25.9
+name: @babel_plugin-transform-optional-chaining@7.27.1, nameSpecified: @babel/plugin-transform-optional-chaining, version: 7.27.1
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-shorthand-properties@7.25.9, nameSpecified: @babel/plugin-transform-shorthand-properties, version: 7.25.9
+name: @babel_plugin-transform-shorthand-properties@7.27.1, nameSpecified: @babel/plugin-transform-shorthand-properties, version: 7.27.1
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-template-literals@7.25.9, nameSpecified: @babel/plugin-transform-template-literals, version: 7.25.9
+name: @babel_plugin-transform-template-literals@7.27.1, nameSpecified: @babel/plugin-transform-template-literals, version: 7.27.1
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-typescript@7.26.5, nameSpecified: @babel/plugin-transform-typescript, version: 7.26.5
+name: @babel_plugin-transform-typescript@7.28.6, nameSpecified: @babel/plugin-transform-typescript, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_plugin-transform-unicode-regex@7.25.9, nameSpecified: @babel/plugin-transform-unicode-regex, version: 7.25.9
+name: @babel_plugin-transform-unicode-regex@7.27.1, nameSpecified: @babel/plugin-transform-unicode-regex, version: 7.27.1
 body: MIT License
 
 Copyrig…
 
-name: @babel_preset-typescript@7.26.0, nameSpecified: @babel/preset-typescript, version: 7.26.0
+name: @babel_preset-typescript@7.27.1, nameSpecified: @babel/preset-typescript, version: 7.27.1
 body: MIT License
 
 Copyrig…
@@ -415,22 +394,17 @@ body: MIT License
 
 Copyrig…
 
-name: @babel_template@7.27.2, nameSpecified: @babel/template, version: 7.27.2
+name: @babel_template@7.28.6, nameSpecified: @babel/template, version: 7.28.6
 body: MIT License
 
 Copyrig…
 
-name: @babel_traverse--for-generate-function-map@7.28.3, nameSpecified: @babel/traverse--for-generate-function-map, version: 7.28.3
+name: @babel_traverse@7.29.0, nameSpecified: @babel/traverse, version: 7.29.0
 body: MIT License
 
 Copyrig…
 
-name: @babel_traverse@7.27.0, nameSpecified: @babel/traverse, version: 7.27.0
-body: MIT License
-
-Copyrig…
-
-name: @babel_types@7.28.2, nameSpecified: @babel/types, version: 7.28.2
+name: @babel_types@7.29.0, nameSpecified: @babel/types, version: 7.29.0
 body: MIT License
 
 Copyrig…
@@ -442,6 +416,33 @@ Copyrig…
 
 name: @egjs_hammerjs@2.0.17, nameSpecified: @egjs/hammerjs, version: 2.0.17
 body: The MIT License (MIT…
+
+name: @expo_config-plugins@54.0.4, nameSpecified: @expo/config-plugins, version: 54.0.4
+body: The MIT License (MIT…
+
+name: @expo_config-types@54.0.10, nameSpecified: @expo/config-types, version: 54.0.10
+body: The MIT License (MIT…
+
+name: @expo_json-file@10.0.8, nameSpecified: @expo/json-file, version: 10.0.8
+body: The MIT License (MIT…
+
+name: @expo_plist@0.4.8, nameSpecified: @expo/plist, version: 0.4.8
+body: MIT…
+
+name: @expo_sdk-runtime-versions@1.0.0, nameSpecified: @expo/sdk-runtime-versions, version: 1.0.0
+body: MIT…
+
+name: @img_colour@1.0.0, nameSpecified: @img/colour, version: 1.0.0
+body: # Licensing
+
+## colo…
+
+name: @img_sharp-darwin-arm64@0.34.5, nameSpecified: @img/sharp-darwin-arm64, version: 0.34.5
+body: Apache License
+Versi…
+
+name: @img_sharp-libvips-darwin-arm64@1.2.4, nameSpecified: @img/sharp-libvips-darwin-arm64, version: 1.2.4
+body: LGPL-3.0-or-later…
 
 name: @isaacs_ttlcache@1.4.1, nameSpecified: @isaacs/ttlcache, version: 1.4.1
 body: The ISC License
@@ -510,114 +511,124 @@ body: MIT License
 
 Copyrig…
 
-name: @react-native-async-storage_async-storage@2.2.0, nameSpecified: @react-native-async-storage/async-storage, version: 2.2.0
-body: MIT License
+name: @nodelib_fs.scandir@2.1.5, nameSpecified: @nodelib/fs.scandir, version: 2.1.5
+body: The MIT License (MIT…
 
-Copyrig…
+name: @nodelib_fs.stat@2.0.5, nameSpecified: @nodelib/fs.stat, version: 2.0.5
+body: The MIT License (MIT…
 
-name: @react-native-vector-icons_ant-design@12.3.0, nameSpecified: @react-native-vector-icons/ant-design, version: 12.3.0
-body: MIT License
+name: @nodelib_fs.walk@1.2.8, nameSpecified: @nodelib/fs.walk, version: 1.2.8
+body: The MIT License (MIT…
 
-Copyrig…
-
-name: @react-native-vector-icons_common@12.3.0, nameSpecified: @react-native-vector-icons/common, version: 12.3.0
-body: MIT License
-
-Copyrig…
-
-name: @react-native-vector-icons_feather@12.3.0, nameSpecified: @react-native-vector-icons/feather, version: 12.3.0
-body: MIT License
-
-Copyrig…
-
-name: @react-native-vector-icons_fontawesome6@12.2.0, nameSpecified: @react-native-vector-icons/fontawesome6, version: 12.2.0
-body: MIT License
-
-Copyrig…
-
-name: @react-native-vector-icons_foundation@12.3.0, nameSpecified: @react-native-vector-icons/foundation, version: 12.3.0
-body: MIT License
-
-Copyrig…
-
-name: @react-native-vector-icons_ionicons@12.3.0, nameSpecified: @react-native-vector-icons/ionicons, version: 12.3.0
-body: MIT License
-
-Copyrig…
-
-name: @react-native-vector-icons_lucide@12.3.0, nameSpecified: @react-native-vector-icons/lucide, version: 12.3.0
-body: MIT License
-
-Copyrig…
-
-name: @react-native-vector-icons_material-design-icons@12.3.0, nameSpecified: @react-native-vector-icons/material-design-icons, version: 12.3.0
-body: MIT License
-
-Copyrig…
-
-name: @react-native-vector-icons_octicons@20.3.0, nameSpecified: @react-native-vector-icons/octicons, version: 20.3.0
-body: MIT License
-
-Copyrig…
-
-name: @react-native_assets-registry@0.81.0, nameSpecified: @react-native/assets-registry, version: 0.81.0
+name: @react-native-async-storage_async-storage@3.0.1, nameSpecified: @react-native-async-storage/async-storage, version: 3.0.1
 body: MIT…
 
-name: @react-native_codegen@0.81.0, nameSpecified: @react-native/codegen, version: 0.81.0
+name: @react-native-vector-icons_ant-design@12.4.1, nameSpecified: @react-native-vector-icons/ant-design, version: 12.4.1
+body: MIT License
+
+Copyrig…
+
+name: @react-native-vector-icons_common@12.4.0, nameSpecified: @react-native-vector-icons/common, version: 12.4.0
+body: MIT License
+
+Copyrig…
+
+name: @react-native-vector-icons_feather@12.4.1, nameSpecified: @react-native-vector-icons/feather, version: 12.4.1
+body: MIT License
+
+Copyrig…
+
+name: @react-native-vector-icons_fontawesome6@12.3.1, nameSpecified: @react-native-vector-icons/fontawesome6, version: 12.3.1
+body: MIT License
+
+Copyrig…
+
+name: @react-native-vector-icons_foundation@12.4.1, nameSpecified: @react-native-vector-icons/foundation, version: 12.4.1
+body: MIT License
+
+Copyrig…
+
+name: @react-native-vector-icons_ionicons@12.4.1, nameSpecified: @react-native-vector-icons/ionicons, version: 12.4.1
+body: MIT License
+
+Copyrig…
+
+name: @react-native-vector-icons_lucide@12.4.1, nameSpecified: @react-native-vector-icons/lucide, version: 12.4.1
+body: MIT License
+
+Copyrig…
+
+name: @react-native-vector-icons_material-design-icons@12.4.1, nameSpecified: @react-native-vector-icons/material-design-icons, version: 12.4.1
+body: MIT License
+
+Copyrig…
+
+name: @react-native-vector-icons_octicons@20.4.1, nameSpecified: @react-native-vector-icons/octicons, version: 20.4.1
+body: MIT License
+
+Copyrig…
+
+name: @react-native_assets-registry@0.84.1, nameSpecified: @react-native/assets-registry, version: 0.84.1
 body: MIT…
 
-name: @react-native_community-cli-plugin@0.81.0, nameSpecified: @react-native/community-cli-plugin, version: 0.81.0
+name: @react-native_codegen@0.84.1, nameSpecified: @react-native/codegen, version: 0.84.1
 body: MIT…
 
-name: @react-native_debugger-frontend@0.81.0, nameSpecified: @react-native/debugger-frontend, version: 0.81.0
+name: @react-native_community-cli-plugin@0.84.1, nameSpecified: @react-native/community-cli-plugin, version: 0.84.1
+body: MIT…
+
+name: @react-native_debugger-frontend@0.84.1, nameSpecified: @react-native/debugger-frontend, version: 0.84.1
 body: BSD-3-Clause…
 
-name: @react-native_dev-middleware@0.81.0, nameSpecified: @react-native/dev-middleware, version: 0.81.0
+name: @react-native_debugger-shell@0.84.1, nameSpecified: @react-native/debugger-shell, version: 0.84.1
 body: MIT…
 
-name: @react-native_gradle-plugin@0.81.0, nameSpecified: @react-native/gradle-plugin, version: 0.81.0
+name: @react-native_dev-middleware@0.84.1, nameSpecified: @react-native/dev-middleware, version: 0.84.1
 body: MIT…
 
-name: @react-native_js-polyfills@0.81.0, nameSpecified: @react-native/js-polyfills, version: 0.81.0
+name: @react-native_gradle-plugin@0.84.1, nameSpecified: @react-native/gradle-plugin, version: 0.84.1
 body: MIT…
 
-name: @react-native_normalize-colors@0.81.0, nameSpecified: @react-native/normalize-colors, version: 0.81.0
+name: @react-native_js-polyfills@0.84.1, nameSpecified: @react-native/js-polyfills, version: 0.84.1
 body: MIT…
 
-name: @react-native_virtualized-lists@0.81.0, nameSpecified: @react-native/virtualized-lists, version: 0.81.0
+name: @react-native_normalize-colors@0.84.1, nameSpecified: @react-native/normalize-colors, version: 0.84.1
 body: MIT…
 
-name: @react-navigation_core@7.12.4, nameSpecified: @react-navigation/core, version: 7.12.4
+name: @react-native_virtualized-lists@0.84.1, nameSpecified: @react-native/virtualized-lists, version: 0.84.1
+body: MIT…
+
+name: @react-navigation_core@7.15.1, nameSpecified: @react-navigation/core, version: 7.15.1
 body: MIT License
 
 Copyrig…
 
-name: @react-navigation_devtools@7.0.38, nameSpecified: @react-navigation/devtools, version: 7.0.38
+name: @react-navigation_devtools@7.0.50, nameSpecified: @react-navigation/devtools, version: 7.0.50
 body: MIT License
 
 Copyrig…
 
-name: @react-navigation_drawer@7.5.7, nameSpecified: @react-navigation/drawer, version: 7.5.7
+name: @react-navigation_drawer@7.9.2, nameSpecified: @react-navigation/drawer, version: 7.9.2
 body: MIT License
 
 Copyrig…
 
-name: @react-navigation_elements@2.6.3, nameSpecified: @react-navigation/elements, version: 2.6.3
+name: @react-navigation_elements@2.9.8, nameSpecified: @react-navigation/elements, version: 2.9.8
 body: MIT License
 
 Copyrig…
 
-name: @react-navigation_native-stack@7.3.25, nameSpecified: @react-navigation/native-stack, version: 7.3.25
+name: @react-navigation_native-stack@7.14.2, nameSpecified: @react-navigation/native-stack, version: 7.14.2
 body: MIT License
 
 Copyrig…
 
-name: @react-navigation_native@7.1.17, nameSpecified: @react-navigation/native, version: 7.1.17
+name: @react-navigation_native@7.1.31, nameSpecified: @react-navigation/native, version: 7.1.31
 body: MIT License
 
 Copyrig…
 
-name: @react-navigation_routers@7.5.1, nameSpecified: @react-navigation/routers, version: 7.5.1
+name: @react-navigation_routers@7.5.3, nameSpecified: @react-navigation/routers, version: 7.5.3
 body: MIT License
 
 Copyrig…
@@ -704,12 +715,12 @@ body: MIT License
 
 Copyrig…
 
-name: accepts@1.3.8, nameSpecified: accepts, version: 1.3.8
+name: accepts@2.0.0, nameSpecified: accepts, version: 2.0.0
 body: (The MIT License)
 
 C…
 
-name: acorn@8.14.0, nameSpecified: acorn, version: 8.14.0
+name: acorn@8.16.0, nameSpecified: acorn, version: 8.16.0
 body: MIT License
 
 Copyrig…
@@ -723,6 +734,11 @@ name: anser@1.4.10, nameSpecified: anser, version: 1.4.10
 body: The MIT License (MIT…
 
 name: ansi-regex@5.0.1, nameSpecified: ansi-regex, version: 5.0.1
+body: MIT License
+
+Copyrig…
+
+name: ansi-styles@3.2.1, nameSpecified: ansi-styles, version: 3.2.1
 body: MIT License
 
 Copyrig…
@@ -751,9 +767,6 @@ name: asap@2.0.6, nameSpecified: asap, version: 2.0.6
 body: 
 Copyright 2009–2014…
 
-name: async-limiter@1.0.1, nameSpecified: async-limiter, version: 1.0.1
-body: The MIT License (MIT…
-
 name: babel-jest@29.7.0, nameSpecified: babel-jest, version: 29.7.0
 body: MIT License
 
@@ -767,7 +780,7 @@ body: MIT License
 
 Copyrig…
 
-name: babel-plugin-syntax-hermes-parser@0.29.1, nameSpecified: babel-plugin-syntax-hermes-parser, version: 0.29.1
+name: babel-plugin-syntax-hermes-parser@0.32.0, nameSpecified: babel-plugin-syntax-hermes-parser, version: 0.32.0
 body: MIT License
 
 Copyrig…
@@ -786,6 +799,11 @@ name: balanced-match@1.0.2, nameSpecified: balanced-match, version: 1.0.2
 body: (MIT)
 
 Copyright (c)…
+
+name: balanced-match@4.0.4, nameSpecified: balanced-match, version: 4.0.4
+body: (MIT)
+
+Original code…
 
 name: base64-js@1.5.1, nameSpecified: base64-js, version: 1.5.1
 body: The MIT License (MIT…
@@ -809,6 +827,11 @@ body: MIT License
 
 Copyrig…
 
+name: brace-expansion@5.0.4, nameSpecified: brace-expansion, version: 5.0.4
+body: MIT License
+
+Copyrig…
+
 name: braces@3.0.3, nameSpecified: braces, version: 3.0.3
 body: The MIT License (MIT…
 
@@ -823,15 +846,6 @@ body: MIT License
 
 Copyrig…
 
-name: caller-callsite@2.0.0, nameSpecified: caller-callsite, version: 2.0.0
-body: The MIT License (MIT…
-
-name: caller-path@2.0.0, nameSpecified: caller-path, version: 2.0.0
-body: The MIT License (MIT…
-
-name: callsites@2.0.0, nameSpecified: callsites, version: 2.0.0
-body: The MIT License (MIT…
-
 name: camelcase@5.3.1, nameSpecified: camelcase, version: 5.3.1
 body: MIT License
 
@@ -844,6 +858,11 @@ Copyrig…
 
 name: caniuse-lite@1.0.30001695, nameSpecified: caniuse-lite, version: 1.0.30001695
 body: Attribution 4.0 Inte…
+
+name: chalk@2.4.2, nameSpecified: chalk, version: 2.4.2
+body: MIT License
+
+Copyrig…
 
 name: chalk@4.1.2, nameSpecified: chalk, version: 4.1.2
 body: MIT License
@@ -867,8 +886,14 @@ body: The MIT License (MIT…
 name: cliui@8.0.1, nameSpecified: cliui, version: 8.0.1
 body: ISC…
 
+name: color-convert@1.9.3, nameSpecified: color-convert, version: 1.9.3
+body: Copyright (c) 2011-2…
+
 name: color-convert@2.0.1, nameSpecified: color-convert, version: 2.0.1
 body: Copyright (c) 2011-2…
+
+name: color-name@1.1.3, nameSpecified: color-name, version: 1.1.3
+body: The MIT License (MIT…
 
 name: color-name@1.1.4, nameSpecified: color-name, version: 1.1.4
 body: The MIT License (MIT…
@@ -880,6 +905,11 @@ name: color@4.2.3, nameSpecified: color, version: 4.2.3
 body: Copyright (c) 2012 H…
 
 name: commander@12.1.0, nameSpecified: commander, version: 12.1.0
+body: (The MIT License)
+
+C…
+
+name: commander@14.0.3, nameSpecified: commander, version: 14.0.3
 body: (The MIT License)
 
 C…
@@ -900,7 +930,7 @@ C…
 name: convert-source-map@2.0.0, nameSpecified: convert-source-map, version: 2.0.0
 body: Copyright 2013 Thors…
 
-name: cosmiconfig@5.2.1, nameSpecified: cosmiconfig, version: 5.2.1
+name: cross-spawn@7.0.6, nameSpecified: cross-spawn, version: 7.0.6
 body: The MIT License (MIT…
 
 name: css-select@5.1.0, nameSpecified: css-select, version: 5.1.0
@@ -933,6 +963,14 @@ C…
 name: destroy@1.2.0, nameSpecified: destroy, version: 1.2.0
 body: 
 The MIT License (MI…
+
+name: detect-indent@6.1.0, nameSpecified: detect-indent, version: 6.1.0
+body: MIT License
+
+Copyrig…
+
+name: detect-libc@2.1.2, nameSpecified: detect-libc, version: 2.1.2
+body:                     …
 
 name: dom-serializer@2.0.0, nameSpecified: dom-serializer, version: 2.0.0
 body: License
@@ -971,9 +1009,6 @@ C…
 name: entities@4.5.0, nameSpecified: entities, version: 4.5.0
 body: Copyright (c) Felix …
 
-name: error-ex@1.3.2, nameSpecified: error-ex, version: 1.3.2
-body: The MIT License (MIT…
-
 name: error-stack-parser@2.1.4, nameSpecified: error-stack-parser, version: 2.1.4
 body: Copyright (c) 2017 E…
 
@@ -986,6 +1021,9 @@ name: escape-html@1.0.3, nameSpecified: escape-html, version: 1.0.3
 body: (The MIT License)
 
 C…
+
+name: escape-string-regexp@1.0.5, nameSpecified: escape-string-regexp, version: 1.0.5
+body: The MIT License (MIT…
 
 name: escape-string-regexp@2.0.0, nameSpecified: escape-string-regexp, version: 2.0.0
 body: MIT License
@@ -1008,7 +1046,7 @@ C…
 name: event-target-shim@5.0.1, nameSpecified: event-target-shim, version: 5.0.1
 body: The MIT License (MIT…
 
-name: exponential-backoff@3.1.2, nameSpecified: exponential-backoff, version: 3.1.2
+name: exponential-backoff@3.1.3, nameSpecified: exponential-backoff, version: 3.1.3
 body: 
                    …
 
@@ -1017,11 +1055,23 @@ body: MIT License
 
 Copyrig…
 
+name: fast-glob@3.3.3, nameSpecified: fast-glob, version: 3.3.3
+body: The MIT License (MIT…
+
 name: fast-json-stable-stringify@2.1.0, nameSpecified: fast-json-stable-stringify, version: 2.1.0
 body: This software is rel…
 
+name: fastq@1.18.0, nameSpecified: fastq, version: 1.18.0
+body: Copyright (c) 2015-2…
+
+name: fb-dotslash@0.5.8, nameSpecified: fb-dotslash, version: 0.5.8
+body: (MIT OR Apache-2.0)…
+
 name: fb-watchman@2.0.2, nameSpecified: fb-watchman, version: 2.0.2
 body: Apache-2.0…
+
+name: fdir@6.5.0, nameSpecified: fdir, version: 6.5.0
+body: Copyright 2023 Abdul…
 
 name: fill-range@7.1.1, nameSpecified: fill-range, version: 7.1.1
 body: The MIT License (MIT…
@@ -1075,32 +1125,59 @@ body: MIT License
 
 Copyrig…
 
-name: glob@7.2.3, nameSpecified: glob, version: 7.2.3
+name: getenv@2.0.0, nameSpecified: getenv, version: 2.0.0
+body: The MIT License (MIT…
+
+name: glob-parent@5.1.2, nameSpecified: glob-parent, version: 5.1.2
 body: The ISC License
 
 Cop…
 
-name: globals@11.12.0, nameSpecified: globals, version: 11.12.0
-body: MIT License
+name: glob@13.0.0, nameSpecified: glob, version: 13.0.0
+body: All packages under `…
 
-Copyrig…
+name: glob@7.2.3, nameSpecified: glob, version: 7.2.3
+body: The ISC License
+
+Cop…
 
 name: graceful-fs@4.2.11, nameSpecified: graceful-fs, version: 4.2.11
 body: The ISC License
 
 Cop…
 
+name: has-flag@3.0.0, nameSpecified: has-flag, version: 3.0.0
+body: MIT License
+
+Copyrig…
+
 name: has-flag@4.0.0, nameSpecified: has-flag, version: 4.0.0
 body: MIT License
 
 Copyrig…
 
-name: hermes-estree@0.29.1, nameSpecified: hermes-estree, version: 0.29.1
+name: he@1.2.0, nameSpecified: he, version: 1.2.0
+body: MIT…
+
+name: hermes-compiler@250829098.0.9, nameSpecified: hermes-compiler, version: 250829098.0.9
+body: MIT…
+
+name: hermes-estree@0.32.0, nameSpecified: hermes-estree, version: 0.32.0
 body: MIT License
 
 Copyrig…
 
-name: hermes-parser@0.29.1, nameSpecified: hermes-parser, version: 0.29.1
+name: hermes-estree@0.33.3, nameSpecified: hermes-estree, version: 0.33.3
+body: MIT License
+
+Copyrig…
+
+name: hermes-parser@0.32.0, nameSpecified: hermes-parser, version: 0.32.0
+body: MIT License
+
+Copyrig…
+
+name: hermes-parser@0.33.3, nameSpecified: hermes-parser, version: 0.33.3
 body: MIT License
 
 Copyrig…
@@ -1111,7 +1188,7 @@ body: Software License Agr…
 name: html-parse-stringify@3.0.1, nameSpecified: html-parse-stringify, version: 3.0.1
 body: MIT…
 
-name: http-errors@2.0.0, nameSpecified: http-errors, version: 2.0.0
+name: http-errors@2.0.1, nameSpecified: http-errors, version: 2.0.1
 body: 
 The MIT License (MI…
 
@@ -1120,13 +1197,14 @@ body: (The MIT License)
 
 C…
 
-name: i18next@25.6.3, nameSpecified: i18next, version: 25.6.3
+name: i18next@25.8.13, nameSpecified: i18next, version: 25.8.13
 body: The MIT License (MIT…
+
+name: idb@8.0.3, nameSpecified: idb, version: 8.0.3
+body: ISC License (ISC)
+Co…
 
 name: image-size@1.2.1, nameSpecified: image-size, version: 1.2.1
-body: The MIT License (MIT…
-
-name: import-fresh@2.0.0, nameSpecified: import-fresh, version: 2.0.0
 body: The MIT License (MIT…
 
 name: imurmurhash@0.1.4, nameSpecified: imurmurhash, version: 0.1.4
@@ -1147,13 +1225,7 @@ body: MIT License
 
 Copyrig…
 
-name: is-arrayish@0.2.1, nameSpecified: is-arrayish, version: 0.2.1
-body: The MIT License (MIT…
-
 name: is-arrayish@0.3.2, nameSpecified: is-arrayish, version: 0.3.2
-body: The MIT License (MIT…
-
-name: is-directory@0.3.1, nameSpecified: is-directory, version: 0.3.1
 body: The MIT License (MIT…
 
 name: is-docker@2.2.1, nameSpecified: is-docker, version: 2.2.1
@@ -1161,23 +1233,29 @@ body: MIT License
 
 Copyrig…
 
+name: is-extglob@2.1.1, nameSpecified: is-extglob, version: 2.1.1
+body: The MIT License (MIT…
+
 name: is-fullwidth-code-point@3.0.0, nameSpecified: is-fullwidth-code-point, version: 3.0.0
 body: MIT License
 
 Copyrig…
 
-name: is-number@7.0.0, nameSpecified: is-number, version: 7.0.0
+name: is-glob@4.0.3, nameSpecified: is-glob, version: 4.0.3
 body: The MIT License (MIT…
 
-name: is-plain-obj@2.1.0, nameSpecified: is-plain-obj, version: 2.1.0
-body: MIT License
-
-Copyrig…
+name: is-number@7.0.0, nameSpecified: is-number, version: 7.0.0
+body: The MIT License (MIT…
 
 name: is-wsl@2.2.0, nameSpecified: is-wsl, version: 2.2.0
 body: MIT License
 
 Copyrig…
+
+name: isexe@2.0.0, nameSpecified: isexe, version: 2.0.0
+body: The ISC License
+
+Cop…
 
 name: istanbul-lib-coverage@3.2.2, nameSpecified: istanbul-lib-coverage, version: 3.2.2
 body: Copyright 2012-2015 …
@@ -1242,14 +1320,8 @@ name: jsc-safe-url@0.2.4, nameSpecified: jsc-safe-url, version: 0.2.4
 body: Zero-Clause BSD
 ====…
 
-name: jsesc@3.0.2, nameSpecified: jsesc, version: 3.0.2
-body: MIT…
-
 name: jsesc@3.1.0, nameSpecified: jsesc, version: 3.1.0
 body: MIT…
-
-name: json-parse-better-errors@1.0.2, nameSpecified: json-parse-better-errors, version: 1.0.2
-body: Copyright 2017 Kat M…
 
 name: json5@2.2.3, nameSpecified: json5, version: 2.2.3
 body: MIT License
@@ -1300,63 +1372,63 @@ body: MIT License
 
 Copyrig…
 
-name: merge-options@3.0.4, nameSpecified: merge-options, version: 3.0.4
-body: The MIT License (MIT…
-
 name: merge-stream@2.0.0, nameSpecified: merge-stream, version: 2.0.0
 body: The MIT License (MIT…
 
-name: metro-babel-transformer@0.83.1, nameSpecified: metro-babel-transformer, version: 0.83.1
+name: merge2@1.4.1, nameSpecified: merge2, version: 1.4.1
+body: The MIT License (MIT…
+
+name: metro-babel-transformer@0.83.4, nameSpecified: metro-babel-transformer, version: 0.83.4
 body: MIT…
 
-name: metro-cache-key@0.83.1, nameSpecified: metro-cache-key, version: 0.83.1
+name: metro-cache-key@0.83.4, nameSpecified: metro-cache-key, version: 0.83.4
 body: MIT…
 
-name: metro-cache@0.83.1, nameSpecified: metro-cache, version: 0.83.1
+name: metro-cache@0.83.4, nameSpecified: metro-cache, version: 0.83.4
 body: MIT…
 
-name: metro-config@0.83.1, nameSpecified: metro-config, version: 0.83.1
+name: metro-config@0.83.4, nameSpecified: metro-config, version: 0.83.4
 body: MIT…
 
-name: metro-core@0.83.1, nameSpecified: metro-core, version: 0.83.1
+name: metro-core@0.83.4, nameSpecified: metro-core, version: 0.83.4
 body: MIT…
 
-name: metro-file-map@0.83.1, nameSpecified: metro-file-map, version: 0.83.1
+name: metro-file-map@0.83.4, nameSpecified: metro-file-map, version: 0.83.4
 body: MIT…
 
-name: metro-minify-terser@0.83.1, nameSpecified: metro-minify-terser, version: 0.83.1
+name: metro-minify-terser@0.83.4, nameSpecified: metro-minify-terser, version: 0.83.4
 body: MIT…
 
-name: metro-resolver@0.83.1, nameSpecified: metro-resolver, version: 0.83.1
+name: metro-resolver@0.83.4, nameSpecified: metro-resolver, version: 0.83.4
 body: MIT…
 
-name: metro-runtime@0.83.1, nameSpecified: metro-runtime, version: 0.83.1
+name: metro-runtime@0.83.4, nameSpecified: metro-runtime, version: 0.83.4
 body: MIT…
 
-name: metro-source-map@0.83.1, nameSpecified: metro-source-map, version: 0.83.1
+name: metro-source-map@0.83.4, nameSpecified: metro-source-map, version: 0.83.4
 body: MIT…
 
-name: metro-symbolicate@0.83.1, nameSpecified: metro-symbolicate, version: 0.83.1
+name: metro-symbolicate@0.83.4, nameSpecified: metro-symbolicate, version: 0.83.4
 body: MIT…
 
-name: metro-transform-plugins@0.83.1, nameSpecified: metro-transform-plugins, version: 0.83.1
+name: metro-transform-plugins@0.83.4, nameSpecified: metro-transform-plugins, version: 0.83.4
 body: MIT…
 
-name: metro-transform-worker@0.83.1, nameSpecified: metro-transform-worker, version: 0.83.1
+name: metro-transform-worker@0.83.4, nameSpecified: metro-transform-worker, version: 0.83.4
 body: MIT…
 
-name: metro@0.83.1, nameSpecified: metro, version: 0.83.1
+name: metro@0.83.4, nameSpecified: metro, version: 0.83.4
 body: MIT…
 
 name: micromatch@4.0.8, nameSpecified: micromatch, version: 4.0.8
 body: The MIT License (MIT…
 
-name: mime-db@1.52.0, nameSpecified: mime-db, version: 1.52.0
+name: mime-db@1.54.0, nameSpecified: mime-db, version: 1.54.0
 body: (The MIT License)
 
 C…
 
-name: mime-types@2.1.35, nameSpecified: mime-types, version: 2.1.35
+name: mime-types@3.0.2, nameSpecified: mime-types, version: 3.0.2
 body: (The MIT License)
 
 C…
@@ -1364,7 +1436,15 @@ C…
 name: mime@1.6.0, nameSpecified: mime, version: 1.6.0
 body: The MIT License (MIT…
 
-name: minimatch@3.1.2, nameSpecified: minimatch, version: 3.1.2
+name: minimatch@10.2.4, nameSpecified: minimatch, version: 10.2.4
+body: # Blue Oak Model Lic…
+
+name: minimatch@3.1.5, nameSpecified: minimatch, version: 3.1.5
+body: The ISC License
+
+Cop…
+
+name: minipass@7.1.2, nameSpecified: minipass, version: 7.1.2
 body: The ISC License
 
 Cop…
@@ -1381,10 +1461,13 @@ body: The MIT License (MIT…
 name: nanoid@3.3.11, nameSpecified: nanoid, version: 3.3.11
 body: The MIT License (MIT…
 
-name: negotiator@0.6.3, nameSpecified: negotiator, version: 0.6.3
+name: negotiator@1.0.0, nameSpecified: negotiator, version: 1.0.0
 body: (The MIT License)
 
 C…
+
+name: node-html-parser@7.0.2, nameSpecified: node-html-parser, version: 7.0.2
+body: Copyright 2019 Tao Q…
 
 name: node-int64@0.4.0, nameSpecified: node-int64, version: 0.4.0
 body: Copyright (c) 2014 R…
@@ -1403,7 +1486,7 @@ body: Copyright (c) Felix …
 name: nullthrows@1.1.1, nameSpecified: nullthrows, version: 1.1.1
 body: The MIT License (MIT…
 
-name: ob1@0.83.1, nameSpecified: ob1, version: 0.83.1
+name: ob1@0.83.4, nameSpecified: ob1, version: 0.83.4
 body: MIT…
 
 name: on-finished@2.3.0, nameSpecified: on-finished, version: 2.3.0
@@ -1441,11 +1524,6 @@ body: MIT License
 
 Copyrig…
 
-name: parse-json@4.0.0, nameSpecified: parse-json, version: 4.0.0
-body: MIT License
-
-Copyrig…
-
 name: parseurl@1.3.3, nameSpecified: parseurl, version: 1.3.3
 body: 
 (The MIT License)
@@ -1460,12 +1538,23 @@ Copyrig…
 name: path-is-absolute@1.0.1, nameSpecified: path-is-absolute, version: 1.0.1
 body: The MIT License (MIT…
 
+name: path-key@3.1.1, nameSpecified: path-key, version: 3.1.1
+body: MIT License
+
+Copyrig…
+
+name: path-scurry@2.0.1, nameSpecified: path-scurry, version: 2.0.1
+body: # Blue Oak Model Lic…
+
 name: picocolors@1.1.1, nameSpecified: picocolors, version: 1.1.1
 body: ISC License
 
 Copyrig…
 
 name: picomatch@2.3.1, nameSpecified: picomatch, version: 2.3.1
+body: The MIT License (MIT…
+
+name: picomatch@4.0.3, nameSpecified: picomatch, version: 4.0.3
 body: The MIT License (MIT…
 
 name: pirates@4.0.6, nameSpecified: pirates, version: 4.0.6
@@ -1477,6 +1566,9 @@ name: plist@3.1.0, nameSpecified: plist, version: 3.1.0
 body: (The MIT License)
 
 C…
+
+name: prettier@3.8.1, nameSpecified: prettier, version: 3.8.1
+body: Copyright © James Lo…
 
 name: pretty-format@29.7.0, nameSpecified: pretty-format, version: 29.7.0
 body: MIT License
@@ -1490,6 +1582,9 @@ name: query-string@7.1.3, nameSpecified: query-string, version: 7.1.3
 body: MIT License
 
 Copyrig…
+
+name: queue-microtask@1.2.3, nameSpecified: queue-microtask, version: 1.2.3
+body: The MIT License (MIT…
 
 name: queue@6.0.2, nameSpecified: queue, version: 6.0.2
 body: The MIT License (MIT…
@@ -1505,7 +1600,7 @@ body: MIT…
 name: react-freeze@1.0.4, nameSpecified: react-freeze, version: 1.0.4
 body: The MIT License (MIT…
 
-name: react-i18next@16.3.5, nameSpecified: react-i18next, version: 16.3.5
+name: react-i18next@16.5.4, nameSpecified: react-i18next, version: 16.5.4
 body: The MIT License (MIT…
 
 name: react-is@16.13.1, nameSpecified: react-is, version: 16.13.1
@@ -1518,26 +1613,28 @@ body: MIT License
 
 Copyrig…
 
-name: react-is@19.1.1, nameSpecified: react-is, version: 19.1.1
+name: react-is@19.2.4, nameSpecified: react-is, version: 19.2.4
 body: MIT License
 
 Copyrig…
 
-name: react-native-drawer-layout@4.1.12, nameSpecified: react-native-drawer-layout, version: 4.1.12
+name: react-native-bootsplash@7.1.0, nameSpecified: react-native-bootsplash, version: 7.1.0
 body: MIT License
 
 Copyrig…
 
-name: react-native-gesture-handler@2.29.1, nameSpecified: react-native-gesture-handler, version: 2.29.1
+name: react-native-drawer-layout@4.2.2, nameSpecified: react-native-drawer-layout, version: 4.2.2
+body: MIT License
+
+Copyrig…
+
+name: react-native-gesture-handler@2.30.0, nameSpecified: react-native-gesture-handler, version: 2.30.0
 body: The MIT License (MIT…
 
 name: react-native-html-to-pdf@1.3.0, nameSpecified: react-native-html-to-pdf, version: 1.3.0
 body: MIT License
 
 Copyrig…
-
-name: react-native-is-edge-to-edge@1.1.7, nameSpecified: react-native-is-edge-to-edge, version: 1.1.7
-body: MIT…
 
 name: react-native-is-edge-to-edge@1.2.1, nameSpecified: react-native-is-edge-to-edge, version: 1.2.1
 body: MIT License
@@ -1549,26 +1646,26 @@ body: MIT License
 
 Copyrig…
 
-name: react-native-localize@3.6.0, nameSpecified: react-native-localize, version: 3.6.0
+name: react-native-localize@3.7.0, nameSpecified: react-native-localize, version: 3.7.0
 body: MIT License
 
 Copyrig…
 
-name: react-native-reanimated@3.19.0, nameSpecified: react-native-reanimated, version: 3.19.0
+name: react-native-reanimated@4.2.2, nameSpecified: react-native-reanimated, version: 4.2.2
 body: The MIT License (MIT…
 
-name: react-native-safe-area-context@5.6.0, nameSpecified: react-native-safe-area-context, version: 5.6.0
+name: react-native-safe-area-context@5.7.0, nameSpecified: react-native-safe-area-context, version: 5.7.0
 body: MIT License
 
 Copyrig…
 
-name: react-native-screens@4.14.1, nameSpecified: react-native-screens, version: 4.14.1
+name: react-native-screens@4.24.0, nameSpecified: react-native-screens, version: 4.24.0
 body: The MIT License (MIT…
 
 name: react-native-share@12.0.11, nameSpecified: react-native-share, version: 12.0.11
 body: The MIT License (MIT…
 
-name: react-native-svg@15.12.1, nameSpecified: react-native-svg, version: 15.12.1
+name: react-native-svg@15.15.3, nameSpecified: react-native-svg, version: 15.15.3
 body: The MIT License (MIT…
 
 name: react-native-toast-message@2.3.3, nameSpecified: react-native-toast-message, version: 2.3.3
@@ -1581,7 +1678,12 @@ body: MIT License
 
 Copyrig…
 
-name: react-native@0.81.0, nameSpecified: react-native, version: 0.81.0
+name: react-native-worklets@0.7.4, nameSpecified: react-native-worklets, version: 0.7.4
+body: MIT License
+
+Copyrig…
+
+name: react-native@0.84.1, nameSpecified: react-native, version: 0.84.1
 body: MIT License
 
 Copyrig…
@@ -1591,12 +1693,12 @@ body: MIT License
 
 Copyrig…
 
-name: react@19.1.0, nameSpecified: react, version: 19.1.0
+name: react@19.2.3, nameSpecified: react, version: 19.2.3
 body: MIT License
 
 Copyrig…
 
-name: regenerate-unicode-properties@10.2.0, nameSpecified: regenerate-unicode-properties, version: 10.2.0
+name: regenerate-unicode-properties@10.2.2, nameSpecified: regenerate-unicode-properties, version: 10.2.2
 body: MIT…
 
 name: regenerate@1.4.2, nameSpecified: regenerate, version: 1.4.2
@@ -1607,19 +1709,16 @@ body: MIT License
 
 Copyrig…
 
-name: regexpu-core@6.2.0, nameSpecified: regexpu-core, version: 6.2.0
+name: regexpu-core@6.4.0, nameSpecified: regexpu-core, version: 6.4.0
 body: MIT…
 
 name: regjsgen@0.8.0, nameSpecified: regjsgen, version: 0.8.0
 body: MIT…
 
-name: regjsparser@0.12.0, nameSpecified: regjsparser, version: 0.12.0
+name: regjsparser@0.13.0, nameSpecified: regjsparser, version: 0.13.0
 body: BSD-2-Clause…
 
 name: require-directory@2.1.1, nameSpecified: require-directory, version: 2.1.1
-body: The MIT License (MIT…
-
-name: resolve-from@3.0.0, nameSpecified: resolve-from, version: 3.0.0
 body: The MIT License (MIT…
 
 name: resolve-from@5.0.0, nameSpecified: resolve-from, version: 5.0.0
@@ -1627,17 +1726,23 @@ body: MIT License
 
 Copyrig…
 
+name: reusify@1.0.4, nameSpecified: reusify, version: 1.0.4
+body: The MIT License (MIT…
+
 name: rimraf@3.0.2, nameSpecified: rimraf, version: 3.0.2
 body: The ISC License
 
 Cop…
+
+name: run-parallel@1.2.0, nameSpecified: run-parallel, version: 1.2.0
+body: The MIT License (MIT…
 
 name: sax@1.4.1, nameSpecified: sax, version: 1.4.1
 body: The ISC License
 
 Cop…
 
-name: scheduler@0.26.0, nameSpecified: scheduler, version: 0.26.0
+name: scheduler@0.27.0, nameSpecified: scheduler, version: 0.27.0
 body: MIT License
 
 Copyrig…
@@ -1647,12 +1752,17 @@ body: The ISC License
 
 Cop…
 
-name: semver@7.7.2, nameSpecified: semver, version: 7.7.2
+name: semver@7.7.3, nameSpecified: semver, version: 7.7.3
 body: The ISC License
 
 Cop…
 
-name: send@0.19.0, nameSpecified: send, version: 0.19.0
+name: semver@7.7.4, nameSpecified: semver, version: 7.7.4
+body: The ISC License
+
+Cop…
+
+name: send@0.19.2, nameSpecified: send, version: 0.19.2
 body: (The MIT License)
 
 C…
@@ -1660,13 +1770,32 @@ C…
 name: serialize-error@2.1.0, nameSpecified: serialize-error, version: 2.1.0
 body: The MIT License (MIT…
 
-name: serve-static@1.16.2, nameSpecified: serve-static, version: 1.16.2
+name: serve-static@1.16.3, nameSpecified: serve-static, version: 1.16.3
 body: (The MIT License)
 
 C…
 
 name: setprototypeof@1.2.0, nameSpecified: setprototypeof, version: 1.2.0
 body: Copyright (c) 2015, …
+
+name: sf-symbols-typescript@2.2.0, nameSpecified: sf-symbols-typescript, version: 2.2.0
+body: MIT License
+
+Copyrig…
+
+name: sharp@0.34.5, nameSpecified: sharp, version: 0.34.5
+body: Apache License
+Versi…
+
+name: shebang-command@2.0.0, nameSpecified: shebang-command, version: 2.0.0
+body: MIT License
+
+Copyrig…
+
+name: shebang-regex@3.0.0, nameSpecified: shebang-regex, version: 3.0.0
+body: MIT License
+
+Copyrig…
 
 name: shell-quote@1.8.3, nameSpecified: shell-quote, version: 1.8.3
 body: The MIT License
@@ -1686,6 +1815,9 @@ name: slash@3.0.0, nameSpecified: slash, version: 3.0.0
 body: MIT License
 
 Copyrig…
+
+name: slugify@1.6.6, nameSpecified: slugify, version: 1.6.6
+body: The MIT License (MIT…
 
 name: source-map-support@0.5.21, nameSpecified: source-map-support, version: 0.5.21
 body: The MIT License (MIT…
@@ -1721,7 +1853,7 @@ name: statuses@1.5.0, nameSpecified: statuses, version: 1.5.0
 body: 
 The MIT License (MI…
 
-name: statuses@2.0.1, nameSpecified: statuses, version: 2.0.1
+name: statuses@2.0.2, nameSpecified: statuses, version: 2.0.2
 body: 
 The MIT License (MI…
 
@@ -1741,6 +1873,11 @@ body: MIT License
 
 Copyrig…
 
+name: supports-color@5.5.0, nameSpecified: supports-color, version: 5.5.0
+body: MIT License
+
+Copyrig…
+
 name: supports-color@7.2.0, nameSpecified: supports-color, version: 7.2.0
 body: MIT License
 
@@ -1751,7 +1888,7 @@ body: MIT License
 
 Copyrig…
 
-name: terser@5.43.1, nameSpecified: terser, version: 5.43.1
+name: terser@5.46.0, nameSpecified: terser, version: 5.46.0
 body: Copyright 2012-2018 …
 
 name: test-exclude@6.0.0, nameSpecified: test-exclude, version: 6.0.0
@@ -1759,6 +1896,11 @@ body: ISC…
 
 name: throat@5.0.0, nameSpecified: throat, version: 5.0.0
 body: Copyright (c) 2013 F…
+
+name: tinyglobby@0.2.15, nameSpecified: tinyglobby, version: 0.2.15
+body: MIT License
+
+Copyrig…
 
 name: tmpl@1.0.5, nameSpecified: tmpl, version: 1.0.5
 body: BSD License
@@ -1769,6 +1911,11 @@ name: to-regex-range@5.0.1, nameSpecified: to-regex-range, version: 5.0.1
 body: The MIT License (MIT…
 
 name: toidentifier@1.0.1, nameSpecified: toidentifier, version: 1.0.1
+body: MIT License
+
+Copyrig…
+
+name: ts-dedent@2.2.0, nameSpecified: ts-dedent, version: 2.2.0
 body: MIT License
 
 Copyrig…
@@ -1792,10 +1939,10 @@ body: MIT…
 name: unicode-match-property-ecmascript@2.0.0, nameSpecified: unicode-match-property-ecmascript, version: 2.0.0
 body: MIT…
 
-name: unicode-match-property-value-ecmascript@2.2.0, nameSpecified: unicode-match-property-value-ecmascript, version: 2.2.0
+name: unicode-match-property-value-ecmascript@2.2.1, nameSpecified: unicode-match-property-value-ecmascript, version: 2.2.1
 body: MIT…
 
-name: unicode-property-aliases-ecmascript@2.1.0, nameSpecified: unicode-property-aliases-ecmascript, version: 2.1.0
+name: unicode-property-aliases-ecmascript@2.2.0, nameSpecified: unicode-property-aliases-ecmascript, version: 2.2.0
 body: MIT…
 
 name: unicorn-magic@0.1.0, nameSpecified: unicorn-magic, version: 0.1.0
@@ -1844,6 +1991,11 @@ Copyrig…
 name: whatwg-fetch@3.6.20, nameSpecified: whatwg-fetch, version: 3.6.20
 body: Copyright (c) 2014-2…
 
+name: which@2.0.2, nameSpecified: which, version: 2.0.2
+body: The ISC License
+
+Cop…
+
 name: wrap-ansi@7.0.0, nameSpecified: wrap-ansi, version: 7.0.0
 body: MIT License
 
@@ -1857,15 +2009,21 @@ Cop…
 name: write-file-atomic@4.0.2, nameSpecified: write-file-atomic, version: 4.0.2
 body: Copyright (c) 2015, …
 
-name: ws@6.2.3, nameSpecified: ws, version: 6.2.3
-body: The MIT License (MIT…
-
 name: ws@7.5.10, nameSpecified: ws, version: 7.5.10
 body: The MIT License (MIT…
 
 name: xcode@3.0.1, nameSpecified: xcode, version: 3.0.1
 body: 
                    …
+
+name: xml-formatter@3.6.7, nameSpecified: xml-formatter, version: 3.6.7
+body: The MIT License (MIT…
+
+name: xml-parser-xo@4.1.5, nameSpecified: xml-parser-xo, version: 4.1.5
+body: The MIT License (MIT…
+
+name: xml2js@0.6.0, nameSpecified: xml2js, version: 0.6.0
+body: Copyright 2010, 2011…
 
 name: xml2js@0.6.2, nameSpecified: xml2js, version: 0.6.2
 body: Copyright 2010, 2011…
@@ -1884,6 +2042,9 @@ body: The ISC License
 
 Cop…
 
+name: yaml@2.8.2, nameSpecified: yaml, version: 2.8.2
+body: Copyright Eemeli Aro…
+
 name: yargs-parser@21.1.1, nameSpecified: yargs-parser, version: 21.1.1
 body: ISC…
 
@@ -1894,4 +2055,4 @@ Copyrig…
 
 add-version-numbers: true
 
-LicensePlist Version: 3.27.1
+LicensePlist Version: 3.27.2
