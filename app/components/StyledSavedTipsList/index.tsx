@@ -29,49 +29,29 @@ export interface StyledSavedTipsListProps {
   onScrollToTopChange: (show: boolean) => void;
 }
 
-export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
-  tips,
-  searchQuery = '',
-  hasActiveFilters = false,
-  onTipPress,
-  onItemSwipeLeft,
-  onClearAll,
-  showScrollToTop,
-  onScrollToTopChange,
-}) => {
-  const { styles, theme } = useStyles(stylesheet);
-  const { t } = useTranslation();
-  const flatListRef = useRef<FlatList>(null);
-  const { animatedStyle: scrollButtonStyle } = useVisibilityAnimation(showScrollToTop);
-  const [hasRendered, setHasRendered] = useState(false);
+const formatDate = (timestamp: number) => {
+  const date = new Date(timestamp);
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
 
-  const formatDate = (timestamp: number) => {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
+interface TipCardProps {
+  item: SavedTip;
+  index: number;
+  hasRendered: boolean;
+  onTipPress: (tip: SavedTip) => void;
+  onItemSwipeLeft: (id: string) => void;
+}
 
-  const renderRightActions = (_progress: SharedValue<number>, _drag: SharedValue<number>) => {
-    return (
-      <View style={styles.deleteAction}>
-        <View style={styles.deleteButton}>
-          <StyledIcons
-            type="MaterialDesignIcons"
-            name="delete"
-            size={24}
-            color={theme.colors.backgroundColor}
-          />
-        </View>
-      </View>
-    );
-  };
-
-  const TipCard = React.memo(({ item, index }: { item: SavedTip; index: number }) => {
+const TipCard = React.memo(
+  ({ item, index, hasRendered, onTipPress, onItemSwipeLeft }: TipCardProps) => {
+    const { styles, theme } = useStyles(stylesheet);
+    const { t } = useTranslation();
     const swipeableRef = useRef<SwipeableMethods>(null);
 
     const handleSwipeOpen = () => {
@@ -81,12 +61,27 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
       }, 100);
     };
 
+    const renderRightActions = (_progress: SharedValue<number>, _drag: SharedValue<number>) => {
+      return (
+        <View style={styles.deleteAction}>
+          <View style={styles.deleteButton}>
+            <StyledIcons
+              type="MaterialDesignIcons"
+              name="delete"
+              size={24}
+              color={theme.colors.backgroundColor}
+            />
+          </View>
+        </View>
+      );
+    };
+
     return (
       <Animated.View
         entering={
           hasRendered
             ? undefined
-            : FadeInDown.delay(Math.min(index * 50, 300))
+            : FadeInDown.delay(Math.min(index * 40, 500))
                 .duration(300)
                 .springify()
         }
@@ -150,10 +145,33 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
         </ReanimatedSwipeable>
       </Animated.View>
     );
-  });
+  },
+);
+
+export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
+  tips,
+  searchQuery = '',
+  hasActiveFilters = false,
+  onTipPress,
+  onItemSwipeLeft,
+  onClearAll,
+  showScrollToTop,
+  onScrollToTopChange,
+}) => {
+  const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
+  const flatListRef = useRef<FlatList>(null);
+  const { animatedStyle: scrollButtonStyle } = useVisibilityAnimation(showScrollToTop);
+  const [hasRendered, setHasRendered] = useState(false);
 
   const renderTipCard = ({ item, index }: { item: SavedTip; index: number }) => (
-    <TipCard item={item} index={index} />
+    <TipCard
+      item={item}
+      index={index}
+      hasRendered={hasRendered}
+      onTipPress={onTipPress}
+      onItemSwipeLeft={onItemSwipeLeft}
+    />
   );
 
   const handleListRendered = () => {

@@ -5,10 +5,6 @@ import Animated, {
     withSpring,
     withTiming,
     withSequence,
-    withDelay,
-    Easing,
-    SharedValue,
-    AnimatedStyle,
 } from 'react-native-reanimated';
 
 const SPRING_CONFIG = {
@@ -31,12 +27,10 @@ export const usePressAnimation = (scaleTo = 0.96) => {
     const scale = useSharedValue(1);
 
     const onPressIn = () => {
-        'worklet';
         scale.value = withSpring(scaleTo, SPRING_SNAPPY);
     };
 
     const onPressOut = () => {
-        'worklet';
         scale.value = withSpring(1, SPRING_CONFIG);
     };
 
@@ -48,52 +42,18 @@ export const usePressAnimation = (scaleTo = 0.96) => {
 };
 
 /**
- * Fade-in animation with optional delay for staggering list items.
- * Returns { animatedStyle } that should be applied to an Animated.View.
+ * Focus scale animation for input fields.
+ * Returns { animatedStyle } that applies a subtle scale when the input is focused.
  */
-export const useFadeIn = (delay = 0, duration = 300) => {
-    const opacity = useSharedValue(0);
+export const useFocusScale = (focused: boolean, scaleTo = 1.03) => {
+    const scale = useSharedValue(1);
 
     useEffect(() => {
-        opacity.value = withDelay(
-            delay,
-            withTiming(1, { duration, easing: Easing.out(Easing.cubic) }),
-        );
-    }, []);
+        scale.value = withSpring(focused ? scaleTo : 1, SPRING_SNAPPY);
+    }, [focused]);
 
     const animatedStyle = useAnimatedStyle(() => ({
-        opacity: opacity.value,
-    }));
-
-    return { opacity, animatedStyle };
-};
-
-/**
- * Slide-in animation with optional delay.
- * Direction: 'up' | 'down' | 'left' | 'right'
- */
-export const useSlideIn = (
-    direction: 'up' | 'down' | 'left' | 'right' = 'up',
-    delay = 0,
-    distance = 20,
-) => {
-    const translateX = useSharedValue(
-        direction === 'left' ? -distance : direction === 'right' ? distance : 0,
-    );
-    const translateY = useSharedValue(
-        direction === 'up' ? distance : direction === 'down' ? -distance : 0,
-    );
-    const opacity = useSharedValue(0);
-
-    useEffect(() => {
-        opacity.value = withDelay(delay, withTiming(1, { duration: 300 }));
-        translateX.value = withDelay(delay, withSpring(0, SPRING_CONFIG));
-        translateY.value = withDelay(delay, withSpring(0, SPRING_CONFIG));
-    }, []);
-
-    const animatedStyle = useAnimatedStyle(() => ({
-        opacity: opacity.value,
-        transform: [{ translateX: translateX.value }, { translateY: translateY.value }],
+        transform: [{ scale: scale.value }],
     }));
 
     return { animatedStyle };
@@ -180,7 +140,7 @@ export const useVisibilityAnimation = (visible: boolean) => {
     const animatedStyle = useAnimatedStyle(() => ({
         opacity: progress.value,
         transform: [{ scale: 0.8 + progress.value * 0.2 }],
-        pointerEvents: progress.value === 0 ? 'none' : 'auto',
+        pointerEvents: progress.value < 0.01 ? 'none' : 'auto',
     }));
 
     return { progress, animatedStyle };

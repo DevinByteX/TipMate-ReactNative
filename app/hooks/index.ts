@@ -25,8 +25,7 @@ import { useSaveTip } from './useSaveTip';
 import { getDeviceCurrency } from './currencyUtils';
 import {
   usePressAnimation,
-  useFadeIn,
-  useSlideIn,
+  useFocusScale,
   useScaleSpring,
   useValuePulse,
   useBounce,
@@ -58,8 +57,7 @@ export {
   useSaveTip,
   getDeviceCurrency,
   usePressAnimation,
-  useFadeIn,
-  useSlideIn,
+  useFocusScale,
   useScaleSpring,
   useValuePulse,
   useBounce,
