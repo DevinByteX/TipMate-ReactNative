@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
-import { acceptNumbersAndDecimals } from '@hooks';
+import { acceptNumbersAndDecimals, useFocusScale } from '@hooks';
 
 type styledTotalAmountInputProps = {
   titleText?: string;
@@ -35,19 +31,7 @@ export const StyledTotalAmountInput = ({
   const [textInputValue, setTextInputValue] = useState<string>();
   const [isFocused, setIsFocused] = useState<boolean>();
 
-  const focusScale = useSharedValue(1);
-
-  useEffect(() => {
-    focusScale.value = withSpring(isFocused ? 1.02 : 1, {
-      damping: 15,
-      stiffness: 200,
-      mass: 0.6,
-    });
-  }, [isFocused]);
-
-  const focusAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: focusScale.value }],
-  }));
+  const { animatedStyle: focusAnimatedStyle } = useFocusScale(isFocused ?? false, 1.02);
 
   return (
     <Animated.View style={[styles.mainContainer, focusAnimatedStyle]}>

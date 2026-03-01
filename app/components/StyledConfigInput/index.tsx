@@ -7,12 +7,9 @@ import {
   TextInputEndEditingEventData,
   Pressable,
 } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import { useFocusScale } from '@hooks';
 
 type StyledConfigInputProps = {
   title: string;
@@ -35,19 +32,7 @@ export const StyledConfigInput = ({
   const [inputFocused, setInputFocused] = useState(false);
   const [text, setText] = useState(`${textValue}${suffix}`);
 
-  const focusScale = useSharedValue(1);
-
-  useEffect(() => {
-    focusScale.value = withSpring(inputFocused ? 1.03 : 1, {
-      damping: 15,
-      stiffness: 200,
-      mass: 0.6,
-    });
-  }, [inputFocused]);
-
-  const focusAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: focusScale.value }],
-  }));
+  const { animatedStyle: focusAnimatedStyle } = useFocusScale(inputFocused, 1.03);
 
   // Synchronise text state with textValue prop
   useEffect(() => {
@@ -96,21 +81,21 @@ export const StyledConfigInput = ({
       <Animated.View style={[styles.configInputInner, focusAnimatedStyle]}>
         <Text style={styles.configBoxText}>{`${title}`}</Text>
         <TextInput
-        ref={TextInputRef}
-        selection={{ start: text.length - suffix.length, end: text.length - suffix.length }}
-        selectionColor={theme.colors.accent}
-        style={styles.configBoxTextInput}
-        maxLength={suffix.length + 2} // Adjust maxLength to include suffix length
-        contextMenuHidden
-        keyboardType="numeric"
-        returnKeyType="done"
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onEndEditing={handleEndEditing}
-        value={text}
-        onChangeText={handleChangeText}
-        {...TextInputProps}
-      />
+          ref={TextInputRef}
+          selection={{ start: text.length - suffix.length, end: text.length - suffix.length }}
+          selectionColor={theme.colors.accent}
+          style={styles.configBoxTextInput}
+          maxLength={suffix.length + 2} // Adjust maxLength to include suffix length
+          contextMenuHidden
+          keyboardType="numeric"
+          returnKeyType="done"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onEndEditing={handleEndEditing}
+          value={text}
+          onChangeText={handleChangeText}
+          {...TextInputProps}
+        />
       </Animated.View>
     </Pressable>
   );
