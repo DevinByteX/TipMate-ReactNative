@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
@@ -11,20 +11,38 @@ const SplitCapsule = ({
   active = false,
   textValue = 5,
   onSplitPress,
+  disabled = false,
 }: {
   active?: boolean;
   textValue: number;
   onSplitPress?: (value: number) => void;
+  disabled?: boolean;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   const { animatedStyle } = useScaleSpring(active);
+
+  let backgroundColor = theme.colors.backgroundColor;
+  if (disabled) {
+    backgroundColor = theme.colors.disable_button || theme.colors.backgroundColor;
+  } else if (active) {
+    backgroundColor = theme.colors.accent;
+  }
+
+  let textColor = theme.colors.card_typography;
+  if (disabled) {
+    textColor = theme.colors.disable_text;
+  } else if (active) {
+    textColor = theme.colors.card;
+  }
+
   return (
     <Animated.View style={[{ flex: 1 }, animatedStyle]}>
       <Pressable
+        disabled={disabled}
         style={[
           styles.splitCapsule,
           {
-            backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
+            backgroundColor: backgroundColor,
           },
         ]}
         onPress={() => {
@@ -35,7 +53,7 @@ const SplitCapsule = ({
           style={[
             styles.splitCapsuleText,
             {
-              color: active ? theme.colors.card : theme.colors.card_typography,
+              color: textColor,
             },
           ]}
         >{`${textValue}`}</Text>
@@ -48,23 +66,39 @@ const SplitCustomCapsule = ({
   active = false,
   textValue = 'custom',
   onCustomSplitPress,
+  disabled = false,
 }: {
   active?: boolean;
   textValue: string;
   onCustomSplitPress?: () => void;
+  disabled?: boolean;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
-  const TextColor = active ? theme.colors.card : theme.colors.card_typography;
+
+  let backgroundColor = theme.colors.accent;
+  let TextColor = theme.colors.card;
+
+  if (disabled) {
+    backgroundColor = theme.colors.disable_button || theme.colors.backgroundColor;
+    TextColor = theme.colors.disable_text;
+  } else if (active) {
+    backgroundColor = theme.colors.accent;
+    TextColor = theme.colors.card;
+  }
+
   return (
     <Pressable
+      disabled={disabled}
       style={[
         styles.splitCapsuleCustom,
         {
-          backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor,
+          backgroundColor: backgroundColor,
         },
       ]}
       onPress={() => {
-        onCustomSplitPress && onCustomSplitPress();
+        if (!disabled) {
+          onCustomSplitPress && onCustomSplitPress();
+        }
       }}
     >
       <Text
@@ -119,6 +153,14 @@ export const StyledSpiltOptions = ({
 
   const isCustomSplitDisabled = billAmount <= 0;
 
+  // Reset split value to 1 when custom split is activated
+  useEffect(() => {
+    if (isCustomSplitActive) {
+      setSplitValue(defaultSplitValue);
+      setCustomSliderVisible(false);
+    }
+  }, [isCustomSplitActive]);
+
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleText}>{`${titleText}`}</Text>
@@ -153,12 +195,18 @@ export const StyledSpiltOptions = ({
                     onSelectedSplitValue && onSelectedSplitValue(value);
                   }}
                   active={splitValue === value && !isCustomSplitActive}
+                  disabled={isCustomSplitActive}
                 />
               ))}
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <Text
-                style={styles.splitDigitsStyles}
+                style={[
+                  styles.splitDigitsStyles,
+                  isCustomSplitActive && {
+                    opacity: 0.6,
+                  },
+                ]}
                 adjustsFontSizeToFit={true}
                 allowFontScaling={false}
                 numberOfLines={1}
@@ -181,15 +229,23 @@ export const StyledSpiltOptions = ({
                     onSelectedSplitValue && onSelectedSplitValue(value);
                   }}
                   active={splitValue === value && !isCustomSplitActive}
+                  disabled={isCustomSplitActive}
                 />
               ))}
             </View>
             <View style={styles.secondColumnContainerStyles}>
               <SplitCustomCapsule
-                textValue={customSliderVisible ? t('buttons.setValue') : t('buttons.custom')}
-                active
+                textValue={
+                  customSliderVisible && !isCustomSplitActive
+                    ? t('buttons.setValue')
+                    : t('buttons.custom')
+                }
+                active={customSliderVisible && !isCustomSplitActive}
+                disabled={isCustomSplitActive}
                 onCustomSplitPress={() => {
-                  setCustomSliderVisible(!customSliderVisible);
+                  if (!isCustomSplitActive) {
+                    setCustomSliderVisible(!customSliderVisible);
+                  }
                 }}
               />
             </View>
@@ -216,7 +272,11 @@ export const StyledSpiltOptions = ({
         disabled={isCustomSplitDisabled}
         style={[
           styles.customSplitButton,
-          isCustomSplitActive && styles.customSplitButtonActive,
+          {
+            backgroundColor: isCustomSplitActive
+              ? theme.colors.accent
+              : theme.colors.backgroundColor,
+          },
           isCustomSplitDisabled && styles.customSplitButtonDisabled,
         ]}
         onPress={() => {
@@ -352,15 +412,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    borderWidth: 1.5,
-    borderColor: colors.accent,
-  },
-  customSplitButtonActive: {
-    backgroundColor: colors.accent,
-    borderColor: colors.accent,
   },
   customSplitButtonDisabled: {
-    borderColor: colors.disable_button,
     opacity: 0.6,
   },
   customSplitButtonText: {
