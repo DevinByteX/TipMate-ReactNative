@@ -1,9 +1,10 @@
-import React from 'react';
-import { Text, View, ViewStyle } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, ViewStyle, Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
-import { useValuePulse, useBounce } from '@hooks';
+import { useValuePulse, useBounce, toFixedWithoutRounding } from '@hooks';
+import { IndividualSplit } from '@/context/types';
 
 // Vertical Devider Component
 export const VerticalDevider = ({
@@ -32,6 +33,7 @@ type StyledBillBox = {
   isSaved?: boolean;
   savedTipId?: string;
   onBookmarkCheckPress?: () => void;
+  individualSplits?: IndividualSplit[];
 };
 
 export const StyledBillBox = ({
@@ -51,7 +53,9 @@ export const StyledBillBox = ({
   isSaved = false,
   savedTipId,
   onBookmarkCheckPress,
+  individualSplits,
 }: StyledBillBox) => {
+  const [isSplitsExpanded, setIsSplitsExpanded] = useState(false);
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
 
@@ -203,6 +207,57 @@ export const StyledBillBox = ({
           </View>
         </View>
       </View>
+      {/* Individual Splits Accordion */}
+      {individualSplits && individualSplits.length > 0 && (
+        <View style={styles.individualSplitsContainer}>
+          <Pressable
+            style={styles.individualSplitsHeader}
+            onPress={() => setIsSplitsExpanded(!isSplitsExpanded)}
+          >
+            <View style={styles.individualSplitsHeaderLeft}>
+              <StyledIcons
+                type="MaterialDesignIcons"
+                name="account-multiple"
+                size={14}
+                color={styles.titleText?.color}
+              />
+              <Text style={styles.individualSplitsTitle}>
+                {`${individualSplits.length} People`}
+              </Text>
+            </View>
+            <StyledIcons
+              type="MaterialDesignIcons"
+              name={isSplitsExpanded ? 'chevron-up' : 'chevron-down'}
+              size={20}
+              color={styles.titleText?.color}
+            />
+          </Pressable>
+          {isSplitsExpanded && (
+            <View style={styles.individualSplitsList}>
+              {individualSplits.map((split, index) => (
+                <View key={split.id || index} style={styles.individualSplitRow}>
+                  <View style={styles.individualSplitNameContainer}>
+                    <Text style={styles.individualSplitName} numberOfLines={1}>
+                      {split.name}
+                    </Text>
+                    <Text style={styles.individualSplitType}>
+                      {split.allocationType === 'fixed'
+                        ? `${currencySymbol}${toFixedWithoutRounding(split.value || 0, 2)}`
+                        : split.allocationType === 'percentage'
+                        ? `${split.value || 0}%`
+                        : 'Remainder'}
+                    </Text>
+                  </View>
+                  <Text style={styles.individualSplitAmount}>
+                    {!isLongCurrencySymbol ? currencySymbol : ''}
+                    {toFixedWithoutRounding(split.calculatedAmount || 0, 2)}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          )}
+        </View>
+      )}
     </View>
   );
 };
@@ -293,5 +348,60 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   horizontalTextContainer: {
     flexDirection: 'row',
+  },
+  // Individual Splits
+  individualSplitsContainer: {
+    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    borderTopWidth: UnistylesRuntime.hairlineWidth * 4,
+    borderTopColor: colors.devider,
+    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  individualSplitsHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  individualSplitsHeaderLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  individualSplitsTitle: {
+    fontSize: 13,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.accent,
+  },
+  individualSplitsList: {
+    marginTop: (UnistylesRuntime.screen.height * 0.8) / 100,
+    gap: (UnistylesRuntime.screen.height * 0.6) / 100,
+  },
+  individualSplitRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: (UnistylesRuntime.screen.height * 0.4) / 100,
+    paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
+    backgroundColor: colors.backgroundColor,
+    borderRadius: 6,
+  },
+  individualSplitNameContainer: {
+    flex: 1,
+    marginRight: 8,
+  },
+  individualSplitName: {
+    fontSize: 13,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.card_typography,
+  },
+  individualSplitType: {
+    fontSize: 10,
+    fontFamily: fonts.Nunito_Medium,
+    color: colors.accent,
+  },
+  individualSplitAmount: {
+    fontSize: 14,
+    fontFamily: fonts.Montserrat_Bold,
+    color: colors.card_typography,
   },
 }));

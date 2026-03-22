@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { SavedTip } from '../context/types';
+import { SavedTip, IndividualSplit } from '../context/types';
 import { useNavigation } from '@react-navigation/native';
 
 interface SaveTipParams {
@@ -9,11 +9,13 @@ interface SaveTipParams {
     total: number;
     tipPercentage: number;
     numberOfPeople: number;
+    splitType?: 'equal' | 'custom';
     perPerson?: {
         amount: number;
         tip: number;
         total: number;
     };
+    individualSplits?: IndividualSplit[];
     currencySymbol: string;
     currencyCode: string;
 }
@@ -47,7 +49,9 @@ export const useSaveTip = () => {
                     total: params.total,
                     tipPercentage: params.tipPercentage,
                     numberOfPeople: params.numberOfPeople,
+                    splitType: params.splitType || 'equal',
                     perPerson: params.perPerson,
+                    individualSplits: params.individualSplits,
                     currencySymbol: params.currencySymbol,
                     currencyCode: params.currencyCode,
                 };

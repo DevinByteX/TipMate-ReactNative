@@ -1,4 +1,5 @@
 import Share, { ShareOptions } from 'react-native-share';
+import { IndividualSplit } from '@/context/types';
 
 export type ShareTipDetailsParams = {
   amount: number;
@@ -6,11 +7,13 @@ export type ShareTipDetailsParams = {
   total: number;
   tipPercentage: number;
   numberOfPeople: number;
+  splitType?: 'equal' | 'custom';
   perPerson?: {
     amount: number;
     tip: number;
     total: number;
   };
+  individualSplits?: IndividualSplit[];
   currencySymbol?: string;
   title?: string;
   subject?: string;
@@ -56,11 +59,24 @@ export const formatTipDetailsPreview = ({
   total,
   tipPercentage,
   numberOfPeople,
+  splitType,
   perPerson,
+  individualSplits,
   currencySymbol = '$',
   translations = defaultTranslations,
 }: Omit<ShareTipDetailsParams, 'title' | 'subject'> & { translations?: ShareTranslations }): string => {
   const t = translations;
+
+  let splitSection = '';
+  if (splitType === 'custom' && individualSplits && individualSplits.length > 0) {
+    const splitLines = individualSplits
+      .map(split => `  • ${split.name}: ${currencySymbol}${(split.calculatedAmount || 0).toFixed(2)}`)
+      .join('\n');
+    splitSection = `\n👥 Custom Split (${individualSplits.length} ${t.persons})\n${splitLines}`;
+  } else if (numberOfPeople > 1 && perPerson) {
+    splitSection = `\n👥 ${t.splitAmong} ${numberOfPeople} ${t.persons}\n  • ${t.subtotalPerPerson} ${currencySymbol}${perPerson.amount.toFixed(2)}\n  • ${t.tipPerPerson} ${currencySymbol}${perPerson.tip.toFixed(2)}\n  • ${t.totalPerPerson} ${currencySymbol}${perPerson.total.toFixed(2)}`;
+  }
+
   const message = `
 💸 ${t.tipSummary}
 
@@ -68,14 +84,7 @@ export const formatTipDetailsPreview = ({
 💰 ${t.tipPercentage} ${tipPercentage}%
 💵 ${t.tipAmount} ${currencySymbol}${tip.toFixed(2)}
 📊 ${t.totalAmount} ${currencySymbol}${total.toFixed(2)}
-
-${numberOfPeople > 1
-      ? `👥 ${t.splitAmong} ${numberOfPeople} ${t.persons}
-  • ${t.subtotalPerPerson} ${currencySymbol}${perPerson?.amount.toFixed(2) ?? 'N/A'}
-  • ${t.tipPerPerson} ${currencySymbol}${perPerson?.tip.toFixed(2) ?? 'N/A'}
-  • ${t.totalPerPerson} ${currencySymbol}${perPerson?.total.toFixed(2) ?? 'N/A'}`
-      : ''
-    }
+${splitSection}
 
 ${t.sharedVia}
     `.trim();

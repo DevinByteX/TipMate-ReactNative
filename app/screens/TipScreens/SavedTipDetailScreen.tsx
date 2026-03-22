@@ -55,7 +55,9 @@ const SavedTipDetailScreen = () => {
     total: tip.total,
     tipPercentage: tip.tipPercentage,
     numberOfPeople: tip.numberOfPeople,
+    splitType: tip.splitType,
     perPerson: tip.perPerson,
+    individualSplits: tip.individualSplits,
     currencySymbol: tip.currencySymbol,
   };
 
@@ -150,7 +152,7 @@ const SavedTipDetailScreen = () => {
         />
 
         {/* Per Person Bill Container */}
-        {tip.numberOfPeople > 1 && tip.perPerson ? (
+        {tip.numberOfPeople > 1 && tip.perPerson && tip.splitType !== 'custom' ? (
           <StyledBillBox
             titleVisibility
             titleText={t('screens.savedTipDetail.perPerson')}
@@ -164,6 +166,25 @@ const SavedTipDetailScreen = () => {
             totalTipAmount={tip.perPerson.tip.toFixed(2)}
             shareButtonPress={openPreview}
             hideSaveButton={true}
+          />
+        ) : null}
+
+        {/* Custom Split Breakdown */}
+        {tip.splitType === 'custom' && tip.individualSplits && tip.individualSplits.length > 0 ? (
+          <StyledBillBox
+            titleVisibility
+            titleText={t('screens.savedTipDetail.perPerson')}
+            description={t('share.customSplitLabel')}
+            currencySymbol={tip.currencySymbol}
+            totalText={t('components.billBox.total')}
+            subTotalText={t('components.billBox.subtotal')}
+            tipText={t('components.billBox.tip')}
+            totalAmount={tip.total.toFixed(2)}
+            subTotalAmount={tip.amount.toFixed(2)}
+            totalTipAmount={tip.tip.toFixed(2)}
+            shareButtonPress={openPreview}
+            hideSaveButton={true}
+            individualSplits={tip.individualSplits}
           />
         ) : null}
 

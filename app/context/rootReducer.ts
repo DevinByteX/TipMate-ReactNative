@@ -1,5 +1,5 @@
 import { AppState, AppAction } from './types';
-import { tipReducer, splitReducer, currencyConfigReducer, savedTipsReducer, duplicatePreventionReducer, languageReducer } from './reducers';
+import { tipReducer, splitReducer, currencyConfigReducer, savedTipsReducer, duplicatePreventionReducer, languageReducer, splitConfigReducer } from './reducers';
 import { Constants } from '@configs';
 
 export const rootReducer = (state: AppState, action: AppAction): AppState => {
@@ -36,6 +36,9 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
     case 'RESET_LANGUAGE_TO_SYSTEM':
       const newLanguageState = languageReducer({ language: state.language ?? undefined, isRTL: state.isRTL }, action);
       return { ...state, ...newLanguageState };
+    case 'SET_ACTIVE_SPLIT_CONFIG':
+    case 'CLEAR_ACTIVE_SPLIT_CONFIG':
+      return { ...state, activeSplitConfig: splitConfigReducer(state.activeSplitConfig, action) };
     default:
       return state;
   }

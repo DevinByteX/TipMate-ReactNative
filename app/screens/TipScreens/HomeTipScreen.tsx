@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { ScrollView, Platform } from 'react-native';
+import { ScrollView, Platform, View, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 // custom component
 import {
   StyledBillBox,
@@ -16,18 +17,22 @@ import {
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
   BillCalculationType,
+  CustomSplitCalculationType,
   RoundingMethod,
   RoundingMethodType,
   calculateBillValues,
+  calculateBillValuesCustomSplit,
   useShareTipPreview,
   useSaveTip,
   getDeviceCurrency,
+  toFixedWithoutRounding,
 } from '@hooks';
 import { useAppContext } from '@/context/AppContext';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
+  const navigation = useNavigation<any>();
 
   const [userInputBillAmount, setUserInputBillAmount] = useState<number>(0);
   const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(5);
@@ -35,7 +40,8 @@ const HomeTipScreen = () => {
   const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
-  const { state } = useAppContext();
+  const [customBillValues, setCustomBillValues] = useState<CustomSplitCalculationType>();
+  const { state, dispatch } = useAppContext();
   const {
     saveTip,
     saveSuccessAlert,
@@ -50,34 +56,72 @@ const HomeTipScreen = () => {
   const currencySymbol: string = currentCurrency.currencySign;
   const currencyCode: string = currentCurrency.currencyId;
 
+  const isCustomSplitActive = state.activeSplitConfig?.type === 'custom';
+  const customSplits = state.activeSplitConfig?.customSplits;
+
   useEffect(() => {
-    const billValuesResults = calculateBillValues(
-      userInputTipPercentage,
-      userInputBillAmount,
-      userInputSplitCount,
-      userInputRound,
-    );
-    setBillValues(billValuesResults);
+    if (isCustomSplitActive && customSplits && customSplits.length > 0) {
+      // Use custom split calculation
+      const customResults = calculateBillValuesCustomSplit(
+        userInputTipPercentage,
+        userInputBillAmount,
+        userInputRound,
+        customSplits,
+      );
+      setCustomBillValues(customResults);
+      // Also calculate equal split for overall display
+      const equalResults = calculateBillValues(
+        userInputTipPercentage,
+        userInputBillAmount,
+        customSplits.length,
+        userInputRound,
+      );
+      setBillValues(equalResults);
+    } else {
+      // Regular equal split calculation
+      const billValuesResults = calculateBillValues(
+        userInputTipPercentage,
+        userInputBillAmount,
+        userInputSplitCount,
+        userInputRound,
+      );
+      setBillValues(billValuesResults);
+      setCustomBillValues(undefined);
+    }
 
     return () => {};
-  }, [userInputTipPercentage, userInputBillAmount, userInputSplitCount, userInputRound]);
+  }, [
+    userInputTipPercentage,
+    userInputBillAmount,
+    userInputSplitCount,
+    userInputRound,
+    isCustomSplitActive,
+    customSplits,
+  ]);
 
   // Prepare share data
-  const shareData = billValues
+  const effectiveOverall =
+    isCustomSplitActive && customBillValues ? customBillValues.overall : billValues?.overall;
+
+  const shareData = effectiveOverall
     ? {
         amount: userInputBillAmount,
-        tip: parseFloat(billValues.overall.tip || '0'),
-        total: parseFloat(billValues.overall.total || '0'),
+        tip: parseFloat(effectiveOverall.tip || '0'),
+        total: parseFloat(effectiveOverall.total || '0'),
         tipPercentage: userInputTipPercentage,
-        numberOfPeople: userInputSplitCount,
+        numberOfPeople:
+          isCustomSplitActive && customSplits ? customSplits.length : userInputSplitCount,
+        splitType: (isCustomSplitActive ? 'custom' : 'equal') as 'equal' | 'custom',
         perPerson:
-          userInputSplitCount > 1
+          !isCustomSplitActive && userInputSplitCount > 1 && billValues
             ? {
                 amount: parseFloat(billValues.perPerson?.subtotal || '0'),
                 tip: parseFloat(billValues.perPerson?.tip || '0'),
                 total: parseFloat(billValues.perPerson?.total || '0'),
               }
             : undefined,
+        individualSplits:
+          isCustomSplitActive && customBillValues ? customBillValues.individuals : undefined,
         currencySymbol,
         currencyCode,
       }
@@ -209,9 +253,20 @@ const HomeTipScreen = () => {
             }
             setUserInputSplitCount(splitCount);
           }}
+          isCustomSplitActive={isCustomSplitActive}
+          onCustomSplitPress={() => {
+            navigation.navigate('CustomSplitScreen', {
+              totalBill: userInputBillAmount,
+              tipPercentage: userInputTipPercentage,
+              currencySymbol,
+            });
+          }}
+          onClearCustomSplit={() => {
+            dispatch({ type: 'CLEAR_ACTIVE_SPLIT_CONFIG' });
+          }}
         />
-        {/* Per Person Bill Container */}
-        {userInputSplitCount > 1 ? (
+        {/* Per Person Bill Container — Equal Split */}
+        {!isCustomSplitActive && userInputSplitCount > 1 ? (
           <StyledBillBox
             titleVisibility
             titleText={t('screens.home.perPerson')}
@@ -228,6 +283,27 @@ const HomeTipScreen = () => {
             isSaved={isTipAlreadySaved}
             savedTipId={existingSavedTip?.id}
             onBookmarkCheckPress={handleBookmarkCheckPress}
+          />
+        ) : null}
+        {/* Per Person Bill Container — Custom Split */}
+        {isCustomSplitActive && customBillValues ? (
+          <StyledBillBox
+            titleVisibility
+            titleText={t('screens.home.totalCost')}
+            description={t('components.billBox.perPersonDescription')}
+            currencySymbol={currencySymbol}
+            totalText={t('components.billBox.total')}
+            subTotalText={t('components.billBox.subtotal')}
+            tipText={t('components.billBox.tip')}
+            totalAmount={customBillValues.overall.total}
+            subTotalAmount={customBillValues.overall.subtotal}
+            totalTipAmount={customBillValues.overall.tip}
+            shareButtonPress={openPreview}
+            saveButtonPress={handleSaveTip}
+            isSaved={isTipAlreadySaved}
+            savedTipId={existingSavedTip?.id}
+            onBookmarkCheckPress={handleBookmarkCheckPress}
+            individualSplits={customBillValues.individuals}
           />
         ) : null}
       </ScrollView>

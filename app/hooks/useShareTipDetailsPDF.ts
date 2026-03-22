@@ -2,6 +2,7 @@ import Share from 'react-native-share';
 import { generatePDF } from 'react-native-html-to-pdf';
 import { Platform } from 'react-native';
 import { APP_LINKS } from '@/configs/constants';
+import { IndividualSplit } from '@/context/types';
 
 export type TipDetailsForPDF = {
   amount: number;
@@ -9,11 +10,13 @@ export type TipDetailsForPDF = {
   total: number;
   tipPercentage: number;
   numberOfPeople: number;
+  splitType?: 'equal' | 'custom';
   perPerson?: {
     amount: number;
     tip: number;
     total: number;
   };
+  individualSplits?: IndividualSplit[];
   currencySymbol?: string;
 };
 
@@ -71,7 +74,7 @@ export const useShareTipDetailsPDF = async (
   translations: PDFTranslations = defaultPDFTranslations,
   locale: string = 'en-US',
 ) => {
-  const { amount, tip, total, tipPercentage, numberOfPeople, perPerson, currencySymbol = '$' } =
+  const { amount, tip, total, tipPercentage, numberOfPeople, splitType, perPerson, individualSplits, currencySymbol = '$' } =
     details;
   const t = translations;
 
@@ -317,7 +320,7 @@ export const useShareTipDetailsPDF = async (
               </div>
             </div>
             
-            ${numberOfPeople > 1 && perPerson
+            ${numberOfPeople > 1 && perPerson && splitType !== 'custom'
       ? `
             <div class="divider"></div>
             
@@ -336,6 +339,23 @@ export const useShareTipDetailsPDF = async (
                 <span class="detail-label">${t.totalPerPerson}</span>
                 <span class="detail-value">${currencySymbol}${perPerson.total.toFixed(2)}</span>
               </div>
+            </div>
+            `
+      : ''
+    }
+            ${splitType === 'custom' && individualSplits && individualSplits.length > 0
+      ? `
+            <div class="divider"></div>
+            
+            <!-- Custom Split Details -->
+            <div class="detail-section">
+              <div class="detail-title">Custom Split (${individualSplits.length} ${t.people})</div>
+              ${individualSplits.map(split => `
+              <div class="detail-row">
+                <span class="detail-label">${split.name}</span>
+                <span class="detail-value">${currencySymbol}${(split.calculatedAmount || 0).toFixed(2)}</span>
+              </div>
+              `).join('')}
             </div>
             `
       : ''

@@ -93,10 +93,16 @@ export const StyledSpiltOptions = ({
   titleText = 'SPLIT COUNT',
   description,
   onSelectedSplitValue,
+  onCustomSplitPress,
+  isCustomSplitActive = false,
+  onClearCustomSplit,
 }: {
   titleText?: string;
   description?: string;
   onSelectedSplitValue?: (value: number) => void;
+  onCustomSplitPress?: () => void;
+  isCustomSplitActive?: boolean;
+  onClearCustomSplit?: () => void;
 }) => {
   const { state } = useAppContext();
   const { t } = useTranslation();
@@ -139,9 +145,10 @@ export const StyledSpiltOptions = ({
                   onSplitPress={value => {
                     setCustomSliderVisible(false);
                     setSplitValue(value);
+                    onClearCustomSplit && onClearCustomSplit();
                     onSelectedSplitValue && onSelectedSplitValue(value);
                   }}
-                  active={splitValue === value}
+                  active={splitValue === value && !isCustomSplitActive}
                 />
               ))}
             </View>
@@ -166,9 +173,10 @@ export const StyledSpiltOptions = ({
                   onSplitPress={value => {
                     setCustomSliderVisible(false);
                     setSplitValue(value);
+                    onClearCustomSplit && onClearCustomSplit();
                     onSelectedSplitValue && onSelectedSplitValue(value);
                   }}
-                  active={splitValue === value}
+                  active={splitValue === value && !isCustomSplitActive}
                 />
               ))}
             </View>
@@ -193,11 +201,50 @@ export const StyledSpiltOptions = ({
             maxValue={state.splitSliderConfig.max}
             onValueChange={value => {
               setSplitValue(value[0]);
+              onClearCustomSplit && onClearCustomSplit();
               onSelectedSplitValue && onSelectedSplitValue(value[0]);
             }}
           />
         </View>
       ) : null}
+      {/* Custom Split Button */}
+      <Pressable
+        style={[styles.customSplitButton, isCustomSplitActive && styles.customSplitButtonActive]}
+        onPress={() => {
+          onCustomSplitPress && onCustomSplitPress();
+        }}
+      >
+        <StyledIcons
+          type={'MaterialDesignIcons'}
+          name={isCustomSplitActive ? 'check-circle' : 'account-multiple'}
+          size={16}
+          color={isCustomSplitActive ? '#ffffff' : styles.titleText?.color}
+        />
+        <Text
+          style={[
+            styles.customSplitButtonText,
+            isCustomSplitActive && styles.customSplitButtonTextActive,
+          ]}
+        >
+          {isCustomSplitActive
+            ? t('screens.customSplit.customSplitActive')
+            : t('components.splitOptions.customSplitButton')}
+        </Text>
+        {isCustomSplitActive && onClearCustomSplit && (
+          <Pressable
+            onPress={e => {
+              e.stopPropagation();
+              onClearCustomSplit();
+            }}
+            hitSlop={8}
+            style={styles.clearCustomSplitButton}
+          >
+            <Text style={styles.clearCustomSplitText}>
+              {t('screens.customSplit.clearCustomSplit')}
+            </Text>
+          </Pressable>
+        )}
+      </Pressable>
     </View>
   );
 };
@@ -277,5 +324,41 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   sliderContainer: {
     marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  customSplitButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderWidth: 1.5,
+    borderColor: colors.accent,
+  },
+  customSplitButtonActive: {
+    backgroundColor: colors.accent,
+    borderColor: colors.accent,
+  },
+  customSplitButtonText: {
+    fontSize: 13,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.accent,
+  },
+  customSplitButtonTextActive: {
+    color: '#ffffff',
+  },
+  clearCustomSplitButton: {
+    marginLeft: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255,255,255,0.3)',
+  },
+  clearCustomSplitText: {
+    fontSize: 11,
+    fontFamily: fonts.Nunito_Bold,
+    color: '#ffffff',
   },
 }));

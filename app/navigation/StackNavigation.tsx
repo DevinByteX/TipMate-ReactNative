@@ -3,6 +3,7 @@ import DrawerNavigation from '@navigation/DrawerNavigation';
 import LicensesScreen from '@/screens/AppInfoScreens/LicenseScreen';
 import LicenseContentModalScreen from '@/screens/AppInfoScreens/LicenseContentModalScreen';
 import SavedTipDetailScreen from '@/screens/TipScreens/SavedTipDetailScreen';
+import CustomSplitScreen from '@/screens/TipScreens/CustomSplitScreen';
 
 const StackNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ const StackNavigation = () => {
     >
       <Stack.Screen name="MainStack" component={DrawerNavigation} />
       <Stack.Screen name="SavedTipDetailScreen" component={SavedTipDetailScreen} />
+      <Stack.Screen name="CustomSplitScreen" component={CustomSplitScreen} />
       <Stack.Screen name="LicensesScreen" component={LicensesScreen} />
       <Stack.Screen
         name="LicenseContentModal"

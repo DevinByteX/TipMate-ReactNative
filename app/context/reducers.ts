@@ -9,6 +9,8 @@ import {
   SavedTipAction,
   DuplicatePreventionAction,
   LanguageAction,
+  ActiveSplitConfig,
+  SplitConfigAction,
 } from './types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -122,6 +124,22 @@ export const languageReducer = (
   }
 };
 
+export const splitConfigReducer = (
+  state: ActiveSplitConfig | undefined,
+  action: SplitConfigAction,
+): ActiveSplitConfig | undefined => {
+  switch (action.type) {
+    case 'SET_ACTIVE_SPLIT_CONFIG':
+      saveState({ activeSplitConfig: action.payload });
+      return action.payload;
+    case 'CLEAR_ACTIVE_SPLIT_CONFIG':
+      saveState({ activeSplitConfig: undefined });
+      return undefined;
+    default:
+      return state;
+  }
+};
+
 // Function to save state to AsyncStorage
 const saveState = async (
   partialState: Partial<{
@@ -132,6 +150,7 @@ const saveState = async (
     duplicatePreventionWindow: number;
     language: string;
     isRTL: boolean;
+    activeSplitConfig: ActiveSplitConfig | undefined;
   }>,
 ) => {
   try {
