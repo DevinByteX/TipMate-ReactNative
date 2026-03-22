@@ -31,6 +31,11 @@ const sharedColors = {
   disable_button_dark: '#4f4f4f',
   error_toast_light: '#e61854',
   error_toast_dark: '#f93a69',
+  success_light: '#4CAF50',
+  success_dark: '#66BB6A',
+  warning_light: '#FF9800',
+  warning_dark: '#FFB74D',
+  white: '#ffffff',
   // Custom theming
   primary_accent_light_second: '#F3982C',
   primary_accent_dark_second: '#F4AB41',
@@ -60,6 +65,8 @@ export const lightTheme = {
     disable_text: sharedColors.disable_text_light,
     disable_button: sharedColors.disable_button_light,
     error_toast: sharedColors.error_toast_light,
+    success: sharedColors.success_light,
+    warning: sharedColors.warning_light,
     // Custom theming
     accent_first: sharedColors.primary_accent_light,
     accent_second: sharedColors.primary_accent_light_second,
@@ -93,6 +100,8 @@ export const darkTheme = {
     disable_text: sharedColors.disable_text_dark,
     disable_button: sharedColors.disable_button_dark,
     error_toast: sharedColors.error_toast_dark,
+    success: sharedColors.success_dark,
+    warning: sharedColors.warning_dark,
     // Custom theming
     accent_first: sharedColors.primary_accent_dark,
     accent_second: sharedColors.primary_accent_dark_second,
@@ -126,6 +135,8 @@ export const premiumTheme = {
     disable_text: sharedColors.blood,
     disable_button: sharedColors.sky,
     error_toast: sharedColors.blood,
+    success: sharedColors.success_light,
+    warning: sharedColors.warning_light,
     // Custom theming
     accent_first: sharedColors.barbie,
     accent_second: sharedColors.blood,
