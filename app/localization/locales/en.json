@@ -34,7 +34,8 @@
       "tipSaveFailed": "Failed to save tip calculation. Please try again."
     },
     "customSplit": {
-      "title": "Custom Split",
+      "title": "TipMate",
+      "subTitle": "Custom Split",
       "subtitle": "Total Bill: {{currency}}{{amount}}",
       "addPerson": "Add Person",
       "removePerson": "Remove",
@@ -61,7 +62,7 @@
       "fixedPlaceholder": "Enter fixed amount",
       "percentagePlaceholder": "Enter percentage",
       "infoTitle": "How to Use Custom Split",
-      "infoMessage": "Assign each person a split type:\n\n• Fixed — Set an exact amount for that person.\n• % — Set a percentage of the total bill.\n• Rest — Evenly divides whatever is left after Fixed and % allocations.\n\nThe total must reach 100% before you can save. Use the footer bar to track your progress."
+      "infoMessage": "Assign each person a split type:\n\n• Fixed - Set an exact amount for that person.\n• % - Set a percentage of the total bill.\n• Rest - Evenly divides whatever is left after Fixed and % allocations.\n\nThe total must reach 100% before you can save. Use the footer bar to track your progress."
     },
     "savedTips": {
       "title": "TipMate",

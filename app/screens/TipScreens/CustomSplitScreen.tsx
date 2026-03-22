@@ -358,10 +358,7 @@ const CustomSplitScreen = () => {
     <>
       <StyledHeader
         headerTitle={t('screens.customSplit.title')}
-        headerSubTitle={t('screens.customSplit.subtitle', {
-          currency: currencySymbol,
-          amount: toFixedWithoutRounding(overallTotal, 2),
-        })}
+        headerSubTitle={t('screens.customSplit.subTitle')}
         enableBackButton
         headerRightIconVisibilty={true}
         headerRightIconType={'MaterialDesignIcons'}
