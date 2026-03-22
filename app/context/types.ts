@@ -22,6 +22,14 @@ export interface SplitSliderConfigValues {
   step: number;
 }
 
+export interface IndividualSplit {
+  id: string;
+  name: string;
+  allocationType: 'fixed' | 'percentage' | 'remainder';
+  value?: number; // Dollar amount for 'fixed', percentage for 'percentage', undefined for 'remainder'
+  calculatedAmount?: number; // Computed final amount after calculation
+}
+
 export interface SavedTip {
   id: string;
   timestamp: number;
@@ -30,13 +38,20 @@ export interface SavedTip {
   total: number;
   tipPercentage: number;
   numberOfPeople: number;
+  splitType?: 'equal' | 'custom'; // default 'equal' when undefined (backward compatible)
   perPerson?: {
     amount: number;
     tip: number;
     total: number;
   };
+  individualSplits?: IndividualSplit[]; // Array of individual split details for custom splits
   currencySymbol: string;
   currencyCode: string;
+}
+
+export interface ActiveSplitConfig {
+  type: 'equal' | 'custom';
+  customSplits?: IndividualSplit[];
 }
 
 export interface AppState {
@@ -49,6 +64,7 @@ export interface AppState {
   duplicatePreventionWindow: number; // in minutes
   language: string | undefined; // Language code (e.g., 'en', 'es', 'ar')
   isRTL: boolean; // RTL layout flag
+  activeSplitConfig?: ActiveSplitConfig; // Active split configuration (custom/equal)
 }
 
 export type TipAction =
@@ -77,6 +93,10 @@ export type LanguageAction =
   | { type: 'SET_LANGUAGE'; payload: { language: string; isRTL: boolean } }
   | { type: 'RESET_LANGUAGE_TO_SYSTEM' };
 
+export type SplitConfigAction =
+  | { type: 'SET_ACTIVE_SPLIT_CONFIG'; payload: ActiveSplitConfig }
+  | { type: 'CLEAR_ACTIVE_SPLIT_CONFIG' };
+
 export type AppAction =
   | TipAction
   | SplitAction
@@ -84,4 +104,5 @@ export type AppAction =
   | SavedTipAction
   | DuplicatePreventionAction
   | LanguageAction
+  | SplitConfigAction
   | { type: 'LOAD_PERSISTED_STATE'; payload: AppState }; // Include LOAD_PERSISTED_STATE

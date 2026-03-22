@@ -1,7 +1,9 @@
 import { convertToTwoDecimalPoints, acceptNumbersAndDecimals } from './convertToTwoDecimals';
 import {
   calculateBillValues,
+  calculateBillValuesCustomSplit,
   BillCalculationType,
+  CustomSplitCalculationType,
   RoundingMethodType,
   RoundingMethod,
   DisabledRoundingMethodsType,
@@ -38,6 +40,7 @@ export {
   convertToTwoDecimalPoints,
   acceptNumbersAndDecimals,
   calculateBillValues,
+  calculateBillValuesCustomSplit,
   RoundingMethod,
   toFixedWithoutRounding,
   asyncStorageUtil,
@@ -67,6 +70,7 @@ export {
 };
 export type {
   BillCalculationType,
+  CustomSplitCalculationType,
   RoundingMethodType,
   DisabledRoundingMethodsType,
   CustomisedTheme,

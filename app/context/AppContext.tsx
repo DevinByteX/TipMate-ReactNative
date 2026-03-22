@@ -15,6 +15,7 @@ const initialState: AppState = {
   duplicatePreventionWindow: Constants.defaultDuplicatePreventionWindow,
   language: undefined,
   isRTL: false,
+  activeSplitConfig: undefined,
 };
 
 interface AppProviderProps {

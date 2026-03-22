@@ -1,4 +1,5 @@
 import { toFixedWithoutRounding } from '@hooks';
+import { IndividualSplit } from '@/context/types';
 
 export type BillCalculationType = {
   perPerson: {
@@ -115,6 +116,125 @@ export const calculateBillValues = (
       tip: toFixedWithoutRounding(roundedOverallTip, 2),
       subtotal: toFixedWithoutRounding(roundedOverallSubtotal, 2),
     },
+    disabledRoundingMethods,
+  };
+};
+
+// Custom split calculation result type
+export type CustomSplitCalculationType = {
+  overall: {
+    total: string;
+    tip: string;
+    subtotal: string;
+  };
+  individuals: IndividualSplit[];
+  disabledRoundingMethods: DisabledRoundingMethodsType;
+};
+
+// Calculate bill values with custom (unequal) split allocations
+export const calculateBillValuesCustomSplit = (
+  tipPercentage: number,
+  billAmount: number,
+  roundingMethod: RoundingMethodType,
+  individualSplits: IndividualSplit[],
+): CustomSplitCalculationType => {
+  // Validate inputs
+  if (isNaN(billAmount) || isNaN(tipPercentage) || individualSplits.length === 0) {
+    return {
+      overall: { total: '0.00', tip: '0.00', subtotal: '0.00' },
+      individuals: [],
+      disabledRoundingMethods: { UP: false, DOWN: false, NO: false },
+    };
+  }
+
+  // 1. Calculate overall amounts
+  const tipTotal = (tipPercentage / 100) * billAmount;
+  const totalBill = billAmount + tipTotal;
+
+  const roundedOverallTotal = applyRoundingMethod(totalBill, roundingMethod);
+  const roundedOverallTip = applyRoundingMethod(tipTotal, roundingMethod);
+  const roundedOverallSubtotal = applyRoundingMethod(billAmount, roundingMethod);
+
+  // 2. Process allocations by type (Fixed → Percentage → Remainder)
+  let remainingAmount = roundedOverallTotal;
+  const processedSplits: (IndividualSplit & { decimalPart?: number })[] = [];
+
+  // 2a. Process FIXED amounts first
+  individualSplits
+    .filter(s => s.allocationType === 'fixed')
+    .forEach(split => {
+      const amount = split.value || 0;
+      remainingAmount -= amount;
+      processedSplits.push({ ...split, calculatedAmount: amount });
+    });
+
+  // 2b. Process PERCENTAGE allocations second
+  individualSplits
+    .filter(s => s.allocationType === 'percentage')
+    .forEach(split => {
+      const percentage = split.value || 0;
+      const amount = (percentage / 100) * roundedOverallTotal;
+      remainingAmount -= amount;
+      processedSplits.push({ ...split, calculatedAmount: amount });
+    });
+
+  // 2c. Process REMAINDER splits (divide remaining equally)
+  const remainderSplits = individualSplits.filter(s => s.allocationType === 'remainder');
+  if (remainderSplits.length > 0) {
+    const amountPerRemainder = remainingAmount / remainderSplits.length;
+    remainderSplits.forEach(split => {
+      processedSplits.push({ ...split, calculatedAmount: amountPerRemainder });
+    });
+  }
+
+  // 3. Distribute penny differences using largest decimal remainder method
+  const splitsWithDecimals = processedSplits.map(split => ({
+    ...split,
+    decimalPart: ((split.calculatedAmount || 0) * 100) % 1,
+  }));
+
+  // Sort by decimal remainder descending for penny distribution
+  splitsWithDecimals.sort((a, b) => (b.decimalPart || 0) - (a.decimalPart || 0));
+
+  // Calculate total after flooring to cents
+  const totalInCentsFloored = splitsWithDecimals.reduce(
+    (sum, split) => sum + Math.floor((split.calculatedAmount || 0) * 100),
+    0,
+  );
+  const targetInCents = Math.round(roundedOverallTotal * 100);
+  const pennyDifference = targetInCents - totalInCentsFloored;
+
+  // Add $0.01 to persons with largest decimal remainders
+  for (let i = 0; i < pennyDifference && i < splitsWithDecimals.length; i++) {
+    splitsWithDecimals[i].calculatedAmount =
+      (Math.floor((splitsWithDecimals[i].calculatedAmount || 0) * 100) + 1) / 100;
+  }
+  // Floor the rest
+  for (let i = pennyDifference; i < splitsWithDecimals.length; i++) {
+    splitsWithDecimals[i].calculatedAmount =
+      Math.floor((splitsWithDecimals[i].calculatedAmount || 0) * 100) / 100;
+  }
+
+  // 4. Determine disabled rounding methods
+  const disabledRoundingMethods: DisabledRoundingMethodsType = {
+    UP: totalBill === Math.ceil(totalBill),
+    DOWN: totalBill === Math.floor(totalBill) || tipPercentage === 0,
+    NO: false,
+  };
+
+  return {
+    overall: {
+      total: toFixedWithoutRounding(roundedOverallTotal, 2),
+      tip: toFixedWithoutRounding(roundedOverallTip, 2),
+      subtotal: toFixedWithoutRounding(roundedOverallSubtotal, 2),
+    },
+    individuals: splitsWithDecimals.map(({ decimalPart, ...split }) => ({
+      id: split.id,
+      name: split.name,
+      allocationType: split.allocationType,
+      value: split.value,
+      calculatedAmount: split.calculatedAmount,
+    })),
     disabledRoundingMethods,
   };
 };
