@@ -34,7 +34,8 @@
       "tipSaveFailed": "No se pudo guardar el cálculo de la propina. Inténtalo de nuevo."
     },
     "customSplit": {
-      "title": "División personalizada",
+      "title": "TipMate",
+      "subTitle": "División personalizada",
       "subtitle": "Cuenta total: {{currency}}{{amount}}",
       "addPerson": "Agregar persona",
       "removePerson": "Eliminar",
@@ -61,7 +62,7 @@
       "fixedPlaceholder": "Ingrese monto fijo",
       "percentagePlaceholder": "Ingrese porcentaje",
       "infoTitle": "Cómo usar la división personalizada",
-      "infoMessage": "Asigne a cada persona un tipo de división:\n\n• Fijo — Establece un monto exacto para esa persona.\n• % — Establece un porcentaje del total.\n• Resto — Divide equitativamente lo que queda después de las asignaciones Fijas y %.\n\nEl total debe llegar al 100% antes de poder guardar. Use la barra inferior para seguir su progreso."
+      "infoMessage": "Asigne a cada persona un tipo de división:\n\n• Fijo - Establece un monto exacto para esa persona.\n• % - Establece un porcentaje del total.\n• Resto - Divide equitativamente lo que queda después de las asignaciones Fijas y %.\n\nEl total debe llegar al 100% antes de poder guardar. Use la barra inferior para seguir su progreso."
     },
     "savedTips": {
       "title": "TipMate",

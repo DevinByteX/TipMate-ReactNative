@@ -34,7 +34,8 @@
       "tipSaveFailed": "Échec de l’enregistrement du calcul du pourboire. Veuillez réessayer."
     },
     "customSplit": {
-      "title": "Partage personnalisé",
+      "title": "TipMate",
+      "subTitle": "Partage personnalisé",
       "subtitle": "Addition totale : {{currency}}{{amount}}",
       "addPerson": "Ajouter une personne",
       "removePerson": "Supprimer",
@@ -61,7 +62,7 @@
       "fixedPlaceholder": "Entrez le montant fixe",
       "percentagePlaceholder": "Entrez le pourcentage",
       "infoTitle": "Comment utiliser la répartition personnalisée",
-      "infoMessage": "Attribuez à chaque personne un type de répartition :\n\n• Fixe — Définit un montant exact pour cette personne.\n• % — Définit un pourcentage du total.\n• Reste — Divise équitablement ce qui reste après les allocations Fixes et %.\n\nLe total doit atteindre 100% avant de pouvoir sauvegarder. Utilisez la barre en bas pour suivre votre progression."
+      "infoMessage": "Attribuez à chaque personne un type de répartition :\n\n• Fixe - Définit un montant exact pour cette personne.\n• % - Définit un pourcentage du total.\n• Reste - Divise équitablement ce qui reste après les allocations Fixes et %.\n\nLe total doit atteindre 100% avant de pouvoir sauvegarder. Utilisez la barre en bas pour suivre votre progression."
     },
     "savedTips": {
       "title": "TipMate",
