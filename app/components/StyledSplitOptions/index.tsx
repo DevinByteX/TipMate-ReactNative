@@ -96,6 +96,7 @@ export const StyledSpiltOptions = ({
   onCustomSplitPress,
   isCustomSplitActive = false,
   onClearCustomSplit,
+  billAmount = 0,
 }: {
   titleText?: string;
   description?: string;
@@ -103,6 +104,7 @@ export const StyledSpiltOptions = ({
   onCustomSplitPress?: () => void;
   isCustomSplitActive?: boolean;
   onClearCustomSplit?: () => void;
+  billAmount?: number;
 }) => {
   const { state } = useAppContext();
   const { t } = useTranslation();
@@ -113,7 +115,9 @@ export const StyledSpiltOptions = ({
 
   const [customSliderVisible, setCustomSliderVisible] = useState<boolean>(false);
 
-  const { styles } = useStyles(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
+
+  const isCustomSplitDisabled = billAmount <= 0;
 
   return (
     <View style={styles.mainContainer}>
@@ -209,21 +213,35 @@ export const StyledSpiltOptions = ({
       ) : null}
       {/* Custom Split Button */}
       <Pressable
-        style={[styles.customSplitButton, isCustomSplitActive && styles.customSplitButtonActive]}
+        disabled={isCustomSplitDisabled}
+        style={[
+          styles.customSplitButton,
+          isCustomSplitActive && styles.customSplitButtonActive,
+          isCustomSplitDisabled && styles.customSplitButtonDisabled,
+        ]}
         onPress={() => {
-          onCustomSplitPress && onCustomSplitPress();
+          if (!isCustomSplitDisabled) {
+            onCustomSplitPress && onCustomSplitPress();
+          }
         }}
       >
         <StyledIcons
           type={'MaterialDesignIcons'}
           name={isCustomSplitActive ? 'check-circle' : 'account-multiple'}
           size={16}
-          color={isCustomSplitActive ? '#ffffff' : styles.titleText?.color}
+          color={
+            isCustomSplitActive
+              ? theme.colors.card
+              : isCustomSplitDisabled
+              ? theme.colors.disable_text
+              : theme.colors.accent
+          }
         />
         <Text
           style={[
             styles.customSplitButtonText,
             isCustomSplitActive && styles.customSplitButtonTextActive,
+            isCustomSplitDisabled && styles.customSplitButtonDisabledText,
           ]}
         >
           {isCustomSplitActive
@@ -249,7 +267,7 @@ export const StyledSpiltOptions = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -341,24 +359,31 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     backgroundColor: colors.accent,
     borderColor: colors.accent,
   },
+  customSplitButtonDisabled: {
+    borderColor: colors.disable_button,
+    opacity: 0.6,
+  },
   customSplitButtonText: {
     fontSize: 13,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
   customSplitButtonTextActive: {
-    color: '#ffffff',
+    color: colors.card,
+  },
+  customSplitButtonDisabledText: {
+    color: colors.disable_text,
   },
   clearCustomSplitButton: {
     marginLeft: 4,
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 4,
-    backgroundColor: 'rgba(255,255,255,0.3)',
+    backgroundColor: utils.hexToRGBA(colors.card, 0.3),
   },
   clearCustomSplitText: {
     fontSize: 11,
     fontFamily: fonts.Nunito_Bold,
-    color: '#ffffff',
+    color: colors.card,
   },
 }));

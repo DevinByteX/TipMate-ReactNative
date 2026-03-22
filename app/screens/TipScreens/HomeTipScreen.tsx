@@ -254,6 +254,7 @@ const HomeTipScreen = () => {
             setUserInputSplitCount(splitCount);
           }}
           isCustomSplitActive={isCustomSplitActive}
+          billAmount={userInputBillAmount}
           onCustomSplitPress={() => {
             navigation.navigate('CustomSplitScreen', {
               totalBill: userInputBillAmount,
