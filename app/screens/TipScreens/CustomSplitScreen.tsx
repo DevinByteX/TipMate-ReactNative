@@ -329,11 +329,11 @@ const CustomSplitScreen = () => {
   const getValidationIcon = () => {
     switch (validation.status) {
       case 'complete':
-        return { name: 'check-circle' as const, color: '#4CAF50' };
+        return { name: 'check-circle' as const, color: theme.colors.success };
       case 'under':
         return { name: 'alert-circle' as const, color: theme.colors.error_toast };
       case 'over':
-        return { name: 'alert' as const, color: '#FF9800' };
+        return { name: 'alert' as const, color: theme.colors.warning };
     }
   };
 
@@ -513,13 +513,13 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   totalBillLabel: {
     fontSize: 14,
     fontFamily: fonts.Nunito_Bold,
-    color: '#ffffff',
+    color: colors.white,
     opacity: 0.9,
   },
   totalBillAmount: {
     fontSize: 22,
     fontFamily: fonts.Montserrat_Black,
-    color: '#ffffff',
+    color: colors.white,
   },
   // Person Card
   personCard: {
@@ -565,7 +565,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.card_typography,
   },
   allocationTypeTextActive: {
-    color: '#ffffff',
+    color: colors.white,
   },
   // Value Input
   valueInputContainer: {
@@ -670,7 +670,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   saveButtonText: {
     fontSize: 16,
     fontFamily: fonts.Nunito_Bold,
-    color: '#ffffff',
+    color: colors.white,
   },
   saveButtonTextDisabled: {
     color: colors.disable_text,
