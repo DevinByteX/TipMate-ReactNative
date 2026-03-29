@@ -264,6 +264,7 @@ const HomeTipScreen = () => {
           }}
           onClearCustomSplit={() => {
             dispatch({ type: 'CLEAR_ACTIVE_SPLIT_CONFIG' });
+            setUserInputSplitCount(1);
           }}
         />
         {/* Per Person Bill Container — Equal Split */}
