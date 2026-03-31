@@ -219,6 +219,15 @@ export const calculateBillValuesCustomSplit = (
     remainderSplits.forEach(split => {
       processedSplits.push({ ...split, calculatedAmount: amountPerRemainder });
     });
+  } else if (processedSplits.length > 0 && Math.abs(remainingAmount) > 0) {
+    // If there are no remainder splits but some amount is still unallocated,
+    // assign the remainder to the last processed split so totals stay consistent.
+    const lastIndex = processedSplits.length - 1;
+    const lastSplit = processedSplits[lastIndex];
+    processedSplits[lastIndex] = {
+      ...lastSplit,
+      calculatedAmount: (lastSplit.calculatedAmount || 0) + remainingAmount,
+    };
   }
 
   // 3. Distribute penny differences using largest decimal remainder method
