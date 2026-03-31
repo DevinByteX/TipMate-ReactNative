@@ -180,6 +180,34 @@ export const calculateBillValuesCustomSplit = (
 
   // 2c. Process REMAINDER splits (divide remaining equally)
   const remainderSplits = individualSplits.filter(s => s.allocationType === 'remainder');
+
+  // If there are no remainder splits but there is still a significant remaining amount,
+  // distribute it deterministically across existing percentage allocations so that
+  // individuals add up to the overall total.
+  if (remainderSplits.length === 0) {
+    const unallocatedAmount = remainingAmount;
+    const unallocatedInCents = Math.round(unallocatedAmount * 100);
+
+    if (unallocatedInCents > 0) {
+      const adjustableSplits = processedSplits.filter(
+        split => split.allocationType === 'percentage',
+      );
+
+      const totalAdjustable = adjustableSplits.reduce(
+        (sum, split) => sum + (split.calculatedAmount || 0),
+        0,
+      );
+
+      if (totalAdjustable > 0) {
+        adjustableSplits.forEach(split => {
+          const current = split.calculatedAmount || 0;
+          const proportion = current / totalAdjustable;
+          split.calculatedAmount = current + unallocatedAmount * proportion;
+        });
+        remainingAmount = 0;
+      }
+    }
+  }
   if (remainderSplits.length > 0) {
     const amountPerRemainder = remainingAmount / remainderSplits.length;
     remainderSplits.forEach(split => {
