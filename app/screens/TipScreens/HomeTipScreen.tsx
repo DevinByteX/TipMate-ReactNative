@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { ScrollView, Platform, View, Text } from 'react-native';
+import { ScrollView, Platform } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 // custom component
@@ -25,7 +25,6 @@ import {
   useShareTipPreview,
   useSaveTip,
   getDeviceCurrency,
-  toFixedWithoutRounding,
 } from '@hooks';
 import { useAppContext } from '@/context/AppContext';
 
