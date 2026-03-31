@@ -92,7 +92,8 @@ const PersonCard = ({
   const handleAllocationTypeChange = (type: IndividualSplit['allocationType']) => {
     onUpdate(person.id, {
       allocationType: type,
-      value: type === 'remainder' ? undefined : undefined,
+      value: undefined,
+      calculatedAmount: undefined,
     });
   };
 
