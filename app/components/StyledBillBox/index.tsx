@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, ViewStyle, Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
+import { useTranslation } from 'react-i18next';
 import { StyledIcons } from '@components';
 import { useValuePulse, useBounce, toFixedWithoutRounding } from '@hooks';
 import { IndividualSplit } from '@/context/types';
@@ -59,6 +60,7 @@ export const StyledBillBox = ({
   const isLongCurrencySymbol: boolean =
     typeof currencySymbol === 'string' && currencySymbol.length > 1;
 
+  const { t } = useTranslation();
   const { styles, theme } = useStyles(stylesheet);
   const { animatedStyle: totalPulseStyle } = useValuePulse(totalAmount);
   const { trigger: triggerBookmarkBounce, animatedStyle: bookmarkBounceStyle } = useBounce();
@@ -222,7 +224,7 @@ export const StyledBillBox = ({
                 color={styles.titleText?.color}
               />
               <Text style={styles.individualSplitsTitle}>
-                {`${individualSplits.length} People`}
+                {`${individualSplits.length} ${t('screens.savedTipDetail.people')}`}
               </Text>
             </View>
             <StyledIcons
@@ -245,7 +247,7 @@ export const StyledBillBox = ({
                         ? `${currencySymbol}${toFixedWithoutRounding(split.value || 0, 2)}`
                         : split.allocationType === 'percentage'
                         ? `${split.value || 0}%`
-                        : 'Remainder'}
+                        : t('screens.customSplit.remainder')}
                     </Text>
                   </View>
                   <Text style={styles.individualSplitAmount}>

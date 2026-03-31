@@ -4,6 +4,14 @@ import { Platform } from 'react-native';
 import { APP_LINKS } from '@/configs/constants';
 import { IndividualSplit } from '@/context/types';
 
+const escapeHtml = (text: string): string =>
+  text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
 export type TipDetailsForPDF = {
   amount: number;
   tip: number;
@@ -352,7 +360,7 @@ export const useShareTipDetailsPDF = async (
               <div class="detail-title">${t.splitDetails} (${individualSplits.length} ${t.people})</div>
               ${individualSplits.map(split => `
               <div class="detail-row">
-                <span class="detail-label">${split.name}</span>
+                <span class="detail-label">${escapeHtml(split.name)}</span>
                 <span class="detail-value">${currencySymbol}${(split.calculatedAmount || 0).toFixed(2)}</span>
               </div>
               `).join('')}

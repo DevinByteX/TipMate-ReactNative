@@ -168,6 +168,12 @@ export const calculateBillValuesCustomSplit = (
       processedSplits.push({ ...split, calculatedAmount: amount });
     });
 
+  // Guard: if fixed allocations exceed the total, clamp remainingAmount to 0
+  // so that percentage and remainder splits don't receive negative amounts.
+  if (remainingAmount < 0) {
+    remainingAmount = 0;
+  }
+
   // 2b. Process PERCENTAGE allocations second
   individualSplits
     .filter(s => s.allocationType === 'percentage')
