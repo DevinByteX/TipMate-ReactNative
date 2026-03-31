@@ -349,7 +349,7 @@ export const useShareTipDetailsPDF = async (
             
             <!-- Custom Split Details -->
             <div class="detail-section">
-              <div class="detail-title">Custom Split (${individualSplits.length} ${t.people})</div>
+              <div class="detail-title">${t.splitDetails} (${individualSplits.length} ${t.people})</div>
               ${individualSplits.map(split => `
               <div class="detail-row">
                 <span class="detail-label">${split.name}</span>
