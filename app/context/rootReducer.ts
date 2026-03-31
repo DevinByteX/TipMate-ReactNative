@@ -14,6 +14,7 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
         duplicatePreventionWindow: action.payload.duplicatePreventionWindow ?? state.duplicatePreventionWindow,
         language: action.payload.language ?? state.language,
         isRTL: action.payload.isRTL ?? state.isRTL,
+        activeSplitConfig: action.payload.activeSplitConfig ?? state.activeSplitConfig,
       };
     case 'UPDATE_TIP_OPTIONS':
       return { ...state, tips: tipReducer(state.tips, action) };
