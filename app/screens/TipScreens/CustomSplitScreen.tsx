@@ -175,7 +175,7 @@ const PersonCard = ({
                 : t('screens.customSplit.percentagePlaceholder')
             }
             placeholderTextColor={theme.utils.hexToRGBA(theme.colors.card_typography, 0.4)}
-            keyboardType={Platform.OS === 'ios' ? 'decimal-pad' : 'number-pad'}
+            keyboardType="decimal-pad"
             returnKeyType="done"
           />
           <Text style={styles.valueInputSuffix}>
