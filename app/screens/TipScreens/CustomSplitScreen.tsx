@@ -478,7 +478,7 @@ const CustomSplitScreen = () => {
         title={t('screens.customSplit.infoTitle')}
         message={t('screens.customSplit.infoMessage')}
         type="info"
-        buttons={[{ text: 'OK', onPress: () => setIsInfoVisible(false) }]}
+        buttons={[{ text: t('common.ok'), onPress: () => setIsInfoVisible(false) }]}
         onDismiss={() => setIsInfoVisible(false)}
       />
     </>
