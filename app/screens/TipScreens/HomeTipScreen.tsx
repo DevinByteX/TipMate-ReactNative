@@ -111,10 +111,17 @@ const HomeTipScreen = () => {
         numberOfPeople:
           isCustomSplitActive && customSplits ? customSplits.length : userInputSplitCount,
         splitType: (isCustomSplitActive ? 'custom' : 'equal') as 'equal' | 'custom',
-        // A stable, primitive representation of the split configuration for duplicate detection
+        // A stable, primitive representation of the split configuration for duplicate detection.
+        // Uses input data (not calculated amounts) so rounding changes don't break detection.
         splitSignature:
-          isCustomSplitActive && customBillValues?.individuals
-            ? `custom:${JSON.stringify(customBillValues.individuals)}`
+          isCustomSplitActive && customSplits
+            ? `custom:${JSON.stringify(
+                customSplits.map(s => ({
+                  id: s.id,
+                  allocationType: s.allocationType,
+                  value: s.value,
+                })),
+              )}`
             : 'equal',
         perPerson:
           !isCustomSplitActive && userInputSplitCount > 1 && billValues

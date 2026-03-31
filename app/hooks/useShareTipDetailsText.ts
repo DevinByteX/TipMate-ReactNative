@@ -76,10 +76,12 @@ export const formatTipDetailsPreview = ({
   if (splitType === 'custom' && individualSplits && individualSplits.length > 0) {
     const splitLines = individualSplits
       .map(split => {
+        // Replace amount and currency first, then name last, because name is
+        // user input and could contain template placeholders like {{currency}}.
         const line = t.individualSplit
-          .replace('{{name}}', split.name)
+          .replace('{{amount}}', (split.calculatedAmount || 0).toFixed(2))
           .replace('{{currency}}', currencySymbol)
-          .replace('{{amount}}', (split.calculatedAmount || 0).toFixed(2));
+          .replace('{{name}}', split.name);
         return `  • ${line}`;
       })
       .join('\n');
