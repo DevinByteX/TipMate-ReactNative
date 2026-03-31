@@ -4,8 +4,8 @@ import { Platform } from 'react-native';
 import { APP_LINKS } from '@/configs/constants';
 import { IndividualSplit } from '@/context/types';
 
-const escapeHtml = (text: string): string =>
-  text
+const escapeHtml = (text: string | null | undefined): string =>
+  (text || '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
