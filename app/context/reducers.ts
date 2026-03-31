@@ -164,6 +164,7 @@ const saveState = async (
         duplicatePreventionWindow: number;
         language: string;
         isRTL: boolean;
+        activeSplitConfig: ActiveSplitConfig | undefined;
       };
       const newState = { ...currentStateObject, ...partialState };
       await AsyncStorage.setItem(Constants.APP_STATE_ASYNCSTORAGE_KEY, JSON.stringify(newState));

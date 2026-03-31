@@ -139,7 +139,7 @@ export const calculateBillValuesCustomSplit = (
   individualSplits: IndividualSplit[],
 ): CustomSplitCalculationType => {
   // Validate inputs
-  if (isNaN(billAmount) || isNaN(tipPercentage) || individualSplits.length === 0) {
+  if (isNaN(billAmount) || isNaN(tipPercentage) || billAmount < 0 || tipPercentage < 0 || individualSplits.length === 0) {
     return {
       overall: { total: '0.00', tip: '0.00', subtotal: '0.00' },
       individuals: [],
@@ -175,6 +175,9 @@ export const calculateBillValuesCustomSplit = (
   }
 
   // 2b. Process PERCENTAGE allocations second
+  // Note: Percentages are calculated against the full rounded total (not the remaining
+  // amount after fixed allocations). This matches the validation in CustomSplitScreen
+  // where fixed_pct + percentage_pct are checked additively against 100%.
   individualSplits
     .filter(s => s.allocationType === 'percentage')
     .forEach(split => {
@@ -233,7 +236,7 @@ export const calculateBillValuesCustomSplit = (
   // 3. Distribute penny differences using largest decimal remainder method
   const splitsWithDecimals = processedSplits.map(split => ({
     ...split,
-    decimalPart: ((split.calculatedAmount || 0) * 100) % 1,
+    decimalPart: Math.round((((split.calculatedAmount || 0) * 100) % 1) * 1e10) / 1e10,
   }));
 
   // Sort by decimal remainder descending for penny distribution

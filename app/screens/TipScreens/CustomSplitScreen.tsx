@@ -201,6 +201,8 @@ const PersonCard = ({
   );
 };
 
+const MemoizedPersonCard = React.memo(PersonCard);
+
 const CustomSplitScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
@@ -388,7 +390,7 @@ const CustomSplitScreen = () => {
 
           {/* Person Cards */}
           {people.map((person, index) => (
-            <PersonCard
+            <MemoizedPersonCard
               key={person.id}
               person={person}
               index={index}
