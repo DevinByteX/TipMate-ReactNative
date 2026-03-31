@@ -111,6 +111,11 @@ const HomeTipScreen = () => {
         numberOfPeople:
           isCustomSplitActive && customSplits ? customSplits.length : userInputSplitCount,
         splitType: (isCustomSplitActive ? 'custom' : 'equal') as 'equal' | 'custom',
+        // A stable, primitive representation of the split configuration for duplicate detection
+        splitSignature:
+          isCustomSplitActive && customBillValues?.individuals
+            ? `custom:${JSON.stringify(customBillValues.individuals)}`
+            : 'equal',
         perPerson:
           !isCustomSplitActive && userInputSplitCount > 1 && billValues
             ? {
