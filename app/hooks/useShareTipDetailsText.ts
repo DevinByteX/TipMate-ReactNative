@@ -17,6 +17,7 @@ export type ShareTipDetailsParams = {
   currencySymbol?: string;
   title?: string;
   subject?: string;
+  translations?: ShareTranslations;
 };
 
 export type ShareTranslations = {
@@ -31,6 +32,8 @@ export type ShareTranslations = {
   tipPerPerson: string;
   totalPerPerson: string;
   sharedVia: string;
+  customSplitLabel: string;
+  individualSplit: string;
 };
 
 /**
@@ -48,6 +51,8 @@ const defaultTranslations: ShareTranslations = {
   tipPerPerson: 'Tip per person:',
   totalPerPerson: 'Total per person:',
   sharedVia: 'Shared via TipMate',
+  customSplitLabel: 'Custom Split:',
+  individualSplit: '{{name}}: {{currency}}{{amount}}',
 };
 
 /**
@@ -70,9 +75,15 @@ export const formatTipDetailsPreview = ({
   let splitSection = '';
   if (splitType === 'custom' && individualSplits && individualSplits.length > 0) {
     const splitLines = individualSplits
-      .map(split => `  • ${split.name}: ${currencySymbol}${(split.calculatedAmount || 0).toFixed(2)}`)
+      .map(split => {
+        const line = t.individualSplit
+          .replace('{{name}}', split.name)
+          .replace('{{currency}}', currencySymbol)
+          .replace('{{amount}}', (split.calculatedAmount || 0).toFixed(2));
+        return `  • ${line}`;
+      })
       .join('\n');
-    splitSection = `\n👥 Custom Split (${individualSplits.length} ${t.persons})\n${splitLines}`;
+    splitSection = `\n👥 ${t.customSplitLabel} (${individualSplits.length} ${t.persons})\n${splitLines}`;
   } else if (numberOfPeople > 1 && perPerson) {
     splitSection = `\n👥 ${t.splitAmong} ${numberOfPeople} ${t.persons}\n  • ${t.subtotalPerPerson} ${currencySymbol}${perPerson.amount.toFixed(2)}\n  • ${t.tipPerPerson} ${currencySymbol}${perPerson.tip.toFixed(2)}\n  • ${t.totalPerPerson} ${currencySymbol}${perPerson.total.toFixed(2)}`;
   }
@@ -98,10 +109,13 @@ export const useShareTipDetailsText = async ({
   total,
   tipPercentage,
   numberOfPeople,
+  splitType,
   perPerson,
+  individualSplits,
   currencySymbol = '$',
   title = 'Share your tip summary',
   subject = 'TipMate Summary',
+  translations,
 }: ShareTipDetailsParams) => {
   const message = formatTipDetailsPreview({
     amount,
@@ -109,8 +123,11 @@ export const useShareTipDetailsText = async ({
     total,
     tipPercentage,
     numberOfPeople,
+    splitType,
     perPerson,
+    individualSplits,
     currencySymbol,
+    translations,
   });
 
   const shareOptions: ShareOptions = {

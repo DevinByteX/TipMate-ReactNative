@@ -68,6 +68,8 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
         tipPerPerson: t('share.tipPerPerson'),
         totalPerPerson: t('share.totalPerPerson'),
         sharedVia: t('share.sharedVia'),
+        customSplitLabel: t('share.customSplitLabel'),
+        individualSplit: t('share.individualSplit'),
     };
 
     // Build PDF translations object from i18n
@@ -115,7 +117,7 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
 
             // Execute share action after modal has been dismissed
             if (action === 'text') {
-                useShareTipDetailsText(shareData).catch(error => {
+                useShareTipDetailsText({ ...shareData, translations: shareTranslations }).catch(error => {
                     console.error('Error sharing as text:', error);
                 });
             } else if (action === 'pdf') {
