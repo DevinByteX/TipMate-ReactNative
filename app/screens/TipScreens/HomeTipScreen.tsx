@@ -161,7 +161,18 @@ const HomeTipScreen = () => {
         areFloatsEqual(savedTip.total, shareData.total) &&
         savedTip.tipPercentage === shareData.tipPercentage &&
         savedTip.numberOfPeople === shareData.numberOfPeople &&
-        savedTip.currencyCode === shareData.currencyCode,
+        savedTip.currencyCode === shareData.currencyCode &&
+        (savedTip.splitType || 'equal') === shareData.splitType &&
+        (savedTip.splitType === 'custom' && shareData.splitType === 'custom'
+          ? shareData.splitSignature ===
+            `custom:${JSON.stringify(
+              (savedTip.individualSplits || []).map(s => ({
+                id: s.id,
+                allocationType: s.allocationType,
+                value: s.value,
+              })),
+            )}`
+          : true),
     );
   }, [shareData, state.savedTips, state.duplicatePreventionWindow]);
 
