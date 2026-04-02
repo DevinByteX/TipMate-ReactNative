@@ -11,6 +11,8 @@ import {
   LanguageAction,
   ActiveSplitConfig,
   SplitConfigAction,
+  SavedSplitPreset,
+  SavedSplitPresetAction,
 } from './types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -140,6 +142,30 @@ export const splitConfigReducer = (
   }
 };
 
+export const savedSplitPresetsReducer = (
+  state: SavedSplitPreset[],
+  action: SavedSplitPresetAction,
+): SavedSplitPreset[] => {
+  switch (action.type) {
+    case 'SAVE_SPLIT_PRESET':
+      const newPresets = [action.payload, ...state];
+      saveState({ savedSplitPresets: newPresets });
+      return newPresets;
+    case 'UPDATE_SPLIT_PRESET':
+      const updatedPresets = state.map(preset =>
+        preset.id === action.payload.id ? action.payload : preset,
+      );
+      saveState({ savedSplitPresets: updatedPresets });
+      return updatedPresets;
+    case 'DELETE_SPLIT_PRESET':
+      const filteredPresets = state.filter(preset => preset.id !== action.payload);
+      saveState({ savedSplitPresets: filteredPresets });
+      return filteredPresets;
+    default:
+      return state;
+  }
+};
+
 // Function to save state to AsyncStorage
 const saveState = async (
   partialState: Partial<{
@@ -151,6 +177,7 @@ const saveState = async (
     language: string;
     isRTL: boolean;
     activeSplitConfig: ActiveSplitConfig | undefined;
+    savedSplitPresets: SavedSplitPreset[];
   }>,
 ) => {
   try {
@@ -165,6 +192,7 @@ const saveState = async (
         language: string;
         isRTL: boolean;
         activeSplitConfig: ActiveSplitConfig | undefined;
+        savedSplitPresets: SavedSplitPreset[];
       };
       const newState = { ...currentStateObject, ...partialState };
       await AsyncStorage.setItem(Constants.APP_STATE_ASYNCSTORAGE_KEY, JSON.stringify(newState));

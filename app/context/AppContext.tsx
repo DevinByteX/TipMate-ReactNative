@@ -16,6 +16,7 @@ const initialState: AppState = {
   language: undefined,
   isRTL: false,
   activeSplitConfig: undefined,
+  savedSplitPresets: [],
 };
 
 interface AppProviderProps {

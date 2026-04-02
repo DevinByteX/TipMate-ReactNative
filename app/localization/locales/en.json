@@ -62,7 +62,21 @@
       "fixedPlaceholder": "Enter fixed amount",
       "percentagePlaceholder": "Enter percentage",
       "infoTitle": "How to Use Custom Split",
-      "infoMessage": "Assign each person a split type:\n\n• Fixed - Set an exact amount for that person.\n• % - Set a percentage of the total bill.\n• Rest - Evenly divides whatever is left after Fixed and % allocations.\n\nThe total must reach 100% before you can save. Use the footer bar to track your progress."
+      "infoMessage": "Assign each person a split type:\n\n• Fixed - Set an exact amount for that person.\n• % - Set a percentage of the total bill.\n• Rest - Evenly divides whatever is left after Fixed and % allocations.\n\nThe total must reach 100% before you can save. Use the footer bar to track your progress.",
+      "savedPresets": "Saved Presets",
+      "saveAsPreset": "Save Preset",
+      "updatePreset": "Update Preset",
+      "saveAsNew": "Save as New",
+      "presetNameTitle": "Name Your Preset",
+      "presetNamePlaceholder": "e.g. Family Dinner, Office Lunch...",
+      "presetSaved": "Preset saved!",
+      "presetUpdated": "Preset updated!",
+      "presetDeleted": "Preset deleted",
+      "deletePresetTitle": "Delete Preset",
+      "deletePresetConfirm": "Are you sure you want to delete this preset?",
+      "presetPeople": "{{count}} people",
+      "applySplit": "Apply Split",
+      "presetNameRequired": "Please enter a preset name"
     },
     "savedTips": {
       "title": "TipMate",
