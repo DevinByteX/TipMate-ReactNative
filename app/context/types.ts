@@ -54,6 +54,14 @@ export interface ActiveSplitConfig {
   customSplits?: IndividualSplit[];
 }
 
+export interface SavedSplitPreset {
+  id: string;
+  name: string;
+  createdAt: number;
+  updatedAt: number;
+  customSplits: IndividualSplit[];
+}
+
 export interface AppState {
   tips: TipOptionState[];
   splits: SplitOptionState[];
@@ -65,6 +73,7 @@ export interface AppState {
   language: string | undefined; // Language code (e.g., 'en', 'es', 'ar')
   isRTL: boolean; // RTL layout flag
   activeSplitConfig?: ActiveSplitConfig; // Active split configuration (custom/equal)
+  savedSplitPresets: SavedSplitPreset[]; // Saved custom split presets
 }
 
 export type TipAction =
@@ -97,6 +106,11 @@ export type SplitConfigAction =
   | { type: 'SET_ACTIVE_SPLIT_CONFIG'; payload: ActiveSplitConfig }
   | { type: 'CLEAR_ACTIVE_SPLIT_CONFIG' };
 
+export type SavedSplitPresetAction =
+  | { type: 'SAVE_SPLIT_PRESET'; payload: SavedSplitPreset }
+  | { type: 'UPDATE_SPLIT_PRESET'; payload: SavedSplitPreset }
+  | { type: 'DELETE_SPLIT_PRESET'; payload: string };
+
 export type AppAction =
   | TipAction
   | SplitAction
@@ -105,4 +119,5 @@ export type AppAction =
   | DuplicatePreventionAction
   | LanguageAction
   | SplitConfigAction
+  | SavedSplitPresetAction
   | { type: 'LOAD_PERSISTED_STATE'; payload: AppState }; // Include LOAD_PERSISTED_STATE

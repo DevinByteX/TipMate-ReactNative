@@ -23,6 +23,7 @@ type StyledAlertProps = {
   showIcon?: boolean;
   customIcon?: { iconType: StyledIconTypesKey; iconName: string };
   customIconColor?: string;
+  children?: React.ReactNode;
 };
 
 const getAlertIcon = (
@@ -54,6 +55,7 @@ export const StyledAlert = ({
   showIcon = true,
   customIcon,
   customIconColor,
+  children,
 }: StyledAlertProps) => {
   const { styles, theme } = useStyles(stylesheet);
 
@@ -108,6 +110,9 @@ export const StyledAlert = ({
 
           {/* Message */}
           {message && <Text style={styles.modalMessage}>{message}</Text>}
+
+          {/* Custom Content */}
+          {children}
 
           {/* Buttons */}
           <View style={styles.buttonContainer}>

@@ -62,7 +62,21 @@
       "fixedPlaceholder": "Entrez le montant fixe",
       "percentagePlaceholder": "Entrez le pourcentage",
       "infoTitle": "Comment utiliser la répartition personnalisée",
-      "infoMessage": "Attribuez à chaque personne un type de répartition :\n\n• Fixe - Définit un montant exact pour cette personne.\n• % - Définit un pourcentage du total.\n• Reste - Divise équitablement ce qui reste après les allocations Fixes et %.\n\nLe total doit atteindre 100% avant de pouvoir sauvegarder. Utilisez la barre en bas pour suivre votre progression."
+      "infoMessage": "Attribuez à chaque personne un type de répartition :\n\n• Fixe - Définit un montant exact pour cette personne.\n• % - Définit un pourcentage du total.\n• Reste - Divise équitablement ce qui reste après les allocations Fixes et %.\n\nLe total doit atteindre 100% avant de pouvoir sauvegarder. Utilisez la barre en bas pour suivre votre progression.",
+      "savedPresets": "Préréglages enregistrés",
+      "saveAsPreset": "Enregistrer le préréglage",
+      "updatePreset": "Mettre à jour le préréglage",
+      "saveAsNew": "Enregistrer comme nouveau",
+      "presetNameTitle": "Nommez votre préréglage",
+      "presetNamePlaceholder": "ex. Dîner en famille, Déjeuner bureau...",
+      "presetSaved": "Préréglage enregistré !",
+      "presetUpdated": "Préréglage mis à jour !",
+      "presetDeleted": "Préréglage supprimé",
+      "deletePresetTitle": "Supprimer le préréglage",
+      "deletePresetConfirm": "Êtes-vous sûr de vouloir supprimer ce préréglage ?",
+      "presetPeople": "{{count}} personnes",
+      "applySplit": "Appliquer la répartition",
+      "presetNameRequired": "Veuillez entrer un nom pour le préréglage"
     },
     "savedTips": {
       "title": "TipMate",

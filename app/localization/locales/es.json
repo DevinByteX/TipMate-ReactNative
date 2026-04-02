@@ -62,7 +62,21 @@
       "fixedPlaceholder": "Ingrese monto fijo",
       "percentagePlaceholder": "Ingrese porcentaje",
       "infoTitle": "Cómo usar la división personalizada",
-      "infoMessage": "Asigne a cada persona un tipo de división:\n\n• Fijo - Establece un monto exacto para esa persona.\n• % - Establece un porcentaje del total.\n• Resto - Divide equitativamente lo que queda después de las asignaciones Fijas y %.\n\nEl total debe llegar al 100% antes de poder guardar. Use la barra inferior para seguir su progreso."
+      "infoMessage": "Asigne a cada persona un tipo de división:\n\n• Fijo - Establece un monto exacto para esa persona.\n• % - Establece un porcentaje del total.\n• Resto - Divide equitativamente lo que queda después de las asignaciones Fijas y %.\n\nEl total debe llegar al 100% antes de poder guardar. Use la barra inferior para seguir su progreso.",
+      "savedPresets": "Preajustes guardados",
+      "saveAsPreset": "Guardar preajuste",
+      "updatePreset": "Actualizar preajuste",
+      "saveAsNew": "Guardar como nuevo",
+      "presetNameTitle": "Nombre del preajuste",
+      "presetNamePlaceholder": "ej. Cena familiar, Almuerzo oficina...",
+      "presetSaved": "¡Preajuste guardado!",
+      "presetUpdated": "¡Preajuste actualizado!",
+      "presetDeleted": "Preajuste eliminado",
+      "deletePresetTitle": "Eliminar preajuste",
+      "deletePresetConfirm": "¿Estás seguro de que quieres eliminar este preajuste?",
+      "presetPeople": "{{count}} personas",
+      "applySplit": "Aplicar división",
+      "presetNameRequired": "Ingrese un nombre para el preajuste"
     },
     "savedTips": {
       "title": "TipMate",

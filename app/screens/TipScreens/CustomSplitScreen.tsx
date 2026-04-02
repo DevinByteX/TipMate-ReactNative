@@ -12,9 +12,10 @@ import { useTranslation } from 'react-i18next';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import Animated, { FadeIn, FadeOut, Layout } from 'react-native-reanimated';
+import Toast from 'react-native-toast-message';
 import { StyledHeader, StyledIcons, StyledAlert } from '@components';
 import { useAppContext } from '@/context/AppContext';
-import { IndividualSplit } from '@/context/types';
+import { IndividualSplit, SavedSplitPreset } from '@/context/types';
 import { toFixedWithoutRounding } from '@hooks';
 
 type CustomSplitRouteParams = {
@@ -22,6 +23,7 @@ type CustomSplitRouteParams = {
     totalBill: number;
     tipPercentage: number;
     currencySymbol: string;
+    presetId?: string;
   };
 };
 
@@ -207,18 +209,35 @@ const CustomSplitScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { dispatch } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const route = useRoute<RouteProp<CustomSplitRouteParams, 'CustomSplitScreen'>>();
 
-  const { totalBill = 0, tipPercentage = 0, currencySymbol = '$' } = route.params || {};
+  const { totalBill = 0, tipPercentage = 0, currencySymbol = '$', presetId } = route.params || {};
 
   const [isInfoVisible, setIsInfoVisible] = useState(false);
+  const [activePresetId, setActivePresetId] = useState<string | null>(presetId ?? null);
+  const [isPresetNameModalVisible, setIsPresetNameModalVisible] = useState(false);
+  const [presetNameInput, setPresetNameInput] = useState('');
+  const [isDeletePresetVisible, setIsDeletePresetVisible] = useState(false);
+  const [presetToDelete, setPresetToDelete] = useState<string | null>(null);
+  const [isPresetsExpanded, setIsPresetsExpanded] = useState(true);
 
-  // Initialize with 2 default people
-  const [people, setPeople] = useState<IndividualSplit[]>([
-    createDefaultPerson(0),
-    createDefaultPerson(1),
-  ]);
+  // Resolve initial people from preset if presetId is provided
+  const getInitialPeople = (): IndividualSplit[] => {
+    if (presetId) {
+      const preset = state.savedSplitPresets.find(p => p.id === presetId);
+      if (preset) {
+        return preset.customSplits.map(split => ({
+          ...split,
+          calculatedAmount: undefined,
+        }));
+      }
+    }
+    return [createDefaultPerson(0), createDefaultPerson(1)];
+  };
+
+  // Initialize with 2 default people or loaded preset
+  const [people, setPeople] = useState<IndividualSplit[]>(getInitialPeople);
 
   const handleUpdatePerson = useCallback((id: string, updates: Partial<IndividualSplit>) => {
     setPeople(prev => prev.map(person => (person.id === id ? { ...person, ...updates } : person)));
@@ -328,6 +347,97 @@ const CustomSplitScreen = () => {
     navigation.goBack();
   }, [canSave, people, dispatch, navigation, t]);
 
+  // Load a preset into the editor
+  const handleLoadPreset = useCallback((preset: SavedSplitPreset) => {
+    const loadedPeople = preset.customSplits.map(split => ({
+      ...split,
+      calculatedAmount: undefined,
+    }));
+    setPeople(loadedPeople);
+    setActivePresetId(preset.id);
+  }, []);
+
+  // Get named people (fills in default names for unnamed)
+  const getNamedPeople = useCallback(() => {
+    return people.map((person, index) => ({
+      ...person,
+      name: person.name.trim() || t('screens.customSplit.personDefault', { number: index + 1 }),
+      calculatedAmount: undefined,
+    }));
+  }, [people, t]);
+
+  // Save as new preset
+  const handleSavePreset = useCallback(() => {
+    if (!canSave) return;
+    const trimmedName = presetNameInput.trim();
+    if (!trimmedName) return;
+
+    const namedPeople = getNamedPeople();
+    const now = Date.now();
+
+    const newPreset: SavedSplitPreset = {
+      id: generateId(),
+      name: trimmedName,
+      createdAt: now,
+      updatedAt: now,
+      customSplits: namedPeople,
+    };
+
+    dispatch({ type: 'SAVE_SPLIT_PRESET', payload: newPreset });
+    setActivePresetId(newPreset.id);
+    setIsPresetNameModalVisible(false);
+    setPresetNameInput('');
+    Toast.show({ type: 'success', text1: t('screens.customSplit.presetSaved') });
+  }, [canSave, presetNameInput, getNamedPeople, dispatch, t]);
+
+  // Update existing preset
+  const handleUpdatePreset = useCallback(() => {
+    if (!canSave || !activePresetId) return;
+
+    const existingPreset = state.savedSplitPresets.find(p => p.id === activePresetId);
+    if (!existingPreset) return;
+
+    const namedPeople = getNamedPeople();
+
+    const updatedPreset: SavedSplitPreset = {
+      ...existingPreset,
+      updatedAt: Date.now(),
+      customSplits: namedPeople,
+    };
+
+    dispatch({ type: 'UPDATE_SPLIT_PRESET', payload: updatedPreset });
+    Toast.show({ type: 'success', text1: t('screens.customSplit.presetUpdated') });
+  }, [canSave, activePresetId, state.savedSplitPresets, getNamedPeople, dispatch, t]);
+
+  // Delete a preset
+  const handleDeletePreset = useCallback(() => {
+    if (!presetToDelete) return;
+    dispatch({ type: 'DELETE_SPLIT_PRESET', payload: presetToDelete });
+    if (activePresetId === presetToDelete) {
+      setActivePresetId(null);
+    }
+    setPresetToDelete(null);
+    setIsDeletePresetVisible(false);
+    Toast.show({ type: 'success', text1: t('screens.customSplit.presetDeleted') });
+  }, [presetToDelete, activePresetId, dispatch, t]);
+
+  // Get brief summary text for a preset
+  const getPresetSummary = useCallback(
+    (preset: SavedSplitPreset) => {
+      const counts = { fixed: 0, percentage: 0, remainder: 0 };
+      preset.customSplits.forEach(s => {
+        counts[s.allocationType]++;
+      });
+      const parts: string[] = [];
+      if (counts.fixed > 0) parts.push(`${counts.fixed} ${t('screens.customSplit.fixed')}`);
+      if (counts.percentage > 0) parts.push(`${counts.percentage} %`);
+      if (counts.remainder > 0)
+        parts.push(`${counts.remainder} ${t('screens.customSplit.remainder')}`);
+      return parts.join(', ');
+    },
+    [t],
+  );
+
   // Validation status display
   const getValidationIcon = () => {
     switch (validation.status) {
@@ -387,6 +497,77 @@ const CustomSplitScreen = () => {
               {toFixedWithoutRounding(overallTotal, 2)}
             </Text>
           </View>
+
+          {/* Saved Presets Section */}
+          {state.savedSplitPresets.length > 0 && (
+            <View style={styles.presetsSection}>
+              <Pressable
+                style={styles.presetsSectionHeader}
+                onPress={() => setIsPresetsExpanded(!isPresetsExpanded)}
+              >
+                <Text style={styles.presetsSectionTitle}>
+                  {t('screens.customSplit.savedPresets')}
+                </Text>
+                <StyledIcons
+                  type="MaterialDesignIcons"
+                  name={isPresetsExpanded ? 'chevron-up' : 'chevron-down'}
+                  size={20}
+                  color={theme.colors.accent}
+                />
+              </Pressable>
+              {isPresetsExpanded && (
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={styles.presetsScrollContent}
+                >
+                  {state.savedSplitPresets.map(preset => (
+                    <Pressable
+                      key={preset.id}
+                      style={[
+                        styles.presetCard,
+                        activePresetId === preset.id && styles.presetCardActive,
+                      ]}
+                      onPress={() => handleLoadPreset(preset)}
+                      onLongPress={() => {
+                        setPresetToDelete(preset.id);
+                        setIsDeletePresetVisible(true);
+                      }}
+                    >
+                      <Text
+                        style={[
+                          styles.presetCardName,
+                          activePresetId === preset.id && styles.presetCardNameActive,
+                        ]}
+                        numberOfLines={1}
+                      >
+                        {preset.name}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.presetCardPeople,
+                          activePresetId === preset.id && styles.presetCardPeopleActive,
+                        ]}
+                      >
+                        {t('screens.customSplit.presetPeople', {
+                          count: preset.customSplits.length,
+                        })}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.presetCardSummary,
+                          activePresetId === preset.id && styles.presetCardSummaryActive,
+                        ]}
+                        numberOfLines={1}
+                      >
+                        {getPresetSummary(preset)}
+                      </Text>
+                    </Pressable>
+                  ))}
+                </ScrollView>
+              )}
+            </View>
+          )}
 
           {/* Person Cards */}
           {people.map((person, index) => (
@@ -463,15 +644,47 @@ const CustomSplitScreen = () => {
           </View>
 
           {/* Save Button */}
-          <Pressable
-            style={[styles.saveButton, !canSave && styles.saveButtonDisabled]}
-            onPress={handleSave}
-            disabled={!canSave}
-          >
-            <Text style={[styles.saveButtonText, !canSave && styles.saveButtonTextDisabled]}>
-              {t('screens.customSplit.saveSplit')}
-            </Text>
-          </Pressable>
+          <View style={styles.footerButtonRow}>
+            <Pressable
+              style={[styles.saveButton, styles.applyButton, !canSave && styles.saveButtonDisabled]}
+              onPress={handleSave}
+              disabled={!canSave}
+            >
+              <Text style={[styles.saveButtonText, !canSave && styles.saveButtonTextDisabled]}>
+                {t('screens.customSplit.applySplit')}
+              </Text>
+            </Pressable>
+            <Pressable
+              style={[styles.presetButton, !canSave && styles.presetButtonDisabled]}
+              onPress={() => {
+                if (activePresetId) {
+                  handleUpdatePreset();
+                } else {
+                  setPresetNameInput('');
+                  setIsPresetNameModalVisible(true);
+                }
+              }}
+              disabled={!canSave}
+            >
+              <Text style={[styles.presetButtonText, !canSave && styles.presetButtonTextDisabled]}>
+                {activePresetId
+                  ? t('screens.customSplit.updatePreset')
+                  : t('screens.customSplit.saveAsPreset')}
+              </Text>
+            </Pressable>
+          </View>
+          {/* Save as New option when editing a preset */}
+          {activePresetId && canSave && (
+            <Pressable
+              style={styles.saveAsNewButton}
+              onPress={() => {
+                setPresetNameInput('');
+                setIsPresetNameModalVisible(true);
+              }}
+            >
+              <Text style={styles.saveAsNewText}>{t('screens.customSplit.saveAsNew')}</Text>
+            </Pressable>
+          )}
         </View>
       </KeyboardAvoidingView>
 
@@ -483,6 +696,74 @@ const CustomSplitScreen = () => {
         type="info"
         buttons={[{ text: t('common.ok'), onPress: () => setIsInfoVisible(false) }]}
         onDismiss={() => setIsInfoVisible(false)}
+      />
+
+      {/* Preset Name Modal */}
+      <StyledAlert
+        visible={isPresetNameModalVisible}
+        title={t('screens.customSplit.presetNameTitle')}
+        type="info"
+        buttons={[
+          {
+            text: t('common.cancel'),
+            style: 'cancel',
+            onPress: () => {
+              setIsPresetNameModalVisible(false);
+              setPresetNameInput('');
+            },
+          },
+          {
+            text: t('common.save'),
+            onPress: () => {
+              if (presetNameInput.trim()) {
+                handleSavePreset();
+              } else {
+                Toast.show({ type: 'error', text1: t('screens.customSplit.presetNameRequired') });
+              }
+            },
+          },
+        ]}
+        onDismiss={() => {
+          setIsPresetNameModalVisible(false);
+          setPresetNameInput('');
+        }}
+      >
+        <TextInput
+          style={styles.presetNameInput}
+          value={presetNameInput}
+          onChangeText={setPresetNameInput}
+          placeholder={t('screens.customSplit.presetNamePlaceholder')}
+          placeholderTextColor={theme.utils.hexToRGBA(theme.colors.card_typography, 0.4)}
+          maxLength={30}
+          autoFocus
+        />
+      </StyledAlert>
+
+      {/* Delete Preset Confirmation */}
+      <StyledAlert
+        visible={isDeletePresetVisible}
+        title={t('screens.customSplit.deletePresetTitle')}
+        message={t('screens.customSplit.deletePresetConfirm')}
+        type="confirm"
+        buttons={[
+          {
+            text: t('common.cancel'),
+            style: 'cancel',
+            onPress: () => {
+              setIsDeletePresetVisible(false);
+              setPresetToDelete(null);
+            },
+          },
+          {
+            text: t('common.delete'),
+            style: 'destructive',
+            onPress: handleDeletePreset,
+          },
+        ]}
+        onDismiss={() => {
+          setIsDeletePresetVisible(false);
+          setPresetToDelete(null);
+        }}
       />
     </>
   );
@@ -677,6 +958,118 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   saveButtonTextDisabled: {
     color: colors.disable_text,
+  },
+  // Footer button row
+  footerButtonRow: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  applyButton: {
+    flex: 1,
+  },
+  presetButton: {
+    flex: 1,
+    paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1.5,
+    borderColor: colors.accent,
+    backgroundColor: 'transparent',
+  },
+  presetButtonDisabled: {
+    borderColor: colors.disable_button,
+  },
+  presetButtonText: {
+    fontSize: 14,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.accent,
+  },
+  presetButtonTextDisabled: {
+    color: colors.disable_text,
+  },
+  saveAsNewButton: {
+    alignItems: 'center',
+    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  saveAsNewText: {
+    fontSize: 13,
+    fontFamily: fonts.Nunito_SemiBold,
+    color: colors.accent,
+    textDecorationLine: 'underline',
+  },
+  // Presets section
+  presetsSection: {
+    marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
+  },
+  presetsSectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: (UnistylesRuntime.screen.height * 1) / 100,
+  },
+  presetsSectionTitle: {
+    fontSize: 14,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.accent,
+  },
+  presetsScrollContent: {
+    gap: 10,
+    paddingVertical: 2,
+  },
+  presetCard: {
+    backgroundColor: colors.card,
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    padding: (UnistylesRuntime.screen.width * 3) / 100,
+    minWidth: (UnistylesRuntime.screen.width * 35) / 100,
+    maxWidth: (UnistylesRuntime.screen.width * 50) / 100,
+    borderWidth: 1.5,
+    borderColor: 'transparent',
+  },
+  presetCardActive: {
+    borderColor: colors.accent,
+    backgroundColor: colors.accent,
+  },
+  presetCardName: {
+    fontSize: 14,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.card_typography,
+    marginBottom: 2,
+  },
+  presetCardNameActive: {
+    color: colors.white,
+  },
+  presetCardPeople: {
+    fontSize: 12,
+    fontFamily: fonts.Nunito_Medium,
+    color: colors.card_typography,
+    opacity: 0.7,
+  },
+  presetCardPeopleActive: {
+    color: colors.white,
+    opacity: 0.9,
+  },
+  presetCardSummary: {
+    fontSize: 11,
+    fontFamily: fonts.Nunito_Medium,
+    color: colors.card_typography,
+    opacity: 0.5,
+    marginTop: 2,
+  },
+  presetCardSummaryActive: {
+    color: colors.white,
+    opacity: 0.7,
+  },
+  // Preset name input in modal
+  presetNameInput: {
+    fontSize: 16,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.card_typography,
+    backgroundColor: colors.backgroundColor,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 1) / 100,
   },
 }));
 
