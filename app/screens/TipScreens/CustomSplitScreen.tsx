@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,17 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import Animated, { FadeIn, FadeOut, Layout } from 'react-native-reanimated';
+import Animated, {
+  FadeIn,
+  FadeOut,
+  LinearTransition,
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withSequence,
+  withTiming,
+  Easing,
+} from 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
 import { StyledHeader, StyledIcons, StyledAlert } from '@components';
 import { useAppContext } from '@/context/AppContext';
@@ -112,7 +122,7 @@ const PersonCard = ({
     <Animated.View
       entering={FadeIn.duration(200)}
       exiting={FadeOut.duration(150)}
-      layout={Layout.springify()}
+      layout={LinearTransition.springify()}
       style={styles.personCard}
     >
       {/* Card Header: Name + Delete */}
@@ -205,6 +215,104 @@ const PersonCard = ({
 
 const MemoizedPersonCard = React.memo(PersonCard);
 
+// Shaking preset card component for iOS-style delete mode
+const ShakingPresetCard = ({
+  preset,
+  isActive,
+  isDeleteMode,
+  onPress,
+  onLongPress,
+  onDelete,
+  getPresetSummary,
+  t,
+  theme,
+  styles,
+}: {
+  preset: SavedSplitPreset;
+  isActive: boolean;
+  isDeleteMode: boolean;
+  onPress: () => void;
+  onLongPress: () => void;
+  onDelete: (id: string) => void;
+  getPresetSummary: (preset: SavedSplitPreset) => string;
+  t: (key: string, options?: any) => string;
+  theme: any;
+  styles: any;
+}) => {
+  const rotation = useSharedValue(0);
+
+  useEffect(() => {
+    if (isDeleteMode) {
+      rotation.value = withRepeat(
+        withSequence(
+          withTiming(-2, { duration: 80, easing: Easing.linear }),
+          withTiming(2, { duration: 80, easing: Easing.linear }),
+          withTiming(-2, { duration: 80, easing: Easing.linear }),
+          withTiming(0, { duration: 80, easing: Easing.linear }),
+        ),
+        -1,
+        false,
+      );
+    } else {
+      rotation.value = withTiming(0, { duration: 100 });
+    }
+  }, [isDeleteMode, rotation]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotateZ: `${rotation.value}deg` }],
+  }));
+
+  return (
+    <Animated.View style={[animatedStyle, { position: 'relative' }]}>
+      <Pressable
+        style={[styles.presetCard, isActive && !isDeleteMode && styles.presetCardActive]}
+        onPress={isDeleteMode ? undefined : onPress}
+        onLongPress={onLongPress}
+      >
+        <Text
+          style={[styles.presetCardName, isActive && !isDeleteMode && styles.presetCardNameActive]}
+          numberOfLines={1}
+        >
+          {preset.name}
+        </Text>
+        <Text
+          style={[
+            styles.presetCardPeople,
+            isActive && !isDeleteMode && styles.presetCardPeopleActive,
+          ]}
+        >
+          {t('screens.customSplit.presetPeople', {
+            count: preset.customSplits.length,
+          })}
+        </Text>
+        <Text
+          style={[
+            styles.presetCardSummary,
+            isActive && !isDeleteMode && styles.presetCardSummaryActive,
+          ]}
+          numberOfLines={1}
+        >
+          {getPresetSummary(preset)}
+        </Text>
+      </Pressable>
+      {isDeleteMode && (
+        <Pressable
+          style={styles.deleteCircleButton}
+          onPress={() => onDelete(preset.id)}
+          hitSlop={8}
+        >
+          <StyledIcons
+            type="MaterialDesignIcons"
+            name="close-circle"
+            size={22}
+            color={theme.colors.error_toast}
+          />
+        </Pressable>
+      )}
+    </Animated.View>
+  );
+};
+
 const CustomSplitScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
@@ -221,6 +329,7 @@ const CustomSplitScreen = () => {
   const [isDeletePresetVisible, setIsDeletePresetVisible] = useState(false);
   const [presetToDelete, setPresetToDelete] = useState<string | null>(null);
   const [isPresetsExpanded, setIsPresetsExpanded] = useState(true);
+  const [isPresetDeleteMode, setIsPresetDeleteMode] = useState(false);
 
   // Resolve initial people from preset if presetId is provided
   const getInitialPeople = (): IndividualSplit[] => {
@@ -348,14 +457,18 @@ const CustomSplitScreen = () => {
   }, [canSave, people, dispatch, navigation, t]);
 
   // Load a preset into the editor
-  const handleLoadPreset = useCallback((preset: SavedSplitPreset) => {
-    const loadedPeople = preset.customSplits.map(split => ({
-      ...split,
-      calculatedAmount: undefined,
-    }));
-    setPeople(loadedPeople);
-    setActivePresetId(preset.id);
-  }, []);
+  const handleLoadPreset = useCallback(
+    (preset: SavedSplitPreset) => {
+      if (isPresetDeleteMode) return;
+      const loadedPeople = preset.customSplits.map(split => ({
+        ...split,
+        calculatedAmount: undefined,
+      }));
+      setPeople(loadedPeople);
+      setActivePresetId(preset.id);
+    },
+    [isPresetDeleteMode],
+  );
 
   // Get named people (fills in default names for unnamed)
   const getNamedPeople = useCallback(() => {
@@ -418,8 +531,23 @@ const CustomSplitScreen = () => {
     }
     setPresetToDelete(null);
     setIsDeletePresetVisible(false);
+    // Exit delete mode if no presets remain after deletion
+    if (state.savedSplitPresets.length <= 1) {
+      setIsPresetDeleteMode(false);
+    }
     Toast.show({ type: 'success', text1: t('screens.customSplit.presetDeleted') });
-  }, [presetToDelete, activePresetId, dispatch, t]);
+  }, [presetToDelete, activePresetId, dispatch, t, state.savedSplitPresets.length]);
+
+  // Handle long press on preset card — enter delete mode
+  const handlePresetLongPress = useCallback(() => {
+    setIsPresetDeleteMode(true);
+  }, []);
+
+  // Handle delete button press on a preset card
+  const handlePresetDeletePress = useCallback((id: string) => {
+    setPresetToDelete(id);
+    setIsDeletePresetVisible(true);
+  }, []);
 
   // Get brief summary text for a preset
   const getPresetSummary = useCallback(
@@ -488,32 +616,55 @@ const CustomSplitScreen = () => {
           contentContainerStyle={styles.scrollContentContainer}
           showsVerticalScrollIndicator={false}
           keyboardDismissMode="on-drag"
+          onScrollBeginDrag={() => {
+            if (isPresetDeleteMode) setIsPresetDeleteMode(false);
+          }}
         >
           {/* Total Bill Banner */}
-          <View style={styles.totalBillBanner}>
+          <Pressable
+            style={styles.totalBillBanner}
+            onPress={() => {
+              if (isPresetDeleteMode) setIsPresetDeleteMode(false);
+            }}
+          >
             <Text style={styles.totalBillLabel}>{t('screens.customSplit.totalBillLabel')}</Text>
             <Text style={styles.totalBillAmount}>
               {currencySymbol}
               {toFixedWithoutRounding(overallTotal, 2)}
             </Text>
-          </View>
+          </Pressable>
 
           {/* Saved Presets Section */}
           {state.savedSplitPresets.length > 0 && (
             <View style={styles.presetsSection}>
               <Pressable
                 style={styles.presetsSectionHeader}
-                onPress={() => setIsPresetsExpanded(!isPresetsExpanded)}
+                onPress={() => {
+                  if (isPresetDeleteMode) {
+                    setIsPresetDeleteMode(false);
+                  } else {
+                    setIsPresetsExpanded(!isPresetsExpanded);
+                  }
+                }}
               >
                 <Text style={styles.presetsSectionTitle}>
                   {t('screens.customSplit.savedPresets')}
                 </Text>
-                <StyledIcons
-                  type="MaterialDesignIcons"
-                  name={isPresetsExpanded ? 'chevron-up' : 'chevron-down'}
-                  size={20}
-                  color={theme.colors.accent}
-                />
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                  {isPresetDeleteMode && (
+                    <Pressable onPress={() => setIsPresetDeleteMode(false)}>
+                      <Text style={styles.doneButtonText}>
+                        {t('common.done', { defaultValue: 'Done' })}
+                      </Text>
+                    </Pressable>
+                  )}
+                  <StyledIcons
+                    type="MaterialDesignIcons"
+                    name={isPresetsExpanded ? 'chevron-up' : 'chevron-down'}
+                    size={20}
+                    color={theme.colors.accent}
+                  />
+                </View>
               </Pressable>
               {isPresetsExpanded && (
                 <ScrollView
@@ -522,81 +673,60 @@ const CustomSplitScreen = () => {
                   contentContainerStyle={styles.presetsScrollContent}
                 >
                   {state.savedSplitPresets.map(preset => (
-                    <Pressable
+                    <ShakingPresetCard
                       key={preset.id}
-                      style={[
-                        styles.presetCard,
-                        activePresetId === preset.id && styles.presetCardActive,
-                      ]}
+                      preset={preset}
+                      isActive={activePresetId === preset.id}
+                      isDeleteMode={isPresetDeleteMode}
                       onPress={() => handleLoadPreset(preset)}
-                      onLongPress={() => {
-                        setPresetToDelete(preset.id);
-                        setIsDeletePresetVisible(true);
-                      }}
-                    >
-                      <Text
-                        style={[
-                          styles.presetCardName,
-                          activePresetId === preset.id && styles.presetCardNameActive,
-                        ]}
-                        numberOfLines={1}
-                      >
-                        {preset.name}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.presetCardPeople,
-                          activePresetId === preset.id && styles.presetCardPeopleActive,
-                        ]}
-                      >
-                        {t('screens.customSplit.presetPeople', {
-                          count: preset.customSplits.length,
-                        })}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.presetCardSummary,
-                          activePresetId === preset.id && styles.presetCardSummaryActive,
-                        ]}
-                        numberOfLines={1}
-                      >
-                        {getPresetSummary(preset)}
-                      </Text>
-                    </Pressable>
+                      onLongPress={handlePresetLongPress}
+                      onDelete={handlePresetDeletePress}
+                      getPresetSummary={getPresetSummary}
+                      t={t}
+                      theme={theme}
+                      styles={styles}
+                    />
                   ))}
                 </ScrollView>
               )}
             </View>
           )}
 
-          {/* Person Cards */}
-          {people.map((person, index) => (
-            <MemoizedPersonCard
-              key={person.id}
-              person={person}
-              index={index}
-              totalPeople={people.length}
-              currencySymbol={currencySymbol}
-              onUpdate={handleUpdatePerson}
-              onRemove={handleRemovePerson}
-              t={t}
-              theme={theme}
-              styles={styles}
-            />
-          ))}
-
-          {/* Add Person Button */}
-          {people.length < MAX_PEOPLE && (
-            <Pressable style={styles.addPersonButton} onPress={handleAddPerson}>
-              <StyledIcons
-                type="MaterialDesignIcons"
-                name="plus-circle"
-                size={20}
-                color={theme.colors.accent}
+          {/* Dismiss delete mode on tap outside presets */}
+          <Pressable
+            onPress={() => {
+              if (isPresetDeleteMode) setIsPresetDeleteMode(false);
+            }}
+          >
+            {/* Person Cards */}
+            {people.map((person, index) => (
+              <MemoizedPersonCard
+                key={person.id}
+                person={person}
+                index={index}
+                totalPeople={people.length}
+                currencySymbol={currencySymbol}
+                onUpdate={handleUpdatePerson}
+                onRemove={handleRemovePerson}
+                t={t}
+                theme={theme}
+                styles={styles}
               />
-              <Text style={styles.addPersonText}>{t('screens.customSplit.addPerson')}</Text>
-            </Pressable>
-          )}
+            ))}
+
+            {/* Add Person Button */}
+            {people.length < MAX_PEOPLE && (
+              <Pressable style={styles.addPersonButton} onPress={handleAddPerson}>
+                <StyledIcons
+                  type="MaterialDesignIcons"
+                  name="plus-circle"
+                  size={20}
+                  color={theme.colors.accent}
+                />
+                <Text style={styles.addPersonText}>{t('screens.customSplit.addPerson')}</Text>
+              </Pressable>
+            )}
+          </Pressable>
         </ScrollView>
 
         {/* Sticky Validation Footer */}
@@ -990,7 +1120,10 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   saveAsNewButton: {
     alignItems: 'center',
-    paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1.2) / 100,
+    marginTop: (UnistylesRuntime.screen.height * 0.5) / 100,
+    minHeight: 44,
+    justifyContent: 'center',
   },
   saveAsNewText: {
     fontSize: 13,
@@ -1015,7 +1148,25 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   presetsScrollContent: {
     gap: 10,
-    paddingVertical: 2,
+    paddingVertical: 8,
+    paddingHorizontal: 8,
+  },
+  deleteCircleButton: {
+    position: 'absolute',
+    top: -6,
+    right: -6,
+    zIndex: 10,
+    backgroundColor: colors.card,
+    borderRadius: 12,
+    width: 24,
+    height: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  doneButtonText: {
+    fontSize: 14,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.accent,
   },
   presetCard: {
     backgroundColor: colors.card,
