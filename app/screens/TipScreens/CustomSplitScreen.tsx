@@ -1234,6 +1234,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   // Preset name input in modal
   presetNameInput: {
+    width: '100%',
     fontSize: 16,
     fontFamily: fonts.Nunito_Bold,
     color: colors.card_typography,
