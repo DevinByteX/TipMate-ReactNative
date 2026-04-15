@@ -76,7 +76,14 @@
       "deletePresetConfirm": "Are you sure you want to delete this preset?",
       "presetPeople": "{{count}} people",
       "applySplit": "Apply Split",
-      "presetNameRequired": "Please enter a preset name"
+      "presetNameRequired": "Please enter a preset name",
+      "duplicateNameTitle": "Preset Name Exists",
+      "duplicateNameMessage": "A preset named \"{{name}}\" already exists. Try a different name.",
+      "duplicateConfigTitle": "Similar Preset Found",
+      "duplicateConfigMessage": "\"{{name}}\" has the same split configuration. Would you like to load it instead?",
+      "duplicateBothTitle": "Duplicate Preset",
+      "duplicateBothMessage": "\"{{name}}\" already has the same name and configuration.",
+      "loadPreset": "Load It"
     },
     "savedTips": {
       "title": "TipMate",

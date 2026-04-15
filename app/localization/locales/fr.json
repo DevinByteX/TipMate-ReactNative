@@ -76,7 +76,14 @@
       "deletePresetConfirm": "Êtes-vous sûr de vouloir supprimer ce préréglage ?",
       "presetPeople": "{{count}} personnes",
       "applySplit": "Appliquer la répartition",
-      "presetNameRequired": "Veuillez entrer un nom pour le préréglage"
+      "presetNameRequired": "Veuillez entrer un nom pour le préréglage",
+      "duplicateNameTitle": "Le nom du préréglage existe",
+      "duplicateNameMessage": "Un préréglage nommé \"{{name}}\" existe déjà. Essayez un nom différent.",
+      "duplicateConfigTitle": "Préréglage similaire trouvé",
+      "duplicateConfigMessage": "\"{{name}}\" a la même configuration de répartition. Voulez-vous le charger à la place ?",
+      "duplicateBothTitle": "Préréglage en double",
+      "duplicateBothMessage": "\"{{name}}\" a déjà le même nom et la même configuration.",
+      "loadPreset": "Le charger"
     },
     "savedTips": {
       "title": "TipMate",

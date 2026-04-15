@@ -76,7 +76,14 @@
       "deletePresetConfirm": "ඔබට මෙම පෙරසිටුවම මැකීමට අවශ්‍ය බව විශ්වාසද?",
       "presetPeople": "පුද්ගලයින් {{count}}",
       "applySplit": "බෙදීම යොදන්න",
-      "presetNameRequired": "කරුණාකර පෙරසිටුවමට නමක් ඇතුළත් කරන්න"
+      "presetNameRequired": "කරුණාකර පෙරසිටුවමට නමක් ඇතුළත් කරන්න",
+      "duplicateNameTitle": "පෙරසිටුවම් නම පවතී",
+      "duplicateNameMessage": "\"{{name}}\" නම සහිත පෙරසිටුවම දැනටමත් පවතී. වෙනස් නමක් උත්සාහ කරන්න.",
+      "duplicateConfigTitle": "සමාන පෙරසිටුවම සොයා ගන්නා ලදී",
+      "duplicateConfigMessage": "\"{{name}}\" ට එකම බෙදීම් වින්‍යාසයි. එය අඩුවට බැගුම් කිරීමට අවශ්‍යද?",
+      "duplicateBothTitle": "අනුපිටපත් පෙරසිටුවම",
+      "duplicateBothMessage": "\"{{name}}\" දැනටමත් එකම නම සහ වින්‍යාස ඇත.",
+      "loadPreset": "එය බගින්න"
     },
     "savedTips": {
       "title": "TipMate",

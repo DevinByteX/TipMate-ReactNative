@@ -76,7 +76,14 @@
       "deletePresetConfirm": "¿Estás seguro de que quieres eliminar este preajuste?",
       "presetPeople": "{{count}} personas",
       "applySplit": "Aplicar división",
-      "presetNameRequired": "Ingrese un nombre para el preajuste"
+      "presetNameRequired": "Ingrese un nombre para el preajuste",
+      "duplicateNameTitle": "El nombre del preajuste existe",
+      "duplicateNameMessage": "Ya existe un preajuste llamado \"{{name}}\". Intenta con un nombre diferente.",
+      "duplicateConfigTitle": "Preajuste similar encontrado",
+      "duplicateConfigMessage": "\"{{name}}\" tiene la misma configuración de división. ¿Te gustaría cargarlo en su lugar?",
+      "duplicateBothTitle": "Preajuste duplicado",
+      "duplicateBothMessage": "\"{{name}}\" ya tiene el mismo nombre y configuración.",
+      "loadPreset": "Cargarlo"
     },
     "savedTips": {
       "title": "TipMate",
