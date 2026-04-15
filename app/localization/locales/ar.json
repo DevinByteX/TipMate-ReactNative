@@ -76,7 +76,14 @@
       "deletePresetConfirm": "هل أنت متأكد من حذف هذا الإعداد المسبق؟",
       "presetPeople": "{{count}} أشخاص",
       "applySplit": "تطبيق التقسيم",
-      "presetNameRequired": "يرجى إدخال اسم للإعداد المسبق"
+      "presetNameRequired": "يرجى إدخال اسم للإعداد المسبق",
+      "duplicateNameTitle": "الإعداد المسبق موجود",
+      "duplicateNameMessage": "يوجد بالفعل إعداد مسبق باسم \"{{name}}\". جرب اسماً مختلفاً.",
+      "duplicateConfigTitle": "تم العثور على إعداد مسبق مشابه",
+      "duplicateConfigMessage": "لدى \"{{name}}\" نفس إعدادات التقسيم. هل تريد تحميله بدلاً من ذلك؟",
+      "duplicateBothTitle": "إعداد مسبق مكرر",
+      "duplicateBothMessage": "\"{{name}}\" لديه بالفعل نفس الاسم والإعدادات.",
+      "loadPreset": "حمّله"
     },
     "savedTips": {
       "title": "TipMate",

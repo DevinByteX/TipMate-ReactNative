@@ -335,6 +335,10 @@ const CustomSplitScreen = () => {
   const [presetToDelete, setPresetToDelete] = useState<string | null>(null);
   const [isPresetsExpanded, setIsPresetsExpanded] = useState(true);
   const [isPresetDeleteMode, setIsPresetDeleteMode] = useState(false);
+  const [duplicateAlert, setDuplicateAlert] = useState<{
+    type: 'name' | 'config' | 'both';
+    preset: SavedSplitPreset;
+  } | null>(null);
 
   // Resolve initial people from preset if presetId is provided
   const getInitialPeople = (): IndividualSplit[] => {
@@ -490,6 +494,38 @@ const CustomSplitScreen = () => {
     [isPresetDeleteMode],
   );
 
+  // Check for duplicate presets (name match, config match, or both)
+  const findDuplicatePreset = useCallback(
+    (
+      name: string,
+      splits: IndividualSplit[],
+    ): { type: 'name' | 'config' | 'both'; preset: SavedSplitPreset } | null => {
+      const lowerName = name.toLowerCase();
+
+      const isSameConfig = (a: IndividualSplit[], b: IndividualSplit[]) => {
+        if (a.length !== b.length) return false;
+        return a.every(
+          (split, i) =>
+            split.allocationType === b[i].allocationType &&
+            split.value === b[i].value &&
+            split.name === b[i].name,
+        );
+      };
+
+      for (const existing of state.savedSplitPresets) {
+        const nameMatch = existing.name.toLowerCase() === lowerName;
+        const configMatch = isSameConfig(splits, existing.customSplits);
+
+        if (nameMatch && configMatch) return { type: 'both', preset: existing };
+        if (nameMatch) return { type: 'name', preset: existing };
+        if (configMatch) return { type: 'config', preset: existing };
+      }
+
+      return null;
+    },
+    [state.savedSplitPresets],
+  );
+
   // Get named people (fills in default names for unnamed)
   const getNamedPeople = useCallback(() => {
     return people.map((person, index) => ({
@@ -506,6 +542,15 @@ const CustomSplitScreen = () => {
     if (!trimmedName) return;
 
     const namedPeople = getNamedPeople();
+
+    // Check for duplicates before saving
+    const duplicate = findDuplicatePreset(trimmedName, namedPeople);
+    if (duplicate) {
+      setIsPresetNameModalVisible(false);
+      setDuplicateAlert(duplicate);
+      return;
+    }
+
     const now = Date.now();
 
     const newPreset: SavedSplitPreset = {
@@ -521,7 +566,7 @@ const CustomSplitScreen = () => {
     setIsPresetNameModalVisible(false);
     setPresetNameInput('');
     Toast.show({ type: 'success', text1: t('screens.customSplit.presetSaved') });
-  }, [canSave, presetNameInput, getNamedPeople, dispatch, t]);
+  }, [canSave, presetNameInput, getNamedPeople, findDuplicatePreset, dispatch, t]);
 
   // Update existing preset
   const handleUpdatePreset = useCallback(() => {
@@ -889,6 +934,68 @@ const CustomSplitScreen = () => {
           autoFocus
         />
       </StyledAlert>
+
+      {/* Duplicate Preset Alert */}
+      <StyledAlert
+        visible={duplicateAlert !== null}
+        title={
+          duplicateAlert?.type === 'name'
+            ? t('screens.customSplit.duplicateNameTitle')
+            : duplicateAlert?.type === 'config'
+            ? t('screens.customSplit.duplicateConfigTitle')
+            : t('screens.customSplit.duplicateBothTitle')
+        }
+        message={
+          duplicateAlert?.type === 'name'
+            ? t('screens.customSplit.duplicateNameMessage', {
+                name: duplicateAlert.preset.name,
+              })
+            : duplicateAlert?.type === 'config'
+            ? t('screens.customSplit.duplicateConfigMessage', {
+                name: duplicateAlert?.preset.name,
+              })
+            : t('screens.customSplit.duplicateBothMessage', {
+                name: duplicateAlert?.preset.name,
+              })
+        }
+        type="warning"
+        buttons={
+          duplicateAlert?.type === 'name'
+            ? [
+                {
+                  text: t('common.ok'),
+                  onPress: () => {
+                    setDuplicateAlert(null);
+                    setIsPresetNameModalVisible(true);
+                  },
+                },
+              ]
+            : [
+                {
+                  text: t('common.cancel'),
+                  style: 'cancel',
+                  onPress: () => {
+                    setDuplicateAlert(null);
+                    setPresetNameInput('');
+                  },
+                },
+                {
+                  text: t('screens.customSplit.loadPreset'),
+                  onPress: () => {
+                    if (duplicateAlert) {
+                      handleLoadPreset(duplicateAlert.preset);
+                    }
+                    setDuplicateAlert(null);
+                    setPresetNameInput('');
+                  },
+                },
+              ]
+        }
+        onDismiss={() => {
+          setDuplicateAlert(null);
+          setPresetNameInput('');
+        }}
+      />
 
       {/* Delete Preset Confirmation */}
       <StyledAlert
