@@ -300,6 +300,11 @@ const ShakingPresetCard = ({
           style={styles.deleteCircleButton}
           onPress={() => onDelete(preset.id)}
           hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel={t('screens.customSplit.deletePresetAccessibilityLabel', {
+            name: preset.name,
+            defaultValue: `Delete preset ${preset.name}`,
+          })}
         >
           <StyledIcons
             type="MaterialDesignIcons"
@@ -347,6 +352,21 @@ const CustomSplitScreen = () => {
 
   // Initialize with 2 default people or loaded preset
   const [people, setPeople] = useState<IndividualSplit[]>(getInitialPeople);
+
+  // Sync preset loading when presets become available (after async persist load)
+  useEffect(() => {
+    if (presetId && state.savedSplitPresets.length > 0) {
+      const preset = state.savedSplitPresets.find(p => p.id === presetId);
+      if (preset && activePresetId !== presetId) {
+        const loadedPeople = preset.customSplits.map(split => ({
+          ...split,
+          calculatedAmount: undefined,
+        }));
+        setPeople(loadedPeople);
+        setActivePresetId(presetId);
+      }
+    }
+  }, [presetId, state.savedSplitPresets]);
 
   const handleUpdatePerson = useCallback((id: string, updates: Partial<IndividualSplit>) => {
     setPeople(prev => prev.map(person => (person.id === id ? { ...person, ...updates } : person)));
@@ -697,6 +717,7 @@ const CustomSplitScreen = () => {
             onPress={() => {
               if (isPresetDeleteMode) setIsPresetDeleteMode(false);
             }}
+            accessible={false}
           >
             {/* Person Cards */}
             {people.map((person, index) => (
