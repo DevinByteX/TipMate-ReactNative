@@ -74,6 +74,7 @@
       "presetDeleted": "تم حذف الإعداد المسبق",
       "deletePresetTitle": "حذف الإعداد المسبق",
       "deletePresetConfirm": "هل أنت متأكد من حذف هذا الإعداد المسبق؟",
+      "deletePresetAccessibilityLabel": "حذف الإعداد المسبق {{name}}",
       "presetPeople": "{{count}} أشخاص",
       "applySplit": "تطبيق التقسيم",
       "presetNameRequired": "يرجى إدخال اسم للإعداد المسبق",
