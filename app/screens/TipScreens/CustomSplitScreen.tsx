@@ -328,7 +328,8 @@ const CustomSplitScreen = () => {
   const { totalBill = 0, tipPercentage = 0, currencySymbol = '$', presetId } = route.params || {};
 
   const [isInfoVisible, setIsInfoVisible] = useState(false);
-  const [activePresetId, setActivePresetId] = useState<string | null>(presetId ?? null);
+  const [activePresetId, setActivePresetId] = useState<string | null>(null);
+  const [hasLoadedPresetFromRoute, setHasLoadedPresetFromRoute] = useState(false);
   const [isPresetNameModalVisible, setIsPresetNameModalVisible] = useState(false);
   const [presetNameInput, setPresetNameInput] = useState('');
   const [isDeletePresetVisible, setIsDeletePresetVisible] = useState(false);
@@ -359,18 +360,19 @@ const CustomSplitScreen = () => {
 
   // Sync preset loading when presets become available (after async persist load)
   useEffect(() => {
-    if (presetId && state.savedSplitPresets.length > 0) {
+    if (presetId && !hasLoadedPresetFromRoute && state.savedSplitPresets.length > 0) {
       const preset = state.savedSplitPresets.find(p => p.id === presetId);
-      if (preset && activePresetId !== presetId) {
+      if (preset) {
         const loadedPeople = preset.customSplits.map(split => ({
           ...split,
           calculatedAmount: undefined,
         }));
         setPeople(loadedPeople);
         setActivePresetId(presetId);
+        setHasLoadedPresetFromRoute(true);
       }
     }
-  }, [presetId, state.savedSplitPresets]);
+  }, [presetId, state.savedSplitPresets, hasLoadedPresetFromRoute]);
 
   const handleUpdatePerson = useCallback((id: string, updates: Partial<IndividualSplit>) => {
     setPeople(prev => prev.map(person => (person.id === id ? { ...person, ...updates } : person)));
@@ -590,6 +592,10 @@ const CustomSplitScreen = () => {
   // Delete a preset
   const handleDeletePreset = useCallback(() => {
     if (!presetToDelete) return;
+    // Check if this is the last preset before dispatching
+    const remainingPresetsCount = state.savedSplitPresets.filter(
+      p => p.id !== presetToDelete,
+    ).length;
     dispatch({ type: 'DELETE_SPLIT_PRESET', payload: presetToDelete });
     if (activePresetId === presetToDelete) {
       setActivePresetId(null);
@@ -597,12 +603,18 @@ const CustomSplitScreen = () => {
     setPresetToDelete(null);
     setIsDeletePresetVisible(false);
     // Exit delete mode if no presets remain after deletion
-    // state.savedSplitPresets still has the old length, so subtract 1
-    if (state.savedSplitPresets.length - 1 <= 0) {
+    if (remainingPresetsCount <= 0) {
       setIsPresetDeleteMode(false);
     }
     Toast.show({ type: 'success', text1: t('screens.customSplit.presetDeleted') });
-  }, [presetToDelete, activePresetId, dispatch, t, state.savedSplitPresets.length]);
+  }, [presetToDelete, activePresetId, dispatch, t, state.savedSplitPresets]);
+
+  // Exit delete mode when all presets are deleted
+  useEffect(() => {
+    if (isPresetDeleteMode && state.savedSplitPresets.length === 0) {
+      setIsPresetDeleteMode(false);
+    }
+  }, [state.savedSplitPresets.length, isPresetDeleteMode]);
 
   // Handle long press on preset card — enter delete mode
   const handlePresetLongPress = useCallback(() => {
