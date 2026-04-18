@@ -597,7 +597,8 @@ const CustomSplitScreen = () => {
     setPresetToDelete(null);
     setIsDeletePresetVisible(false);
     // Exit delete mode if no presets remain after deletion
-    if (state.savedSplitPresets.length <= 1) {
+    // state.savedSplitPresets still has the old length, so subtract 1
+    if (state.savedSplitPresets.length - 1 <= 0) {
       setIsPresetDeleteMode(false);
     }
     Toast.show({ type: 'success', text1: t('screens.customSplit.presetDeleted') });
