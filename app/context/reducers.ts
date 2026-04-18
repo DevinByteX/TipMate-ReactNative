@@ -148,13 +148,19 @@ export const savedSplitPresetsReducer = (
 ): SavedSplitPreset[] => {
   switch (action.type) {
     case 'SAVE_SPLIT_PRESET':
-      return [action.payload, ...state];
+      const afterSave = [action.payload, ...state];
+      saveState({ savedSplitPresets: afterSave });
+      return afterSave;
     case 'UPDATE_SPLIT_PRESET':
-      return state.map(preset =>
+      const afterUpdate = state.map(preset =>
         preset.id === action.payload.id ? action.payload : preset,
       );
+      saveState({ savedSplitPresets: afterUpdate });
+      return afterUpdate;
     case 'DELETE_SPLIT_PRESET':
-      return state.filter(preset => preset.id !== action.payload);
+      const afterDelete = state.filter(preset => preset.id !== action.payload);
+      saveState({ savedSplitPresets: afterDelete });
+      return afterDelete;
     default:
       return state;
   }
