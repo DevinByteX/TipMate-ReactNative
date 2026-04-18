@@ -74,6 +74,7 @@
       "presetDeleted": "Préréglage supprimé",
       "deletePresetTitle": "Supprimer le préréglage",
       "deletePresetConfirm": "Êtes-vous sûr de vouloir supprimer ce préréglage ?",
+      "deletePresetAccessibilityLabel": "Supprimer le préréglage {{name}}",
       "presetPeople": "{{count}} personnes",
       "applySplit": "Appliquer la répartition",
       "presetNameRequired": "Veuillez entrer un nom pour le préréglage",

@@ -74,6 +74,7 @@
       "presetDeleted": "Preajuste eliminado",
       "deletePresetTitle": "Eliminar preajuste",
       "deletePresetConfirm": "¿Estás seguro de que quieres eliminar este preajuste?",
+      "deletePresetAccessibilityLabel": "Eliminar preajuste {{name}}",
       "presetPeople": "{{count}} personas",
       "applySplit": "Aplicar división",
       "presetNameRequired": "Ingrese un nombre para el preajuste",

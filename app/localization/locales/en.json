@@ -74,6 +74,7 @@
       "presetDeleted": "Preset deleted",
       "deletePresetTitle": "Delete Preset",
       "deletePresetConfirm": "Are you sure you want to delete this preset?",
+      "deletePresetAccessibilityLabel": "Delete preset {{name}}",
       "presetPeople": "{{count}} people",
       "applySplit": "Apply Split",
       "presetNameRequired": "Please enter a preset name",

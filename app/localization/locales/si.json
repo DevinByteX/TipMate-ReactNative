@@ -74,6 +74,7 @@
       "presetDeleted": "පෙරසිටුවම මකා දමන ලදී",
       "deletePresetTitle": "පෙරසිටුවම මකන්න",
       "deletePresetConfirm": "ඔබට මෙම පෙරසිටුවම මැකීමට අවශ්‍ය බව විශ්වාසද?",
+      "deletePresetAccessibilityLabel": "පෙරසිටුවම {{name}} මැකීම",
       "presetPeople": "පුද්ගලයින් {{count}}",
       "applySplit": "බෙදීම යොදන්න",
       "presetNameRequired": "කරුණාකර පෙරසිටුවමට නමක් ඇතුළත් කරන්න",
