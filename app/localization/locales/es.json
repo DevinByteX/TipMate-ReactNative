@@ -57,6 +57,7 @@
       "editSplit": "Editar división",
       "customSplitActive": "División personalizada activa",
       "clearCustomSplit": "Limpiar",
+      "clearActiveSplit": "Borrar división personalizada",
       "totalBillLabel": "Total de la cuenta (incl. propina)",
       "namePlaceholder": "Ingrese nombre",
       "fixedPlaceholder": "Ingrese monto fijo",

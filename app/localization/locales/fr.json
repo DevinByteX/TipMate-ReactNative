@@ -57,6 +57,7 @@
       "editSplit": "Modifier le partage",
       "customSplitActive": "Partage personnalisé actif",
       "clearCustomSplit": "Effacer",
+      "clearActiveSplit": "Effacer le partage personnalisé",
       "totalBillLabel": "Total de l'addition (pourboire incl.)",
       "namePlaceholder": "Entrez le nom",
       "fixedPlaceholder": "Entrez le montant fixe",
