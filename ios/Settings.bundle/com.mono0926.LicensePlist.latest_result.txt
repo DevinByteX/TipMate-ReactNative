@@ -707,7 +707,7 @@ body:     MIT License
 
    …
 
-name: @xmldom_xmldom@0.8.11, nameSpecified: @xmldom/xmldom, version: 0.8.11
+name: @xmldom_xmldom@0.8.12, nameSpecified: @xmldom/xmldom, version: 0.8.12
 body: Copyright 2019 - pre…
 
 name: abort-controller@3.0.0, nameSpecified: abort-controller, version: 3.0.0
@@ -822,12 +822,12 @@ C…
 name: bplist-parser@0.3.1, nameSpecified: bplist-parser, version: 0.3.1
 body: MIT…
 
-name: brace-expansion@1.1.12, nameSpecified: brace-expansion, version: 1.1.12
+name: brace-expansion@1.1.13, nameSpecified: brace-expansion, version: 1.1.13
 body: MIT License
 
 Copyrig…
 
-name: brace-expansion@5.0.4, nameSpecified: brace-expansion, version: 5.0.4
+name: brace-expansion@5.0.5, nameSpecified: brace-expansion, version: 5.0.5
 body: MIT License
 
 Copyrig…
@@ -1551,10 +1551,10 @@ body: ISC License
 
 Copyrig…
 
-name: picomatch@2.3.1, nameSpecified: picomatch, version: 2.3.1
+name: picomatch@2.3.2, nameSpecified: picomatch, version: 2.3.2
 body: The MIT License (MIT…
 
-name: picomatch@4.0.3, nameSpecified: picomatch, version: 4.0.3
+name: picomatch@4.0.4, nameSpecified: picomatch, version: 4.0.4
 body: The MIT License (MIT…
 
 name: pirates@4.0.6, nameSpecified: pirates, version: 4.0.6
@@ -2042,7 +2042,7 @@ body: The ISC License
 
 Cop…
 
-name: yaml@2.8.2, nameSpecified: yaml, version: 2.8.2
+name: yaml@2.8.3, nameSpecified: yaml, version: 2.8.3
 body: Copyright Eemeli Aro…
 
 name: yargs-parser@21.1.1, nameSpecified: yargs-parser, version: 21.1.1
