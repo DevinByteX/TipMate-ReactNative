@@ -14,7 +14,7 @@ rename:
   "unicorn-magic@0.1.0": unicorn-magic
   "picocolors@1.1.1": picocolors
   "plist@3.1.0": plist
-  "@xmldom_xmldom@0.8.11": '@xmldom/xmldom'
+  "@xmldom_xmldom@0.8.12": '@xmldom/xmldom'
   "base64-js@1.5.1": base64-js
   "xmlbuilder@15.1.1": xmlbuilder
   "@react-native-vector-icons_feather@12.4.1": '@react-native-vector-icons/feather'
@@ -121,7 +121,7 @@ rename:
   "nullthrows@1.1.1": nullthrows
   "tinyglobby@0.2.15": tinyglobby
   "fdir@6.5.0": fdir
-  "picomatch@4.0.3": picomatch
+  "picomatch@4.0.4": picomatch
   "yargs@17.7.2": yargs
   "cliui@8.0.1": cliui
   "string-width@4.2.3": string-width
@@ -163,7 +163,7 @@ rename:
   "wrappy@1.0.2": wrappy
   "inherits@2.0.4": inherits
   "minimatch@3.1.5": minimatch
-  "brace-expansion@1.1.12": brace-expansion
+  "brace-expansion@1.1.13": brace-expansion
   "balanced-match@1.0.2": balanced-match
   "concat-map@0.0.1": concat-map
   "path-is-absolute@1.0.1": path-is-absolute
@@ -210,7 +210,7 @@ rename:
   "jest-worker@29.7.0": jest-worker
   "jest-util@29.7.0": jest-util
   "ci-info@3.9.0": ci-info
-  "picomatch@2.3.1": picomatch
+  "picomatch@2.3.2": picomatch
   "merge-stream@2.0.0": merge-stream
   "supports-color@8.1.1": supports-color
   "jsc-safe-url@0.2.4": jsc-safe-url
@@ -261,7 +261,7 @@ rename:
   "source-map@0.6.1": source-map
   "serialize-error@2.1.0": serialize-error
   "throat@5.0.0": throat
-  "yaml@2.8.2": yaml
+  "yaml@2.8.3": yaml
   "semver@7.7.4": semver
   "@react-native_gradle-plugin@0.84.1": '@react-native/gradle-plugin'
   "@react-native_js-polyfills@0.84.1": '@react-native/js-polyfills'
@@ -362,7 +362,7 @@ rename:
   "getenv@2.0.0": getenv
   "glob@13.0.0": glob
   "minimatch@10.2.4": minimatch
-  "brace-expansion@5.0.4": brace-expansion
+  "brace-expansion@5.0.5": brace-expansion
   "balanced-match@4.0.4": balanced-match
   "minipass@7.1.2": minipass
   "path-scurry@2.0.1": path-scurry
@@ -520,8 +520,8 @@ manual:
     version: '3.1.0'
     source: https://github.com/TooTallNate/node-plist
     file: '../node_modules/plist/LICENSE'
-  - name: '@xmldom_xmldom@0.8.11'
-    version: '0.8.11'
+  - name: '@xmldom_xmldom@0.8.12'
+    version: '0.8.12'
     source: https://github.com/xmldom/xmldom
     file: '../node_modules/@xmldom/xmldom/LICENSE'
   - name: base64-js@1.5.1
@@ -948,8 +948,8 @@ manual:
     version: '6.5.0'
     source: https://github.com/thecodrr/fdir
     file: '../node_modules/tinyglobby/node_modules/fdir/LICENSE'
-  - name: picomatch@4.0.3
-    version: '4.0.3'
+  - name: picomatch@4.0.4
+    version: '4.0.4'
     source: micromatch/picomatch
     file: '../node_modules/tinyglobby/node_modules/picomatch/LICENSE'
   - name: yargs@17.7.2
@@ -1115,8 +1115,8 @@ manual:
     version: '3.1.5'
     source: https://github.com/isaacs/minimatch
     file: '../node_modules/minimatch/LICENSE'
-  - name: brace-expansion@1.1.12
-    version: '1.1.12'
+  - name: brace-expansion@1.1.13
+    version: '1.1.13'
     source: https://github.com/juliangruber/brace-expansion
     file: '../node_modules/minimatch/node_modules/brace-expansion/LICENSE'
   - name: balanced-match@1.0.2
@@ -1303,8 +1303,8 @@ manual:
     version: '3.9.0'
     source: https://github.com/watson/ci-info
     file: '../node_modules/ci-info/LICENSE'
-  - name: picomatch@2.3.1
-    version: '2.3.1'
+  - name: picomatch@2.3.2
+    version: '2.3.2'
     source: micromatch/picomatch
     file: '../node_modules/picomatch/LICENSE'
   - name: merge-stream@2.0.0
@@ -1507,8 +1507,8 @@ manual:
     version: '5.0.0'
     source: https://github.com/ForbesLindesay/throat
     file: '../node_modules/throat/LICENSE'
-  - name: yaml@2.8.2
-    version: '2.8.2'
+  - name: yaml@2.8.3
+    version: '2.8.3'
     source: https://github.com/eemeli/yaml
     file: '../node_modules/yaml/LICENSE'
   - name: semver@7.7.4
@@ -1910,8 +1910,8 @@ manual:
     version: '10.2.4'
     source: https://github.com/isaacs/minimatch
     file: '../node_modules/@expo/config-plugins/node_modules/minimatch/LICENSE.md'
-  - name: brace-expansion@5.0.4
-    version: '5.0.4'
+  - name: brace-expansion@5.0.5
+    version: '5.0.5'
     source: https://github.com/juliangruber/brace-expansion
     file: '../node_modules/@expo/config-plugins/node_modules/brace-expansion/LICENSE'
   - name: balanced-match@4.0.4

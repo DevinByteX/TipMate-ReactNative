@@ -1028,9 +1028,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/@xmldom_xmldom@0.8.11</string>
+			<string>com.mono0926.LicensePlist/@xmldom_xmldom@0.8.12</string>
 			<key>Title</key>
-			<string>@xmldom/xmldom (0.8.11)</string>
+			<string>@xmldom/xmldom (0.8.12)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -1236,17 +1236,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/brace-expansion@1.1.12</string>
+			<string>com.mono0926.LicensePlist/brace-expansion@1.1.13</string>
 			<key>Title</key>
-			<string>brace-expansion (1.1.12)</string>
+			<string>brace-expansion (1.1.13)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/brace-expansion@5.0.4</string>
+			<string>com.mono0926.LicensePlist/brace-expansion@5.0.5</string>
 			<key>Title</key>
-			<string>brace-expansion (5.0.4)</string>
+			<string>brace-expansion (5.0.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -2732,17 +2732,17 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/picomatch@2.3.1</string>
+			<string>com.mono0926.LicensePlist/picomatch@2.3.2</string>
 			<key>Title</key>
-			<string>picomatch (2.3.1)</string>
+			<string>picomatch (2.3.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/picomatch@4.0.3</string>
+			<string>com.mono0926.LicensePlist/picomatch@4.0.4</string>
 			<key>Title</key>
-			<string>picomatch (4.0.3)</string>
+			<string>picomatch (4.0.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -3884,9 +3884,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/yaml@2.8.2</string>
+			<string>com.mono0926.LicensePlist/yaml@2.8.3</string>
 			<key>Title</key>
-			<string>yaml (2.8.2)</string>
+			<string>yaml (2.8.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
