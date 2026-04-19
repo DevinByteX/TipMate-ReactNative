@@ -374,6 +374,36 @@ const CustomSplitScreen = () => {
     }
   }, [presetId, state.savedSplitPresets, hasLoadedPresetFromRoute]);
 
+  // Check if the current activeSplitConfig matches any saved preset
+  useEffect(() => {
+    if (
+      state.activeSplitConfig?.type === 'custom' &&
+      state.activeSplitConfig?.customSplits &&
+      state.savedSplitPresets.length > 0 &&
+      !presetId // Only do this if presetId wasn't explicitly provided
+    ) {
+      const currentSplits = state.activeSplitConfig.customSplits;
+
+      // Find a preset that matches the current config
+      const matchingPreset = state.savedSplitPresets.find(preset => {
+        if (preset.customSplits.length !== currentSplits.length) return false;
+
+        return preset.customSplits.every((split, index) => {
+          const current = currentSplits[index];
+          return (
+            split.allocationType === current.allocationType &&
+            split.value === current.value &&
+            split.name === current.name
+          );
+        });
+      });
+
+      if (matchingPreset) {
+        setActivePresetId(matchingPreset.id);
+      }
+    }
+  }, [state.activeSplitConfig, state.savedSplitPresets, presetId]);
+
   const handleUpdatePerson = useCallback((id: string, updates: Partial<IndividualSplit>) => {
     setPeople(prev => prev.map(person => (person.id === id ? { ...person, ...updates } : person)));
   }, []);
@@ -482,6 +512,14 @@ const CustomSplitScreen = () => {
     navigation.goBack();
   }, [canSave, people, dispatch, navigation, t]);
 
+  // Clear active custom split and go back to equal splitting
+  const isCustomSplitCurrentlyActive = state.activeSplitConfig?.type === 'custom';
+
+  const handleClearCustomSplit = useCallback(() => {
+    dispatch({ type: 'CLEAR_ACTIVE_SPLIT_CONFIG' });
+    navigation.goBack();
+  }, [dispatch, navigation]);
+
   // Load a preset into the editor
   const handleLoadPreset = useCallback(
     (preset: SavedSplitPreset) => {
@@ -495,6 +533,27 @@ const CustomSplitScreen = () => {
     },
     [isPresetDeleteMode],
   );
+
+  // Toggle preset selection: deselect if already active, load if not
+  const handlePresetPress = useCallback(
+    (preset: SavedSplitPreset) => {
+      if (isPresetDeleteMode) return;
+      if (activePresetId === preset.id) {
+        // Deselect the preset
+        setActivePresetId(null);
+      } else {
+        // Load the preset
+        handleLoadPreset(preset);
+      }
+    },
+    [activePresetId, isPresetDeleteMode, handleLoadPreset],
+  );
+
+  // Clear active preset and reset to blank state
+  const handleClearPreset = useCallback(() => {
+    setActivePresetId(null);
+    setPeople([createDefaultPerson(0), createDefaultPerson(1)]);
+  }, []);
 
   // Check for duplicate presets (name match, config match, or both)
   const findDuplicatePreset = useCallback(
@@ -756,7 +815,7 @@ const CustomSplitScreen = () => {
                       preset={preset}
                       isActive={activePresetId === preset.id}
                       isDeleteMode={isPresetDeleteMode}
-                      onPress={() => handleLoadPreset(preset)}
+                      onPress={() => handlePresetPress(preset)}
                       onLongPress={handlePresetLongPress}
                       onDelete={handlePresetDeletePress}
                       getPresetSummary={getPresetSummary}
@@ -851,6 +910,21 @@ const CustomSplitScreen = () => {
               </Text>
             )}
           </View>
+
+          {/* Clear Custom Split Button */}
+          {isCustomSplitCurrentlyActive && (
+            <Pressable style={styles.clearActiveSplitButton} onPress={handleClearCustomSplit}>
+              <StyledIcons
+                type="MaterialDesignIcons"
+                name="close-circle"
+                size={16}
+                color={theme.colors.error_toast}
+              />
+              <Text style={styles.clearActiveSplitText}>
+                {t('screens.customSplit.clearActiveSplit')}
+              </Text>
+            </Pressable>
+          )}
 
           {/* Save Button */}
           <View style={styles.footerButtonRow}>
@@ -1040,7 +1114,7 @@ const CustomSplitScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   flex1: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -1054,6 +1128,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingBottom: (UnistylesRuntime.screen.height * 2) / 100,
     paddingTop: (UnistylesRuntime.screen.height * 1) / 100,
   },
+  // Active Preset Info Bar
   // Total Bill Banner
   totalBillBanner: {
     backgroundColor: colors.accent,
@@ -1272,6 +1347,22 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.accent,
     textDecorationLine: 'underline',
   },
+  clearActiveSplitButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+    marginBottom: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 0.8) / 100,
+    borderWidth: 1,
+    borderColor: colors.error_toast,
+  },
+  clearActiveSplitText: {
+    fontSize: 13,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.error_toast,
+  },
   // Presets section
   presetsSection: {
     marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
@@ -1351,6 +1442,44 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   presetCardSummaryActive: {
     color: colors.white,
     opacity: 0.7,
+  },
+  // Active Preset Info Bar
+  activePresetBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: utils.hexToRGBA(colors.accent, 0.15),
+    paddingHorizontal: (UnistylesRuntime.screen.width * 3) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 0.8) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 0.8) / 100,
+    marginBottom: (UnistylesRuntime.screen.height * 1.2) / 100,
+    borderLeftWidth: 3,
+    borderLeftColor: colors.accent,
+  },
+  activePresetText: {
+    fontSize: 12,
+    fontFamily: fonts.Nunito_SemiBold,
+    color: colors.accent,
+    flex: 1,
+  },
+  activePresetName: {
+    fontSize: 12,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.accent,
+  },
+  clearButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 6,
+    backgroundColor: utils.hexToRGBA(colors.error_toast, 0.15),
+    borderWidth: 1,
+    borderColor: colors.error_toast,
+    marginLeft: 8,
+  },
+  clearButtonText: {
+    fontSize: 12,
+    fontFamily: fonts.Nunito_Bold,
+    color: colors.error_toast,
   },
   // Preset name input in modal
   presetNameInput: {

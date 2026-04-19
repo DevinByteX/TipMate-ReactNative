@@ -57,6 +57,7 @@
       "editSplit": "تعديل التقسيم",
       "customSplitActive": "التقسيم المخصص نشط",
       "clearCustomSplit": "مسح",
+      "clearActiveSplit": "مسح التقسيم المخصص",
       "totalBillLabel": "إجمالي الفاتورة (شامل البقشيش)",
       "namePlaceholder": "أدخل الاسم",
       "fixedPlaceholder": "أدخل المبلغ الثابت",

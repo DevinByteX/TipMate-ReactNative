@@ -57,6 +57,8 @@
       "editSplit": "Edit Split",
       "customSplitActive": "Custom Split Active",
       "clearCustomSplit": "Clear",
+      "clearActiveSplit": "Clear Custom Split",
+      "editing": "Editing:",
       "totalBillLabel": "Total Bill (incl. tip)",
       "namePlaceholder": "Enter name",
       "fixedPlaceholder": "Enter fixed amount",
