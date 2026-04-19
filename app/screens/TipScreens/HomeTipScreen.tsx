@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { ScrollView, Platform } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 // custom component
 import {
   StyledBillBox,
@@ -32,6 +32,8 @@ const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
   const navigation = useNavigation<any>();
+  const scrollViewRef = useRef<ScrollView>(null);
+  const scrollPositionRef = useRef<number>(0);
 
   const [userInputBillAmount, setUserInputBillAmount] = useState<number>(0);
   const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(5);
@@ -97,6 +99,32 @@ const HomeTipScreen = () => {
     isCustomSplitActive,
     customSplits,
   ]);
+
+  // Restore scroll position when returning from navigation
+  useFocusEffect(
+    React.useCallback(() => {
+      // Small delay to ensure layout is complete before scrolling
+      const timer = setTimeout(() => {
+        if (scrollViewRef.current && scrollPositionRef.current > 0) {
+          scrollViewRef.current.scrollTo({
+            y: scrollPositionRef.current,
+            animated: false,
+          });
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }, []),
+  );
+
+  // Store scroll position before navigating away
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', () => {
+      // Position will be stored in onScroll event
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   // Prepare share data
   const effectiveOverall =
@@ -211,11 +239,16 @@ const HomeTipScreen = () => {
         headerRightIconVisibilty={false}
       />
       <ScrollView
+        ref={scrollViewRef}
         style={styles.mainContainer}
         contentContainerStyle={styles.scrollContentContainer}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         keyboardDismissMode={'on-drag'}
+        scrollEventThrottle={16}
+        onScroll={event => {
+          scrollPositionRef.current = event.nativeEvent.contentOffset.y;
+        }}
       >
         {/* Total Amount container */}
         <StyledTotalAmountInput
