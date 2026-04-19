@@ -40,7 +40,7 @@ type CustomSplitRouteParams = {
 const MIN_PEOPLE = 2;
 const MAX_PEOPLE = 15;
 
-const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
 
 const createDefaultPerson = (index: number): IndividualSplit => ({
   id: generateId(),
