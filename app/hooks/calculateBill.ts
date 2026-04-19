@@ -251,12 +251,13 @@ export const calculateBillValuesCustomSplit = (
   const pennyDifference = targetInCents - totalInCentsFloored;
 
   // Add $0.01 to persons with largest decimal remainders
-  for (let i = 0; i < pennyDifference && i < splitsWithDecimals.length; i++) {
+  const startIdx = Math.max(0, pennyDifference);
+  for (let i = 0; i < Math.max(0, pennyDifference) && i < splitsWithDecimals.length; i++) {
     splitsWithDecimals[i].calculatedAmount =
       (Math.floor((splitsWithDecimals[i].calculatedAmount || 0) * 100) + 1) / 100;
   }
   // Floor the rest
-  for (let i = pennyDifference; i < splitsWithDecimals.length; i++) {
+  for (let i = startIdx; i < splitsWithDecimals.length; i++) {
     splitsWithDecimals[i].calculatedAmount =
       Math.floor((splitsWithDecimals[i].calculatedAmount || 0) * 100) / 100;
   }
@@ -279,7 +280,7 @@ export const calculateBillValuesCustomSplit = (
       name: split.name,
       allocationType: split.allocationType,
       value: split.value,
-      calculatedAmount: split.calculatedAmount,
+      calculatedAmount: split?.calculatedAmount ?? 0,
     })),
     disabledRoundingMethods,
   };
