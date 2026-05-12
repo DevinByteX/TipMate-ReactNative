@@ -35,6 +35,10 @@ import {
   useModalEntrance,
   useBottomSheetEntrance,
 } from './useAnimations';
+import { useCustomSplitPeople } from './useCustomSplitPeople';
+import { useCustomSplitValidation } from './useCustomSplitValidation';
+import { useSplitPresets } from './useSplitPresets';
+import { usePresetDuplication } from './usePresetDuplication';
 
 export {
   convertToTwoDecimalPoints,
@@ -67,6 +71,10 @@ export {
   useVisibilityAnimation,
   useModalEntrance,
   useBottomSheetEntrance,
+  useCustomSplitPeople,
+  useCustomSplitValidation,
+  useSplitPresets,
+  usePresetDuplication,
 };
 export type {
   BillCalculationType,
