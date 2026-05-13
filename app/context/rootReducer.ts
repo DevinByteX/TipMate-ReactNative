@@ -9,6 +9,8 @@ export const rootReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         tips: action.payload.tips ?? state.tips,
         splits: action.payload.splits ?? state.splits,
+        tipSliderConfig: action.payload.tipSliderConfig ?? state.tipSliderConfig,
+        splitSliderConfig: action.payload.splitSliderConfig ?? state.splitSliderConfig,
         currencyConfig: action.payload.currencyConfig ?? state.currencyConfig,
         savedTips: action.payload.savedTips ?? state.savedTips,
         duplicatePreventionWindow: action.payload.duplicatePreventionWindow ?? state.duplicatePreventionWindow,

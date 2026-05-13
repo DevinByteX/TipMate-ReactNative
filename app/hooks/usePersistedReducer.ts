@@ -1,4 +1,4 @@
-import { useReducer, useEffect, Reducer, Dispatch } from 'react';
+import { useReducer, useEffect, useRef, Reducer, Dispatch } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const usePersistedReducer = <S, A>(
@@ -7,6 +7,7 @@ export const usePersistedReducer = <S, A>(
   key: string,
 ): [S, Dispatch<A>] => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const isHydratedRef = useRef(false);
 
   useEffect(() => {
     const loadState = async () => {
@@ -18,6 +19,8 @@ export const usePersistedReducer = <S, A>(
         }
       } catch (error) {
         console.error('Failed to load state from AsyncStorage', error);
+      } finally {
+        isHydratedRef.current = true;
       }
     };
 
@@ -25,6 +28,7 @@ export const usePersistedReducer = <S, A>(
   }, [key]);
 
   useEffect(() => {
+    if (!isHydratedRef.current) return;
     const saveState = async () => {
       try {
         await AsyncStorage.setItem(key, JSON.stringify(state));
