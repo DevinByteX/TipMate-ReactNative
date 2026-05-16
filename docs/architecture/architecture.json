@@ -1,0 +1,864 @@
+{
+  "app": {
+    "name": "TipMate",
+    "bundleId": "com.devinapps.tips.tipcalculator",
+    "version": "1.7.0",
+    "framework": "React Native",
+    "rnVersion": "0.84.1",
+    "reactVersion": "19.2.3",
+    "platforms": ["iOS", "Android"]
+  },
+  "entryPoints": {
+    "root": "index.js",
+    "appEntry": "app/Entrypoint.tsx",
+    "description": "index.js registers 'App' AppRegistry component which is Entrypoint.tsx"
+  },
+  "providerTree": [
+    {
+      "name": "GestureHandlerRootView",
+      "source": "react-native-gesture-handler",
+      "purpose": "Enables gesture recognition across the entire app",
+      "children": [
+        {
+          "name": "AppProvider",
+          "source": "app/context/AppContext.tsx",
+          "purpose": "Global state via usePersistedReducer + AsyncStorage",
+          "children": [
+            {
+              "name": "ApplicationNavigator",
+              "source": "app/navigation/ApplicationNavigation.tsx",
+              "purpose": "Theme init, NavigationContainer, BootSplash, Toast",
+              "children": [
+                {
+                  "name": "SafeAreaProvider",
+                  "source": "react-native-safe-area-context"
+                },
+                {
+                  "name": "NavigationContainer",
+                  "source": "@react-navigation/native"
+                },
+                {
+                  "name": "StackNavigation",
+                  "source": "app/navigation/StackNavigation.tsx"
+                },
+                {
+                  "name": "Toast",
+                  "source": "react-native-toast-message"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "navigation": {
+    "type": "Nested Stack + Drawer",
+    "stack": {
+      "name": "StackNavigation",
+      "file": "app/navigation/StackNavigation.tsx",
+      "navigator": "createNativeStackNavigator",
+      "defaultOptions": {
+        "headerShown": false,
+        "orientation": "portrait",
+        "animation": "ios_from_right",
+        "animationDuration": 250
+      },
+      "screens": [
+        {
+          "name": "MainStack",
+          "component": "DrawerNavigation",
+          "type": "nested-drawer"
+        },
+        {
+          "name": "SavedTipDetailScreen",
+          "file": "app/screens/TipScreens/SavedTipDetailScreen.tsx",
+          "presentation": "push"
+        },
+        {
+          "name": "CustomSplitScreen",
+          "file": "app/screens/TipScreens/CustomSplitScreen.tsx",
+          "presentation": "push"
+        },
+        {
+          "name": "LicensesScreen",
+          "file": "app/screens/AppInfoScreens/LicenseScreen.tsx",
+          "presentation": "push"
+        },
+        {
+          "name": "LicenseContentModal",
+          "file": "app/screens/AppInfoScreens/LicenseContentModalScreen.tsx",
+          "presentation": "modal",
+          "animation": "slide_from_bottom"
+        }
+      ]
+    },
+    "drawer": {
+      "name": "DrawerNavigation",
+      "file": "app/navigation/DrawerNavigation.tsx",
+      "navigator": "createDrawerNavigator",
+      "defaultOptions": {
+        "drawerType": "slide",
+        "overlayColor": "rgba(0,0,0,0.3)",
+        "swipeEdgeWidth": 80
+      },
+      "customDrawerContent": "StyledDrawer",
+      "screens": [
+        {
+          "name": "CalcTipScreen",
+          "label": "navigation.tipSplit",
+          "component": "HomeTipScreen",
+          "file": "app/screens/TipScreens/HomeTipScreen.tsx",
+          "visible": true
+        },
+        {
+          "name": "SavedTipScreen",
+          "label": "navigation.tipSummary",
+          "component": "SavedTipsScreen",
+          "file": "app/screens/TipScreens/SavedTipsScreen.tsx",
+          "visible": true
+        },
+        {
+          "name": "SettingsScreen",
+          "label": "navigation.settingsPreferences",
+          "component": "SettingsScreen",
+          "file": "app/screens/TipScreens/SettingsScreen.tsx",
+          "visible": true
+        },
+        {
+          "name": "AboutUsScreen",
+          "component": "AboutUsScreen",
+          "file": "app/screens/AppInfoScreens/AboutUsScreen.tsx",
+          "visible": false,
+          "note": "Hidden from drawer, navigated to programmatically"
+        }
+      ]
+    }
+  },
+  "screens": {
+    "TipScreens": [
+      {
+        "name": "HomeTipScreen",
+        "file": "app/screens/TipScreens/HomeTipScreen.tsx",
+        "description": "Main tip calculator. Handles bill input, tip %, split mode, rounding, save & share.",
+        "stateUsed": ["activeSplitConfig", "currencyConfig", "tips", "splits", "savedTips"],
+        "hooksUsed": [
+          "calculateBillValues",
+          "calculateBillValuesCustomSplit",
+          "useSaveTip",
+          "useShareTipPreview",
+          "getDeviceCurrency",
+          "useAppContext"
+        ],
+        "componentsUsed": [
+          "StyledBillBox",
+          "StyledHeader",
+          "StyledTotalAmountInput",
+          "StyledTipOptions",
+          "StyledSpiltOptions",
+          "StyledRoundBox",
+          "StyledSharePreviewModal",
+          "StyledAlert"
+        ],
+        "localState": [
+          "userInputBillAmount",
+          "userInputTipPercentage",
+          "userInputSplitCount",
+          "userInputRound",
+          "billValues",
+          "customBillValues"
+        ],
+        "navigationTo": ["CustomSplitScreen", "SavedTipDetailScreen"]
+      },
+      {
+        "name": "SavedTipsScreen",
+        "file": "app/screens/TipScreens/SavedTipsScreen.tsx",
+        "description": "Lists all saved tip calculations with swipe-to-delete.",
+        "stateUsed": ["savedTips"],
+        "hooksUsed": ["useAppContext"],
+        "componentsUsed": ["StyledHeader", "StyledSavedTipsList"],
+        "navigationTo": ["SavedTipDetailScreen"]
+      },
+      {
+        "name": "SavedTipDetailScreen",
+        "file": "app/screens/TipScreens/SavedTipDetailScreen.tsx",
+        "description": "Full detail view of a single saved tip. Supports sharing.",
+        "stateUsed": ["savedTips"],
+        "hooksUsed": ["useShareTipDetailsText", "useShareTipDetailsPDF"],
+        "componentsUsed": ["StyledHeader"]
+      },
+      {
+        "name": "SettingsScreen",
+        "file": "app/screens/TipScreens/SettingsScreen.tsx",
+        "description": "App preferences: theme, currency, language, tip/split defaults, duplicate prevention.",
+        "stateUsed": [
+          "currencyConfig",
+          "language",
+          "isRTL",
+          "duplicatePreventionWindow",
+          "tips",
+          "splits"
+        ],
+        "hooksUsed": ["useAppContext", "useThemeColorCustomiser"],
+        "componentsUsed": [
+          "StyledHeader",
+          "StyledThemeBox",
+          "StyledCurrencySelector",
+          "StyledLanguageSelector",
+          "StyledToggle",
+          "StyledTipOptionsEditMode",
+          "StyledSplitOptionsEditMode",
+          "StyledDuplicatePreventionSelector"
+        ]
+      },
+      {
+        "name": "CustomSplitScreen",
+        "file": "app/screens/TipScreens/CustomSplitScreen.tsx",
+        "description": "Create/edit custom split with per-person allocation (fixed/percentage/remainder). Manages split presets.",
+        "stateUsed": ["activeSplitConfig", "savedSplitPresets"],
+        "hooksUsed": [
+          "useCustomSplitPeople",
+          "useCustomSplitValidation",
+          "useSplitPresets",
+          "usePresetDuplication",
+          "useAppContext"
+        ],
+        "componentsUsed": [
+          "StyledHeader",
+          "StyledCustomSplitPersonCard",
+          "StyledCustomSplitFooter",
+          "StyledCustomSplitPresetCard"
+        ],
+        "dispatchedActions": [
+          "SET_ACTIVE_SPLIT_CONFIG",
+          "SAVE_SPLIT_PRESET",
+          "UPDATE_SPLIT_PRESET",
+          "DELETE_SPLIT_PRESET"
+        ]
+      }
+    ],
+    "AppInfoScreens": [
+      {
+        "name": "AboutUsScreen",
+        "file": "app/screens/AppInfoScreens/AboutUsScreen.tsx",
+        "description": "App info, links, developer credits.",
+        "hooksUsed": ["useExternalLinkAlert"],
+        "componentsUsed": ["StyledHeader"]
+      },
+      {
+        "name": "LicenseScreen",
+        "file": "app/screens/AppInfoScreens/LicenseScreen.tsx",
+        "description": "Lists all open-source licenses. Scroll-to-top spring animation.",
+        "hooksUsed": ["useAnimations"],
+        "componentsUsed": ["StyledHeader", "StyledLicenseDetailsCard"],
+        "navigationTo": ["LicenseContentModal"]
+      },
+      {
+        "name": "LicenseContentModalScreen",
+        "file": "app/screens/AppInfoScreens/LicenseContentModalScreen.tsx",
+        "description": "Full text of a single open-source license, presented as bottom sheet modal.",
+        "hooksUsed": [],
+        "componentsUsed": ["StyledHeader"]
+      }
+    ]
+  },
+  "stateManagement": {
+    "pattern": "React Context + useReducer + AsyncStorage persistence",
+    "contextFile": "app/context/AppContext.tsx",
+    "typesFile": "app/context/types.ts",
+    "rootReducerFile": "app/context/rootReducer.ts",
+    "reducersFile": "app/context/reducers.ts",
+    "persistenceKey": "APPSTATE",
+    "persistenceHook": "usePersistedReducer",
+    "stateShape": {
+      "tips": {
+        "type": "TipOptionState[]",
+        "persisted": true,
+        "description": "4 quick-select tip % options"
+      },
+      "splits": {
+        "type": "SplitOptionState[]",
+        "persisted": true,
+        "description": "4 quick-select split count options"
+      },
+      "tipSliderConfig": {
+        "type": "TipSliderConfigValues",
+        "persisted": true,
+        "description": "Slider bounds/step for tip %, default {min:0, max:80, step:1}"
+      },
+      "splitSliderConfig": {
+        "type": "SplitSliderConfigValues",
+        "persisted": true,
+        "description": "Slider bounds/step for split count, default {min:1, max:15, step:1}"
+      },
+      "currencyConfig": {
+        "type": "CurrencyType | undefined",
+        "persisted": true,
+        "description": "User-selected currency; undefined = device locale currency"
+      },
+      "savedTips": {
+        "type": "SavedTip[]",
+        "persisted": true,
+        "description": "Persisted tip calculation history"
+      },
+      "duplicatePreventionWindow": {
+        "type": "number",
+        "persisted": true,
+        "description": "Minutes window to detect duplicate saves, default 15"
+      },
+      "language": {
+        "type": "string | undefined",
+        "persisted": true,
+        "description": "User language code override; undefined = device language"
+      },
+      "isRTL": {
+        "type": "boolean",
+        "persisted": true,
+        "description": "RTL layout flag, derived from language selection"
+      },
+      "activeSplitConfig": {
+        "type": "ActiveSplitConfig | undefined",
+        "persisted": false,
+        "description": "Active custom split config; intentionally NOT persisted — resets on app restart"
+      },
+      "savedSplitPresets": {
+        "type": "SavedSplitPreset[]",
+        "persisted": true,
+        "description": "Named custom split configurations"
+      }
+    },
+    "reducers": [
+      {
+        "name": "tipReducer",
+        "actions": ["UPDATE_TIP_OPTIONS", "RESET_TIP_OPTIONS_TO_DEFAULT"],
+        "manages": "tips"
+      },
+      {
+        "name": "splitReducer",
+        "actions": ["UPDATE_SPLIT_OPTIONS", "RESET_SPLIT_OPTIONS_TO_DEFAULT"],
+        "manages": "splits"
+      },
+      {
+        "name": "currencyConfigReducer",
+        "actions": ["UPDATE_CURRENCY_SIGN", "RESET_CURRENCY_TO_SYSTEM"],
+        "manages": "currencyConfig"
+      },
+      {
+        "name": "savedTipsReducer",
+        "actions": ["SAVE_TIP", "DELETE_TIP", "CLEAR_ALL_TIPS"],
+        "manages": "savedTips"
+      },
+      {
+        "name": "duplicatePreventionReducer",
+        "actions": ["UPDATE_DUPLICATE_PREVENTION_WINDOW"],
+        "manages": "duplicatePreventionWindow"
+      },
+      {
+        "name": "languageReducer",
+        "actions": ["SET_LANGUAGE", "RESET_LANGUAGE_TO_SYSTEM"],
+        "manages": "language + isRTL"
+      },
+      {
+        "name": "splitConfigReducer",
+        "actions": ["SET_ACTIVE_SPLIT_CONFIG", "CLEAR_ACTIVE_SPLIT_CONFIG"],
+        "manages": "activeSplitConfig"
+      },
+      {
+        "name": "savedSplitPresetsReducer",
+        "actions": ["SAVE_SPLIT_PRESET", "UPDATE_SPLIT_PRESET", "DELETE_SPLIT_PRESET"],
+        "manages": "savedSplitPresets"
+      }
+    ],
+    "specialAction": {
+      "name": "LOAD_PERSISTED_STATE",
+      "description": "Dispatched on app start by usePersistedReducer to hydrate all state from AsyncStorage"
+    }
+  },
+  "hooks": {
+    "calculation": [
+      {
+        "name": "calculateBillValues",
+        "file": "app/hooks/calculateBill.ts",
+        "purpose": "Calculates bill for equal splits: per-person and overall totals with rounding"
+      },
+      {
+        "name": "calculateBillValuesCustomSplit",
+        "file": "app/hooks/calculateBill.ts",
+        "purpose": "Calculates bill for custom splits: fixed → percentage → remainder allocation order, penny distribution via largest remainder method"
+      }
+    ],
+    "sharing": [
+      {
+        "name": "useShareTipPreview",
+        "file": "app/hooks/useShareTipPreview.ts",
+        "purpose": "Manages share preview modal state and delegates to text/PDF share hooks"
+      },
+      {
+        "name": "useShareTipDetailsText",
+        "file": "app/hooks/useShareTipDetailsText.ts",
+        "purpose": "Formats tip data as text and triggers native share sheet"
+      },
+      {
+        "name": "useShareTipDetailsPDF",
+        "file": "app/hooks/useShareTipDetailsPDF.ts",
+        "purpose": "Generates PDF from tip data and triggers native share sheet"
+      }
+    ],
+    "persistence": [
+      {
+        "name": "usePersistedReducer",
+        "file": "app/hooks/usePersistedReducer.ts",
+        "purpose": "Wraps useReducer with AsyncStorage: loads state on mount, saves on every dispatch"
+      },
+      {
+        "name": "asyncStorageUtil",
+        "file": "app/hooks/asyncStorageUtil.ts",
+        "purpose": "Low-level AsyncStorage read/write utilities"
+      },
+      {
+        "name": "asyncStorageHooks",
+        "file": "app/hooks/asyncStorageHooks.ts",
+        "purpose": "Theme preference AsyncStorage helpers (getUserPreferredTheme, setUserPreferredTheme, etc.)"
+      }
+    ],
+    "customSplit": [
+      {
+        "name": "useCustomSplitPeople",
+        "file": "app/hooks/useCustomSplitPeople.ts",
+        "purpose": "Manages add/remove/edit of people in CustomSplitScreen local state"
+      },
+      {
+        "name": "useCustomSplitValidation",
+        "file": "app/hooks/useCustomSplitValidation.ts",
+        "purpose": "Validates allocation totals (fixed ≤ total, percentage ≤ 100%, ≥1 remainder or exact allocation)"
+      },
+      {
+        "name": "useSplitPresets",
+        "file": "app/hooks/useSplitPresets.ts",
+        "purpose": "Manages saved split preset CRUD, active preset detection by matching current config"
+      },
+      {
+        "name": "usePresetDuplication",
+        "file": "app/hooks/usePresetDuplication.ts",
+        "purpose": "Detects and prevents saving duplicate presets"
+      }
+    ],
+    "tipSaving": [
+      {
+        "name": "useSaveTip",
+        "file": "app/hooks/useSaveTip.ts",
+        "purpose": "Encapsulates save tip logic, success/error alert state, and navigation to tip detail"
+      }
+    ],
+    "ui": [
+      {
+        "name": "useAnimations",
+        "file": "app/hooks/useAnimations.ts",
+        "exports": [
+          "usePressAnimation",
+          "useFocusScale",
+          "useScaleSpring",
+          "useValuePulse",
+          "useBounce",
+          "useVisibilityAnimation",
+          "useModalEntrance",
+          "useBottomSheetEntrance"
+        ]
+      },
+      {
+        "name": "useThemeColorCustomiser",
+        "file": "app/hooks/useThemeColorCustomiser.ts",
+        "purpose": "Applies custom accent color overrides to the active Unistyles theme"
+      },
+      {
+        "name": "useExternalLinkAlert",
+        "file": "app/hooks/useExternalLinkAlert.ts",
+        "purpose": "Shows confirmation alert before opening external URLs"
+      }
+    ],
+    "utilities": [
+      {
+        "name": "convertToTwoDecimalPoints",
+        "file": "app/hooks/convertToTwoDecimals.ts"
+      },
+      {
+        "name": "toFixedWithoutRounding",
+        "file": "app/hooks/tofixedWithoutRounding.ts"
+      },
+      {
+        "name": "getDeviceCurrency",
+        "file": "app/hooks/currencyUtils.ts",
+        "purpose": "Reads device locale to determine default currency symbol and code"
+      },
+      {
+        "name": "validateOptionValues",
+        "file": "app/hooks/validationHooks.ts"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "StyledHeader",
+      "file": "app/components/StyledHeader/",
+      "purpose": "Shared screen header with title, back/menu button"
+    },
+    {
+      "name": "StyledTotalAmountInput",
+      "file": "app/components/StyledTotalAmountInput/",
+      "purpose": "Bill amount text input with currency symbol"
+    },
+    {
+      "name": "StyledTipOptions",
+      "file": "app/components/StyledTipOptions/",
+      "purpose": "Quick-select tip % capsules + slider"
+    },
+    {
+      "name": "StyledTipOptionsEditMode",
+      "file": "app/components/StyledTipOptionsEditMode/",
+      "purpose": "Editable tip % capsules for SettingsScreen"
+    },
+    {
+      "name": "StyledSpiltOptions",
+      "file": "app/components/StyledSplitOptions/",
+      "purpose": "Quick-select split count capsules + custom split button"
+    },
+    {
+      "name": "StyledSplitOptionsEditMode",
+      "file": "app/components/StyledSplitOptionsEditMode/",
+      "purpose": "Editable split count capsules for SettingsScreen"
+    },
+    {
+      "name": "StyledBillBox",
+      "file": "app/components/StyledBillBox/",
+      "purpose": "Displays calculated totals (overall + per-person)"
+    },
+    {
+      "name": "StyledRoundBox",
+      "file": "app/components/StyledRoundBox/",
+      "purpose": "Rounding method selector (UP / DOWN / NONE)"
+    },
+    {
+      "name": "StyledSharePreviewModal",
+      "file": "app/components/StyledSharePreviewModal/",
+      "purpose": "Bottom sheet modal previewing tip share content with Text/PDF actions",
+      "animation": "slide"
+    },
+    {
+      "name": "StyledSavedTipsList",
+      "file": "app/components/StyledSavedTipsList/",
+      "purpose": "FlatList of saved tips with swipe-to-delete (ReanimatedSwipeable) and scroll-to-top spring animation"
+    },
+    {
+      "name": "StyledCustomSplitPersonCard",
+      "file": "app/components/StyledCustomSplitPersonCard/",
+      "purpose": "Per-person card in CustomSplitScreen with name, allocation type, and value inputs"
+    },
+    {
+      "name": "StyledCustomSplitFooter",
+      "file": "app/components/StyledCustomSplitFooter/",
+      "purpose": "Footer for CustomSplitScreen with save/cancel actions and validation summary"
+    },
+    {
+      "name": "StyledCustomSplitPresetCard",
+      "file": "app/components/StyledCustomSplitPresetCard/",
+      "purpose": "Displays a saved split preset with load/delete actions"
+    },
+    {
+      "name": "StyledDrawer",
+      "file": "app/components/StyledDrawer/",
+      "purpose": "Custom drawer content with navigation items and app branding"
+    },
+    {
+      "name": "StyledCurrencySelector",
+      "file": "app/components/StyledCurrencySelector/",
+      "purpose": "Searchable currency picker modal",
+      "animation": "slide"
+    },
+    {
+      "name": "StyledLanguageSelector",
+      "file": "app/components/StyledLanguageSelector/",
+      "purpose": "Language picker modal",
+      "animation": "slide"
+    },
+    {
+      "name": "StyledThemeBox",
+      "file": "app/components/StyledThemeBox/",
+      "purpose": "Theme selector (light/dark + accent color swatches)"
+    },
+    {
+      "name": "StyledToggle",
+      "file": "app/components/StyledToggle/",
+      "purpose": "Platform-scaled Switch component (iOS 0.8x, Android 0.9x)"
+    },
+    {
+      "name": "StyledAlert",
+      "file": "app/components/StyledAlert/",
+      "purpose": "Custom alert modal",
+      "animation": "fade"
+    },
+    {
+      "name": "StyledDuplicatePreventionSelector",
+      "file": "app/components/StyledDuplicatePreventionSelector/",
+      "purpose": "Time-window picker for duplicate save detection",
+      "animation": "slide"
+    },
+    {
+      "name": "StyledConfigInput",
+      "file": "app/components/StyledConfigInput/",
+      "purpose": "Numeric input for configurable values (tip %, split count) in edit mode"
+    },
+    {
+      "name": "StyledHorizontalSlider",
+      "file": "app/components/StyledHorizontalSlider/",
+      "purpose": "Styled slider built on @miblanchard/react-native-slider"
+    },
+    {
+      "name": "StyledFilterCapsule",
+      "file": "app/components/StyledFilterCapsule/",
+      "purpose": "Generic pill/capsule toggle button"
+    },
+    {
+      "name": "StyledTextInputCapsule",
+      "file": "app/components/StyledTextInputCapsule/",
+      "purpose": "Text input styled as a capsule"
+    },
+    {
+      "name": "StyledLicenseDetailsCard",
+      "file": "app/components/StyledLicenseDetailsCard/",
+      "purpose": "Card displaying a single license entry with expand action"
+    },
+    {
+      "name": "StyledIcons",
+      "file": "app/components/StyledIcons/",
+      "purpose": "Themed wrappers around vector icon sets"
+    },
+    {
+      "name": "StyledSVGIcons",
+      "file": "app/components/StyledSVGIcons/",
+      "purpose": "Custom SVG icons via react-native-svg"
+    }
+  ],
+  "styling": {
+    "library": "react-native-unistyles",
+    "version": "2.43.0",
+    "setupFile": "app/styles/uniStyles.ts",
+    "themesFile": "app/styles/themes.ts",
+    "breakpointsFile": "app/styles/breakpoints.ts",
+    "toastConfigFile": "app/styles/toastConfig.tsx",
+    "themes": {
+      "light": "lightTheme",
+      "dark": "darkTheme"
+    },
+    "customThemes": {
+      "file": "app/configs/customThemesConfig.ts",
+      "description": "4 accent color variants (teal, orange, blue, pink) × 2 modes = 8 custom themes"
+    },
+    "fonts": [
+      "Montserrat-Black",
+      "Montserrat-Bold",
+      "Montserrat-Medium",
+      "Montserrat-Regular",
+      "Montserrat-Semibold",
+      "Nunito-Black",
+      "Nunito-Bold",
+      "Nunito-SemiBold",
+      "Nunito-Medium",
+      "Nunito-Regular"
+    ],
+    "themePersistence": "AsyncStorage (separate from app state, via asyncStorageHooks)"
+  },
+  "localization": {
+    "library": "i18next + react-i18next",
+    "configFile": "app/localization/localizationConfig.ts",
+    "i18nFile": "app/localization/i18n.ts",
+    "rtlFile": "app/localization/useRTL.ts",
+    "languages": [
+      { "code": "en", "name": "English" },
+      { "code": "es", "name": "Spanish" },
+      { "code": "fr", "name": "French" },
+      { "code": "ar", "name": "Arabic", "rtl": true },
+      { "code": "si", "name": "Sinhala" }
+    ],
+    "initStrategy": "Synchronous init on app start with device language; user preference synced after state hydration",
+    "rtlSupport": true
+  },
+  "storage": {
+    "library": "@react-native-async-storage/async-storage",
+    "keys": {
+      "APPSTATE": "Main app state (tips, splits, savedTips, currency, language, presets, etc.)",
+      "ThemePreference": "User-selected theme name",
+      "ThemeColorOption": "User-selected accent color option"
+    }
+  },
+  "dataTypes": {
+    "TipOptionState": { "place": "number", "value": "number" },
+    "SplitOptionState": { "place": "number", "value": "number" },
+    "IndividualSplit": {
+      "id": "string",
+      "name": "string",
+      "allocationType": "'fixed' | 'percentage' | 'remainder'",
+      "value": "number | undefined",
+      "calculatedAmount": "number | undefined"
+    },
+    "ActiveSplitConfig": {
+      "type": "'equal' | 'custom'",
+      "customSplits": "IndividualSplit[] | undefined"
+    },
+    "SavedTip": {
+      "id": "string",
+      "timestamp": "number",
+      "amount": "number",
+      "tip": "number",
+      "total": "number",
+      "tipPercentage": "number",
+      "numberOfPeople": "number",
+      "splitType": "'equal' | 'custom' | undefined",
+      "perPerson": "{ amount, tip, total } | undefined",
+      "individualSplits": "IndividualSplit[] | undefined",
+      "currencySymbol": "string",
+      "currencyCode": "string"
+    },
+    "SavedSplitPreset": {
+      "id": "string",
+      "name": "string",
+      "createdAt": "number",
+      "updatedAt": "number",
+      "customSplits": "IndividualSplit[]"
+    },
+    "BillCalculationType": {
+      "perPerson": "{ total, tip, subtotal }",
+      "overall": "{ total, tip, subtotal }",
+      "disabledRoundingMethods": "{ UP, DOWN, NO }"
+    },
+    "CustomSplitCalculationType": {
+      "overall": "{ total, tip, subtotal }",
+      "individuals": "IndividualSplit[]",
+      "disabledRoundingMethods": "{ UP, DOWN, NO }"
+    }
+  },
+  "keyDependencies": {
+    "navigation": [
+      "@react-navigation/native",
+      "@react-navigation/native-stack",
+      "@react-navigation/drawer",
+      "@react-navigation/devtools"
+    ],
+    "animation": [
+      "react-native-reanimated ^4.2.2",
+      "react-native-gesture-handler ^2.30.0",
+      "react-native-worklets ^0.7.4"
+    ],
+    "storage": ["@react-native-async-storage/async-storage ^3.0.1"],
+    "styling": ["react-native-unistyles 2.43.0"],
+    "i18n": ["i18next ^25.8.13", "react-i18next ^16.5.4", "react-native-localize ^3.7.0"],
+    "sharing": ["react-native-share 12.0.11", "react-native-html-to-pdf ^1.3.0"],
+    "ui": [
+      "react-native-safe-area-context ^5.7.0",
+      "react-native-screens ^4.24.0",
+      "react-native-svg ^15.15.3",
+      "react-native-toast-message ^2.3.3",
+      "@miblanchard/react-native-slider ^2.6.0"
+    ],
+    "icons": [
+      "@react-native-vector-icons/ant-design",
+      "@react-native-vector-icons/feather",
+      "@react-native-vector-icons/fontawesome6",
+      "@react-native-vector-icons/foundation",
+      "@react-native-vector-icons/ionicons",
+      "@react-native-vector-icons/lucide",
+      "@react-native-vector-icons/material-design-icons",
+      "@react-native-vector-icons/octicons"
+    ],
+    "splash": ["react-native-bootsplash ^7.1.0"],
+    "legal": ["react-native-legal ^1.6.0"]
+  },
+  "componentStateConnections": {
+    "description": "Components that directly receive and display global state (passed as props from their parent screen)",
+    "StyledTipOptions": ["tips", "tipSliderConfig"],
+    "StyledSpiltOptions": ["splits", "splitSliderConfig"],
+    "StyledTipOptionsEditMode": ["tips"],
+    "StyledSplitOptionsEditMode": ["splits"],
+    "StyledSavedTipsList": ["savedTips"],
+    "StyledCurrencySelector": ["currencyConfig"],
+    "StyledLanguageSelector": ["language", "isRTL"],
+    "StyledDuplicatePreventionSelector": ["duplicatePreventionWindow"],
+    "StyledCustomSplitPresetCard": ["savedSplitPresets"]
+  },
+  "coreBillCalculationFlow": {
+    "description": "How a bill amount becomes a displayed result",
+    "steps": [
+      "User enters bill amount → setUserInputBillAmount",
+      "User selects tip % (capsule or slider) → setUserInputTipPercentage",
+      "User selects split count or custom split → setUserInputSplitCount / activeSplitConfig",
+      "User selects rounding method → setUserInputRound",
+      "useEffect fires on any dependency change",
+      "if isCustomSplitActive: calculateBillValuesCustomSplit() → setCustomBillValues()",
+      "else: calculateBillValues() → setBillValues()",
+      "StyledBillBox renders the result"
+    ]
+  },
+  "customSplitFlow": {
+    "description": "Flow for creating and applying a custom split",
+    "steps": [
+      "User taps 'Custom' in StyledSplitOptions → navigation.navigate('CustomSplitScreen')",
+      "useCustomSplitPeople manages local people array (add/remove/edit)",
+      "useCustomSplitValidation validates allocations in real time",
+      "User taps Save → dispatch SET_ACTIVE_SPLIT_CONFIG → navigation.goBack()",
+      "HomeTipScreen useEffect detects activeSplitConfig change",
+      "calculateBillValuesCustomSplit() runs with new config",
+      "StyledBillBox shows per-person individual amounts",
+      "User presses equal-split number → dispatch CLEAR_ACTIVE_SPLIT_CONFIG"
+    ]
+  },
+  "shareSaveFlow": {
+    "description": "Flow for saving and sharing a calculated tip",
+    "steps": [
+      "User taps Save/Share button in HomeTipScreen",
+      "useSaveTip checks for existing duplicate (timestamp window + amount + people)",
+      "If not duplicate: dispatch SAVE_TIP → savedTipsReducer → AsyncStorage",
+      "useShareTipPreview opens StyledSharePreviewModal",
+      "User picks Text Share → useShareTipDetailsText → native share sheet",
+      "User picks PDF Share → useShareTipDetailsPDF → react-native-html-to-pdf → native share sheet"
+    ]
+  },
+  "themeBootFlow": {
+    "description": "App startup: theme application and boot splash dismissal",
+    "steps": [
+      "Entrypoint.tsx: initializeI18n() + applyRTLSync() run synchronously before first render",
+      "ApplicationNavigator mounts → getUserPreferredTheme() reads ThemePreference from AsyncStorage",
+      "getUserUpdatedThemeOption() restores ThemeColorOption accent overrides from AsyncStorage",
+      "useThemeColorCustomiser() applies accent color overrides to active Unistyles theme",
+      "UnistylesRuntime.setTheme(preferredTheme) — applies the persisted theme",
+      "UnistylesRuntime.setAdaptiveThemes(false) — prevents OS light/dark from overriding user choice",
+      "NavigationContainer.onReady() fires → BootSplash.hide({ fade: true })"
+    ]
+  },
+  "plugins": {
+    "highContrastPlugin": {
+      "file": "app/plugins/highContrastPlugin.ts",
+      "purpose": "Unistyles plugin to enforce high-contrast color overrides when accessibility setting is enabled"
+    }
+  },
+  "buildConfig": {
+    "metro": "metro.config.js",
+    "babel": "babel.config.js — uses @react-native/babel-preset + module-resolver for path aliases",
+    "typescript": "tsconfig.json",
+    "pathAliases": {
+      "@navigation": "app/navigation",
+      "@hooks": "app/hooks",
+      "@components": "app/components",
+      "@configs": "app/configs",
+      "@styles": "app/styles",
+      "@/": "app/"
+    },
+    "ios": {
+      "workspace": "ios/TipCalculator.xcworkspace",
+      "scheme": "TipCalculator",
+      "pods": "ios/Podfile"
+    },
+    "android": {
+      "appGradle": "android/app/build.gradle",
+      "releaseVariants": ["assembleRelease", "bundleRelease (AAB)"]
+    }
+  }
+}
