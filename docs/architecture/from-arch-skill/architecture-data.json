@@ -1,0 +1,511 @@
+{
+  "title": "TipMate — Architecture & Flows",
+  "subtitle": "React Native 0.84.1 · iOS & Android · v1.7.0 — Pick a flow on the right to highlight the path through the system and see what happens at each step.",
+  "legend": [
+    { "label": "Entry / Provider", "color": "bg-pink-500", "type": "entry" },
+    { "label": "Navigation", "color": "bg-blue-500", "type": "nav" },
+    { "label": "Screen", "color": "bg-yellow-400", "type": "screen" },
+    { "label": "Hook", "color": "bg-green-500", "type": "hook" },
+    { "label": "State / Reducer", "color": "bg-purple-500", "type": "reducer" },
+    { "label": "Storage & Libs", "color": "bg-orange-500", "type": "external" }
+  ],
+  "columns": [
+    {
+      "name": "BOOTSTRAP",
+      "items": [
+        { "id": "index-js", "label": "index.js", "sublabel": "AppRegistry root", "type": "entry" },
+        {
+          "id": "entrypoint",
+          "label": "Entrypoint.tsx",
+          "sublabel": "i18n init + RTL sync",
+          "type": "entry"
+        },
+        {
+          "id": "gesture-root",
+          "label": "GestureHandlerRootView",
+          "sublabel": "gesture-handler",
+          "type": "entry"
+        },
+        {
+          "id": "app-provider",
+          "label": "AppProvider",
+          "sublabel": "AppContext.tsx",
+          "type": "entry"
+        },
+        {
+          "id": "app-navigator",
+          "label": "ApplicationNavigator",
+          "sublabel": "Theme init + BootSplash",
+          "type": "entry"
+        },
+        {
+          "id": "nav-container",
+          "label": "NavigationContainer",
+          "sublabel": "@react-navigation/native",
+          "type": "entry"
+        }
+      ]
+    },
+    {
+      "name": "NAVIGATION",
+      "items": [
+        {
+          "id": "stack-nav",
+          "label": "StackNavigation",
+          "sublabel": "NativeStack push/modal",
+          "type": "nav"
+        },
+        {
+          "id": "drawer-nav",
+          "label": "DrawerNavigation",
+          "sublabel": "Drawer type: slide",
+          "type": "nav"
+        }
+      ]
+    },
+    {
+      "name": "SCREENS",
+      "items": [
+        {
+          "id": "home-tip",
+          "label": "HomeTipScreen",
+          "sublabel": "Main calculator",
+          "type": "screen"
+        },
+        {
+          "id": "saved-tips",
+          "label": "SavedTipsScreen",
+          "sublabel": "Tip history list",
+          "type": "screen"
+        },
+        {
+          "id": "saved-detail",
+          "label": "SavedTipDetailScreen",
+          "sublabel": "Single tip view",
+          "type": "screen"
+        },
+        {
+          "id": "settings",
+          "label": "SettingsScreen",
+          "sublabel": "App preferences",
+          "type": "screen"
+        },
+        {
+          "id": "custom-split",
+          "label": "CustomSplitScreen",
+          "sublabel": "Per-person allocation",
+          "type": "screen"
+        },
+        {
+          "id": "about-us",
+          "label": "AboutUsScreen",
+          "sublabel": "App info + links",
+          "type": "screen"
+        },
+        {
+          "id": "license",
+          "label": "LicenseScreen",
+          "sublabel": "OSS licenses list",
+          "type": "screen"
+        },
+        {
+          "id": "license-modal",
+          "label": "LicenseContentModal",
+          "sublabel": "Full license text",
+          "type": "screen"
+        }
+      ]
+    },
+    {
+      "name": "HOOKS",
+      "items": [
+        {
+          "id": "calc-equal",
+          "label": "calculateBillValues",
+          "sublabel": "Equal split calc",
+          "type": "hook"
+        },
+        {
+          "id": "calc-custom",
+          "label": "calculateBillValuesCustomSplit",
+          "sublabel": "Custom split calc",
+          "type": "hook"
+        },
+        {
+          "id": "use-save-tip",
+          "label": "useSaveTip",
+          "sublabel": "Save + dedup logic",
+          "type": "hook"
+        },
+        {
+          "id": "use-share-preview",
+          "label": "useShareTipPreview",
+          "sublabel": "Share modal delegate",
+          "type": "hook"
+        },
+        {
+          "id": "use-share-text",
+          "label": "useShareTipDetailsText",
+          "sublabel": "Text → share sheet",
+          "type": "hook"
+        },
+        {
+          "id": "use-share-pdf",
+          "label": "useShareTipDetailsPDF",
+          "sublabel": "PDF → share sheet",
+          "type": "hook"
+        },
+        {
+          "id": "persisted-reducer",
+          "label": "usePersistedReducer",
+          "sublabel": "State + AsyncStorage sync",
+          "type": "hook"
+        },
+        {
+          "id": "async-storage-hooks",
+          "label": "asyncStorageHooks",
+          "sublabel": "Theme preference R/W",
+          "type": "hook"
+        },
+        {
+          "id": "custom-split-people",
+          "label": "useCustomSplitPeople",
+          "sublabel": "People array CRUD",
+          "type": "hook"
+        },
+        {
+          "id": "custom-split-validation",
+          "label": "useCustomSplitValidation",
+          "sublabel": "Allocation validation",
+          "type": "hook"
+        },
+        {
+          "id": "use-split-presets",
+          "label": "useSplitPresets",
+          "sublabel": "Preset CRUD",
+          "type": "hook"
+        },
+        {
+          "id": "use-theme-color",
+          "label": "useThemeColorCustomiser",
+          "sublabel": "Accent color overrides",
+          "type": "hook"
+        },
+        {
+          "id": "use-animations",
+          "label": "useAnimations",
+          "sublabel": "Spring / fade / bounce",
+          "type": "hook"
+        }
+      ]
+    },
+    {
+      "name": "STATE & REDUCERS",
+      "items": [
+        {
+          "id": "app-context",
+          "label": "AppContext",
+          "sublabel": "Global state context",
+          "type": "reducer"
+        },
+        {
+          "id": "root-reducer",
+          "label": "rootReducer",
+          "sublabel": "Combines all reducers",
+          "type": "reducer"
+        },
+        {
+          "id": "tip-reducer",
+          "label": "tipReducer",
+          "sublabel": "tips: TipOptionState[]",
+          "type": "reducer"
+        },
+        {
+          "id": "split-reducer",
+          "label": "splitReducer",
+          "sublabel": "splits: SplitOptionState[]",
+          "type": "reducer"
+        },
+        {
+          "id": "currency-reducer",
+          "label": "currencyConfigReducer",
+          "sublabel": "currencyConfig",
+          "type": "reducer"
+        },
+        {
+          "id": "saved-tips-reducer",
+          "label": "savedTipsReducer",
+          "sublabel": "savedTips: SavedTip[]",
+          "type": "reducer"
+        },
+        {
+          "id": "language-reducer",
+          "label": "languageReducer",
+          "sublabel": "language + isRTL",
+          "type": "reducer"
+        },
+        {
+          "id": "split-config-reducer",
+          "label": "splitConfigReducer",
+          "sublabel": "activeSplitConfig (session)",
+          "type": "reducer"
+        },
+        {
+          "id": "saved-presets-reducer",
+          "label": "savedSplitPresetsReducer",
+          "sublabel": "savedSplitPresets[]",
+          "type": "reducer"
+        }
+      ]
+    },
+    {
+      "name": "STORAGE & LIBS",
+      "items": [
+        {
+          "id": "async-storage",
+          "label": "AsyncStorage",
+          "sublabel": "APPSTATE · ThemePreference",
+          "type": "external"
+        },
+        {
+          "id": "unistyles",
+          "label": "react-native-unistyles",
+          "sublabel": "8 themes · Montserrat/Nunito",
+          "type": "external"
+        },
+        {
+          "id": "i18next",
+          "label": "i18next",
+          "sublabel": "en · es · fr · ar(RTL) · si",
+          "type": "external"
+        },
+        {
+          "id": "rn-share",
+          "label": "react-native-share",
+          "sublabel": "OS native share sheet",
+          "type": "external"
+        },
+        {
+          "id": "html-to-pdf",
+          "label": "react-native-html-to-pdf",
+          "sublabel": "HTML → PDF conversion",
+          "type": "external"
+        },
+        {
+          "id": "bootsplash",
+          "label": "react-native-bootsplash",
+          "sublabel": "Splash → fade dismiss",
+          "type": "external"
+        },
+        {
+          "id": "reanimated",
+          "label": "react-native-reanimated",
+          "sublabel": "Spring / worklets",
+          "type": "external"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    { "number": 1, "from": "index-js", "to": "entrypoint", "label": "AppRegistry" },
+    { "number": 2, "from": "entrypoint", "to": "gesture-root", "label": "wraps" },
+    { "number": 3, "from": "gesture-root", "to": "app-provider", "label": "wraps" },
+    { "number": 4, "from": "app-provider", "to": "app-navigator", "label": "wraps" },
+    { "number": 5, "from": "app-navigator", "to": "nav-container", "label": "renders" },
+    { "number": 6, "from": "nav-container", "to": "stack-nav", "label": "hosts" },
+    { "number": 7, "from": "stack-nav", "to": "drawer-nav", "label": "MainStack" },
+    { "number": 8, "from": "drawer-nav", "to": "home-tip", "label": "CalcTipScreen" },
+    { "number": 9, "from": "drawer-nav", "to": "saved-tips", "label": "SavedTipScreen" },
+    { "number": 10, "from": "drawer-nav", "to": "settings", "label": "SettingsScreen" },
+    { "number": 11, "from": "drawer-nav", "to": "about-us", "label": "AboutUsScreen" },
+    { "number": 12, "from": "stack-nav", "to": "saved-detail", "label": "push" },
+    { "number": 13, "from": "stack-nav", "to": "custom-split", "label": "push" },
+    { "number": 14, "from": "stack-nav", "to": "license", "label": "push" },
+    { "number": 15, "from": "stack-nav", "to": "license-modal", "label": "modal" },
+    { "number": 16, "from": "home-tip", "to": "calc-equal", "label": "useEffect" },
+    { "number": 17, "from": "home-tip", "to": "calc-custom", "label": "if customActive" },
+    { "number": 18, "from": "home-tip", "to": "use-save-tip", "label": "save tap" },
+    { "number": 19, "from": "home-tip", "to": "use-share-preview", "label": "share tap" },
+    { "number": 20, "from": "home-tip", "to": "custom-split", "label": "navigate" },
+    { "number": 21, "from": "home-tip", "to": "saved-detail", "label": "after save" },
+    { "number": 22, "from": "saved-tips", "to": "saved-detail", "label": "tap item" },
+    { "number": 23, "from": "saved-detail", "to": "use-share-text", "label": "text share" },
+    { "number": 24, "from": "saved-detail", "to": "use-share-pdf", "label": "PDF share" },
+    { "number": 25, "from": "custom-split", "to": "custom-split-people", "label": "manages" },
+    { "number": 26, "from": "custom-split", "to": "custom-split-validation", "label": "validates" },
+    { "number": 27, "from": "custom-split", "to": "use-split-presets", "label": "presets" },
+    { "number": 28, "from": "settings", "to": "use-theme-color", "label": "accent change" },
+    { "number": 29, "from": "license", "to": "use-animations", "label": "scroll-to-top spring" },
+    { "number": 30, "from": "use-share-preview", "to": "use-share-text", "label": "text branch" },
+    { "number": 31, "from": "use-share-preview", "to": "use-share-pdf", "label": "PDF branch" },
+    { "number": 32, "from": "use-save-tip", "to": "saved-tips-reducer", "label": "SAVE_TIP" },
+    {
+      "number": 33,
+      "from": "custom-split",
+      "to": "split-config-reducer",
+      "label": "SET_ACTIVE_SPLIT_CONFIG"
+    },
+    {
+      "number": 34,
+      "from": "custom-split",
+      "to": "saved-presets-reducer",
+      "label": "SAVE/UPDATE/DELETE_PRESET"
+    },
+    { "number": 35, "from": "settings", "to": "tip-reducer", "label": "UPDATE_TIP_OPTIONS" },
+    { "number": 36, "from": "settings", "to": "split-reducer", "label": "UPDATE_SPLIT_OPTIONS" },
+    { "number": 37, "from": "settings", "to": "currency-reducer", "label": "UPDATE_CURRENCY_SIGN" },
+    { "number": 38, "from": "settings", "to": "language-reducer", "label": "SET_LANGUAGE" },
+    { "number": 39, "from": "saved-tips", "to": "saved-tips-reducer", "label": "DELETE_TIP" },
+    { "number": 40, "from": "app-provider", "to": "app-context", "label": "provides" },
+    { "number": 41, "from": "app-context", "to": "persisted-reducer", "label": "uses" },
+    { "number": 42, "from": "persisted-reducer", "to": "root-reducer", "label": "wraps" },
+    { "number": 43, "from": "root-reducer", "to": "tip-reducer", "label": "delegates" },
+    { "number": 44, "from": "root-reducer", "to": "split-reducer", "label": "delegates" },
+    { "number": 45, "from": "root-reducer", "to": "currency-reducer", "label": "delegates" },
+    { "number": 46, "from": "root-reducer", "to": "saved-tips-reducer", "label": "delegates" },
+    { "number": 47, "from": "root-reducer", "to": "language-reducer", "label": "delegates" },
+    { "number": 48, "from": "root-reducer", "to": "split-config-reducer", "label": "delegates" },
+    { "number": 49, "from": "root-reducer", "to": "saved-presets-reducer", "label": "delegates" },
+    { "number": 50, "from": "persisted-reducer", "to": "async-storage", "label": "APPSTATE key" },
+    {
+      "number": 51,
+      "from": "async-storage-hooks",
+      "to": "async-storage",
+      "label": "ThemePreference"
+    },
+    { "number": 52, "from": "app-navigator", "to": "async-storage-hooks", "label": "reads theme" },
+    { "number": 53, "from": "use-theme-color", "to": "unistyles", "label": "setTheme" },
+    { "number": 54, "from": "app-navigator", "to": "unistyles", "label": "setTheme on boot" },
+    { "number": 55, "from": "entrypoint", "to": "i18next", "label": "initializeI18n" },
+    { "number": 56, "from": "app-navigator", "to": "bootsplash", "label": "hide(fade)" },
+    { "number": 57, "from": "use-share-text", "to": "rn-share", "label": "open()" },
+    { "number": 58, "from": "use-share-pdf", "to": "html-to-pdf", "label": "generate PDF" },
+    { "number": 59, "from": "use-share-pdf", "to": "rn-share", "label": "open()" },
+    { "number": 60, "from": "use-animations", "to": "reanimated", "label": "useSharedValue" }
+  ],
+  "flows": [
+    {
+      "id": "app-boot",
+      "name": "App Bootstrap",
+      "description": "From index.js AppRegistry to BootSplash dismissal — provider tree, theme init, state hydration, i18n setup, and navigator ready.",
+      "path": [1, 2, 3, 4, 40, 41, 42, 5, 6, 7, 52, 51, 54, 55, 56]
+    },
+    {
+      "id": "tip-calculation",
+      "name": "Tip Calculation",
+      "description": "User enters a bill amount on HomeTipScreen — the calculation hooks fire and StyledBillBox re-renders with per-person totals in real time.",
+      "path": [7, 8, 16, 17, 41, 42, 43, 44, 50]
+    },
+    {
+      "id": "custom-split",
+      "name": "Custom Split Flow",
+      "description": "Opening CustomSplitScreen, building per-person fixed/percentage/remainder allocations, validating, saving as a preset, and applying back to the calculator.",
+      "path": [8, 20, 13, 25, 26, 27, 33, 34, 42, 48, 49, 50]
+    },
+    {
+      "id": "save-share",
+      "name": "Save & Share Tip",
+      "description": "Saving a calculated tip to history with duplicate prevention, then sharing via native text message or generated PDF through the OS share sheet.",
+      "path": [8, 18, 32, 46, 50, 19, 30, 57, 31, 58, 59]
+    },
+    {
+      "id": "settings-change",
+      "name": "Settings & Theme",
+      "description": "Changing app preferences — editing tip/split presets, switching currency or language, and applying a new accent color theme via Unistyles.",
+      "path": [7, 10, 35, 36, 37, 38, 43, 44, 45, 47, 50, 28, 53]
+    },
+    {
+      "id": "saved-tips-browse",
+      "name": "Browse & Share Saved Tips",
+      "description": "Navigating to the tip history list, tapping a saved calculation for full detail, then sharing as formatted text or PDF.",
+      "path": [7, 9, 22, 12, 23, 24, 57, 58, 59]
+    }
+  ],
+  "steps": [
+    {
+      "number": 1,
+      "title": "index.js → AppRegistry",
+      "description": "index.js calls AppRegistry.registerComponent('App', () => App). This is the native iOS/Android entry point — it hands control to Entrypoint.tsx as the root React component."
+    },
+    {
+      "number": 2,
+      "title": "Entrypoint.tsx — i18n + RTL sync",
+      "description": "Before any UI renders, Entrypoint.tsx synchronously calls initializeI18n() to configure the i18next instance with all 5 locales (en, es, fr, ar, si) and applyRTLSync() to set right-to-left layout for Arabic via I18nManager.forceRTL. This must happen before the component tree mounts."
+    },
+    {
+      "number": 3,
+      "title": "Provider tree mounts",
+      "description": "GestureHandlerRootView (react-native-gesture-handler) wraps the entire app, enabling swipe and gesture recognition. AppProvider (AppContext.tsx) mounts inside it, invoking usePersistedReducer which reads the 'APPSTATE' key from AsyncStorage and dispatches LOAD_PERSISTED_STATE to hydrate all 11 global state fields on first render."
+    },
+    {
+      "number": 4,
+      "title": "ApplicationNavigator — theme boot",
+      "description": "ApplicationNavigator reads ThemePreference and ThemeColorOption from AsyncStorage via asyncStorageHooks. It calls UnistylesRuntime.setTheme(preferredTheme) and UnistylesRuntime.setAdaptiveThemes(false) to lock the user's chosen theme before the first frame paints — preventing a theme flash."
+    },
+    {
+      "number": 5,
+      "title": "NavigationContainer ready → BootSplash dismiss",
+      "description": "NavigationContainer renders the full navigator tree — StackNavigation wraps DrawerNavigation (type: slide, 80px swipe edge). When NavigationContainer.onReady() fires, BootSplash.hide({ fade: true }) dismisses the splash screen with a cross-fade animation. The app is now interactive."
+    },
+    {
+      "number": 6,
+      "title": "Bill amount triggers useEffect",
+      "description": "User types a bill amount into StyledTotalAmountInput on HomeTipScreen. The value updates local state (setUserInputBillAmount). A useEffect in HomeTipScreen watches bill amount, tip %, split count, and rounding method — it fires on every change to recompute results."
+    },
+    {
+      "number": 7,
+      "title": "calculateBillValues runs",
+      "description": "For equal splits: calculateBillValues(amount, tipPct, splitCount, roundMethod) returns perPerson and overall totals with UP/DOWN/NONE rounding. For active custom splits: calculateBillValuesCustomSplit applies allocations in order — fixed amounts first, then percentages, then remainder (largest remainder method ensures exact penny distribution). StyledBillBox re-renders immediately."
+    },
+    {
+      "number": 8,
+      "title": "Navigate to CustomSplitScreen",
+      "description": "User taps 'Custom' in StyledSplitOptions. HomeTipScreen calls navigation.navigate('CustomSplitScreen'). StackNavigation pushes the screen with the default ios_from_right animation (250ms duration)."
+    },
+    {
+      "number": 9,
+      "title": "Build per-person split allocations",
+      "description": "useCustomSplitPeople manages the local IndividualSplit[] array — add, remove, rename, and change each person's allocationType ('fixed' | 'percentage' | 'remainder'). useCustomSplitValidation checks in real time: fixed totals ≤ bill amount, percentage total ≤ 100%, and at least one 'remainder' person OR exact full allocation before Save is enabled."
+    },
+    {
+      "number": 10,
+      "title": "Save split config and return",
+      "description": "User taps Save. CustomSplitScreen dispatches SET_ACTIVE_SPLIT_CONFIG to splitConfigReducer with the IndividualSplit[] array. navigation.goBack() returns to HomeTipScreen. The useEffect detects activeSplitConfig change and runs calculateBillValuesCustomSplit() — StyledBillBox shows per-person individual amounts. Note: activeSplitConfig is intentionally NOT persisted — it resets on app restart."
+    },
+    {
+      "number": 11,
+      "title": "Save tip to history",
+      "description": "User taps the Save button on HomeTipScreen. useSaveTip checks savedTips for a duplicate within the duplicatePreventionWindow (default 15 min) with the same bill amount and person count. If not a duplicate, it dispatches SAVE_TIP to savedTipsReducer. usePersistedReducer automatically serialises the updated savedTips array to AsyncStorage under 'APPSTATE' on every dispatch."
+    },
+    {
+      "number": 12,
+      "title": "Share modal and native share sheet",
+      "description": "useShareTipPreview opens StyledSharePreviewModal (slide animation). User selects 'Text' or 'PDF'. Text path: useShareTipDetailsText formats the tip data as a plain-text message and calls react-native-share.open(). PDF path: useShareTipDetailsPDF renders an HTML template → react-native-html-to-pdf generates a PDF file → react-native-share.open() presents the native OS share sheet with the PDF attachment."
+    },
+    {
+      "number": 13,
+      "title": "Edit tip & split option presets",
+      "description": "User edits default tip % or split count capsules via StyledTipOptionsEditMode / StyledSplitOptionsEditMode on SettingsScreen. Each confirmed value dispatches UPDATE_TIP_OPTIONS or UPDATE_SPLIT_OPTIONS to tipReducer / splitReducer. usePersistedReducer saves the entire state to AsyncStorage on every dispatch — next app launch will restore the custom presets."
+    },
+    {
+      "number": 14,
+      "title": "Currency and language preference changes",
+      "description": "Currency change: StyledCurrencySelector dispatches UPDATE_CURRENCY_SIGN to currencyConfigReducer — all currency symbols on HomeTipScreen update immediately. Language change: StyledLanguageSelector dispatches SET_LANGUAGE to languageReducer, updating both language and isRTL fields. AppContext's useEffect syncs the new language code to i18next so all translation strings re-render. RTL layout changes require an app restart."
+    },
+    {
+      "number": 15,
+      "title": "Theme accent color change",
+      "description": "User picks an accent swatch in StyledThemeBox. SettingsScreen calls useThemeColorCustomiser with the new accent option. The hook applies color overrides to the active Unistyles theme registry via UnistylesRuntime and persists the selection to AsyncStorage via asyncStorageHooks.setUserUpdatedThemeOption(). All styled components re-render with the new accent color immediately."
+    },
+    {
+      "number": 16,
+      "title": "Browse and delete saved tips",
+      "description": "SavedTipsScreen renders the savedTips[] array via StyledSavedTipsList (FlatList). Each row shows bill amount, tip %, person count, and timestamp. Swipe-to-delete is implemented with ReanimatedSwipeable from react-native-gesture-handler. Swiping and confirming dispatches DELETE_TIP; clearing all dispatches CLEAR_ALL_TIPS — both persist automatically."
+    },
+    {
+      "number": 17,
+      "title": "View saved tip detail and share",
+      "description": "Tapping a row navigates to SavedTipDetailScreen (push animation) with the full SavedTip object including overall totals, per-person breakdown, and custom split individual amounts if applicable. Share buttons invoke the same useShareTipDetailsText and useShareTipDetailsPDF hooks used from HomeTipScreen — producing identical text or PDF share outputs."
+    }
+  ]
+}
