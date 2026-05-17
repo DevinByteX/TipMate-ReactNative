@@ -1,8 +1,7 @@
 import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useShareTipDetailsText, formatTipDetailsPreview } from './useShareTipDetailsText';
-import { useShareTipDetailsPDF, PDFTranslations } from './useShareTipDetailsPDF';
-import type { ShareTipDetailsParams, ShareTranslations } from './useShareTipDetailsText';
+import { shareTipText, shareTipPDF, formatTipDetailsPreview } from '@/utils/tipSharing';
+import type { ShareTipDetailsParams, ShareTranslations, PDFTranslations } from '@/utils/tipSharing';
 import { Platform } from 'react-native';
 import { useUserSettings } from '@/context/AppContext';
 import { getLocaleForFormatting } from '@/localization';
@@ -117,11 +116,11 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
 
             // Execute share action after modal has been dismissed
             if (action === 'text') {
-                useShareTipDetailsText({ ...shareData, translations: shareTranslations }).catch(error => {
+                shareTipText({ ...shareData, translations: shareTranslations }).catch(error => {
                     console.error('Error sharing as text:', error);
                 });
             } else if (action === 'pdf') {
-                useShareTipDetailsPDF(shareData, pdfTranslations, locale).catch(error => {
+                shareTipPDF(shareData, pdfTranslations, locale).catch(error => {
                     console.error('Error sharing as PDF:', error);
                 });
             }

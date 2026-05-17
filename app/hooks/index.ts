@@ -19,8 +19,7 @@ import { usePersistedReducer } from './usePersistedReducer';
 import { validateOptionValues, areOptionArraysSame } from '@/utils/optionsValidation';
 import { useThemeColorCustomiser, CustomisedTheme } from './useThemeColorCustomiser';
 import { useExternalLinkAlert, ExternalLinkAlertConfig } from './useExternalLinkAlert';
-import { useShareTipDetailsText, formatTipDetailsPreview, ShareTipDetailsParams, ShareTranslations } from './useShareTipDetailsText';
-import { useShareTipDetailsPDF, TipDetailsForPDF, PDFTranslations } from './useShareTipDetailsPDF';
+import { shareTipText, shareTipPDF, formatTipDetailsPreview, ShareTipDetailsParams, ShareTranslations, TipDetailsForPDF, PDFTranslations } from '@/utils/tipSharing';
 import { useShareTipPreview } from './useShareTipPreview';
 import { useSaveTip } from './useSaveTip';
 import { getDeviceCurrency } from '@/utils/deviceCurrency';
@@ -53,9 +52,9 @@ export {
   areOptionArraysSame,
   useThemeColorCustomiser,
   useExternalLinkAlert,
-  useShareTipDetailsText,
+  shareTipText,
+  shareTipPDF,
   formatTipDetailsPreview,
-  useShareTipDetailsPDF,
   useShareTipPreview,
   useSaveTip,
   getDeviceCurrency,
