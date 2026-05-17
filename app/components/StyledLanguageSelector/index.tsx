@@ -7,6 +7,7 @@ import { StyledIcons, StyledAlert } from '@components';
 import { useUserSettings } from '@/context/AppContext';
 import Toast from 'react-native-toast-message';
 import { useBottomSheetEntrance } from '@hooks';
+import { ActionTypes } from '@/context/actionTypes';
 import {
   SUPPORTED_LANGUAGES,
   changeLanguage,
@@ -217,7 +218,7 @@ export const StyledLanguageSelector = ({
 
       // Update app state to reset language (undefined)
       dispatch({
-        type: 'RESET_LANGUAGE_TO_SYSTEM',
+        type: ActionTypes.RESET_LANGUAGE_TO_SYSTEM,
       });
 
       setAlertVisible(false);
@@ -240,7 +241,7 @@ export const StyledLanguageSelector = ({
 
       // Update app state
       dispatch({
-        type: 'SET_LANGUAGE',
+        type: ActionTypes.SET_LANGUAGE,
         payload: {
           language: pendingLanguage.code,
           isRTL: isRTLLanguage(pendingLanguage.code),
@@ -282,7 +283,7 @@ export const StyledLanguageSelector = ({
 
         // Update app state
         dispatch({
-          type: 'SET_LANGUAGE',
+          type: ActionTypes.SET_LANGUAGE,
           payload: {
             language: language.code,
             isRTL: isRTLLanguage(language.code),
@@ -321,7 +322,7 @@ export const StyledLanguageSelector = ({
 
       // Update app state to reset language (undefined)
       dispatch({
-        type: 'RESET_LANGUAGE_TO_SYSTEM',
+        type: ActionTypes.RESET_LANGUAGE_TO_SYSTEM,
       });
 
       Toast.show({

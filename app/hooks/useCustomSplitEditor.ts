@@ -10,6 +10,7 @@ import { namedPeople } from '@/utils/splitFormatting';
 import { findPresetDuplicate, getPresetSummary as getPresetSummaryFn } from '@/utils/presetManager';
 import { Constants } from '@configs';
 import type { RootStackParamList } from '@navigation/types';
+import { ActionTypes } from '@/context/actionTypes';
 
 const createDefaultPerson = (): IndividualSplit => ({
     id: generateId(),
@@ -259,7 +260,7 @@ export const useCustomSplitEditor = (
 
     const confirmDeletePreset = useCallback(() => {
         if (!presetToDelete) return;
-        historyDispatch({ type: 'DELETE_SPLIT_PRESET', payload: presetToDelete });
+        historyDispatch({ type: ActionTypes.DELETE_SPLIT_PRESET, payload: presetToDelete });
         if (activePresetId === presetToDelete) setActivePresetId(null);
         setPresetToDelete(null);
         setIsDeleteConfirmVisible(false);
@@ -299,7 +300,7 @@ export const useCustomSplitEditor = (
 
         const now = Date.now();
         historyDispatch({
-            type: 'SAVE_SPLIT_PRESET',
+            type: ActionTypes.SAVE_SPLIT_PRESET,
             payload: {
                 id: generateId(),
                 name: trimmedName,
@@ -320,7 +321,7 @@ export const useCustomSplitEditor = (
         if (!existing) return;
         const named = namedPeople(people, t);
         historyDispatch({
-            type: 'UPDATE_SPLIT_PRESET',
+            type: ActionTypes.UPDATE_SPLIT_PRESET,
             payload: { ...existing, updatedAt: Date.now(), customSplits: named },
         });
         Toast.show({ type: 'success', text1: t('screens.customSplit.presetUpdated') });
@@ -353,13 +354,13 @@ export const useCustomSplitEditor = (
         if (!canSave) return;
         const named = namedPeople(people, t);
         sessionDispatch({
-            type: 'SET_ACTIVE_SPLIT_CONFIG',
+            type: ActionTypes.SET_ACTIVE_SPLIT_CONFIG,
             payload: { type: 'custom', customSplits: named },
         });
     }, [canSave, people, t, sessionDispatch]);
 
     const clear = useCallback(() => {
-        sessionDispatch({ type: 'CLEAR_ACTIVE_SPLIT_CONFIG' });
+        sessionDispatch({ type: ActionTypes.CLEAR_ACTIVE_SPLIT_CONFIG });
     }, [sessionDispatch]);
 
     const isCustomSplitActive = sessionState.activeSplitConfig?.type === 'custom';

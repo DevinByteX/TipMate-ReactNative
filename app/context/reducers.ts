@@ -1,4 +1,5 @@
 import { CurrencyType } from '@configs';
+import { ActionTypes } from './actionTypes';
 import {
   SplitOptionState,
   SplitAction,
@@ -17,14 +18,13 @@ import {
 
 export const tipReducer = (state: TipOptionState[], action: TipAction): TipOptionState[] => {
   switch (action.type) {
-    case 'UPDATE_TIP_OPTIONS':
+    case ActionTypes.UPDATE_TIP_OPTIONS:
       const updatedTips = state.map(tip =>
         tip.place === action.payload.place ? action.payload : tip,
       );
       return updatedTips;
-    case 'RESET_TIP_OPTIONS_TO_DEFAULT':
-      const defaultTipOptionsPayload = action.payload;
-      return defaultTipOptionsPayload;
+    case ActionTypes.RESET_TIP_OPTIONS_TO_DEFAULT:
+      return action.payload;
     default:
       return state;
   }
@@ -35,14 +35,13 @@ export const splitReducer = (
   action: SplitAction,
 ): SplitOptionState[] => {
   switch (action.type) {
-    case 'UPDATE_SPLIT_OPTIONS':
+    case ActionTypes.UPDATE_SPLIT_OPTIONS:
       const updatedSplits = state.map(split =>
         split.place === action.payload.place ? action.payload : split,
       );
       return updatedSplits;
-    case 'RESET_SPLIT_OPTIONS_TO_DEFAULT':
-      const defaultSplitOptionsPayload = action.payload;
-      return defaultSplitOptionsPayload;
+    case ActionTypes.RESET_SPLIT_OPTIONS_TO_DEFAULT:
+      return action.payload;
     default:
       return state;
   }
@@ -53,10 +52,9 @@ export const currencyConfigReducer = (
   action: CurrencyConfigAction,
 ): CurrencyType | undefined => {
   switch (action.type) {
-    case 'UPDATE_CURRENCY_SIGN':
-      const updatedCurrencyConfig = action.payload;
-      return updatedCurrencyConfig;
-    case 'RESET_CURRENCY_TO_SYSTEM':
+    case ActionTypes.UPDATE_CURRENCY_SIGN:
+      return action.payload;
+    case ActionTypes.RESET_CURRENCY_TO_SYSTEM:
       return undefined;
     default:
       return state;
@@ -65,13 +63,11 @@ export const currencyConfigReducer = (
 
 export const savedTipsReducer = (state: SavedTip[], action: SavedTipAction): SavedTip[] => {
   switch (action.type) {
-    case 'SAVE_TIP':
-      const newTips = [action.payload, ...state];
-      return newTips;
-    case 'DELETE_TIP':
-      const filteredTips = state.filter(tip => tip.id !== action.payload);
-      return filteredTips;
-    case 'CLEAR_ALL_TIPS':
+    case ActionTypes.SAVE_TIP:
+      return [action.payload, ...state];
+    case ActionTypes.DELETE_TIP:
+      return state.filter(tip => tip.id !== action.payload);
+    case ActionTypes.CLEAR_ALL_TIPS:
       return [];
     default:
       return state;
@@ -83,7 +79,7 @@ export const duplicatePreventionReducer = (
   action: DuplicatePreventionAction,
 ): number => {
   switch (action.type) {
-    case 'UPDATE_DUPLICATE_PREVENTION_WINDOW':
+    case ActionTypes.UPDATE_DUPLICATE_PREVENTION_WINDOW:
       return action.payload;
     default:
       return state;
@@ -100,13 +96,12 @@ export const languageReducer = (
   action: LanguageAction,
 ): LanguageState => {
   switch (action.type) {
-    case 'SET_LANGUAGE':
-      const newLanguageState = {
+    case ActionTypes.SET_LANGUAGE:
+      return {
         language: action.payload.language,
         isRTL: action.payload.isRTL,
       };
-      return newLanguageState;
-    case 'RESET_LANGUAGE_TO_SYSTEM':
+    case ActionTypes.RESET_LANGUAGE_TO_SYSTEM:
       return { language: undefined, isRTL: false };
     default:
       return state;
@@ -118,9 +113,9 @@ export const splitConfigReducer = (
   action: SplitConfigAction,
 ): ActiveSplitConfig | undefined => {
   switch (action.type) {
-    case 'SET_ACTIVE_SPLIT_CONFIG':
+    case ActionTypes.SET_ACTIVE_SPLIT_CONFIG:
       return action.payload;
-    case 'CLEAR_ACTIVE_SPLIT_CONFIG':
+    case ActionTypes.CLEAR_ACTIVE_SPLIT_CONFIG:
       return undefined;
     default:
       return state;
@@ -132,17 +127,14 @@ export const savedSplitPresetsReducer = (
   action: SavedSplitPresetAction,
 ): SavedSplitPreset[] => {
   switch (action.type) {
-    case 'SAVE_SPLIT_PRESET':
-      const afterSave = [action.payload, ...state];
-      return afterSave;
-    case 'UPDATE_SPLIT_PRESET':
-      const afterUpdate = state.map(preset =>
+    case ActionTypes.SAVE_SPLIT_PRESET:
+      return [action.payload, ...state];
+    case ActionTypes.UPDATE_SPLIT_PRESET:
+      return state.map(preset =>
         preset.id === action.payload.id ? action.payload : preset,
       );
-      return afterUpdate;
-    case 'DELETE_SPLIT_PRESET':
-      const afterDelete = state.filter(preset => preset.id !== action.payload);
-      return afterDelete;
+    case ActionTypes.DELETE_SPLIT_PRESET:
+      return state.filter(preset => preset.id !== action.payload);
     default:
       return state;
   }

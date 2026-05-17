@@ -1,5 +1,6 @@
 import { useReducer, useEffect, useRef, Reducer, Dispatch } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ActionTypes } from '@/context/actionTypes';
 
 export const usePersistedReducer = <S, A>(
   reducer: Reducer<S, A>,
@@ -15,7 +16,7 @@ export const usePersistedReducer = <S, A>(
         const savedState = await AsyncStorage.getItem(key);
         if (savedState) {
           const parsedState = JSON.parse(savedState) as S;
-          dispatch({ type: 'LOAD_PERSISTED_STATE', payload: parsedState } as any);
+          dispatch({ type: ActionTypes.LOAD_PERSISTED_STATE, payload: parsedState } as any);
         }
       } catch (error) {
         console.error('Failed to load state from AsyncStorage', error);

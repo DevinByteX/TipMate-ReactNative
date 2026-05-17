@@ -1,101 +1,101 @@
 import Share, { ShareOptions } from 'react-native-share';
 import { generatePDF } from 'react-native-html-to-pdf';
 import { Platform } from 'react-native';
-import { APP_LINKS } from '@/configs/constants';
+import { Constants } from '@configs';
 import { IndividualSplit } from '@/context/types';
 
 // ─── Text sharing ─────────────────────────────────────────────────────────────
 
 export type ShareTipDetailsParams = {
+  amount: number;
+  tip: number;
+  total: number;
+  tipPercentage: number;
+  numberOfPeople: number;
+  splitType?: 'equal' | 'custom';
+  perPerson?: {
     amount: number;
     tip: number;
     total: number;
-    tipPercentage: number;
-    numberOfPeople: number;
-    splitType?: 'equal' | 'custom';
-    perPerson?: {
-        amount: number;
-        tip: number;
-        total: number;
-    };
-    individualSplits?: IndividualSplit[];
-    currencySymbol?: string;
-    title?: string;
-    subject?: string;
-    translations?: ShareTranslations;
+  };
+  individualSplits?: IndividualSplit[];
+  currencySymbol?: string;
+  title?: string;
+  subject?: string;
+  translations?: ShareTranslations;
 };
 
 export type ShareTranslations = {
-    tipSummary: string;
-    billAmount: string;
-    tipPercentage: string;
-    tipAmount: string;
-    totalAmount: string;
-    splitAmong: string;
-    persons: string;
-    subtotalPerPerson: string;
-    tipPerPerson: string;
-    totalPerPerson: string;
-    sharedVia: string;
-    customSplitLabel: string;
-    individualSplit: string;
+  tipSummary: string;
+  billAmount: string;
+  tipPercentage: string;
+  tipAmount: string;
+  totalAmount: string;
+  splitAmong: string;
+  persons: string;
+  subtotalPerPerson: string;
+  tipPerPerson: string;
+  totalPerPerson: string;
+  sharedVia: string;
+  customSplitLabel: string;
+  individualSplit: string;
 };
 
 /**
  * Default English translations for backward compatibility
  */
 const defaultTranslations: ShareTranslations = {
-    tipSummary: 'Tip Summary',
-    billAmount: 'Bill Amount:',
-    tipPercentage: 'Tip Percentage:',
-    tipAmount: 'Tip Amount:',
-    totalAmount: 'Total Amount:',
-    splitAmong: 'Split Among:',
-    persons: 'person(s)',
-    subtotalPerPerson: 'Subtotal per person:',
-    tipPerPerson: 'Tip per person:',
-    totalPerPerson: 'Total per person:',
-    sharedVia: 'Shared via TipMate',
-    customSplitLabel: 'Custom Split:',
-    individualSplit: '{{name}}: {{currency}}{{amount}}',
+  tipSummary: 'Tip Summary',
+  billAmount: 'Bill Amount:',
+  tipPercentage: 'Tip Percentage:',
+  tipAmount: 'Tip Amount:',
+  totalAmount: 'Total Amount:',
+  splitAmong: 'Split Among:',
+  persons: 'person(s)',
+  subtotalPerPerson: 'Subtotal per person:',
+  tipPerPerson: 'Tip per person:',
+  totalPerPerson: 'Total per person:',
+  sharedVia: 'Shared via TipMate',
+  customSplitLabel: 'Custom Split:',
+  individualSplit: '{{name}}: {{currency}}{{amount}}',
 };
 
 /**
  * Formats the tip details into a preview message string
  */
 export const formatTipDetailsPreview = ({
-    amount,
-    tip,
-    total,
-    tipPercentage,
-    numberOfPeople,
-    splitType,
-    perPerson,
-    individualSplits,
-    currencySymbol = '$',
-    translations = defaultTranslations,
+  amount,
+  tip,
+  total,
+  tipPercentage,
+  numberOfPeople,
+  splitType,
+  perPerson,
+  individualSplits,
+  currencySymbol = '$',
+  translations = defaultTranslations,
 }: Omit<ShareTipDetailsParams, 'title' | 'subject'> & { translations?: ShareTranslations }): string => {
-    const t = translations;
+  const t = translations;
 
-    let splitSection = '';
-    if (splitType === 'custom' && individualSplits && individualSplits.length > 0) {
-        const splitLines = individualSplits
-            .map(split => {
-                // Replace amount and currency first, then name last, because name is
-                // user input and could contain template placeholders like {{currency}}.
-                const line = t.individualSplit
-                    .replace('{{amount}}', (split.calculatedAmount || 0).toFixed(2))
-                    .replace('{{currency}}', currencySymbol)
-                    .replace('{{name}}', split.name);
-                return `  • ${line}`;
-            })
-            .join('\n');
-        splitSection = `\n👥 ${t.customSplitLabel} (${individualSplits.length} ${t.persons})\n${splitLines}`;
-    } else if (numberOfPeople > 1 && perPerson) {
-        splitSection = `\n👥 ${t.splitAmong} ${numberOfPeople} ${t.persons}\n  • ${t.subtotalPerPerson} ${currencySymbol}${perPerson.amount.toFixed(2)}\n  • ${t.tipPerPerson} ${currencySymbol}${perPerson.tip.toFixed(2)}\n  • ${t.totalPerPerson} ${currencySymbol}${perPerson.total.toFixed(2)}`;
-    }
+  let splitSection = '';
+  if (splitType === 'custom' && individualSplits && individualSplits.length > 0) {
+    const splitLines = individualSplits
+      .map(split => {
+        // Replace amount and currency first, then name last, because name is
+        // user input and could contain template placeholders like {{currency}}.
+        const line = t.individualSplit
+          .replace('{{amount}}', (split.calculatedAmount || 0).toFixed(2))
+          .replace('{{currency}}', currencySymbol)
+          .replace('{{name}}', split.name);
+        return `  • ${line}`;
+      })
+      .join('\n');
+    splitSection = `\n👥 ${t.customSplitLabel} (${individualSplits.length} ${t.persons})\n${splitLines}`;
+  } else if (numberOfPeople > 1 && perPerson) {
+    splitSection = `\n👥 ${t.splitAmong} ${numberOfPeople} ${t.persons}\n  • ${t.subtotalPerPerson} ${currencySymbol}${perPerson.amount.toFixed(2)}\n  • ${t.tipPerPerson} ${currencySymbol}${perPerson.tip.toFixed(2)}\n  • ${t.totalPerPerson} ${currencySymbol}${perPerson.total.toFixed(2)}`;
+  }
 
-    const message = `
+  const message = `
 💸 ${t.tipSummary}
 
 🧾 ${t.billAmount} ${currencySymbol}${amount.toFixed(2)}
@@ -107,10 +107,24 @@ ${splitSection}
 ${t.sharedVia}
     `.trim();
 
-    return message;
+  return message;
 };
 
 export const shareTipText = async ({
+  amount,
+  tip,
+  total,
+  tipPercentage,
+  numberOfPeople,
+  splitType,
+  perPerson,
+  individualSplits,
+  currencySymbol = '$',
+  title = 'Share your tip summary',
+  subject = 'TipMate Summary',
+  translations,
+}: ShareTipDetailsParams) => {
+  const message = formatTipDetailsPreview({
     amount,
     tip,
     total,
@@ -119,107 +133,93 @@ export const shareTipText = async ({
     splitType,
     perPerson,
     individualSplits,
-    currencySymbol = '$',
-    title = 'Share your tip summary',
-    subject = 'TipMate Summary',
+    currencySymbol,
     translations,
-}: ShareTipDetailsParams) => {
-    const message = formatTipDetailsPreview({
-        amount,
-        tip,
-        total,
-        tipPercentage,
-        numberOfPeople,
-        splitType,
-        perPerson,
-        individualSplits,
-        currencySymbol,
-        translations,
-    });
+  });
 
-    const shareOptions: ShareOptions = {
-        title,
-        subject,
-        message,
-        failOnCancel: false,
-    };
+  const shareOptions: ShareOptions = {
+    title,
+    subject,
+    message,
+    failOnCancel: false,
+  };
 
-    try {
-        await Share.open(shareOptions);
-    } catch (error: unknown) {
-        throw error;
-    }
+  try {
+    await Share.open(shareOptions);
+  } catch (error: unknown) {
+    throw error;
+  }
 };
 
 // ─── PDF sharing ──────────────────────────────────────────────────────────────
 
 export type TipDetailsForPDF = {
+  amount: number;
+  tip: number;
+  total: number;
+  tipPercentage: number;
+  numberOfPeople: number;
+  splitType?: 'equal' | 'custom';
+  perPerson?: {
     amount: number;
     tip: number;
     total: number;
-    tipPercentage: number;
-    numberOfPeople: number;
-    splitType?: 'equal' | 'custom';
-    perPerson?: {
-        amount: number;
-        tip: number;
-        total: number;
-    };
-    individualSplits?: IndividualSplit[];
-    currencySymbol?: string;
+  };
+  individualSplits?: IndividualSplit[];
+  currencySymbol?: string;
 };
 
 export type PDFTranslations = {
-    thankYou: string;
-    tipSummaryDescription: string;
-    receiptId: string;
-    date: string;
-    time: string;
-    amount: string;
-    billDetails: string;
-    billAmount: string;
-    tip: string;
-    totalAmount: string;
-    splitDetails: string;
-    people: string;
-    subtotalPerPerson: string;
-    tipPerPerson: string;
-    totalPerPerson: string;
-    generatedBy: string;
-    tagline: string;
-    shareTitle: string;
-    shareSubject: string;
+  thankYou: string;
+  tipSummaryDescription: string;
+  receiptId: string;
+  date: string;
+  time: string;
+  amount: string;
+  billDetails: string;
+  billAmount: string;
+  tip: string;
+  totalAmount: string;
+  splitDetails: string;
+  people: string;
+  subtotalPerPerson: string;
+  tipPerPerson: string;
+  totalPerPerson: string;
+  generatedBy: string;
+  tagline: string;
+  shareTitle: string;
+  shareSubject: string;
 };
 
 const defaultPDFTranslations: PDFTranslations = {
-    thankYou: 'Thank you',
-    tipSummaryDescription: 'Your tip calculation summary',
-    receiptId: 'Receipt ID',
-    date: 'Date',
-    time: 'Time',
-    amount: 'Amount',
-    billDetails: 'Bill Details',
-    billAmount: 'Bill Amount',
-    tip: 'Tip',
-    totalAmount: 'Total Amount',
-    splitDetails: 'Split Details',
-    people: 'People',
-    subtotalPerPerson: 'Subtotal per Person',
-    tipPerPerson: 'Tip per Person',
-    totalPerPerson: 'Total per Person',
-    generatedBy: 'Generated by',
-    tagline: 'Smart Tips, Easy Living',
-    shareTitle: 'Share TipMate Summary',
-    shareSubject: 'TipMate Summary',
+  thankYou: 'Thank you',
+  tipSummaryDescription: 'Your tip calculation summary',
+  receiptId: 'Receipt ID',
+  date: 'Date',
+  time: 'Time',
+  amount: 'Amount',
+  billDetails: 'Bill Details',
+  billAmount: 'Bill Amount',
+  tip: 'Tip',
+  totalAmount: 'Total Amount',
+  splitDetails: 'Split Details',
+  people: 'People',
+  subtotalPerPerson: 'Subtotal per Person',
+  tipPerPerson: 'Tip per Person',
+  totalPerPerson: 'Total per Person',
+  generatedBy: 'Generated by',
+  tagline: 'Smart Tips, Easy Living',
+  shareTitle: 'Share TipMate Summary',
+  shareSubject: 'TipMate Summary',
 };
 
 const escapeHtml = (text: string | null | undefined): string =>
-    (text || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+  (text || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 
 /**
  * Generates and shares a PDF with tip details
@@ -227,36 +227,36 @@ const escapeHtml = (text: string | null | undefined): string =>
  * Styling is based on the current app theme from Unistyles
  */
 export const shareTipPDF = async (
-    details: TipDetailsForPDF,
-    translations: PDFTranslations = defaultPDFTranslations,
-    locale: string = 'en-US',
+  details: TipDetailsForPDF,
+  translations: PDFTranslations = defaultPDFTranslations,
+  locale: string = 'en-US',
 ) => {
-    const { amount, tip, total, tipPercentage, numberOfPeople, splitType, perPerson, individualSplits, currencySymbol = '$' } =
-        details;
-    const t = translations;
+  const { amount, tip, total, tipPercentage, numberOfPeople, splitType, perPerson, individualSplits, currencySymbol = '$' } =
+    details;
+  const t = translations;
 
-    // Gradient colors matching app theme
-    const gradientStart = '#009688';
-    const gradientEnd = '#00695C';
+  // Gradient colors matching app theme
+  const gradientStart = '#009688';
+  const gradientEnd = '#00695C';
 
-    // Platform-specific store link
-    const storeLink = Platform.OS === 'ios' ? APP_LINKS.appStore : APP_LINKS.playStore;
+  // Platform-specific store link
+  const storeLink = Platform.OS === 'ios' ? Constants.APP_LINKS.appStore : Constants.APP_LINKS.playStore;
 
-    // Generate receipt ID based on timestamp
-    const receiptId = new Date().getTime().toString();
-    const formattedDate = new Date().toLocaleDateString(locale, {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-    });
-    const formattedTime = new Date().toLocaleTimeString(locale, {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-    });
+  // Generate receipt ID based on timestamp
+  const receiptId = new Date().getTime().toString();
+  const formattedDate = new Date().toLocaleDateString(locale, {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+  const formattedTime = new Date().toLocaleTimeString(locale, {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
 
-    // Generate HTML content for the receipt-style PDF
-    const htmlContent = `
+  // Generate HTML content for the receipt-style PDF
+  const htmlContent = `
     <!DOCTYPE html>
     <html>
       <head>
@@ -478,7 +478,7 @@ export const shareTipPDF = async (
             </div>
             
             ${numberOfPeople > 1 && perPerson && splitType !== 'custom'
-            ? `
+      ? `
             <div class="divider"></div>
             
             <!-- Split Details -->
@@ -498,10 +498,10 @@ export const shareTipPDF = async (
               </div>
             </div>
             `
-            : ''
-        }
+      : ''
+    }
             ${splitType === 'custom' && individualSplits && individualSplits.length > 0
-            ? `
+      ? `
             <div class="divider"></div>
             
             <!-- Custom Split Details -->
@@ -515,8 +515,8 @@ export const shareTipPDF = async (
               `).join('')}
             </div>
             `
-            : ''
-        }
+      : ''
+    }
           </div>
           
           <!-- Footer -->
@@ -531,33 +531,33 @@ export const shareTipPDF = async (
     </html>
   `;
 
-    try {
-        // Generate PDF from HTML
-        const pdfOptions = {
-            html: htmlContent,
-            fileName: `TipMate_Summary_${new Date().getTime()}`,
-            directory: 'Documents',
-            base64: false,
-        };
+  try {
+    // Generate PDF from HTML
+    const pdfOptions = {
+      html: htmlContent,
+      fileName: `TipMate_Summary_${new Date().getTime()}`,
+      directory: 'Documents',
+      base64: false,
+    };
 
-        const pdf = await generatePDF(pdfOptions);
+    const pdf = await generatePDF(pdfOptions);
 
-        if (!pdf.filePath) {
-            throw new Error('PDF generation failed: No file path returned');
-        }
-
-        // Share the generated PDF
-        const shareOptions = {
-            title: t.shareTitle,
-            subject: t.shareSubject,
-            url: `file://${pdf.filePath}`,
-            type: 'application/pdf',
-            failOnCancel: false,
-            useInternalStorage: true,
-        };
-
-        await Share.open(shareOptions);
-    } catch (error: unknown) {
-        throw error;
+    if (!pdf.filePath) {
+      throw new Error('PDF generation failed: No file path returned');
     }
+
+    // Share the generated PDF
+    const shareOptions = {
+      title: t.shareTitle,
+      subject: t.shareSubject,
+      url: `file://${pdf.filePath}`,
+      type: 'application/pdf',
+      failOnCancel: false,
+      useInternalStorage: true,
+    };
+
+    await Share.open(shareOptions);
+  } catch (error: unknown) {
+    throw error;
+  }
 };

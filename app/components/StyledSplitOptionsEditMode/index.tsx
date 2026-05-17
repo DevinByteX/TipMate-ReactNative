@@ -16,6 +16,7 @@ import { areOptionArraysSame } from '@hooks';
 import { useConfig } from '@/context/AppContext';
 import { SplitOptionState } from '@/context/types';
 import Toast from 'react-native-toast-message';
+import { ActionTypes } from '@/context/actionTypes';
 
 const SplitPercentageEditCapsule = ({
   textValue = 5,
@@ -35,7 +36,7 @@ const SplitPercentageEditCapsule = ({
       maxValidateValue={15}
       onValueChange={({ place, preValue, newValue }) => {
         const updatedSplitOption: SplitOptionState = { place: place, value: newValue }; // Update split option value
-        dispatch({ type: 'UPDATE_SPLIT_OPTIONS', payload: updatedSplitOption });
+        dispatch({ type: ActionTypes.UPDATE_SPLIT_OPTIONS, payload: updatedSplitOption });
       }}
     />
   );
@@ -232,7 +233,7 @@ export const StyledSplitOptionsEditMode = ({
             style: 'default',
             onPress: () => {
               dispatch({
-                type: 'RESET_SPLIT_OPTIONS_TO_DEFAULT',
+                type: ActionTypes.RESET_SPLIT_OPTIONS_TO_DEFAULT,
                 payload: Constants.defaultSplitOptionsArray,
               });
               Toast.show({

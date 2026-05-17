@@ -8,6 +8,7 @@ import { Constants, type CurrencyType } from '@configs';
 import { useUserSettings } from '@/context/AppContext';
 import { getDeviceCurrency, useBottomSheetEntrance } from '@hooks';
 import Toast from 'react-native-toast-message';
+import { ActionTypes } from '@/context/actionTypes';
 
 const CurrencySelectiveScroll = ({
   currencies,
@@ -204,7 +205,7 @@ export const StyledCurrencySelector = ({
   );
 
   const handleSystemDefaultPress = () => {
-    dispatch({ type: 'RESET_CURRENCY_TO_SYSTEM' });
+    dispatch({ type: ActionTypes.RESET_CURRENCY_TO_SYSTEM });
     setModalVisibility(false);
     Toast.show({
       type: 'success',
@@ -255,7 +256,7 @@ export const StyledCurrencySelector = ({
         onSystemDefaultPress={handleSystemDefaultPress}
         systemDefaultCurrency={systemDefaultCurrency}
         currencySelectiveBarPress={currencyObj => {
-          dispatch({ type: 'UPDATE_CURRENCY_SIGN', payload: currencyObj });
+          dispatch({ type: ActionTypes.UPDATE_CURRENCY_SIGN, payload: currencyObj });
           setModalVisibility(false);
           Toast.show({
             type: 'success',

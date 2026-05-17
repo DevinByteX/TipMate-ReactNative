@@ -1,6 +1,7 @@
 import React, { createContext, Dispatch, useContext, useReducer, ReactNode } from 'react';
 import { SplitSessionState, SplitConfigAction } from './types';
 import { splitConfigReducer } from './reducers';
+import { ActionTypes } from './actionTypes';
 
 const initialState: SplitSessionState = {
   activeSplitConfig: undefined,
@@ -11,8 +12,8 @@ const splitSessionReducer = (
   action: SplitConfigAction,
 ): SplitSessionState => {
   switch (action.type) {
-    case 'SET_ACTIVE_SPLIT_CONFIG':
-    case 'CLEAR_ACTIVE_SPLIT_CONFIG':
+    case ActionTypes.SET_ACTIVE_SPLIT_CONFIG:
+    case ActionTypes.CLEAR_ACTIVE_SPLIT_CONFIG:
       return { ...state, activeSplitConfig: splitConfigReducer(state.activeSplitConfig, action) };
     default:
       return state;

@@ -9,6 +9,7 @@ import { Constants, DuplicatePreventionTimeOption } from '@configs';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
 import { useBottomSheetEntrance } from '@hooks';
+import { ActionTypes } from '@/context/actionTypes';
 
 const getDuplicatePreventionLabel = (value: number, t: TFunction) => {
   if (value === 0) {
@@ -197,7 +198,7 @@ export const StyledDuplicatePreventionSelector = ({
         modalDescription={modalDescription}
         selectedValue={selectedValue}
         onTimeOptionPress={option => {
-          dispatch({ type: 'UPDATE_DUPLICATE_PREVENTION_WINDOW', payload: option.value });
+          dispatch({ type: ActionTypes.UPDATE_DUPLICATE_PREVENTION_WINDOW, payload: option.value });
           setModalVisibility(false);
           Toast.show({
             type: 'success',

@@ -16,6 +16,7 @@ import { areOptionArraysSame } from '@hooks';
 import { useConfig } from '@/context/AppContext';
 import { TipOptionState } from '@/context/types';
 import Toast from 'react-native-toast-message';
+import { ActionTypes } from '@/context/actionTypes';
 
 const TipPercentageEditCapsule = ({
   textValue = 5,
@@ -36,7 +37,7 @@ const TipPercentageEditCapsule = ({
       maxValidateValue={80}
       onValueChange={({ place, preValue, newValue }) => {
         const updatedTipOption: TipOptionState = { place: place, value: newValue }; // Updated tip option value
-        dispatch({ type: 'UPDATE_TIP_OPTIONS', payload: updatedTipOption });
+        dispatch({ type: ActionTypes.UPDATE_TIP_OPTIONS, payload: updatedTipOption });
       }}
     />
   );
@@ -233,7 +234,7 @@ export const StyledTipOptionsEditMode = ({
             style: 'default',
             onPress: () => {
               dispatch({
-                type: 'RESET_TIP_OPTIONS_TO_DEFAULT',
+                type: ActionTypes.RESET_TIP_OPTIONS_TO_DEFAULT,
                 payload: Constants.defaultTipOptionsArray,
               });
               Toast.show({

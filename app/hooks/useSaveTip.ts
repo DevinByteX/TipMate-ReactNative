@@ -3,6 +3,7 @@ import { useHistory } from '../context/AppContext';
 import { SavedTip, IndividualSplit } from '../context/types';
 import { useNavigation } from '@react-navigation/native';
 import { generateId } from '@/utils/idGenerator';
+import { ActionTypes } from '@/context/actionTypes';
 
 interface SaveTipParams {
     amount: number;
@@ -52,7 +53,7 @@ export const useSaveTip = () => {
                     currencyCode: params.currencyCode,
                 };
 
-                dispatch({ type: 'SAVE_TIP', payload: savedTip });
+                dispatch({ type: ActionTypes.SAVE_TIP, payload: savedTip });
                 setSaveSuccessAlert({ visible: true, savedTip });
                 return savedTip;
             } catch (error) {
@@ -67,7 +68,7 @@ export const useSaveTip = () => {
     const deleteTip = useCallback(
         (tipId: string) => {
             try {
-                dispatch({ type: 'DELETE_TIP', payload: tipId });
+                dispatch({ type: ActionTypes.DELETE_TIP, payload: tipId });
             } catch (error) {
                 console.error('Error deleting tip:', error);
                 setDeleteErrorAlert(true);
@@ -82,7 +83,7 @@ export const useSaveTip = () => {
 
     const confirmClearAllTips = useCallback(() => {
         try {
-            dispatch({ type: 'CLEAR_ALL_TIPS' });
+            dispatch({ type: ActionTypes.CLEAR_ALL_TIPS });
             setClearAllAlert(false);
         } catch (error) {
             console.error('Error clearing tips:', error);

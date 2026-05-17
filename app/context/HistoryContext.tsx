@@ -3,6 +3,7 @@ import { HistoryState, HistoryAction } from './types';
 import { savedTipsReducer, savedSplitPresetsReducer } from './reducers';
 import { Constants } from '@configs';
 import { usePersistedReducer } from '@hooks';
+import { ActionTypes } from './actionTypes';
 
 const initialState: HistoryState = {
   savedTips: [],
@@ -11,19 +12,19 @@ const initialState: HistoryState = {
 
 const historyReducer = (state: HistoryState, action: HistoryAction): HistoryState => {
   switch (action.type) {
-    case 'LOAD_PERSISTED_STATE':
+    case ActionTypes.LOAD_PERSISTED_STATE:
       return {
         ...state,
         savedTips: action.payload.savedTips ?? state.savedTips,
         savedSplitPresets: action.payload.savedSplitPresets ?? state.savedSplitPresets,
       };
-    case 'SAVE_TIP':
-    case 'DELETE_TIP':
-    case 'CLEAR_ALL_TIPS':
+    case ActionTypes.SAVE_TIP:
+    case ActionTypes.DELETE_TIP:
+    case ActionTypes.CLEAR_ALL_TIPS:
       return { ...state, savedTips: savedTipsReducer(state.savedTips, action) };
-    case 'SAVE_SPLIT_PRESET':
-    case 'UPDATE_SPLIT_PRESET':
-    case 'DELETE_SPLIT_PRESET':
+    case ActionTypes.SAVE_SPLIT_PRESET:
+    case ActionTypes.UPDATE_SPLIT_PRESET:
+    case ActionTypes.DELETE_SPLIT_PRESET:
       return {
         ...state,
         savedSplitPresets: savedSplitPresetsReducer(state.savedSplitPresets, action),

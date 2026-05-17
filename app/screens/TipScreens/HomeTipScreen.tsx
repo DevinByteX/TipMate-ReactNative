@@ -23,6 +23,7 @@ import {
 } from '@/utils/billCalculation';
 import { useShareTipPreview, useSaveTip, getDeviceCurrency } from '@hooks';
 import { useUserSettings, useHistory, useSplitSession } from '@/context/AppContext';
+import { ActionTypes } from '@/context/actionTypes';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -309,7 +310,7 @@ const HomeTipScreen = () => {
             });
           }}
           onClearCustomSplit={() => {
-            dispatch({ type: 'CLEAR_ACTIVE_SPLIT_CONFIG' });
+            dispatch({ type: ActionTypes.CLEAR_ACTIVE_SPLIT_CONFIG });
             setUserInputSplitCount(1);
           }}
         />
