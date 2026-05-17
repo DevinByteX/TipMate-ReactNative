@@ -14,7 +14,7 @@ import {
   setUserPreferredTheme,
   getUserUpdatedThemeOption,
   setUserUpdatedThemeOption,
-} from './asyncStorageHooks';
+} from '@/utils/themeStorage';
 import { usePersistedReducer } from './usePersistedReducer';
 import { validateOptionValues, areOptionArraysSame } from '@/utils/optionsValidation';
 import { useThemeColorCustomiser, CustomisedTheme } from './useThemeColorCustomiser';

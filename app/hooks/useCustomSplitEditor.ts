@@ -7,6 +7,7 @@ import { IndividualSplit, SavedSplitPreset } from '@/context/types';
 import { validateSplitAllocations } from '@/utils/splitValidation';
 import { generateId } from '@/utils/idGenerator';
 import { namedPeople } from '@/utils/splitFormatting';
+import { findPresetDuplicate, getPresetSummary as getPresetSummaryFn } from '@/utils/presetManager';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -196,47 +197,17 @@ export const useCustomSplitEditor = (
 
     // ── Helpers ──────────────────────────────────────────────────────────────
 
-    const isSameConfig = (a: IndividualSplit[], b: IndividualSplit[]): boolean => {
-        if (a.length !== b.length) return false;
-        return a.every(
-            (split, i) =>
-                split.allocationType === b[i].allocationType &&
-                split.value === b[i].value &&
-                split.name === b[i].name,
-        );
-    };
-
     const findDuplicate = useCallback(
         (
             name: string,
             splits: IndividualSplit[],
-        ): { type: 'name' | 'config' | 'both'; preset: SavedSplitPreset } | null => {
-            const lowerName = name.toLowerCase();
-            for (const existing of historyState.savedSplitPresets) {
-                const nameMatch = existing.name.toLowerCase() === lowerName;
-                const configMatch = isSameConfig(splits, existing.customSplits);
-                if (nameMatch && configMatch) return { type: 'both', preset: existing };
-                if (nameMatch) return { type: 'name', preset: existing };
-                if (configMatch) return { type: 'config', preset: existing };
-            }
-            return null;
-        },
+        ): { type: 'name' | 'config' | 'both'; preset: SavedSplitPreset } | null =>
+            findPresetDuplicate(name, splits, historyState.savedSplitPresets),
         [historyState.savedSplitPresets],
     );
 
     const getPresetSummary = useCallback(
-        (preset: SavedSplitPreset): string => {
-            const counts = { fixed: 0, percentage: 0, remainder: 0 };
-            preset.customSplits.forEach(s => {
-                counts[s.allocationType]++;
-            });
-            const parts: string[] = [];
-            if (counts.fixed > 0) parts.push(`${counts.fixed} ${t('screens.customSplit.fixed')}`);
-            if (counts.percentage > 0) parts.push(`${counts.percentage} %`);
-            if (counts.remainder > 0)
-                parts.push(`${counts.remainder} ${t('screens.customSplit.remainder')}`);
-            return parts.join(', ');
-        },
+        (preset: SavedSplitPreset): string => getPresetSummaryFn(preset, t),
         [t],
     );
 
