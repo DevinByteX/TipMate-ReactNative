@@ -6,6 +6,7 @@ import { useHistory, useSplitSession } from '@/context/AppContext';
 import { IndividualSplit, SavedSplitPreset } from '@/context/types';
 import { validateSplitAllocations } from '@/utils/splitValidation';
 import { generateId } from '@/utils/idGenerator';
+import { namedPeople } from '@/utils/splitFormatting';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -195,18 +196,6 @@ export const useCustomSplitEditor = (
 
     // ── Helpers ──────────────────────────────────────────────────────────────
 
-    const getNamedPeople = useCallback(
-        (source: IndividualSplit[]): IndividualSplit[] =>
-            source.map((person, index) => ({
-                ...person,
-                name:
-                    person.name.trim() ||
-                    t('screens.customSplit.personDefault', { number: index + 1 }),
-                calculatedAmount: undefined,
-            })),
-        [t],
-    );
-
     const isSameConfig = (a: IndividualSplit[], b: IndividualSplit[]): boolean => {
         if (a.length !== b.length) return false;
         return a.every(
@@ -342,8 +331,8 @@ export const useCustomSplitEditor = (
             return;
         }
 
-        const namedPeople = getNamedPeople(people);
-        const duplicate = findDuplicate(trimmedName, namedPeople);
+        const named = namedPeople(people, t);
+        const duplicate = findDuplicate(trimmedName, named);
         if (duplicate) {
             setIsNameModalVisible(false);
             setDuplicateAlert(duplicate);
@@ -358,26 +347,26 @@ export const useCustomSplitEditor = (
                 name: trimmedName,
                 createdAt: now,
                 updatedAt: now,
-                customSplits: namedPeople,
+                customSplits: named,
             },
         });
         setIsNameModalVisible(false);
         setNameInputState('');
         setActivePresetId(null);
         Toast.show({ type: 'success', text1: t('screens.customSplit.presetSaved') });
-    }, [nameInput, people, getNamedPeople, findDuplicate, historyDispatch, t]);
+    }, [nameInput, people, findDuplicate, historyDispatch, t]);
 
     const updatePreset = useCallback(() => {
         if (!activePresetId) return;
         const existing = historyState.savedSplitPresets.find(p => p.id === activePresetId);
         if (!existing) return;
-        const namedPeople = getNamedPeople(people);
+        const named = namedPeople(people, t);
         historyDispatch({
             type: 'UPDATE_SPLIT_PRESET',
-            payload: { ...existing, updatedAt: Date.now(), customSplits: namedPeople },
+            payload: { ...existing, updatedAt: Date.now(), customSplits: named },
         });
         Toast.show({ type: 'success', text1: t('screens.customSplit.presetUpdated') });
-    }, [activePresetId, historyState.savedSplitPresets, people, getNamedPeople, historyDispatch, t]);
+    }, [activePresetId, historyState.savedSplitPresets, people, historyDispatch, t]);
 
     // ── Duplicate alert actions ──────────────────────────────────────────────
 
@@ -404,12 +393,12 @@ export const useCustomSplitEditor = (
 
     const save = useCallback(() => {
         if (!canSave) return;
-        const namedPeople = getNamedPeople(people);
+        const named = namedPeople(people, t);
         sessionDispatch({
             type: 'SET_ACTIVE_SPLIT_CONFIG',
-            payload: { type: 'custom', customSplits: namedPeople },
+            payload: { type: 'custom', customSplits: named },
         });
-    }, [canSave, people, getNamedPeople, sessionDispatch]);
+    }, [canSave, people, t, sessionDispatch]);
 
     const clear = useCallback(() => {
         sessionDispatch({ type: 'CLEAR_ACTIVE_SPLIT_CONFIG' });
