@@ -114,6 +114,9 @@ export const useCustomSplitEditor = (
                 return preset.customSplits.map(split => ({ ...split, calculatedAmount: undefined }));
             }
         }
+        if (sessionState.activeSplitConfig?.type === 'custom' && sessionState.activeSplitConfig.customSplits) {
+            return sessionState.activeSplitConfig.customSplits.map(split => ({ ...split, calculatedAmount: undefined }));
+        }
         return [createDefaultPerson(), createDefaultPerson()];
     };
 
