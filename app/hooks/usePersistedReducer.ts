@@ -27,17 +27,27 @@ export const usePersistedReducer = <S, A>(
     loadState();
   }, [key]);
 
+  const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   useEffect(() => {
     if (!isHydratedRef.current) return;
-    const saveState = async () => {
+
+    if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+
+    saveTimeoutRef.current = setTimeout(async () => {
       try {
         await AsyncStorage.setItem(key, JSON.stringify(state));
       } catch (error) {
         console.error('Failed to save state to AsyncStorage', error);
       }
-    };
+    }, 400);
 
-    saveState();
+    return () => {
+      if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+      AsyncStorage.setItem(key, JSON.stringify(state)).catch(error => {
+        console.error('Failed to flush state to AsyncStorage on unmount', error);
+      });
+    };
   }, [state, key]);
 
   return [state, dispatch];
