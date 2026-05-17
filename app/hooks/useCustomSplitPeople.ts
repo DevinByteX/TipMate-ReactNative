@@ -2,11 +2,10 @@ import { useState, useCallback, useEffect } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { useHistory } from '@/context/AppContext';
 import { IndividualSplit } from '@/context/types';
+import { generateId } from '@/utils/idGenerator';
 
 const MIN_PEOPLE = 2;
 const MAX_PEOPLE = 15;
-
-const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
 
 const createDefaultPerson = (index: number): IndividualSplit => ({
     id: generateId(),

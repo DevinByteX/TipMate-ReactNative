@@ -2,8 +2,7 @@ import { useState, useCallback } from 'react';
 import Toast from 'react-native-toast-message';
 import { useHistory } from '@/context/AppContext';
 import { IndividualSplit, SavedSplitPreset } from '@/context/types';
-
-const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+import { generateId } from '@/utils/idGenerator';
 
 export const usePresetDuplication = () => {
     const { state, dispatch } = useHistory();

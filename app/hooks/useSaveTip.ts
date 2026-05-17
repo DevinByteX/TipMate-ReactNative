@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useHistory } from '../context/AppContext';
 import { SavedTip, IndividualSplit } from '../context/types';
 import { useNavigation } from '@react-navigation/native';
+import { generateId } from '@/utils/idGenerator';
 
 interface SaveTipParams {
     amount: number;
@@ -19,11 +20,6 @@ interface SaveTipParams {
     currencySymbol: string;
     currencyCode: string;
 }
-
-// Simple ID generator using timestamp and random number
-const generateId = (): string => {
-    return `tip_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
-};
 
 export const useSaveTip = () => {
     const { dispatch } = useHistory();

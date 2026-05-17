@@ -5,13 +5,12 @@ import Toast from 'react-native-toast-message';
 import { useHistory, useSplitSession } from '@/context/AppContext';
 import { IndividualSplit, SavedSplitPreset } from '@/context/types';
 import { validateSplitAllocations } from '@/utils/splitValidation';
+import { generateId } from '@/utils/idGenerator';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const MIN_PEOPLE = 2;
 const MAX_PEOPLE = 15;
-
-const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
 
 const createDefaultPerson = (): IndividualSplit => ({
     id: generateId(),
