@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { shareTipText, shareTipPDF, formatTipDetailsPreview } from '@/utils/tipSharing';
 import type { ShareTipDetailsParams, ShareTranslations, PDFTranslations } from '@/utils/tipSharing';
@@ -55,7 +55,7 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
     const locale = getLocaleForFormatting(settingsState.language);
 
     // Build translations object from i18n
-    const shareTranslations: ShareTranslations = {
+    const shareTranslations: ShareTranslations = useMemo(() => ({
         tipSummary: t('share.tipSummary'),
         billAmount: t('share.billAmount'),
         tipPercentage: t('share.tipPercentage'),
@@ -69,10 +69,10 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
         sharedVia: t('share.sharedVia'),
         customSplitLabel: t('share.customSplitLabel'),
         individualSplit: t('share.individualSplit'),
-    };
+    }), [t]);
 
     // Build PDF translations object from i18n
-    const pdfTranslations: PDFTranslations = {
+    const pdfTranslations: PDFTranslations = useMemo(() => ({
         thankYou: t('share.pdf.thankYou'),
         tipSummaryDescription: t('share.pdf.tipSummaryDescription'),
         receiptId: t('share.receipt'),
@@ -92,10 +92,13 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
         tagline: t('screens.home.tagline'),
         shareTitle: t('share.shareYourTip'),
         shareSubject: t('share.tipMateSummary'),
-    };
+    }), [t]);
 
     // Generate preview content
-    const previewContent = shareData ? formatTipDetailsPreview({ ...shareData, translations: shareTranslations }) : '';
+    const previewContent = useMemo(
+        () => shareData ? formatTipDetailsPreview({ ...shareData, translations: shareTranslations }) : '',
+        [shareData, shareTranslations],
+    );
 
     // Open the preview modal
     const openPreview = () => {

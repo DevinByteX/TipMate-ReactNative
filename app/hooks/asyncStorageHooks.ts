@@ -1,5 +1,6 @@
 import { UnistylesRuntime, UnistylesThemes } from 'react-native-unistyles';
-import { asyncStorageUtil, CustomisedTheme } from '@hooks';
+import { asyncStorageUtil } from '@/utils/asyncStorage';
+import type { CustomisedTheme } from './useThemeColorCustomiser';
 
 // Function to fetch user preferred theme from AsyncStorage
 export const getUserPreferredTheme = async (): Promise<keyof UnistylesThemes> => {

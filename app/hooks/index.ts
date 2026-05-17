@@ -8,7 +8,7 @@ import {
   RoundingMethod,
   DisabledRoundingMethodsType,
 } from '@/utils/billCalculation';
-import { asyncStorageUtil } from './asyncStorageUtil';
+import { asyncStorageUtil } from '@/utils/asyncStorage';
 import {
   getUserPreferredTheme,
   setUserPreferredTheme,
