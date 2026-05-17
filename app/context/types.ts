@@ -121,3 +121,47 @@ export type AppAction =
   | SplitConfigAction
   | SavedSplitPresetAction
   | { type: 'LOAD_PERSISTED_STATE'; payload: AppState }; // Include LOAD_PERSISTED_STATE
+
+// ---------------------------------------------------------------------------
+// Domain state interfaces — used by the split-context architecture
+// ---------------------------------------------------------------------------
+
+export interface UserSettingsState {
+  currencyConfig: CurrencyType | undefined;
+  language: string | undefined;
+  isRTL: boolean;
+  duplicatePreventionWindow: number;
+}
+
+export interface ConfigState {
+  tips: TipOptionState[];
+  splits: SplitOptionState[];
+  tipSliderConfig: TipSliderConfigValues;
+  splitSliderConfig: SplitSliderConfigValues;
+}
+
+export interface HistoryState {
+  savedTips: SavedTip[];
+  savedSplitPresets: SavedSplitPreset[];
+}
+
+export interface SplitSessionState {
+  activeSplitConfig?: ActiveSplitConfig;
+}
+
+// Domain action union types
+export type UserSettingsAction =
+  | CurrencyConfigAction
+  | DuplicatePreventionAction
+  | LanguageAction
+  | { type: 'LOAD_PERSISTED_STATE'; payload: UserSettingsState };
+
+export type ConfigAction =
+  | TipAction
+  | SplitAction
+  | { type: 'LOAD_PERSISTED_STATE'; payload: ConfigState };
+
+export type HistoryAction =
+  | SavedTipAction
+  | SavedSplitPresetAction
+  | { type: 'LOAD_PERSISTED_STATE'; payload: HistoryState };

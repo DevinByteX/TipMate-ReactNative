@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledIcons, StyledAlert } from '@components';
-import { useAppContext } from '@/context/AppContext';
+import { useUserSettings } from '@/context/AppContext';
 import Toast from 'react-native-toast-message';
 import { useBottomSheetEntrance } from '@hooks';
 import {
@@ -123,7 +123,9 @@ const LanguageListModal = ({
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   const currentLangConfig = SUPPORTED_LANGUAGES.find(l => l.code === currentLanguage);
-  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(modalVisibility ?? false);
+  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(
+    modalVisibility ?? false,
+  );
 
   return (
     <Modal
@@ -182,7 +184,7 @@ export const StyledLanguageSelector = ({
   modalDescription?: string;
 }) => {
   const { t } = useTranslation();
-  const { state, dispatch } = useAppContext();
+  const { state, dispatch } = useUserSettings();
   const { styles } = useStyles(stylesheet);
   const { shouldRestartForRTL, applyRTL } = useRTL();
 

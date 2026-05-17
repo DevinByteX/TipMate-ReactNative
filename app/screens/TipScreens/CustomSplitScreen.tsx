@@ -19,7 +19,7 @@ import {
   StyledCustomSplitPersonCard,
   StyledCustomSplitPresetCard,
 } from '@components';
-import { useAppContext } from '@/context/AppContext';
+import { useSplitSession, useHistory } from '@/context/AppContext';
 import { SavedSplitPreset } from '@/context/types';
 import {
   toFixedWithoutRounding,
@@ -46,7 +46,8 @@ const CustomSplitScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { state, dispatch } = useAppContext();
+  const { state: sessionState, dispatch } = useSplitSession();
+  const { state: historyState } = useHistory();
   const route = useRoute<RouteProp<CustomSplitRouteParams, 'CustomSplitScreen'>>();
 
   const { totalBill = 0, tipPercentage = 0, currencySymbol = '$' } = route.params || {};
@@ -130,7 +131,7 @@ const CustomSplitScreen = () => {
   }, [canSave, people, getNamedPeople, t, dispatch, navigation]);
 
   // Clear custom split
-  const isCustomSplitCurrentlyActive = state.activeSplitConfig?.type === 'custom';
+  const isCustomSplitCurrentlyActive = sessionState.activeSplitConfig?.type === 'custom';
   const handleClearCustomSplit = useCallback(() => {
     dispatch({ type: 'CLEAR_ACTIVE_SPLIT_CONFIG' });
     navigation.goBack();
@@ -220,7 +221,7 @@ const CustomSplitScreen = () => {
           </Pressable>
 
           {/* Saved Presets Section */}
-          {state.savedSplitPresets.length > 0 && (
+          {historyState.savedSplitPresets.length > 0 && (
             <View style={styles.presetsSection}>
               <Pressable
                 style={styles.presetsSectionHeader}
@@ -257,7 +258,7 @@ const CustomSplitScreen = () => {
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.presetsScrollContent}
                 >
-                  {state.savedSplitPresets.map(preset => (
+                  {historyState.savedSplitPresets.map(preset => (
                     <StyledCustomSplitPresetCard
                       key={preset.id}
                       preset={preset}

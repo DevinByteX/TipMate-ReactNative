@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
-import { useAppContext } from '@/context/AppContext';
+import { useConfig } from '@/context/AppContext';
 import { useScaleSpring } from '@hooks';
 
 const SplitCapsule = ({
@@ -140,7 +140,7 @@ export const StyledSpiltOptions = ({
   onClearCustomSplit?: () => void;
   billAmount?: number;
 }) => {
-  const { state } = useAppContext();
+  const { state } = useConfig();
   const { t } = useTranslation();
 
   const defaultSplitValue = 1;

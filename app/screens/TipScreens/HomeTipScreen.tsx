@@ -26,7 +26,7 @@ import {
   useSaveTip,
   getDeviceCurrency,
 } from '@hooks';
-import { useAppContext } from '@/context/AppContext';
+import { useUserSettings, useHistory, useSplitSession } from '@/context/AppContext';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -42,7 +42,9 @@ const HomeTipScreen = () => {
 
   const [billValues, setBillValues] = useState<BillCalculationType>();
   const [customBillValues, setCustomBillValues] = useState<CustomSplitCalculationType>();
-  const { state, dispatch } = useAppContext();
+  const { state: settingsState } = useUserSettings();
+  const { state: historyState } = useHistory();
+  const { state: sessionState, dispatch } = useSplitSession();
   const {
     saveTip,
     saveSuccessAlert,
@@ -53,12 +55,12 @@ const HomeTipScreen = () => {
   } = useSaveTip();
 
   // Use persisted currency if user has explicitly selected one, otherwise use device currency
-  const currentCurrency = state?.currencyConfig || getDeviceCurrency();
+  const currentCurrency = settingsState?.currencyConfig || getDeviceCurrency();
   const currencySymbol: string = currentCurrency.currencySign;
   const currencyCode: string = currentCurrency.currencyId;
 
-  const isCustomSplitActive = state.activeSplitConfig?.type === 'custom';
-  const customSplits = state.activeSplitConfig?.customSplits;
+  const isCustomSplitActive = sessionState.activeSplitConfig?.type === 'custom';
+  const customSplits = sessionState.activeSplitConfig?.customSplits;
 
   useEffect(() => {
     if (isCustomSplitActive && customSplits && customSplits.length > 0) {
@@ -169,19 +171,19 @@ const HomeTipScreen = () => {
   // Check if current tip already exists in saved tips within the time window
   const existingSavedTip = useMemo(() => {
     // Early returns for edge cases
-    if (!shareData || !state.savedTips || state.duplicatePreventionWindow === 0) {
+    if (!shareData || !historyState.savedTips || settingsState.duplicatePreventionWindow === 0) {
       return null;
     }
 
     const currentTime = Date.now();
-    const windowMs = state.duplicatePreventionWindow * 60 * 1000;
+    const windowMs = settingsState.duplicatePreventionWindow * 60 * 1000;
 
     // Helper function to compare floating point numbers with epsilon tolerance
     const areFloatsEqual = (a: number, b: number, epsilon: number = 0.001): boolean => {
       return Math.abs(a - b) < epsilon;
     };
 
-    return state.savedTips.find(
+    return historyState.savedTips.find(
       savedTip =>
         currentTime - savedTip.timestamp < windowMs &&
         areFloatsEqual(savedTip.amount, shareData.amount) &&
@@ -202,7 +204,7 @@ const HomeTipScreen = () => {
             )}`
           : true),
     );
-  }, [shareData, state.savedTips, state.duplicatePreventionWindow]);
+  }, [shareData, historyState.savedTips, settingsState.duplicatePreventionWindow]);
 
   const isTipAlreadySaved = !!existingSavedTip;
 

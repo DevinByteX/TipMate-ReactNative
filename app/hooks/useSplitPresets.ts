@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
-import { useAppContext } from '@/context/AppContext';
+import { useHistory, useSplitSession } from '@/context/AppContext';
 import { IndividualSplit, SavedSplitPreset } from '@/context/types';
 
 export const useSplitPresets = () => {
-    const { state } = useAppContext();
+    const { state: historyState } = useHistory();
+    const { state } = useSplitSession();
 
     const [activePresetId, setActivePresetId] = useState<string | null>(null);
     const [isPresetsExpanded, setIsPresetsExpanded] = useState(true);
@@ -14,12 +15,12 @@ export const useSplitPresets = () => {
         if (
             state.activeSplitConfig?.type === 'custom' &&
             state.activeSplitConfig?.customSplits &&
-            state.savedSplitPresets.length > 0
+            historyState.savedSplitPresets.length > 0
         ) {
             const currentSplits = state.activeSplitConfig.customSplits;
 
             // Find a preset that matches the current config
-            const matchingPreset = state.savedSplitPresets.find(preset => {
+            const matchingPreset = historyState.savedSplitPresets.find(preset => {
                 if (preset.customSplits.length !== currentSplits.length) return false;
 
                 return preset.customSplits.every((split, index) => {
@@ -36,7 +37,7 @@ export const useSplitPresets = () => {
                 setActivePresetId(matchingPreset.id);
             }
         }
-    }, [state.activeSplitConfig, state.savedSplitPresets]);
+    }, [state.activeSplitConfig, historyState.savedSplitPresets]);
 
     // Load a preset into the editor
     const handleLoadPreset = useCallback(
@@ -88,10 +89,10 @@ export const useSplitPresets = () => {
 
     // Exit delete mode when all presets are deleted
     useEffect(() => {
-        if (isPresetDeleteMode && state.savedSplitPresets.length === 0) {
+        if (isPresetDeleteMode && historyState.savedSplitPresets.length === 0) {
             setIsPresetDeleteMode(false);
         }
-    }, [state.savedSplitPresets.length, isPresetDeleteMode]);
+    }, [historyState.savedSplitPresets.length, isPresetDeleteMode]);
 
     return {
         activePresetId,

@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
-import { useAppContext } from '@/context/AppContext';
+import { useHistory } from '@/context/AppContext';
 import { IndividualSplit } from '@/context/types';
 
 const MIN_PEOPLE = 2;
@@ -26,7 +26,7 @@ type CustomSplitRouteParams = {
 };
 
 export const useCustomSplitPeople = () => {
-    const { state } = useAppContext();
+    const { state } = useHistory();
     const route = useRoute<RouteProp<CustomSplitRouteParams, 'CustomSplitScreen'>>();
     const { presetId } = route.params || {};
 

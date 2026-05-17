@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react';
 import Toast from 'react-native-toast-message';
-import { useAppContext } from '@/context/AppContext';
+import { useHistory } from '@/context/AppContext';
 import { IndividualSplit, SavedSplitPreset } from '@/context/types';
 
 const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
 
 export const usePresetDuplication = () => {
-    const { state, dispatch } = useAppContext();
+    const { state, dispatch } = useHistory();
 
     const [isPresetNameModalVisible, setIsPresetNameModalVisible] = useState(false);
     const [presetNameInput, setPresetNameInput] = useState('');

@@ -13,7 +13,7 @@ import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import { SavedTip } from '@/context/types';
 import { useSaveTip } from '@hooks';
 import { useShareTipPreview } from '@hooks';
-import { useAppContext } from '@/context/AppContext';
+import { useUserSettings } from '@/context/AppContext';
 import { getLocaleForFormatting } from '@/localization';
 
 type SavedTipDetailRouteParams = {
@@ -25,7 +25,7 @@ type SavedTipDetailRouteParams = {
 const SavedTipDetailScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
-  const { state } = useAppContext();
+  const { state: settingsState } = useUserSettings();
   const route = useRoute<RouteProp<SavedTipDetailRouteParams, 'SavedTipDetailScreen'>>();
   const navigation = useNavigation();
   const { deleteTip } = useSaveTip();
@@ -38,7 +38,7 @@ const SavedTipDetailScreen = () => {
 
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
-    return date.toLocaleDateString(getLocaleForFormatting(state.language), {
+    return date.toLocaleDateString(getLocaleForFormatting(settingsState.language), {
       weekday: 'long',
       month: 'long',
       day: 'numeric',

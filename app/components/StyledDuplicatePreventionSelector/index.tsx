@@ -3,7 +3,7 @@ import { View, Text, Modal, Pressable, ScrollView, StyleSheet } from 'react-nati
 import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
-import { useAppContext } from '@/context/AppContext';
+import { useUserSettings } from '@/context/AppContext';
 import Toast from 'react-native-toast-message';
 import { Constants, DuplicatePreventionTimeOption } from '@configs';
 import { useTranslation } from 'react-i18next';
@@ -90,7 +90,9 @@ const TimeOptionsModal = ({
 }) => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
-  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(modalVisibility ?? false);
+  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(
+    modalVisibility ?? false,
+  );
 
   return (
     <Modal
@@ -155,7 +157,7 @@ export const StyledDuplicatePreventionSelector = ({
   modalDescription?: string;
   changeToastMessage?: string;
 }) => {
-  const { state, dispatch } = useAppContext();
+  const { state, dispatch } = useUserSettings();
   const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
 

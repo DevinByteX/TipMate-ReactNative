@@ -5,7 +5,7 @@ import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
-import { useAppContext } from '@/context/AppContext';
+import { useUserSettings } from '@/context/AppContext';
 import { getDeviceCurrency, useBottomSheetEntrance } from '@hooks';
 import Toast from 'react-native-toast-message';
 
@@ -119,7 +119,9 @@ const CurrencyListModal = ({
   systemDefaultCurrency: CurrencyType;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
-  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(modalVisibility ?? false);
+  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(
+    modalVisibility ?? false,
+  );
 
   return (
     <Modal
@@ -183,7 +185,7 @@ export const StyledCurrencySelector = ({
   modalDescription?: string;
   currencyChangeToastMessage?: string;
 }) => {
-  const { state, dispatch } = useAppContext();
+  const { state, dispatch } = useUserSettings();
   const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
 

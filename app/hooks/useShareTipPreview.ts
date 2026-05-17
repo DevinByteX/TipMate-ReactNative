@@ -4,7 +4,7 @@ import { useShareTipDetailsText, formatTipDetailsPreview } from './useShareTipDe
 import { useShareTipDetailsPDF, PDFTranslations } from './useShareTipDetailsPDF';
 import type { ShareTipDetailsParams, ShareTranslations } from './useShareTipDetailsText';
 import { Platform } from 'react-native';
-import { useAppContext } from '@/context/AppContext';
+import { useUserSettings } from '@/context/AppContext';
 import { getLocaleForFormatting } from '@/localization';
 
 type ShareTipData = Omit<ShareTipDetailsParams, 'title' | 'subject'>;
@@ -52,8 +52,8 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
     const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);
     const pendingShareAction = useRef<'text' | 'pdf' | null>(null);
     const { t } = useTranslation();
-    const { state } = useAppContext();
-    const locale = getLocaleForFormatting(state.language);
+    const { state: settingsState } = useUserSettings();
+    const locale = getLocaleForFormatting(settingsState.language);
 
     // Build translations object from i18n
     const shareTranslations: ShareTranslations = {

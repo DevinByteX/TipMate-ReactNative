@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useAppContext } from '../context/AppContext';
+import { useHistory } from '../context/AppContext';
 import { SavedTip, IndividualSplit } from '../context/types';
 import { useNavigation } from '@react-navigation/native';
 
@@ -26,7 +26,7 @@ const generateId = (): string => {
 };
 
 export const useSaveTip = () => {
-    const { dispatch } = useAppContext();
+    const { dispatch } = useHistory();
     const navigation = useNavigation();
 
     const [saveSuccessAlert, setSaveSuccessAlert] = useState<{

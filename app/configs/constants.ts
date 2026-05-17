@@ -29,6 +29,9 @@ export const Constants = {
     { place: 4, value: 15 },
   ] as TipOptionState[],
   APP_STATE_ASYNCSTORAGE_KEY: 'APPSTATE' as string,
+  USER_SETTINGS_ASYNCSTORAGE_KEY: 'USER_SETTINGS_STATE' as string,
+  CONFIG_ASYNCSTORAGE_KEY: 'CONFIG_STATE' as string,
+  HISTORY_ASYNCSTORAGE_KEY: 'HISTORY_STATE' as string,
   defaultSplitSliderConfigValues: {
     min: 1,
     max: 15,
