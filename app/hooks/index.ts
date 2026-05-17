@@ -35,10 +35,7 @@ import {
   useModalEntrance,
   useBottomSheetEntrance,
 } from './useAnimations';
-import { useCustomSplitPeople } from './useCustomSplitPeople';
-import { useCustomSplitValidation } from './useCustomSplitValidation';
-import { useSplitPresets } from './useSplitPresets';
-import { usePresetDuplication } from './usePresetDuplication';
+import { useCustomSplitEditor, CustomSplitEditorReturn } from './useCustomSplitEditor';
 
 export {
   convertToTwoDecimalPoints,
@@ -71,10 +68,7 @@ export {
   useVisibilityAnimation,
   useModalEntrance,
   useBottomSheetEntrance,
-  useCustomSplitPeople,
-  useCustomSplitValidation,
-  useSplitPresets,
-  usePresetDuplication,
+  useCustomSplitEditor,
 };
 export type {
   BillCalculationType,
@@ -87,4 +81,5 @@ export type {
   ShareTranslations,
   TipDetailsForPDF,
   PDFTranslations,
+  CustomSplitEditorReturn,
 };

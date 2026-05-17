@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import Toast from 'react-native-toast-message';
 import {
   StyledHeader,
   StyledIcons,
@@ -19,15 +18,8 @@ import {
   StyledCustomSplitPersonCard,
   StyledCustomSplitPresetCard,
 } from '@components';
-import { useSplitSession, useHistory } from '@/context/AppContext';
 import { SavedSplitPreset } from '@/context/types';
-import {
-  toFixedWithoutRounding,
-  useCustomSplitPeople,
-  useCustomSplitValidation,
-  useSplitPresets,
-  usePresetDuplication,
-} from '@hooks';
+import { toFixedWithoutRounding, useCustomSplitEditor } from '@hooks';
 import { IndividualSplit } from '@/context/types';
 
 type CustomSplitRouteParams = {
@@ -39,147 +31,56 @@ type CustomSplitRouteParams = {
   };
 };
 
-const MIN_PEOPLE = 2;
-const MAX_PEOPLE = 15;
-
 const CustomSplitScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { state: sessionState, dispatch } = useSplitSession();
-  const { state: historyState } = useHistory();
   const route = useRoute<RouteProp<CustomSplitRouteParams, 'CustomSplitScreen'>>();
-
   const { totalBill = 0, tipPercentage = 0, currencySymbol = '$' } = route.params || {};
 
-  // Import hooks
-  const {
-    people,
-    setPeople,
-    handleUpdatePerson,
-    handleRemovePerson,
-    handleAddPerson,
-    createDefaultPerson,
-  } = useCustomSplitPeople();
-
-  const { overallTotal, validation, canSave, getValidationIcon, getValidationText } =
-    useCustomSplitValidation(people, totalBill, tipPercentage, theme, t);
-
-  const {
-    activePresetId,
-    setActivePresetId,
-    isPresetsExpanded,
-    setIsPresetsExpanded,
-    isPresetDeleteMode,
-    setIsPresetDeleteMode,
-    handleLoadPreset: hLoadPreset,
-    handlePresetPress,
-    handleClearPreset,
-    handlePresetLongPress,
-  } = useSplitPresets();
-
-  const {
-    isPresetNameModalVisible,
-    setIsPresetNameModalVisible,
-    presetNameInput,
-    setPresetNameInput,
-    isDeletePresetVisible,
-    setIsDeletePresetVisible,
-    presetToDelete,
-    setPresetToDelete,
-    duplicateAlert,
-    setDuplicateAlert,
-    handleSavePreset: hSavePreset,
-    handleUpdatePreset: hUpdatePreset,
-    handleDeletePreset: hDeletePreset,
-    getNamedPeople,
-  } = usePresetDuplication();
+  const { people, presets, validation, isCustomSplitActive, actions } = useCustomSplitEditor(
+    totalBill,
+    tipPercentage,
+  );
 
   const [isInfoVisible, setIsInfoVisible] = useState(false);
 
-  // Wrapper for handleLoadPreset to pass people update
-  const handleLoadPreset = useCallback(
-    (preset: SavedSplitPreset) => {
-      hLoadPreset(preset, setPeople);
-    },
-    [hLoadPreset],
-  );
-
-  // Wrapper for handlePresetPress
-  const handlePresetPressWrapper = useCallback(
-    (preset: SavedSplitPreset) => {
-      handlePresetPress(preset, setPeople);
-    },
-    [handlePresetPress],
-  );
-
-  // Main save handler
-  const handleSave = useCallback(() => {
-    if (!canSave) return;
-
-    const namedPeople = getNamedPeople(people, t);
-
-    dispatch({
-      type: 'SET_ACTIVE_SPLIT_CONFIG',
-      payload: {
-        type: 'custom',
-        customSplits: namedPeople,
-      },
-    });
-
+  const handleSave = () => {
+    actions.save();
     navigation.goBack();
-  }, [canSave, people, getNamedPeople, t, dispatch, navigation]);
+  };
 
-  // Clear custom split
-  const isCustomSplitCurrentlyActive = sessionState.activeSplitConfig?.type === 'custom';
-  const handleClearCustomSplit = useCallback(() => {
-    dispatch({ type: 'CLEAR_ACTIVE_SPLIT_CONFIG' });
+  const handleClear = () => {
+    actions.clear();
     navigation.goBack();
-  }, [dispatch, navigation]);
+  };
 
-  // Get preset summary
-  const getPresetSummary = useCallback(
-    (preset: SavedSplitPreset) => {
-      const counts = { fixed: 0, percentage: 0, remainder: 0 };
-      preset.customSplits.forEach(s => {
-        counts[s.allocationType]++;
-      });
-      const parts: string[] = [];
-      if (counts.fixed > 0) parts.push(`${counts.fixed} ${t('screens.customSplit.fixed')}`);
-      if (counts.percentage > 0) parts.push(`${counts.percentage} %`);
-      if (counts.remainder > 0)
-        parts.push(`${counts.remainder} ${t('screens.customSplit.remainder')}`);
-      return parts.join(', ');
-    },
-    [t],
-  );
+  // Display mapping for validation status (hook is display-agnostic per Q2 decision)
+  const getValidationIcon = () => {
+    switch (validation.status) {
+      case 'complete':
+        return { name: 'check-circle' as const, color: theme.colors.success };
+      case 'under':
+        return { name: 'alert-circle' as const, color: theme.colors.error_toast };
+      case 'over':
+        return { name: 'alert' as const, color: theme.colors.warning };
+    }
+  };
 
-  // Preset delete handler
-  const handlePresetDeletePress = useCallback((id: string) => {
-    setPresetToDelete(id);
-    setIsDeletePresetVisible(true);
-  }, []);
-
-  // Handle save preset with wrapper
-  const handleSavePresetWrapper = useCallback(() => {
-    hSavePreset(people, t, () => {
-      setActivePresetId(null);
-    });
-  }, [hSavePreset, people, t]);
-
-  // Handle update preset with wrapper
-  const handleUpdatePresetWrapper = useCallback(() => {
-    hUpdatePreset(people, activePresetId, t);
-  }, [hUpdatePreset, people, activePresetId, t]);
-
-  // Handle delete preset with wrapper
-  const handleDeletePresetWrapper = useCallback(() => {
-    hDeletePreset(t, () => {
-      if (activePresetId === presetToDelete) {
-        setActivePresetId(null);
+  const getValidationText = () => {
+    switch (validation.status) {
+      case 'complete':
+        return t('screens.customSplit.validationComplete');
+      case 'under': {
+        const remaining = toFixedWithoutRounding(100 - validation.totalAllocatedPercentage, 1);
+        return t('screens.customSplit.validationUnder', { remaining: `${remaining}%` });
       }
-    });
-  }, [hDeletePreset, t, activePresetId, presetToDelete]);
+      case 'over': {
+        const excess = toFixedWithoutRounding(validation.totalAllocatedPercentage - 100, 1);
+        return t('screens.customSplit.validationOver', { excess: `${excess}%` });
+      }
+    }
+  };
 
   return (
     <>
@@ -203,33 +104,33 @@ const CustomSplitScreen = () => {
           showsVerticalScrollIndicator={false}
           keyboardDismissMode="on-drag"
           onScrollBeginDrag={() => {
-            if (isPresetDeleteMode) setIsPresetDeleteMode(false);
+            if (presets.isDeleteMode) actions.exitDeleteMode();
           }}
         >
           {/* Total Bill Banner */}
           <Pressable
             style={styles.totalBillBanner}
             onPress={() => {
-              if (isPresetDeleteMode) setIsPresetDeleteMode(false);
+              if (presets.isDeleteMode) actions.exitDeleteMode();
             }}
           >
             <Text style={styles.totalBillLabel}>{t('screens.customSplit.totalBillLabel')}</Text>
             <Text style={styles.totalBillAmount}>
               {currencySymbol}
-              {toFixedWithoutRounding(overallTotal, 2)}
+              {toFixedWithoutRounding(validation.overallTotal, 2)}
             </Text>
           </Pressable>
 
           {/* Saved Presets Section */}
-          {historyState.savedSplitPresets.length > 0 && (
+          {presets.savedPresets.length > 0 && (
             <View style={styles.presetsSection}>
               <Pressable
                 style={styles.presetsSectionHeader}
                 onPress={() => {
-                  if (isPresetDeleteMode) {
-                    setIsPresetDeleteMode(false);
+                  if (presets.isDeleteMode) {
+                    actions.exitDeleteMode();
                   } else {
-                    setIsPresetsExpanded(!isPresetsExpanded);
+                    actions.togglePresetsExpanded();
                   }
                 }}
               >
@@ -237,8 +138,8 @@ const CustomSplitScreen = () => {
                   {t('screens.customSplit.savedPresets')}
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                  {isPresetDeleteMode && (
-                    <Pressable onPress={() => setIsPresetDeleteMode(false)}>
+                  {presets.isDeleteMode && (
+                    <Pressable onPress={actions.exitDeleteMode}>
                       <Text style={styles.doneButtonText}>
                         {t('common.done', { defaultValue: 'Done' })}
                       </Text>
@@ -246,28 +147,28 @@ const CustomSplitScreen = () => {
                   )}
                   <StyledIcons
                     type="MaterialDesignIcons"
-                    name={isPresetsExpanded ? 'chevron-up' : 'chevron-down'}
+                    name={presets.isExpanded ? 'chevron-up' : 'chevron-down'}
                     size={20}
                     color={theme.colors.accent}
                   />
                 </View>
               </Pressable>
-              {isPresetsExpanded && (
+              {presets.isExpanded && (
                 <ScrollView
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.presetsScrollContent}
                 >
-                  {historyState.savedSplitPresets.map(preset => (
+                  {presets.savedPresets.map(preset => (
                     <StyledCustomSplitPresetCard
                       key={preset.id}
                       preset={preset}
-                      isActive={activePresetId === preset.id}
-                      isDeleteMode={isPresetDeleteMode}
-                      onPress={() => handlePresetPressWrapper(preset)}
-                      onLongPress={handlePresetLongPress}
-                      onDelete={handlePresetDeletePress}
-                      getPresetSummary={getPresetSummary}
+                      isActive={presets.activePresetId === preset.id}
+                      isDeleteMode={presets.isDeleteMode}
+                      onPress={() => actions.pressPreset(preset)}
+                      onLongPress={actions.longPressPreset}
+                      onDelete={actions.requestDeletePreset}
+                      getPresetSummary={actions.getPresetSummary}
                       t={t}
                       theme={theme}
                       styles={styles}
@@ -281,19 +182,19 @@ const CustomSplitScreen = () => {
           {/* Person Cards */}
           <Pressable
             onPress={() => {
-              if (isPresetDeleteMode) setIsPresetDeleteMode(false);
+              if (presets.isDeleteMode) actions.exitDeleteMode();
             }}
             accessible={false}
           >
-            {people.map((person: IndividualSplit, index: number) => (
+            {people.list.map((person: IndividualSplit, index: number) => (
               <StyledCustomSplitPersonCard
                 key={person.id}
                 person={person}
                 index={index}
-                totalPeople={people.length}
+                totalPeople={people.list.length}
                 currencySymbol={currencySymbol}
-                onUpdate={handleUpdatePerson}
-                onRemove={handleRemovePerson}
+                onUpdate={actions.updatePerson}
+                onRemove={actions.removePerson}
                 t={t}
                 theme={theme}
                 styles={styles}
@@ -301,8 +202,8 @@ const CustomSplitScreen = () => {
             ))}
 
             {/* Add Person Button */}
-            {people.length < MAX_PEOPLE && (
-              <Pressable style={styles.addPersonButton} onPress={handleAddPerson}>
+            {people.canAdd && (
+              <Pressable style={styles.addPersonButton} onPress={actions.addPerson}>
                 <StyledIcons
                   type="MaterialDesignIcons"
                   name="plus-circle"
@@ -318,8 +219,8 @@ const CustomSplitScreen = () => {
         {/* Sticky Validation Footer */}
         <View style={styles.footerContainer}>
           {/* Display clear button if custom split is currently active */}
-          {isCustomSplitCurrentlyActive && (
-            <Pressable style={styles.clearActiveSplitButton} onPress={handleClearCustomSplit}>
+          {isCustomSplitActive && (
+            <Pressable style={styles.clearActiveSplitButton} onPress={handleClear}>
               <StyledIcons
                 type="MaterialDesignIcons"
                 name="close"
@@ -377,28 +278,41 @@ const CustomSplitScreen = () => {
           {/* Save Button */}
           <View style={styles.footerButtonRow}>
             <Pressable
-              style={[styles.saveButton, styles.applyButton, !canSave && styles.saveButtonDisabled]}
+              style={[
+                styles.saveButton,
+                styles.applyButton,
+                !validation.canSave && styles.saveButtonDisabled,
+              ]}
               onPress={handleSave}
-              disabled={!canSave}
+              disabled={!validation.canSave}
             >
-              <Text style={[styles.saveButtonText, !canSave && styles.saveButtonTextDisabled]}>
+              <Text
+                style={[
+                  styles.saveButtonText,
+                  !validation.canSave && styles.saveButtonTextDisabled,
+                ]}
+              >
                 {t('screens.customSplit.applySplit')}
               </Text>
             </Pressable>
             <Pressable
-              style={[styles.presetButton, !canSave && styles.presetButtonDisabled]}
+              style={[styles.presetButton, !validation.canSave && styles.presetButtonDisabled]}
               onPress={() => {
-                if (activePresetId) {
-                  handleUpdatePresetWrapper();
+                if (presets.activePresetId) {
+                  actions.updatePreset();
                 } else {
-                  setPresetNameInput('');
-                  setIsPresetNameModalVisible(true);
+                  actions.openSaveModal();
                 }
               }}
-              disabled={!canSave}
+              disabled={!validation.canSave}
             >
-              <Text style={[styles.presetButtonText, !canSave && styles.presetButtonTextDisabled]}>
-                {activePresetId
+              <Text
+                style={[
+                  styles.presetButtonText,
+                  !validation.canSave && styles.presetButtonTextDisabled,
+                ]}
+              >
+                {presets.activePresetId
                   ? t('screens.customSplit.updatePreset')
                   : t('screens.customSplit.saveAsPreset')}
               </Text>
@@ -406,14 +320,8 @@ const CustomSplitScreen = () => {
           </View>
 
           {/* Save as New option when editing a preset */}
-          {activePresetId && canSave && (
-            <Pressable
-              style={styles.saveAsNewButton}
-              onPress={() => {
-                setPresetNameInput('');
-                setIsPresetNameModalVisible(true);
-              }}
-            >
+          {presets.activePresetId && validation.canSave && (
+            <Pressable style={styles.saveAsNewButton} onPress={actions.openSaveModal}>
               <Text style={styles.saveAsNewText}>{t('screens.customSplit.saveAsNew')}</Text>
             </Pressable>
           )}
@@ -432,38 +340,26 @@ const CustomSplitScreen = () => {
 
       {/* Preset Name Modal */}
       <StyledAlert
-        visible={isPresetNameModalVisible}
+        visible={presets.isNameModalVisible}
         title={t('screens.customSplit.presetNameTitle')}
         type="info"
         buttons={[
           {
             text: t('common.cancel'),
             style: 'cancel',
-            onPress: () => {
-              setIsPresetNameModalVisible(false);
-              setPresetNameInput('');
-            },
+            onPress: actions.closeSaveModal,
           },
           {
             text: t('common.save'),
-            onPress: () => {
-              if (presetNameInput.trim()) {
-                handleSavePresetWrapper();
-              } else {
-                Toast.show({ type: 'error', text1: t('screens.customSplit.presetNameRequired') });
-              }
-            },
+            onPress: actions.savePreset,
           },
         ]}
-        onDismiss={() => {
-          setIsPresetNameModalVisible(false);
-          setPresetNameInput('');
-        }}
+        onDismiss={actions.closeSaveModal}
       >
         <TextInput
           style={styles.presetNameInput}
-          value={presetNameInput}
-          onChangeText={setPresetNameInput}
+          value={presets.nameInput}
+          onChangeText={actions.setNameInput}
           placeholder={t('screens.customSplit.presetNamePlaceholder')}
           placeholderTextColor={theme.utils.hexToRGBA(theme.colors.card_typography, 0.4)}
           maxLength={30}
@@ -473,69 +369,58 @@ const CustomSplitScreen = () => {
 
       {/* Duplicate Preset Alert */}
       <StyledAlert
-        visible={duplicateAlert !== null}
+        visible={presets.duplicateAlert !== null}
         title={
-          duplicateAlert?.type === 'name'
+          presets.duplicateAlert?.type === 'name'
             ? t('screens.customSplit.duplicateNameTitle')
-            : duplicateAlert?.type === 'config'
+            : presets.duplicateAlert?.type === 'config'
             ? t('screens.customSplit.duplicateConfigTitle')
             : t('screens.customSplit.duplicateBothTitle')
         }
         message={
-          duplicateAlert?.type === 'name'
+          presets.duplicateAlert?.type === 'name'
             ? t('screens.customSplit.duplicateNameMessage', {
-                name: duplicateAlert.preset.name,
+                name: presets.duplicateAlert.preset.name,
               })
-            : duplicateAlert?.type === 'config'
+            : presets.duplicateAlert?.type === 'config'
             ? t('screens.customSplit.duplicateConfigMessage', {
-                name: duplicateAlert?.preset.name,
+                name: presets.duplicateAlert?.preset.name,
               })
             : t('screens.customSplit.duplicateBothMessage', {
-                name: duplicateAlert?.preset.name,
+                name: presets.duplicateAlert?.preset.name,
               })
         }
         type="warning"
         buttons={
-          duplicateAlert?.type === 'name'
+          presets.duplicateAlert?.type === 'name'
             ? [
                 {
                   text: t('common.ok'),
-                  onPress: () => {
-                    setDuplicateAlert(null);
-                    setIsPresetNameModalVisible(true);
-                  },
+                  onPress: actions.confirmDuplicateAndRename,
                 },
               ]
             : [
                 {
                   text: t('common.cancel'),
                   style: 'cancel',
-                  onPress: () => {
-                    setDuplicateAlert(null);
-                    setPresetNameInput('');
-                  },
+                  onPress: actions.dismissDuplicateAlert,
                 },
                 {
                   text: t('screens.customSplit.loadPreset'),
                   onPress: () => {
-                    if (duplicateAlert) {
-                      handleLoadPreset(duplicateAlert.preset);
+                    if (presets.duplicateAlert) {
+                      actions.loadPresetFromDuplicate(presets.duplicateAlert.preset);
                     }
-                    setDuplicateAlert(null);
-                    setPresetNameInput('');
                   },
                 },
               ]
         }
-        onDismiss={() => {
-          setDuplicateAlert(null);
-          setPresetNameInput('');
-        }}
+        onDismiss={actions.dismissDuplicateAlert}
       />
 
       {/* Delete Preset Confirmation */}
       <StyledAlert
-        visible={isDeletePresetVisible}
+        visible={presets.isDeleteConfirmVisible}
         title={t('screens.customSplit.deletePresetTitle')}
         message={t('screens.customSplit.deletePresetConfirm')}
         type="confirm"
@@ -543,21 +428,15 @@ const CustomSplitScreen = () => {
           {
             text: t('common.cancel'),
             style: 'cancel',
-            onPress: () => {
-              setIsDeletePresetVisible(false);
-              setPresetToDelete(null);
-            },
+            onPress: actions.cancelDeletePreset,
           },
           {
             text: t('common.delete'),
             style: 'destructive',
-            onPress: handleDeletePresetWrapper,
+            onPress: actions.confirmDeletePreset,
           },
         ]}
-        onDismiss={() => {
-          setIsDeletePresetVisible(false);
-          setPresetToDelete(null);
-        }}
+        onDismiss={actions.cancelDeletePreset}
       />
     </>
   );
