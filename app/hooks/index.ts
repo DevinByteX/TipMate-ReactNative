@@ -1,4 +1,4 @@
-import { convertToTwoDecimalPoints, acceptNumbersAndDecimals } from './convertToTwoDecimals';
+import { convertToTwoDecimalPoints, acceptNumbersAndDecimals, toFixedWithoutRounding } from '@/utils/numberFormatting';
 import {
   calculateBillValues,
   calculateBillValuesCustomSplit,
@@ -15,16 +15,15 @@ import {
   getUserUpdatedThemeOption,
   setUserUpdatedThemeOption,
 } from './asyncStorageHooks';
-import { toFixedWithoutRounding } from './tofixedWithoutRounding';
 import { usePersistedReducer } from './usePersistedReducer';
-import { validateOptionValues, areOptionArraysSame } from './validationHooks';
+import { validateOptionValues, areOptionArraysSame } from '@/utils/optionsValidation';
 import { useThemeColorCustomiser, CustomisedTheme } from './useThemeColorCustomiser';
 import { useExternalLinkAlert, ExternalLinkAlertConfig } from './useExternalLinkAlert';
 import { useShareTipDetailsText, formatTipDetailsPreview, ShareTipDetailsParams, ShareTranslations } from './useShareTipDetailsText';
 import { useShareTipDetailsPDF, TipDetailsForPDF, PDFTranslations } from './useShareTipDetailsPDF';
 import { useShareTipPreview } from './useShareTipPreview';
 import { useSaveTip } from './useSaveTip';
-import { getDeviceCurrency } from './currencyUtils';
+import { getDeviceCurrency } from '@/utils/deviceCurrency';
 import {
   usePressAnimation,
   useFocusScale,

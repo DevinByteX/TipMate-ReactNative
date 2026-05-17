@@ -1,4 +1,4 @@
-import { toFixedWithoutRounding } from '@hooks';
+import { toFixedWithoutRounding } from '@/utils/numberFormatting';
 import { IndividualSplit } from '@/context/types';
 
 export type BillCalculationType = {
