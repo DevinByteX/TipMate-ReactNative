@@ -21,21 +21,13 @@ import {
 import { SavedSplitPreset } from '@/context/types';
 import { toFixedWithoutRounding, useCustomSplitEditor } from '@hooks';
 import { IndividualSplit } from '@/context/types';
-
-type CustomSplitRouteParams = {
-  CustomSplitScreen: {
-    totalBill: number;
-    tipPercentage: number;
-    currencySymbol: string;
-    presetId?: string;
-  };
-};
+import type { RootStackParamList } from '@navigation/types';
 
 const CustomSplitScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const route = useRoute<RouteProp<CustomSplitRouteParams, 'CustomSplitScreen'>>();
+  const route = useRoute<RouteProp<RootStackParamList, 'CustomSplitScreen'>>();
   const { totalBill = 0, tipPercentage = 0, currencySymbol = '$' } = route.params || {};
 
   const { people, presets, validation, isCustomSplitActive, actions } = useCustomSplitEditor(

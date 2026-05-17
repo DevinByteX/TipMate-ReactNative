@@ -9,7 +9,7 @@ import BootSplash from 'react-native-bootsplash';
 // Custom Stacks
 import StackNavigation from '@navigation/StackNavigation';
 // Custom Hooks
-import { getUserPreferredTheme, getUserUpdatedThemeOption, useThemeColorCustomiser } from '@hooks';
+import { getUserPreferredTheme, getUserUpdatedThemeOption, applyThemeColors } from '@hooks';
 import { toastConfig } from '@styles/toastConfig';
 
 const ApplicationNavigator = (props: any) => {
@@ -21,7 +21,7 @@ const ApplicationNavigator = (props: any) => {
         const updatedThemeOption = await getUserUpdatedThemeOption();
 
         // Ensure updatedThemeOption is an array
-        useThemeColorCustomiser(updatedThemeOption);
+        applyThemeColors(updatedThemeOption);
 
         console.log('Setting app theme to:', preferredTheme);
         UnistylesRuntime.setTheme(preferredTheme);

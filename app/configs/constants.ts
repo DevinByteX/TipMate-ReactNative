@@ -37,6 +37,8 @@ export const Constants = {
     max: 15,
     step: 1,
   } as SplitSliderConfigValues,
+  MIN_SPLIT_PEOPLE: 2,
+  MAX_SPLIT_PEOPLE: 15,
   defaultTipSliderConfigValues: {
     min: 0,
     max: 80,

@@ -15,9 +15,10 @@ import {
   getUserUpdatedThemeOption,
   setUserUpdatedThemeOption,
 } from '@/utils/themeStorage';
+import type { CustomisedTheme } from '@/utils/themeStorage';
 import { usePersistedReducer } from './usePersistedReducer';
 import { validateOptionValues, areOptionArraysSame } from '@/utils/optionsValidation';
-import { useThemeColorCustomiser, CustomisedTheme } from './useThemeColorCustomiser';
+import { applyThemeColors } from '@/utils/themeCustomization';
 import { useExternalLinkAlert, ExternalLinkAlertConfig } from './useExternalLinkAlert';
 import { shareTipText, shareTipPDF, formatTipDetailsPreview, ShareTipDetailsParams, ShareTranslations, TipDetailsForPDF, PDFTranslations } from '@/utils/tipSharing';
 import { useShareTipPreview } from './useShareTipPreview';
@@ -50,7 +51,7 @@ export {
   usePersistedReducer,
   validateOptionValues,
   areOptionArraysSame,
-  useThemeColorCustomiser,
+  applyThemeColors,
   useExternalLinkAlert,
   shareTipText,
   shareTipPDF,

@@ -8,11 +8,8 @@ import { validateSplitAllocations } from '@/utils/splitValidation';
 import { generateId } from '@/utils/idGenerator';
 import { namedPeople } from '@/utils/splitFormatting';
 import { findPresetDuplicate, getPresetSummary as getPresetSummaryFn } from '@/utils/presetManager';
-
-// ─── Constants ────────────────────────────────────────────────────────────────
-
-const MIN_PEOPLE = 2;
-const MAX_PEOPLE = 15;
+import { Constants } from '@configs';
+import type { RootStackParamList } from '@navigation/types';
 
 const createDefaultPerson = (): IndividualSplit => ({
     id: generateId(),
@@ -22,16 +19,6 @@ const createDefaultPerson = (): IndividualSplit => ({
     calculatedAmount: undefined,
 });
 
-// ─── Route Types ──────────────────────────────────────────────────────────────
-
-type CustomSplitRouteParams = {
-    CustomSplitScreen: {
-        totalBill: number;
-        tipPercentage: number;
-        currencySymbol: string;
-        presetId?: string;
-    };
-};
 
 // ─── Return Shape ─────────────────────────────────────────────────────────────
 
@@ -104,7 +91,7 @@ export const useCustomSplitEditor = (
     const { t } = useTranslation();
     const { state: historyState, dispatch: historyDispatch } = useHistory();
     const { state: sessionState, dispatch: sessionDispatch } = useSplitSession();
-    const route = useRoute<RouteProp<CustomSplitRouteParams, 'CustomSplitScreen'>>();
+    const route = useRoute<RouteProp<RootStackParamList, 'CustomSplitScreen'>>();
     const { presetId } = route.params || {};
 
     // ── People ──────────────────────────────────────────────────────────────
@@ -193,7 +180,7 @@ export const useCustomSplitEditor = (
     );
 
     const canSave =
-        validationResult.status === 'complete' && people.length >= MIN_PEOPLE && overallTotal > 0;
+        validationResult.status === 'complete' && people.length >= Constants.MIN_SPLIT_PEOPLE && overallTotal > 0;
 
     // ── Helpers ──────────────────────────────────────────────────────────────
 
@@ -218,11 +205,11 @@ export const useCustomSplitEditor = (
     }, []);
 
     const addPerson = useCallback(() => {
-        setPeople(prev => (prev.length >= MAX_PEOPLE ? prev : [...prev, createDefaultPerson()]));
+        setPeople(prev => (prev.length >= Constants.MAX_SPLIT_PEOPLE ? prev : [...prev, createDefaultPerson()]));
     }, []);
 
     const removePerson = useCallback((id: string) => {
-        setPeople(prev => (prev.length <= MIN_PEOPLE ? prev : prev.filter(p => p.id !== id)));
+        setPeople(prev => (prev.length <= Constants.MIN_SPLIT_PEOPLE ? prev : prev.filter(p => p.id !== id)));
     }, []);
 
     // ── Preset interaction ───────────────────────────────────────────────────
@@ -382,8 +369,8 @@ export const useCustomSplitEditor = (
     return {
         people: {
             list: people,
-            canAdd: people.length < MAX_PEOPLE,
-            canRemove: people.length > MIN_PEOPLE,
+            canAdd: people.length < Constants.MAX_SPLIT_PEOPLE,
+            canRemove: people.length > Constants.MIN_SPLIT_PEOPLE,
         },
         presets: {
             savedPresets: historyState.savedSplitPresets,

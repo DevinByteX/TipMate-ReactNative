@@ -3,9 +3,8 @@ import { useRoute, RouteProp } from '@react-navigation/native';
 import { useHistory } from '@/context/AppContext';
 import { IndividualSplit } from '@/context/types';
 import { generateId } from '@/utils/idGenerator';
-
-const MIN_PEOPLE = 2;
-const MAX_PEOPLE = 15;
+import { Constants } from '@configs';
+import type { RootStackParamList } from '@navigation/types';
 
 const createDefaultPerson = (index: number): IndividualSplit => ({
     id: generateId(),
@@ -15,18 +14,9 @@ const createDefaultPerson = (index: number): IndividualSplit => ({
     calculatedAmount: undefined,
 });
 
-type CustomSplitRouteParams = {
-    CustomSplitScreen: {
-        totalBill: number;
-        tipPercentage: number;
-        currencySymbol: string;
-        presetId?: string;
-    };
-};
-
 export const useCustomSplitPeople = () => {
     const { state } = useHistory();
-    const route = useRoute<RouteProp<CustomSplitRouteParams, 'CustomSplitScreen'>>();
+    const route = useRoute<RouteProp<RootStackParamList, 'CustomSplitScreen'>>();
     const { presetId } = route.params || {};
 
     const [hasLoadedPresetFromRoute, setHasLoadedPresetFromRoute] = useState(false);
@@ -69,14 +59,14 @@ export const useCustomSplitPeople = () => {
 
     const handleRemovePerson = useCallback((id: string) => {
         setPeople(prev => {
-            if (prev.length <= MIN_PEOPLE) return prev;
+            if (prev.length <= Constants.MIN_SPLIT_PEOPLE) return prev;
             return prev.filter(person => person.id !== id);
         });
     }, []);
 
     const handleAddPerson = useCallback(() => {
         setPeople(prev => {
-            if (prev.length >= MAX_PEOPLE) return prev;
+            if (prev.length >= Constants.MAX_SPLIT_PEOPLE) return prev;
             return [...prev, createDefaultPerson(prev.length)];
         });
     }, []);
@@ -89,8 +79,8 @@ export const useCustomSplitPeople = () => {
         handleAddPerson,
         hasLoadedPresetFromRoute,
         setHasLoadedPresetFromRoute,
-        MIN_PEOPLE,
-        MAX_PEOPLE,
+        MIN_PEOPLE: Constants.MIN_SPLIT_PEOPLE,
+        MAX_PEOPLE: Constants.MAX_SPLIT_PEOPLE,
         createDefaultPerson,
     };
 };
