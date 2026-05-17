@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Toast from 'react-native-toast-message';
 import { useHistory, useSplitSession } from '@/context/AppContext';
 import { IndividualSplit, SavedSplitPreset } from '@/context/types';
+import { validateSplitAllocations } from '@/utils/splitValidation';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -185,52 +186,10 @@ export const useCustomSplitEditor = (
         return totalBill + tip;
     }, [totalBill, tipPercentage]);
 
-    const validationResult = useMemo(() => {
-        let fixedTotal = 0;
-        let percentageTotal = 0;
-        let remainderCount = 0;
-
-        people.forEach(person => {
-            switch (person.allocationType) {
-                case 'fixed':
-                    fixedTotal += person.value || 0;
-                    break;
-                case 'percentage':
-                    percentageTotal += person.value || 0;
-                    break;
-                case 'remainder':
-                    remainderCount++;
-                    break;
-            }
-        });
-
-        const fixedPercentage = overallTotal > 0 ? (fixedTotal / overallTotal) * 100 : 0;
-        const totalAllocatedPercentage = fixedPercentage + percentageTotal;
-        const remainingPercentage = 100 - totalAllocatedPercentage;
-        const tolerance = 0.01;
-
-        let status: 'complete' | 'under' | 'over';
-        if (remainderCount > 0) {
-            status = totalAllocatedPercentage > 100 + tolerance ? 'over' : 'complete';
-        } else {
-            if (Math.abs(totalAllocatedPercentage - 100) <= tolerance) {
-                status = 'complete';
-            } else if (totalAllocatedPercentage < 100) {
-                status = 'under';
-            } else {
-                status = 'over';
-            }
-        }
-
-        return {
-            status,
-            totalAllocatedPercentage,
-            fixedTotal,
-            percentageTotal,
-            remainderCount,
-            remainingPercentage: Math.max(0, remainingPercentage),
-        };
-    }, [people, overallTotal]);
+    const validationResult = useMemo(
+        () => validateSplitAllocations(people, overallTotal),
+        [people, overallTotal],
+    );
 
     const canSave =
         validationResult.status === 'complete' && people.length >= MIN_PEOPLE && overallTotal > 0;
