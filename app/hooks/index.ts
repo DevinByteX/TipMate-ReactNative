@@ -7,7 +7,7 @@ import {
   RoundingMethodType,
   RoundingMethod,
   DisabledRoundingMethodsType,
-} from './calculateBill';
+} from '@/utils/billCalculation';
 import { asyncStorageUtil } from './asyncStorageUtil';
 import {
   getUserPreferredTheme,

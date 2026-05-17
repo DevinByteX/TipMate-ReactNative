@@ -16,16 +16,12 @@ import {
 // Styling
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
-  BillCalculationType,
-  CustomSplitCalculationType,
   RoundingMethod,
   RoundingMethodType,
   calculateBillValues,
   calculateBillValuesCustomSplit,
-  useShareTipPreview,
-  useSaveTip,
-  getDeviceCurrency,
-} from '@hooks';
+} from '@/utils/billCalculation';
+import { useShareTipPreview, useSaveTip, getDeviceCurrency } from '@hooks';
 import { useUserSettings, useHistory, useSplitSession } from '@/context/AppContext';
 
 const HomeTipScreen = () => {
@@ -40,8 +36,6 @@ const HomeTipScreen = () => {
   const [userInputSplitCount, setUserInputSplitCount] = useState<number>(1);
   const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
 
-  const [billValues, setBillValues] = useState<BillCalculationType>();
-  const [customBillValues, setCustomBillValues] = useState<CustomSplitCalculationType>();
   const { state: settingsState } = useUserSettings();
   const { state: historyState } = useHistory();
   const { state: sessionState, dispatch } = useSplitSession();
@@ -62,37 +56,32 @@ const HomeTipScreen = () => {
   const isCustomSplitActive = sessionState.activeSplitConfig?.type === 'custom';
   const customSplits = sessionState.activeSplitConfig?.customSplits;
 
-  useEffect(() => {
+  const { billValues, customBillValues } = useMemo(() => {
     if (isCustomSplitActive && customSplits && customSplits.length > 0) {
-      // Use custom split calculation
-      const customResults = calculateBillValuesCustomSplit(
-        userInputTipPercentage,
-        userInputBillAmount,
-        userInputRound,
-        customSplits,
-      );
-      setCustomBillValues(customResults);
-      // Also calculate equal split for overall display
-      const equalResults = calculateBillValues(
-        userInputTipPercentage,
-        userInputBillAmount,
-        customSplits.length,
-        userInputRound,
-      );
-      setBillValues(equalResults);
-    } else {
-      // Regular equal split calculation
-      const billValuesResults = calculateBillValues(
+      return {
+        customBillValues: calculateBillValuesCustomSplit(
+          userInputTipPercentage,
+          userInputBillAmount,
+          userInputRound,
+          customSplits,
+        ),
+        billValues: calculateBillValues(
+          userInputTipPercentage,
+          userInputBillAmount,
+          customSplits.length,
+          userInputRound,
+        ),
+      };
+    }
+    return {
+      billValues: calculateBillValues(
         userInputTipPercentage,
         userInputBillAmount,
         userInputSplitCount,
         userInputRound,
-      );
-      setBillValues(billValuesResults);
-      setCustomBillValues(undefined);
-    }
-
-    return () => {};
+      ),
+      customBillValues: undefined,
+    };
   }, [
     userInputTipPercentage,
     userInputBillAmount,
