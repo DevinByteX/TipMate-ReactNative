@@ -1,25 +1,13 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import Toast from 'react-native-toast-message';
-import { useHistory, useSplitSession } from '@/context/AppContext';
+import { useSplitSession } from '@/context/AppContext';
 import { IndividualSplit, SavedSplitPreset } from '@/context/types';
 import { validateSplitAllocations } from '@/utils/splitValidation';
-import { generateId } from '@/utils/idGenerator';
 import { namedPeople } from '@/utils/splitFormatting';
-import { findPresetDuplicate, getPresetSummary as getPresetSummaryFn } from '@/utils/presetManager';
 import { Constants } from '@configs';
-import type { RootStackParamList } from '@navigation/types';
 import { ActionTypes } from '@/context/actionTypes';
-
-const createDefaultPerson = (): IndividualSplit => ({
-    id: generateId(),
-    name: '',
-    allocationType: 'remainder',
-    value: undefined,
-    calculatedAmount: undefined,
-});
-
+import { useCustomSplitPeople } from './useCustomSplitPeople';
+import { useSplitPresets } from './useSplitPresets';
 
 // ─── Return Shape ─────────────────────────────────────────────────────────────
 
@@ -90,83 +78,46 @@ export const useCustomSplitEditor = (
     tipPercentage: number,
 ): CustomSplitEditorReturn => {
     const { t } = useTranslation();
-    const { state: historyState, dispatch: historyDispatch } = useHistory();
     const { state: sessionState, dispatch: sessionDispatch } = useSplitSession();
-    const route = useRoute<RouteProp<RootStackParamList, 'CustomSplitScreen'>>();
-    const { presetId } = route.params || {};
 
-    // ── People ──────────────────────────────────────────────────────────────
+    // Delegate people management to sub-hook
+    const {
+        people,
+        setPeople,
+        handleUpdatePerson: updatePerson,
+        handleRemovePerson: removePerson,
+        handleAddPerson: addPerson,
+    } = useCustomSplitPeople();
 
-    const getInitialPeople = (): IndividualSplit[] => {
-        if (presetId) {
-            const preset = historyState.savedSplitPresets.find(p => p.id === presetId);
-            if (preset) {
-                return preset.customSplits.map(split => ({ ...split, calculatedAmount: undefined }));
-            }
-        }
-        if (sessionState.activeSplitConfig?.type === 'custom' && sessionState.activeSplitConfig.customSplits) {
-            return sessionState.activeSplitConfig.customSplits.map(split => ({ ...split, calculatedAmount: undefined }));
-        }
-        return [createDefaultPerson(), createDefaultPerson()];
-    };
-
-    const [people, setPeople] = useState<IndividualSplit[]>(getInitialPeople);
-    const [hasLoadedPresetFromRoute, setHasLoadedPresetFromRoute] = useState(false);
-
-    // Sync preset loading once persisted state is hydrated
-    useEffect(() => {
-        if (presetId && !hasLoadedPresetFromRoute && historyState.savedSplitPresets.length > 0) {
-            const preset = historyState.savedSplitPresets.find(p => p.id === presetId);
-            if (preset) {
-                setPeople(preset.customSplits.map(split => ({ ...split, calculatedAmount: undefined })));
-                setHasLoadedPresetFromRoute(true);
-            }
-        }
-    }, [presetId, historyState.savedSplitPresets, hasLoadedPresetFromRoute]);
-
-    // ── Preset display state ─────────────────────────────────────────────────
-
-    const [activePresetId, setActivePresetId] = useState<string | null>(null);
-    const [isPresetsExpanded, setIsPresetsExpanded] = useState(true);
-    const [isPresetDeleteMode, setIsPresetDeleteMode] = useState(false);
-    const [isNameModalVisible, setIsNameModalVisible] = useState(false);
-    const [nameInput, setNameInputState] = useState('');
-    const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
-    const [presetToDelete, setPresetToDelete] = useState<string | null>(null);
-    const [duplicateAlert, setDuplicateAlert] = useState<{
-        type: 'name' | 'config' | 'both';
-        preset: SavedSplitPreset;
-    } | null>(null);
-
-    // Detect if active session config matches a saved preset
-    useEffect(() => {
-        if (
-            sessionState.activeSplitConfig?.type === 'custom' &&
-            sessionState.activeSplitConfig?.customSplits &&
-            historyState.savedSplitPresets.length > 0
-        ) {
-            const currentSplits = sessionState.activeSplitConfig.customSplits;
-            const match = historyState.savedSplitPresets.find(preset => {
-                if (preset.customSplits.length !== currentSplits.length) return false;
-                return preset.customSplits.every((split, i) => {
-                    const c = currentSplits[i];
-                    return (
-                        split.allocationType === c.allocationType &&
-                        split.value === c.value &&
-                        split.name === c.name
-                    );
-                });
-            });
-            if (match) setActivePresetId(match.id);
-        }
-    }, [sessionState.activeSplitConfig, historyState.savedSplitPresets]);
-
-    // Exit delete mode when all presets are deleted
-    useEffect(() => {
-        if (isPresetDeleteMode && historyState.savedSplitPresets.length === 0) {
-            setIsPresetDeleteMode(false);
-        }
-    }, [historyState.savedSplitPresets.length, isPresetDeleteMode]);
+    // Delegate preset management to sub-hook
+    const {
+        savedPresets,
+        activePresetId,
+        isExpanded,
+        isDeleteMode,
+        isNameModalVisible,
+        nameInput,
+        isDeleteConfirmVisible,
+        presetToDelete,
+        duplicateAlert,
+        loadPreset,
+        pressPreset,
+        longPressPreset,
+        exitDeleteMode,
+        togglePresetsExpanded,
+        requestDeletePreset,
+        cancelDeletePreset,
+        confirmDeletePreset,
+        openSaveModal,
+        closeSaveModal,
+        setNameInput,
+        savePreset,
+        updatePreset,
+        dismissDuplicateAlert,
+        confirmDuplicateAndRename,
+        loadPresetFromDuplicate,
+        getPresetSummary,
+    } = useSplitPresets(people, setPeople);
 
     // ── Validation ───────────────────────────────────────────────────────────
 
@@ -182,171 +133,6 @@ export const useCustomSplitEditor = (
 
     const canSave =
         validationResult.status === 'complete' && people.length >= Constants.MIN_SPLIT_PEOPLE && overallTotal > 0;
-
-    // ── Helpers ──────────────────────────────────────────────────────────────
-
-    const findDuplicate = useCallback(
-        (
-            name: string,
-            splits: IndividualSplit[],
-        ): { type: 'name' | 'config' | 'both'; preset: SavedSplitPreset } | null =>
-            findPresetDuplicate(name, splits, historyState.savedSplitPresets),
-        [historyState.savedSplitPresets],
-    );
-
-    const getPresetSummary = useCallback(
-        (preset: SavedSplitPreset): string => getPresetSummaryFn(preset, t),
-        [t],
-    );
-
-    // ── People actions ───────────────────────────────────────────────────────
-
-    const updatePerson = useCallback((id: string, updates: Partial<IndividualSplit>) => {
-        setPeople(prev => prev.map(p => (p.id === id ? { ...p, ...updates } : p)));
-    }, []);
-
-    const addPerson = useCallback(() => {
-        setPeople(prev => (prev.length >= Constants.MAX_SPLIT_PEOPLE ? prev : [...prev, createDefaultPerson()]));
-    }, []);
-
-    const removePerson = useCallback((id: string) => {
-        setPeople(prev => (prev.length <= Constants.MIN_SPLIT_PEOPLE ? prev : prev.filter(p => p.id !== id)));
-    }, []);
-
-    // ── Preset interaction ───────────────────────────────────────────────────
-
-    const loadPreset = useCallback(
-        (preset: SavedSplitPreset) => {
-            if (isPresetDeleteMode) return;
-            setPeople(preset.customSplits.map(split => ({ ...split, calculatedAmount: undefined })));
-            setActivePresetId(preset.id);
-        },
-        [isPresetDeleteMode],
-    );
-
-    const pressPreset = useCallback(
-        (preset: SavedSplitPreset) => {
-            if (isPresetDeleteMode) return;
-            if (activePresetId === preset.id) {
-                setActivePresetId(null);
-            } else {
-                loadPreset(preset);
-            }
-        },
-        [activePresetId, isPresetDeleteMode, loadPreset],
-    );
-
-    const longPressPreset = useCallback(() => {
-        setIsPresetDeleteMode(true);
-    }, []);
-
-    const exitDeleteMode = useCallback(() => {
-        setIsPresetDeleteMode(false);
-    }, []);
-
-    const togglePresetsExpanded = useCallback(() => {
-        setIsPresetsExpanded(prev => !prev);
-    }, []);
-
-    const requestDeletePreset = useCallback((id: string) => {
-        setPresetToDelete(id);
-        setIsDeleteConfirmVisible(true);
-    }, []);
-
-    const cancelDeletePreset = useCallback(() => {
-        setIsDeleteConfirmVisible(false);
-        setPresetToDelete(null);
-    }, []);
-
-    const confirmDeletePreset = useCallback(() => {
-        if (!presetToDelete) return;
-        historyDispatch({ type: ActionTypes.DELETE_SPLIT_PRESET, payload: presetToDelete });
-        if (activePresetId === presetToDelete) setActivePresetId(null);
-        setPresetToDelete(null);
-        setIsDeleteConfirmVisible(false);
-        Toast.show({ type: 'success', text1: t('screens.customSplit.presetDeleted') });
-    }, [presetToDelete, activePresetId, historyDispatch, t]);
-
-    // ── Preset save / name modal ─────────────────────────────────────────────
-
-    const openSaveModal = useCallback(() => {
-        setNameInputState('');
-        setIsNameModalVisible(true);
-    }, []);
-
-    const closeSaveModal = useCallback(() => {
-        setIsNameModalVisible(false);
-        setNameInputState('');
-    }, []);
-
-    const setNameInput = useCallback((value: string) => {
-        setNameInputState(value);
-    }, []);
-
-    const savePreset = useCallback(() => {
-        const trimmedName = nameInput.trim();
-        if (!trimmedName) {
-            Toast.show({ type: 'error', text1: t('screens.customSplit.presetNameRequired') });
-            return;
-        }
-
-        const named = namedPeople(people, t);
-        const duplicate = findDuplicate(trimmedName, named);
-        if (duplicate) {
-            setIsNameModalVisible(false);
-            setDuplicateAlert(duplicate);
-            return;
-        }
-
-        const now = Date.now();
-        historyDispatch({
-            type: ActionTypes.SAVE_SPLIT_PRESET,
-            payload: {
-                id: generateId(),
-                name: trimmedName,
-                createdAt: now,
-                updatedAt: now,
-                customSplits: named,
-            },
-        });
-        setIsNameModalVisible(false);
-        setNameInputState('');
-        setActivePresetId(null);
-        Toast.show({ type: 'success', text1: t('screens.customSplit.presetSaved') });
-    }, [nameInput, people, findDuplicate, historyDispatch, t]);
-
-    const updatePreset = useCallback(() => {
-        if (!activePresetId) return;
-        const existing = historyState.savedSplitPresets.find(p => p.id === activePresetId);
-        if (!existing) return;
-        const named = namedPeople(people, t);
-        historyDispatch({
-            type: ActionTypes.UPDATE_SPLIT_PRESET,
-            payload: { ...existing, updatedAt: Date.now(), customSplits: named },
-        });
-        Toast.show({ type: 'success', text1: t('screens.customSplit.presetUpdated') });
-    }, [activePresetId, historyState.savedSplitPresets, people, historyDispatch, t]);
-
-    // ── Duplicate alert actions ──────────────────────────────────────────────
-
-    const dismissDuplicateAlert = useCallback(() => {
-        setDuplicateAlert(null);
-        setNameInputState('');
-    }, []);
-
-    const confirmDuplicateAndRename = useCallback(() => {
-        setDuplicateAlert(null);
-        setIsNameModalVisible(true);
-    }, []);
-
-    const loadPresetFromDuplicate = useCallback(
-        (preset: SavedSplitPreset) => {
-            loadPreset(preset);
-            setDuplicateAlert(null);
-            setNameInputState('');
-        },
-        [loadPreset],
-    );
 
     // ── Main split actions ───────────────────────────────────────────────────
 
@@ -374,10 +160,10 @@ export const useCustomSplitEditor = (
             canRemove: people.length > Constants.MIN_SPLIT_PEOPLE,
         },
         presets: {
-            savedPresets: historyState.savedSplitPresets,
+            savedPresets,
             activePresetId,
-            isExpanded: isPresetsExpanded,
-            isDeleteMode: isPresetDeleteMode,
+            isExpanded,
+            isDeleteMode,
             isNameModalVisible,
             nameInput,
             isDeleteConfirmVisible,
@@ -416,3 +202,4 @@ export const useCustomSplitEditor = (
         },
     };
 };
+
