@@ -12,8 +12,7 @@ import {
   VerticalDevider,
 } from '@components';
 import { Constants } from '@configs';
-import { areOptionArraysSame } from '@hooks';
-import { useConfig } from '@/context/AppContext';
+import { areOptionArraysSame, useSplitOptionsEditSelector } from '@hooks';
 import { SplitOptionState } from '@/context/types';
 import Toast from 'react-native-toast-message';
 import { ActionTypes } from '@/context/actionTypes';
@@ -25,18 +24,18 @@ const SplitPercentageEditCapsule = ({
   textValue: number;
   place?: number;
 }) => {
-  const { state, dispatch } = useConfig();
+  const { splits, updateSplitOption } = useSplitOptionsEditSelector();
   return (
     <StyledTextInputCapsule
       textValue={textValue}
       previousValue={textValue}
       place={place}
-      optionsArray={state?.splits}
+      optionsArray={splits}
       minValidateValue={1}
       maxValidateValue={15}
       onValueChange={({ place, preValue, newValue }) => {
         const updatedSplitOption: SplitOptionState = { place: place, value: newValue }; // Update split option value
-        dispatch({ type: ActionTypes.UPDATE_SPLIT_OPTIONS, payload: updatedSplitOption });
+        updateSplitOption(updatedSplitOption);
       }}
     />
   );
@@ -111,7 +110,8 @@ export const StyledSplitOptionsEditMode = ({
   solidButtonText: string;
   resetSuccessToastText: string;
 }) => {
-  const { state, dispatch } = useConfig();
+  const { splits, splitSliderConfig, updateSplitOption, resetSplitsToDefault } =
+    useSplitOptionsEditSelector();
   const { t } = useTranslation();
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
@@ -142,7 +142,7 @@ export const StyledSplitOptionsEditMode = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {state.splits.slice(0, 2).map(({ place, value }) => (
+              {splits.slice(0, 2).map(({ place, value }) => (
                 <SplitPercentageEditCapsule key={place} textValue={value} place={place} />
               ))}
             </View>
@@ -151,7 +151,7 @@ export const StyledSplitOptionsEditMode = ({
                 textValue={t('buttons.reset')}
                 active={
                   !areOptionArraysSame({
-                    firstArray: state.splits,
+                    firstArray: splits,
                     secondArray: Constants.defaultSplitOptionsArray,
                   })
                 }
@@ -166,7 +166,7 @@ export const StyledSplitOptionsEditMode = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {state.splits.slice(2).map(({ place, value }) => (
+              {splits.slice(2).map(({ place, value }) => (
                 <SplitPercentageEditCapsule key={place} textValue={value} place={place} />
               ))}
             </View>
@@ -191,24 +191,24 @@ export const StyledSplitOptionsEditMode = ({
             <StyledConfigInput
               autoFocus
               title={`Min :`}
-              textValue={state.splitSliderConfig.min}
-              previousValue={state.splitSliderConfig.min}
+              textValue={splitSliderConfig.min}
+              previousValue={splitSliderConfig.min}
               onValueChange={({ preValue, newValue }) => {
                 console.log(`Min`, `P ${preValue}`, `N ${newValue}`);
               }}
             />
             <StyledConfigInput
               title={`Max :`}
-              textValue={state.splitSliderConfig.max}
-              previousValue={state.splitSliderConfig.max}
+              textValue={splitSliderConfig.max}
+              previousValue={splitSliderConfig.max}
               onValueChange={({ preValue, newValue }) => {
                 console.log(`Max`, `P ${preValue}`, `N ${newValue}`);
               }}
             />
             <StyledConfigInput
               title={`Step :`}
-              textValue={state.splitSliderConfig.step}
-              previousValue={state.splitSliderConfig.step}
+              textValue={splitSliderConfig.step}
+              previousValue={splitSliderConfig.step}
               onValueChange={({ preValue, newValue }) => {
                 console.log(`Step`, `P ${preValue}`, `N ${newValue}`);
               }}
@@ -232,10 +232,7 @@ export const StyledSplitOptionsEditMode = ({
             text: solidButtonText,
             style: 'default',
             onPress: () => {
-              dispatch({
-                type: ActionTypes.RESET_SPLIT_OPTIONS_TO_DEFAULT,
-                payload: Constants.defaultSplitOptionsArray,
-              });
+              resetSplitsToDefault(Constants.defaultSplitOptionsArray);
               Toast.show({
                 type: 'success',
                 text1: resetSuccessToastText,

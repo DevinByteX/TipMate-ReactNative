@@ -5,10 +5,8 @@ import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
-import { useUserSettings } from '@/context/AppContext';
-import { getDeviceCurrency, useBottomSheetEntrance } from '@hooks';
+import { getDeviceCurrency, useBottomSheetEntrance, useCurrencySelectorData } from '@hooks';
 import Toast from 'react-native-toast-message';
-import { ActionTypes } from '@/context/actionTypes';
 
 const CurrencySelectiveScroll = ({
   currencies,
@@ -186,7 +184,7 @@ export const StyledCurrencySelector = ({
   modalDescription?: string;
   currencyChangeToastMessage?: string;
 }) => {
-  const { state, dispatch } = useUserSettings();
+  const { currencyConfig, updateCurrency, resetToSystem } = useCurrencySelectorData();
   const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
 
@@ -194,18 +192,15 @@ export const StyledCurrencySelector = ({
 
   const systemDefaultCurrency = useMemo(() => getDeviceCurrency(), []);
 
-  const isUsingSystemDefault = useMemo(
-    () => state.currencyConfig === undefined,
-    [state.currencyConfig],
-  );
+  const isUsingSystemDefault = useMemo(() => currencyConfig === undefined, [currencyConfig]);
 
   const CurrencyObject = useMemo(
-    () => state.currencyConfig || systemDefaultCurrency,
-    [state.currencyConfig, systemDefaultCurrency],
+    () => currencyConfig || systemDefaultCurrency,
+    [currencyConfig, systemDefaultCurrency],
   );
 
   const handleSystemDefaultPress = () => {
-    dispatch({ type: ActionTypes.RESET_CURRENCY_TO_SYSTEM });
+    resetToSystem();
     setModalVisibility(false);
     Toast.show({
       type: 'success',
@@ -256,7 +251,7 @@ export const StyledCurrencySelector = ({
         onSystemDefaultPress={handleSystemDefaultPress}
         systemDefaultCurrency={systemDefaultCurrency}
         currencySelectiveBarPress={currencyObj => {
-          dispatch({ type: ActionTypes.UPDATE_CURRENCY_SIGN, payload: currencyObj });
+          updateCurrency(currencyObj);
           setModalVisibility(false);
           Toast.show({
             type: 'success',

@@ -4,10 +4,8 @@ import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledIcons, StyledAlert } from '@components';
-import { useUserSettings } from '@/context/AppContext';
+import { useBottomSheetEntrance, useLanguageSelectorData } from '@hooks';
 import Toast from 'react-native-toast-message';
-import { useBottomSheetEntrance } from '@hooks';
-import { ActionTypes } from '@/context/actionTypes';
 import {
   SUPPORTED_LANGUAGES,
   changeLanguage,
@@ -185,7 +183,7 @@ export const StyledLanguageSelector = ({
   modalDescription?: string;
 }) => {
   const { t } = useTranslation();
-  const { state, dispatch } = useUserSettings();
+  const { language, setLanguage, resetToSystem } = useLanguageSelectorData();
   const { styles } = useStyles(stylesheet);
   const { shouldRestartForRTL, applyRTL } = useRTL();
 
@@ -199,10 +197,10 @@ export const StyledLanguageSelector = ({
     () => getLanguageConfig(systemDefaultLanguageCode),
     [systemDefaultLanguageCode],
   );
-  const isUsingSystemDefault = useMemo(() => state.language === undefined, [state.language]);
+  const isUsingSystemDefault = useMemo(() => language === undefined, [language]);
 
-  // Use state.language if available, otherwise fallback to i18n's current language
-  const currentLanguage = state.language || getCurrentLanguage();
+  // Use language if available, otherwise fallback to i18n's current language
+  const currentLanguage = language || getCurrentLanguage();
   const currentLangConfig = SUPPORTED_LANGUAGES.find(l => l.code === currentLanguage);
 
   const handleRTLLanguageConfirm = useCallback(async () => {
@@ -217,9 +215,7 @@ export const StyledLanguageSelector = ({
       await changeLanguage(systemDefaultLanguage.code);
 
       // Update app state to reset language (undefined)
-      dispatch({
-        type: ActionTypes.RESET_LANGUAGE_TO_SYSTEM,
-      });
+      resetToSystem();
 
       setAlertVisible(false);
       setIsResettingToSystem(false);
@@ -240,13 +236,7 @@ export const StyledLanguageSelector = ({
       await changeLanguage(pendingLanguage.code);
 
       // Update app state
-      dispatch({
-        type: ActionTypes.SET_LANGUAGE,
-        payload: {
-          language: pendingLanguage.code,
-          isRTL: isRTLLanguage(pendingLanguage.code),
-        },
-      });
+      setLanguage(pendingLanguage.code, isRTLLanguage(pendingLanguage.code));
 
       setAlertVisible(false);
       setPendingLanguage(null);
@@ -260,7 +250,14 @@ export const StyledLanguageSelector = ({
     }
 
     setIsResettingToSystem(false);
-  }, [pendingLanguage, isResettingToSystem, systemDefaultLanguage, applyRTL, dispatch]);
+  }, [
+    pendingLanguage,
+    isResettingToSystem,
+    systemDefaultLanguage,
+    applyRTL,
+    setLanguage,
+    resetToSystem,
+  ]);
 
   const handleLanguageChange = useCallback(
     async (language: LanguageConfig) => {
@@ -282,13 +279,7 @@ export const StyledLanguageSelector = ({
         await changeLanguage(language.code);
 
         // Update app state
-        dispatch({
-          type: ActionTypes.SET_LANGUAGE,
-          payload: {
-            language: language.code,
-            isRTL: isRTLLanguage(language.code),
-          },
-        });
+        setLanguage(language.code, isRTLLanguage(language.code));
 
         Toast.show({
           type: 'success',
@@ -297,7 +288,7 @@ export const StyledLanguageSelector = ({
         });
       }
     },
-    [dispatch, shouldRestartForRTL],
+    [setLanguage, shouldRestartForRTL],
   );
 
   const handleSystemDefaultPress = useCallback(async () => {
@@ -321,9 +312,7 @@ export const StyledLanguageSelector = ({
       await changeLanguage(systemDefaultLanguage.code);
 
       // Update app state to reset language (undefined)
-      dispatch({
-        type: ActionTypes.RESET_LANGUAGE_TO_SYSTEM,
-      });
+      resetToSystem();
 
       Toast.show({
         type: 'success',
@@ -331,7 +320,7 @@ export const StyledLanguageSelector = ({
         visibilityTime: 2000,
       });
     }
-  }, [systemDefaultLanguage, shouldRestartForRTL, dispatch]);
+  }, [systemDefaultLanguage, shouldRestartForRTL, resetToSystem]);
 
   return (
     <View style={styles.mainContainer}>

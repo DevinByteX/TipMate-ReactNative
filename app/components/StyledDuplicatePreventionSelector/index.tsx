@@ -3,13 +3,11 @@ import { View, Text, Modal, Pressable, ScrollView, StyleSheet } from 'react-nati
 import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
-import { useUserSettings } from '@/context/AppContext';
+import { useBottomSheetEntrance, useDuplicatePreventionSelectorData } from '@hooks';
 import Toast from 'react-native-toast-message';
 import { Constants, DuplicatePreventionTimeOption } from '@configs';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
-import { useBottomSheetEntrance } from '@hooks';
-import { ActionTypes } from '@/context/actionTypes';
 
 const getDuplicatePreventionLabel = (value: number, t: TFunction) => {
   if (value === 0) {
@@ -158,13 +156,13 @@ export const StyledDuplicatePreventionSelector = ({
   modalDescription?: string;
   changeToastMessage?: string;
 }) => {
-  const { state, dispatch } = useUserSettings();
+  const { duplicatePreventionWindow, updateWindow } = useDuplicatePreventionSelectorData();
   const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
 
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
-  const selectedValue = state.duplicatePreventionWindow;
+  const selectedValue = duplicatePreventionWindow;
 
   return (
     <View style={styles.mainContainer}>
@@ -198,7 +196,7 @@ export const StyledDuplicatePreventionSelector = ({
         modalDescription={modalDescription}
         selectedValue={selectedValue}
         onTimeOptionPress={option => {
-          dispatch({ type: ActionTypes.UPDATE_DUPLICATE_PREVENTION_WINDOW, payload: option.value });
+          updateWindow(option.value);
           setModalVisibility(false);
           Toast.show({
             type: 'success',

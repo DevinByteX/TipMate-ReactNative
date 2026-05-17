@@ -35,6 +35,15 @@ import {
   useBottomSheetEntrance,
 } from './useAnimations';
 import { useCustomSplitEditor, CustomSplitEditorReturn } from './useCustomSplitEditor';
+import {
+  useTipOptionsSelector,
+  useSplitOptionsSelector,
+  useTipOptionsEditSelector,
+  useSplitOptionsEditSelector,
+  useCurrencySelectorData,
+  useLanguageSelectorData,
+  useDuplicatePreventionSelectorData,
+} from './contextSelectors';
 
 export {
   convertToTwoDecimalPoints,
@@ -68,6 +77,13 @@ export {
   useModalEntrance,
   useBottomSheetEntrance,
   useCustomSplitEditor,
+  useTipOptionsSelector,
+  useSplitOptionsSelector,
+  useTipOptionsEditSelector,
+  useSplitOptionsEditSelector,
+  useCurrencySelectorData,
+  useLanguageSelectorData,
+  useDuplicatePreventionSelectorData,
 };
 export type {
   BillCalculationType,
