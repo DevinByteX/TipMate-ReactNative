@@ -28,6 +28,9 @@ const SplitSessionContext = createContext<{
 });
 
 export const SplitSessionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  // Intentionally uses useReducer (not usePersistedReducer) — activeSplitConfig is
+  // session-only state and should reset to undefined on every app restart.
+  // savedSplitPresets (the persisted list) lives in HistoryContext instead.
   const [state, dispatch] = useReducer(splitSessionReducer, initialState);
 
   return (
