@@ -32,3 +32,5 @@ export type {
     PDFTranslations,
 } from './tipSharing';
 export { getDeviceCurrency } from './deviceCurrency';
+export { buildSplitSignature, findDuplicateTip } from './duplicateDetection';
+export type { DuplicateCheckCandidate } from './duplicateDetection';

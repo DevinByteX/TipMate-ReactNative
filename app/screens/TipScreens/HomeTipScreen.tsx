@@ -22,7 +22,7 @@ import {
   calculateBillValuesCustomSplit,
 } from '@/utils/billCalculation';
 import { useShareTipPreview, useSaveTip } from '@hooks';
-import { getDeviceCurrency } from '@utils';
+import { getDeviceCurrency, buildSplitSignature, findDuplicateTip } from '@utils';
 import { useUserSettings, useHistory, useSplitSession } from '@/context/AppContext';
 import { ActionTypes } from '@/context/actionTypes';
 
@@ -134,16 +134,7 @@ const HomeTipScreen = () => {
         splitType: (isCustomSplitActive ? 'custom' : 'equal') as 'equal' | 'custom',
         // A stable, primitive representation of the split configuration for duplicate detection.
         // Uses input data (not calculated amounts) so rounding changes don't break detection.
-        splitSignature:
-          isCustomSplitActive && customSplits
-            ? `custom:${JSON.stringify(
-                customSplits.map(s => ({
-                  id: s.id,
-                  allocationType: s.allocationType,
-                  value: s.value,
-                })),
-              )}`
-            : 'equal',
+        splitSignature: buildSplitSignature(isCustomSplitActive, customSplits),
         perPerson:
           !isCustomSplitActive && userInputSplitCount > 1 && billValues
             ? {
@@ -160,42 +151,17 @@ const HomeTipScreen = () => {
     : null;
 
   // Check if current tip already exists in saved tips within the time window
-  const existingSavedTip = useMemo(() => {
-    // Early returns for edge cases
-    if (!shareData || !historyState.savedTips || settingsState.duplicatePreventionWindow === 0) {
-      return null;
-    }
-
-    const currentTime = Date.now();
-    const windowMs = settingsState.duplicatePreventionWindow * 60 * 1000;
-
-    // Helper function to compare floating point numbers with epsilon tolerance
-    const areFloatsEqual = (a: number, b: number, epsilon: number = 0.001): boolean => {
-      return Math.abs(a - b) < epsilon;
-    };
-
-    return historyState.savedTips.find(
-      savedTip =>
-        currentTime - savedTip.timestamp < windowMs &&
-        areFloatsEqual(savedTip.amount, shareData.amount) &&
-        areFloatsEqual(savedTip.tip, shareData.tip) &&
-        areFloatsEqual(savedTip.total, shareData.total) &&
-        savedTip.tipPercentage === shareData.tipPercentage &&
-        savedTip.numberOfPeople === shareData.numberOfPeople &&
-        savedTip.currencyCode === shareData.currencyCode &&
-        (savedTip.splitType || 'equal') === shareData.splitType &&
-        (savedTip.splitType === 'custom' && shareData.splitType === 'custom'
-          ? shareData.splitSignature ===
-            `custom:${JSON.stringify(
-              (savedTip.individualSplits || []).map(s => ({
-                id: s.id,
-                allocationType: s.allocationType,
-                value: s.value,
-              })),
-            )}`
-          : true),
-    );
-  }, [shareData, historyState.savedTips, settingsState.duplicatePreventionWindow]);
+  const existingSavedTip = useMemo(
+    () =>
+      shareData
+        ? findDuplicateTip(
+            shareData,
+            historyState.savedTips,
+            settingsState.duplicatePreventionWindow,
+          )
+        : undefined,
+    [shareData, historyState.savedTips, settingsState.duplicatePreventionWindow],
+  );
 
   const isTipAlreadySaved = !!existingSavedTip;
 
