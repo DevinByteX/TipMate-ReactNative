@@ -3,7 +3,7 @@ import { View, Text, Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons, StyledToggle } from '@components';
-import { setUserPreferredTheme, setUserUpdatedThemeOption, applyThemeColors } from '@hooks';
+import { setUserPreferredTheme, setUserUpdatedThemeOption, applyThemeColors } from '@utils';
 import { useCustomThemesConfig } from '@configs';
 import { useScaleSpring } from '@hooks';
 

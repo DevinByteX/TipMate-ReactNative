@@ -3,7 +3,8 @@ import { Text, TextInput, TextInputProps, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
-import { acceptNumbersAndDecimals, useFocusScale } from '@hooks';
+import { useFocusScale } from '@hooks';
+import { acceptNumbersAndDecimals } from '@utils';
 
 type styledTotalAmountInputProps = {
   titleText?: string;

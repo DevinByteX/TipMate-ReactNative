@@ -2,7 +2,8 @@ import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
-import { RoundingMethod, RoundingMethodType, DisabledRoundingMethodsType } from '@hooks';
+import { RoundingMethod } from '@utils';
+import type { RoundingMethodType, DisabledRoundingMethodsType } from '@utils';
 import { IconTypeMap, StyledIcons, StyledIconTypesKey } from '@components';
 
 type RoundCapsuleProps = {

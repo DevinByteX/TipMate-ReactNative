@@ -12,7 +12,8 @@ import {
   VerticalDevider,
 } from '@components';
 import { Constants } from '@configs';
-import { areOptionArraysSame, useSplitOptionsEditSelector } from '@hooks';
+import { useSplitOptionsEditSelector } from '@hooks';
+import { areOptionArraysSame } from '@utils';
 import { SplitOptionState } from '@/context/types';
 import Toast from 'react-native-toast-message';
 import { ActionTypes } from '@/context/actionTypes';

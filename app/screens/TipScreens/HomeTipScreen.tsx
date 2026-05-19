@@ -21,7 +21,8 @@ import {
   calculateBillValues,
   calculateBillValuesCustomSplit,
 } from '@/utils/billCalculation';
-import { useShareTipPreview, useSaveTip, getDeviceCurrency } from '@hooks';
+import { useShareTipPreview, useSaveTip } from '@hooks';
+import { getDeviceCurrency } from '@utils';
 import { useUserSettings, useHistory, useSplitSession } from '@/context/AppContext';
 import { ActionTypes } from '@/context/actionTypes';
 

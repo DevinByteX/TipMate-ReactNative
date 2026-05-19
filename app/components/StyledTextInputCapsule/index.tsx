@@ -5,7 +5,7 @@ import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unis
 import Toast from 'react-native-toast-message';
 // Custom configs
 import { SplitOptionState, TipOptionState } from '@/context/types';
-import { validateOptionValues } from '@hooks';
+import { validateOptionValues } from '@utils';
 
 type StyledTextInputCapsuleProps = {
   textValue: number;

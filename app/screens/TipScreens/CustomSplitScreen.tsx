@@ -19,7 +19,8 @@ import {
   StyledCustomSplitPresetCard,
 } from '@components';
 import { SavedSplitPreset } from '@/context/types';
-import { toFixedWithoutRounding, useCustomSplitEditor } from '@hooks';
+import { useCustomSplitEditor } from '@hooks';
+import { toFixedWithoutRounding } from '@utils';
 import { IndividualSplit } from '@/context/types';
 import type { RootStackParamList } from '@navigation/types';
 

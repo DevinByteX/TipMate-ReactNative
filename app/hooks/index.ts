@@ -1,29 +1,7 @@
-import { convertToTwoDecimalPoints, acceptNumbersAndDecimals, toFixedWithoutRounding } from '@/utils/numberFormatting';
-import {
-  calculateBillValues,
-  calculateBillValuesCustomSplit,
-  BillCalculationType,
-  CustomSplitCalculationType,
-  RoundingMethodType,
-  RoundingMethod,
-  DisabledRoundingMethodsType,
-} from '@/utils/billCalculation';
-import { asyncStorageUtil } from '@/utils/asyncStorage';
-import {
-  getUserPreferredTheme,
-  setUserPreferredTheme,
-  getUserUpdatedThemeOption,
-  setUserUpdatedThemeOption,
-} from '@/utils/themeStorage';
-import type { CustomisedTheme } from '@/utils/themeStorage';
 import { usePersistedReducer } from './usePersistedReducer';
-import { validateOptionValues, areOptionArraysSame } from '@/utils/optionsValidation';
-import { applyThemeColors } from '@/utils/themeCustomization';
-import { useExternalLinkAlert, ExternalLinkAlertConfig } from './useExternalLinkAlert';
-import { shareTipText, shareTipPDF, formatTipDetailsPreview, ShareTipDetailsParams, ShareTranslations, TipDetailsForPDF, PDFTranslations } from '@/utils/tipSharing';
+import { useExternalLinkAlert } from './useExternalLinkAlert';
 import { useShareTipPreview } from './useShareTipPreview';
 import { useSaveTip } from './useSaveTip';
-import { getDeviceCurrency } from '@/utils/deviceCurrency';
 import {
   usePressAnimation,
   useFocusScale,
@@ -34,7 +12,7 @@ import {
   useModalEntrance,
   useBottomSheetEntrance,
 } from './useAnimations';
-import { useCustomSplitEditor, CustomSplitEditorReturn } from './useCustomSplitEditor';
+import { useCustomSplitEditor } from './useCustomSplitEditor';
 import {
   useTipOptionsSelector,
   useSplitOptionsSelector,
@@ -44,30 +22,14 @@ import {
   useLanguageSelectorData,
   useDuplicatePreventionSelectorData,
 } from './contextSelectors';
+import { useCustomSplitPeople } from './useCustomSplitPeople';
+import { useSplitPresets } from './useSplitPresets';
 
 export {
-  convertToTwoDecimalPoints,
-  acceptNumbersAndDecimals,
-  calculateBillValues,
-  calculateBillValuesCustomSplit,
-  RoundingMethod,
-  toFixedWithoutRounding,
-  asyncStorageUtil,
-  getUserPreferredTheme,
-  setUserPreferredTheme,
-  getUserUpdatedThemeOption,
-  setUserUpdatedThemeOption,
   usePersistedReducer,
-  validateOptionValues,
-  areOptionArraysSame,
-  applyThemeColors,
   useExternalLinkAlert,
-  shareTipText,
-  shareTipPDF,
-  formatTipDetailsPreview,
   useShareTipPreview,
   useSaveTip,
-  getDeviceCurrency,
   usePressAnimation,
   useFocusScale,
   useScaleSpring,
@@ -84,17 +46,8 @@ export {
   useCurrencySelectorData,
   useLanguageSelectorData,
   useDuplicatePreventionSelectorData,
+  useCustomSplitPeople,
+  useSplitPresets,
 };
-export type {
-  BillCalculationType,
-  CustomSplitCalculationType,
-  RoundingMethodType,
-  DisabledRoundingMethodsType,
-  CustomisedTheme,
-  ExternalLinkAlertConfig,
-  ShareTipDetailsParams,
-  ShareTranslations,
-  TipDetailsForPDF,
-  PDFTranslations,
-  CustomSplitEditorReturn,
-};
+export type { ExternalLinkAlertConfig } from './useExternalLinkAlert';
+export type { CustomSplitEditorReturn } from './useCustomSplitEditor';

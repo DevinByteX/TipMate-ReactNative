@@ -9,7 +9,7 @@ import BootSplash from 'react-native-bootsplash';
 // Custom Stacks
 import StackNavigation from '@navigation/StackNavigation';
 // Custom Hooks
-import { getUserPreferredTheme, getUserUpdatedThemeOption, applyThemeColors } from '@hooks';
+import { getUserPreferredTheme, getUserUpdatedThemeOption, applyThemeColors } from '@utils';
 import { toastConfig } from '@styles/toastConfig';
 
 const ApplicationNavigator = (props: any) => {

@@ -11,6 +11,8 @@
       "@navigation/*": ["app/navigation/*"],
       "@hooks": ["app/hooks/index"],
       "@hooks/*": ["app/hooks/*"],
+      "@utils": ["app/utils/index"],
+      "@utils/*": ["app/utils/*"],
       "@configs": ["app/configs/index"],
       "@plugins": ["./app/plugins/index"]
     }

@@ -5,7 +5,8 @@ import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
-import { getDeviceCurrency, useBottomSheetEntrance, useCurrencySelectorData } from '@hooks';
+import { useBottomSheetEntrance, useCurrencySelectorData } from '@hooks';
+import { getDeviceCurrency } from '@utils';
 import Toast from 'react-native-toast-message';
 
 const CurrencySelectiveScroll = ({

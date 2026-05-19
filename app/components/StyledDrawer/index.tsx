@@ -8,7 +8,7 @@ import {
 } from '@react-navigation/drawer';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { IconTypeMap, StyledIcons, StyledIconTypesKey, StyledToggle } from '@components';
-import { setUserPreferredTheme } from '@hooks';
+import { setUserPreferredTheme } from '@utils';
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 
 interface StyledDrawerProps extends DrawerContentComponentProps {}
