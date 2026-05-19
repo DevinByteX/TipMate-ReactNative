@@ -1,3 +1,5 @@
+export { ErrorBoundary } from './ErrorBoundary';
+export type { ErrorBoundaryProps } from './ErrorBoundary';
 export { StyledHeader } from './StyledHeader';
 export { StyledTotalAmountInput } from './StyledTotalAmountInput';
 export { StyledBillBox, VerticalDevider } from './StyledBillBox';

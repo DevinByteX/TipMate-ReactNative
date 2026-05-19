@@ -3,6 +3,7 @@ import { UserSettingsProvider, useUserSettings } from './UserSettingsContext';
 import { ConfigProvider, useConfig } from './ConfigContext';
 import { HistoryProvider, useHistory } from './HistoryContext';
 import { SplitSessionProvider, useSplitSession } from './SplitSessionContext';
+import { ErrorBoundary } from '../components/ErrorBoundary';
 
 interface AppProviderProps {
   children: ReactNode;
@@ -10,13 +11,15 @@ interface AppProviderProps {
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   return (
-    <UserSettingsProvider>
-      <ConfigProvider>
-        <HistoryProvider>
-          <SplitSessionProvider>{children}</SplitSessionProvider>
-        </HistoryProvider>
-      </ConfigProvider>
-    </UserSettingsProvider>
+    <ErrorBoundary>
+      <UserSettingsProvider>
+        <ConfigProvider>
+          <HistoryProvider>
+            <SplitSessionProvider>{children}</SplitSessionProvider>
+          </HistoryProvider>
+        </ConfigProvider>
+      </UserSettingsProvider>
+    </ErrorBoundary>
   );
 };
 
