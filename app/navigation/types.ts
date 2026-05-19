@@ -3,9 +3,11 @@
  * Import these instead of defining local route param types per-file.
  */
 
+import { SavedTip } from '@/context/types';
+
 export type RootStackParamList = {
     MainStack: undefined;
-    SavedTipDetailScreen: undefined;
+    SavedTipDetailScreen: { tip: SavedTip };
     CustomSplitScreen: {
         totalBill: number;
         tipPercentage: number;
@@ -15,3 +17,13 @@ export type RootStackParamList = {
     LicensesScreen: undefined;
     LicenseContentModal: undefined;
 };
+
+/**
+ * Register RootStackParamList globally so useNavigation() is typed across
+ * all navigators (including cross-navigator calls from drawer screens).
+ */
+declare global {
+    namespace ReactNavigation {
+        interface RootParamList extends RootStackParamList { }
+    }
+}

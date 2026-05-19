@@ -164,7 +164,7 @@ const SavedTipsScreen = () => {
   };
 
   const handleTipPress = (tip: SavedTip) => {
-    (navigation as any).navigate('SavedTipDetailScreen', { tip });
+    navigation.navigate('SavedTipDetailScreen', { tip });
   };
 
   const resetFilters = () => {

@@ -15,18 +15,13 @@ import { useSaveTip } from '@hooks';
 import { useShareTipPreview } from '@hooks';
 import { useUserSettings } from '@/context/AppContext';
 import { getLocaleForFormatting } from '@/localization';
-
-type SavedTipDetailRouteParams = {
-  SavedTipDetailScreen: {
-    tip: SavedTip;
-  };
-};
+import type { RootStackParamList } from '@navigation/types';
 
 const SavedTipDetailScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
   const { state: settingsState } = useUserSettings();
-  const route = useRoute<RouteProp<SavedTipDetailRouteParams, 'SavedTipDetailScreen'>>();
+  const route = useRoute<RouteProp<RootStackParamList, 'SavedTipDetailScreen'>>();
   const navigation = useNavigation();
   const { deleteTip } = useSaveTip();
   const tip = route.params?.tip;
