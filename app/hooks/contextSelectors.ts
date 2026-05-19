@@ -101,3 +101,72 @@ export function useDuplicatePreventionSelectorData() {
             dispatch(updateDuplicatePreventionWindow(value)),
     };
 }
+
+// ---------------------------------------------------------------------------
+// Composed selectors — single context call, multiple slices
+// ---------------------------------------------------------------------------
+
+/**
+ * Aggregates all read-only Config state (tips + splits) in one `useConfig()`
+ * call. Use when a component or screen needs both config slices to avoid two
+ * separate context subscriptions.
+ */
+export function useConfigSelectorData() {
+    const { state } = useConfig();
+    return {
+        tips: state.tips,
+        tipSliderConfig: state.tipSliderConfig,
+        splits: state.splits,
+        splitSliderConfig: state.splitSliderConfig,
+    };
+}
+
+/**
+ * Aggregates all editable Config state + actions (tips + splits) in one
+ * `useConfig()` call.
+ */
+export function useConfigEditSelectorData() {
+    const { state, dispatch } = useConfig();
+    return {
+        tips: state.tips,
+        tipSliderConfig: state.tipSliderConfig,
+        splits: state.splits,
+        splitSliderConfig: state.splitSliderConfig,
+        updateTipOption: (tip: TipOptionState) =>
+            dispatch(updateTipOption(tip)),
+        resetTipsToDefault: (defaultTips: TipOptionState[]) =>
+            dispatch(resetTipOptionsToDefault(defaultTips)),
+        updateSplitOption: (split: SplitOptionState) =>
+            dispatch(updateSplitOption(split)),
+        resetSplitsToDefault: (defaultSplits: SplitOptionState[]) =>
+            dispatch(resetSplitOptionsToDefault(defaultSplits)),
+    };
+}
+
+/**
+ * Aggregates all UserSettings slices (currency + language + duplicate
+ * prevention) in one `useUserSettings()` call. Use when a parent component
+ * needs more than one settings slice to avoid redundant context subscriptions.
+ */
+export function useUserSettingsSelectorData() {
+    const { state, dispatch } = useUserSettings();
+    return {
+        // currency
+        currencyConfig: state.currencyConfig,
+        updateCurrency: (currency: CurrencyType) =>
+            dispatch(updateCurrencySign(currency)),
+        resetCurrencyToSystem: () =>
+            dispatch(resetCurrencyToSystem()),
+        // language
+        language: state.language,
+        isRTL: state.isRTL,
+        setLanguage: (lang: string, isRTL: boolean) =>
+            dispatch(setLanguage(lang, isRTL)),
+        resetLanguageToSystem: () =>
+            dispatch(resetLanguageToSystem()),
+        // duplicate prevention
+        duplicatePreventionWindow: state.duplicatePreventionWindow,
+        updateDuplicatePreventionWindow: (value: number) =>
+            dispatch(updateDuplicatePreventionWindow(value)),
+    };
+}

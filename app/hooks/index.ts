@@ -21,6 +21,9 @@ import {
   useCurrencySelectorData,
   useLanguageSelectorData,
   useDuplicatePreventionSelectorData,
+  useConfigSelectorData,
+  useConfigEditSelectorData,
+  useUserSettingsSelectorData,
 } from './contextSelectors';
 import { useCustomSplitPeople } from './useCustomSplitPeople';
 import { useSplitPresets } from './useSplitPresets';
@@ -46,6 +49,9 @@ export {
   useCurrencySelectorData,
   useLanguageSelectorData,
   useDuplicatePreventionSelectorData,
+  useConfigSelectorData,
+  useConfigEditSelectorData,
+  useUserSettingsSelectorData,
   useCustomSplitPeople,
   useSplitPresets,
 };
