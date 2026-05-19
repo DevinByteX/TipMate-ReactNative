@@ -43,10 +43,10 @@ const HomeTipScreen = () => {
   const {
     saveTip,
     saveSuccessAlert,
-    setSaveSuccessAlert,
     saveErrorAlert,
-    setSaveErrorAlert,
     navigateToTipDetail,
+    dismissSaveSuccess,
+    dismissSaveError,
   } = useSaveTip();
 
   // Use persisted currency if user has explicitly selected one, otherwise use device currency
@@ -377,7 +377,7 @@ const HomeTipScreen = () => {
           {
             text: t('common.ok'),
             style: 'cancel',
-            onPress: () => setSaveSuccessAlert({ visible: false }),
+            onPress: dismissSaveSuccess,
           },
           {
             text: t('common.viewDetails'),
@@ -386,7 +386,7 @@ const HomeTipScreen = () => {
               saveSuccessAlert.savedTip && navigateToTipDetail(saveSuccessAlert.savedTip),
           },
         ]}
-        onDismiss={() => setSaveSuccessAlert({ visible: false })}
+        onDismiss={dismissSaveSuccess}
       />
 
       {/* Save Error Alert */}
@@ -395,10 +395,8 @@ const HomeTipScreen = () => {
         title={t('common.error')}
         message={t('screens.home.tipSaveFailed')}
         type="error"
-        buttons={[
-          { text: t('common.ok'), style: 'default', onPress: () => setSaveErrorAlert(false) },
-        ]}
-        onDismiss={() => setSaveErrorAlert(false)}
+        buttons={[{ text: t('common.ok'), style: 'default', onPress: dismissSaveError }]}
+        onDismiss={dismissSaveError}
       />
     </>
   );

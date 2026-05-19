@@ -99,6 +99,12 @@ export const useSaveTip = () => {
         [navigation],
     );
 
+    const dismissSaveSuccess = useCallback(() => setSaveSuccessAlert({ visible: false }), []);
+    const dismissSaveError = useCallback(() => setSaveErrorAlert(false), []);
+    const dismissDeleteError = useCallback(() => setDeleteErrorAlert(false), []);
+    const dismissClearAll = useCallback(() => setClearAllAlert(false), []);
+    const dismissClearError = useCallback(() => setClearErrorAlert(false), []);
+
     return {
         saveTip,
         deleteTip,
@@ -106,14 +112,14 @@ export const useSaveTip = () => {
         confirmClearAllTips,
         navigateToTipDetail,
         saveSuccessAlert,
-        setSaveSuccessAlert,
         saveErrorAlert,
-        setSaveErrorAlert,
         deleteErrorAlert,
-        setDeleteErrorAlert,
         clearAllAlert,
-        setClearAllAlert,
         clearErrorAlert,
-        setClearErrorAlert,
+        dismissSaveSuccess,
+        dismissSaveError,
+        dismissDeleteError,
+        dismissClearAll,
+        dismissClearError,
     };
 };

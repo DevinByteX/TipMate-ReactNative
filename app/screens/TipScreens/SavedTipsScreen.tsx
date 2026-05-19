@@ -31,11 +31,11 @@ const SavedTipsScreen = () => {
     clearAllTips,
     confirmClearAllTips,
     clearAllAlert,
-    setClearAllAlert,
     deleteErrorAlert,
-    setDeleteErrorAlert,
     clearErrorAlert,
-    setClearErrorAlert,
+    dismissClearAll,
+    dismissDeleteError,
+    dismissClearError,
   } = useSaveTip();
   const navigation = useNavigation();
 
@@ -294,11 +294,11 @@ const SavedTipsScreen = () => {
           {
             text: t('common.cancel'),
             style: 'cancel',
-            onPress: () => setClearAllAlert(false),
+            onPress: dismissClearAll,
           },
           { text: t('messages.deleteAll'), style: 'destructive', onPress: confirmClearAllTips },
         ]}
-        onDismiss={() => setClearAllAlert(false)}
+        onDismiss={dismissClearAll}
       />
 
       {/* Delete Error Alert */}
@@ -307,10 +307,8 @@ const SavedTipsScreen = () => {
         title={t('common.error')}
         message={t('messages.deleteError')}
         type="error"
-        buttons={[
-          { text: t('common.ok'), style: 'default', onPress: () => setDeleteErrorAlert(false) },
-        ]}
-        onDismiss={() => setDeleteErrorAlert(false)}
+        buttons={[{ text: t('common.ok'), style: 'default', onPress: dismissDeleteError }]}
+        onDismiss={dismissDeleteError}
       />
 
       {/* Clear Error Alert */}
@@ -319,10 +317,8 @@ const SavedTipsScreen = () => {
         title={t('common.error')}
         message={t('messages.clearError')}
         type="error"
-        buttons={[
-          { text: t('common.ok'), style: 'default', onPress: () => setClearErrorAlert(false) },
-        ]}
-        onDismiss={() => setClearErrorAlert(false)}
+        buttons={[{ text: t('common.ok'), style: 'default', onPress: dismissClearError }]}
+        onDismiss={dismissClearError}
       />
     </>
   );
