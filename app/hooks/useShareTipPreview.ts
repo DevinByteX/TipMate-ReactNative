@@ -50,7 +50,7 @@ interface UseShareTipPreviewReturn {
 export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipPreviewReturn => {
     const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);
     const pendingShareAction = useRef<'text' | 'pdf' | null>(null);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { state: settingsState } = useUserSettings();
     const locale = getLocaleForFormatting(settingsState.language);
 
@@ -69,7 +69,8 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
         sharedVia: t('share.sharedVia'),
         customSplitLabel: t('share.customSplitLabel'),
         individualSplit: t('share.individualSplit'),
-    }), [t]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }), [i18n.language]);
 
     // Build PDF translations object from i18n
     const pdfTranslations: PDFTranslations = useMemo(() => ({
@@ -92,7 +93,8 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
         tagline: t('screens.home.tagline'),
         shareTitle: t('share.shareYourTip'),
         shareSubject: t('share.tipMateSummary'),
-    }), [t]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }), [i18n.language]);
 
     // Generate preview content
     const previewContent = useMemo(
