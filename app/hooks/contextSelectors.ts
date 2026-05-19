@@ -7,14 +7,19 @@
  */
 
 import { useConfig, useUserSettings } from '@/context/AppContext';
-import {
-    TipOptionState,
-    SplitOptionState,
-    ConfigAction,
-    UserSettingsAction,
-} from '@/context/types';
+import { TipOptionState, SplitOptionState } from '@/context/types';
 import { CurrencyType } from '@configs';
-import { ActionTypes } from '@/context/actionTypes';
+import {
+    updateTipOption,
+    resetTipOptionsToDefault,
+    updateSplitOption,
+    resetSplitOptionsToDefault,
+    updateCurrencySign,
+    resetCurrencyToSystem,
+    setLanguage,
+    resetLanguageToSystem,
+    updateDuplicatePreventionWindow,
+} from '@/context/actionCreators';
 
 // ---------------------------------------------------------------------------
 // Read-only selectors
@@ -43,12 +48,9 @@ export function useTipOptionsEditSelector() {
         tips: state.tips,
         tipSliderConfig: state.tipSliderConfig,
         updateTipOption: (tip: TipOptionState) =>
-            dispatch({ type: ActionTypes.UPDATE_TIP_OPTIONS, payload: tip } as ConfigAction),
+            dispatch(updateTipOption(tip)),
         resetTipsToDefault: (defaultTips: TipOptionState[]) =>
-            dispatch({
-                type: ActionTypes.RESET_TIP_OPTIONS_TO_DEFAULT,
-                payload: defaultTips,
-            } as ConfigAction),
+            dispatch(resetTipOptionsToDefault(defaultTips)),
     };
 }
 
@@ -59,12 +61,9 @@ export function useSplitOptionsEditSelector() {
         splits: state.splits,
         splitSliderConfig: state.splitSliderConfig,
         updateSplitOption: (split: SplitOptionState) =>
-            dispatch({ type: ActionTypes.UPDATE_SPLIT_OPTIONS, payload: split } as ConfigAction),
+            dispatch(updateSplitOption(split)),
         resetSplitsToDefault: (defaultSplits: SplitOptionState[]) =>
-            dispatch({
-                type: ActionTypes.RESET_SPLIT_OPTIONS_TO_DEFAULT,
-                payload: defaultSplits,
-            } as ConfigAction),
+            dispatch(resetSplitOptionsToDefault(defaultSplits)),
     };
 }
 
@@ -74,12 +73,9 @@ export function useCurrencySelectorData() {
     return {
         currencyConfig: state.currencyConfig,
         updateCurrency: (currency: CurrencyType) =>
-            dispatch({
-                type: ActionTypes.UPDATE_CURRENCY_SIGN,
-                payload: currency,
-            } as UserSettingsAction),
+            dispatch(updateCurrencySign(currency)),
         resetToSystem: () =>
-            dispatch({ type: ActionTypes.RESET_CURRENCY_TO_SYSTEM } as UserSettingsAction),
+            dispatch(resetCurrencyToSystem()),
     };
 }
 
@@ -90,12 +86,9 @@ export function useLanguageSelectorData() {
         language: state.language,
         isRTL: state.isRTL,
         setLanguage: (language: string, isRTL: boolean) =>
-            dispatch({
-                type: ActionTypes.SET_LANGUAGE,
-                payload: { language, isRTL },
-            } as UserSettingsAction),
+            dispatch(setLanguage(language, isRTL)),
         resetToSystem: () =>
-            dispatch({ type: ActionTypes.RESET_LANGUAGE_TO_SYSTEM } as UserSettingsAction),
+            dispatch(resetLanguageToSystem()),
     };
 }
 
@@ -105,9 +98,6 @@ export function useDuplicatePreventionSelectorData() {
     return {
         duplicatePreventionWindow: state.duplicatePreventionWindow,
         updateWindow: (value: number) =>
-            dispatch({
-                type: ActionTypes.UPDATE_DUPLICATE_PREVENTION_WINDOW,
-                payload: value,
-            } as UserSettingsAction),
+            dispatch(updateDuplicatePreventionWindow(value)),
     };
 }

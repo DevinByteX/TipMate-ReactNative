@@ -5,7 +5,7 @@ import { IndividualSplit, SavedSplitPreset } from '@/context/types';
 import { validateSplitAllocations } from '@/utils/splitValidation';
 import { namedPeople } from '@/utils/splitFormatting';
 import { Constants } from '@configs';
-import { ActionTypes } from '@/context/actionTypes';
+import { setActiveSplitConfig, clearActiveSplitConfig } from '@/context/actionCreators';
 import { useCustomSplitPeople } from './useCustomSplitPeople';
 import { useSplitPresets } from './useSplitPresets';
 
@@ -139,14 +139,11 @@ export const useCustomSplitEditor = (
     const save = useCallback(() => {
         if (!canSave) return;
         const named = namedPeople(people, t);
-        sessionDispatch({
-            type: ActionTypes.SET_ACTIVE_SPLIT_CONFIG,
-            payload: { type: 'custom', customSplits: named },
-        });
+        sessionDispatch(setActiveSplitConfig({ type: 'custom', customSplits: named }));
     }, [canSave, people, t, sessionDispatch]);
 
     const clear = useCallback(() => {
-        sessionDispatch({ type: ActionTypes.CLEAR_ACTIVE_SPLIT_CONFIG });
+        sessionDispatch(clearActiveSplitConfig());
     }, [sessionDispatch]);
 
     const isCustomSplitActive = sessionState.activeSplitConfig?.type === 'custom';

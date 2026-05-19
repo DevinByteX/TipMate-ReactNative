@@ -6,7 +6,7 @@ import { IndividualSplit, SavedSplitPreset } from '@/context/types';
 import { generateId } from '@/utils/idGenerator';
 import { namedPeople } from '@/utils/splitFormatting';
 import { findPresetDuplicate, getPresetSummary as getPresetSummaryFn } from '@/utils/presetManager';
-import { ActionTypes } from '@/context/actionTypes';
+import { saveSplitPreset, updateSplitPreset, deleteSplitPreset } from '@/context/actionCreators';
 
 export const useSplitPresets = (
     people: IndividualSplit[],
@@ -131,7 +131,7 @@ export const useSplitPresets = (
 
     const confirmDeletePreset = useCallback(() => {
         if (!presetToDelete) return;
-        historyDispatch({ type: ActionTypes.DELETE_SPLIT_PRESET, payload: presetToDelete });
+        historyDispatch(deleteSplitPreset(presetToDelete));
         if (activePresetId === presetToDelete) setActivePresetId(null);
         setPresetToDelete(null);
         setIsDeleteConfirmVisible(false);
@@ -168,16 +168,13 @@ export const useSplitPresets = (
             return;
         }
         const now = Date.now();
-        historyDispatch({
-            type: ActionTypes.SAVE_SPLIT_PRESET,
-            payload: {
-                id: generateId(),
-                name: trimmedName,
-                createdAt: now,
-                updatedAt: now,
-                customSplits: named,
-            },
-        });
+        historyDispatch(saveSplitPreset({
+            id: generateId(),
+            name: trimmedName,
+            createdAt: now,
+            updatedAt: now,
+            customSplits: named,
+        }));
         setIsNameModalVisible(false);
         setNameInputState('');
         setActivePresetId(null);
@@ -189,10 +186,7 @@ export const useSplitPresets = (
         const existing = historyState.savedSplitPresets.find(p => p.id === activePresetId);
         if (!existing) return;
         const named = namedPeople(people, t);
-        historyDispatch({
-            type: ActionTypes.UPDATE_SPLIT_PRESET,
-            payload: { ...existing, updatedAt: Date.now(), customSplits: named },
-        });
+        historyDispatch(updateSplitPreset({ ...existing, updatedAt: Date.now(), customSplits: named }));
         Toast.show({ type: 'success', text1: t('screens.customSplit.presetUpdated') });
     }, [activePresetId, historyState.savedSplitPresets, people, historyDispatch, t]);
 
