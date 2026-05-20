@@ -15,7 +15,7 @@ import {
 } from '@components';
 // Styling
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
-import { useAppContext } from '@/context/AppContext';
+import { useHistory, useUserSettings } from '@/context/AppContext';
 import { SavedTip } from '@/context/types';
 import { useSaveTip } from '@hooks';
 import { useNavigation } from '@react-navigation/native';
@@ -23,18 +23,19 @@ import { getLocaleForFormatting } from '@/localization';
 
 const SavedTipsScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
-  const { state } = useAppContext();
+  const { state: historyState } = useHistory();
+  const { state: settingsState } = useUserSettings();
   const { t } = useTranslation();
   const {
     deleteTip,
     clearAllTips,
     confirmClearAllTips,
     clearAllAlert,
-    setClearAllAlert,
     deleteErrorAlert,
-    setDeleteErrorAlert,
     clearErrorAlert,
-    setClearErrorAlert,
+    dismissClearAll,
+    dismissDeleteError,
+    dismissClearError,
   } = useSaveTip();
   const navigation = useNavigation();
 
@@ -47,7 +48,7 @@ const SavedTipsScreen = () => {
   const [isDeleteAlertVisible, setIsDeleteAlertVisible] = useState(false);
   const [pendingDeleteTipId, setPendingDeleteTipId] = useState<string | null>(null);
 
-  const savedTips = useMemo(() => state.savedTips || [], [state.savedTips]);
+  const savedTips = useMemo(() => historyState.savedTips || [], [historyState.savedTips]);
 
   const hasActiveFilters =
     percentageFilter !== 'all' || peopleFilter !== 'all' || dateFilter !== 'all';
@@ -124,7 +125,7 @@ const SavedTipsScreen = () => {
         const percentageMatch = tip.tipPercentage.toString().includes(query);
         const currencyMatch = tip.currencyCode.toLowerCase().includes(query);
         const date = new Date(tip.timestamp);
-        const dateString = date.toLocaleDateString(getLocaleForFormatting(state.language), {
+        const dateString = date.toLocaleDateString(getLocaleForFormatting(settingsState.language), {
           month: 'short',
           day: 'numeric',
           year: 'numeric',
@@ -147,7 +148,7 @@ const SavedTipsScreen = () => {
     }
 
     return filtered;
-  }, [savedTips, searchQuery, percentageFilter, peopleFilter, dateFilter]);
+  }, [savedTips, searchQuery, percentageFilter, peopleFilter, dateFilter, settingsState.language]);
 
   const handleDeleteTip = (tipId: string) => {
     setPendingDeleteTipId(tipId);
@@ -163,7 +164,7 @@ const SavedTipsScreen = () => {
   };
 
   const handleTipPress = (tip: SavedTip) => {
-    (navigation as any).navigate('SavedTipDetailScreen', { tip });
+    navigation.navigate('SavedTipDetailScreen', { tip });
   };
 
   const resetFilters = () => {
@@ -293,11 +294,11 @@ const SavedTipsScreen = () => {
           {
             text: t('common.cancel'),
             style: 'cancel',
-            onPress: () => setClearAllAlert(false),
+            onPress: dismissClearAll,
           },
           { text: t('messages.deleteAll'), style: 'destructive', onPress: confirmClearAllTips },
         ]}
-        onDismiss={() => setClearAllAlert(false)}
+        onDismiss={dismissClearAll}
       />
 
       {/* Delete Error Alert */}
@@ -306,10 +307,8 @@ const SavedTipsScreen = () => {
         title={t('common.error')}
         message={t('messages.deleteError')}
         type="error"
-        buttons={[
-          { text: t('common.ok'), style: 'default', onPress: () => setDeleteErrorAlert(false) },
-        ]}
-        onDismiss={() => setDeleteErrorAlert(false)}
+        buttons={[{ text: t('common.ok'), style: 'default', onPress: dismissDeleteError }]}
+        onDismiss={dismissDeleteError}
       />
 
       {/* Clear Error Alert */}
@@ -318,10 +317,8 @@ const SavedTipsScreen = () => {
         title={t('common.error')}
         message={t('messages.clearError')}
         type="error"
-        buttons={[
-          { text: t('common.ok'), style: 'default', onPress: () => setClearErrorAlert(false) },
-        ]}
-        onDismiss={() => setClearErrorAlert(false)}
+        buttons={[{ text: t('common.ok'), style: 'default', onPress: dismissClearError }]}
+        onDismiss={dismissClearError}
       />
     </>
   );

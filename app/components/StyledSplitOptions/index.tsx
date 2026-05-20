@@ -4,8 +4,7 @@ import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
-import { useAppContext } from '@/context/AppContext';
-import { useScaleSpring } from '@hooks';
+import { useScaleSpring, useSplitOptionsSelector } from '@hooks';
 
 const SplitCapsule = ({
   active = false,
@@ -140,7 +139,7 @@ export const StyledSpiltOptions = ({
   onClearCustomSplit?: () => void;
   billAmount?: number;
 }) => {
-  const { state } = useAppContext();
+  const { splits, splitSliderConfig } = useSplitOptionsSelector();
   const { t } = useTranslation();
 
   const defaultSplitValue = 1;
@@ -184,7 +183,7 @@ export const StyledSpiltOptions = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {state.splits.slice(0, 2).map(({ place, value }) => (
+              {splits.slice(0, 2).map(({ place, value }) => (
                 <SplitCapsule
                   key={place}
                   textValue={value}
@@ -218,7 +217,7 @@ export const StyledSpiltOptions = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {state.splits.slice(2).map(({ place, value }) => (
+              {splits.slice(2).map(({ place, value }) => (
                 <SplitCapsule
                   key={place}
                   textValue={value}
@@ -256,9 +255,9 @@ export const StyledSpiltOptions = ({
         <View style={styles.sliderContainer}>
           <StyledHorizontalSlider
             sliderValue={splitValue}
-            step={state.splitSliderConfig.step}
-            minValue={state.splitSliderConfig.min}
-            maxValue={state.splitSliderConfig.max}
+            step={splitSliderConfig.step}
+            minValue={splitSliderConfig.min}
+            maxValue={splitSliderConfig.max}
             onValueChange={value => {
               setSplitValue(value[0]);
               onClearCustomSplit && onClearCustomSplit();

@@ -5,6 +5,7 @@ import '@styles/uniStyles'; // This should always be imported in the root file o
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ApplicationNavigator from '@navigation/ApplicationNavigation';
 import AppProvider from './context/AppContext';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { initializeI18n, applyRTLSync, getCurrentLanguage } from './localization';
 
 /**
@@ -30,11 +31,13 @@ const styles = StyleSheet.create({
 
 const Entrypoint = () => {
   return (
-    <GestureHandlerRootView style={styles.gestureRoot}>
-      <AppProvider>
-        <ApplicationNavigator />
-      </AppProvider>
-    </GestureHandlerRootView>
+    <ErrorBoundary>
+      <GestureHandlerRootView style={styles.gestureRoot}>
+        <AppProvider>
+          <ApplicationNavigator />
+        </AppProvider>
+      </GestureHandlerRootView>
+    </ErrorBoundary>
   );
 };
 

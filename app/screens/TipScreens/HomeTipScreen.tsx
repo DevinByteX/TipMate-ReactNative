@@ -16,17 +16,15 @@ import {
 // Styling
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
-  BillCalculationType,
-  CustomSplitCalculationType,
   RoundingMethod,
   RoundingMethodType,
   calculateBillValues,
   calculateBillValuesCustomSplit,
-  useShareTipPreview,
-  useSaveTip,
-  getDeviceCurrency,
-} from '@hooks';
-import { useAppContext } from '@/context/AppContext';
+} from '@/utils/billCalculation';
+import { useShareTipPreview, useSaveTip } from '@hooks';
+import { getDeviceCurrency, buildSplitSignature, findDuplicateTip } from '@utils';
+import { useUserSettings, useHistory, useSplitSession } from '@/context/AppContext';
+import { ActionTypes } from '@/context/actionTypes';
 
 const HomeTipScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -40,57 +38,52 @@ const HomeTipScreen = () => {
   const [userInputSplitCount, setUserInputSplitCount] = useState<number>(1);
   const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
 
-  const [billValues, setBillValues] = useState<BillCalculationType>();
-  const [customBillValues, setCustomBillValues] = useState<CustomSplitCalculationType>();
-  const { state, dispatch } = useAppContext();
+  const { state: settingsState } = useUserSettings();
+  const { state: historyState } = useHistory();
+  const { state: sessionState, dispatch } = useSplitSession();
   const {
     saveTip,
     saveSuccessAlert,
-    setSaveSuccessAlert,
     saveErrorAlert,
-    setSaveErrorAlert,
     navigateToTipDetail,
+    dismissSaveSuccess,
+    dismissSaveError,
   } = useSaveTip();
 
   // Use persisted currency if user has explicitly selected one, otherwise use device currency
-  const currentCurrency = state?.currencyConfig || getDeviceCurrency();
+  const currentCurrency = settingsState?.currencyConfig || getDeviceCurrency();
   const currencySymbol: string = currentCurrency.currencySign;
   const currencyCode: string = currentCurrency.currencyId;
 
-  const isCustomSplitActive = state.activeSplitConfig?.type === 'custom';
-  const customSplits = state.activeSplitConfig?.customSplits;
+  const isCustomSplitActive = sessionState.activeSplitConfig?.type === 'custom';
+  const customSplits = sessionState.activeSplitConfig?.customSplits;
 
-  useEffect(() => {
+  const { billValues, customBillValues } = useMemo(() => {
     if (isCustomSplitActive && customSplits && customSplits.length > 0) {
-      // Use custom split calculation
-      const customResults = calculateBillValuesCustomSplit(
-        userInputTipPercentage,
-        userInputBillAmount,
-        userInputRound,
-        customSplits,
-      );
-      setCustomBillValues(customResults);
-      // Also calculate equal split for overall display
-      const equalResults = calculateBillValues(
-        userInputTipPercentage,
-        userInputBillAmount,
-        customSplits.length,
-        userInputRound,
-      );
-      setBillValues(equalResults);
-    } else {
-      // Regular equal split calculation
-      const billValuesResults = calculateBillValues(
+      return {
+        customBillValues: calculateBillValuesCustomSplit(
+          userInputTipPercentage,
+          userInputBillAmount,
+          userInputRound,
+          customSplits,
+        ),
+        billValues: calculateBillValues(
+          userInputTipPercentage,
+          userInputBillAmount,
+          customSplits.length,
+          userInputRound,
+        ),
+      };
+    }
+    return {
+      billValues: calculateBillValues(
         userInputTipPercentage,
         userInputBillAmount,
         userInputSplitCount,
         userInputRound,
-      );
-      setBillValues(billValuesResults);
-      setCustomBillValues(undefined);
-    }
-
-    return () => {};
+      ),
+      customBillValues: undefined,
+    };
   }, [
     userInputTipPercentage,
     userInputBillAmount,
@@ -130,79 +123,60 @@ const HomeTipScreen = () => {
   const effectiveOverall =
     isCustomSplitActive && customBillValues ? customBillValues.overall : billValues?.overall;
 
-  const shareData = effectiveOverall
-    ? {
-        amount: userInputBillAmount,
-        tip: parseFloat(effectiveOverall.tip || '0'),
-        total: parseFloat(effectiveOverall.total || '0'),
-        tipPercentage: userInputTipPercentage,
-        numberOfPeople:
-          isCustomSplitActive && customSplits ? customSplits.length : userInputSplitCount,
-        splitType: (isCustomSplitActive ? 'custom' : 'equal') as 'equal' | 'custom',
-        // A stable, primitive representation of the split configuration for duplicate detection.
-        // Uses input data (not calculated amounts) so rounding changes don't break detection.
-        splitSignature:
-          isCustomSplitActive && customSplits
-            ? `custom:${JSON.stringify(
-                customSplits.map(s => ({
-                  id: s.id,
-                  allocationType: s.allocationType,
-                  value: s.value,
-                })),
-              )}`
-            : 'equal',
-        perPerson:
-          !isCustomSplitActive && userInputSplitCount > 1 && billValues
-            ? {
-                amount: parseFloat(billValues.perPerson?.subtotal || '0'),
-                tip: parseFloat(billValues.perPerson?.tip || '0'),
-                total: parseFloat(billValues.perPerson?.total || '0'),
-              }
-            : undefined,
-        individualSplits:
-          isCustomSplitActive && customBillValues ? customBillValues.individuals : undefined,
-        currencySymbol,
-        currencyCode,
-      }
-    : null;
+  const shareData = useMemo(
+    () =>
+      effectiveOverall
+        ? {
+            amount: userInputBillAmount,
+            tip: parseFloat(effectiveOverall.tip || '0'),
+            total: parseFloat(effectiveOverall.total || '0'),
+            tipPercentage: userInputTipPercentage,
+            numberOfPeople:
+              isCustomSplitActive && customSplits ? customSplits.length : userInputSplitCount,
+            splitType: (isCustomSplitActive ? 'custom' : 'equal') as 'equal' | 'custom',
+            // A stable, primitive representation of the split configuration for duplicate detection.
+            // Uses input data (not calculated amounts) so rounding changes don't break detection.
+            splitSignature: buildSplitSignature(isCustomSplitActive, customSplits),
+            perPerson:
+              !isCustomSplitActive && userInputSplitCount > 1 && billValues
+                ? {
+                    amount: parseFloat(billValues.perPerson?.subtotal || '0'),
+                    tip: parseFloat(billValues.perPerson?.tip || '0'),
+                    total: parseFloat(billValues.perPerson?.total || '0'),
+                  }
+                : undefined,
+            individualSplits:
+              isCustomSplitActive && customBillValues ? customBillValues.individuals : undefined,
+            currencySymbol,
+            currencyCode,
+          }
+        : null,
+    [
+      effectiveOverall,
+      userInputBillAmount,
+      userInputTipPercentage,
+      isCustomSplitActive,
+      customSplits,
+      userInputSplitCount,
+      billValues,
+      customBillValues,
+      currencySymbol,
+      currencyCode,
+    ],
+  );
 
   // Check if current tip already exists in saved tips within the time window
-  const existingSavedTip = useMemo(() => {
-    // Early returns for edge cases
-    if (!shareData || !state.savedTips || state.duplicatePreventionWindow === 0) {
-      return null;
-    }
-
-    const currentTime = Date.now();
-    const windowMs = state.duplicatePreventionWindow * 60 * 1000;
-
-    // Helper function to compare floating point numbers with epsilon tolerance
-    const areFloatsEqual = (a: number, b: number, epsilon: number = 0.001): boolean => {
-      return Math.abs(a - b) < epsilon;
-    };
-
-    return state.savedTips.find(
-      savedTip =>
-        currentTime - savedTip.timestamp < windowMs &&
-        areFloatsEqual(savedTip.amount, shareData.amount) &&
-        areFloatsEqual(savedTip.tip, shareData.tip) &&
-        areFloatsEqual(savedTip.total, shareData.total) &&
-        savedTip.tipPercentage === shareData.tipPercentage &&
-        savedTip.numberOfPeople === shareData.numberOfPeople &&
-        savedTip.currencyCode === shareData.currencyCode &&
-        (savedTip.splitType || 'equal') === shareData.splitType &&
-        (savedTip.splitType === 'custom' && shareData.splitType === 'custom'
-          ? shareData.splitSignature ===
-            `custom:${JSON.stringify(
-              (savedTip.individualSplits || []).map(s => ({
-                id: s.id,
-                allocationType: s.allocationType,
-                value: s.value,
-              })),
-            )}`
-          : true),
-    );
-  }, [shareData, state.savedTips, state.duplicatePreventionWindow]);
+  const existingSavedTip = useMemo(
+    () =>
+      shareData
+        ? findDuplicateTip(
+            shareData,
+            historyState.savedTips,
+            settingsState.duplicatePreventionWindow,
+          )
+        : undefined,
+    [shareData, historyState.savedTips, settingsState.duplicatePreventionWindow],
+  );
 
   const isTipAlreadySaved = !!existingSavedTip;
 
@@ -318,7 +292,7 @@ const HomeTipScreen = () => {
             });
           }}
           onClearCustomSplit={() => {
-            dispatch({ type: 'CLEAR_ACTIVE_SPLIT_CONFIG' });
+            dispatch({ type: ActionTypes.CLEAR_ACTIVE_SPLIT_CONFIG });
             setUserInputSplitCount(1);
           }}
         />
@@ -385,7 +359,7 @@ const HomeTipScreen = () => {
           {
             text: t('common.ok'),
             style: 'cancel',
-            onPress: () => setSaveSuccessAlert({ visible: false }),
+            onPress: dismissSaveSuccess,
           },
           {
             text: t('common.viewDetails'),
@@ -394,7 +368,7 @@ const HomeTipScreen = () => {
               saveSuccessAlert.savedTip && navigateToTipDetail(saveSuccessAlert.savedTip),
           },
         ]}
-        onDismiss={() => setSaveSuccessAlert({ visible: false })}
+        onDismiss={dismissSaveSuccess}
       />
 
       {/* Save Error Alert */}
@@ -403,10 +377,8 @@ const HomeTipScreen = () => {
         title={t('common.error')}
         message={t('screens.home.tipSaveFailed')}
         type="error"
-        buttons={[
-          { text: t('common.ok'), style: 'default', onPress: () => setSaveErrorAlert(false) },
-        ]}
-        onDismiss={() => setSaveErrorAlert(false)}
+        buttons={[{ text: t('common.ok'), style: 'default', onPress: dismissSaveError }]}
+        onDismiss={dismissSaveError}
       />
     </>
   );

@@ -6,7 +6,7 @@ import { StyledHeader, StyledAlert } from '@components';
 import { AppLogo } from '@/components/StyledSVGIcons';
 import { useNavigation } from '@react-navigation/native';
 import { useExternalLinkAlert } from '@hooks';
-import { APP_LINKS, EMAILS, APP_INFO } from '@configs';
+import { Constants } from '@configs';
 import { useTranslation } from 'react-i18next';
 
 export const AboutUsScreen: React.FC = () => {
@@ -49,7 +49,11 @@ export const AboutUsScreen: React.FC = () => {
           <Text
             style={[styles.sectionTitle, { textDecorationLine: 'underline' }]}
             onPress={() =>
-              handleLinkPress(Platform.OS === 'ios' ? APP_LINKS.appStore : APP_LINKS.playStore)
+              handleLinkPress(
+                Platform.OS === 'ios'
+                  ? Constants.APP_LINKS.appStore
+                  : Constants.APP_LINKS.playStore,
+              )
             }
           >
             {t('screens.appInfo.developer')}
@@ -60,7 +64,7 @@ export const AboutUsScreen: React.FC = () => {
           <Text style={styles.sectionTitle}>{t('screens.appInfo.support')}</Text>
           <Pressable
             onPress={() =>
-              handleLinkPress(`mailto:${EMAILS.support}`, {
+              handleLinkPress(`mailto:${Constants.EMAILS.support}`, {
                 title: t('screens.appInfo.contactConfirmTitle'),
                 message: t('screens.appInfo.contactConfirmMessage'),
                 openText: t('screens.appInfo.contactConfirmButtonContinue'),
@@ -68,7 +72,7 @@ export const AboutUsScreen: React.FC = () => {
               })
             }
           >
-            <Text style={styles.linkText}>{EMAILS.support}</Text>
+            <Text style={styles.linkText}>{Constants.EMAILS.support}</Text>
           </Pressable>
         </View>
         <Text style={styles.feedbackText}>{t('screens.appInfo.feedbackDescription')}</Text>
@@ -87,7 +91,7 @@ export const AboutUsScreen: React.FC = () => {
             </Text>
           </Pressable>
           <Pressable
-            onPress={() => handleLinkPress(APP_LINKS.privacyPolicy)}
+            onPress={() => handleLinkPress(Constants.APP_LINKS.privacyPolicy)}
             style={styles.acknowledgementButton}
           >
             <Text style={styles.acknowledgementButtonText}>
@@ -96,7 +100,7 @@ export const AboutUsScreen: React.FC = () => {
           </Pressable>
         </View>
         <Text style={styles.versionText}>
-          {t('screens.appInfo.appVersion')} {APP_INFO.version}
+          {t('screens.appInfo.appVersion')} {Constants.APP_INFO.version}
         </Text>
       </View>
 

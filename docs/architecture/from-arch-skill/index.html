@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TipMate — Architecture & Flows</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        :root {
+            --bg-primary: #0f172a;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .mono {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+        
+        .architecture-container {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .column-header {
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        
+        .arch-item {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #475569;
+        }
+        
+        .arch-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+        }
+        
+        .arch-item.highlight {
+            border-color: #fbbf24 !important;
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3) !important;
+            transform: scale(1.02);
+            z-index: 10;
+        }
+        
+        .connection-number {
+            background: #334155;
+            color: #e2e8f0;
+            font-size: 0.65rem;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            font-weight: 700;
+            box-shadow: 0 0 0 2px #1e293b;
+        }
+        
+        .flow-btn {
+            transition: all 0.15s ease;
+        }
+        
+        .flow-btn.active {
+            background-color: #334155;
+            border-color: #64748b;
+            box-shadow: 0 0 0 1px #64748b;
+        }
+        
+        .section-title {
+            font-size: 0.875rem;
+            letter-spacing: 0.025em;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+        
+        .diagram-grid {
+            scrollbar-width: thin;
+            scrollbar-color: #475569 #1e293b;
+        }
+        
+        .path-step {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        
+        .legend-pill {
+            font-size: 0.65rem;
+            padding: 1px 8px 1px 6px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200">
+    <!-- Header -->
+    <div class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-lg sticky top-0 z-50">
+        <div class="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-x-4">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-yellow-400 rounded-xl flex items-center justify-center shadow-inner">
+                        <i class="fa-solid fa-project-diagram text-slate-950 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-semibold tracking-tighter">TipMate — Architecture & Flows</h1>
+                        <p class="text-xs text-slate-400 -mt-0.5">System Architecture Visualization</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-x-3">
+                <div class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-2xl flex items-center text-xs">
+                    <i class="fa-solid fa-info-circle mr-1.5 text-yellow-400"></i>
+                    <span class="text-slate-400">Interactive — click flows to highlight paths</span>
+                </div>
+                
+                <button onclick="downloadJSON()" 
+                        class="flex items-center gap-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs rounded-2xl transition-colors">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Download JSON</span>
+                </button>
+                
+                <button onclick="window.location.reload()" 
+                        class="px-3 py-2 text-xs flex items-center gap-x-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-2xl transition-colors">
+                    <i class="fa-solid fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-[1600px] mx-auto px-6 pt-6 pb-12">
+        
+        <!-- Subtitle -->
+        <div class="mb-6 max-w-3xl">
+            <p class="text-slate-400 text-[15px] leading-relaxed">React Native 0.84.1 · iOS & Android · v1.7.0 — Pick a flow on the right to highlight the path through the system and see what happens at each step.</p>
+        </div>
+        
+        <!-- Legend -->
+        <div class="mb-8 flex flex-wrap items-center gap-2">
+            <span class="text-xs uppercase tracking-[1px] text-slate-500 mr-3">LEGEND</span>
+            <div class="legend-pill border border-slate-700 bg-slate-900 px-2.5 py-0.5"><span class="inline-block w-2 h-2 rounded-full bg-pink-500" style="background-color: "></span><span class="text-xs text-slate-300">Entry / Provider</span></div><div class="legend-pill border border-slate-700 bg-slate-900 px-2.5 py-0.5"><span class="inline-block w-2 h-2 rounded-full bg-blue-500" style="background-color: "></span><span class="text-xs text-slate-300">Navigation</span></div><div class="legend-pill border border-slate-700 bg-slate-900 px-2.5 py-0.5"><span class="inline-block w-2 h-2 rounded-full bg-yellow-400" style="background-color: "></span><span class="text-xs text-slate-300">Screen</span></div><div class="legend-pill border border-slate-700 bg-slate-900 px-2.5 py-0.5"><span class="inline-block w-2 h-2 rounded-full bg-green-500" style="background-color: "></span><span class="text-xs text-slate-300">Hook</span></div><div class="legend-pill border border-slate-700 bg-slate-900 px-2.5 py-0.5"><span class="inline-block w-2 h-2 rounded-full bg-purple-500" style="background-color: "></span><span class="text-xs text-slate-300">State / Reducer</span></div><div class="legend-pill border border-slate-700 bg-slate-900 px-2.5 py-0.5"><span class="inline-block w-2 h-2 rounded-full bg-orange-500" style="background-color: "></span><span class="text-xs text-slate-300">Storage & Libs</span></div>
+        </div>
+        
+        <div class="flex gap-6">
+            
+            <!-- Main Diagram Area -->
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-3 px-1">
+                    <div class="section-title flex items-center gap-x-2">
+                        <i class="fa-solid fa-sitemap"></i> 
+                        <span>ARCHITECTURE COMPONENTS</span>
+                    </div>
+                    <div class="text-[10px] text-slate-500 mono">7 COLUMNS • 60 CONNECTIONS</div>
+                </div>
+                
+                <!-- Columns Grid -->
+                <div class="diagram-grid overflow-x-auto pb-4">
+                    <div class="flex gap-3 min-w-max" id="columns-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <!-- Connections Summary -->
+                <div class="mt-4 bg-slate-900/70 border border-slate-800 rounded-3xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="section-title flex items-center gap-x-2">
+                            <i class="fa-solid fa-link"></i>
+                            <span>KEY CONNECTIONS</span>
+                        </div>
+                        <span class="text-xs text-slate-500">Numbered paths used by flows</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs" id="connections-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Sidebar: Flows + Steps -->
+            <div class="w-80 flex-shrink-0 space-y-6">
+                
+                <!-- Flows -->
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden">
+                    <div class="px-5 pt-4 pb-3 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
+                        <div class="section-title flex items-center gap-x-2">
+                            <i class="fa-solid fa-route text-yellow-400"></i>
+                            <span>FLOWS</span>
+                        </div>
+                        <button onclick="clearSelection()" 
+                                class="text-[10px] px-2.5 py-px rounded-full bg-slate-800 text-slate-400 hover:text-slate-200 transition-colors">
+                            CLEAR
+                            </button>
+                    </div>
+                    
+                    <div class="p-2 max-h-[380px] overflow-y-auto" id="flows-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <!-- Steps -->
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden">
+                    <div class="px-5 pt-4 pb-3 border-b border-slate-800 bg-slate-950/50">
+                        <div class="section-title flex items-center gap-x-2">
+                            <i class="fa-solid fa-list-ol text-emerald-400"></i>
+                            <span>STEPS</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 space-y-4 max-h-[280px] overflow-y-auto" id="steps-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <!-- Footer note -->
+        <div class="mt-8 text-center">
+            <p class="text-[10px] text-slate-500">Generated on May 17, 2026 at 02:09 • Edit the accompanying JSON file and re-run the generator to update</p>
+        </div>
+        
+    </div>
+    
+    <script>
+        // Embedded Architecture Data
+        const architectureData = {
+  "title": "TipMate — Architecture & Flows",
+  "subtitle": "React Native 0.84.1 · iOS & Android · v1.7.0 — Pick a flow on the right to highlight the path through the system and see what happens at each step.",
+  "legend": [
+    {
+      "label": "Entry / Provider",
+      "color": "bg-pink-500",
+      "type": "entry"
+    },
+    {
+      "label": "Navigation",
+      "color": "bg-blue-500",
+      "type": "nav"
+    },
+    {
+      "label": "Screen",
+      "color": "bg-yellow-400",
+      "type": "screen"
+    },
+    {
+      "label": "Hook",
+      "color": "bg-green-500",
+      "type": "hook"
+    },
+    {
+      "label": "State / Reducer",
+      "color": "bg-purple-500",
+      "type": "reducer"
+    },
+    {
+      "label": "Storage & Libs",
+      "color": "bg-orange-500",
+      "type": "external"
+    }
+  ],
+  "columns": [
+    {
+      "name": "BOOTSTRAP",
+      "items": [
+        {
+          "id": "index-js",
+          "label": "index.js",
+          "sublabel": "AppRegistry root",
+          "type": "entry"
+        },
+        {
+          "id": "entrypoint",
+          "label": "Entrypoint.tsx",
+          "sublabel": "i18n init + RTL sync",
+          "type": "entry"
+        },
+        {
+          "id": "gesture-root",
+          "label": "GestureHandlerRootView",
+          "sublabel": "gesture-handler",
+          "type": "entry"
+        },
+        {
+          "id": "app-provider",
+          "label": "AppProvider",
+          "sublabel": "AppContext.tsx",
+          "type": "entry"
+        },
+        {
+          "id": "app-navigator",
+          "label": "ApplicationNavigator",
+          "sublabel": "Theme init + BootSplash",
+          "type": "entry"
+        },
+        {
+          "id": "nav-container",
+          "label": "NavigationContainer",
+          "sublabel": "@react-navigation/native",
+          "type": "entry"
+        }
+      ]
+    },
+    {
+      "name": "NAVIGATION",
+      "items": [
+        {
+          "id": "stack-nav",
+          "label": "StackNavigation",
+          "sublabel": "NativeStack push/modal",
+          "type": "nav"
+        },
+        {
+          "id": "drawer-nav",
+          "label": "DrawerNavigation",
+          "sublabel": "Drawer type: slide",
+          "type": "nav"
+        }
+      ]
+    },
+    {
+      "name": "SCREENS",
+      "items": [
+        {
+          "id": "home-tip",
+          "label": "HomeTipScreen",
+          "sublabel": "Main calculator",
+          "type": "screen"
+        },
+        {
+          "id": "saved-tips",
+          "label": "SavedTipsScreen",
+          "sublabel": "Tip history list",
+          "type": "screen"
+        },
+        {
+          "id": "saved-detail",
+          "label": "SavedTipDetailScreen",
+          "sublabel": "Single tip view",
+          "type": "screen"
+        },
+        {
+          "id": "settings",
+          "label": "SettingsScreen",
+          "sublabel": "App preferences",
+          "type": "screen"
+        },
+        {
+          "id": "custom-split",
+          "label": "CustomSplitScreen",
+          "sublabel": "Per-person allocation",
+          "type": "screen"
+        },
+        {
+          "id": "about-us",
+          "label": "AboutUsScreen",
+          "sublabel": "App info + links",
+          "type": "screen"
+        },
+        {
+          "id": "license",
+          "label": "LicenseScreen",
+          "sublabel": "OSS licenses list",
+          "type": "screen"
+        },
+        {
+          "id": "license-modal",
+          "label": "LicenseContentModal",
+          "sublabel": "Full license text",
+          "type": "screen"
+        }
+      ]
+    },
+    {
+      "name": "HOOKS",
+      "items": [
+        {
+          "id": "calc-equal",
+          "label": "calculateBillValues",
+          "sublabel": "Equal split calc",
+          "type": "hook"
+        },
+        {
+          "id": "calc-custom",
+          "label": "calculateBillValuesCustomSplit",
+          "sublabel": "Custom split calc",
+          "type": "hook"
+        },
+        {
+          "id": "use-save-tip",
+          "label": "useSaveTip",
+          "sublabel": "Save + dedup logic",
+          "type": "hook"
+        },
+        {
+          "id": "use-share-preview",
+          "label": "useShareTipPreview",
+          "sublabel": "Share modal delegate",
+          "type": "hook"
+        },
+        {
+          "id": "use-share-text",
+          "label": "useShareTipDetailsText",
+          "sublabel": "Text → share sheet",
+          "type": "hook"
+        },
+        {
+          "id": "use-share-pdf",
+          "label": "useShareTipDetailsPDF",
+          "sublabel": "PDF → share sheet",
+          "type": "hook"
+        },
+        {
+          "id": "persisted-reducer",
+          "label": "usePersistedReducer",
+          "sublabel": "State + AsyncStorage sync",
+          "type": "hook"
+        },
+        {
+          "id": "async-storage-hooks",
+          "label": "asyncStorageHooks",
+          "sublabel": "Theme preference R/W",
+          "type": "hook"
+        },
+        {
+          "id": "custom-split-people",
+          "label": "useCustomSplitPeople",
+          "sublabel": "People array CRUD",
+          "type": "hook"
+        },
+        {
+          "id": "custom-split-validation",
+          "label": "useCustomSplitValidation",
+          "sublabel": "Allocation validation",
+          "type": "hook"
+        },
+        {
+          "id": "use-split-presets",
+          "label": "useSplitPresets",
+          "sublabel": "Preset CRUD",
+          "type": "hook"
+        },
+        {
+          "id": "use-theme-color",
+          "label": "useThemeColorCustomiser",
+          "sublabel": "Accent color overrides",
+          "type": "hook"
+        },
+        {
+          "id": "use-animations",
+          "label": "useAnimations",
+          "sublabel": "Spring / fade / bounce",
+          "type": "hook"
+        }
+      ]
+    },
+    {
+      "name": "STATE & REDUCERS",
+      "items": [
+        {
+          "id": "app-context",
+          "label": "AppContext",
+          "sublabel": "Global state context",
+          "type": "reducer"
+        },
+        {
+          "id": "root-reducer",
+          "label": "rootReducer",
+          "sublabel": "Combines all reducers",
+          "type": "reducer"
+        },
+        {
+          "id": "tip-reducer",
+          "label": "tipReducer",
+          "sublabel": "tips: TipOptionState[]",
+          "type": "reducer"
+        },
+        {
+          "id": "split-reducer",
+          "label": "splitReducer",
+          "sublabel": "splits: SplitOptionState[]",
+          "type": "reducer"
+        },
+        {
+          "id": "currency-reducer",
+          "label": "currencyConfigReducer",
+          "sublabel": "currencyConfig",
+          "type": "reducer"
+        },
+        {
+          "id": "saved-tips-reducer",
+          "label": "savedTipsReducer",
+          "sublabel": "savedTips: SavedTip[]",
+          "type": "reducer"
+        },
+        {
+          "id": "language-reducer",
+          "label": "languageReducer",
+          "sublabel": "language + isRTL",
+          "type": "reducer"
+        },
+        {
+          "id": "split-config-reducer",
+          "label": "splitConfigReducer",
+          "sublabel": "activeSplitConfig (session)",
+          "type": "reducer"
+        },
+        {
+          "id": "saved-presets-reducer",
+          "label": "savedSplitPresetsReducer",
+          "sublabel": "savedSplitPresets[]",
+          "type": "reducer"
+        }
+      ]
+    },
+    {
+      "name": "STORAGE & LIBS",
+      "items": [
+        {
+          "id": "async-storage",
+          "label": "AsyncStorage",
+          "sublabel": "APPSTATE · ThemePreference",
+          "type": "external"
+        },
+        {
+          "id": "unistyles",
+          "label": "react-native-unistyles",
+          "sublabel": "8 themes · Montserrat/Nunito",
+          "type": "external"
+        },
+        {
+          "id": "i18next",
+          "label": "i18next",
+          "sublabel": "en · es · fr · ar(RTL) · si",
+          "type": "external"
+        },
+        {
+          "id": "rn-share",
+          "label": "react-native-share",
+          "sublabel": "OS native share sheet",
+          "type": "external"
+        },
+        {
+          "id": "html-to-pdf",
+          "label": "react-native-html-to-pdf",
+          "sublabel": "HTML → PDF conversion",
+          "type": "external"
+        },
+        {
+          "id": "bootsplash",
+          "label": "react-native-bootsplash",
+          "sublabel": "Splash → fade dismiss",
+          "type": "external"
+        },
+        {
+          "id": "reanimated",
+          "label": "react-native-reanimated",
+          "sublabel": "Spring / worklets",
+          "type": "external"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "number": 1,
+      "from": "index-js",
+      "to": "entrypoint",
+      "label": "AppRegistry"
+    },
+    {
+      "number": 2,
+      "from": "entrypoint",
+      "to": "gesture-root",
+      "label": "wraps"
+    },
+    {
+      "number": 3,
+      "from": "gesture-root",
+      "to": "app-provider",
+      "label": "wraps"
+    },
+    {
+      "number": 4,
+      "from": "app-provider",
+      "to": "app-navigator",
+      "label": "wraps"
+    },
+    {
+      "number": 5,
+      "from": "app-navigator",
+      "to": "nav-container",
+      "label": "renders"
+    },
+    {
+      "number": 6,
+      "from": "nav-container",
+      "to": "stack-nav",
+      "label": "hosts"
+    },
+    {
+      "number": 7,
+      "from": "stack-nav",
+      "to": "drawer-nav",
+      "label": "MainStack"
+    },
+    {
+      "number": 8,
+      "from": "drawer-nav",
+      "to": "home-tip",
+      "label": "CalcTipScreen"
+    },
+    {
+      "number": 9,
+      "from": "drawer-nav",
+      "to": "saved-tips",
+      "label": "SavedTipScreen"
+    },
+    {
+      "number": 10,
+      "from": "drawer-nav",
+      "to": "settings",
+      "label": "SettingsScreen"
+    },
+    {
+      "number": 11,
+      "from": "drawer-nav",
+      "to": "about-us",
+      "label": "AboutUsScreen"
+    },
+    {
+      "number": 12,
+      "from": "stack-nav",
+      "to": "saved-detail",
+      "label": "push"
+    },
+    {
+      "number": 13,
+      "from": "stack-nav",
+      "to": "custom-split",
+      "label": "push"
+    },
+    {
+      "number": 14,
+      "from": "stack-nav",
+      "to": "license",
+      "label": "push"
+    },
+    {
+      "number": 15,
+      "from": "stack-nav",
+      "to": "license-modal",
+      "label": "modal"
+    },
+    {
+      "number": 16,
+      "from": "home-tip",
+      "to": "calc-equal",
+      "label": "useEffect"
+    },
+    {
+      "number": 17,
+      "from": "home-tip",
+      "to": "calc-custom",
+      "label": "if customActive"
+    },
+    {
+      "number": 18,
+      "from": "home-tip",
+      "to": "use-save-tip",
+      "label": "save tap"
+    },
+    {
+      "number": 19,
+      "from": "home-tip",
+      "to": "use-share-preview",
+      "label": "share tap"
+    },
+    {
+      "number": 20,
+      "from": "home-tip",
+      "to": "custom-split",
+      "label": "navigate"
+    },
+    {
+      "number": 21,
+      "from": "home-tip",
+      "to": "saved-detail",
+      "label": "after save"
+    },
+    {
+      "number": 22,
+      "from": "saved-tips",
+      "to": "saved-detail",
+      "label": "tap item"
+    },
+    {
+      "number": 23,
+      "from": "saved-detail",
+      "to": "use-share-text",
+      "label": "text share"
+    },
+    {
+      "number": 24,
+      "from": "saved-detail",
+      "to": "use-share-pdf",
+      "label": "PDF share"
+    },
+    {
+      "number": 25,
+      "from": "custom-split",
+      "to": "custom-split-people",
+      "label": "manages"
+    },
+    {
+      "number": 26,
+      "from": "custom-split",
+      "to": "custom-split-validation",
+      "label": "validates"
+    },
+    {
+      "number": 27,
+      "from": "custom-split",
+      "to": "use-split-presets",
+      "label": "presets"
+    },
+    {
+      "number": 28,
+      "from": "settings",
+      "to": "use-theme-color",
+      "label": "accent change"
+    },
+    {
+      "number": 29,
+      "from": "license",
+      "to": "use-animations",
+      "label": "scroll-to-top spring"
+    },
+    {
+      "number": 30,
+      "from": "use-share-preview",
+      "to": "use-share-text",
+      "label": "text branch"
+    },
+    {
+      "number": 31,
+      "from": "use-share-preview",
+      "to": "use-share-pdf",
+      "label": "PDF branch"
+    },
+    {
+      "number": 32,
+      "from": "use-save-tip",
+      "to": "saved-tips-reducer",
+      "label": "SAVE_TIP"
+    },
+    {
+      "number": 33,
+      "from": "custom-split",
+      "to": "split-config-reducer",
+      "label": "SET_ACTIVE_SPLIT_CONFIG"
+    },
+    {
+      "number": 34,
+      "from": "custom-split",
+      "to": "saved-presets-reducer",
+      "label": "SAVE/UPDATE/DELETE_PRESET"
+    },
+    {
+      "number": 35,
+      "from": "settings",
+      "to": "tip-reducer",
+      "label": "UPDATE_TIP_OPTIONS"
+    },
+    {
+      "number": 36,
+      "from": "settings",
+      "to": "split-reducer",
+      "label": "UPDATE_SPLIT_OPTIONS"
+    },
+    {
+      "number": 37,
+      "from": "settings",
+      "to": "currency-reducer",
+      "label": "UPDATE_CURRENCY_SIGN"
+    },
+    {
+      "number": 38,
+      "from": "settings",
+      "to": "language-reducer",
+      "label": "SET_LANGUAGE"
+    },
+    {
+      "number": 39,
+      "from": "saved-tips",
+      "to": "saved-tips-reducer",
+      "label": "DELETE_TIP"
+    },
+    {
+      "number": 40,
+      "from": "app-provider",
+      "to": "app-context",
+      "label": "provides"
+    },
+    {
+      "number": 41,
+      "from": "app-context",
+      "to": "persisted-reducer",
+      "label": "uses"
+    },
+    {
+      "number": 42,
+      "from": "persisted-reducer",
+      "to": "root-reducer",
+      "label": "wraps"
+    },
+    {
+      "number": 43,
+      "from": "root-reducer",
+      "to": "tip-reducer",
+      "label": "delegates"
+    },
+    {
+      "number": 44,
+      "from": "root-reducer",
+      "to": "split-reducer",
+      "label": "delegates"
+    },
+    {
+      "number": 45,
+      "from": "root-reducer",
+      "to": "currency-reducer",
+      "label": "delegates"
+    },
+    {
+      "number": 46,
+      "from": "root-reducer",
+      "to": "saved-tips-reducer",
+      "label": "delegates"
+    },
+    {
+      "number": 47,
+      "from": "root-reducer",
+      "to": "language-reducer",
+      "label": "delegates"
+    },
+    {
+      "number": 48,
+      "from": "root-reducer",
+      "to": "split-config-reducer",
+      "label": "delegates"
+    },
+    {
+      "number": 49,
+      "from": "root-reducer",
+      "to": "saved-presets-reducer",
+      "label": "delegates"
+    },
+    {
+      "number": 50,
+      "from": "persisted-reducer",
+      "to": "async-storage",
+      "label": "APPSTATE key"
+    },
+    {
+      "number": 51,
+      "from": "async-storage-hooks",
+      "to": "async-storage",
+      "label": "ThemePreference"
+    },
+    {
+      "number": 52,
+      "from": "app-navigator",
+      "to": "async-storage-hooks",
+      "label": "reads theme"
+    },
+    {
+      "number": 53,
+      "from": "use-theme-color",
+      "to": "unistyles",
+      "label": "setTheme"
+    },
+    {
+      "number": 54,
+      "from": "app-navigator",
+      "to": "unistyles",
+      "label": "setTheme on boot"
+    },
+    {
+      "number": 55,
+      "from": "entrypoint",
+      "to": "i18next",
+      "label": "initializeI18n"
+    },
+    {
+      "number": 56,
+      "from": "app-navigator",
+      "to": "bootsplash",
+      "label": "hide(fade)"
+    },
+    {
+      "number": 57,
+      "from": "use-share-text",
+      "to": "rn-share",
+      "label": "open()"
+    },
+    {
+      "number": 58,
+      "from": "use-share-pdf",
+      "to": "html-to-pdf",
+      "label": "generate PDF"
+    },
+    {
+      "number": 59,
+      "from": "use-share-pdf",
+      "to": "rn-share",
+      "label": "open()"
+    },
+    {
+      "number": 60,
+      "from": "use-animations",
+      "to": "reanimated",
+      "label": "useSharedValue"
+    }
+  ],
+  "flows": [
+    {
+      "id": "app-boot",
+      "name": "App Bootstrap",
+      "description": "From index.js AppRegistry to BootSplash dismissal — provider tree, theme init, state hydration, i18n setup, and navigator ready.",
+      "path": [
+        1,
+        2,
+        3,
+        4,
+        40,
+        41,
+        42,
+        5,
+        6,
+        7,
+        52,
+        51,
+        54,
+        55,
+        56
+      ]
+    },
+    {
+      "id": "tip-calculation",
+      "name": "Tip Calculation",
+      "description": "User enters a bill amount on HomeTipScreen — the calculation hooks fire and StyledBillBox re-renders with per-person totals in real time.",
+      "path": [
+        7,
+        8,
+        16,
+        17,
+        41,
+        42,
+        43,
+        44,
+        50
+      ]
+    },
+    {
+      "id": "custom-split",
+      "name": "Custom Split Flow",
+      "description": "Opening CustomSplitScreen, building per-person fixed/percentage/remainder allocations, validating, saving as a preset, and applying back to the calculator.",
+      "path": [
+        8,
+        20,
+        13,
+        25,
+        26,
+        27,
+        33,
+        34,
+        42,
+        48,
+        49,
+        50
+      ]
+    },
+    {
+      "id": "save-share",
+      "name": "Save & Share Tip",
+      "description": "Saving a calculated tip to history with duplicate prevention, then sharing via native text message or generated PDF through the OS share sheet.",
+      "path": [
+        8,
+        18,
+        32,
+        46,
+        50,
+        19,
+        30,
+        57,
+        31,
+        58,
+        59
+      ]
+    },
+    {
+      "id": "settings-change",
+      "name": "Settings & Theme",
+      "description": "Changing app preferences — editing tip/split presets, switching currency or language, and applying a new accent color theme via Unistyles.",
+      "path": [
+        7,
+        10,
+        35,
+        36,
+        37,
+        38,
+        43,
+        44,
+        45,
+        47,
+        50,
+        28,
+        53
+      ]
+    },
+    {
+      "id": "saved-tips-browse",
+      "name": "Browse & Share Saved Tips",
+      "description": "Navigating to the tip history list, tapping a saved calculation for full detail, then sharing as formatted text or PDF.",
+      "path": [
+        7,
+        9,
+        22,
+        12,
+        23,
+        24,
+        57,
+        58,
+        59
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "number": 1,
+      "title": "index.js → AppRegistry",
+      "description": "index.js calls AppRegistry.registerComponent('App', () => App). This is the native iOS/Android entry point — it hands control to Entrypoint.tsx as the root React component."
+    },
+    {
+      "number": 2,
+      "title": "Entrypoint.tsx — i18n + RTL sync",
+      "description": "Before any UI renders, Entrypoint.tsx synchronously calls initializeI18n() to configure the i18next instance with all 5 locales (en, es, fr, ar, si) and applyRTLSync() to set right-to-left layout for Arabic via I18nManager.forceRTL. This must happen before the component tree mounts."
+    },
+    {
+      "number": 3,
+      "title": "Provider tree mounts",
+      "description": "GestureHandlerRootView (react-native-gesture-handler) wraps the entire app, enabling swipe and gesture recognition. AppProvider (AppContext.tsx) mounts inside it, invoking usePersistedReducer which reads the 'APPSTATE' key from AsyncStorage and dispatches LOAD_PERSISTED_STATE to hydrate all 11 global state fields on first render."
+    },
+    {
+      "number": 4,
+      "title": "ApplicationNavigator — theme boot",
+      "description": "ApplicationNavigator reads ThemePreference and ThemeColorOption from AsyncStorage via asyncStorageHooks. It calls UnistylesRuntime.setTheme(preferredTheme) and UnistylesRuntime.setAdaptiveThemes(false) to lock the user's chosen theme before the first frame paints — preventing a theme flash."
+    },
+    {
+      "number": 5,
+      "title": "NavigationContainer ready → BootSplash dismiss",
+      "description": "NavigationContainer renders the full navigator tree — StackNavigation wraps DrawerNavigation (type: slide, 80px swipe edge). When NavigationContainer.onReady() fires, BootSplash.hide({ fade: true }) dismisses the splash screen with a cross-fade animation. The app is now interactive."
+    },
+    {
+      "number": 6,
+      "title": "Bill amount triggers useEffect",
+      "description": "User types a bill amount into StyledTotalAmountInput on HomeTipScreen. The value updates local state (setUserInputBillAmount). A useEffect in HomeTipScreen watches bill amount, tip %, split count, and rounding method — it fires on every change to recompute results."
+    },
+    {
+      "number": 7,
+      "title": "calculateBillValues runs",
+      "description": "For equal splits: calculateBillValues(amount, tipPct, splitCount, roundMethod) returns perPerson and overall totals with UP/DOWN/NONE rounding. For active custom splits: calculateBillValuesCustomSplit applies allocations in order — fixed amounts first, then percentages, then remainder (largest remainder method ensures exact penny distribution). StyledBillBox re-renders immediately."
+    },
+    {
+      "number": 8,
+      "title": "Navigate to CustomSplitScreen",
+      "description": "User taps 'Custom' in StyledSplitOptions. HomeTipScreen calls navigation.navigate('CustomSplitScreen'). StackNavigation pushes the screen with the default ios_from_right animation (250ms duration)."
+    },
+    {
+      "number": 9,
+      "title": "Build per-person split allocations",
+      "description": "useCustomSplitPeople manages the local IndividualSplit[] array — add, remove, rename, and change each person's allocationType ('fixed' | 'percentage' | 'remainder'). useCustomSplitValidation checks in real time: fixed totals ≤ bill amount, percentage total ≤ 100%, and at least one 'remainder' person OR exact full allocation before Save is enabled."
+    },
+    {
+      "number": 10,
+      "title": "Save split config and return",
+      "description": "User taps Save. CustomSplitScreen dispatches SET_ACTIVE_SPLIT_CONFIG to splitConfigReducer with the IndividualSplit[] array. navigation.goBack() returns to HomeTipScreen. The useEffect detects activeSplitConfig change and runs calculateBillValuesCustomSplit() — StyledBillBox shows per-person individual amounts. Note: activeSplitConfig is intentionally NOT persisted — it resets on app restart."
+    },
+    {
+      "number": 11,
+      "title": "Save tip to history",
+      "description": "User taps the Save button on HomeTipScreen. useSaveTip checks savedTips for a duplicate within the duplicatePreventionWindow (default 15 min) with the same bill amount and person count. If not a duplicate, it dispatches SAVE_TIP to savedTipsReducer. usePersistedReducer automatically serialises the updated savedTips array to AsyncStorage under 'APPSTATE' on every dispatch."
+    },
+    {
+      "number": 12,
+      "title": "Share modal and native share sheet",
+      "description": "useShareTipPreview opens StyledSharePreviewModal (slide animation). User selects 'Text' or 'PDF'. Text path: useShareTipDetailsText formats the tip data as a plain-text message and calls react-native-share.open(). PDF path: useShareTipDetailsPDF renders an HTML template → react-native-html-to-pdf generates a PDF file → react-native-share.open() presents the native OS share sheet with the PDF attachment."
+    },
+    {
+      "number": 13,
+      "title": "Edit tip & split option presets",
+      "description": "User edits default tip % or split count capsules via StyledTipOptionsEditMode / StyledSplitOptionsEditMode on SettingsScreen. Each confirmed value dispatches UPDATE_TIP_OPTIONS or UPDATE_SPLIT_OPTIONS to tipReducer / splitReducer. usePersistedReducer saves the entire state to AsyncStorage on every dispatch — next app launch will restore the custom presets."
+    },
+    {
+      "number": 14,
+      "title": "Currency and language preference changes",
+      "description": "Currency change: StyledCurrencySelector dispatches UPDATE_CURRENCY_SIGN to currencyConfigReducer — all currency symbols on HomeTipScreen update immediately. Language change: StyledLanguageSelector dispatches SET_LANGUAGE to languageReducer, updating both language and isRTL fields. AppContext's useEffect syncs the new language code to i18next so all translation strings re-render. RTL layout changes require an app restart."
+    },
+    {
+      "number": 15,
+      "title": "Theme accent color change",
+      "description": "User picks an accent swatch in StyledThemeBox. SettingsScreen calls useThemeColorCustomiser with the new accent option. The hook applies color overrides to the active Unistyles theme registry via UnistylesRuntime and persists the selection to AsyncStorage via asyncStorageHooks.setUserUpdatedThemeOption(). All styled components re-render with the new accent color immediately."
+    },
+    {
+      "number": 16,
+      "title": "Browse and delete saved tips",
+      "description": "SavedTipsScreen renders the savedTips[] array via StyledSavedTipsList (FlatList). Each row shows bill amount, tip %, person count, and timestamp. Swipe-to-delete is implemented with ReanimatedSwipeable from react-native-gesture-handler. Swiping and confirming dispatches DELETE_TIP; clearing all dispatches CLEAR_ALL_TIPS — both persist automatically."
+    },
+    {
+      "number": 17,
+      "title": "View saved tip detail and share",
+      "description": "Tapping a row navigates to SavedTipDetailScreen (push animation) with the full SavedTip object including overall totals, per-person breakdown, and custom split individual amounts if applicable. Share buttons invoke the same useShareTipDetailsText and useShareTipDetailsPDF hooks used from HomeTipScreen — producing identical text or PDF share outputs."
+    }
+  ]
+};
+        
+        let currentHighlightedFlow = null;
+        
+        function renderColumns() {
+            const container = document.getElementById('columns-container');
+            container.innerHTML = '';
+            
+            const typeColorMap = {};
+            architectureData.legend.forEach(l => {
+                typeColorMap[l.type] = l.color;
+            });
+            
+            architectureData.columns.forEach(column => {
+                const colDiv = document.createElement('div');
+                colDiv.className = 'w-44 flex-shrink-0 bg-slate-900 border border-slate-700 rounded-3xl overflow-hidden shadow-xl';
+                
+                // Header
+                const header = document.createElement('div');
+                header.className = 'column-header px-3.5 py-2.5 text-center text-slate-300';
+                header.innerHTML = `<span class="font-mono tracking-[1.5px]">${column.name}</span>`;
+                colDiv.appendChild(header);
+                
+                // Items
+                const itemsContainer = document.createElement('div');
+                itemsContainer.className = 'p-2 space-y-1.5 bg-slate-950/50';
+                
+                column.items.forEach(item => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = `arch-item px-3 py-2.5 rounded-2xl bg-slate-900 cursor-pointer text-sm`;
+                    itemEl.setAttribute('data-id', item.id);
+                    
+                    const colorClass = typeColorMap[item.type] || 'bg-slate-600';
+                    
+                    let html = `
+                        <div class="flex items-start gap-x-2.5">
+                            <div class="mt-0.5 flex-shrink-0">
+                                <span class="inline-block w-2.5 h-2.5 rounded-full ${colorClass} ring-1 ring-offset-2 ring-offset-slate-900 ring-slate-700"></span>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <div class="font-medium text-slate-100 leading-tight">${item.label}</div>
+                    `;
+                    
+                    if (item.sublabel) {
+                        html += `<div class="text-[10px] text-slate-400 leading-none mt-0.5 mono">${item.sublabel}</div>`;
+                    }
+                    
+                    html += `</div></div>`;
+                    itemEl.innerHTML = html;
+                    
+                    // Click to highlight related
+                    itemEl.onclick = () => highlightRelatedComponents(item.id);
+                    
+                    itemsContainer.appendChild(itemEl);
+                });
+                
+                colDiv.appendChild(itemsContainer);
+                container.appendChild(colDiv);
+            });
+        }
+        
+        function renderConnections() {
+            const container = document.getElementById('connections-list');
+            container.innerHTML = '';
+            
+            if (!architectureData.connections || architectureData.connections.length === 0) {
+                container.innerHTML = '<div class="col-span-3 text-center py-4 text-xs text-slate-500">No connections defined</div>';
+                return;
+            }
+            
+            architectureData.connections.forEach(conn => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center gap-x-2 text-xs px-3 py-2 bg-slate-950 border border-slate-800 rounded-2xl hover:border-slate-700 transition-colors';
+                
+                const fromItem = findItemById(conn.from);
+                const toItem = findItemById(conn.to);
+                
+                div.innerHTML = `
+                    <div class="flex-shrink-0">
+                        <span class="connection-number font-mono">${conn.number}</span>
+                    </div>
+                    <div class="flex-1 min-w-0 text-[11px] leading-tight">
+                        <span class="font-medium text-slate-300">${fromItem ? fromItem.label : conn.from}</span>
+                        <span class="mx-1 text-slate-500">→</span>
+                        <span class="font-medium text-slate-300">${toItem ? toItem.label : conn.to}</span>
+                    </div>
+                `;
+                
+                container.appendChild(div);
+            });
+        }
+        
+        function findItemById(id) {
+            for (const col of architectureData.columns) {
+                const found = col.items.find(i => i.id === id);
+                if (found) return found;
+            }
+            return null;
+        }
+        
+        function renderFlows() {
+            const container = document.getElementById('flows-list');
+            container.innerHTML = '';
+            
+            if (!architectureData.flows || architectureData.flows.length === 0) {
+                container.innerHTML = '<div class="px-4 py-6 text-center text-xs text-slate-500">No flows defined</div>';
+                return;
+            }
+            
+            architectureData.flows.forEach(flow => {
+                const btn = document.createElement('button');
+                btn.className = `flow-btn w-full text-left px-4 py-3 mb-1.5 rounded-2xl border border-transparent hover:border-slate-700 flex items-start gap-x-3 group`;
+                btn.setAttribute('data-flow-id', flow.id);
+                
+                btn.innerHTML = `
+                    <div class="pt-0.5">
+                        <i class="fa-solid fa-play text-yellow-400 group-hover:text-yellow-300 transition-colors text-xs"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-semibold text-sm text-slate-100 leading-tight pr-1">${flow.name}</div>
+                        <div class="text-[10px] text-slate-400 line-clamp-2 mt-0.5">${flow.description}</div>
+                        
+                        <div class="mt-2 flex flex-wrap gap-1">
+                            ${flow.path.map(n => `<span class="inline-block text-[9px] px-1.5 py-px bg-slate-800 text-yellow-300/80 rounded font-mono">${n}</span>`).join('')} 
+                        </div>
+                    </div>
+                `;
+                
+                btn.onclick = () => selectFlow(flow, btn);
+                
+                container.appendChild(btn);
+            });
+        }
+        
+        function renderSteps() {
+            const container = document.getElementById('steps-list');
+            container.innerHTML = '';
+            
+            if (!architectureData.steps || architectureData.steps.length === 0) {
+                container.innerHTML = '<div class="text-xs text-slate-500 px-1">No steps defined</div>';
+                return;
+            }
+            
+            architectureData.steps.forEach(step => {
+                const div = document.createElement('div');
+                div.className = 'flex gap-3';
+                
+                div.innerHTML = `
+                    <div class="flex-shrink-0 w-6 h-6 mt-0.5 rounded-full bg-emerald-900/70 flex items-center justify-center text-emerald-300 text-xs font-bold border border-emerald-700">
+                        ${step.number}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-semibold text-sm text-emerald-100">${step.title}</div>
+                        <div class="text-xs text-slate-400 whitespace-pre-line mt-0.5 leading-snug">${step.description}</div>
+                    </div>
+                `;
+                
+                container.appendChild(div);
+            });
+        }
+        
+        function selectFlow(flow, btnElement) {
+            // Clear previous
+            clearSelection(false);
+            
+            // Activate button
+            btnElement.classList.add('active', 'border-yellow-400/60', 'bg-slate-800');
+            currentHighlightedFlow = flow.id;
+            
+            // Highlight path
+            highlightPath(flow.path);
+            
+            // Scroll to top of diagram
+            document.querySelector('.diagram-grid').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        function highlightPath(pathNumbers) {
+            // Find all involved component IDs from the path connections
+            const involvedIds = new Set();
+            
+            pathNumbers.forEach(num => {
+                const conn = architectureData.connections.find(c => c.number === num);
+                if (conn) {
+                    involvedIds.add(conn.from);
+                    involvedIds.add(conn.to);
+                }
+            });
+            
+            // Add highlight class to matching elements
+            document.querySelectorAll('.arch-item').forEach(el => {
+                const itemId = el.getAttribute('data-id');
+                if (involvedIds.has(itemId)) {
+                    el.classList.add('highlight');
+                }
+            });
+            
+            // Optional: show toast with path info
+            showPathToast(pathNumbers);
+        }
+        
+        function showPathToast(pathNumbers) {
+            const existing = document.getElementById('path-toast');
+            if (existing) existing.remove();
+            
+            const toast = document.createElement('div');
+            toast.id = 'path-toast';
+            toast.className = 'fixed bottom-6 left-1/2 -translate-x/2 bg-slate-900 border border-yellow-400/30 text-yellow-100 px-6 py-3 rounded-3xl shadow-2xl flex items-center gap-x-3 text-sm z-[100]';
+            
+            const pathHTML = pathNumbers.map(n => `<span class="px-2 py-0.5 bg-yellow-400/10 text-yellow-300 rounded-xl font-mono text-xs">${n}</span>`).join('');
+            
+            toast.innerHTML = `
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-link text-yellow-400"></i>
+                    <span class="font-medium">Path highlighted:</span> 
+                    <span class="flex gap-1">${pathHTML}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
+            }, 3800);
+        }
+        
+        function highlightRelatedComponents(itemId) {
+            clearSelection(false);
+            
+            // Find connections involving this item
+            const relatedConns = architectureData.connections.filter(c => c.from === itemId || c.to === itemId);
+            const relatedNumbers = relatedConns.map(c => c.number);
+            
+            // Highlight the item itself
+            document.querySelectorAll(`.arch-item[data-id="${itemId}"]`).forEach(el => {
+                el.classList.add('highlight');
+            });
+            
+            // Highlight connected items
+            const connectedIds = new Set();
+            relatedConns.forEach(c => {
+                connectedIds.add(c.from);
+                connectedIds.add(c.to);
+            });
+            
+            connectedIds.forEach(id => {
+                document.querySelectorAll(`.arch-item[data-id="${id}"]`).forEach(el => {
+                    if (el.getAttribute('data-id') !== itemId) {
+                        el.classList.add('highlight');
+                    }
+                });
+            });
+            
+            // Show related connections in console or toast
+            if (relatedNumbers.length > 0) {
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-6 right-6 bg-slate-900 border border-slate-700 px-4 py-2 rounded-2xl text-xs shadow-xl z-[100]';
+                toast.innerHTML = `Connected via steps: <span class="font-mono text-yellow-300">${relatedNumbers.join(', ')}</span>`;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2200);
+            }
+        }
+        
+        function clearSelection(resetFlow = true) {
+            // Remove all highlights
+            document.querySelectorAll('.arch-item').forEach(el => {
+                el.classList.remove('highlight');
+            });
+            
+            // Deactivate flow buttons
+            document.querySelectorAll('.flow-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-yellow-400/60', 'bg-slate-800');
+            });
+            
+            // Remove any toasts
+            const toast = document.getElementById('path-toast');
+            if (toast) toast.remove();
+            
+            if (resetFlow) {
+                currentHighlightedFlow = null;
+            }
+        }
+        
+        function downloadJSON() {
+            const dataStr = JSON.stringify(architectureData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'architecture-data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        function initialize() {
+            // Render all sections
+            renderColumns();
+            renderConnections();
+            renderFlows();
+            renderSteps();
+            
+            // Keyboard support: ESC clears
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    clearSelection();
+                }
+            });
+            
+            // Demo: Auto-highlight first flow after 1.2s if present (optional, comment out for production)
+            // setTimeout(() => {
+            //     const firstFlowBtn = document.querySelector('.flow-btn');
+            //     if (firstFlowBtn && architectureData.flows.length > 0) {
+            //         firstFlowBtn.click();
+            //     }
+            // }, 1200);
+            
+            console.log('%c[Arch Visualizer] Interactive diagram initialized successfully', 'color:#64748b');
+        }
+        
+        // Boot
+        window.onload = initialize;
+    </script>
+</body>
+</html>

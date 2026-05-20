@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -12,12 +12,12 @@ export type ExternalLinkAlertConfig = {
 export const useExternalLinkAlert = (config?: ExternalLinkAlertConfig) => {
   const { t } = useTranslation();
 
-  const defaultConfig: Required<ExternalLinkAlertConfig> = {
+  const defaultConfig: Required<ExternalLinkAlertConfig> = useMemo(() => ({
     title: t('externalLink.title'),
     message: t('externalLink.message'),
     openText: t('externalLink.openText'),
     cancelText: t('externalLink.cancelText'),
-  };
+  }), [t]);
 
   const baseConfig = { ...defaultConfig, ...config };
   const [alertState, setAlertState] = useState<{

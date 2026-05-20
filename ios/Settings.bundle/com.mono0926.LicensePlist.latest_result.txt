@@ -4,142 +4,15 @@ body: MIT License
 Copyrig…
 version: 250829098.0.9
 
-name: HtmlToPdf, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 1.3.0
-
 name: LicensePlist, nameSpecified: 
 body: MIT License
 
 Copyrig…
 version: 3.27.2
 
-name: React, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 0.84.1
-
-name: React-Core, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 0.84.1
-
-name: react-native-safe-area-context, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 5.7.0
-
-name: react-native-unistyles, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 2.43.0
-
-name: react-native-vector-icons-ant-design, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 12.4.1
-
-name: react-native-vector-icons-feather, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 12.4.1
-
-name: react-native-vector-icons-fontawesome6, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 12.3.1
-
-name: react-native-vector-icons-foundation, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 12.4.1
-
-name: react-native-vector-icons-ionicons, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 12.4.1
-
-name: react-native-vector-icons-lucide, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 12.4.1
-
-name: react-native-vector-icons-material-design-icons, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 12.4.1
-
-name: react-native-vector-icons-octicons, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 20.4.1
-
-name: ReactNativeLegal, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 1.6.0
-
-name: RNBootSplash, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 7.1.0
-
-name: RNGestureHandler, nameSpecified: 
-body: The MIT License (MIT…
-version: 2.30.0
-
-name: RNLocalize, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 3.7.0
-
-name: RNReanimated, nameSpecified: 
-body: The MIT License (MIT…
-version: 4.2.2
-
-name: RNScreens, nameSpecified: 
-body: The MIT License (MIT…
-version: 4.24.0
-
-name: RNShare, nameSpecified: 
-body: The MIT License (MIT…
-version: 12.0.11
-
-name: RNSVG, nameSpecified: 
-body: The MIT License (MIT…
-version: 15.15.3
-
-name: RNWorklets, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 0.7.4
-
 name: @ampproject_remapping@2.3.0, nameSpecified: @ampproject/remapping, version: 2.3.0
 body: 
                    …
-
-name: @babel_code-frame@7.10.4, nameSpecified: @babel/code-frame, version: 7.10.4
-body: MIT License
-
-Copyrig…
 
 name: @babel_code-frame@7.29.0, nameSpecified: @babel/code-frame, version: 7.29.0
 body: MIT License
@@ -237,11 +110,6 @@ body: MIT License
 Copyrig…
 
 name: @babel_helpers@7.27.0, nameSpecified: @babel/helpers, version: 7.27.0
-body: MIT License
-
-Copyrig…
-
-name: @babel_highlight@7.25.9, nameSpecified: @babel/highlight, version: 7.25.9
 body: MIT License
 
 Copyrig…
@@ -409,7 +277,7 @@ body: MIT License
 
 Copyrig…
 
-name: @callstack_licenses@0.3.0, nameSpecified: @callstack/licenses, version: 0.3.0
+name: @callstack_licenses@0.3.1, nameSpecified: @callstack/licenses, version: 0.3.1
 body: MIT License
 
 Copyrig…
@@ -417,16 +285,16 @@ Copyrig…
 name: @egjs_hammerjs@2.0.17, nameSpecified: @egjs/hammerjs, version: 2.0.17
 body: The MIT License (MIT…
 
-name: @expo_config-plugins@54.0.4, nameSpecified: @expo/config-plugins, version: 54.0.4
+name: @expo_config-plugins@55.0.8, nameSpecified: @expo/config-plugins, version: 55.0.8
 body: The MIT License (MIT…
 
-name: @expo_config-types@54.0.10, nameSpecified: @expo/config-types, version: 54.0.10
+name: @expo_config-types@55.0.5, nameSpecified: @expo/config-types, version: 55.0.5
 body: The MIT License (MIT…
 
-name: @expo_json-file@10.0.8, nameSpecified: @expo/json-file, version: 10.0.8
+name: @expo_json-file@10.0.13, nameSpecified: @expo/json-file, version: 10.0.13
 body: The MIT License (MIT…
 
-name: @expo_plist@0.4.8, nameSpecified: @expo/plist, version: 0.4.8
+name: @expo_plist@0.5.2, nameSpecified: @expo/plist, version: 0.5.2
 body: MIT…
 
 name: @expo_sdk-runtime-versions@1.0.0, nameSpecified: @expo/sdk-runtime-versions, version: 1.0.0
@@ -707,7 +575,7 @@ body:     MIT License
 
    …
 
-name: @xmldom_xmldom@0.8.12, nameSpecified: @xmldom/xmldom, version: 0.8.12
+name: @xmldom_xmldom@0.8.13, nameSpecified: @xmldom/xmldom, version: 0.8.13
 body: Copyright 2019 - pre…
 
 name: abort-controller@3.0.0, nameSpecified: abort-controller, version: 3.0.0
@@ -734,11 +602,6 @@ name: anser@1.4.10, nameSpecified: anser, version: 1.4.10
 body: The MIT License (MIT…
 
 name: ansi-regex@5.0.1, nameSpecified: ansi-regex, version: 5.0.1
-body: MIT License
-
-Copyrig…
-
-name: ansi-styles@3.2.1, nameSpecified: ansi-styles, version: 3.2.1
 body: MIT License
 
 Copyrig…
@@ -859,11 +722,6 @@ Copyrig…
 name: caniuse-lite@1.0.30001695, nameSpecified: caniuse-lite, version: 1.0.30001695
 body: Attribution 4.0 Inte…
 
-name: chalk@2.4.2, nameSpecified: chalk, version: 2.4.2
-body: MIT License
-
-Copyrig…
-
 name: chalk@4.1.2, nameSpecified: chalk, version: 4.1.2
 body: MIT License
 
@@ -886,14 +744,8 @@ body: The MIT License (MIT…
 name: cliui@8.0.1, nameSpecified: cliui, version: 8.0.1
 body: ISC…
 
-name: color-convert@1.9.3, nameSpecified: color-convert, version: 1.9.3
-body: Copyright (c) 2011-2…
-
 name: color-convert@2.0.1, nameSpecified: color-convert, version: 2.0.1
 body: Copyright (c) 2011-2…
-
-name: color-name@1.1.3, nameSpecified: color-name, version: 1.1.3
-body: The MIT License (MIT…
 
 name: color-name@1.1.4, nameSpecified: color-name, version: 1.1.4
 body: The MIT License (MIT…
@@ -1022,9 +874,6 @@ body: (The MIT License)
 
 C…
 
-name: escape-string-regexp@1.0.5, nameSpecified: escape-string-regexp, version: 1.0.5
-body: The MIT License (MIT…
-
 name: escape-string-regexp@2.0.0, nameSpecified: escape-string-regexp, version: 2.0.0
 body: MIT License
 
@@ -1145,11 +994,6 @@ name: graceful-fs@4.2.11, nameSpecified: graceful-fs, version: 4.2.11
 body: The ISC License
 
 Cop…
-
-name: has-flag@3.0.0, nameSpecified: has-flag, version: 3.0.0
-body: MIT License
-
-Copyrig…
 
 name: has-flag@4.0.0, nameSpecified: has-flag, version: 4.0.0
 body: MIT License
@@ -1466,7 +1310,7 @@ body: (The MIT License)
 
 C…
 
-name: node-html-parser@7.0.2, nameSpecified: node-html-parser, version: 7.0.2
+name: node-html-parser@7.1.0, nameSpecified: node-html-parser, version: 7.1.0
 body: Copyright 2019 Tao Q…
 
 name: node-int64@0.4.0, nameSpecified: node-int64, version: 0.4.0
@@ -1618,7 +1462,7 @@ body: MIT License
 
 Copyrig…
 
-name: react-native-bootsplash@7.1.0, nameSpecified: react-native-bootsplash, version: 7.1.0
+name: react-native-bootsplash@7.3.1, nameSpecified: react-native-bootsplash, version: 7.3.1
 body: MIT License
 
 Copyrig…
@@ -1641,7 +1485,12 @@ body: MIT License
 
 Copyrig…
 
-name: react-native-legal@1.6.0, nameSpecified: react-native-legal, version: 1.6.0
+name: react-native-is-edge-to-edge@1.3.1, nameSpecified: react-native-is-edge-to-edge, version: 1.3.1
+body: MIT License
+
+Copyrig…
+
+name: react-native-legal@1.6.3, nameSpecified: react-native-legal, version: 1.6.3
 body: MIT License
 
 Copyrig…
@@ -1873,11 +1722,6 @@ body: MIT License
 
 Copyrig…
 
-name: supports-color@5.5.0, nameSpecified: supports-color, version: 5.5.0
-body: MIT License
-
-Copyrig…
-
 name: supports-color@7.2.0, nameSpecified: supports-color, version: 7.2.0
 body: MIT License
 
@@ -2016,7 +1860,7 @@ name: xcode@3.0.1, nameSpecified: xcode, version: 3.0.1
 body: 
                    …
 
-name: xml-formatter@3.6.7, nameSpecified: xml-formatter, version: 3.6.7
+name: xml-formatter@3.7.0, nameSpecified: xml-formatter, version: 3.7.0
 body: The MIT License (MIT…
 
 name: xml-parser-xo@4.1.5, nameSpecified: xml-parser-xo, version: 4.1.5

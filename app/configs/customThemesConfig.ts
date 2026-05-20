@@ -1,4 +1,4 @@
-import { CustomisedTheme } from '@hooks';
+import type { CustomisedTheme } from '@/utils/themeStorage';
 import { UnistylesThemes, useStyles } from 'react-native-unistyles';
 
 export interface ThemeBox {
@@ -7,7 +7,7 @@ export interface ThemeBox {
   customisedTheme: CustomisedTheme[];
 }
 
-export const CustomThemesConfig = (): ThemeBox[] => {
+export const useCustomThemesConfig = (): ThemeBox[] => {
   const { theme } = useStyles();
   return [
     {

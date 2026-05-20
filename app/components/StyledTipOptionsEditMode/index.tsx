@@ -12,8 +12,8 @@ import {
   VerticalDevider,
 } from '@components';
 import { Constants } from '@configs';
-import { areOptionArraysSame } from '@hooks';
-import { useAppContext } from '@/context/AppContext';
+import { useTipOptionsEditSelector } from '@hooks';
+import { areOptionArraysSame } from '@utils';
 import { TipOptionState } from '@/context/types';
 import Toast from 'react-native-toast-message';
 
@@ -24,19 +24,19 @@ const TipPercentageEditCapsule = ({
   textValue: number;
   place?: number;
 }) => {
-  const { state, dispatch } = useAppContext();
+  const { tips, updateTipOption } = useTipOptionsEditSelector();
   return (
     <StyledTextInputCapsule
       textValue={textValue}
       previousValue={textValue}
       place={place}
       suffix={'%'}
-      optionsArray={state?.tips}
+      optionsArray={tips}
       minValidateValue={0}
       maxValidateValue={80}
       onValueChange={({ place, preValue, newValue }) => {
         const updatedTipOption: TipOptionState = { place: place, value: newValue }; // Updated tip option value
-        dispatch({ type: 'UPDATE_TIP_OPTIONS', payload: updatedTipOption });
+        updateTipOption(updatedTipOption);
       }}
     />
   );
@@ -111,7 +111,8 @@ export const StyledTipOptionsEditMode = ({
   solidButtonText: string;
   resetSuccessToastText: string;
 }) => {
-  const { state, dispatch } = useAppContext();
+  const { tips, tipSliderConfig, updateTipOption, resetTipsToDefault } =
+    useTipOptionsEditSelector();
   const { t } = useTranslation();
 
   const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
@@ -142,7 +143,7 @@ export const StyledTipOptionsEditMode = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {state.tips.slice(0, 2).map(({ place, value }) => (
+              {tips.slice(0, 2).map(({ place, value }) => (
                 <TipPercentageEditCapsule key={place} textValue={value} place={place} />
               ))}
             </View>
@@ -151,7 +152,7 @@ export const StyledTipOptionsEditMode = ({
                 textValue={t('buttons.reset')}
                 active={
                   !areOptionArraysSame({
-                    firstArray: state.tips,
+                    firstArray: tips,
                     secondArray: Constants.defaultTipOptionsArray,
                   })
                 }
@@ -166,7 +167,7 @@ export const StyledTipOptionsEditMode = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {state.tips.slice(2).map(({ place, value }) => (
+              {tips.slice(2).map(({ place, value }) => (
                 <TipPercentageEditCapsule key={place} textValue={value} place={place} />
               ))}
             </View>
@@ -191,24 +192,24 @@ export const StyledTipOptionsEditMode = ({
             <StyledConfigInput
               autoFocus
               title={`Min :`}
-              textValue={state.tipSliderConfig.min}
-              previousValue={state.tipSliderConfig.min}
+              textValue={tipSliderConfig.min}
+              previousValue={tipSliderConfig.min}
               onValueChange={({ preValue, newValue }) => {
                 console.log(`Min`, `P ${preValue}`, `N ${newValue}`);
               }}
             />
             <StyledConfigInput
               title={`Max :`}
-              textValue={state.tipSliderConfig.max}
-              previousValue={state.tipSliderConfig.max}
+              textValue={tipSliderConfig.max}
+              previousValue={tipSliderConfig.max}
               onValueChange={({ preValue, newValue }) => {
                 console.log(`Max`, `P ${preValue}`, `N ${newValue}`);
               }}
             />
             <StyledConfigInput
               title={`Step :`}
-              textValue={state.tipSliderConfig.step}
-              previousValue={state.tipSliderConfig.step}
+              textValue={tipSliderConfig.step}
+              previousValue={tipSliderConfig.step}
               onValueChange={({ preValue, newValue }) => {
                 console.log(`Step`, `P ${preValue}`, `N ${newValue}`);
               }}
@@ -232,10 +233,7 @@ export const StyledTipOptionsEditMode = ({
             text: solidButtonText,
             style: 'default',
             onPress: () => {
-              dispatch({
-                type: 'RESET_TIP_OPTIONS_TO_DEFAULT',
-                payload: Constants.defaultTipOptionsArray,
-              });
+              resetTipsToDefault(Constants.defaultTipOptionsArray);
               Toast.show({
                 type: 'success',
                 text1: resetSuccessToastText,

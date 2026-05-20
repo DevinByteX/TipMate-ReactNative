@@ -1,3 +1,5 @@
+export { ErrorBoundary } from './ErrorBoundary';
+export type { ErrorBoundaryProps } from './ErrorBoundary';
 export { StyledHeader } from './StyledHeader';
 export { StyledTotalAmountInput } from './StyledTotalAmountInput';
 export { StyledBillBox, VerticalDevider } from './StyledBillBox';
@@ -21,6 +23,9 @@ export { StyledSharePreviewModal } from './StyledSharePreviewModal';
 export { StyledAlert } from './StyledAlert';
 export { StyledSavedTipsList } from './StyledSavedTipsList';
 export { StyledFilterCapsule } from './StyledFilterCapsule';
+export { default as StyledCustomSplitPersonCard } from './StyledCustomSplitPersonCard';
+export { default as StyledCustomSplitPresetCard } from './StyledCustomSplitPresetCard';
+export { default as StyledCustomSplitFooter } from './StyledCustomSplitFooter';
 
 // types should export seperately
 export type { IconTypeMap, StyledIconTypesKey, BaseIconProps, StyledIconsProps } from './StyledIcons';

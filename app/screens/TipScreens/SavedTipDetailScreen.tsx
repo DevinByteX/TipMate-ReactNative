@@ -10,58 +10,37 @@ import {
 } from '@components';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
-import { SavedTip } from '@/context/types';
 import { useSaveTip } from '@hooks';
 import { useShareTipPreview } from '@hooks';
-import { useAppContext } from '@/context/AppContext';
+import { useUserSettings } from '@/context/AppContext';
 import { getLocaleForFormatting } from '@/localization';
-
-type SavedTipDetailRouteParams = {
-  SavedTipDetailScreen: {
-    tip: SavedTip;
-  };
-};
+import type { RootStackParamList } from '@navigation/types';
 
 const SavedTipDetailScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
   const { t } = useTranslation();
-  const { state } = useAppContext();
-  const route = useRoute<RouteProp<SavedTipDetailRouteParams, 'SavedTipDetailScreen'>>();
+  const { state: settingsState } = useUserSettings();
+  const route = useRoute<RouteProp<RootStackParamList, 'SavedTipDetailScreen'>>();
   const navigation = useNavigation();
   const { deleteTip } = useSaveTip();
   const tip = route.params?.tip;
 
-  if (!tip) {
-    navigation.goBack();
-    return null;
-  }
+  // Prepare share data (null when tip is not available so hooks can be called unconditionally)
+  const shareData = tip
+    ? {
+        amount: tip.amount,
+        tip: tip.tip,
+        total: tip.total,
+        tipPercentage: tip.tipPercentage,
+        numberOfPeople: tip.numberOfPeople,
+        splitType: tip.splitType,
+        perPerson: tip.perPerson,
+        individualSplits: tip.individualSplits,
+        currencySymbol: tip.currencySymbol,
+      }
+    : null;
 
-  const formatDate = (timestamp: number) => {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString(getLocaleForFormatting(state.language), {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
-
-  // Prepare share data
-  const shareData = {
-    amount: tip.amount,
-    tip: tip.tip,
-    total: tip.total,
-    tipPercentage: tip.tipPercentage,
-    numberOfPeople: tip.numberOfPeople,
-    splitType: tip.splitType,
-    perPerson: tip.perPerson,
-    individualSplits: tip.individualSplits,
-    currencySymbol: tip.currencySymbol,
-  };
-
-  // Use the share preview hook
+  // Hooks must be called before any early return to satisfy rules-of-hooks
   const {
     isPreviewVisible,
     previewContent,
@@ -73,6 +52,23 @@ const SavedTipDetailScreen = () => {
   } = useShareTipPreview(shareData);
 
   const [isDeleteAlertVisible, setIsDeleteAlertVisible] = useState(false);
+
+  if (!tip) {
+    navigation.goBack();
+    return null;
+  }
+
+  const formatDate = (timestamp: number) => {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString(getLocaleForFormatting(settingsState.language), {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
 
   const handleDelete = () => {
     setIsDeleteAlertVisible(true);

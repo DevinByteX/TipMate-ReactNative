@@ -5,8 +5,8 @@ import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { Constants, type CurrencyType } from '@configs';
-import { useAppContext } from '@/context/AppContext';
-import { getDeviceCurrency, useBottomSheetEntrance } from '@hooks';
+import { useBottomSheetEntrance, useCurrencySelectorData } from '@hooks';
+import { getDeviceCurrency } from '@utils';
 import Toast from 'react-native-toast-message';
 
 const CurrencySelectiveScroll = ({
@@ -119,7 +119,9 @@ const CurrencyListModal = ({
   systemDefaultCurrency: CurrencyType;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
-  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(modalVisibility ?? false);
+  const { animatedStyle: sheetStyle, backdropStyle } = useBottomSheetEntrance(
+    modalVisibility ?? false,
+  );
 
   return (
     <Modal
@@ -183,7 +185,7 @@ export const StyledCurrencySelector = ({
   modalDescription?: string;
   currencyChangeToastMessage?: string;
 }) => {
-  const { state, dispatch } = useAppContext();
+  const { currencyConfig, updateCurrency, resetToSystem } = useCurrencySelectorData();
   const { styles } = useStyles(stylesheet);
   const { t } = useTranslation();
 
@@ -191,18 +193,15 @@ export const StyledCurrencySelector = ({
 
   const systemDefaultCurrency = useMemo(() => getDeviceCurrency(), []);
 
-  const isUsingSystemDefault = useMemo(
-    () => state.currencyConfig === undefined,
-    [state.currencyConfig],
-  );
+  const isUsingSystemDefault = useMemo(() => currencyConfig === undefined, [currencyConfig]);
 
   const CurrencyObject = useMemo(
-    () => state.currencyConfig || systemDefaultCurrency,
-    [state.currencyConfig, systemDefaultCurrency],
+    () => currencyConfig || systemDefaultCurrency,
+    [currencyConfig, systemDefaultCurrency],
   );
 
   const handleSystemDefaultPress = () => {
-    dispatch({ type: 'RESET_CURRENCY_TO_SYSTEM' });
+    resetToSystem();
     setModalVisibility(false);
     Toast.show({
       type: 'success',
@@ -253,7 +252,7 @@ export const StyledCurrencySelector = ({
         onSystemDefaultPress={handleSystemDefaultPress}
         systemDefaultCurrency={systemDefaultCurrency}
         currencySelectiveBarPress={currencyObj => {
-          dispatch({ type: 'UPDATE_CURRENCY_SIGN', payload: currencyObj });
+          updateCurrency(currencyObj);
           setModalVisibility(false);
           Toast.show({
             type: 'success',

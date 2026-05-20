@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TipMate — Architecture Explorer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f1117;
+      --surface:  #1a1d27;
+      --surface2: #22263a;
+      --border:   #2d3150;
+      --text:     #e2e8f0;
+      --muted:    #7c839e;
+      --mono:     'JetBrains Mono','Fira Code','Cascadia Code',monospace;
+      --font:     'Inter','Segoe UI',system-ui,sans-serif;
+      --radius:   10px;
+
+      /* Entity type colors */
+      --c-screen:  #fbbf24;
+      --c-hook:    #34d399;
+      --c-comp:    #c084fc;
+      --c-state:   #38bdf8;
+      --c-reducer: #fb923c;
+      --c-nav:     #a3e635;
+    }
+
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* ─── DETAIL PANEL ─────────────────────────────────── */
+    #detail-panel {
+      position: fixed; top: 0; right: -440px; width: 420px; height: 100vh;
+      background: #141720; border-left: 1px solid var(--border);
+      z-index: 200; overflow-y: auto;
+      transition: right 0.35s cubic-bezier(0.34,1.4,0.64,1);
+      display: flex; flex-direction: column;
+    }
+    #detail-panel.open { right: 0; }
+    #panel-close {
+      position: absolute; top: 14px; right: 14px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted); border-radius: 6px; width: 28px; height: 28px;
+      font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    #panel-close:hover { color: var(--text); }
+    #panel-header { padding: 24px 24px 16px; border-bottom: 1px solid var(--border); }
+    #panel-type-badge {
+      display: inline-block; padding: 3px 8px; border-radius: 4px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    #panel-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; font-family: var(--mono); }
+    #panel-file { font-size: 10.5px; color: #475569; font-family: var(--mono); margin-bottom: 8px; }
+    #panel-desc { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+    #panel-body { padding: 16px 24px; flex: 1; }
+    .panel-group-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); margin: 14px 0 8px;
+    }
+    .panel-conn-item {
+      display: flex; align-items: center; gap: 8px; padding: 7px 10px;
+      border-radius: 6px; background: var(--surface2); border: 1px solid var(--border);
+      margin-bottom: 5px; cursor: pointer; transition: border-color 0.15s;
+    }
+    .panel-conn-item:hover { border-color: var(--text); }
+    .panel-conn-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .panel-conn-label { font-family: var(--mono); font-size: 12px; flex: 1; }
+    .panel-conn-arrow { color: var(--muted); font-size: 12px; }
+    #panel-mini-map { margin-top: 20px; }
+    #panel-mini-svg { width: 100%; height: 180px; background: var(--surface2); border-radius: 8px; border: 1px solid var(--border); }
+
+    /* ─── CONNECTION SVG OVERLAY ───────────────────────── */
+    #conn-svg {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 50;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    #conn-svg.visible { opacity: 1; }
+    .conn-line { fill: none; stroke-width: 1.5; stroke-dasharray: 6 4; opacity: 0.7; }
+    @keyframes dash { to { stroke-dashoffset: -20; } }
+    .conn-line { animation: dash 0.8s linear infinite; }
+
+    /* ─── HEADER ───────────────────────────────────────── */
+    .page-header {
+      background: linear-gradient(135deg, #0f1117, #1a1d27 50%, #0d1f17);
+      border-bottom: 1px solid var(--border); padding: 32px 48px 24px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .logo {
+      width: 52px; height: 52px; border-radius: 16px; flex-shrink: 0;
+      background: linear-gradient(135deg, #10b981, #059669);
+      display: flex; align-items: center; justify-content: center; font-size: 26px;
+    }
+    .header-titles h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; color: #fff; }
+    .header-titles p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .header-stats { margin-left: auto; display: flex; gap: 20px; }
+    .stat-pill { text-align: center; }
+    .stat-val { font-size: 20px; font-weight: 800; display: block; }
+    .stat-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
+
+    /* ─── TOOLBAR ──────────────────────────────────────── */
+    .toolbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.96); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .toc { padding: 8px 48px 0; display: flex; gap: 2px; overflow-x: auto; }
+    .toc a {
+      text-decoration: none; color: var(--muted); font-size: 12px; font-weight: 500;
+      padding: 5px 10px; border-radius: 6px; white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+    .toc a:hover { background: var(--surface2); color: var(--text); }
+    .search-bar { padding: 8px 48px 10px; display: flex; gap: 8px; align-items: center; }
+    #search-input {
+      flex: 1; max-width: 400px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 14px; color: var(--text); font-size: 13px;
+      outline: none; transition: border-color 0.15s;
+    }
+    #search-input:focus { border-color: #10b981; }
+    #search-input::placeholder { color: var(--muted); }
+    .toolbar-btn {
+      padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+      border: 1px solid var(--border); background: var(--surface2); color: var(--muted);
+      cursor: pointer; transition: all 0.15s; white-space: nowrap;
+    }
+    .toolbar-btn:hover { color: var(--text); border-color: var(--text); }
+    .toolbar-btn.active { background: #0d2e1f; color: #10b981; border-color: #1a5c3a; }
+    #selection-label {
+      font-size: 12px; color: var(--muted); margin-left: 4px;
+      padding: 6px 10px; background: var(--surface); border-radius: 6px;
+      border: 1px solid var(--border); display: none; max-width: 300px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .legend { display: flex; gap: 12px; margin-left: auto; align-items: center; }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ─── CONTAINER ────────────────────────────────────── */
+    .container { max-width: 1380px; margin: 0 auto; padding: 36px 48px 100px; }
+    @media(max-width:900px) { .container { padding: 24px 20px 80px; } .toc, .search-bar { padding-left: 20px; padding-right: 20px; } }
+
+    /* ─── SECTION ──────────────────────────────────────── */
+    .section { margin-top: 44px; }
+    .section-hdr {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 14px; cursor: pointer; user-select: none;
+    }
+    .section-hdr::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-hdr .chevron { transition: transform 0.25s; font-size: 10px; }
+    .section-hdr .count-badge {
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted); padding: 1px 7px; border-radius: 10px; font-size: 10px;
+    }
+    .section-body { transition: max-height 0.35s ease, opacity 0.3s ease; max-height: 9999px; overflow: hidden; }
+    .section.collapsed .section-body { max-height: 0; opacity: 0; pointer-events: none; }
+    .section.collapsed .chevron { transform: rotate(-90deg); }
+
+    /* ─── ENTITY CARDS (base) ──────────────────────────── */
+    [data-nid] {
+      cursor: pointer; border-radius: var(--radius);
+      transition: opacity 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+      position: relative;
+    }
+    [data-nid]:hover { transform: translateY(-1px); }
+
+    /* Connection states */
+    .is-active   { transform: translateY(-2px) !important; }
+    .is-dimmed   { opacity: 0.1 !important; pointer-events: none; transform: none !important; }
+
+    .is-active[data-ntype="screen"],  .is-connected[data-ntype="screen"]  { box-shadow: 0 0 0 2px var(--c-screen)  !important; }
+    .is-active[data-ntype="hook"],    .is-connected[data-ntype="hook"]    { box-shadow: 0 0 0 2px var(--c-hook)    !important; }
+    .is-active[data-ntype="comp"],    .is-connected[data-ntype="comp"]    { box-shadow: 0 0 0 2px var(--c-comp)    !important; }
+    .is-active[data-ntype="state"],   .is-connected[data-ntype="state"]   { box-shadow: 0 0 0 2px var(--c-state)   !important; }
+    .is-active[data-ntype="reducer"], .is-connected[data-ntype="reducer"] { box-shadow: 0 0 0 2px var(--c-reducer) !important; }
+    .is-active[data-ntype="nav"],     .is-connected[data-ntype="nav"]     { box-shadow: 0 0 0 2px var(--c-nav)     !important; }
+
+    .is-connected { background: rgba(255,255,255,0.02) !important; }
+
+    /* ─── OVERVIEW DIAGRAM ─────────────────────────────── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+    }
+    @media(max-width:700px){ .overview-grid { grid-template-columns: 1fr; } }
+    .ov-zone { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    .ov-zone-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 12px;
+    }
+    .ov-node {
+      display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+      border-radius: 6px; background: var(--bg); border: 1px solid var(--border);
+      margin-bottom: 6px; cursor: pointer; transition: border-color 0.15s;
+      font-size: 12px;
+    }
+    .ov-node:hover { border-color: #7c839e; }
+    .ov-node .ov-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .ov-node .ov-label { flex: 1; }
+    .ov-node .ov-count { font-size: 10px; color: var(--muted); }
+    .ov-arrow { text-align: center; color: var(--muted); font-size: 18px; padding: 4px 0; }
+    .ov-flow { display: flex; flex-direction: column; }
+    .ov-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+    .ov-chip {
+      padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
+      border: 1px solid; cursor: pointer; transition: opacity 0.15s;
+    }
+    .ov-chip:hover { opacity: 0.8; }
+
+    /* ─── PROVIDER TREE ────────────────────────────────── */
+    .tree-node { display: flex; align-items: flex-start; gap: 0; }
+    .tree-indent { display: flex; flex-shrink: 0; }
+    .tree-v { width: 18px; border-left: 1px dashed var(--border); }
+    .tree-h { width: 18px; position: relative; }
+    .tree-h::before { content:''; position:absolute; top:14px; left:0; right:0; height:1px; background:var(--border); }
+    .tree-pill {
+      margin: 3px 0; padding: 5px 12px; border-radius: 6px; font-size: 12px;
+      font-family: var(--mono); white-space: nowrap;
+    }
+
+    /* ─── SCREEN CARDS ─────────────────────────────────── */
+    .screen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+    .screen-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+    .sc-name { font-size: 14px; font-weight: 700; color: var(--c-screen); margin-bottom: 3px; display: flex; align-items: center; gap: 8px; }
+    .sc-file { font-family: var(--mono); font-size: 10px; color: #475569; margin-bottom: 8px; }
+    .sc-desc { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
+    .sc-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+
+    /* ─── STATE TABLE ──────────────────────────────────── */
+    .state-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    .state-table th { text-align: left; padding: 8px 12px; font-size: 10px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); white-space: nowrap; }
+    .state-table td { padding: 8px 12px; border-bottom: 1px solid rgba(45,49,80,0.4); vertical-align: middle; }
+    .state-table tr[data-nid]:hover td { background: rgba(255,255,255,0.01); }
+    .state-table tr:last-child td { border-bottom: none; }
+    .td-key { font-family: var(--mono); color: var(--c-state); }
+    .td-type { font-family: var(--mono); color: var(--muted); font-size: 10.5px; }
+    .persist-y { color: #10b981; }
+    .persist-n { color: var(--muted); }
+
+    /* ─── REDUCER LIST ─────────────────────────────────── */
+    .reducer-row {
+      display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .r-name { font-family: var(--mono); font-size: 12px; color: var(--c-reducer); width: 220px; flex-shrink: 0; }
+    .r-actions { display: flex; flex-wrap: wrap; gap: 4px; flex: 1; }
+    .action-tag {
+      padding: 2px 8px; border-radius: 4px; font-family: var(--mono); font-size: 10px;
+      background: #12243a; border: 1px solid #1e3a6e; color: #7dd3fc;
+    }
+    .r-manages { font-size: 11px; color: var(--muted); flex-shrink: 0; width: 160px; text-align: right; }
+
+    /* ─── HOOK CARDS ───────────────────────────────────── */
+    .hook-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 10px; }
+    .hook-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 13px 16px;
+    }
+    .hc-name { font-family: var(--mono); font-size: 12.5px; color: var(--c-hook); font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .hc-desc { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+    .hc-file { font-family: var(--mono); font-size: 10px; color: #475569; margin-top: 5px; }
+
+    /* ─── COMPONENT GRID ───────────────────────────────── */
+    .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 9px; }
+    .comp-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 11px 14px;
+    }
+    .cc-name { font-family: var(--mono); font-size: 11.5px; color: var(--c-comp); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .cc-desc { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+
+    /* ─── TAGS ─────────────────────────────────────────── */
+    .tag {
+      display: inline-block; padding: 2px 7px; border-radius: 4px;
+      font-family: var(--mono); font-size: 10px; margin: 1px; cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .tag:hover { opacity: 0.8; }
+    .tag-screen  { background: rgba(251,191,36,0.12);  color: var(--c-screen);  border: 1px solid rgba(251,191,36,0.25); }
+    .tag-hook    { background: rgba(52,211,153,0.12);  color: var(--c-hook);    border: 1px solid rgba(52,211,153,0.25); }
+    .tag-comp    { background: rgba(192,132,252,0.12); color: var(--c-comp);    border: 1px solid rgba(192,132,252,0.25); }
+    .tag-state   { background: rgba(56,189,248,0.12);  color: var(--c-state);   border: 1px solid rgba(56,189,248,0.25); }
+    .tag-reducer { background: rgba(251,146,60,0.12);  color: var(--c-reducer); border: 1px solid rgba(251,146,60,0.25); }
+    .tag-action  { background: #12243a; color: #7dd3fc; border: 1px solid #1e3a6e; }
+    .tag-modal   { background: rgba(232,121,249,0.1); color: #e879f9; border: 1px solid rgba(232,121,249,0.2); }
+    .tag-anim    { background: rgba(163,230,53,0.1); color: #a3e635; border: 1px solid rgba(163,230,53,0.2); }
+
+    /* ─── CONN BADGE ───────────────────────────────────── */
+    .conn-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 18px; height: 18px; border-radius: 9px; padding: 0 4px;
+      font-size: 9px; font-weight: 700;
+      background: var(--surface2); color: var(--muted); border: 1px solid var(--border);
+      margin-left: auto; flex-shrink: 0;
+    }
+    .conn-badge.has-conns { background: #0d2e1f; color: #10b981; border-color: #1a5c3a; }
+
+    /* ─── FLOW STEPS ───────────────────────────────────── */
+    .flow-steps { display: flex; flex-direction: column; gap: 3px; }
+    .flow-step {
+      display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 7px;
+      font-size: 12.5px; cursor: default; transition: background 0.2s;
+    }
+    .flow-step:hover { background: #252940; }
+    .flow-step-num { width: 20px; height: 20px; border-radius: 50%; background: var(--border); color: var(--muted); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .flow-step.dispatch .flow-step-num { background: #0f1f3d; color: #93c5fd; border: 1px solid #1e3a6e; }
+    .flow-step.highlight .flow-step-num { background: #0d2e1f; color: #10b981; border: 1px solid #1a5c3a; }
+    .flow-arrow-sep { text-align: center; color: var(--border); font-size: 12px; }
+
+    /* ─── CARD GRID ────────────────────────────────────── */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+    .card-title { font-size: 13px; font-weight: 700; color: #10b981; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card-title .dot { width: 7px; height: 7px; border-radius: 50%; background: #10b981; flex-shrink: 0; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    @media(max-width:900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    /* ─── DEPS ─────────────────────────────────────────── */
+    .deps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 12px; }
+    .dep-group { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+    .dep-title { font-size: 11px; font-weight: 700; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .dep-item { font-family: var(--mono); font-size: 10.5px; color: var(--muted); padding: 2px 0; }
+    .dep-item::before { content: '·  '; color: var(--border); }
+
+    /* ─── PILL LIST ────────────────────────────────────── */
+    .pill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .lang-pill { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: var(--surface2); border: 1px solid var(--border); }
+    .rtl-badge { display: inline-block; margin-left: 6px; font-size: 9px; background: #3d1a1a; color: #fca5a5; border-radius: 3px; padding: 0 4px; }
+
+    /* ─── SCROLL TOP ───────────────────────────────────── */
+    .scroll-top {
+      position: fixed; bottom: 24px; right: 24px; width: 38px; height: 38px;
+      border-radius: 50%; background: #10b981; color: #fff; font-size: 16px;
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(16,185,129,0.4); transition: transform 0.2s;
+      z-index: 80;
+    }
+    .scroll-top:hover { transform: translateY(-2px); }
+
+    /* ─── HOOK GROUP LABEL ─────────────────────────────── */
+    .hook-group-lbl { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin: 18px 0 8px; }
+
+    /* ─── SEARCH HIDDEN ────────────────────────────────── */
+    .search-hidden { display: none !important; }
+
+    /* ─── NAV DIAGRAM ──────────────────────────────────── */
+    .nav-diag { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .nav-row { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+    .nav-row + .nav-row { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--border); }
+    .nav-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); width: 80px; flex-shrink: 0; padding-top: 7px; text-align: right; padding-right: 12px; border-right: 1px solid var(--border); }
+    .nav-items { display: flex; flex-wrap: wrap; gap: 7px; flex: 1; }
+    .nav-chip {
+      padding: 6px 13px; border-radius: 7px; font-size: 12px; font-weight: 600;
+      border: 1px solid; cursor: pointer; transition: opacity 0.15s;
+    }
+    .nav-chip:hover { opacity: 0.8; }
+    .nav-stack  { background: #0f1f3d; border-color: #1e3a6e; color: #93c5fd; }
+    .nav-drawer { background: #0f2e20; border-color: #1a5c3a; color: #34d399; }
+    .nav-modal  { background: #2d1a2e; border-color: #5c3069; color: #c084fc; }
+    .nav-hidden { background: #1a1a1a; border-color: #333; color: var(--muted); font-style: italic; }
+
+    /* ─── STORAGE TABLE ────────────────────────────────── */
+    .stor-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    .stor-table th { text-align: left; padding: 7px 12px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); border-bottom: 1px solid var(--border); }
+    .stor-table td { padding: 9px 12px; border-bottom: 1px solid rgba(45,49,80,0.4); }
+    .stor-table tr:last-child td { border-bottom: none; }
+    .stor-key { font-family: var(--mono); color: #fbbf24; }
+  </style>
+</head>
+<body>
+
+<!-- ─── SVG CONNECTION OVERLAY ───────────────────────────── -->
+<svg id="conn-svg">
+  <defs>
+    <marker id="arr-screen"  markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 Z" fill="var(--c-screen)"/></marker>
+    <marker id="arr-hook"    markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 Z" fill="var(--c-hook)"/></marker>
+    <marker id="arr-comp"    markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 Z" fill="var(--c-comp)"/></marker>
+    <marker id="arr-state"   markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 Z" fill="var(--c-state)"/></marker>
+    <marker id="arr-reducer" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 Z" fill="var(--c-reducer)"/></marker>
+  </defs>
+  <g id="conn-lines"></g>
+</svg>
+
+<!-- ─── DETAIL PANEL ─────────────────────────────────────── -->
+<div id="detail-panel">
+  <button id="panel-close" onclick="clearSelection()">✕</button>
+  <div id="panel-header">
+    <div id="panel-type-badge"></div>
+    <div id="panel-title"></div>
+    <div id="panel-file"></div>
+    <div id="panel-desc"></div>
+  </div>
+  <div id="panel-body"></div>
+</div>
+
+<!-- ─── HEADER ───────────────────────────────────────────── -->
+<header class="page-header">
+  <div class="logo">💸</div>
+  <div class="header-titles">
+    <h1>TipMate — Architecture Explorer</h1>
+    <p>React Native 0.84.1 · React 19.2.3 · v1.7.0 · iOS &amp; Android · Click any entity to explore connections</p>
+  </div>
+  <div class="header-stats">
+    <div class="stat-pill"><span class="stat-val" style="color:var(--c-screen)">8</span><span class="stat-lbl">Screens</span></div>
+    <div class="stat-pill"><span class="stat-val" style="color:var(--c-hook)">15</span><span class="stat-lbl">Hooks</span></div>
+    <div class="stat-pill"><span class="stat-val" style="color:var(--c-comp)">27</span><span class="stat-lbl">Components</span></div>
+    <div class="stat-pill"><span class="stat-val" style="color:var(--c-state)">11</span><span class="stat-lbl">State Fields</span></div>
+    <div class="stat-pill"><span class="stat-val" style="color:var(--c-reducer)">8</span><span class="stat-lbl">Reducers</span></div>
+  </div>
+</header>
+
+<!-- ─── TOOLBAR ──────────────────────────────────────────── -->
+<div class="toolbar">
+  <nav class="toc">
+    <a href="#s-overview">Overview</a>
+    <a href="#s-tree">Provider Tree</a>
+    <a href="#s-nav">Navigation</a>
+    <a href="#s-screens">Screens</a>
+    <a href="#s-state">State</a>
+    <a href="#s-reducers">Reducers</a>
+    <a href="#s-hooks">Hooks</a>
+    <a href="#s-components">Components</a>
+    <a href="#s-flows">Data Flows</a>
+    <a href="#s-styling">Styling</a>
+    <a href="#s-i18n">Localization</a>
+    <a href="#s-storage">Storage</a>
+    <a href="#s-deps">Dependencies</a>
+  </nav>
+  <div class="search-bar">
+    <input id="search-input" placeholder="Search screens, hooks, components, state…" oninput="handleSearch(this.value)" />
+    <button class="toolbar-btn" id="lines-btn" onclick="toggleLines()">Show lines</button>
+    <button class="toolbar-btn" id="clear-btn" onclick="clearSelection()" style="display:none">Clear</button>
+    <span id="selection-label"></span>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-screen)"></div>Screen</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-hook)"></div>Hook</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-comp)"></div>Component</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-state)"></div>State</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--c-reducer)"></div>Reducer</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ─── OVERVIEW ─────────────────────────────────────── -->
+  <div class="section" id="s-overview">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Architecture Overview <span class="count-badge">App Structure</span>
+    </div>
+    <div class="section-body">
+      <div class="overview-grid" id="overview-grid"></div>
+    </div>
+  </div>
+
+  <!-- ─── PROVIDER TREE ────────────────────────────────── -->
+  <div class="section" id="s-tree">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Provider Tree <span class="count-badge">5 layers</span>
+    </div>
+    <div class="section-body">
+      <div class="card">
+        <div style="font-family:var(--mono);font-size:12.5px;" id="tree-root"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── NAVIGATION ───────────────────────────────────── -->
+  <div class="section" id="s-nav">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Navigation <span class="count-badge">Stack + Drawer</span>
+    </div>
+    <div class="section-body">
+      <div class="nav-diag">
+        <div class="nav-row">
+          <div class="nav-lbl">Stack</div>
+          <div class="nav-items">
+            <div class="nav-chip nav-stack" data-nid="nav-MainStack" data-ntype="nav">MainStack → Drawer</div>
+            <div class="nav-chip nav-stack" data-nid="nav-SavedTipDetailScreen" data-ntype="nav">SavedTipDetailScreen</div>
+            <div class="nav-chip nav-stack" data-nid="nav-CustomSplitScreen" data-ntype="nav">CustomSplitScreen</div>
+            <div class="nav-chip nav-stack" data-nid="nav-LicensesScreen" data-ntype="nav">LicensesScreen</div>
+            <div class="nav-chip nav-modal" data-nid="nav-LicenseContentModal" data-ntype="nav">LicenseContentModal <span style="opacity:.5;font-size:10px;">modal·slide_from_bottom</span></div>
+          </div>
+        </div>
+        <div class="nav-row">
+          <div class="nav-lbl">Drawer</div>
+          <div class="nav-items">
+            <div class="nav-chip nav-drawer" data-nid="nav-CalcTipScreen" data-ntype="nav">CalcTipScreen</div>
+            <div class="nav-chip nav-drawer" data-nid="nav-SavedTipScreen" data-ntype="nav">SavedTipScreen</div>
+            <div class="nav-chip nav-drawer" data-nid="nav-SettingsScreen" data-ntype="nav">SettingsScreen</div>
+            <div class="nav-chip nav-hidden" data-nid="nav-AboutUsScreen" data-ntype="nav">AboutUsScreen <span style="font-size:10px;">hidden</span></div>
+          </div>
+        </div>
+        <div style="margin-top:14px;font-size:11.5px;color:var(--muted);">
+          Drawer type: <strong style="color:var(--text)">slide</strong> &nbsp;·&nbsp;
+          Default animation: <strong style="color:var(--text)">ios_from_right 250ms</strong> &nbsp;·&nbsp;
+          BootSplash: <strong style="color:var(--text)">fade on NavigationContainer.onReady()</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SCREENS ──────────────────────────────────────── -->
+  <div class="section" id="s-screens">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Screens <span class="count-badge" id="screens-count"></span>
+    </div>
+    <div class="section-body">
+      <div class="screen-grid" id="screen-grid"></div>
+    </div>
+  </div>
+
+  <!-- ─── STATE MANAGEMENT ─────────────────────────────── -->
+  <div class="section" id="s-state">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> State Management <span class="count-badge" id="state-count"></span>
+    </div>
+    <div class="section-body">
+      <div class="card" style="margin-bottom:12px;font-size:12.5px;color:var(--muted);">
+        Pattern: <strong style="color:var(--text)">React Context + useReducer + AsyncStorage</strong>
+        &nbsp;·&nbsp; Hook: <code style="color:var(--c-state)">usePersistedReducer</code>
+        &nbsp;·&nbsp; Key: <code style="color:#fbbf24">APPSTATE</code>
+        &nbsp;·&nbsp; Hydrated via <code style="color:var(--c-state)">LOAD_PERSISTED_STATE</code>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="state-table">
+          <thead><tr><th>Key</th><th>Type</th><th>Description</th><th>Persisted</th></tr></thead>
+          <tbody id="state-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── REDUCERS ─────────────────────────────────────── -->
+  <div class="section" id="s-reducers">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Reducers <span class="count-badge" id="reducers-count"></span>
+    </div>
+    <div class="section-body" id="reducer-list"></div>
+  </div>
+
+  <!-- ─── HOOKS ─────────────────────────────────────────── -->
+  <div class="section" id="s-hooks">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Hooks <span class="count-badge" id="hooks-count"></span>
+    </div>
+    <div class="section-body" id="hooks-container"></div>
+  </div>
+
+  <!-- ─── COMPONENTS ────────────────────────────────────── -->
+  <div class="section" id="s-components">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Components <span class="count-badge" id="comps-count"></span>
+    </div>
+    <div class="section-body">
+      <div class="comp-grid" id="comp-grid"></div>
+    </div>
+  </div>
+
+  <!-- ─── DATA FLOWS ────────────────────────────────────── -->
+  <div class="section" id="s-flows">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Data Flows <span class="count-badge">4 flows</span>
+    </div>
+    <div class="section-body">
+      <div class="grid-2" id="flows-container"></div>
+    </div>
+  </div>
+
+  <!-- ─── STYLING ───────────────────────────────────────── -->
+  <div class="section" id="s-styling">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Styling &amp; Theming
+    </div>
+    <div class="section-body">
+      <div class="grid-3">
+        <div class="card"><div class="card-title"><span class="dot" style="background:var(--c-comp)"></span>react-native-unistyles 2.43</div><p style="font-size:12.5px;color:var(--muted)">Themes in <code style="color:var(--c-state)">themes.ts</code>. Breakpoints in <code style="color:var(--c-state)">breakpoints.ts</code>. Registered via <code style="color:var(--c-state)">uniStyles.ts</code>. Applied at start: <code style="color:var(--c-state)">UnistylesRuntime.setTheme()</code>.</p></div>
+        <div class="card"><div class="card-title"><span class="dot" style="background:var(--c-reducer)"></span>8 Custom Themes</div><p style="font-size:12.5px;color:var(--muted)">4 accent colors (teal, orange, blue, pink) × light/dark modes. Stored in <code style="color:var(--c-state)">customThemesConfig.ts</code>. Persisted separately from APPSTATE in AsyncStorage.</p></div>
+        <div class="card"><div class="card-title"><span class="dot" style="background:var(--c-hook)"></span>Fonts</div><p style="font-size:12.5px;color:var(--muted);line-height:2"><span style="background:#0d2e1f;color:#10b981;padding:2px 7px;border-radius:4px;font-size:11px;">Montserrat</span> Black · Bold · Medium · Regular · SemiBold<br><span style="background:#0f1f3d;color:#93c5fd;padding:2px 7px;border-radius:4px;font-size:11px;">Nunito</span> Black · Bold · SemiBold · Medium · Regular</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── LOCALIZATION ──────────────────────────────────── -->
+  <div class="section" id="s-i18n">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Localization
+    </div>
+    <div class="section-body">
+      <div class="grid-2">
+        <div class="card"><div class="card-title"><span class="dot" style="background:var(--c-state)"></span>i18next + react-i18next</div><p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Synchronous device-language init on app start. User preference synced after AsyncStorage hydration. RTL applied via <code style="color:var(--c-state)">I18nManager.forceRTL()</code>.</p><div class="pill-list"><span class="lang-pill">🇬🇧 English</span><span class="lang-pill">🇪🇸 Spanish</span><span class="lang-pill">🇫🇷 French</span><span class="lang-pill">🇸🇦 Arabic <span class="rtl-badge">RTL</span></span><span class="lang-pill">🇱🇰 Sinhala</span></div></div>
+        <div class="card"><div class="card-title"><span class="dot" style="background:#fb7185"></span>RTL Support</div><p style="font-size:12.5px;color:var(--muted)">Arabic triggers RTL layout. <code style="color:var(--c-state)">isRTL</code> boolean persisted in APPSTATE. <code style="color:var(--c-state)">applyRTLSync()</code> called at Entrypoint init. <code style="color:var(--c-state)">react-native-localize</code> for device locale detection. Navigation and components respond to the flag.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── STORAGE ───────────────────────────────────────── -->
+  <div class="section" id="s-storage">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Storage
+    </div>
+    <div class="section-body">
+      <div class="card" style="overflow-x:auto">
+        <table class="stor-table">
+          <thead><tr><th>AsyncStorage Key</th><th>Contents</th><th>Managed By</th></tr></thead>
+          <tbody>
+            <tr><td class="stor-key">APPSTATE</td><td style="font-size:12px;color:var(--muted)">tips, splits, sliderConfigs, currencyConfig, savedTips, duplicatePreventionWindow, language, isRTL, savedSplitPresets<br><em style="font-size:11px">Note: activeSplitConfig intentionally NOT persisted</em></td><td style="font-size:12px;color:var(--muted)"><code style="color:var(--c-state)">usePersistedReducer</code></td></tr>
+            <tr><td class="stor-key">ThemePreference</td><td style="font-size:12px;color:var(--muted)">Active Unistyles theme name (e.g. "light", "tealDark")</td><td style="font-size:12px;color:var(--muted)"><code style="color:var(--c-state)">asyncStorageHooks.ts</code></td></tr>
+            <tr><td class="stor-key">ThemeColorOption</td><td style="font-size:12px;color:var(--muted)">Serialized custom accent color option array</td><td style="font-size:12px;color:var(--muted)"><code style="color:var(--c-state)">asyncStorageHooks.ts</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── DEPENDENCIES ──────────────────────────────────── -->
+  <div class="section" id="s-deps">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <span class="chevron">▾</span> Key Dependencies
+    </div>
+    <div class="section-body">
+      <div class="deps-grid" id="deps-grid"></div>
+    </div>
+  </div>
+
+</div>
+
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ─────────────────────────────────────────────────────────
+     SCRIPT
+───────────────────────────────────────────────────────────── -->
+<script>
+// ╔══════════════════════════════════════════════════════════╗
+// ║  ENTITY DATA                                             ║
+// ╚══════════════════════════════════════════════════════════╝
+const E = {
+  // ── SCREENS ────────────────────────────────────────────
+  'screen-HomeTipScreen': { label:'HomeTipScreen', type:'screen', file:'app/screens/TipScreens/HomeTipScreen.tsx', desc:'Main tip calculator: bill input, tip %, split mode, rounding, save & share.',
+    connects:['hook-calculateBillValues','hook-calculateBillValuesCustomSplit','hook-useSaveTip','hook-useShareTipPreview','hook-getDeviceCurrency','comp-StyledBillBox','comp-StyledTipOptions','comp-StyledSpiltOptions','comp-StyledRoundBox','comp-StyledSharePreviewModal','comp-StyledAlert','comp-StyledHeader','comp-StyledTotalAmountInput','state-activeSplitConfig','state-currencyConfig','state-savedTips','state-tips','state-splits'] },
+
+  'screen-CustomSplitScreen': { label:'CustomSplitScreen', type:'screen', file:'app/screens/TipScreens/CustomSplitScreen.tsx', desc:'Per-person allocation (fixed/percentage/remainder) with preset management.',
+    connects:['hook-useCustomSplitPeople','hook-useCustomSplitValidation','hook-useSplitPresets','hook-usePresetDuplication','comp-StyledHeader','comp-StyledCustomSplitPersonCard','comp-StyledCustomSplitFooter','comp-StyledCustomSplitPresetCard','state-activeSplitConfig','state-savedSplitPresets'] },
+
+  'screen-SavedTipsScreen': { label:'SavedTipsScreen', type:'screen', file:'app/screens/TipScreens/SavedTipsScreen.tsx', desc:'Saved tip history list with swipe-to-delete.',
+    connects:['comp-StyledSavedTipsList','comp-StyledHeader','state-savedTips'] },
+
+  'screen-SavedTipDetailScreen': { label:'SavedTipDetailScreen', type:'screen', file:'app/screens/TipScreens/SavedTipDetailScreen.tsx', desc:'Full detail view of a saved tip with share (text & PDF) options.',
+    connects:['hook-useShareTipDetailsText','hook-useShareTipDetailsPDF','comp-StyledHeader'] },
+
+  'screen-SettingsScreen': { label:'SettingsScreen', type:'screen', file:'app/screens/TipScreens/SettingsScreen.tsx', desc:'Preferences: theme, currency, language, tip/split defaults, duplicate prevention.',
+    connects:['hook-useThemeColorCustomiser','comp-StyledHeader','comp-StyledThemeBox','comp-StyledCurrencySelector','comp-StyledLanguageSelector','comp-StyledToggle','comp-StyledTipOptionsEditMode','comp-StyledSplitOptionsEditMode','comp-StyledDuplicatePreventionSelector','state-currencyConfig','state-language','state-isRTL','state-duplicatePreventionWindow','state-tips','state-splits'] },
+
+  'screen-AboutUsScreen': { label:'AboutUsScreen', type:'screen', file:'app/screens/AppInfoScreens/AboutUsScreen.tsx', desc:'App info, links, developer credits.',
+    connects:['hook-useExternalLinkAlert','comp-StyledHeader'] },
+
+  'screen-LicenseScreen': { label:'LicenseScreen', type:'screen', file:'app/screens/AppInfoScreens/LicenseScreen.tsx', desc:'Open-source licenses list with scroll-to-top spring animation.',
+    connects:['comp-StyledLicenseDetailsCard','comp-StyledHeader'] },
+
+  'screen-LicenseContentModalScreen': { label:'LicenseContentModalScreen', type:'screen', file:'app/screens/AppInfoScreens/LicenseContentModalScreen.tsx', desc:'Full license text in a bottom sheet modal.',
+    connects:['comp-StyledHeader'] },
+
+  // ── HOOKS ─────────────────────────────────────────────
+  'hook-calculateBillValues': { label:'calculateBillValues', type:'hook', file:'app/hooks/calculateBill.ts', desc:'Calculates equal split: per-person & overall totals with rounding (UP/DOWN/NO).', connects:[] },
+  'hook-calculateBillValuesCustomSplit': { label:'calculateBillValuesCustomSplit', type:'hook', file:'app/hooks/calculateBill.ts', desc:'Custom split: fixed → % → remainder allocation, penny distribution via largest remainder method.', connects:[] },
+  'hook-useSaveTip': { label:'useSaveTip', type:'hook', file:'app/hooks/useSaveTip.ts', desc:'Save tip logic, duplicate detection (window + amount + splitSignature), success/error alerts, navigate to detail.', connects:['state-savedTips'] },
+  'hook-useShareTipPreview': { label:'useShareTipPreview', type:'hook', file:'app/hooks/useShareTipPreview.ts', desc:'Manages share preview modal state and delegates to text/PDF share hooks.', connects:['hook-useShareTipDetailsText','hook-useShareTipDetailsPDF'] },
+  'hook-getDeviceCurrency': { label:'getDeviceCurrency', type:'hook', file:'app/hooks/currencyUtils.ts', desc:'Reads device locale to determine default currency symbol and code.', connects:[] },
+  'hook-useCustomSplitPeople': { label:'useCustomSplitPeople', type:'hook', file:'app/hooks/useCustomSplitPeople.ts', desc:'Manages add/remove/update of people in CustomSplitScreen local state.', connects:[] },
+  'hook-useCustomSplitValidation': { label:'useCustomSplitValidation', type:'hook', file:'app/hooks/useCustomSplitValidation.ts', desc:'Validates allocations: fixed ≤ total, % ≤ 100, ≥1 remainder or exact coverage.', connects:[] },
+  'hook-useSplitPresets': { label:'useSplitPresets', type:'hook', file:'app/hooks/useSplitPresets.ts', desc:'Saved split preset CRUD + active preset detection by matching current config.', connects:['state-savedSplitPresets','state-activeSplitConfig'] },
+  'hook-usePresetDuplication': { label:'usePresetDuplication', type:'hook', file:'app/hooks/usePresetDuplication.ts', desc:'Detects and prevents saving duplicate preset configurations.', connects:['state-savedSplitPresets'] },
+  'hook-useShareTipDetailsText': { label:'useShareTipDetailsText', type:'hook', file:'app/hooks/useShareTipDetailsText.ts', desc:'Format tip data as text and trigger native share sheet.', connects:[] },
+  'hook-useShareTipDetailsPDF': { label:'useShareTipDetailsPDF', type:'hook', file:'app/hooks/useShareTipDetailsPDF.ts', desc:'Generate PDF via react-native-html-to-pdf and trigger native share sheet.', connects:[] },
+  'hook-useThemeColorCustomiser': { label:'useThemeColorCustomiser', type:'hook', file:'app/hooks/useThemeColorCustomiser.ts', desc:'Applies custom accent color overrides to the active Unistyles theme.', connects:[] },
+  'hook-useExternalLinkAlert': { label:'useExternalLinkAlert', type:'hook', file:'app/hooks/useExternalLinkAlert.ts', desc:'Shows confirmation alert before opening external URLs.', connects:[] },
+  'hook-usePersistedReducer': { label:'usePersistedReducer', type:'hook', file:'app/hooks/usePersistedReducer.ts', desc:'Wraps useReducer with AsyncStorage: loads on mount, saves on every dispatch.', connects:['state-tips','state-splits','state-currencyConfig','state-savedTips','state-duplicatePreventionWindow','state-language','state-isRTL','state-savedSplitPresets'] },
+  'hook-useAnimations': { label:'useAnimations', type:'hook', file:'app/hooks/useAnimations.ts', desc:'Animation hooks: usePressAnimation · useScaleSpring · useValuePulse · useBounce · useVisibilityAnimation · useModalEntrance · useBottomSheetEntrance.', connects:[] },
+
+  // ── COMPONENTS ────────────────────────────────────────
+  'comp-StyledHeader':                  { label:'StyledHeader',                  type:'comp', file:'app/components/StyledHeader/', desc:'Shared screen header: title, back/menu button.', connects:[] },
+  'comp-StyledTotalAmountInput':        { label:'StyledTotalAmountInput',         type:'comp', file:'app/components/StyledTotalAmountInput/', desc:'Bill amount text input with currency symbol prefix.', connects:[] },
+  'comp-StyledTipOptions':              { label:'StyledTipOptions',               type:'comp', file:'app/components/StyledTipOptions/', desc:'Quick-select tip % capsules + adjustable slider.', connects:['state-tips','state-tipSliderConfig'] },
+  'comp-StyledSpiltOptions':            { label:'StyledSpiltOptions',             type:'comp', file:'app/components/StyledSplitOptions/', desc:'Quick-select split count capsules + custom split button.', connects:['state-splits','state-splitSliderConfig'] },
+  'comp-StyledBillBox':                 { label:'StyledBillBox',                  type:'comp', file:'app/components/StyledBillBox/', desc:'Displays calculated overall + per-person bill totals.', connects:[] },
+  'comp-StyledRoundBox':                { label:'StyledRoundBox',                 type:'comp', file:'app/components/StyledRoundBox/', desc:'Rounding method selector: UP / DOWN / NONE.', connects:[] },
+  'comp-StyledSharePreviewModal':       { label:'StyledSharePreviewModal',        type:'comp', file:'app/components/StyledSharePreviewModal/', desc:'Bottom sheet: tip share preview with Text/PDF actions.', connects:[], tags:['modal'] },
+  'comp-StyledAlert':                   { label:'StyledAlert',                    type:'comp', file:'app/components/StyledAlert/', desc:'Custom fade-in alert modal.', connects:[], tags:['modal'] },
+  'comp-StyledSavedTipsList':           { label:'StyledSavedTipsList',            type:'comp', file:'app/components/StyledSavedTipsList/', desc:'FlatList of saved tips · swipe-to-delete (ReanimatedSwipeable) · scroll-to-top spring.', connects:['state-savedTips'], tags:['anim'] },
+  'comp-StyledCustomSplitPersonCard':   { label:'StyledCustomSplitPersonCard',    type:'comp', file:'app/components/StyledCustomSplitPersonCard/', desc:'Per-person card: name, allocation type, value inputs.', connects:[] },
+  'comp-StyledCustomSplitFooter':       { label:'StyledCustomSplitFooter',        type:'comp', file:'app/components/StyledCustomSplitFooter/', desc:'CustomSplitScreen footer: save/cancel + validation summary.', connects:[] },
+  'comp-StyledCustomSplitPresetCard':   { label:'StyledCustomSplitPresetCard',    type:'comp', file:'app/components/StyledCustomSplitPresetCard/', desc:'Saved split preset card with load/delete actions.', connects:['state-savedSplitPresets'] },
+  'comp-StyledDrawer':                  { label:'StyledDrawer',                   type:'comp', file:'app/components/StyledDrawer/', desc:'Custom drawer content: nav items + app branding.', connects:[] },
+  'comp-StyledCurrencySelector':        { label:'StyledCurrencySelector',         type:'comp', file:'app/components/StyledCurrencySelector/', desc:'Searchable currency picker modal.', connects:['state-currencyConfig'], tags:['modal'] },
+  'comp-StyledLanguageSelector':        { label:'StyledLanguageSelector',         type:'comp', file:'app/components/StyledLanguageSelector/', desc:'Language picker modal.', connects:['state-language','state-isRTL'], tags:['modal'] },
+  'comp-StyledThemeBox':                { label:'StyledThemeBox',                 type:'comp', file:'app/components/StyledThemeBox/', desc:'Theme selector: light/dark toggle + accent color swatches.', connects:[] },
+  'comp-StyledToggle':                  { label:'StyledToggle',                   type:'comp', file:'app/components/StyledToggle/', desc:'Platform-scaled Switch: iOS 0.8×, Android 0.9×.', connects:[] },
+  'comp-StyledDuplicatePreventionSelector': { label:'StyledDuplicatePreventionSelector', type:'comp', file:'app/components/StyledDuplicatePreventionSelector/', desc:'Time-window picker for duplicate save detection.', connects:['state-duplicatePreventionWindow'], tags:['modal'] },
+  'comp-StyledTipOptionsEditMode':      { label:'StyledTipOptionsEditMode',       type:'comp', file:'app/components/StyledTipOptionsEditMode/', desc:'Editable tip % capsules for SettingsScreen.', connects:['state-tips'] },
+  'comp-StyledSplitOptionsEditMode':    { label:'StyledSplitOptionsEditMode',     type:'comp', file:'app/components/StyledSplitOptionsEditMode/', desc:'Editable split count capsules for SettingsScreen.', connects:['state-splits'] },
+  'comp-StyledLicenseDetailsCard':      { label:'StyledLicenseDetailsCard',       type:'comp', file:'app/components/StyledLicenseDetailsCard/', desc:'Single license entry card with expand action.', connects:[] },
+  'comp-StyledHorizontalSlider':        { label:'StyledHorizontalSlider',         type:'comp', file:'app/components/StyledHorizontalSlider/', desc:'Styled slider via @miblanchard/react-native-slider.', connects:[] },
+  'comp-StyledConfigInput':             { label:'StyledConfigInput',              type:'comp', file:'app/components/StyledConfigInput/', desc:'Numeric capsule input for editable config values.', connects:[] },
+  'comp-StyledFilterCapsule':           { label:'StyledFilterCapsule',            type:'comp', file:'app/components/StyledFilterCapsule/', desc:'Generic pill/capsule toggle button.', connects:[] },
+  'comp-StyledTextInputCapsule':        { label:'StyledTextInputCapsule',         type:'comp', file:'app/components/StyledTextInputCapsule/', desc:'Capsule-styled text input.', connects:[] },
+  'comp-StyledIcons':                   { label:'StyledIcons',                    type:'comp', file:'app/components/StyledIcons/', desc:'Themed wrappers around multiple vector icon sets.', connects:[] },
+  'comp-StyledSVGIcons':                { label:'StyledSVGIcons',                 type:'comp', file:'app/components/StyledSVGIcons/', desc:'Custom SVG icons via react-native-svg.', connects:[] },
+
+  // ── STATE FIELDS ──────────────────────────────────────
+  'state-tips':                    { label:'tips',                    type:'state', desc:'TipOptionState[] — 4 quick-select tip % options (default: 0,5,10,15)', persisted:true,  connects:['reducer-tipReducer'] },
+  'state-splits':                  { label:'splits',                  type:'state', desc:'SplitOptionState[] — 4 quick-select split count options (default: 1,3,5,7)', persisted:true, connects:['reducer-splitReducer'] },
+  'state-tipSliderConfig':         { label:'tipSliderConfig',         type:'state', desc:'TipSliderConfigValues — {min:0, max:80, step:1}', persisted:true,  connects:[] },
+  'state-splitSliderConfig':       { label:'splitSliderConfig',       type:'state', desc:'SplitSliderConfigValues — {min:1, max:15, step:1}', persisted:true, connects:[] },
+  'state-currencyConfig':          { label:'currencyConfig',          type:'state', desc:'CurrencyType | undefined — User-selected currency. undefined = device locale.', persisted:true, connects:['reducer-currencyConfigReducer'] },
+  'state-savedTips':               { label:'savedTips',               type:'state', desc:'SavedTip[] — Persisted tip calculation history.', persisted:true,  connects:['reducer-savedTipsReducer'] },
+  'state-duplicatePreventionWindow':{ label:'duplicatePreventionWindow',type:'state', desc:'number — Minutes window to detect duplicate tip saves (default: 15).', persisted:true, connects:['reducer-duplicatePreventionReducer'] },
+  'state-language':                { label:'language',                type:'state', desc:'string | undefined — User language override. undefined = device language.', persisted:true, connects:['reducer-languageReducer'] },
+  'state-isRTL':                   { label:'isRTL',                   type:'state', desc:'boolean — RTL layout flag, derived from language.', persisted:true,  connects:['reducer-languageReducer'] },
+  'state-activeSplitConfig':       { label:'activeSplitConfig',       type:'state', desc:'ActiveSplitConfig | undefined — Active custom split. NOT persisted across sessions.', persisted:false, connects:['reducer-splitConfigReducer'] },
+  'state-savedSplitPresets':       { label:'savedSplitPresets',       type:'state', desc:'SavedSplitPreset[] — Named custom split configurations.', persisted:true, connects:['reducer-savedSplitPresetsReducer'] },
+
+  // ── REDUCERS ──────────────────────────────────────────
+  'reducer-tipReducer':                { label:'tipReducer',                type:'reducer', actions:['UPDATE_TIP_OPTIONS','RESET_TIP_OPTIONS_TO_DEFAULT'],             desc:'Manages tips array.',              connects:['state-tips'] },
+  'reducer-splitReducer':              { label:'splitReducer',              type:'reducer', actions:['UPDATE_SPLIT_OPTIONS','RESET_SPLIT_OPTIONS_TO_DEFAULT'],          desc:'Manages splits array.',            connects:['state-splits'] },
+  'reducer-currencyConfigReducer':     { label:'currencyConfigReducer',     type:'reducer', actions:['UPDATE_CURRENCY_SIGN','RESET_CURRENCY_TO_SYSTEM'],               desc:'Manages currencyConfig.',          connects:['state-currencyConfig'] },
+  'reducer-savedTipsReducer':          { label:'savedTipsReducer',          type:'reducer', actions:['SAVE_TIP','DELETE_TIP','CLEAR_ALL_TIPS'],                        desc:'Manages savedTips.',               connects:['state-savedTips'] },
+  'reducer-duplicatePreventionReducer':{ label:'duplicatePreventionReducer',type:'reducer', actions:['UPDATE_DUPLICATE_PREVENTION_WINDOW'],                            desc:'Manages duplicatePreventionWindow.',connects:['state-duplicatePreventionWindow'] },
+  'reducer-languageReducer':           { label:'languageReducer',           type:'reducer', actions:['SET_LANGUAGE','RESET_LANGUAGE_TO_SYSTEM'],                       desc:'Manages language + isRTL.',        connects:['state-language','state-isRTL'] },
+  'reducer-splitConfigReducer':        { label:'splitConfigReducer',        type:'reducer', actions:['SET_ACTIVE_SPLIT_CONFIG','CLEAR_ACTIVE_SPLIT_CONFIG'],           desc:'Manages activeSplitConfig.',       connects:['state-activeSplitConfig'] },
+  'reducer-savedSplitPresetsReducer':  { label:'savedSplitPresetsReducer',  type:'reducer', actions:['SAVE_SPLIT_PRESET','UPDATE_SPLIT_PRESET','DELETE_SPLIT_PRESET'], desc:'Manages savedSplitPresets.',       connects:['state-savedSplitPresets'] },
+};
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  REVERSE CONNECTION MAP + HELPERS                        ║
+// ╚══════════════════════════════════════════════════════════╝
+const REV = {};
+Object.entries(E).forEach(([id, ent]) => {
+  ent.connects.forEach(c => {
+    if (!REV[c]) REV[c] = [];
+    REV[c].push(id);
+  });
+});
+
+function allConns(id) {
+  const d = E[id]?.connects || [];
+  const r = REV[id] || [];
+  return [...new Set([...d, ...r])];
+}
+
+function connCount(id) { return allConns(id).length; }
+
+const TYPE_COLOR = { screen:'var(--c-screen)', hook:'var(--c-hook)', comp:'var(--c-comp)', state:'var(--c-state)', reducer:'var(--c-reducer)', nav:'var(--c-nav)' };
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  SELECTION STATE                                         ║
+// ╚══════════════════════════════════════════════════════════╝
+let selectedId = null;
+let showLines = false;
+
+function selectEntity(id) {
+  if (!E[id]) return;
+  if (selectedId === id) { clearSelection(); return; }
+  selectedId = id;
+
+  const conns = new Set(allConns(id));
+
+  document.querySelectorAll('[data-nid]').forEach(el => {
+    const eid = el.dataset.nid;
+    el.classList.remove('is-active','is-connected','is-dimmed');
+    if (eid === id)        el.classList.add('is-active');
+    else if (conns.has(eid)) el.classList.add('is-connected');
+    else                   el.classList.add('is-dimmed');
+  });
+
+  // Show clear button + label
+  const lbl = document.getElementById('selection-label');
+  const clearBtn = document.getElementById('clear-btn');
+  lbl.textContent = `${conns.size} connections — ${E[id].label}`;
+  lbl.style.display = 'block';
+  clearBtn.style.display = 'inline-block';
+
+  showDetailPanel(id);
+  if (showLines) drawLines(id, [...conns]);
+
+  // Scroll the active element into view gently
+  const el = document.querySelector(`[data-nid="${id}"]`);
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+function clearSelection() {
+  selectedId = null;
+  document.querySelectorAll('[data-nid]').forEach(el => {
+    el.classList.remove('is-active','is-connected','is-dimmed');
+  });
+  document.getElementById('selection-label').style.display = 'none';
+  document.getElementById('clear-btn').style.display = 'none';
+  document.getElementById('detail-panel').classList.remove('open');
+  clearLines();
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  DETAIL PANEL                                            ║
+// ╚══════════════════════════════════════════════════════════╝
+function showDetailPanel(id) {
+  const ent = E[id];
+  if (!ent) return;
+
+  const color = TYPE_COLOR[ent.type] || '#7c839e';
+  const badge = document.getElementById('panel-type-badge');
+  badge.textContent = ent.type.toUpperCase();
+  badge.style.background = `rgba(${hexToRgb(color)},0.15)`;
+  badge.style.color = color;
+  badge.style.border = `1px solid rgba(${hexToRgb(color)},0.3)`;
+
+  document.getElementById('panel-title').textContent = ent.label;
+  document.getElementById('panel-file').textContent = ent.file || '';
+  document.getElementById('panel-desc').textContent = ent.desc || '';
+
+  const body = document.getElementById('panel-body');
+  body.innerHTML = '';
+
+  // Group connections by type
+  const grouped = {};
+  allConns(id).forEach(cid => {
+    const cent = E[cid];
+    if (!cent) return;
+    if (!grouped[cent.type]) grouped[cent.type] = [];
+    grouped[cent.type].push(cid);
+  });
+
+  const typeOrder = ['screen','hook','comp','state','reducer'];
+  typeOrder.forEach(t => {
+    if (!grouped[t] || !grouped[t].length) return;
+    const grpTitle = document.createElement('div');
+    grpTitle.className = 'panel-group-title';
+    grpTitle.textContent = `${t.toUpperCase()}S (${grouped[t].length})`;
+    body.appendChild(grpTitle);
+    grouped[t].forEach(cid => {
+      const cent = E[cid];
+      const item = document.createElement('div');
+      item.className = 'panel-conn-item';
+      item.innerHTML = `
+        <div class="panel-conn-dot" style="background:${TYPE_COLOR[cent.type]}"></div>
+        <span class="panel-conn-label" style="color:${TYPE_COLOR[cent.type]}">${cent.label}</span>
+        <span class="panel-conn-arrow">→</span>`;
+      item.onclick = () => selectEntity(cid);
+      body.appendChild(item);
+    });
+  });
+
+  if (!Object.keys(grouped).length) {
+    body.innerHTML = '<div style="color:var(--muted);font-size:12.5px;margin-top:10px;">No direct connections found.</div>';
+  }
+
+  // Mini radial SVG
+  const miniWrap = document.createElement('div');
+  miniWrap.id = 'panel-mini-map';
+  miniWrap.innerHTML = `<div style="font-size:10px;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:8px;font-weight:700;">Connection Map</div>`;
+  const svgEl = buildMiniSVG(id);
+  miniWrap.appendChild(svgEl);
+  body.appendChild(miniWrap);
+
+  document.getElementById('detail-panel').classList.add('open');
+}
+
+function buildMiniSVG(id) {
+  const W = 360, H = 200;
+  const conns = allConns(id);
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width', '100%');
+  svg.setAttribute('height', H);
+  svg.style.cssText = `background:var(--surface2);border-radius:8px;border:1px solid var(--border);display:block;`;
+
+  const cx = W / 2, cy = H / 2;
+  const r = 70;
+  const ent = E[id];
+  const color = TYPE_COLOR[ent.type];
+
+  // Center node
+  const cg = document.createElementNS('http://www.w3.org/2000/svg','g');
+  const cc = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  cc.setAttribute('cx', cx); cc.setAttribute('cy', cy); cc.setAttribute('r', 22);
+  cc.setAttribute('fill', `rgba(${hexToRgb(color)},0.15)`);
+  cc.setAttribute('stroke', color); cc.setAttribute('stroke-width', '1.5');
+  const ct = document.createElementNS('http://www.w3.org/2000/svg','text');
+  ct.setAttribute('x', cx); ct.setAttribute('y', cy + 4);
+  ct.setAttribute('text-anchor','middle'); ct.setAttribute('font-size','8');
+  ct.setAttribute('fill', color); ct.setAttribute('font-family','monospace');
+  const shortLabel = ent.label.length > 14 ? ent.label.slice(0,13)+'…' : ent.label;
+  ct.textContent = shortLabel;
+  cg.appendChild(cc); cg.appendChild(ct); svg.appendChild(cg);
+
+  const shown = conns.slice(0, 12);
+  shown.forEach((cid, i) => {
+    const cent = E[cid]; if (!cent) return;
+    const angle = (i / shown.length) * 2 * Math.PI - Math.PI / 2;
+    const nx = cx + r * Math.cos(angle);
+    const ny = cy + r * Math.sin(angle);
+    const nc = TYPE_COLOR[cent.type];
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',cx); line.setAttribute('y1',cy);
+    line.setAttribute('x2',nx); line.setAttribute('y2',ny);
+    line.setAttribute('stroke', nc); line.setAttribute('stroke-width','0.8');
+    line.setAttribute('stroke-dasharray','3 2'); line.setAttribute('opacity','0.6');
+    svg.appendChild(line);
+
+    const nc2 = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    nc2.setAttribute('cx', nx); nc2.setAttribute('cy', ny); nc2.setAttribute('r', 12);
+    nc2.setAttribute('fill', `rgba(${hexToRgb(nc)},0.1)`);
+    nc2.setAttribute('stroke', nc); nc2.setAttribute('stroke-width','1');
+    nc2.style.cursor = 'pointer';
+    nc2.onclick = () => selectEntity(cid);
+    svg.appendChild(nc2);
+
+    const nt = document.createElementNS('http://www.w3.org/2000/svg','text');
+    nt.setAttribute('x', nx); nt.setAttribute('y', ny + 3);
+    nt.setAttribute('text-anchor','middle'); nt.setAttribute('font-size','6');
+    nt.setAttribute('fill', nc); nt.setAttribute('font-family','monospace');
+    const sl = cent.label.length > 10 ? cent.label.slice(0,9)+'…' : cent.label;
+    nt.textContent = sl;
+    nt.style.pointerEvents = 'none';
+    svg.appendChild(nt);
+  });
+  if (conns.length > 12) {
+    const moreT = document.createElementNS('http://www.w3.org/2000/svg','text');
+    moreT.setAttribute('x', cx); moreT.setAttribute('y', H - 8);
+    moreT.setAttribute('text-anchor','middle'); moreT.setAttribute('font-size','8');
+    moreT.setAttribute('fill', 'var(--muted)');
+    moreT.textContent = `+${conns.length - 12} more`;
+    svg.appendChild(moreT);
+  }
+  return svg;
+}
+
+function hexToRgb(cssVar) {
+  // Return RGB for known CSS variable names
+  const map = {
+    'var(--c-screen)': '251,191,36',
+    'var(--c-hook)':   '52,211,153',
+    'var(--c-comp)':   '192,132,252',
+    'var(--c-state)':  '56,189,248',
+    'var(--c-reducer)':'251,146,60',
+    'var(--c-nav)':    '163,230,53',
+  };
+  return map[cssVar] || '255,255,255';
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  SVG CONNECTION LINES                                    ║
+// ╚══════════════════════════════════════════════════════════╝
+function toggleLines() {
+  showLines = !showLines;
+  const btn = document.getElementById('lines-btn');
+  btn.classList.toggle('active', showLines);
+  btn.textContent = showLines ? 'Hide lines' : 'Show lines';
+  if (!showLines) clearLines();
+  else if (selectedId) drawLines(selectedId, allConns(selectedId));
+}
+
+function clearLines() {
+  document.getElementById('conn-lines').innerHTML = '';
+  document.getElementById('conn-svg').classList.remove('visible');
+}
+
+function drawLines(srcId, connIds) {
+  const svg = document.getElementById('conn-svg');
+  const g = document.getElementById('conn-lines');
+  g.innerHTML = '';
+  if (!connIds.length) return;
+
+  const srcEl = document.querySelector(`[data-nid="${srcId}"]`);
+  if (!srcEl) return;
+  const srcR = srcEl.getBoundingClientRect();
+  const sx = srcR.left + srcR.width / 2;
+  const sy = srcR.top + srcR.height / 2;
+
+  let drew = 0;
+  connIds.forEach(cid => {
+    const cent = E[cid]; if (!cent) return;
+    const el = document.querySelector(`[data-nid="${cid}"]`);
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    if (r.bottom < -50 || r.top > window.innerHeight + 50) return; // skip off-screen
+    const ex = r.left + r.width / 2;
+    const ey = r.top + r.height / 2;
+    const color = TYPE_COLOR[cent.type];
+    const cp1x = sx + (ex - sx) * 0.5;
+    const cp2x = sx + (ex - sx) * 0.5;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', `M ${sx} ${sy} C ${cp1x} ${sy}, ${cp2x} ${ey}, ${ex} ${ey}`);
+    path.setAttribute('stroke', color.replace('var(--c-','').replace(')',''));
+    // Inline the color
+    const cmap = { screen:'#fbbf24', hook:'#34d399', comp:'#c084fc', state:'#38bdf8', reducer:'#fb923c' };
+    path.setAttribute('stroke', cmap[cent.type] || '#7c839e');
+    path.setAttribute('class','conn-line');
+    path.setAttribute('marker-end', `url(#arr-${cent.type})`);
+    g.appendChild(path);
+    drew++;
+  });
+  if (drew > 0) svg.classList.add('visible');
+}
+
+// Redraw on scroll if lines are visible
+let lineRedrawTimer;
+window.addEventListener('scroll', () => {
+  if (!showLines || !selectedId) return;
+  clearTimeout(lineRedrawTimer);
+  lineRedrawTimer = setTimeout(() => drawLines(selectedId, allConns(selectedId)), 50);
+}, { passive: true });
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  SEARCH                                                  ║
+// ╚══════════════════════════════════════════════════════════╝
+function handleSearch(q) {
+  q = q.toLowerCase().trim();
+  if (q && selectedId) clearSelection();
+  document.querySelectorAll('[data-nid]').forEach(el => {
+    if (!q) { el.classList.remove('search-hidden'); return; }
+    const text = (el.textContent || '').toLowerCase();
+    el.classList.toggle('search-hidden', !text.includes(q));
+  });
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  SECTION COLLAPSE                                        ║
+// ╚══════════════════════════════════════════════════════════╝
+function toggleSection(hdr) {
+  hdr.closest('.section').classList.toggle('collapsed');
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  OVERVIEW                                                ║
+// ╚══════════════════════════════════════════════════════════╝
+function renderOverview() {
+  const grid = document.getElementById('overview-grid');
+
+  const screenEntries = Object.entries(E).filter(([,v]) => v.type === 'screen');
+  const hookEntries   = Object.entries(E).filter(([,v]) => v.type === 'hook');
+  const compEntries   = Object.entries(E).filter(([,v]) => v.type === 'comp');
+  const stateEntries  = Object.entries(E).filter(([,v]) => v.type === 'state');
+  const redEntries    = Object.entries(E).filter(([,v]) => v.type === 'reducer');
+
+  function zone(title, rows) {
+    const z = document.createElement('div');
+    z.className = 'ov-zone';
+    z.innerHTML = `<div class="ov-zone-title">${title}</div>`;
+    rows.forEach(r => z.appendChild(r));
+    return z;
+  }
+  function ovNode(id, ent) {
+    const d = document.createElement('div');
+    d.className = 'ov-node';
+    d.setAttribute('data-nid', id);
+    d.setAttribute('data-ntype', ent.type);
+    const cc = connCount(id);
+    d.innerHTML = `<div class="ov-dot" style="background:${TYPE_COLOR[ent.type].replace('var(--c-','').replace(')','')};background:${getColor(ent.type)}"></div>
+      <span class="ov-label" style="color:${getColor(ent.type)}">${ent.label}</span>
+      ${cc>0?`<span class="ov-count">${cc}↔</span>`:''}`;
+    d.onclick = e => { e.stopPropagation(); selectEntity(id); };
+    return d;
+  }
+
+  function getColor(t) {
+    const m={screen:'#fbbf24',hook:'#34d399',comp:'#c084fc',state:'#38bdf8',reducer:'#fb923c'};
+    return m[t]||'#7c839e';
+  }
+
+  // Zone 1: Entry & Providers
+  const z1 = zone('⚡ Entry & Providers', []);
+  ['index.js → Entrypoint.tsx','GestureHandlerRootView','AppProvider','ApplicationNavigator'].forEach(lbl => {
+    const d = document.createElement('div');
+    d.className = 'ov-node';
+    const color = lbl.includes('AppProvider') ? '#10b981' : '#7c839e';
+    d.innerHTML = `<div class="ov-dot" style="background:${color}"></div><span class="ov-label" style="color:${color}">${lbl}</span>`;
+    z1.querySelector('.ov-zone-title').after(d);
+    z1.appendChild(d);
+  });
+
+  // Zone 2: Navigation & Screens
+  const z2 = zone('🧭 Navigation & Screens', []);
+  ['StackNavigation','DrawerNavigation'].forEach(lbl => {
+    const d = document.createElement('div');
+    d.className = 'ov-node';
+    d.innerHTML = `<div class="ov-dot" style="background:#a3e635"></div><span class="ov-label" style="color:#a3e635">${lbl}</span>`;
+    z2.appendChild(d);
+  });
+  const arrow = document.createElement('div');
+  arrow.style.cssText = 'font-size:11px;color:var(--muted);padding:4px 0 2px;';
+  arrow.textContent = '↳ Screens';
+  z2.appendChild(arrow);
+  screenEntries.forEach(([id,ent]) => z2.appendChild(ovNode(id, ent)));
+
+  // Zone 3: Domain (hooks + components)
+  const z3 = zone('🔧 Domain Layer', []);
+  const hookLbl = document.createElement('div'); hookLbl.style.cssText='font-size:10px;color:#34d399;margin-bottom:4px;font-weight:600;'; hookLbl.textContent=`Hooks (${hookEntries.length})`;
+  z3.appendChild(hookLbl);
+  hookEntries.forEach(([id,ent]) => z3.appendChild(ovNode(id,ent)));
+  const compLbl = document.createElement('div'); compLbl.style.cssText='font-size:10px;color:#c084fc;margin:10px 0 4px;font-weight:600;'; compLbl.textContent=`Components (${compEntries.length})`;
+  z3.appendChild(compLbl);
+  compEntries.slice(0,10).forEach(([id,ent]) => z3.appendChild(ovNode(id,ent)));
+  const moreC = document.createElement('div'); moreC.style.cssText='font-size:11px;color:var(--muted);padding:4px 0;'; moreC.textContent=`+ ${compEntries.length - 10} more components → see Components section`;
+  z3.appendChild(moreC);
+
+  // Zone 4: State & Storage
+  const z4 = zone('📦 State & Storage', []);
+  const sLbl = document.createElement('div'); sLbl.style.cssText='font-size:10px;color:#38bdf8;margin-bottom:4px;font-weight:600;'; sLbl.textContent=`State Fields (${stateEntries.length})`;
+  z4.appendChild(sLbl);
+  stateEntries.forEach(([id,ent]) => z4.appendChild(ovNode(id,ent)));
+  const rLbl = document.createElement('div'); rLbl.style.cssText='font-size:10px;color:#fb923c;margin:10px 0 4px;font-weight:600;'; rLbl.textContent=`Reducers (${redEntries.length})`;
+  z4.appendChild(rLbl);
+  redEntries.forEach(([id,ent]) => z4.appendChild(ovNode(id,ent)));
+  const storageLbl = document.createElement('div'); storageLbl.style.cssText='font-size:10px;color:#fbbf24;margin:10px 0 4px;font-weight:600;'; storageLbl.textContent='AsyncStorage';
+  z4.appendChild(storageLbl);
+  ['APPSTATE','ThemePreference','ThemeColorOption'].forEach(k => {
+    const d = document.createElement('div'); d.className='ov-node';
+    d.innerHTML=`<div class="ov-dot" style="background:#fbbf24"></div><span class="ov-label" style="color:#fbbf24">${k}</span>`;
+    z4.appendChild(d);
+  });
+
+  grid.append(z1, z2, z3, z4);
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  PROVIDER TREE                                           ║
+// ╚══════════════════════════════════════════════════════════╝
+function renderTree() {
+  const root = document.getElementById('tree-root');
+  const nodes = [
+    { label:'GestureHandlerRootView', type:'provider', src:'react-native-gesture-handler', depth:0 },
+    { label:'AppProvider',            type:'provider', src:'app/context/AppContext.tsx · usePersistedReducer + rootReducer', depth:1 },
+    { label:'ApplicationNavigator',   type:'navigator',src:'app/navigation/ApplicationNavigation.tsx · theme init, BootSplash, Toast', depth:2 },
+    { label:'SafeAreaProvider',       type:'util',     src:'react-native-safe-area-context', depth:3 },
+    { label:'NavigationContainer',    type:'navigator',src:'@react-navigation/native · ref + onReady → BootSplash.hide()', depth:3 },
+    { label:'StackNavigation',        type:'navigator',src:'app/navigation/StackNavigation.tsx', depth:4 },
+    { label:'DrawerNavigation',       type:'navigator',src:'app/navigation/DrawerNavigation.tsx · slide drawer', depth:5 },
+    { label:'[ Drawer Screens ]',     type:'screen',   src:'HomeTipScreen · SavedTipsScreen · SettingsScreen · AboutUsScreen', depth:6 },
+    { label:'[ Stack Screens ]',      type:'screen',   src:'SavedTipDetailScreen · CustomSplitScreen · LicensesScreen · LicenseContentModal', depth:5 },
+    { label:'Toast',                  type:'util',     src:'react-native-toast-message · topOffset = statusBar + 5vh', depth:3 },
+  ];
+  const colors = { provider:'var(--c-hook)', navigator:'var(--c-state)', util:'var(--c-comp)', screen:'var(--c-screen)' };
+  const bg = { provider:'#0f2e20', navigator:'#0f1f3d', util:'#1e1b2e', screen:'#2a1a0a' };
+  const border = { provider:'#1a5c3a', navigator:'#1e3a6e', util:'#3d3569', screen:'#5c3310' };
+
+  nodes.forEach(n => {
+    const row = document.createElement('div');
+    row.className = 'tree-node';
+    let h = '';
+    for (let d=0;d<n.depth;d++) h += `<div class="tree-indent"><div class="tree-v"></div></div>`;
+    if (n.depth>0) h += `<div class="tree-h"></div>`;
+    h += `<div class="tree-pill" style="background:${bg[n.type]};border:1px solid ${border[n.type]};color:${colors[n.type]}">
+      <strong>${n.label}</strong>
+      <span style="opacity:0.55;font-weight:400;font-size:10.5px;margin-left:8px;">— ${n.src}</span>
+    </div>`;
+    row.innerHTML = h;
+    root.appendChild(row);
+  });
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  SCREENS                                                 ║
+// ╚══════════════════════════════════════════════════════════╝
+function renderScreens() {
+  const grid = document.getElementById('screen-grid');
+  const screens = Object.entries(E).filter(([,v]) => v.type === 'screen');
+  document.getElementById('screens-count').textContent = `${screens.length} screens`;
+
+  screens.forEach(([id, s]) => {
+    const cc = connCount(id);
+    const div = document.createElement('div');
+    div.className = 'screen-card';
+    div.setAttribute('data-nid', id);
+    div.setAttribute('data-ntype', 'screen');
+    div.onclick = e => { e.stopPropagation(); selectEntity(id); };
+
+    const hooks   = s.connects.filter(c => c.startsWith('hook-'));
+    const comps   = s.connects.filter(c => c.startsWith('comp-'));
+    const states  = s.connects.filter(c => c.startsWith('state-'));
+    const revActions = (REV[id]||[]).filter(c=>c.startsWith('reducer-'));
+
+    div.innerHTML = `
+      <div class="sc-name">
+        ${s.label}
+        <span class="conn-badge ${cc>0?'has-conns':''}">${cc}</span>
+      </div>
+      <div class="sc-file">${s.file}</div>
+      <div class="sc-desc">${s.desc}</div>
+      <div class="sc-tags">
+        ${hooks.map(h=>`<span class="tag tag-hook" data-nid="${h}" data-ntype="hook" onclick="event.stopPropagation();selectEntity('${h}')">${E[h]?.label||h}</span>`).join('')}
+        ${comps.map(c=>`<span class="tag tag-comp" data-nid="${c}" data-ntype="comp" onclick="event.stopPropagation();selectEntity('${c}')">${E[c]?.label||c}</span>`).join('')}
+        ${states.map(st=>`<span class="tag tag-state" data-nid="${st}" data-ntype="state" onclick="event.stopPropagation();selectEntity('${st}')">${E[st]?.label||st}</span>`).join('')}
+      </div>`;
+    grid.appendChild(div);
+  });
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  STATE TABLE                                             ║
+// ╚══════════════════════════════════════════════════════════╝
+function renderState() {
+  const fields = Object.entries(E).filter(([,v]) => v.type === 'state');
+  document.getElementById('state-count').textContent = `${fields.length} fields`;
+  const tbody = document.getElementById('state-tbody');
+  fields.forEach(([id, f]) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-nid', id);
+    tr.setAttribute('data-ntype', 'state');
+    tr.onclick = () => selectEntity(id);
+    tr.innerHTML = `
+      <td class="td-key">${f.label}</td>
+      <td class="td-type">${f.desc.split(' — ')[0] || ''}</td>
+      <td style="color:var(--text);font-size:12px">${f.desc.split(' — ')[1] || f.desc}</td>
+      <td>${f.persisted ? '<span class="persist-y">✓ Yes</span>' : '<span class="persist-n">✗ Session</span>'}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  REDUCERS                                                ║
+// ╚══════════════════════════════════════════════════════════╝
+function renderReducers() {
+  const reds = Object.entries(E).filter(([,v]) => v.type === 'reducer');
+  document.getElementById('reducers-count').textContent = `${reds.length} reducers`;
+  const container = document.getElementById('reducer-list');
+  reds.forEach(([id, r]) => {
+    const cc = connCount(id);
+    const row = document.createElement('div');
+    row.className = 'reducer-row';
+    row.setAttribute('data-nid', id);
+    row.setAttribute('data-ntype', 'reducer');
+    row.onclick = () => selectEntity(id);
+    row.innerHTML = `
+      <span class="r-name">${r.label}</span>
+      <div class="r-actions">${r.actions.map(a=>`<span class="action-tag">${a}</span>`).join('')}</div>
+      <span class="r-manages">→ ${r.connects.map(c=>E[c]?.label||c).join(', ')}</span>
+      <span class="conn-badge ${cc>0?'has-conns':''}">${cc}</span>`;
+    container.appendChild(row);
+  });
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  HOOKS                                                   ║
+// ╚══════════════════════════════════════════════════════════╝
+const hookGroups = [
+  { title:'🧮 Calculation',    ids:['hook-calculateBillValues','hook-calculateBillValuesCustomSplit'] },
+  { title:'💾 Persistence',    ids:['hook-usePersistedReducer'] },
+  { title:'✂️ Custom Split',   ids:['hook-useCustomSplitPeople','hook-useCustomSplitValidation','hook-useSplitPresets','hook-usePresetDuplication'] },
+  { title:'📤 Sharing',        ids:['hook-useShareTipPreview','hook-useShareTipDetailsText','hook-useShareTipDetailsPDF'] },
+  { title:'💡 Tip Saving',     ids:['hook-useSaveTip'] },
+  { title:'🌍 Locale',         ids:['hook-getDeviceCurrency'] },
+  { title:'🎨 UI & Animation', ids:['hook-useAnimations','hook-useThemeColorCustomiser','hook-useExternalLinkAlert'] },
+];
+
+function renderHooks() {
+  const allHookIds = Object.entries(E).filter(([,v])=>v.type==='hook').map(([k])=>k);
+  document.getElementById('hooks-count').textContent = `${allHookIds.length} hooks`;
+  const container = document.getElementById('hooks-container');
+  hookGroups.forEach(grp => {
+    const lbl = document.createElement('div');
+    lbl.className = 'hook-group-lbl';
+    lbl.textContent = grp.title;
+    container.appendChild(lbl);
+    const grid = document.createElement('div');
+    grid.className = 'hook-grid';
+    grp.ids.forEach(id => {
+      const h = E[id]; if (!h) return;
+      const cc = connCount(id);
+      const card = document.createElement('div');
+      card.className = 'hook-card';
+      card.setAttribute('data-nid', id);
+      card.setAttribute('data-ntype', 'hook');
+      card.onclick = () => selectEntity(id);
+      card.innerHTML = `
+        <div class="hc-name">${h.label}() <span class="conn-badge ${cc>0?'has-conns':''}">${cc}</span></div>
+        <div class="hc-desc">${h.desc}</div>
+        <div class="hc-file">${h.file}</div>`;
+      grid.appendChild(card);
+    });
+    container.appendChild(grid);
+  });
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  COMPONENTS                                              ║
+// ╚══════════════════════════════════════════════════════════╝
+function renderComponents() {
+  const comps = Object.entries(E).filter(([,v]) => v.type === 'comp');
+  document.getElementById('comps-count').textContent = `${comps.length} components`;
+  const grid = document.getElementById('comp-grid');
+  comps.forEach(([id, c]) => {
+    const cc = connCount(id);
+    const tags = (c.tags||[]).map(t=>`<span class="tag tag-${t}">${t}</span>`).join('');
+    const card = document.createElement('div');
+    card.className = 'comp-card';
+    card.setAttribute('data-nid', id);
+    card.setAttribute('data-ntype', 'comp');
+    card.onclick = () => selectEntity(id);
+    card.innerHTML = `
+      <div class="cc-name">${c.label} <span class="conn-badge ${cc>0?'has-conns':''}" style="margin-left:auto">${cc}</span></div>
+      <div class="cc-desc">${c.desc}</div>
+      ${tags}`;
+    grid.appendChild(card);
+  });
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  DATA FLOWS                                              ║
+// ╚══════════════════════════════════════════════════════════╝
+const flows = [
+  {
+    title:'Bill Calculation Flow', color:'#10b981', dotColor:'#10b981',
+    steps:[
+      { text:'User enters bill amount', type:'normal' },
+      { text:'User selects tip % (capsule or slider)', type:'normal' },
+      { text:'User selects split count or triggers Custom Split', type:'normal' },
+      { text:'User picks rounding method (UP/DOWN/NONE)', type:'normal' },
+      { text:'useEffect fires on any input dependency change', type:'dispatch' },
+      { text:'isCustomSplitActive? → calculateBillValuesCustomSplit() : calculateBillValues()', type:'dispatch' },
+      { text:'StyledBillBox renders per-person + overall totals', type:'highlight' },
+    ]
+  },
+  {
+    title:'Custom Split Flow', color:'#38bdf8', dotColor:'#38bdf8',
+    steps:[
+      { text:'User taps "Custom" in StyledSplitOptions', type:'normal' },
+      { text:'navigation.navigate("CustomSplitScreen", { totalBill, tipPercentage })', type:'normal' },
+      { text:'useCustomSplitPeople manages local people array', type:'normal' },
+      { text:'useCustomSplitValidation validates allocations in real time', type:'normal' },
+      { text:'User taps Save → dispatch SET_ACTIVE_SPLIT_CONFIG', type:'dispatch' },
+      { text:'navigation.goBack() → HomeTipScreen', type:'normal' },
+      { text:'HomeTipScreen useEffect detects activeSplitConfig change', type:'dispatch' },
+      { text:'calculateBillValuesCustomSplit() → StyledBillBox shows individual amounts', type:'highlight' },
+      { text:'User selects equal split → dispatch CLEAR_ACTIVE_SPLIT_CONFIG', type:'dispatch' },
+    ]
+  },
+  {
+    title:'Save & Share Flow', color:'#f59e0b', dotColor:'#f59e0b',
+    steps:[
+      { text:'User taps Save/Share in HomeTipScreen', type:'normal' },
+      { text:'useSaveTip checks for duplicate (window + amount + splitSignature)', type:'normal' },
+      { text:'If unique → dispatch SAVE_TIP → savedTipsReducer → AsyncStorage', type:'dispatch' },
+      { text:'useShareTipPreview opens StyledSharePreviewModal', type:'normal' },
+      { text:'Text Share → useShareTipDetailsText → native share sheet', type:'highlight' },
+      { text:'PDF Share → useShareTipDetailsPDF → react-native-html-to-pdf → share sheet', type:'highlight' },
+    ]
+  },
+  {
+    title:'Theme & Boot Flow', color:'#c084fc', dotColor:'#c084fc',
+    steps:[
+      { text:'Entrypoint.tsx: initializeI18n() + applyRTLSync() synchronously', type:'normal' },
+      { text:'ApplicationNavigator mounts → getUserPreferredTheme() from AsyncStorage', type:'normal' },
+      { text:'getUserUpdatedThemeOption() → useThemeColorCustomiser(accents)', type:'normal' },
+      { text:'UnistylesRuntime.setTheme(preferredTheme)', type:'dispatch' },
+      { text:'UnistylesRuntime.setAdaptiveThemes(false) — prevents system theme override', type:'normal' },
+      { text:'NavigationContainer.onReady() → BootSplash.hide({ fade: true })', type:'highlight' },
+    ]
+  },
+];
+
+function renderFlows() {
+  const container = document.getElementById('flows-container');
+  flows.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<div class="card-title"><span class="dot" style="background:${f.dotColor}"></span>${f.title}</div>`;
+    const steps = document.createElement('div');
+    steps.className = 'flow-steps';
+    f.steps.forEach((s, i) => {
+      if (i > 0) {
+        const sep = document.createElement('div');
+        sep.className = 'flow-arrow-sep';
+        sep.textContent = '↓';
+        steps.appendChild(sep);
+      }
+      const step = document.createElement('div');
+      step.className = `flow-step ${s.type}`;
+      step.innerHTML = `<div class="flow-step-num">${i+1}</div><div>${s.text}</div>`;
+      steps.appendChild(step);
+    });
+    card.appendChild(steps);
+    container.appendChild(card);
+  });
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  DEPENDENCIES                                            ║
+// ╚══════════════════════════════════════════════════════════╝
+const depsData = {
+  'Navigation':        ['@react-navigation/native','@react-navigation/native-stack','@react-navigation/drawer','@react-navigation/devtools'],
+  'Animation & Gesture':['react-native-reanimated ^4.2.2','react-native-gesture-handler ^2.30.0','react-native-worklets ^0.7.4'],
+  'Storage':           ['@react-native-async-storage/async-storage ^3.0.1'],
+  'Styling':           ['react-native-unistyles 2.43.0','react-native-safe-area-context ^5.7.0'],
+  'i18n':              ['i18next ^25.8.13','react-i18next ^16.5.4','react-native-localize ^3.7.0'],
+  'Sharing':           ['react-native-share 12.0.11','react-native-html-to-pdf ^1.3.0'],
+  'UI Primitives':     ['react-native-screens ^4.24.0','react-native-svg ^15.15.3','react-native-toast-message ^2.3.3','@miblanchard/react-native-slider ^2.6.0'],
+  'Icons (×8 sets)':   ['ant-design','feather','fontawesome6','foundation','ionicons','lucide','material-design-icons','octicons'],
+  'Native / System':   ['react-native-bootsplash ^7.1.0','react-native-legal ^1.6.0'],
+};
+
+function renderDeps() {
+  const grid = document.getElementById('deps-grid');
+  Object.entries(depsData).forEach(([grp, items]) => {
+    const d = document.createElement('div');
+    d.className = 'dep-group';
+    d.innerHTML = `<div class="dep-title">${grp}</div>${items.map(i=>`<div class="dep-item">${i}</div>`).join('')}`;
+    grid.appendChild(d);
+  });
+}
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  CLICK-AWAY CLEAR                                        ║
+// ╚══════════════════════════════════════════════════════════╝
+document.addEventListener('click', e => {
+  if (!e.target.closest('[data-nid]') && !e.target.closest('#detail-panel') && selectedId) {
+    clearSelection();
+  }
+});
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  INIT                                                    ║
+// ╚══════════════════════════════════════════════════════════╝
+renderOverview();
+renderTree();
+renderScreens();
+renderState();
+renderReducers();
+renderHooks();
+renderComponents();
+renderFlows();
+renderDeps();
+</script>
+</body>
+</html>

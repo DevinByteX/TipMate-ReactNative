@@ -4,7 +4,8 @@ import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledIcons } from '@components';
-import { useValuePulse, useBounce, toFixedWithoutRounding } from '@hooks';
+import { useValuePulse, useBounce } from '@hooks';
+import { toFixedWithoutRounding } from '@utils';
 import { IndividualSplit } from '@/context/types';
 
 // Vertical Devider Component

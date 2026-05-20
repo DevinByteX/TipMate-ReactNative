@@ -4,8 +4,7 @@ import Animated from 'react-native-reanimated';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useTranslation } from 'react-i18next';
 import { StyledHorizontalSlider, StyledIcons, VerticalDevider } from '@components';
-import { useAppContext } from '@/context/AppContext';
-import { useScaleSpring } from '@hooks';
+import { useScaleSpring, useTipOptionsSelector } from '@hooks';
 
 const TipPercentageCapsule = ({
   active = false,
@@ -99,7 +98,7 @@ export const StyledTipOptions = ({
   description?: string;
   onSelectedTipValue?: (value: number) => void;
 }) => {
-  const { state } = useAppContext();
+  const { tips, tipSliderConfig } = useTipOptionsSelector();
   const { t } = useTranslation();
 
   const defaultTipValue = 5;
@@ -132,7 +131,7 @@ export const StyledTipOptions = ({
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {state.tips.slice(0, 2).map(({ place, value }) => (
+              {tips.slice(0, 2).map(({ place, value }) => (
                 <TipPercentageCapsule
                   key={place}
                   textValue={value}
@@ -167,7 +166,7 @@ export const StyledTipOptions = ({
           {/* Second Row */}
           <View style={styles.mainRowContainerStyles}>
             <View style={styles.fistColumnContainerStyles}>
-              {state.tips.slice(2).map(({ place, value }) => (
+              {tips.slice(2).map(({ place, value }) => (
                 <TipPercentageCapsule
                   key={place}
                   textValue={value}
@@ -196,9 +195,9 @@ export const StyledTipOptions = ({
         <View style={styles.sliderContainer}>
           <StyledHorizontalSlider
             sliderValue={tipPercentageValue}
-            step={state.tipSliderConfig.step}
-            minValue={state.tipSliderConfig.min}
-            maxValue={state.tipSliderConfig.max}
+            step={tipSliderConfig.step}
+            minValue={tipSliderConfig.min}
+            maxValue={tipSliderConfig.max}
             onValueChange={value => {
               setTipPercentageValue(value[0]);
               onSelectedTipValue && onSelectedTipValue(value[0]);

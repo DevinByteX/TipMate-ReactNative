@@ -1,7 +1,13 @@
 import { useCallback, useState } from 'react';
-import { useAppContext } from '../context/AppContext';
+import { useHistory } from '../context/AppContext';
 import { SavedTip, IndividualSplit } from '../context/types';
 import { useNavigation } from '@react-navigation/native';
+import { generateId } from '@/utils/idGenerator';
+import {
+    saveTip as createSaveTip,
+    deleteTip as createDeleteTip,
+    clearAllTips as createClearAllTips,
+} from '@/context/actionCreators';
 
 interface SaveTipParams {
     amount: number;
@@ -20,13 +26,8 @@ interface SaveTipParams {
     currencyCode: string;
 }
 
-// Simple ID generator using timestamp and random number
-const generateId = (): string => {
-    return `tip_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
-};
-
 export const useSaveTip = () => {
-    const { dispatch } = useAppContext();
+    const { dispatch } = useHistory();
     const navigation = useNavigation();
 
     const [saveSuccessAlert, setSaveSuccessAlert] = useState<{
@@ -56,7 +57,7 @@ export const useSaveTip = () => {
                     currencyCode: params.currencyCode,
                 };
 
-                dispatch({ type: 'SAVE_TIP', payload: savedTip });
+                dispatch(createSaveTip(savedTip));
                 setSaveSuccessAlert({ visible: true, savedTip });
                 return savedTip;
             } catch (error) {
@@ -71,7 +72,7 @@ export const useSaveTip = () => {
     const deleteTip = useCallback(
         (tipId: string) => {
             try {
-                dispatch({ type: 'DELETE_TIP', payload: tipId });
+                dispatch(createDeleteTip(tipId));
             } catch (error) {
                 console.error('Error deleting tip:', error);
                 setDeleteErrorAlert(true);
@@ -86,7 +87,7 @@ export const useSaveTip = () => {
 
     const confirmClearAllTips = useCallback(() => {
         try {
-            dispatch({ type: 'CLEAR_ALL_TIPS' });
+            dispatch(createClearAllTips());
             setClearAllAlert(false);
         } catch (error) {
             console.error('Error clearing tips:', error);
@@ -96,11 +97,17 @@ export const useSaveTip = () => {
 
     const navigateToTipDetail = useCallback(
         (tip: SavedTip) => {
-            (navigation as any).navigate('SavedTipDetailScreen', { tip });
+            navigation.navigate('SavedTipDetailScreen', { tip });
             setSaveSuccessAlert({ visible: false });
         },
         [navigation],
     );
+
+    const dismissSaveSuccess = useCallback(() => setSaveSuccessAlert({ visible: false }), []);
+    const dismissSaveError = useCallback(() => setSaveErrorAlert(false), []);
+    const dismissDeleteError = useCallback(() => setDeleteErrorAlert(false), []);
+    const dismissClearAll = useCallback(() => setClearAllAlert(false), []);
+    const dismissClearError = useCallback(() => setClearErrorAlert(false), []);
 
     return {
         saveTip,
@@ -109,14 +116,14 @@ export const useSaveTip = () => {
         confirmClearAllTips,
         navigateToTipDetail,
         saveSuccessAlert,
-        setSaveSuccessAlert,
         saveErrorAlert,
-        setSaveErrorAlert,
         deleteErrorAlert,
-        setDeleteErrorAlert,
         clearAllAlert,
-        setClearAllAlert,
         clearErrorAlert,
-        setClearErrorAlert,
+        dismissSaveSuccess,
+        dismissSaveError,
+        dismissDeleteError,
+        dismissClearAll,
+        dismissClearError,
     };
 };

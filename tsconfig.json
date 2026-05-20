@@ -2,13 +2,19 @@
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
     "types": ["jest"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "baseUrl": ".", // if i'm not using baseUrl option i have to add . in every single path beginning as EX : "paths":{ "@/":["./app/*"]} || see no dot in /app/*
     "paths": {
       "@/*": ["app/*"],
       "@components": ["app/components/index"], // if you are refering common index file in folder you should add "/index" end of the path
+      "@components/*": ["app/components/*"],
       "@styles/*": ["app/styles/*"], // if we want to import all the files in particular folder we should use "*", end of the path
       "@navigation/*": ["app/navigation/*"],
       "@hooks": ["app/hooks/index"],
+      "@hooks/*": ["app/hooks/*"],
+      "@utils": ["app/utils/index"],
+      "@utils/*": ["app/utils/*"],
       "@configs": ["app/configs/index"],
       "@plugins": ["./app/plugins/index"]
     }

@@ -8,60 +8,46 @@ import {
 } from 'react-native-toast-message';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 
-/*
-  1. Create the config
-*/
+const SuccessToast = (props: BaseToastProps) => {
+  const { styles } = useStyles(stylesheet);
+  return (
+    <BaseToast
+      {...props}
+      style={styles.successToastStyle}
+      contentContainerStyle={styles.successToastContainerStyle}
+      text1Style={styles.successText1}
+      text1NumberOfLines={2}
+    />
+  );
+};
+
+const AppErrorToast = (props: BaseToastProps) => {
+  const { styles } = useStyles(stylesheet);
+  return (
+    <ErrorToast
+      {...props}
+      style={styles.errorToastStyle}
+      contentContainerStyle={styles.errorToastContainerStyle}
+      text1Style={styles.errorText1}
+      text1NumberOfLines={2}
+    />
+  );
+};
+
+const TomatoToast = ({ text1, props }: ToastConfigParams<any>) => {
+  const { styles } = useStyles(stylesheet);
+  return (
+    <View style={styles.tomatoToastStyle}>
+      <Text>{text1}</Text>
+      {props?.uuid && <Text>{props.uuid}</Text>}
+    </View>
+  );
+};
+
 export const toastConfig = {
-  /*
-    Overwrite 'success' type,
-    by modifying the existing `BaseToast` component
-  */
-  success: (props: BaseToastProps) => {
-    const { styles } = useStyles(stylesheet);
-    return (
-      <BaseToast
-        {...props}
-        style={styles.successToastStyle}
-        contentContainerStyle={styles.successToastContainerStyle}
-        text1Style={styles.successText1}
-        text1NumberOfLines={2}
-      />
-    );
-  },
-
-  /*
-    Overwrite 'error' type,
-    by modifying the existing `ErrorToast` component
-  */
-  error: (props: BaseToastProps) => {
-    const { styles } = useStyles(stylesheet);
-    return (
-      <ErrorToast
-        {...props}
-        style={styles.errorToastStyle}
-        contentContainerStyle={styles.errorToastContainerStyle}
-        text1Style={styles.errorText1}
-        text1NumberOfLines={2}
-      />
-    );
-  },
-
-  /*
-    Or create a completely new type - `tomatoToast`,
-    building the layout from scratch.
-    I can consume any custom `props` I want.
-    They will be passed when calling the `show` method (see below)
-    *** USAGE : Toast.show({ type: 'tomatoToast', text1: `example text`, props:{ uuid :'example uuid'}, });
-  */
-  tomatoToast: ({ text1, props }: ToastConfigParams<any>) => {
-    const { styles } = useStyles(stylesheet);
-    return (
-      <View style={styles.tomatoToastStyle}>
-        <Text>{text1}</Text>
-        {props?.uuid && <Text>{props.uuid}</Text>}
-      </View>
-    );
-  },
+  success: SuccessToast,
+  error: AppErrorToast,
+  tomatoToast: TomatoToast,
 };
 
 const stylesheet = createStyleSheet(({ colors, fonts }) => ({

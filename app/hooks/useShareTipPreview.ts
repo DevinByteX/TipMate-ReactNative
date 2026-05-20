@@ -1,10 +1,9 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useShareTipDetailsText, formatTipDetailsPreview } from './useShareTipDetailsText';
-import { useShareTipDetailsPDF, PDFTranslations } from './useShareTipDetailsPDF';
-import type { ShareTipDetailsParams, ShareTranslations } from './useShareTipDetailsText';
+import { shareTipText, shareTipPDF, formatTipDetailsPreview } from '@/utils/tipSharing';
+import type { ShareTipDetailsParams, ShareTranslations, PDFTranslations } from '@/utils/tipSharing';
 import { Platform } from 'react-native';
-import { useAppContext } from '@/context/AppContext';
+import { useUserSettings } from '@/context/AppContext';
 import { getLocaleForFormatting } from '@/localization';
 
 type ShareTipData = Omit<ShareTipDetailsParams, 'title' | 'subject'>;
@@ -51,12 +50,12 @@ interface UseShareTipPreviewReturn {
 export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipPreviewReturn => {
     const [isPreviewVisible, setIsPreviewVisible] = useState<boolean>(false);
     const pendingShareAction = useRef<'text' | 'pdf' | null>(null);
-    const { t } = useTranslation();
-    const { state } = useAppContext();
-    const locale = getLocaleForFormatting(state.language);
+    const { t, i18n } = useTranslation();
+    const { state: settingsState } = useUserSettings();
+    const locale = getLocaleForFormatting(settingsState.language);
 
     // Build translations object from i18n
-    const shareTranslations: ShareTranslations = {
+    const shareTranslations: ShareTranslations = useMemo(() => ({
         tipSummary: t('share.tipSummary'),
         billAmount: t('share.billAmount'),
         tipPercentage: t('share.tipPercentage'),
@@ -70,10 +69,11 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
         sharedVia: t('share.sharedVia'),
         customSplitLabel: t('share.customSplitLabel'),
         individualSplit: t('share.individualSplit'),
-    };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }), [i18n.language]);
 
     // Build PDF translations object from i18n
-    const pdfTranslations: PDFTranslations = {
+    const pdfTranslations: PDFTranslations = useMemo(() => ({
         thankYou: t('share.pdf.thankYou'),
         tipSummaryDescription: t('share.pdf.tipSummaryDescription'),
         receiptId: t('share.receipt'),
@@ -93,10 +93,14 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
         tagline: t('screens.home.tagline'),
         shareTitle: t('share.shareYourTip'),
         shareSubject: t('share.tipMateSummary'),
-    };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }), [i18n.language]);
 
     // Generate preview content
-    const previewContent = shareData ? formatTipDetailsPreview({ ...shareData, translations: shareTranslations }) : '';
+    const previewContent = useMemo(
+        () => shareData ? formatTipDetailsPreview({ ...shareData, translations: shareTranslations }) : '',
+        [shareData, shareTranslations],
+    );
 
     // Open the preview modal
     const openPreview = () => {
@@ -117,11 +121,11 @@ export const useShareTipPreview = (shareData: ShareTipData | null): UseShareTipP
 
             // Execute share action after modal has been dismissed
             if (action === 'text') {
-                useShareTipDetailsText({ ...shareData, translations: shareTranslations }).catch(error => {
+                shareTipText({ ...shareData, translations: shareTranslations }).catch(error => {
                     console.error('Error sharing as text:', error);
                 });
             } else if (action === 'pdf') {
-                useShareTipDetailsPDF(shareData, pdfTranslations, locale).catch(error => {
+                shareTipPDF(shareData, pdfTranslations, locale).catch(error => {
                     console.error('Error sharing as PDF:', error);
                 });
             }
