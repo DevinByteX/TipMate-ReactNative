@@ -1,6 +1,7 @@
 import React, { createContext, Dispatch, useContext, useEffect, ReactNode } from 'react';
 import { UserSettingsState, UserSettingsAction } from './types';
 import { currencyConfigReducer, duplicatePreventionReducer, languageReducer } from './reducers';
+import { ActionTypes } from './actionTypes';
 import { Constants } from '@configs';
 import { usePersistedReducer } from '../hooks/usePersistedReducer';
 import { changeLanguage, applyRTLSync, getCurrentLanguage } from '../localization';
@@ -17,7 +18,7 @@ const userSettingsReducer = (
   action: UserSettingsAction,
 ): UserSettingsState => {
   switch (action.type) {
-    case 'LOAD_PERSISTED_STATE':
+    case ActionTypes.LOAD_PERSISTED_STATE:
       return {
         ...state,
         currencyConfig: action.payload.currencyConfig ?? state.currencyConfig,
@@ -26,10 +27,10 @@ const userSettingsReducer = (
         duplicatePreventionWindow:
           action.payload.duplicatePreventionWindow ?? state.duplicatePreventionWindow,
       };
-    case 'UPDATE_CURRENCY_SIGN':
-    case 'RESET_CURRENCY_TO_SYSTEM':
+    case ActionTypes.UPDATE_CURRENCY_SIGN:
+    case ActionTypes.RESET_CURRENCY_TO_SYSTEM:
       return { ...state, currencyConfig: currencyConfigReducer(state.currencyConfig, action) };
-    case 'UPDATE_DUPLICATE_PREVENTION_WINDOW':
+    case ActionTypes.UPDATE_DUPLICATE_PREVENTION_WINDOW:
       return {
         ...state,
         duplicatePreventionWindow: duplicatePreventionReducer(
@@ -37,8 +38,8 @@ const userSettingsReducer = (
           action,
         ),
       };
-    case 'SET_LANGUAGE':
-    case 'RESET_LANGUAGE_TO_SYSTEM': {
+    case ActionTypes.SET_LANGUAGE:
+    case ActionTypes.RESET_LANGUAGE_TO_SYSTEM: {
       const langState = languageReducer({ language: state.language, isRTL: state.isRTL }, action);
       return { ...state, ...langState };
     }
@@ -55,7 +56,7 @@ const UserSettingsContext = createContext<{
   dispatch: () => undefined,
 });
 
-export const UserSettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const UserSettingsProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = usePersistedReducer(
     userSettingsReducer,
     initialState,
