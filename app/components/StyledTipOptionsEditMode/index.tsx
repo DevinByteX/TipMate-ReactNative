@@ -16,7 +16,6 @@ import { useTipOptionsEditSelector } from '@hooks';
 import { areOptionArraysSame } from '@utils';
 import { TipOptionState } from '@/context/types';
 import Toast from 'react-native-toast-message';
-import { ActionTypes } from '@/context/actionTypes';
 
 const TipPercentageEditCapsule = ({
   textValue = 5,

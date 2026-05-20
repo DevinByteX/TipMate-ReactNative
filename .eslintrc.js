@@ -6,6 +6,9 @@ module.exports = {
     // Prevent circular dependencies across the codebase.
     // maxDepth caps traversal depth to keep lint runs fast.
     'import/no-cycle': ['error', { maxDepth: 10 }],
+    // Catch unused imports and variables (prefix with _ to intentionally ignore).
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
   },
   settings: {
     'import/resolver': {

@@ -2,6 +2,8 @@
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
     "types": ["jest"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "baseUrl": ".", // if i'm not using baseUrl option i have to add . in every single path beginning as EX : "paths":{ "@/":["./app/*"]} || see no dot in /app/*
     "paths": {
       "@/*": ["app/*"],
