@@ -97,7 +97,7 @@ export const useSaveTip = () => {
 
     const navigateToTipDetail = useCallback(
         (tip: SavedTip) => {
-            (navigation as any).navigate('SavedTipDetailScreen', { tip });
+            navigation.navigate('SavedTipDetailScreen', { tip });
             setSaveSuccessAlert({ visible: false });
         },
         [navigation],
