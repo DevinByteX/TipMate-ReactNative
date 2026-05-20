@@ -1,6 +1,7 @@
 import React, { createContext, Dispatch, useContext, ReactNode } from 'react';
 import { ConfigState, ConfigAction } from './types';
 import { tipReducer, splitReducer } from './reducers';
+import { ActionTypes } from './actionTypes';
 import { Constants } from '@configs';
 import { usePersistedReducer } from '../hooks/usePersistedReducer';
 
@@ -13,7 +14,7 @@ const initialState: ConfigState = {
 
 const configReducer = (state: ConfigState, action: ConfigAction): ConfigState => {
   switch (action.type) {
-    case 'LOAD_PERSISTED_STATE':
+    case ActionTypes.LOAD_PERSISTED_STATE:
       return {
         ...state,
         tips: action.payload.tips ?? state.tips,
@@ -21,26 +22,26 @@ const configReducer = (state: ConfigState, action: ConfigAction): ConfigState =>
         tipSliderConfig: action.payload.tipSliderConfig ?? state.tipSliderConfig,
         splitSliderConfig: action.payload.splitSliderConfig ?? state.splitSliderConfig,
       };
-    case 'UPDATE_TIP_OPTIONS':
-    case 'RESET_TIP_OPTIONS_TO_DEFAULT':
+    case ActionTypes.UPDATE_TIP_OPTIONS:
+    case ActionTypes.RESET_TIP_OPTIONS_TO_DEFAULT:
       return { ...state, tips: tipReducer(state.tips, action) };
-    case 'UPDATE_SPLIT_OPTIONS':
-    case 'RESET_SPLIT_OPTIONS_TO_DEFAULT':
+    case ActionTypes.UPDATE_SPLIT_OPTIONS:
+    case ActionTypes.RESET_SPLIT_OPTIONS_TO_DEFAULT:
       return { ...state, splits: splitReducer(state.splits, action) };
     default:
       return state;
   }
 };
 
-const ConfigContext = createContext<{
-  state: ConfigState;
-  dispatch: Dispatch<ConfigAction>;
-}>({
-  state: initialState,
-  dispatch: () => undefined,
-});
+const ConfigContext = createContext<
+  | {
+      state: ConfigState;
+      dispatch: Dispatch<ConfigAction>;
+    }
+  | undefined
+>(undefined);
 
-export const ConfigProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ConfigProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = usePersistedReducer(
     configReducer,
     initialState,

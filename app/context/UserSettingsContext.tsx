@@ -48,13 +48,13 @@ const userSettingsReducer = (
   }
 };
 
-const UserSettingsContext = createContext<{
-  state: UserSettingsState;
-  dispatch: Dispatch<UserSettingsAction>;
-}>({
-  state: initialState,
-  dispatch: () => undefined,
-});
+const UserSettingsContext = createContext<
+  | {
+      state: UserSettingsState;
+      dispatch: Dispatch<UserSettingsAction>;
+    }
+  | undefined
+>(undefined);
 
 export const UserSettingsProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = usePersistedReducer(

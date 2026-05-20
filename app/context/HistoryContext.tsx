@@ -34,13 +34,13 @@ const historyReducer = (state: HistoryState, action: HistoryAction): HistoryStat
   }
 };
 
-const HistoryContext = createContext<{
-  state: HistoryState;
-  dispatch: Dispatch<HistoryAction>;
-}>({
-  state: initialState,
-  dispatch: () => undefined,
-});
+const HistoryContext = createContext<
+  | {
+      state: HistoryState;
+      dispatch: Dispatch<HistoryAction>;
+    }
+  | undefined
+>(undefined);
 
 export const HistoryProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = usePersistedReducer(

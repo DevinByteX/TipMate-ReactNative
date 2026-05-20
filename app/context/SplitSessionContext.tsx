@@ -20,13 +20,13 @@ const splitSessionReducer = (
   }
 };
 
-const SplitSessionContext = createContext<{
-  state: SplitSessionState;
-  dispatch: Dispatch<SplitConfigAction>;
-}>({
-  state: initialState,
-  dispatch: () => undefined,
-});
+const SplitSessionContext = createContext<
+  | {
+      state: SplitSessionState;
+      dispatch: Dispatch<SplitConfigAction>;
+    }
+  | undefined
+>(undefined);
 
 export const SplitSessionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Intentionally uses useReducer (not usePersistedReducer) — activeSplitConfig is
