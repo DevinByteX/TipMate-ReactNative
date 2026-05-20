@@ -3,8 +3,7 @@ import { View, Text, TextInput, Pressable } from 'react-native';
 import Animated, { FadeIn, FadeOut, LinearTransition } from 'react-native-reanimated';
 import { StyledIcons } from '@components';
 import { IndividualSplit } from '@/context/types';
-
-const MIN_PEOPLE = 2;
+import { Constants } from '@/configs';
 
 // Allocation type button component
 const AllocationTypeButton = ({
@@ -53,7 +52,7 @@ const PersonCard = ({
   theme,
   styles,
 }: PersonCardProps) => {
-  const canRemove = totalPeople > MIN_PEOPLE;
+  const canRemove = totalPeople > Constants.MIN_SPLIT_PEOPLE;
   const placeholderName = `${t('screens.customSplit.personDefault', { number: index + 1 })} - ${t(
     'screens.customSplit.namePlaceholder',
   )}`;

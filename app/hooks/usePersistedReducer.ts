@@ -9,6 +9,7 @@ export const usePersistedReducer = <S, A>(
 ): [S, Dispatch<A>] => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const isHydratedRef = useRef(false);
+  const latestStateRef = useRef(state);
 
   useEffect(() => {
     const loadState = async () => {
@@ -28,8 +29,14 @@ export const usePersistedReducer = <S, A>(
     loadState();
   }, [key]);
 
+  // Keep latestStateRef in sync with state
+  useEffect(() => {
+    latestStateRef.current = state;
+  }, [state]);
+
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Debounced save on state changes (cleanup only clears timeout)
   useEffect(() => {
     if (!isHydratedRef.current) return;
 
@@ -37,7 +44,7 @@ export const usePersistedReducer = <S, A>(
 
     saveTimeoutRef.current = setTimeout(async () => {
       try {
-        await AsyncStorage.setItem(key, JSON.stringify(state));
+        await AsyncStorage.setItem(key, JSON.stringify(latestStateRef.current));
       } catch (error) {
         console.error('Failed to save state to AsyncStorage', error);
       }
@@ -45,11 +52,18 @@ export const usePersistedReducer = <S, A>(
 
     return () => {
       if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
-      AsyncStorage.setItem(key, JSON.stringify(state)).catch(error => {
+    };
+  }, [state, key]);
+
+  // Unmount flush only
+  useEffect(() => {
+    return () => {
+      if (!isHydratedRef.current) return;
+      AsyncStorage.setItem(key, JSON.stringify(latestStateRef.current)).catch(error => {
         console.error('Failed to flush state to AsyncStorage on unmount', error);
       });
     };
-  }, [state, key]);
+  }, [key]);
 
   return [state, dispatch];
 };

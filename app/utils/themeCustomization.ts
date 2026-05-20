@@ -9,7 +9,11 @@ export const applyThemeColors = (themes: CustomisedTheme[]): void => {
     if (
         !Array.isArray(themes) ||
         themes.some(
-            theme => typeof theme.themeName !== 'string' || typeof theme.customColors !== 'object',
+            theme =>
+                typeof theme.themeName !== 'string' ||
+                !theme.customColors ||
+                typeof theme.customColors !== 'object' ||
+                Array.isArray(theme.customColors),
         )
     ) {
         console.log('Invalid theme configuration provided');

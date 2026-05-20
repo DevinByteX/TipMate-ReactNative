@@ -40,8 +40,8 @@ export const areOptionArraysSame = ({
     }
 
     // Sort the arrays by a unique property to ensure order doesn't matter
-    const sortedFirstArray = firstArray.sort((a, b) => a.place - b.place);
-    const sortedSecondArray = secondArray.sort((a, b) => a.place - b.place);
+    const sortedFirstArray = [...firstArray].sort((a, b) => a.place - b.place);
+    const sortedSecondArray = [...secondArray].sort((a, b) => a.place - b.place);
 
     // Compare each object deeply
     return sortedFirstArray.every((obj1, index) => {
