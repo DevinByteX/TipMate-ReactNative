@@ -33,8 +33,9 @@ export const acceptNumbersAndDecimals = (input: string): string => {
     }
 
     // Restrict to two decimal places
-    if (parts[1]?.length > 2) {
-        formatted = `${parts[0]}.${parts[1].substring(0, 2)}`;
+    const trimmedParts = formatted.split('.');
+    if (trimmedParts[1]?.length > 2) {
+        formatted = `${trimmedParts[0]}.${trimmedParts[1].substring(0, 2)}`;
     }
 
     return formatted;
