@@ -148,7 +148,7 @@ const SavedTipsScreen = () => {
     }
 
     return filtered;
-  }, [savedTips, searchQuery, percentageFilter, peopleFilter, dateFilter]);
+  }, [savedTips, searchQuery, percentageFilter, peopleFilter, dateFilter, settingsState.language]);
 
   const handleDeleteTip = (tipId: string) => {
     setPendingDeleteTipId(tipId);

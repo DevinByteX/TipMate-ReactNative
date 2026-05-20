@@ -16,7 +16,6 @@ import { useSplitOptionsEditSelector } from '@hooks';
 import { areOptionArraysSame } from '@utils';
 import { SplitOptionState } from '@/context/types';
 import Toast from 'react-native-toast-message';
-import { ActionTypes } from '@/context/actionTypes';
 
 const SplitPercentageEditCapsule = ({
   textValue = 5,
@@ -34,8 +33,8 @@ const SplitPercentageEditCapsule = ({
       optionsArray={splits}
       minValidateValue={1}
       maxValidateValue={15}
-      onValueChange={({ place, preValue, newValue }) => {
-        const updatedSplitOption: SplitOptionState = { place: place, value: newValue }; // Update split option value
+      onValueChange={({ place: updatedPlace, newValue }) => {
+        const updatedSplitOption: SplitOptionState = { place: updatedPlace, value: newValue }; // Update split option value
         updateSplitOption(updatedSplitOption);
       }}
     />
@@ -111,11 +110,10 @@ export const StyledSplitOptionsEditMode = ({
   solidButtonText: string;
   resetSuccessToastText: string;
 }) => {
-  const { splits, splitSliderConfig, updateSplitOption, resetSplitsToDefault } =
-    useSplitOptionsEditSelector();
+  const { splits, splitSliderConfig, resetSplitsToDefault } = useSplitOptionsEditSelector();
   const { t } = useTranslation();
 
-  const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
+  const [customSliderConfigVisible, _setCustomSliderConfigVisible] = useState<boolean>(false);
   const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);
 
   const { styles } = useStyles(stylesheet);
@@ -133,12 +131,7 @@ export const StyledSplitOptionsEditMode = ({
         {` ${description}`}
       </Text>
       <View>
-        <VerticalDevider
-          verticalDeviderAdditionalStyles={{
-            position: 'absolute',
-            alignSelf: 'center',
-          }}
-        />
+        <VerticalDevider verticalDeviderAdditionalStyles={styles.verticalDividerStyles} />
         <View style={styles.mainInnerContainer}>
           {/* First Row */}
           <View style={styles.mainRowContainerStyles}>
@@ -350,5 +343,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 14,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
+  },
+  verticalDividerStyles: {
+    position: 'absolute' as const,
+    alignSelf: 'center' as const,
   },
 }));

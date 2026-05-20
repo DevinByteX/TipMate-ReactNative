@@ -123,32 +123,47 @@ const HomeTipScreen = () => {
   const effectiveOverall =
     isCustomSplitActive && customBillValues ? customBillValues.overall : billValues?.overall;
 
-  const shareData = effectiveOverall
-    ? {
-        amount: userInputBillAmount,
-        tip: parseFloat(effectiveOverall.tip || '0'),
-        total: parseFloat(effectiveOverall.total || '0'),
-        tipPercentage: userInputTipPercentage,
-        numberOfPeople:
-          isCustomSplitActive && customSplits ? customSplits.length : userInputSplitCount,
-        splitType: (isCustomSplitActive ? 'custom' : 'equal') as 'equal' | 'custom',
-        // A stable, primitive representation of the split configuration for duplicate detection.
-        // Uses input data (not calculated amounts) so rounding changes don't break detection.
-        splitSignature: buildSplitSignature(isCustomSplitActive, customSplits),
-        perPerson:
-          !isCustomSplitActive && userInputSplitCount > 1 && billValues
-            ? {
-                amount: parseFloat(billValues.perPerson?.subtotal || '0'),
-                tip: parseFloat(billValues.perPerson?.tip || '0'),
-                total: parseFloat(billValues.perPerson?.total || '0'),
-              }
-            : undefined,
-        individualSplits:
-          isCustomSplitActive && customBillValues ? customBillValues.individuals : undefined,
-        currencySymbol,
-        currencyCode,
-      }
-    : null;
+  const shareData = useMemo(
+    () =>
+      effectiveOverall
+        ? {
+            amount: userInputBillAmount,
+            tip: parseFloat(effectiveOverall.tip || '0'),
+            total: parseFloat(effectiveOverall.total || '0'),
+            tipPercentage: userInputTipPercentage,
+            numberOfPeople:
+              isCustomSplitActive && customSplits ? customSplits.length : userInputSplitCount,
+            splitType: (isCustomSplitActive ? 'custom' : 'equal') as 'equal' | 'custom',
+            // A stable, primitive representation of the split configuration for duplicate detection.
+            // Uses input data (not calculated amounts) so rounding changes don't break detection.
+            splitSignature: buildSplitSignature(isCustomSplitActive, customSplits),
+            perPerson:
+              !isCustomSplitActive && userInputSplitCount > 1 && billValues
+                ? {
+                    amount: parseFloat(billValues.perPerson?.subtotal || '0'),
+                    tip: parseFloat(billValues.perPerson?.tip || '0'),
+                    total: parseFloat(billValues.perPerson?.total || '0'),
+                  }
+                : undefined,
+            individualSplits:
+              isCustomSplitActive && customBillValues ? customBillValues.individuals : undefined,
+            currencySymbol,
+            currencyCode,
+          }
+        : null,
+    [
+      effectiveOverall,
+      userInputBillAmount,
+      userInputTipPercentage,
+      isCustomSplitActive,
+      customSplits,
+      userInputSplitCount,
+      billValues,
+      customBillValues,
+      currencySymbol,
+      currencyCode,
+    ],
+  );
 
   // Check if current tip already exists in saved tips within the time window
   const existingSavedTip = useMemo(
