@@ -139,13 +139,24 @@ export const calculateBillValuesCustomSplit = (
   individualSplits: IndividualSplit[],
 ): CustomSplitCalculationType => {
   // Validate inputs
-  if (isNaN(billAmount) || isNaN(tipPercentage) || billAmount < 0 || tipPercentage < 0 || individualSplits.length === 0) {
+  if (
+    !Array.isArray(individualSplits) ||
+    isNaN(billAmount) ||
+    isNaN(tipPercentage) ||
+    billAmount < 0 ||
+    tipPercentage < 0 ||
+    individualSplits.length === 0 ||
+    individualSplits.some(s => !s || typeof s !== 'object')
+  ) {
     return {
       overall: { total: '0.00', tip: '0.00', subtotal: '0.00' },
       individuals: [],
       disabledRoundingMethods: { UP: false, DOWN: false, NO: false },
     };
   }
+
+  // Filter out any invalid splits to be extra safe
+  const validSplits = individualSplits.filter(s => s && typeof s === 'object' && 'id' in s && 'name' in s);
 
   // 1. Calculate overall amounts
   const tipTotal = (tipPercentage / 100) * billAmount;
@@ -160,9 +171,10 @@ export const calculateBillValuesCustomSplit = (
   const processedSplits: (IndividualSplit & { decimalPart?: number })[] = [];
 
   // 2a. Process FIXED amounts first
-  individualSplits
-    .filter(s => s.allocationType === 'fixed')
+  validSplits
+    .filter(s => s && s.allocationType === 'fixed')
     .forEach(split => {
+      if (!split) return;
       const amount = split.value || 0;
       remainingAmount -= amount;
       processedSplits.push({ ...split, calculatedAmount: amount });
@@ -178,9 +190,10 @@ export const calculateBillValuesCustomSplit = (
   // Note: Percentages are calculated against the full rounded total (not the remaining
   // amount after fixed allocations). This matches the validation in CustomSplitScreen
   // where fixed_pct + percentage_pct are checked additively against 100%.
-  individualSplits
-    .filter(s => s.allocationType === 'percentage')
+  validSplits
+    .filter(s => s && s.allocationType === 'percentage')
     .forEach(split => {
+      if (!split) return;
       const percentage = split.value || 0;
       const amount = (percentage / 100) * roundedOverallTotal;
       remainingAmount -= amount;
@@ -188,7 +201,7 @@ export const calculateBillValuesCustomSplit = (
     });
 
   // 2c. Process REMAINDER splits (divide remaining equally)
-  const remainderSplits = individualSplits.filter(s => s.allocationType === 'remainder');
+  const remainderSplits = validSplits.filter(s => s && s.allocationType === 'remainder');
 
   // If there are no remainder splits but there is still a significant remaining amount,
   // distribute it deterministically across existing percentage allocations so that
@@ -199,7 +212,7 @@ export const calculateBillValuesCustomSplit = (
 
     if (unallocatedInCents > 0) {
       const adjustableSplits = processedSplits.filter(
-        split => split.allocationType === 'percentage',
+        split => split && split.allocationType === 'percentage',
       );
 
       const totalAdjustable = adjustableSplits.reduce(
@@ -209,7 +222,8 @@ export const calculateBillValuesCustomSplit = (
 
       if (totalAdjustable > 0) {
         adjustableSplits.forEach(split => {
-          const current = split.calculatedAmount || 0;
+          if (!split) return;
+          const current = split?.calculatedAmount || 0;
           const proportion = current / totalAdjustable;
           split.calculatedAmount = current + unallocatedAmount * proportion;
         });
@@ -234,10 +248,12 @@ export const calculateBillValuesCustomSplit = (
   }
 
   // 3. Distribute penny differences using largest decimal remainder method
-  const splitsWithDecimals = processedSplits.map(split => ({
-    ...split,
-    decimalPart: Math.round((((split.calculatedAmount || 0) * 100) % 1) * 1e10) / 1e10,
-  }));
+  const splitsWithDecimals = processedSplits
+    .filter(split => split && typeof split === 'object')
+    .map(split => ({
+      ...split,
+      decimalPart: Math.round((((split?.calculatedAmount || 0) * 100) % 1) * 1e10) / 1e10,
+    }));
 
   // Sort by decimal remainder descending for penny distribution
   splitsWithDecimals.sort((a, b) => (b.decimalPart || 0) - (a.decimalPart || 0));
@@ -253,13 +269,17 @@ export const calculateBillValuesCustomSplit = (
   // Add $0.01 to persons with largest decimal remainders
   const startIdx = Math.max(0, pennyDifference);
   for (let i = 0; i < Math.max(0, pennyDifference) && i < splitsWithDecimals.length; i++) {
-    splitsWithDecimals[i].calculatedAmount =
-      (Math.floor((splitsWithDecimals[i].calculatedAmount || 0) * 100) + 1) / 100;
+    if (splitsWithDecimals[i]) {
+      splitsWithDecimals[i].calculatedAmount =
+        (Math.floor((splitsWithDecimals[i]?.calculatedAmount || 0) * 100) + 1) / 100;
+    }
   }
   // Floor the rest
   for (let i = startIdx; i < splitsWithDecimals.length; i++) {
-    splitsWithDecimals[i].calculatedAmount =
-      Math.floor((splitsWithDecimals[i].calculatedAmount || 0) * 100) / 100;
+    if (splitsWithDecimals[i]) {
+      splitsWithDecimals[i].calculatedAmount =
+        Math.floor((splitsWithDecimals[i]?.calculatedAmount || 0) * 100) / 100;
+    }
   }
 
   // 4. Determine disabled rounding methods
