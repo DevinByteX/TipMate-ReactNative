@@ -2,7 +2,7 @@ import React, { createContext, Dispatch, useContext, useEffect, ReactNode } from
 import { UserSettingsState, UserSettingsAction } from './types';
 import { currencyConfigReducer, duplicatePreventionReducer, languageReducer } from './reducers';
 import { Constants } from '@configs';
-import { usePersistedReducer } from '@hooks';
+import { usePersistedReducer } from '../hooks/usePersistedReducer';
 import { changeLanguage, applyRTLSync, getCurrentLanguage } from '../localization';
 
 const initialState: UserSettingsState = {

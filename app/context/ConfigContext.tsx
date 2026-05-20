@@ -2,7 +2,7 @@ import React, { createContext, Dispatch, useContext, ReactNode } from 'react';
 import { ConfigState, ConfigAction } from './types';
 import { tipReducer, splitReducer } from './reducers';
 import { Constants } from '@configs';
-import { usePersistedReducer } from '@hooks';
+import { usePersistedReducer } from '../hooks/usePersistedReducer';
 
 const initialState: ConfigState = {
   tips: Constants.defaultTipOptionsArray,

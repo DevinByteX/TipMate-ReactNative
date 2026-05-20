@@ -2,7 +2,7 @@ import React, { createContext, Dispatch, useContext, ReactNode } from 'react';
 import { HistoryState, HistoryAction } from './types';
 import { savedTipsReducer, savedSplitPresetsReducer } from './reducers';
 import { Constants } from '@configs';
-import { usePersistedReducer } from '@hooks';
+import { usePersistedReducer } from '../hooks/usePersistedReducer';
 import { ActionTypes } from './actionTypes';
 
 const initialState: HistoryState = {

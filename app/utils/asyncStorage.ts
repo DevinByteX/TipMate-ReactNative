@@ -77,8 +77,10 @@ export const asyncStorageUtil: AsyncStorageUtil = {
    */
   mergeData: async (key: string, value: any): Promise<void> => {
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.mergeItem(key, jsonValue);
+      const existing = await AsyncStorage.getItem(key);
+      const existingObj = existing ? JSON.parse(existing) : {};
+      const merged = { ...existingObj, ...value };
+      await AsyncStorage.setItem(key, JSON.stringify(merged));
       console.log(`${key} Data successfully merged`);
     } catch (error) {
       console.log(`${key} Error merging data`, error);
@@ -92,12 +94,8 @@ export const asyncStorageUtil: AsyncStorageUtil = {
   printAsyncStorage: async (): Promise<void> => {
     try {
       const keys = await AsyncStorage.getAllKeys();
-      const stores = await AsyncStorage.multiGet(keys);
-      const asyncStorage: { [key: string]: string | null } = {};
-      stores.forEach(([key, value]) => {
-        asyncStorage[key] = value;
-      });
-      console.log('asyncStorage', asyncStorage);
+      const stores = await AsyncStorage.getMany(keys);
+      console.log('asyncStorage', stores);
     } catch (error) {
       console.log('Error printing AsyncStorage:', error);
     }
