@@ -261,7 +261,7 @@ rename:
   "source-map@0.6.1": source-map
   "serialize-error@2.1.0": serialize-error
   "throat@5.0.0": throat
-  "yaml@2.8.3": yaml
+  "yaml@2.9.0": yaml
   "semver@7.7.4": semver
   "@react-native_gradle-plugin@0.84.1": '@react-native/gradle-plugin'
   "@react-native_js-polyfills@0.84.1": '@react-native/js-polyfills'
@@ -353,7 +353,7 @@ rename:
   "getenv@2.0.0": getenv
   "glob@13.0.0": glob
   "minimatch@10.2.4": minimatch
-  "brace-expansion@5.0.5": brace-expansion
+  "brace-expansion@5.0.6": brace-expansion
   "balanced-match@4.0.4": balanced-match
   "minipass@7.1.2": minipass
   "path-scurry@2.0.1": path-scurry
@@ -1499,8 +1499,8 @@ manual:
     version: '5.0.0'
     source: https://github.com/ForbesLindesay/throat
     file: '../node_modules/throat/LICENSE'
-  - name: yaml@2.8.3
-    version: '2.8.3'
+  - name: yaml@2.9.0
+    version: '2.9.0'
     source: https://github.com/eemeli/yaml
     file: '../node_modules/yaml/LICENSE'
   - name: semver@7.7.4
@@ -1866,8 +1866,8 @@ manual:
     version: '10.2.4'
     source: https://github.com/isaacs/minimatch
     file: '../node_modules/@expo/config-plugins/node_modules/minimatch/LICENSE.md'
-  - name: brace-expansion@5.0.5
-    version: '5.0.5'
+  - name: brace-expansion@5.0.6
+    version: '5.0.6'
     source: https://github.com/juliangruber/brace-expansion
     file: '../node_modules/@expo/config-plugins/node_modules/brace-expansion/LICENSE'
   - name: balanced-match@4.0.4
