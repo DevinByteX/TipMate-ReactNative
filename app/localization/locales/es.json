@@ -152,6 +152,7 @@
       "total": "TOTAL",
       "subtotal": "SUBTOTAL",
       "tip": "PROPINA",
+      "tax": "IMPUESTO",
       "perPerson": "POR PERSONA",
       "totalDescription": "¡Voilà! Aquí tienes el importe final, con la propina y cualquier redondeo ya incluidos.",
       "perPersonDescription": "¿Tienes curiosidad por la división? Aquí está el importe que aportará cada persona.",
@@ -161,6 +162,12 @@
     "billInput": {
       "placeholder": "0.00",
       "description": "Introduce aquí el importe total de la cuenta: ¡empecemos!"
+    },
+    "taxInput": {
+      "title": "IMPUESTO",
+      "description": "¿Calcular la propina antes o después del impuesto?",
+      "afterTax": "CON IMPUESTO",
+      "beforeTax": "SIN IMPUESTO"
     },
     "tipInput": {
       "description": "¿Te sientes generoso? Elige el porcentaje de propina y observa cómo sucede la magia."

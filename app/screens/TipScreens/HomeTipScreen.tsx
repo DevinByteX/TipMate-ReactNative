@@ -7,12 +7,14 @@ import {
   StyledBillBox,
   StyledHeader,
   StyledTotalAmountInput,
+  StyledTaxInput,
   StyledTipOptions,
   StyledSpiltOptions,
   StyledRoundBox,
   StyledSharePreviewModal,
   StyledAlert,
 } from '@/components';
+import type { TaxMode, TaxType } from '@/components';
 // Styling
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
@@ -20,6 +22,7 @@ import {
   RoundingMethodType,
   calculateBillValues,
   calculateBillValuesCustomSplit,
+  TaxConfig,
 } from '@/utils/billCalculation';
 import { useShareTipPreview, useSaveTip } from '@hooks';
 import { getDeviceCurrency, buildSplitSignature, findDuplicateTip } from '@utils';
@@ -37,6 +40,9 @@ const HomeTipScreen = () => {
   const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(5);
   const [userInputSplitCount, setUserInputSplitCount] = useState<number>(1);
   const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
+  const [taxMode, setTaxMode] = useState<TaxMode>('after');
+  const [taxType, setTaxType] = useState<TaxType>('percentage');
+  const [taxValue, setTaxValue] = useState<string>('');
 
   const { state: settingsState } = useUserSettings();
   const { state: historyState } = useHistory();
@@ -58,6 +64,14 @@ const HomeTipScreen = () => {
   const isCustomSplitActive = sessionState.activeSplitConfig?.type === 'custom';
   const customSplits = sessionState.activeSplitConfig?.customSplits;
 
+  const taxConfig: TaxConfig | undefined = useMemo(() => {
+    const numericTaxValue = parseFloat(taxValue);
+    if (taxMode === 'before' && !isNaN(numericTaxValue) && numericTaxValue > 0) {
+      return { mode: 'before', type: taxType, value: numericTaxValue };
+    }
+    return undefined;
+  }, [taxMode, taxType, taxValue]);
+
   const { billValues, customBillValues } = useMemo(() => {
     if (isCustomSplitActive && customSplits && customSplits.length > 0) {
       return {
@@ -66,12 +80,14 @@ const HomeTipScreen = () => {
           userInputBillAmount,
           userInputRound,
           customSplits,
+          taxConfig,
         ),
         billValues: calculateBillValues(
           userInputTipPercentage,
           userInputBillAmount,
           customSplits.length,
           userInputRound,
+          taxConfig,
         ),
       };
     }
@@ -81,6 +97,7 @@ const HomeTipScreen = () => {
         userInputBillAmount,
         userInputSplitCount,
         userInputRound,
+        taxConfig,
       ),
       customBillValues: undefined,
     };
@@ -91,6 +108,7 @@ const HomeTipScreen = () => {
     userInputRound,
     isCustomSplitActive,
     customSplits,
+    taxConfig,
   ]);
 
   // Restore scroll position when returning from navigation
@@ -134,8 +152,6 @@ const HomeTipScreen = () => {
             numberOfPeople:
               isCustomSplitActive && customSplits ? customSplits.length : userInputSplitCount,
             splitType: (isCustomSplitActive ? 'custom' : 'equal') as 'equal' | 'custom',
-            // A stable, primitive representation of the split configuration for duplicate detection.
-            // Uses input data (not calculated amounts) so rounding changes don't break detection.
             splitSignature: buildSplitSignature(isCustomSplitActive, customSplits),
             perPerson:
               !isCustomSplitActive && userInputSplitCount > 1 && billValues
@@ -147,6 +163,8 @@ const HomeTipScreen = () => {
                 : undefined,
             individualSplits:
               isCustomSplitActive && customBillValues ? customBillValues.individuals : undefined,
+            taxAmount: effectiveOverall.tax ? parseFloat(effectiveOverall.tax) : undefined,
+            taxMode: taxConfig ? taxConfig.mode : undefined,
             currencySymbol,
             currencyCode,
           }
@@ -160,6 +178,7 @@ const HomeTipScreen = () => {
       userInputSplitCount,
       billValues,
       customBillValues,
+      taxConfig,
       currencySymbol,
       currencyCode,
     ],
@@ -233,6 +252,23 @@ const HomeTipScreen = () => {
           keyboardType={Platform.OS === 'ios' ? 'decimal-pad' : 'number-pad'}
           onAmountChange={amount => setUserInputBillAmount(amount)}
         />
+        {/* Tax Mode Toggle + Tax Input */}
+        <StyledTaxInput
+          titleText={t('components.taxInput.title')}
+          description={t('components.taxInput.description')}
+          afterTaxLabel={t('components.taxInput.afterTax')}
+          beforeTaxLabel={t('components.taxInput.beforeTax')}
+          taxMode={taxMode}
+          taxType={taxType}
+          taxValue={taxValue}
+          currencySymbol={currencySymbol}
+          onTaxModeChange={mode => {
+            setTaxMode(mode);
+            setTaxValue('');
+          }}
+          onTaxTypeChange={type => setTaxType(type)}
+          onTaxValueChange={value => setTaxValue(value)}
+        />
         {/* Tip Percentage Options Container */}
         <StyledTipOptions
           titleText={t('screens.home.selectTip')}
@@ -253,9 +289,11 @@ const HomeTipScreen = () => {
           totalText={t('components.billBox.total')}
           subTotalText={t('components.billBox.subtotal')}
           tipText={t('components.billBox.tip')}
+          taxText={t('components.billBox.tax')}
           totalAmount={billValues?.overall?.total}
           subTotalAmount={billValues?.overall?.subtotal}
           totalTipAmount={billValues?.overall?.tip}
+          taxAmount={billValues?.overall?.tax}
           shareButtonPress={openPreview}
           saveButtonPress={handleSaveTip}
           isSaved={isTipAlreadySaved}
@@ -306,9 +344,11 @@ const HomeTipScreen = () => {
             totalText={t('components.billBox.total')}
             subTotalText={t('components.billBox.subtotal')}
             tipText={t('components.billBox.tip')}
+            taxText={t('components.billBox.tax')}
             totalAmount={billValues?.perPerson?.total}
             subTotalAmount={billValues?.perPerson?.subtotal}
             totalTipAmount={billValues?.perPerson?.tip}
+            taxAmount={billValues?.perPerson?.tax}
             shareButtonPress={openPreview}
             saveButtonPress={handleSaveTip}
             isSaved={isTipAlreadySaved}
@@ -326,9 +366,11 @@ const HomeTipScreen = () => {
             totalText={t('components.billBox.total')}
             subTotalText={t('components.billBox.subtotal')}
             tipText={t('components.billBox.tip')}
+            taxText={t('components.billBox.tax')}
             totalAmount={customBillValues.overall.total}
             subTotalAmount={customBillValues.overall.subtotal}
             totalTipAmount={customBillValues.overall.tip}
+            taxAmount={customBillValues.overall.tax}
             shareButtonPress={openPreview}
             saveButtonPress={handleSaveTip}
             isSaved={isTipAlreadySaved}

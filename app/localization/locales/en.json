@@ -153,6 +153,7 @@
       "total": "TOTAL",
       "subtotal": "SUBTOTAL",
       "tip": "TIP",
+      "tax": "TAX",
       "perPerson": "PER PERSON",
       "totalDescription": "Voilà! Here's your final amount, with the tip and any rounding all taken care of.",
       "perPersonDescription": "Curious about the split? Here's the amount each person will chip in.",
@@ -162,6 +163,12 @@
     "billInput": {
       "placeholder": "0.00",
       "description": "Pop in the total bill amount here – let's get started!"
+    },
+    "taxInput": {
+      "title": "TAX",
+      "description": "Should the tip be calculated on the pre-tax subtotal or the full bill?",
+      "afterTax": "AFTER TAX",
+      "beforeTax": "BEFORE TAX"
     },
     "tipInput": {
       "description": "Feeling generous? Choose your tip percentage and watch the magic happen."

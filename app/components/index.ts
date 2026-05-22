@@ -7,6 +7,8 @@ export { StyledTipOptions } from './StyledTipOptions';
 export { StyledHorizontalSlider } from './StyledHorizontalSlider';
 export { StyledSpiltOptions } from './StyledSplitOptions';
 export { StyledRoundBox } from './StyledRoundBox';
+export { StyledTaxInput } from './StyledTaxInput';
+export type { TaxMode, TaxType } from './StyledTaxInput';
 export { StyledIcons, StyledIconTypes } from './StyledIcons';
 export { StyledDrawer } from './StyledDrawer';
 export { StyledToggle } from './StyledToggle';
