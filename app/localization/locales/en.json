@@ -117,6 +117,9 @@
       "customiseLanguage": "CUSTOMISE YOUR LANGUAGE",
       "duplicatePrevention": "DUPLICATE SAVE PREVENTION",
       "customiseTheme": "CUSTOMISE YOUR THEME",
+      "taxInputTitle": "TAX INPUT",
+      "taxInputDescription": "Enable a tax field on the calculator. When entered, the tip will be calculated on the pre-tax subtotal.",
+      "taxInputToggleText": "Show tax input on calculator",
       "confirmReset": "Confirm Reset",
       "resetMessage": "Are you sure you want to reset to default values?",
       "resetSuccess": "Reset successful"
@@ -166,9 +169,9 @@
     },
     "taxInput": {
       "title": "TAX",
-      "description": "Should the tip be calculated on the pre-tax subtotal or the full bill?",
-      "afterTax": "AFTER TAX",
-      "beforeTax": "BEFORE TAX"
+      "description": "Enter the tax amount. The tip will be calculated on the pre-tax subtotal.",
+      "taxPercentageExceedsMax": "Tax percentage cannot exceed 100%",
+      "taxAmountExceedsBill": "Tax cannot exceed the total bill amount"
     },
     "tipInput": {
       "description": "Feeling generous? Choose your tip percentage and watch the magic happen."

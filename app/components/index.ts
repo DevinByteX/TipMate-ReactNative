@@ -8,7 +8,8 @@ export { StyledHorizontalSlider } from './StyledHorizontalSlider';
 export { StyledSpiltOptions } from './StyledSplitOptions';
 export { StyledRoundBox } from './StyledRoundBox';
 export { StyledTaxInput } from './StyledTaxInput';
-export type { TaxMode, TaxType } from './StyledTaxInput';
+export type { TaxType } from './StyledTaxInput';
+export { StyledTaxSettingsRow } from './StyledTaxSettingsRow';
 export { StyledIcons, StyledIconTypes } from './StyledIcons';
 export { StyledDrawer } from './StyledDrawer';
 export { StyledToggle } from './StyledToggle';
@@ -30,12 +31,17 @@ export { default as StyledCustomSplitPresetCard } from './StyledCustomSplitPrese
 export { default as StyledCustomSplitFooter } from './StyledCustomSplitFooter';
 
 // types should export seperately
-export type { IconTypeMap, StyledIconTypesKey, BaseIconProps, StyledIconsProps } from './StyledIcons';
+export type {
+  IconTypeMap,
+  StyledIconTypesKey,
+  BaseIconProps,
+  StyledIconsProps,
+} from './StyledIcons';
 export type { AlertType, StyledAlertButton } from './StyledAlert';
 export type { StyledSavedTipsListProps } from './StyledSavedTipsList';
 export type {
-    StyledFilterCapsuleProps,
-    PercentageFilter,
-    PeopleFilter,
-    DateFilter,
+  StyledFilterCapsuleProps,
+  PercentageFilter,
+  PeopleFilter,
+  DateFilter,
 } from './StyledFilterCapsule';

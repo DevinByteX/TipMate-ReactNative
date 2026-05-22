@@ -11,6 +11,7 @@ const initialState: UserSettingsState = {
   language: undefined,
   isRTL: false,
   duplicatePreventionWindow: Constants.defaultDuplicatePreventionWindow,
+  showTaxInput: false,
 };
 
 const userSettingsReducer = (
@@ -26,6 +27,7 @@ const userSettingsReducer = (
         isRTL: action.payload.isRTL ?? state.isRTL,
         duplicatePreventionWindow:
           action.payload.duplicatePreventionWindow ?? state.duplicatePreventionWindow,
+        showTaxInput: action.payload.showTaxInput ?? state.showTaxInput,
       };
     case ActionTypes.UPDATE_CURRENCY_SIGN:
     case ActionTypes.RESET_CURRENCY_TO_SYSTEM:
@@ -43,6 +45,8 @@ const userSettingsReducer = (
       const langState = languageReducer({ language: state.language, isRTL: state.isRTL }, action);
       return { ...state, ...langState };
     }
+    case ActionTypes.SET_SHOW_TAX_INPUT:
+      return { ...state, showTaxInput: action.payload };
     default:
       return state;
   }

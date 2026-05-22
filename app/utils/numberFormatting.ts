@@ -1,44 +1,44 @@
 export const convertToTwoDecimalPoints = (input: string): string => {
-    // Remove any non-numeric characters
-    const numericValue = input.replace(/[^0-9]/g, '');
+  // Remove any non-numeric characters
+  const numericValue = input.replace(/[^0-9]/g, '');
 
-    // If the numeric value is empty, return an empty string
-    if (numericValue === '') {
-        return '';
-    }
+  // If the numeric value is empty, return an empty string
+  if (numericValue === '') {
+    return '';
+  }
 
-    // Convert the numeric value(type String) to a number and divide by 100
-    const valueWithFloatingPoints = parseFloat(numericValue) / 100;
+  // Convert the numeric value(type String) to a number and divide by 100
+  const valueWithFloatingPoints = parseFloat(numericValue) / 100;
 
-    // Format the valueWithFloatingPoints(type number) to two decimal points and return it as string(by using toFixed() method returns string)
-    return valueWithFloatingPoints.toFixed(2);
+  // Format the valueWithFloatingPoints(type number) to two decimal points and return it as string(by using toFixed() method returns string)
+  return valueWithFloatingPoints.toFixed(2);
 };
 
 export const acceptNumbersAndDecimals = (input: string): string => {
-    // Remove all characters except digits and decimal points
-    let formatted = input.replace(/[^\d.]/g, '');
+  // Remove all characters except digits and decimal points
+  let formatted = input.replace(/[^\d.]/g, '');
 
-    // Ensure only one decimal point is present
-    const parts = formatted.split('.');
-    formatted = parts[0] + (parts.length > 1 ? `.${parts.slice(1).join('')}` : '');
+  // Ensure only one decimal point is present
+  const parts = formatted.split('.');
+  formatted = parts[0] + (parts.length > 1 ? `.${parts.slice(1).join('')}` : '');
 
-    // Remove leading zeros (except when the input starts with "0" and has no decimal point)
-    if (!formatted.startsWith('0.') && formatted.length > 1) {
-        formatted = formatted.replace(/^0+/, '');
-    }
+  // Remove leading zeros (except when the input starts with "0" and has no decimal point)
+  if (!formatted.startsWith('0.') && formatted.length > 1) {
+    formatted = formatted.replace(/^0+/, '');
+  }
 
-    // Ensure a leading zero if the input starts with a decimal point
-    if (formatted.startsWith('.')) {
-        formatted = '0' + formatted;
-    }
+  // Ensure a leading zero if the input starts with a decimal point
+  if (formatted.startsWith('.')) {
+    formatted = '0' + formatted;
+  }
 
-    // Restrict to two decimal places
-    const trimmedParts = formatted.split('.');
-    if (trimmedParts[1]?.length > 2) {
-        formatted = `${trimmedParts[0]}.${trimmedParts[1].substring(0, 2)}`;
-    }
+  // Restrict to two decimal places
+  const trimmedParts = formatted.split('.');
+  if (trimmedParts[1]?.length > 2) {
+    formatted = `${trimmedParts[0]}.${trimmedParts[1].substring(0, 2)}`;
+  }
 
-    return formatted;
+  return formatted;
 };
 
 /**
@@ -50,12 +50,40 @@ export const acceptNumbersAndDecimals = (input: string): string => {
  * @returns {string} A string representation of the truncated number.
  */
 export const toFixedWithoutRounding = (value: number, decimals: number): string => {
-    // Calculate the factor by which to multiply the value to truncate decimals
-    const factor = Math.pow(10, decimals);
+  // Calculate the factor by which to multiply the value to truncate decimals
+  const factor = Math.pow(10, decimals);
 
-    // Truncate the value by flooring the multiplied result and dividing by the factor
-    const truncatedValue = Math.floor(value * factor) / factor;
+  // Truncate the value by flooring the multiplied result and dividing by the factor
+  const truncatedValue = Math.floor(value * factor) / factor;
 
-    // Convert the truncated value to a string with the specified number of decimals
-    return truncatedValue.toFixed(decimals);
+  // Convert the truncated value to a string with the specified number of decimals
+  return truncatedValue.toFixed(decimals);
+};
+
+export const validateTaxInput = (
+  taxValue: string,
+  taxType: 'percentage' | 'amount',
+  billAmount?: string,
+): { isValid: boolean; errorKey: string | null } => {
+  if (!taxValue || taxValue === '0') {
+    return { isValid: true, errorKey: null };
+  }
+
+  const numericValue = parseFloat(taxValue);
+  if (isNaN(numericValue)) {
+    return { isValid: true, errorKey: null };
+  }
+
+  if (taxType === 'percentage' && numericValue > 100) {
+    return { isValid: false, errorKey: 'components.taxInput.taxPercentageExceedsMax' };
+  }
+
+  if (taxType === 'amount' && billAmount) {
+    const numericBill = parseFloat(billAmount);
+    if (!isNaN(numericBill) && numericBill > 0 && numericValue > numericBill) {
+      return { isValid: false, errorKey: 'components.taxInput.taxAmountExceedsBill' };
+    }
+  }
+
+  return { isValid: true, errorKey: null };
 };
