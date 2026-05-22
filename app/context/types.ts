@@ -45,6 +45,8 @@ export interface SavedTip {
     total: number;
   };
   individualSplits?: IndividualSplit[]; // Array of individual split details for custom splits
+  taxAmount?: number; // Tax amount applied (only when before-tax mode was used)
+  taxMode?: 'before' | 'after'; // Whether tip was calculated before or after tax
   currencySymbol: string;
   currencyCode: string;
 }

@@ -152,6 +152,7 @@
       "total": "TOTAL",
       "subtotal": "SOUS-TOTAL",
       "tip": "POURBOIRE",
+      "tax": "TAXE",
       "perPerson": "PAR PERSONNE",
       "totalDescription": "Voilà ! Voici votre montant final, avec le pourboire et les éventuels arrondis déjà pris en compte.",
       "perPersonDescription": "Curieux de connaître le partage ? Voici le montant que chaque personne paiera.",
@@ -161,6 +162,12 @@
     "billInput": {
       "placeholder": "0,00",
       "description": "Entrez ici le montant total de la note – c’est parti !"
+    },
+    "taxInput": {
+      "title": "TAXE",
+      "description": "Calculer le pourboire avant ou après la taxe ?",
+      "afterTax": "APRÈS TAXE",
+      "beforeTax": "AVANT TAXE"
     },
     "tipInput": {
       "description": "Vous vous sentez généreux ? Choisissez votre pourcentage de pourboire et regardez la magie opérer."

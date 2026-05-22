@@ -26,9 +26,11 @@ type StyledBillBox = {
   totalText?: string;
   subTotalText?: string;
   tipText?: string;
+  taxText?: string;
   totalAmount?: string | number;
   subTotalAmount?: string | number;
   totalTipAmount?: string | number;
+  taxAmount?: string;
   shareButtonPress?: () => void;
   saveButtonPress?: () => void;
   hideSaveButton?: boolean;
@@ -46,9 +48,11 @@ export const StyledBillBox = ({
   totalText = 'TOTAL',
   subTotalText = 'SUBTOTAL',
   tipText = 'TIP',
+  taxText = 'TAX',
   totalAmount = '0.00',
   subTotalAmount = '0.00',
   totalTipAmount = '0.00',
+  taxAmount,
   shareButtonPress,
   saveButtonPress,
   hideSaveButton = false,
@@ -181,6 +185,35 @@ export const StyledBillBox = ({
               </Text>
             </View>
           </View>
+          {/* Tip Text Container */}
+          {taxAmount && parseFloat(taxAmount) > 0 ? (
+            <View style={styles.tipContainer}>
+              <Text
+                style={styles.subTextStyles}
+                adjustsFontSizeToFit={true}
+                allowFontScaling={false}
+                numberOfLines={1}
+              >
+                {taxText}
+                {isLongCurrencySymbol ? (
+                  <Text
+                    style={{ color: theme.colors.card_typography }}
+                  >{` · ${currencySymbol}`}</Text>
+                ) : null}
+              </Text>
+              <View style={styles.horizontalTextContainer}>
+                <Text
+                  style={styles.subDigitStyles}
+                  adjustsFontSizeToFit={true}
+                  allowFontScaling={false}
+                  numberOfLines={1}
+                >
+                  {!isLongCurrencySymbol ? <Text>{currencySymbol}</Text> : null}
+                  {taxAmount}
+                </Text>
+              </View>
+            </View>
+          ) : null}
           {/* Tip Text Container */}
           <View style={styles.tipContainer}>
             <Text

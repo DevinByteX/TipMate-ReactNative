@@ -22,6 +22,8 @@ interface SaveTipParams {
         total: number;
     };
     individualSplits?: IndividualSplit[];
+    taxAmount?: number;
+    taxMode?: 'before' | 'after';
     currencySymbol: string;
     currencyCode: string;
 }
@@ -53,6 +55,8 @@ export const useSaveTip = () => {
                     splitType: params.splitType || 'equal',
                     perPerson: params.perPerson,
                     individualSplits: params.individualSplits,
+                    taxAmount: params.taxAmount,
+                    taxMode: params.taxMode,
                     currencySymbol: params.currencySymbol,
                     currencyCode: params.currencyCode,
                 };

@@ -1,16 +1,24 @@
 import { toFixedWithoutRounding } from '@/utils/numberFormatting';
 import { IndividualSplit } from '@/context/types';
 
+export type TaxConfig = {
+  mode: 'before' | 'after';
+  type: 'percentage' | 'amount';
+  value: number;
+};
+
 export type BillCalculationType = {
   perPerson: {
     total: string;
     tip: string;
     subtotal: string;
+    tax?: string;
   };
   overall: {
     total: string;
     tip: string;
     subtotal: string;
+    tax?: string;
   };
   disabledRoundingMethods: {
     UP: boolean;
@@ -61,6 +69,7 @@ export const calculateBillValues = (
   billAmount: number,
   numberOfPeople: number,
   roundingMethod: RoundingMethodType,
+  taxConfig?: TaxConfig,
 ): BillCalculationType => {
   // Validate inputs
   if (isNaN(billAmount) || isNaN(tipPercentage) || isNaN(numberOfPeople) || numberOfPeople <= 0) {
@@ -83,10 +92,19 @@ export const calculateBillValues = (
     };
   }
 
-  // Calculate the tip amount
+  // Resolve tax amount when 'before tax' mode is active
+  const isBeforeTax =
+    taxConfig && taxConfig.mode === 'before' && taxConfig.value > 0;
+  const taxAmount = isBeforeTax
+    ? taxConfig!.type === 'percentage'
+      ? (taxConfig!.value / 100) * billAmount
+      : taxConfig!.value
+    : 0;
+
+  // Calculate the tip amount — always on the pre-tax subtotal
   const tipTotal = (tipPercentage / 100) * billAmount;
-  // Calculate the total bill including the tip
-  const totalBill = billAmount + tipTotal;
+  // Calculate the total bill including tax (if any) and tip
+  const totalBill = billAmount + taxAmount + tipTotal;
 
   // Apply rounding methods
   const roundedOverallTip = applyRoundingMethod(tipTotal, roundingMethod);
@@ -97,6 +115,7 @@ export const calculateBillValues = (
   const roundedTipPerPerson = roundedOverallTip / numberOfPeople;
   const roundedSubtotalPerPerson = roundedOverallSubtotal / numberOfPeople;
   const roundedTotalPerPerson = roundedOverallTotal / numberOfPeople;
+  const taxPerPerson = isBeforeTax ? taxAmount / numberOfPeople : 0;
 
   // Determine disabled rounding methods
   const disabledRoundingMethods: DisabledRoundingMethodsType = {
@@ -110,11 +129,13 @@ export const calculateBillValues = (
       total: toFixedWithoutRounding(roundedTotalPerPerson, 2),
       tip: toFixedWithoutRounding(roundedTipPerPerson, 2),
       subtotal: toFixedWithoutRounding(roundedSubtotalPerPerson, 2),
+      ...(isBeforeTax && { tax: toFixedWithoutRounding(taxPerPerson, 2) }),
     },
     overall: {
       total: toFixedWithoutRounding(roundedOverallTotal, 2),
       tip: toFixedWithoutRounding(roundedOverallTip, 2),
       subtotal: toFixedWithoutRounding(roundedOverallSubtotal, 2),
+      ...(isBeforeTax && { tax: toFixedWithoutRounding(taxAmount, 2) }),
     },
     disabledRoundingMethods,
   };
@@ -126,6 +147,7 @@ export type CustomSplitCalculationType = {
     total: string;
     tip: string;
     subtotal: string;
+    tax?: string;
   };
   individuals: IndividualSplit[];
   disabledRoundingMethods: DisabledRoundingMethodsType;
@@ -137,6 +159,7 @@ export const calculateBillValuesCustomSplit = (
   billAmount: number,
   roundingMethod: RoundingMethodType,
   individualSplits: IndividualSplit[],
+  taxConfig?: TaxConfig,
 ): CustomSplitCalculationType => {
   // Validate inputs
   if (
@@ -158,9 +181,18 @@ export const calculateBillValuesCustomSplit = (
   // Filter out any invalid splits to be extra safe
   const validSplits = individualSplits.filter(s => s && typeof s === 'object' && 'id' in s && 'name' in s);
 
-  // 1. Calculate overall amounts
+  // Resolve tax amount when 'before tax' mode is active
+  const isBeforeTax =
+    taxConfig && taxConfig.mode === 'before' && taxConfig.value > 0;
+  const taxAmount = isBeforeTax
+    ? taxConfig!.type === 'percentage'
+      ? (taxConfig!.value / 100) * billAmount
+      : taxConfig!.value
+    : 0;
+
+  // 1. Calculate overall amounts — tip is always on the pre-tax subtotal
   const tipTotal = (tipPercentage / 100) * billAmount;
-  const totalBill = billAmount + tipTotal;
+  const totalBill = billAmount + taxAmount + tipTotal;
 
   const roundedOverallTotal = applyRoundingMethod(totalBill, roundingMethod);
   const roundedOverallTip = applyRoundingMethod(tipTotal, roundingMethod);
@@ -294,6 +326,7 @@ export const calculateBillValuesCustomSplit = (
       total: toFixedWithoutRounding(roundedOverallTotal, 2),
       tip: toFixedWithoutRounding(roundedOverallTip, 2),
       subtotal: toFixedWithoutRounding(roundedOverallSubtotal, 2),
+      ...(isBeforeTax && { tax: toFixedWithoutRounding(taxAmount, 2) }),
     },
     individuals: splitsWithDecimals.map(({ decimalPart, ...split }) => ({
       id: split.id,
