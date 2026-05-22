@@ -116,6 +116,9 @@
       "customiseLanguage": "PERSONNALISER VOTRE LANGUE",
       "duplicatePrevention": "PRÉVENTION DES ENREGISTREMENTS EN DOUBLE",
       "customiseTheme": "PERSONNALISER VOTRE THÈME",
+      "taxInputTitle": "SAISIE DE TAXE",
+      "taxInputDescription": "Activez un champ de taxe sur la calculatrice. Lorsqu'une valeur est saisie, le pourboire est calculé sur le sous-total hors taxe.",
+      "taxInputToggleText": "Afficher le champ de taxe sur la calculatrice",
       "confirmReset": "Confirmer la réinitialisation",
       "resetMessage": "Êtes-vous sûr de vouloir réinitialiser aux valeurs par défaut ?",
       "resetSuccess": "Réinitialisation réussie"
@@ -165,9 +168,9 @@
     },
     "taxInput": {
       "title": "TAXE",
-      "description": "Calculer le pourboire avant ou après la taxe ?",
-      "afterTax": "APRÈS TAXE",
-      "beforeTax": "AVANT TAXE"
+      "description": "Saisissez le montant de la taxe. Le pourboire sera calculé sur le sous-total hors taxe.",
+      "taxPercentageExceedsMax": "Le pourcentage de taxe ne peut pas dépasser 100%",
+      "taxAmountExceedsBill": "La taxe ne peut pas dépasser le montant total de la facture"
     },
     "tipInput": {
       "description": "Vous vous sentez généreux ? Choisissez votre pourcentage de pourboire et regardez la magie opérer."

@@ -1,43 +1,14 @@
 import React, { useRef } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import Animated from 'react-native-reanimated';
+import Toast from 'react-native-toast-message';
+import { useTranslation } from 'react-i18next';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { StyledIcons } from '@components';
 import { useFocusScale } from '@hooks';
-import { acceptNumbersAndDecimals } from '@utils';
+import { acceptNumbersAndDecimals, validateTaxInput } from '@utils';
 
-export type TaxMode = 'before' | 'after';
 export type TaxType = 'percentage' | 'amount';
-
-type ModeButtonProps = {
-  label: string;
-  active: boolean;
-  onPress: () => void;
-};
-
-const ModeButton = ({ label, active, onPress }: ModeButtonProps) => {
-  const { styles, theme } = useStyles(stylesheet);
-  return (
-    <Pressable
-      style={[
-        styles.modeButton,
-        { backgroundColor: active ? theme.colors.accent : theme.colors.backgroundColor },
-      ]}
-      onPress={onPress}
-    >
-      <Text
-        style={[
-          styles.modeButtonText,
-          { color: active ? theme.colors.card : theme.colors.card_typography },
-        ]}
-        adjustsFontSizeToFit
-        numberOfLines={1}
-      >
-        {label}
-      </Text>
-    </Pressable>
-  );
-};
 
 type TypePillProps = {
   label: string;
@@ -70,13 +41,10 @@ const TypePill = ({ label, active, onPress }: TypePillProps) => {
 type StyledTaxInputProps = {
   titleText?: string;
   description?: string;
-  afterTaxLabel?: string;
-  beforeTaxLabel?: string;
-  taxMode: TaxMode;
   taxType: TaxType;
   taxValue: string;
   currencySymbol?: string;
-  onTaxModeChange: (mode: TaxMode) => void;
+  billAmount?: string;
   onTaxTypeChange: (type: TaxType) => void;
   onTaxValueChange: (value: string) => void;
 };
@@ -84,24 +52,34 @@ type StyledTaxInputProps = {
 export const StyledTaxInput = ({
   titleText = 'TAX',
   description,
-  afterTaxLabel = 'AFTER TAX',
-  beforeTaxLabel = 'BEFORE TAX',
-  taxMode,
   taxType,
   taxValue,
   currencySymbol,
-  onTaxModeChange,
+  billAmount,
   onTaxTypeChange,
   onTaxValueChange,
 }: StyledTaxInputProps) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
   const inputRef = useRef<TextInput>(null);
 
   const [isFocused, setIsFocused] = React.useState(false);
   const { animatedStyle: focusAnimatedStyle } = useFocusScale(isFocused, 1.02);
 
+  const isDisabled = !billAmount || parseFloat(billAmount) <= 0;
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    const { isValid, errorKey } = validateTaxInput(taxValue, taxType, billAmount);
+    if (!isValid && errorKey) {
+      Toast.show({ type: 'error', text1: t(errorKey) });
+      onTaxValueChange('');
+    }
+  };
+
   const isLongCurrencySymbol = typeof currencySymbol === 'string' && currencySymbol.length > 1;
-  const prefix = taxType === 'amount' ? (isLongCurrencySymbol ? '' : currencySymbol) : '';
+  const currencyLabel = isLongCurrencySymbol ? currencySymbol ?? '$' : currencySymbol ?? '$';
+  const prefix = taxType === 'amount' && !isLongCurrencySymbol ? currencySymbol : '';
   const suffix = taxType === 'percentage' ? '%' : isLongCurrencySymbol ? currencySymbol : '';
 
   return (
@@ -117,78 +95,64 @@ export const StyledTaxInput = ({
         {description ? ` ${description}` : ''}
       </Text>
 
-      {/* Mode toggle: AFTER TAX / BEFORE TAX */}
-      <View style={styles.modeRow}>
-        <ModeButton
-          label={afterTaxLabel}
-          active={taxMode === 'after'}
-          onPress={() => onTaxModeChange('after')}
-        />
-        <ModeButton
-          label={beforeTaxLabel}
-          active={taxMode === 'before'}
-          onPress={() => onTaxModeChange('before')}
-        />
-      </View>
+      {/* Tax value input with % / $ type switcher */}
+      <Animated.View
+        style={[styles.inputRow, focusAnimatedStyle, isDisabled && styles.disabledRow]}
+        pointerEvents={isDisabled ? 'none' : 'auto'}
+      >
+        <View style={styles.typeToggleContainer}>
+          <TypePill
+            label="%"
+            active={taxType === 'percentage'}
+            onPress={() => {
+              onTaxTypeChange('percentage');
+              onTaxValueChange('');
+            }}
+          />
+          <TypePill
+            label={currencyLabel}
+            active={taxType === 'amount'}
+            onPress={() => {
+              onTaxTypeChange('amount');
+              onTaxValueChange('');
+            }}
+          />
+        </View>
 
-      {/* Tax value input — only visible in before-tax mode */}
-      {taxMode === 'before' && (
-        <Animated.View style={[styles.inputRow, focusAnimatedStyle]}>
-          {/* % / $ type toggle */}
-          <View style={styles.typeToggleContainer}>
-            <TypePill
-              label="%"
-              active={taxType === 'percentage'}
-              onPress={() => {
-                onTaxTypeChange('percentage');
-                onTaxValueChange('');
-              }}
-            />
-            <TypePill
-              label={isLongCurrencySymbol ? currencySymbol ?? '$' : currencySymbol ?? '$'}
-              active={taxType === 'amount'}
-              onPress={() => {
-                onTaxTypeChange('amount');
-                onTaxValueChange('');
-              }}
-            />
-          </View>
-
-          {/* Input field */}
-          <View style={styles.textInputWrapper}>
-            {prefix ? (
-              <Text allowFontScaling={false} style={styles.affixText}>
-                {prefix}
-              </Text>
-            ) : null}
-            <TextInput
-              ref={inputRef}
-              style={[
-                styles.textInput,
-                { color: isFocused ? theme.colors.accent : theme.colors.card_typography },
-              ]}
-              value={taxValue}
-              placeholder={'0.00'}
-              placeholderTextColor={theme.colors.disable_text}
-              keyboardType={'decimal-pad'}
-              returnKeyType={'done'}
-              maxLength={8}
-              allowFontScaling={false}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              onChangeText={text => {
-                const sanitised = acceptNumbersAndDecimals(text);
-                onTaxValueChange(sanitised);
-              }}
-            />
-            {suffix ? (
-              <Text allowFontScaling={false} style={styles.affixText}>
-                {suffix}
-              </Text>
-            ) : null}
-          </View>
-        </Animated.View>
-      )}
+        <View style={styles.textInputWrapper}>
+          {prefix ? (
+            <Text allowFontScaling={false} style={styles.affixText}>
+              {prefix}
+            </Text>
+          ) : null}
+          <TextInput
+            ref={inputRef}
+            style={[
+              styles.textInput,
+              { color: isFocused ? theme.colors.accent : theme.colors.card_typography },
+            ]}
+            value={taxValue}
+            placeholder={'0.00'}
+            placeholderTextColor={theme.colors.disable_text}
+            keyboardType={'decimal-pad'}
+            returnKeyType={'done'}
+            maxLength={8}
+            allowFontScaling={false}
+            editable={!isDisabled}
+            onFocus={() => setIsFocused(true)}
+            onBlur={handleBlur}
+            onChangeText={text => {
+              const sanitised = acceptNumbersAndDecimals(text);
+              onTaxValueChange(sanitised);
+            }}
+          />
+          {suffix ? (
+            <Text allowFontScaling={false} style={styles.affixText}>
+              {suffix}
+            </Text>
+          ) : null}
+        </View>
+      </Animated.View>
     </View>
   );
 };
@@ -215,28 +179,11 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
-  modeRow: {
-    flexDirection: 'row',
-    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
-    paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
-  },
-  modeButton: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
-    height: (UnistylesRuntime.screen.height * 4) / 100,
-  },
-  modeButtonText: {
-    fontSize: 13,
-    fontFamily: fonts.Montserrat_Black,
-  },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
-    paddingBottom: (UnistylesRuntime.screen.height * 1) / 100,
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
     columnGap: (UnistylesRuntime.screen.width * 3) / 100,
   },
   typeToggleContainer: {
@@ -268,6 +215,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
     marginHorizontal: 2,
+  },
+  disabledRow: {
+    opacity: 0.4,
   },
   textInput: {
     flex: 1,

@@ -7,6 +7,7 @@ import {
   StyledLanguageSelector,
   StyledHeader,
   StyledSplitOptionsEditMode,
+  StyledTaxSettingsRow,
   StyledThemeBox,
   StyledTipOptionsEditMode,
   StyledDuplicatePreventionSelector,
@@ -67,6 +68,11 @@ const SettingsScreen = () => {
           modalTitle={t('components.duplicatePrevention.modalTitle')}
           modalDescription={t('components.duplicatePrevention.modalDescription')}
           changeToastMessage={t('components.duplicatePrevention.changeMessage')}
+        />
+        <StyledTaxSettingsRow
+          title={t('screens.settings.taxInputTitle')}
+          description={t('screens.settings.taxInputDescription')}
+          toggleText={t('screens.settings.taxInputToggleText')}
         />
         <StyledThemeBox
           title={t('screens.settings.customiseTheme')}

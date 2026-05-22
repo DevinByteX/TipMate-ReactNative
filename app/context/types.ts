@@ -133,6 +133,7 @@ export interface UserSettingsState {
   language: string | undefined;
   isRTL: boolean;
   duplicatePreventionWindow: number;
+  showTaxInput: boolean;
 }
 
 export interface ConfigState {
@@ -156,6 +157,7 @@ export type UserSettingsAction =
   | CurrencyConfigAction
   | DuplicatePreventionAction
   | LanguageAction
+  | { type: 'SET_SHOW_TAX_INPUT'; payload: boolean }
   | { type: 'LOAD_PERSISTED_STATE'; payload: UserSettingsState };
 
 export type ConfigAction =

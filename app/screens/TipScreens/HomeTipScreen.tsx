@@ -14,7 +14,7 @@ import {
   StyledSharePreviewModal,
   StyledAlert,
 } from '@/components';
-import type { TaxMode, TaxType } from '@/components';
+import type { TaxType } from '@/components';
 // Styling
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
@@ -25,7 +25,7 @@ import {
   TaxConfig,
 } from '@/utils/billCalculation';
 import { useShareTipPreview, useSaveTip } from '@hooks';
-import { getDeviceCurrency, buildSplitSignature, findDuplicateTip } from '@utils';
+import { getDeviceCurrency, buildSplitSignature, findDuplicateTip, validateTaxInput } from '@utils';
 import { useUserSettings, useHistory, useSplitSession } from '@/context/AppContext';
 import { ActionTypes } from '@/context/actionTypes';
 
@@ -40,7 +40,6 @@ const HomeTipScreen = () => {
   const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(5);
   const [userInputSplitCount, setUserInputSplitCount] = useState<number>(1);
   const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
-  const [taxMode, setTaxMode] = useState<TaxMode>('after');
   const [taxType, setTaxType] = useState<TaxType>('percentage');
   const [taxValue, setTaxValue] = useState<string>('');
 
@@ -66,11 +65,12 @@ const HomeTipScreen = () => {
 
   const taxConfig: TaxConfig | undefined = useMemo(() => {
     const numericTaxValue = parseFloat(taxValue);
-    if (taxMode === 'before' && !isNaN(numericTaxValue) && numericTaxValue > 0) {
+    const { isValid } = validateTaxInput(taxValue, taxType, String(userInputBillAmount));
+    if (settingsState.showTaxInput && !isNaN(numericTaxValue) && numericTaxValue > 0 && isValid) {
       return { mode: 'before', type: taxType, value: numericTaxValue };
     }
     return undefined;
-  }, [taxMode, taxType, taxValue]);
+  }, [settingsState.showTaxInput, taxType, taxValue, userInputBillAmount]);
 
   const { billValues, customBillValues } = useMemo(() => {
     if (isCustomSplitActive && customSplits && customSplits.length > 0) {
@@ -252,23 +252,19 @@ const HomeTipScreen = () => {
           keyboardType={Platform.OS === 'ios' ? 'decimal-pad' : 'number-pad'}
           onAmountChange={amount => setUserInputBillAmount(amount)}
         />
-        {/* Tax Mode Toggle + Tax Input */}
-        <StyledTaxInput
-          titleText={t('components.taxInput.title')}
-          description={t('components.taxInput.description')}
-          afterTaxLabel={t('components.taxInput.afterTax')}
-          beforeTaxLabel={t('components.taxInput.beforeTax')}
-          taxMode={taxMode}
-          taxType={taxType}
-          taxValue={taxValue}
-          currencySymbol={currencySymbol}
-          onTaxModeChange={mode => {
-            setTaxMode(mode);
-            setTaxValue('');
-          }}
-          onTaxTypeChange={type => setTaxType(type)}
-          onTaxValueChange={value => setTaxValue(value)}
-        />
+        {/* Tax Input — visible only when enabled in Settings */}
+        {settingsState.showTaxInput ? (
+          <StyledTaxInput
+            titleText={t('components.taxInput.title')}
+            description={t('components.taxInput.description')}
+            taxType={taxType}
+            taxValue={taxValue}
+            currencySymbol={currencySymbol}
+            billAmount={String(userInputBillAmount)}
+            onTaxTypeChange={type => setTaxType(type)}
+            onTaxValueChange={value => setTaxValue(value)}
+          />
+        ) : null}
         {/* Tip Percentage Options Container */}
         <StyledTipOptions
           titleText={t('screens.home.selectTip')}

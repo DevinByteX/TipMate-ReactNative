@@ -116,6 +116,9 @@
       "customiseLanguage": "PERSONALIZA TU IDIOMA",
       "duplicatePrevention": "PREVENCIÓN DE GUARDADOS DUPLICADOS",
       "customiseTheme": "PERSONALIZA TU TEMA",
+      "taxInputTitle": "ENTRADA DE IMPUESTO",
+      "taxInputDescription": "Activa un campo de impuesto en la calculadora. Al ingresar un valor, la propina se calculará sobre el subtotal antes de impuesto.",
+      "taxInputToggleText": "Mostrar campo de impuesto en la calculadora",
       "confirmReset": "Confirmar restablecimiento",
       "resetMessage": "¿Seguro que deseas restablecer los valores predeterminados?",
       "resetSuccess": "Restablecimiento exitoso"
@@ -165,9 +168,9 @@
     },
     "taxInput": {
       "title": "IMPUESTO",
-      "description": "¿Calcular la propina antes o después del impuesto?",
-      "afterTax": "CON IMPUESTO",
-      "beforeTax": "SIN IMPUESTO"
+      "description": "Ingresa el importe del impuesto. La propina se calculará sobre el subtotal antes de impuesto.",
+      "taxPercentageExceedsMax": "El porcentaje de impuesto no puede superar el 100%",
+      "taxAmountExceedsBill": "El impuesto no puede superar el total de la factura"
     },
     "tipInput": {
       "description": "¿Te sientes generoso? Elige el porcentaje de propina y observa cómo sucede la magia."
