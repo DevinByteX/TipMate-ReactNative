@@ -1,6 +1,6 @@
 import Share, { ShareOptions } from 'react-native-share';
 import { generatePDF } from 'react-native-html-to-pdf';
-import { Platform } from 'react-native';
+import { Platform, Image } from 'react-native';
 import { Constants } from '@configs';
 import { IndividualSplit } from '@/context/types';
 
@@ -336,14 +336,11 @@ export const shareTipPDF = async (
             text-align: center;
             position: relative;
           }
-          .mascot {
-            font-size: 48px;
+          .app-icon {
+            width: 64px;
+            height: 64px;
             margin-bottom: 8px;
-            animation: float 3s ease-in-out infinite;
-          }
-          @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            filter: brightness(0) invert(1);
           }
           .receipt-title {
             font-size: 24px;
@@ -471,7 +468,9 @@ export const shareTipPDF = async (
         <div class="receipt-container">
           <!-- Receipt Header -->
           <div class="receipt-header">
-            <div class="mascot">💸</div>
+            <img src="${
+              Image.resolveAssetSource(require('../assets/appLogos/light_icon_transparent.png')).uri
+            }" class="app-icon" alt="TipMate" />
             <div class="receipt-title">${t.thankYou}</div>
             <div class="receipt-subtitle">${t.tipSummaryDescription}</div>
           </div>
