@@ -145,6 +145,7 @@ const SavedTipDetailScreen = () => {
           subTotalAmount={tip.amount.toFixed(2)}
           totalTipAmount={tip.tip.toFixed(2)}
           taxAmount={tip.taxAmount !== undefined ? tip.taxAmount.toFixed(2) : undefined}
+          taxText={t('components.billBox.tax')}
           shareButtonPress={openPreview}
           hideSaveButton={true}
         />
