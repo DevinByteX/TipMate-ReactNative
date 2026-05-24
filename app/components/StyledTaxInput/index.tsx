@@ -68,6 +68,18 @@ export const StyledTaxInput = ({
 
   const isDisabled = !billAmount || parseFloat(billAmount) <= 0;
 
+  const convertTaxValue = (toType: TaxType): string => {
+    const numericValue = parseFloat(taxValue);
+    const numericBill = parseFloat(billAmount ?? '0');
+    if (!taxValue || isNaN(numericValue) || numericValue <= 0 || numericBill <= 0) return '';
+    const converted =
+      toType === 'percentage'
+        ? (numericValue / numericBill) * 100
+        : (numericValue / 100) * numericBill;
+    const rounded = Math.round(converted * 100) / 100;
+    return rounded % 1 === 0 ? String(rounded) : rounded.toFixed(2).replace(/\.?0+$/, '');
+  };
+
   const handleBlur = () => {
     setIsFocused(false);
     const { isValid, errorKey } = validateTaxInput(taxValue, taxType, billAmount);
@@ -77,10 +89,10 @@ export const StyledTaxInput = ({
     }
   };
 
-  const isLongCurrencySymbol = typeof currencySymbol === 'string' && currencySymbol.length > 1;
-  const currencyLabel = isLongCurrencySymbol ? currencySymbol ?? '$' : currencySymbol ?? '$';
-  const prefix = taxType === 'amount' && !isLongCurrencySymbol ? currencySymbol : '';
-  const suffix = taxType === 'percentage' ? '%' : isLongCurrencySymbol ? currencySymbol : '';
+  const symbol = currencySymbol ?? '$';
+  const isLongCurrencySymbol = symbol.length > 1;
+  const prefix = taxType === 'amount' && !isLongCurrencySymbol ? symbol : '';
+  const suffix = taxType === 'percentage' ? '%' : isLongCurrencySymbol ? symbol : '';
 
   return (
     <View style={styles.mainContainer}>
@@ -105,16 +117,20 @@ export const StyledTaxInput = ({
             label="%"
             active={taxType === 'percentage'}
             onPress={() => {
-              onTaxTypeChange('percentage');
-              onTaxValueChange('');
+              if (taxType !== 'percentage') {
+                onTaxValueChange(convertTaxValue('percentage'));
+                onTaxTypeChange('percentage');
+              }
             }}
           />
           <TypePill
-            label={currencyLabel}
+            label={symbol}
             active={taxType === 'amount'}
             onPress={() => {
-              onTaxTypeChange('amount');
-              onTaxValueChange('');
+              if (taxType !== 'amount') {
+                onTaxValueChange(convertTaxValue('amount'));
+                onTaxTypeChange('amount');
+              }
             }}
           />
         </View>
