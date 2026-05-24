@@ -20,8 +20,8 @@ const RoundCapsule = ({
   active = false,
   textValue,
   textLabel,
-  iconType = 'FontAwesome6',
-  iconName = 'circle',
+  iconType: _iconType = 'FontAwesome6',
+  iconName: _iconName = 'circle',
   disabled = false,
   onRoundCapsulePress,
 }: RoundCapsuleProps) => {

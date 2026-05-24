@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, { Rect, SvgProps } from 'react-native-svg';
+import Svg, { SvgProps } from 'react-native-svg';
 
 export interface IconBaseProps {
   height?: number | string;

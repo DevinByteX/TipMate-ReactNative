@@ -434,7 +434,7 @@ const CustomSplitScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, typography, utils }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   flex1: {
     flex: 1,
     backgroundColor: colors.backgroundColor,

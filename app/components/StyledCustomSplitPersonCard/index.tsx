@@ -10,7 +10,7 @@ const AllocationTypeButton = ({
   label,
   isActive,
   onPress,
-  theme,
+  theme: _theme,
   styles,
 }: {
   label: string;

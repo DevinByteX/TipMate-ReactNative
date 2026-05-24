@@ -38,7 +38,7 @@ const StyledCustomSplitFooter = ({
   onClearCustomSplit,
   onSaveAsNew,
   onUpdatePreset,
-  people,
+  people: _people,
   getValidationIcon,
   getValidationText,
   t,
