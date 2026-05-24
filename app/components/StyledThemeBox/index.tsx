@@ -197,5 +197,6 @@ const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   themeColorIcon: {
     color: colors.card_typography,
     fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
   },
 }));

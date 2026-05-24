@@ -15,8 +15,20 @@ const scaleFont = (size: number): number =>
  * Display size is the largest typographic size used for prominent numeric
  * amounts (e.g. the main bill total). It scales proportionally with screen width.
  */
-const displayFontSize = Math.round((SCREEN_WIDTH * 40) / BASE_WIDTH);
-const displayLineHeight = Math.round(displayFontSize * 1.2);
+const displayFontSize = scaleFont(40);
+// Line-height multipliers per size — tighter for large display text, more open
+// for body text to aid readability.  All line heights are derived from the
+// corresponding scaled font size so they stay in sync if the font scale changes.
+const LINE_HEIGHT_RATIOS: Record<string, number> = {
+    xxs: 1.5,    // 8  → 12  (generous for tiny text)
+    xs: 1.4,     // 10 → 14
+    sm: 1.333,   // 12 → 16
+    md: 1.429,   // 14 → 20
+    lg: 1.375,   // 16 → 22
+    xl: 1.4,     // 20 → 28
+    xxl: 1.364,  // 22 → 30
+    display: 1.2, // large numeric amounts — compact
+};
 
 /**
  * Centralised font-size scale for TipMate.
@@ -56,16 +68,37 @@ export const typography = {
         display: displayFontSize,
     },
     lineHeight: {
-        xxs: scaleFont(12),
-        xs: scaleFont(14),
-        sm: scaleFont(16),
-        md: scaleFont(20),
-        lg: scaleFont(22),
-        xl: scaleFont(28),
-        xxl: scaleFont(30),
-        display: displayLineHeight,
+        xxs: Math.round(scaleFont(8) * LINE_HEIGHT_RATIOS.xxs),
+        xs: Math.round(scaleFont(10) * LINE_HEIGHT_RATIOS.xs),
+        sm: Math.round(scaleFont(12) * LINE_HEIGHT_RATIOS.sm),
+        md: Math.round(scaleFont(14) * LINE_HEIGHT_RATIOS.md),
+        lg: Math.round(scaleFont(16) * LINE_HEIGHT_RATIOS.lg),
+        xl: Math.round(scaleFont(20) * LINE_HEIGHT_RATIOS.xl),
+        xxl: Math.round(scaleFont(22) * LINE_HEIGHT_RATIOS.xxl),
+        display: Math.round(displayFontSize * LINE_HEIGHT_RATIOS.display),
     },
 } as const;
 
 export type TypographyToken = keyof typeof typography.fontSize;
 export type TypographyScale = typeof typography;
+
+/** Paired fontSize + lineHeight values for a single token. */
+export type TypographyMetrics = {
+    fontSize: number;
+    lineHeight: number;
+};
+
+/**
+ * Returns the paired `fontSize` and `lineHeight` for a given token.
+ * Prefer this over referencing `typography.fontSize` and `typography.lineHeight`
+ * separately to ensure the two values always stay in sync.
+ *
+ * @example
+ *   const { fontSize, lineHeight } = getTypographyPair('md');
+ */
+export function getTypographyPair(token: TypographyToken): TypographyMetrics {
+    return {
+        fontSize: typography.fontSize[token],
+        lineHeight: typography.lineHeight[token],
+    };
+}
