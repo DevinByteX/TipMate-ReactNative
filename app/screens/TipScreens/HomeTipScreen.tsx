@@ -151,6 +151,9 @@ const HomeTipScreen = () => {
                     amount: parseFloat(billValues.perPerson?.subtotal || '0'),
                     tip: parseFloat(billValues.perPerson?.tip || '0'),
                     total: parseFloat(billValues.perPerson?.total || '0'),
+                    tax: billValues.perPerson?.tax
+                      ? parseFloat(billValues.perPerson.tax)
+                      : undefined,
                   }
                 : undefined,
             individualSplits:
