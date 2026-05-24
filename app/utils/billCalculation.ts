@@ -92,17 +92,22 @@ export const calculateBillValues = (
     };
   }
 
-  // Resolve tax amount when 'before tax' mode is active
+  // 'before' mode: bill is pre-tax — tax is calculated and added as a separate line item.
+  //                 Tip is calculated on the pre-tax subtotal (industry standard).
+  // 'after' mode:  bill already includes tax — no extra tax calculation needed.
+  //                This mode is a UI signal only; calculation is identical to no-tax.
   const isBeforeTax =
     taxConfig && taxConfig.mode === 'before' && taxConfig.value > 0;
+
   const taxAmount = isBeforeTax
     ? taxConfig!.type === 'percentage'
       ? (taxConfig!.value / 100) * billAmount
       : taxConfig!.value
     : 0;
 
-  // Calculate the tip amount — always on the pre-tax subtotal
+  // Tip is always calculated on the pre-tax subtotal
   const tipTotal = (tipPercentage / 100) * billAmount;
+
   // Calculate the total bill including tax (if any) and tip
   const totalBill = billAmount + taxAmount + tipTotal;
 
@@ -181,16 +186,20 @@ export const calculateBillValuesCustomSplit = (
   // Filter out any invalid splits to be extra safe
   const validSplits = individualSplits.filter(s => s && typeof s === 'object' && 'id' in s && 'name' in s);
 
-  // Resolve tax amount when 'before tax' mode is active
+  // 'before' mode: bill is pre-tax — tax is calculated and added as a separate line item.
+  //                 Tip is calculated on the pre-tax subtotal (industry standard).
+  // 'after' mode:  bill already includes tax — no extra tax calculation needed.
+  //                This mode is a UI signal only; calculation is identical to no-tax.
   const isBeforeTax =
     taxConfig && taxConfig.mode === 'before' && taxConfig.value > 0;
+
   const taxAmount = isBeforeTax
     ? taxConfig!.type === 'percentage'
       ? (taxConfig!.value / 100) * billAmount
       : taxConfig!.value
     : 0;
 
-  // 1. Calculate overall amounts — tip is always on the pre-tax subtotal
+  // 1. Calculate overall amounts — tip on the pre-tax subtotal (industry standard)
   const tipTotal = (tipPercentage / 100) * billAmount;
   const totalBill = billAmount + taxAmount + tipTotal;
 
