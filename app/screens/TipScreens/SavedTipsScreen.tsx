@@ -324,7 +324,7 @@ const SavedTipsScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -348,7 +348,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
     placeholderTextColor: colors.accent,
@@ -377,7 +378,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderColor: colors.accent,
   },
   filterIconBadgeText: {
-    fontSize: 10,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     fontFamily: fonts.Montserrat_Black,
     color: colors.accent,
   },

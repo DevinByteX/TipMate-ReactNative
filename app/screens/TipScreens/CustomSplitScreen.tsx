@@ -18,7 +18,6 @@ import {
   StyledCustomSplitPersonCard,
   StyledCustomSplitPresetCard,
 } from '@components';
-import { SavedSplitPreset } from '@/context/types';
 import { useCustomSplitEditor } from '@hooks';
 import { toFixedWithoutRounding } from '@utils';
 import { IndividualSplit } from '@/context/types';
@@ -435,7 +434,7 @@ const CustomSplitScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography, utils }) => ({
   flex1: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -461,13 +460,15 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     justifyContent: 'space-between',
   },
   totalBillLabel: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
     color: colors.white,
     opacity: 0.9,
   },
   totalBillAmount: {
-    fontSize: 22,
+    fontSize: typography.fontSize.xxl,
+    lineHeight: typography.lineHeight.xxl,
     fontFamily: fonts.Montserrat_Black,
     color: colors.white,
   },
@@ -486,7 +487,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   personNameInput: {
     flex: 1,
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Nunito_Bold,
     color: colors.card_typography,
     padding: 0,
@@ -510,7 +512,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     backgroundColor: colors.accent,
   },
   allocationTypeText: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_SemiBold,
     color: colors.card_typography,
   },
@@ -527,20 +530,23 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     paddingVertical: (UnistylesRuntime.screen.height * 0.6) / 100,
   },
   valueInputPrefix: {
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.accent,
     marginRight: 4,
   },
   valueInput: {
     flex: 1,
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
     padding: 0,
   },
   valueInputSuffix: {
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.accent,
     marginLeft: 4,
@@ -553,7 +559,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     paddingVertical: (UnistylesRuntime.screen.height * 0.4) / 100,
   },
   remainderText: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Medium,
     color: colors.accent,
   },
@@ -571,7 +578,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     marginBottom: (UnistylesRuntime.screen.height * 1) / 100,
   },
   addPersonText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
@@ -592,7 +600,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   validationText: {
     flex: 1,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
   },
   breakdownRow: {
@@ -602,7 +611,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
   breakdownText: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Medium,
     color: colors.card_typography,
   },
@@ -618,7 +628,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     backgroundColor: colors.disable_button,
   },
   saveButtonText: {
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Nunito_Bold,
     color: colors.white,
   },
@@ -647,7 +658,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     borderColor: colors.disable_button,
   },
   presetButtonText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
@@ -662,7 +674,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     justifyContent: 'center',
   },
   saveAsNewText: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_SemiBold,
     color: colors.accent,
     textDecorationLine: 'underline',
@@ -679,7 +692,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     borderColor: colors.error_toast,
   },
   clearActiveSplitText: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Bold,
     color: colors.error_toast,
   },
@@ -694,7 +708,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     marginBottom: (UnistylesRuntime.screen.height * 1) / 100,
   },
   presetsSectionTitle: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
@@ -716,7 +731,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     justifyContent: 'center',
   },
   doneButtonText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
@@ -734,7 +750,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     backgroundColor: colors.accent,
   },
   presetCardName: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
     color: colors.card_typography,
     marginBottom: 2,
@@ -743,7 +760,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     color: colors.white,
   },
   presetCardPeople: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Medium,
     color: colors.card_typography,
     opacity: 0.7,
@@ -753,7 +771,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     opacity: 0.9,
   },
   presetCardSummary: {
-    fontSize: 11,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     fontFamily: fonts.Nunito_Medium,
     color: colors.card_typography,
     opacity: 0.5,
@@ -766,7 +785,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   // Preset name input in modal
   presetNameInput: {
     width: '100%',
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Nunito_Bold,
     color: colors.card_typography,
     backgroundColor: colors.backgroundColor,

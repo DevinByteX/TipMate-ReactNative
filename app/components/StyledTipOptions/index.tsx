@@ -209,7 +209,7 @@ export const StyledTipOptions = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -219,12 +219,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   titleText: {
     color: colors.accent,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   instructionText: {
-    fontSize: 10,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
@@ -266,18 +268,21 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   tipDigitsStyles: {
-    fontSize: 24,
+    fontSize: typography.fontSize.xxl,
+    lineHeight: typography.lineHeight.xxl,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
     alignSelf: 'center',
   },
   tipPercentageCapsuleText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Black,
     color: colors.accent,
   },
   tipPercentageCapsuleCustomText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
     paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,

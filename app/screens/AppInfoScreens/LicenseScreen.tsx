@@ -151,12 +151,7 @@ const LicensesScreen = () => {
         scrollEventThrottle={16}
         ListEmptyComponent={renderEmptyComponent()}
       />
-      <Animated.View
-        style={[
-          styles.scrollToTopButton,
-          scrollButtonStyle,
-        ]}
-      >
+      <Animated.View style={[styles.scrollToTopButton, scrollButtonStyle]}>
         <Pressable onPress={scrollToTop} style={styles.scrollToTopIcon}>
           <StyledIcons
             type="Feather"
@@ -170,7 +165,7 @@ const LicensesScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   searchContainer: {
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
@@ -181,7 +176,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
     paddingVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
     placeholderTextColor: colors.accent,
@@ -201,7 +197,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingVertical: (UnistylesRuntime.screen.height * 10) / 100,
   },
   emptyText: {
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.card_typography,
     textAlign: 'center',

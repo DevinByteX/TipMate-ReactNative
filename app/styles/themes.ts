@@ -53,6 +53,8 @@ const hexToRGBA = (hex: string, opacity: number) => {
   return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${opacity})`;
 };
 
+import { typography } from './typography';
+
 export const lightTheme = {
   colors: {
     ...sharedColors,
@@ -85,6 +87,7 @@ export const lightTheme = {
   utils: {
     hexToRGBA,
   },
+  typography,
   // add any keys/functions/objects/arrays you want!
 } as const;
 
@@ -120,6 +123,7 @@ export const darkTheme = {
   utils: {
     hexToRGBA,
   },
+  typography,
   // add any keys/functions/objects/arrays you want!
 } as const;
 
@@ -155,5 +159,6 @@ export const premiumTheme = {
   utils: {
     hexToRGBA,
   },
+  typography,
   // add any keys/functions/objects/arrays you want!
 } as const;

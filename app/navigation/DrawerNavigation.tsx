@@ -38,7 +38,7 @@ const DrawerNavigation = () => {
           drawerLabelStyle: {
             fontFamily: theme.fonts.Montserrat_Bold,
             fontWeight: undefined,
-            fontSize: 14,
+            fontSize: theme.typography.fontSize.md,
           },
         }}
       />
@@ -50,7 +50,7 @@ const DrawerNavigation = () => {
           drawerLabelStyle: {
             fontFamily: theme.fonts.Montserrat_Bold,
             fontWeight: undefined,
-            fontSize: 14,
+            fontSize: theme.typography.fontSize.md,
           },
         }}
       />
@@ -62,7 +62,7 @@ const DrawerNavigation = () => {
           drawerLabelStyle: {
             fontFamily: theme.fonts.Montserrat_Bold,
             fontWeight: undefined,
-            fontSize: 14,
+            fontSize: theme.typography.fontSize.md,
           },
         }}
       />

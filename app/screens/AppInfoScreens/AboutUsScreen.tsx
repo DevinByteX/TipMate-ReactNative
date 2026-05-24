@@ -128,7 +128,7 @@ export const AboutUsScreen: React.FC = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -145,8 +145,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   description: {
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     textAlign: 'left',
     marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
@@ -157,13 +157,15 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   sectionTitle: {
     color: colors.accent,
     fontFamily: fonts.Nunito_Bold,
-    fontSize: 18,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     marginBottom: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
   sectionText: {
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
   },
   acknowledgementsSection: {
     backgroundColor: colors.backgroundColor,
@@ -173,14 +175,15 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   linkText: {
     color: colors.accent,
     fontFamily: fonts.Montserrat_Medium,
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     textDecorationLine: 'underline',
   },
   feedbackText: {
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     marginVertical: (UnistylesRuntime.screen.height * 1.5) / 100,
   },
   acknowledgementLinks: {
@@ -197,12 +200,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   acknowledgementButtonText: {
     color: colors.backgroundColor,
     fontFamily: fonts.Montserrat_Medium,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
   },
   versionText: {
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     textAlign: 'center',
     marginTop: (UnistylesRuntime.screen.height * 1.5) / 100,
   },

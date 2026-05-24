@@ -229,7 +229,7 @@ const SavedTipDetailScreen = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -252,19 +252,22 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     gap: (UnistylesRuntime.screen.width * 3) / 100,
   },
   dateText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.card_typography,
     flex: 1,
   },
   peopleText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.card_typography,
     flex: 1,
   },
   currencyText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.card_typography,
     flex: 1,
@@ -279,12 +282,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     alignItems: 'center',
   },
   tipPercentageLabel: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
   tipPercentageValue: {
-    fontSize: 20,
+    fontSize: typography.fontSize.xl,
+    lineHeight: typography.lineHeight.xl,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },

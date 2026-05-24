@@ -42,7 +42,12 @@ const HeaderBarIcon = ({
   const { onPressIn, onPressOut, animatedStyle } = usePressAnimation();
   return (
     <Animated.View style={animatedStyle}>
-      <Pressable style={headerBarStyles} onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
+      <Pressable
+        style={headerBarStyles}
+        onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+      >
         <StyledIcons type={iconType} name={iconName} size={iconSize} color={iconColor} />
       </Pressable>
     </Animated.View>
@@ -120,7 +125,7 @@ export const StyledHeader = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   headerMainContainer: {
     backgroundColor: colors.headerBGColor,
     paddingTop: UnistylesRuntime.statusBar.height,
@@ -147,12 +152,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingEnd: (UnistylesRuntime.screen.width * 5) / 100,
   },
   headerText: {
-    fontSize: 20,
+    fontSize: typography.fontSize.xl,
+    lineHeight: typography.lineHeight.xl,
     color: colors.accent,
     fontFamily: fonts.Nunito_Black,
   },
   headerSubText: {
-    fontSize: 8,
+    fontSize: typography.fontSize.xxs,
+    lineHeight: typography.lineHeight.xxs,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
   },

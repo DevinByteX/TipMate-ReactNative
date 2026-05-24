@@ -1,5 +1,6 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -13,6 +14,27 @@ interface ErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
 }
+
+// Extracted as a functional component so it can use the useStyles hook
+// (error boundaries must be class components and cannot use hooks directly)
+const ErrorFallbackView = ({ error, onReset }: { error: Error | null; onReset: () => void }) => {
+  const { styles } = useStyles(stylesheet);
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Something went wrong</Text>
+      <Text style={styles.message}>{error?.message ?? 'An unexpected error occurred.'}</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onReset}
+        accessibilityRole="button"
+        accessibilityLabel="Try again"
+      >
+        <Text style={styles.buttonText}>Try Again</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 /**
  * Class-based React error boundary.
@@ -54,60 +76,48 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         return this.props.fallback;
       }
 
-      return (
-        <View style={styles.container}>
-          <Text style={styles.title}>Something went wrong</Text>
-          <Text style={styles.message}>
-            {this.state.error?.message ?? 'An unexpected error occurred.'}
-          </Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.handleReset}
-            accessibilityRole="button"
-            accessibilityLabel="Try again"
-          >
-            <Text style={styles.buttonText}>Try Again</Text>
-          </TouchableOpacity>
-        </View>
-      );
+      return <ErrorFallbackView error={this.state.error} onReset={this.handleReset} />;
     }
 
     return this.props.children;
   }
 }
 
-const styles = StyleSheet.create({
+const stylesheet = createStyleSheet(({ colors, typography }) => ({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white,
   },
   title: {
-    fontSize: 20,
+    fontSize: typography.fontSize.xl,
+    lineHeight: typography.lineHeight.xl,
     fontWeight: '600',
     marginBottom: 8,
-    color: '#1a1a1a',
+    color: colors.card_typography,
   },
   message: {
-    fontSize: 14,
-    color: '#666666',
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
+    color: colors.disable_text,
     textAlign: 'center',
     marginBottom: 24,
   },
   button: {
     paddingHorizontal: 24,
     paddingVertical: 12,
-    backgroundColor: '#007AFF',
+    backgroundColor: colors.accent,
     borderRadius: 8,
   },
   buttonText: {
-    color: '#ffffff',
-    fontSize: 16,
+    color: colors.white,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontWeight: '600',
   },
-});
+}));
 
 export { ErrorBoundary };
 export type { ErrorBoundaryProps };

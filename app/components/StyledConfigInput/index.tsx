@@ -101,7 +101,7 @@ export const StyledConfigInput = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   configInputBox: {
     flex: 1,
     flexDirection: 'row',
@@ -117,12 +117,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     alignItems: 'center',
   },
   configBoxText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.accent,
   },
   configBoxTextInput: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
     paddingVertical: (UnistylesRuntime.screen.height * 0.75) / 100,

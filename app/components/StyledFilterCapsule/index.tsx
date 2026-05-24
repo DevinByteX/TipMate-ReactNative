@@ -195,7 +195,7 @@ export const StyledFilterCapsule: React.FC<StyledFilterCapsuleProps> = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   filtersContainer: {
     backgroundColor: colors.backgroundColor,
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
@@ -211,7 +211,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginBottom: (UnistylesRuntime.screen.height * 0.8) / 100,
   },
   filterSectionTitle: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
@@ -231,7 +232,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderColor: colors.accent,
   },
   filterCapsuleText: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
   },
@@ -247,7 +249,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginTop: (UnistylesRuntime.screen.height * 0.5) / 100,
   },
   resetFiltersText: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },

@@ -267,7 +267,7 @@ export const StyledCurrencySelector = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography, utils }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -277,19 +277,22 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   titleText: {
     color: colors.accent,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   instructionText: {
-    fontSize: 10,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   modalInstructionText: {
-    fontSize: 10,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     marginBottom: (UnistylesRuntime.screen.height * 2) / 100,
@@ -309,7 +312,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   currencyChangeText: {
     color: colors.card_typography,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
   },
   currencyBoxContainer: {
@@ -325,14 +329,15 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   currencyText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Black,
     color: colors.accent,
   },
 
   // Modal contents
   modalBackdrop: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: utils.hexToRGBA(colors.backgroundColor, 0.5),
   },
   modalMainContainer: {
@@ -355,7 +360,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   modalTitle: {
     color: colors.accent,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
   },
   modalContentCurrencyBarContainer: {
@@ -367,7 +373,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   modalcurrencyText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },

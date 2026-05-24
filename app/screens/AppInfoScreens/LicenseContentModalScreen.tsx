@@ -75,7 +75,7 @@ const LicenseContentModalScreen: React.FC = () => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }, runtime) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }, runtime) => ({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -100,13 +100,15 @@ const stylesheet = createStyleSheet(({ colors, fonts }, runtime) => ({
     flex: 1,
   },
   titleText: {
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Nunito_Black,
     color: colors.accent,
     marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
   },
   subtitleText: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
   },
@@ -121,7 +123,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }, runtime) => ({
   licenseWebsiteUrl: {
     color: colors.accent,
     fontFamily: fonts.Montserrat_Bold,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     textAlign: 'center',
     textDecorationLine: 'underline',
     paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
@@ -130,7 +133,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }, runtime) => ({
     paddingTop: (UnistylesRuntime.screen.height * 2) / 100,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
     lineHeight: 14,
   },
 }));

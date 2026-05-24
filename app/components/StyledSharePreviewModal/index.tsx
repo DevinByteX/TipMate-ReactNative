@@ -69,7 +69,7 @@ export const StyledSharePreviewModal = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography, utils }) => ({
   centeredView: {
     flex: 1,
     justifyContent: 'center',
@@ -93,12 +93,14 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   headerTitle: {
     fontFamily: fonts.Nunito_Black,
-    fontSize: 20,
+    fontSize: typography.fontSize.xl,
+    lineHeight: typography.lineHeight.xl,
     color: colors.accent,
     textAlign: 'center',
   },
   headerSubtitle: {
-    fontSize: 11,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     textAlign: 'center',
@@ -110,7 +112,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     paddingVertical: (UnistylesRuntime.screen.height * 2) / 100,
   },
   previewText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
     fontFamily: fonts.Montserrat_Regular,
     color: colors.card_typography,
     lineHeight: 22,
@@ -134,7 +136,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
   },
   shareButtonText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card,
     textAlign: 'center',
@@ -151,7 +154,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     borderColor: colors.card_typography,
   },
   closeButtonText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
   },

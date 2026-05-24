@@ -89,7 +89,7 @@ export const StyledTotalAmountInput = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   mainContainer: {
     width: '100%',
     backgroundColor: colors.card,
@@ -99,11 +99,13 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   titleText: {
     color: colors.accent,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
   },
   instructionText: {
-    fontSize: 10,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
@@ -114,15 +116,17 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   currencySymbol: {
     color: colors.card_typography,
-    fontSize: 40,
+    fontSize: typography.fontSize.display,
+    lineHeight: typography.lineHeight.display,
     fontFamily: fonts.Montserrat_Black,
   },
   textInputStyles: {
     flex: 1,
     width: '100%',
     color: colors.card_typography,
-    fontSize: 40,
+    fontSize: typography.fontSize.display,
+    lineHeight: typography.lineHeight.display,
     fontFamily: fonts.Montserrat_Black,
-    paddingVertical: 0, // To remove android hidden padding issue
+    paddingVertical: 0,
   },
 }));
