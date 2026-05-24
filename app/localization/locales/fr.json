@@ -266,6 +266,7 @@
     "totalPerPerson": "Total par personne :",
     "individualSplit": "{{name}} : {{currency}}{{amount}}",
     "customSplitLabel": "Partage personnalisé :",
+    "taxAmount": "Montant de la taxe :",
     "sharedVia": "Partagé via TipMate",
     "shareYourTip": "Partager le résumé de votre pourboire",
     "tipMateSummary": "Résumé TipMate",
@@ -278,7 +279,8 @@
       "amount": "Montant",
       "billDetails": "Détails de la note",
       "splitDetails": "Détails du partage",
-      "generatedBy": "Généré par"
+      "generatedBy": "Généré par",
+      "taxAmount": "Montant de la taxe"
     }
   },
   "messages": {

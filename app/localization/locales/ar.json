@@ -266,6 +266,7 @@
     "totalPerPerson": "الإجمالي لكل شخص:",
     "individualSplit": "{{name}}: {{currency}}{{amount}}",
     "customSplitLabel": "التقسيم المخصص:",
+    "taxAmount": "قيمة الضريبة:",
     "sharedVia": "تمت المشاركة عبر TipMate",
     "shareYourTip": "شارك ملخص الإكرامية",
     "tipMateSummary": "ملخص TipMate",
@@ -278,7 +279,8 @@
       "amount": "المبلغ",
       "billDetails": "تفاصيل الفاتورة",
       "splitDetails": "تفاصيل التقسيم",
-      "generatedBy": "تم الإنشاء بواسطة"
+      "generatedBy": "تم الإنشاء بواسطة",
+      "taxAmount": "قيمة الضريبة"
     }
   },
   "messages": {

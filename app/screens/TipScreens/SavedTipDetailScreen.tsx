@@ -36,6 +36,7 @@ const SavedTipDetailScreen = () => {
         splitType: tip.splitType,
         perPerson: tip.perPerson,
         individualSplits: tip.individualSplits,
+        taxAmount: tip.taxAmount,
         currencySymbol: tip.currencySymbol,
       }
     : null;
@@ -143,6 +144,7 @@ const SavedTipDetailScreen = () => {
           totalAmount={tip.total.toFixed(2)}
           subTotalAmount={tip.amount.toFixed(2)}
           totalTipAmount={tip.tip.toFixed(2)}
+          taxAmount={tip.taxAmount !== undefined ? tip.taxAmount.toFixed(2) : undefined}
           shareButtonPress={openPreview}
           hideSaveButton={true}
         />
