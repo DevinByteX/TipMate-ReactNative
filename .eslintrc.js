@@ -1,3 +1,26 @@
+/**
+ * ESLint configuration for TipMate.
+ *
+ * Circular dependency detection
+ * ─────────────────────────────
+ * `import/no-cycle` is set to maxDepth:10 — deep enough to catch real cycles
+ * without false-positives in legitimate dependency chains.  `ignoreExternal:true`
+ * skips node_modules entirely; without it the TypeScript resolver trips over
+ * Flow syntax inside React Native's own index.js.
+ *
+ * Unused variables
+ * ────────────────
+ * `@typescript-eslint/no-unused-vars` is preferred over the base rule (which is
+ * disabled) because it understands TypeScript type-only imports.  Prefix a name
+ * with _ (e.g. `_unused`, `_props`) to signal an intentional no-op and silence
+ * the warning.  This is safer than turning the rule off entirely.
+ *
+ * Module resolution
+ * ─────────────────
+ * The `babel-module` resolver teaches import/no-cycle to follow path aliases
+ * defined in babel.config.js (@hooks, @configs, @styles, etc.).  The `node`
+ * resolver adds platform-specific extensions so RN platform files are found.
+ */
 module.exports = {
   root: true,
   extends: '@react-native',

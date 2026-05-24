@@ -134,7 +134,7 @@ const stylesheet = createStyleSheet(({ colors, fonts, typography }, runtime) => 
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     fontSize: typography.fontSize.sm,
-    lineHeight: 14,
+    lineHeight: typography.lineHeight.sm,
   },
 }));
 

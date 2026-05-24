@@ -3,6 +3,11 @@ android/
 ios/
 build/
 dist/
+vendor/
 .next/
 coverage/
+__generated__/
+.codegen/
+.eslint-cache
+.turbo/
 *.min.js
