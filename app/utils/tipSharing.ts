@@ -78,7 +78,9 @@ export const formatTipDetailsPreview = ({
   taxAmount,
   currencySymbol = '$',
   translations = defaultTranslations,
-}: Omit<ShareTipDetailsParams, 'title' | 'subject'> & { translations?: ShareTranslations }): string => {
+}: Omit<ShareTipDetailsParams, 'title' | 'subject'> & {
+  translations?: ShareTranslations;
+}): string => {
   const t = translations;
 
   let splitSection = '';
@@ -96,10 +98,19 @@ export const formatTipDetailsPreview = ({
       .join('\n');
     splitSection = `\n👥 ${t.customSplitLabel} (${individualSplits.length} ${t.persons})\n${splitLines}`;
   } else if (numberOfPeople > 1 && perPerson) {
-    splitSection = `\n👥 ${t.splitAmong} ${numberOfPeople} ${t.persons}\n  • ${t.subtotalPerPerson} ${currencySymbol}${perPerson.amount.toFixed(2)}\n  • ${t.tipPerPerson} ${currencySymbol}${perPerson.tip.toFixed(2)}\n  • ${t.totalPerPerson} ${currencySymbol}${perPerson.total.toFixed(2)}`;
+    splitSection = `\n👥 ${t.splitAmong} ${numberOfPeople} ${t.persons}\n  • ${
+      t.subtotalPerPerson
+    } ${currencySymbol}${perPerson.amount.toFixed(2)}\n  • ${
+      t.tipPerPerson
+    } ${currencySymbol}${perPerson.tip.toFixed(2)}\n  • ${
+      t.totalPerPerson
+    } ${currencySymbol}${perPerson.total.toFixed(2)}`;
   }
 
-  const taxLine = taxAmount && taxAmount > 0 ? `\n🏷️ ${t.taxAmount} ${currencySymbol}${taxAmount.toFixed(2)}` : '';
+  const taxLine =
+    taxAmount && taxAmount > 0
+      ? `\n 🏷️ ${t.taxAmount} ${currencySymbol}${taxAmount.toFixed(2)}`
+      : '';
 
   const message = `
 💸 ${t.tipSummary}
@@ -242,8 +253,18 @@ export const shareTipPDF = async (
   translations: PDFTranslations = defaultPDFTranslations,
   locale: string = 'en-US',
 ) => {
-  const { amount, tip, total, tipPercentage, numberOfPeople, splitType, perPerson, individualSplits, taxAmount, currencySymbol = '$' } =
-    details;
+  const {
+    amount,
+    tip,
+    total,
+    tipPercentage,
+    numberOfPeople,
+    splitType,
+    perPerson,
+    individualSplits,
+    taxAmount,
+    currencySymbol = '$',
+  } = details;
   const t = translations;
 
   // Gradient colors matching app theme
@@ -251,7 +272,8 @@ export const shareTipPDF = async (
   const gradientEnd = '#00695C';
 
   // Platform-specific store link
-  const storeLink = Platform.OS === 'ios' ? Constants.APP_LINKS.appStore : Constants.APP_LINKS.playStore;
+  const storeLink =
+    Platform.OS === 'ios' ? Constants.APP_LINKS.appStore : Constants.APP_LINKS.playStore;
 
   // Generate receipt ID based on timestamp
   const receiptId = new Date().getTime().toString();
@@ -265,6 +287,16 @@ export const shareTipPDF = async (
     minute: '2-digit',
     hour12: false,
   });
+
+  // Extract tax row into its own template for better readability
+  const taxRowHtml =
+    taxAmount && taxAmount > 0
+      ? `
+              <div class="detail-row">
+                <span class="detail-label">${t.taxAmount}</span>
+                <span class="detail-value">${currencySymbol}${taxAmount.toFixed(2)}</span>
+              </div>`
+      : '';
 
   // Generate HTML content for the receipt-style PDF
   const htmlContent = `
@@ -477,11 +509,9 @@ export const shareTipPDF = async (
               <div class="detail-row">
                 <span class="detail-label">${t.billAmount}</span>
                 <span class="detail-value">${currencySymbol}${amount.toFixed(2)}</span>
-              </div>              ${taxAmount && taxAmount > 0 ? `
+              </div>
+              ${taxRowHtml}
               <div class="detail-row">
-                <span class="detail-label">${t.taxAmount}</span>
-                <span class="detail-value">${currencySymbol}${taxAmount.toFixed(2)}</span>
-              </div>` : ''}              <div class="detail-row">
                 <span class="detail-label">${t.tip} (${tipPercentage}%)</span>
                 <span class="detail-value">${currencySymbol}${tip.toFixed(2)}</span>
               </div>
@@ -491,8 +521,9 @@ export const shareTipPDF = async (
               </div>
             </div>
             
-            ${numberOfPeople > 1 && perPerson && splitType !== 'custom'
-      ? `
+            ${
+              numberOfPeople > 1 && perPerson && splitType !== 'custom'
+                ? `
             <div class="divider"></div>
             
             <!-- Split Details -->
@@ -512,25 +543,34 @@ export const shareTipPDF = async (
               </div>
             </div>
             `
-      : ''
-    }
-            ${splitType === 'custom' && individualSplits && individualSplits.length > 0
-      ? `
+                : ''
+            }
+            ${
+              splitType === 'custom' && individualSplits && individualSplits.length > 0
+                ? `
             <div class="divider"></div>
             
             <!-- Custom Split Details -->
             <div class="detail-section">
-              <div class="detail-title">${t.splitDetails} (${individualSplits.length} ${t.people})</div>
-              ${individualSplits.map(split => `
+              <div class="detail-title">${t.splitDetails} (${individualSplits.length} ${
+                    t.people
+                  })</div>
+              ${individualSplits
+                .map(
+                  split => `
               <div class="detail-row">
                 <span class="detail-label">${escapeHtml(split.name)}</span>
-                <span class="detail-value">${currencySymbol}${(split.calculatedAmount || 0).toFixed(2)}</span>
+                <span class="detail-value">${currencySymbol}${(split.calculatedAmount || 0).toFixed(
+                    2,
+                  )}</span>
               </div>
-              `).join('')}
+              `,
+                )
+                .join('')}
             </div>
             `
-      : ''
-    }
+                : ''
+            }
           </div>
           
           <!-- Footer -->
