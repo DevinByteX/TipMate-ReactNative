@@ -43,6 +43,7 @@ export interface SavedTip {
     amount: number;
     tip: number;
     total: number;
+    tax?: number;
   };
   individualSplits?: IndividualSplit[]; // Array of individual split details for custom splits
   taxAmount?: number; // Tax amount applied (only when before-tax mode was used)
