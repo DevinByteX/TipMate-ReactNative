@@ -133,7 +133,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   mainDrawerContainer: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
@@ -161,7 +161,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   footerButtonText: {
     color: colors.accent,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     paddingStart: (UnistylesRuntime.screen.width * 2) / 100,
   },
@@ -172,7 +173,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   preferencesText: {
     color: colors.card_typography,
-    fontSize: 16,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     fontFamily: fonts.Nunito_Black,
   },
   themePrefContainer: {
@@ -182,7 +184,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   themePrefText: {
     color: colors.card_typography,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     paddingEnd: (UnistylesRuntime.screen.width * 2) / 100,
     maxWidth: (UnistylesRuntime.screen.width * 60) / 100,

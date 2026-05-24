@@ -260,7 +260,7 @@ export const StyledSavedTipsList: React.FC<StyledSavedTipsListProps> = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -269,12 +269,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
   },
   countText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
     color: colors.card_typography,
   },
   clearAllText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
@@ -309,7 +311,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginBottom: (UnistylesRuntime.screen.height * 1) / 100,
   },
   cardDate: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.card_typography,
   },
@@ -323,7 +326,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     gap: 4,
   },
   peopleText: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
@@ -333,17 +337,20 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
   },
   amountLabel: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.card_typography,
   },
   amountValue: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
   },
   tipValue: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.accent,
   },
@@ -353,12 +360,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginVertical: (UnistylesRuntime.screen.height * 0.8) / 100,
   },
   totalLabel: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
     color: colors.accent,
   },
   totalValue: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },
@@ -369,13 +378,15 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingVertical: (UnistylesRuntime.screen.height * 10) / 100,
   },
   emptyTitle: {
-    fontSize: 20,
+    fontSize: typography.fontSize.xl,
+    lineHeight: typography.lineHeight.xl,
     fontFamily: fonts.Nunito_Black,
     color: colors.card_typography,
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
   },
   emptyDescription: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.card_typography,
     textAlign: 'center',
@@ -383,7 +394,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingHorizontal: (UnistylesRuntime.screen.width * 10) / 100,
   },
   emptyHint: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Montserrat_Medium,
     color: colors.accent,
     textAlign: 'center',

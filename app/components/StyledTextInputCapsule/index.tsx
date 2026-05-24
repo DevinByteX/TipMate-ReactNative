@@ -127,7 +127,7 @@ export const StyledTextInputCapsule = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   tipEditViewCapsule: {
     flex: 1,
     justifyContent: 'center',
@@ -136,7 +136,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   tipEditViewCapsuleText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Black,
     color: colors.accent,
     width: '100%',

@@ -298,7 +298,7 @@ export const StyledBillBox = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   superMainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -324,7 +324,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   titleText: {
     color: colors.accent,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
@@ -332,7 +333,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     color: colors.card_typography,
   },
   instructionText: {
-    fontSize: 10,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
@@ -349,17 +351,20 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   totalDigitsStyles: {
-    fontSize: 40,
+    fontSize: typography.fontSize.display,
+    lineHeight: typography.lineHeight.display,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },
   subTextStyles: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
   subDigitStyles: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
   },
@@ -404,7 +409,8 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     gap: 6,
   },
   individualSplitsTitle: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
@@ -426,17 +432,20 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     marginRight: 8,
   },
   individualSplitName: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Bold,
     color: colors.card_typography,
   },
   individualSplitType: {
-    fontSize: 10,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     fontFamily: fonts.Nunito_Medium,
     color: colors.accent,
   },
   individualSplitAmount: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
   },

@@ -41,7 +41,7 @@ export const StyledLicenseDetailsCard: React.FC<LicenseDetailsProps> = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   licenseMainContainer: {
     width: '100%',
     flex: 1,
@@ -66,12 +66,14 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   libraryNameText: {
     color: colors.accent,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
     marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,
   },
   versionText: {
-    fontSize: 12,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Bold,
     marginBottom: (UnistylesRuntime.screen.height * 0.5) / 100,

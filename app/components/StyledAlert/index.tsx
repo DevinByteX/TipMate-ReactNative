@@ -151,7 +151,7 @@ export const StyledAlert = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography, utils }) => ({
   overlay: {
     flex: 1,
     justifyContent: 'center',
@@ -180,12 +180,13 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   modalTitle: {
     fontFamily: fonts.Nunito_Black,
-    fontSize: 18,
+    fontSize: typography.fontSize.lg,
+    lineHeight: typography.lineHeight.lg,
     color: colors.accent,
     textAlign: 'center',
   },
   modalMessage: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     textAlign: 'center',
@@ -208,7 +209,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     alignItems: 'center',
   },
   lineButtonText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card_typography,
   },
@@ -221,7 +223,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     alignItems: 'center',
   },
   solidButtonText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card,
   },
@@ -234,7 +237,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     alignItems: 'center',
   },
   destructiveButtonText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Bold,
     color: colors.card,
   },

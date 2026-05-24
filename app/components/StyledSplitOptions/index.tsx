@@ -326,7 +326,7 @@ export const StyledSpiltOptions = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography, utils }) => ({
   mainContainer: {
     marginTop: (UnistylesRuntime.screen.height * 2) / 100,
     width: '100%',
@@ -336,12 +336,14 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
   },
   titleText: {
     color: colors.accent,
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
     marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
   instructionText: {
-    fontSize: 10,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     color: colors.card_typography,
     fontFamily: fonts.Montserrat_Medium,
     marginVertical: (UnistylesRuntime.screen.height * 0.5) / 100,
@@ -383,18 +385,21 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
   splitDigitsStyles: {
-    fontSize: 24,
+    fontSize: typography.fontSize.xxl,
+    lineHeight: typography.lineHeight.xxl,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
     alignSelf: 'center',
   },
   splitCapsuleText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Black,
     color: colors.accent,
   },
   splitCapsuleCustomText: {
-    fontSize: 14,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Montserrat_Black,
     color: colors.card_typography,
     paddingHorizontal: (UnistylesRuntime.screen.width * 2) / 100,
@@ -416,7 +421,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     opacity: 0.6,
   },
   customSplitButtonText: {
-    fontSize: 13,
+    fontSize: typography.fontSize.sm,
+    lineHeight: typography.lineHeight.sm,
     fontFamily: fonts.Nunito_Bold,
     color: colors.accent,
   },
@@ -434,7 +440,8 @@ const stylesheet = createStyleSheet(({ colors, fonts, utils }) => ({
     backgroundColor: utils.hexToRGBA(colors.card, 0.3),
   },
   clearCustomSplitText: {
-    fontSize: 11,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
     fontFamily: fonts.Nunito_Bold,
     color: colors.card,
   },

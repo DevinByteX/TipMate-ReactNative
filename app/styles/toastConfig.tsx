@@ -50,7 +50,7 @@ export const toastConfig = {
   tomatoToast: TomatoToast,
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   successToastStyle: {
     borderStartColor: colors.accent, // for Android to change left border color
     borderLeftColor: colors.accent, // for iOS to change left border color
@@ -61,7 +61,12 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   successToastContainerStyle: {
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
-  successText1: { color: colors.accent, fontFamily: fonts.Nunito_Black, fontSize: 14 },
+  successText1: {
+    color: colors.accent,
+    fontFamily: fonts.Nunito_Black,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
+  },
   errorToastStyle: {
     borderLeftColor: colors.error_toast,
     backgroundColor: colors.backgroundColor,
@@ -71,7 +76,12 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   errorToastContainerStyle: {
     paddingHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
   },
-  errorText1: { color: colors.error_toast, fontFamily: fonts.Nunito_Black, fontSize: 14 },
+  errorText1: {
+    color: colors.error_toast,
+    fontFamily: fonts.Nunito_Black,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
+  },
   tomatoToastStyle: {
     height: (UnistylesRuntime.screen.height * 8) / 100,
     width: '100%',
