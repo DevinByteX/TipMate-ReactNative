@@ -27,6 +27,7 @@ import {
 } from './contextSelectors';
 import { useCustomSplitPeople } from './useCustomSplitPeople';
 import { useSplitPresets } from './useSplitPresets';
+import { useTaxConfig } from './useTaxConfig';
 
 export {
   usePersistedReducer,
@@ -54,6 +55,8 @@ export {
   useUserSettingsSelectorData,
   useCustomSplitPeople,
   useSplitPresets,
+  useTaxConfig,
 };
 export type { ExternalLinkAlertConfig } from './useExternalLinkAlert';
 export type { CustomSplitEditorReturn } from './useCustomSplitEditor';
+export type { UseTaxConfigReturn } from './useTaxConfig';

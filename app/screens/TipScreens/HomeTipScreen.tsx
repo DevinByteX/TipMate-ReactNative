@@ -14,7 +14,6 @@ import {
   StyledSharePreviewModal,
   StyledAlert,
 } from '@/components';
-import type { TaxType } from '@/components';
 // Styling
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
@@ -22,10 +21,9 @@ import {
   RoundingMethodType,
   calculateBillValues,
   calculateBillValuesCustomSplit,
-  TaxConfig,
 } from '@/utils/billCalculation';
-import { useShareTipPreview, useSaveTip } from '@hooks';
-import { getDeviceCurrency, buildSplitSignature, findDuplicateTip, validateTaxInput } from '@utils';
+import { useShareTipPreview, useSaveTip, useTaxConfig } from '@hooks';
+import { getDeviceCurrency, buildSplitSignature, findDuplicateTip } from '@utils';
 import { useUserSettings, useHistory, useSplitSession } from '@/context/AppContext';
 import { ActionTypes } from '@/context/actionTypes';
 
@@ -40,8 +38,6 @@ const HomeTipScreen = () => {
   const [userInputTipPercentage, setUserInputTipPercentage] = useState<number>(5);
   const [userInputSplitCount, setUserInputSplitCount] = useState<number>(1);
   const [userInputRound, setUserInputRound] = useState<RoundingMethodType>(RoundingMethod.NO);
-  const [taxType, setTaxType] = useState<TaxType>('percentage');
-  const [taxValue, setTaxValue] = useState<string>('');
 
   const { state: settingsState } = useUserSettings();
   const { state: historyState } = useHistory();
@@ -63,14 +59,10 @@ const HomeTipScreen = () => {
   const isCustomSplitActive = sessionState.activeSplitConfig?.type === 'custom';
   const customSplits = sessionState.activeSplitConfig?.customSplits;
 
-  const taxConfig: TaxConfig | undefined = useMemo(() => {
-    const numericTaxValue = parseFloat(taxValue);
-    const { isValid } = validateTaxInput(taxValue, taxType, String(userInputBillAmount));
-    if (settingsState.showTaxInput && !isNaN(numericTaxValue) && numericTaxValue > 0 && isValid) {
-      return { mode: 'before', type: taxType, value: numericTaxValue };
-    }
-    return undefined;
-  }, [settingsState.showTaxInput, taxType, taxValue, userInputBillAmount]);
+  const { taxType, setTaxType, taxValue, setTaxValue, taxConfig } = useTaxConfig({
+    billAmount: userInputBillAmount,
+    showTaxInput: settingsState.showTaxInput,
+  });
 
   const { billValues, customBillValues } = useMemo(() => {
     if (isCustomSplitActive && customSplits && customSplits.length > 0) {
