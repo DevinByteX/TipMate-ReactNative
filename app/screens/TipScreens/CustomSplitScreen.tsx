@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import {
   StyledHeader,
@@ -25,6 +26,7 @@ import type { RootStackParamList } from '@navigation/types';
 
 const CustomSplitScreen = () => {
   const { styles, theme } = useStyles(stylesheet);
+  const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const navigation = useNavigation();
   const route = useRoute<RouteProp<RootStackParamList, 'CustomSplitScreen'>>();
@@ -209,7 +211,7 @@ const CustomSplitScreen = () => {
         </ScrollView>
 
         {/* Sticky Validation Footer */}
-        <View style={styles.footerContainer}>
+        <View style={[styles.footerContainer, { paddingBottom: insets.bottom + 16 }]}>
           {/* Display clear button if custom split is currently active */}
           {isCustomSplitActive && (
             <Pressable style={styles.clearActiveSplitButton} onPress={handleClear}>
