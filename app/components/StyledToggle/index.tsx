@@ -80,7 +80,7 @@ export const StyledToggle = ({
   );
 };
 
-const stylesheet = createStyleSheet(({ colors, fonts }) => ({
+const stylesheet = createStyleSheet(() => ({
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',

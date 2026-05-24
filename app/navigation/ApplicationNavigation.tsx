@@ -12,7 +12,7 @@ import StackNavigation from '@navigation/StackNavigation';
 import { getUserPreferredTheme, getUserUpdatedThemeOption, applyThemeColors } from '@utils';
 import { toastConfig } from '@styles/toastConfig';
 
-const ApplicationNavigator = (props: any) => {
+const ApplicationNavigator = () => {
   useEffect(() => {
     // Setting user preferred theme or initialTheme
     const setAppTheme = async () => {

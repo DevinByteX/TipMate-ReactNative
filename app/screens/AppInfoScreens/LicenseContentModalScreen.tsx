@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View, Pressable, StatusBar, Platform } from 'react-native';
+import { ScrollView, Text, View, Pressable, Platform } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { UnistylesRuntime } from 'react-native-unistyles';
 import { useNavigation, useRoute } from '@react-navigation/native';

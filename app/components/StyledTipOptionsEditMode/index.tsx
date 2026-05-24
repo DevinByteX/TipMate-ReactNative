@@ -34,7 +34,7 @@ const TipPercentageEditCapsule = ({
       optionsArray={tips}
       minValidateValue={0}
       maxValidateValue={80}
-      onValueChange={({ place, preValue, newValue }) => {
+      onValueChange={({ place, preValue: _preValue, newValue }) => {
         const updatedTipOption: TipOptionState = { place: place, value: newValue }; // Updated tip option value
         updateTipOption(updatedTipOption);
       }}
@@ -111,11 +111,10 @@ export const StyledTipOptionsEditMode = ({
   solidButtonText: string;
   resetSuccessToastText: string;
 }) => {
-  const { tips, tipSliderConfig, updateTipOption, resetTipsToDefault } =
-    useTipOptionsEditSelector();
+  const { tips, tipSliderConfig, resetTipsToDefault } = useTipOptionsEditSelector();
   const { t } = useTranslation();
 
-  const [customSliderConfigVisible, setCustomSliderConfigVisible] = useState<boolean>(false);
+  const [customSliderConfigVisible, _setCustomSliderConfigVisible] = useState<boolean>(false);
   const [confirmPopUpVisibility, setConfirmPopUpVisibility] = useState<boolean>(false);
 
   const { styles } = useStyles(stylesheet);
