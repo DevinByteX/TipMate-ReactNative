@@ -2,13 +2,21 @@ module.exports = {
   root: true,
   extends: '@react-native',
   plugins: ['import'],
+  ignorePatterns: ['node_modules/', 'android/', 'ios/', 'build/', 'dist/'],
+  parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 2020,
+  },
   rules: {
-    // Prevent circular dependencies across the codebase.
-    // maxDepth caps traversal depth to keep lint runs fast.
-    'import/no-cycle': ['error', { maxDepth: 10 }],
+    // ignoreExternal:true prevents traversal into node_modules, fixing the
+    // TypeScript parser / Flow syntax conflict in react-native's index.js.
+    'import/no-cycle': ['error', { maxDepth: 10, ignoreExternal: true }],
     // Catch unused imports and variables (prefix with _ to intentionally ignore).
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['warn', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      { varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
+    ],
   },
   settings: {
     'import/resolver': {
