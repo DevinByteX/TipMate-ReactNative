@@ -30,7 +30,7 @@
       "roundTotal": "REDONDEAR TOTAL",
       "splitCount": "DIVIDIR ENTRE",
       "perPerson": "POR PERSONA",
-      "tipSaved": "¡Cálculo de propina guardado correctamente!",
+      "tipSaved": "¡Cálculo de propina guardado con éxito!",
       "tipSaveFailed": "No se pudo guardar el cálculo de la propina. Inténtalo de nuevo."
     },
     "customSplit": {
@@ -45,7 +45,7 @@
       "remainder": "Resto",
       "allocationTypeLabel": "Tipo de asignación",
       "valueLabel": "Monto",
-      "validationComplete": "100% asignado — ¡Listo para guardar!",
+      "validationComplete": "100% asignado. ¡Listo para guardar!",
       "validationUnder": "Necesita {{remaining}} más",
       "validationOver": "Sobre-asignado por {{excess}}",
       "fixedSummary": "Fijo: {{currency}}{{amount}}",
@@ -85,7 +85,7 @@
       "duplicateConfigTitle": "Preajuste similar encontrado",
       "duplicateConfigMessage": "\"{{name}}\" tiene la misma configuración de división. ¿Te gustaría cargarlo en su lugar?",
       "duplicateBothTitle": "Preajuste duplicado",
-      "duplicateBothMessage": "\"{{name}}\" ya tiene el mismo nombre y configuración.",
+      "duplicateBothMessage": "Ya existe un preajuste llamado \"{{name}}\" con esta configuración.",
       "loadPreset": "Cargarlo"
     },
     "savedTips": {

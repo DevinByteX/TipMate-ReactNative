@@ -45,7 +45,7 @@
       "remainder": "Reste",
       "allocationTypeLabel": "Type d'allocation",
       "valueLabel": "Montant",
-      "validationComplete": "100% alloué — Prêt à sauvegarder !",
+      "validationComplete": "100% alloué. Prêt à sauvegarder !",
       "validationUnder": "Il manque {{remaining}}",
       "validationOver": "Surallocation de {{excess}}",
       "fixedSummary": "Fixe : {{currency}}{{amount}}",
@@ -85,7 +85,7 @@
       "duplicateConfigTitle": "Préréglage similaire trouvé",
       "duplicateConfigMessage": "\"{{name}}\" a la même configuration de répartition. Voulez-vous le charger à la place ?",
       "duplicateBothTitle": "Préréglage en double",
-      "duplicateBothMessage": "\"{{name}}\" a déjà le même nom et la même configuration.",
+      "duplicateBothMessage": "Un préréglage nommé \"{{name}}\" avec cette configuration existe déjà.",
       "loadPreset": "Le charger"
     },
     "savedTips": {

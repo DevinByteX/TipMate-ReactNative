@@ -30,8 +30,8 @@
       "roundTotal": "ROUND TOTAL",
       "splitCount": "SPLIT COUNT",
       "perPerson": "PER PERSON",
-      "tipSaved": "Tip calculation saved successfully!",
-      "tipSaveFailed": "Failed to save tip calculation. Please try again."
+      "tipSaved": "Tip calculation saved!",
+      "tipSaveFailed": "Failed to save the tip calculation. Please try again."
     },
     "customSplit": {
       "title": "TipMate",
@@ -45,7 +45,7 @@
       "remainder": "Rest",
       "allocationTypeLabel": "Allocation Type",
       "valueLabel": "Amount",
-      "validationComplete": "100% Allocated — Ready to save!",
+      "validationComplete": "100% allocated. Ready to save!",
       "validationUnder": "Need {{remaining}} more",
       "validationOver": "Over-allocated by {{excess}}",
       "fixedSummary": "Fixed: {{currency}}{{amount}}",
@@ -86,7 +86,7 @@
       "duplicateConfigTitle": "Similar Preset Found",
       "duplicateConfigMessage": "\"{{name}}\" has the same split configuration. Would you like to load it instead?",
       "duplicateBothTitle": "Duplicate Preset",
-      "duplicateBothMessage": "\"{{name}}\" already has the same name and configuration.",
+      "duplicateBothMessage": "A preset named \"{{name}}\" with this configuration already exists.",
       "loadPreset": "Load It"
     },
     "savedTips": {
