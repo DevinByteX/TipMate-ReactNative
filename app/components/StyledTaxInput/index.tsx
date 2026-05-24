@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Platform, Pressable, Text, TextInput, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
 import { useTranslation } from 'react-i18next';
@@ -150,7 +150,7 @@ export const StyledTaxInput = ({
             value={taxValue}
             placeholder={'0.00'}
             placeholderTextColor={theme.colors.disable_text}
-            keyboardType={'decimal-pad'}
+            keyboardType={Platform.OS === 'ios' ? 'decimal-pad' : 'number-pad'}
             returnKeyType={'done'}
             maxLength={8}
             allowFontScaling={false}
