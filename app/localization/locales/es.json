@@ -266,6 +266,7 @@
     "totalPerPerson": "Total por persona:",
     "individualSplit": "{{name}}: {{currency}}{{amount}}",
     "customSplitLabel": "División personalizada:",
+    "taxAmount": "Importe del impuesto:",
     "sharedVia": "Compartido vía TipMate",
     "shareYourTip": "Comparte el resumen de tu propina",
     "tipMateSummary": "Resumen de TipMate",
@@ -278,7 +279,8 @@
       "amount": "Importe",
       "billDetails": "Detalles de la cuenta",
       "splitDetails": "Detalles de la división",
-      "generatedBy": "Generado por"
+      "generatedBy": "Generado por",
+      "taxAmount": "Importe del impuesto"
     }
   },
   "messages": {

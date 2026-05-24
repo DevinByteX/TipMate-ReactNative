@@ -19,6 +19,7 @@ export type ShareTipDetailsParams = {
     total: number;
   };
   individualSplits?: IndividualSplit[];
+  taxAmount?: number;
   currencySymbol?: string;
   title?: string;
   subject?: string;
@@ -31,6 +32,7 @@ export type ShareTranslations = {
   tipPercentage: string;
   tipAmount: string;
   totalAmount: string;
+  taxAmount: string;
   splitAmong: string;
   persons: string;
   subtotalPerPerson: string;
@@ -50,6 +52,7 @@ const defaultTranslations: ShareTranslations = {
   tipPercentage: 'Tip Percentage:',
   tipAmount: 'Tip Amount:',
   totalAmount: 'Total Amount:',
+  taxAmount: 'Tax Amount:',
   splitAmong: 'Split Among:',
   persons: 'person(s)',
   subtotalPerPerson: 'Subtotal per person:',
@@ -72,6 +75,7 @@ export const formatTipDetailsPreview = ({
   splitType,
   perPerson,
   individualSplits,
+  taxAmount,
   currencySymbol = '$',
   translations = defaultTranslations,
 }: Omit<ShareTipDetailsParams, 'title' | 'subject'> & { translations?: ShareTranslations }): string => {
@@ -95,10 +99,12 @@ export const formatTipDetailsPreview = ({
     splitSection = `\n👥 ${t.splitAmong} ${numberOfPeople} ${t.persons}\n  • ${t.subtotalPerPerson} ${currencySymbol}${perPerson.amount.toFixed(2)}\n  • ${t.tipPerPerson} ${currencySymbol}${perPerson.tip.toFixed(2)}\n  • ${t.totalPerPerson} ${currencySymbol}${perPerson.total.toFixed(2)}`;
   }
 
+  const taxLine = taxAmount && taxAmount > 0 ? `\n🏷️ ${t.taxAmount} ${currencySymbol}${taxAmount.toFixed(2)}` : '';
+
   const message = `
 💸 ${t.tipSummary}
 
-🧾 ${t.billAmount} ${currencySymbol}${amount.toFixed(2)}
+🧾 ${t.billAmount} ${currencySymbol}${amount.toFixed(2)}${taxLine}
 💰 ${t.tipPercentage} ${tipPercentage}%
 💵 ${t.tipAmount} ${currencySymbol}${tip.toFixed(2)}
 📊 ${t.totalAmount} ${currencySymbol}${total.toFixed(2)}
@@ -119,6 +125,7 @@ export const shareTipText = async ({
   splitType,
   perPerson,
   individualSplits,
+  taxAmount,
   currencySymbol = '$',
   title = 'Share your tip summary',
   subject = 'TipMate Summary',
@@ -133,6 +140,7 @@ export const shareTipText = async ({
     splitType,
     perPerson,
     individualSplits,
+    taxAmount,
     currencySymbol,
     translations,
   });
@@ -166,6 +174,7 @@ export type TipDetailsForPDF = {
     total: number;
   };
   individualSplits?: IndividualSplit[];
+  taxAmount?: number;
   currencySymbol?: string;
 };
 
@@ -180,6 +189,7 @@ export type PDFTranslations = {
   billAmount: string;
   tip: string;
   totalAmount: string;
+  taxAmount: string;
   splitDetails: string;
   people: string;
   subtotalPerPerson: string;
@@ -202,6 +212,7 @@ const defaultPDFTranslations: PDFTranslations = {
   billAmount: 'Bill Amount',
   tip: 'Tip',
   totalAmount: 'Total Amount',
+  taxAmount: 'Tax Amount',
   splitDetails: 'Split Details',
   people: 'People',
   subtotalPerPerson: 'Subtotal per Person',
@@ -231,7 +242,7 @@ export const shareTipPDF = async (
   translations: PDFTranslations = defaultPDFTranslations,
   locale: string = 'en-US',
 ) => {
-  const { amount, tip, total, tipPercentage, numberOfPeople, splitType, perPerson, individualSplits, currencySymbol = '$' } =
+  const { amount, tip, total, tipPercentage, numberOfPeople, splitType, perPerson, individualSplits, taxAmount, currencySymbol = '$' } =
     details;
   const t = translations;
 
@@ -466,8 +477,11 @@ export const shareTipPDF = async (
               <div class="detail-row">
                 <span class="detail-label">${t.billAmount}</span>
                 <span class="detail-value">${currencySymbol}${amount.toFixed(2)}</span>
-              </div>
+              </div>              ${taxAmount && taxAmount > 0 ? `
               <div class="detail-row">
+                <span class="detail-label">${t.taxAmount}</span>
+                <span class="detail-value">${currencySymbol}${taxAmount.toFixed(2)}</span>
+              </div>` : ''}              <div class="detail-row">
                 <span class="detail-label">${t.tip} (${tipPercentage}%)</span>
                 <span class="detail-value">${currencySymbol}${tip.toFixed(2)}</span>
               </div>

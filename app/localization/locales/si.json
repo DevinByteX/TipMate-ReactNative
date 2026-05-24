@@ -266,6 +266,7 @@
     "totalPerPerson": "පුද්ගලයෙකුට මුළු එකතුව:",
     "individualSplit": "{{name}}: {{currency}}{{amount}}",
     "customSplitLabel": "අභිරුචි බෙදීම:",
+    "taxAmount": "බදු මුදල:",
     "sharedVia": "TipMate හරහා බෙදාගත්තේ",
     "shareYourTip": "ඔබගේ ටිප් සාරාංශය බෙදාගන්න",
     "tipMateSummary": "TipMate සාරාංශය",
@@ -278,7 +279,8 @@
       "amount": "මුදල",
       "billDetails": "බිල් විස්තර",
       "splitDetails": "බෙදීම් විස්තර",
-      "generatedBy": "සෑදූයේ"
+      "generatedBy": "සෑදූයේ",
+      "taxAmount": "බදු මුදල"
     }
   },
   "messages": {
