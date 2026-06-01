@@ -6,9 +6,10 @@ import {
   DrawerItemList,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
+import Toast from 'react-native-toast-message';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { IconTypeMap, StyledIcons, StyledIconTypesKey, StyledToggle } from '@components';
-import { setUserPreferredTheme } from '@utils';
+import { setUserPreferredTheme, handleRateUs } from '@utils';
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 
 interface StyledDrawerProps extends DrawerContentComponentProps {}
@@ -88,6 +89,17 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
     props.navigation.navigate('AboutUsScreen');
   };
 
+  const onRateUsPress = () => {
+    handleRateUs({
+      onError: () => {
+        Toast.show({
+          type: 'error',
+          text1: t('messages.unknownError'),
+        });
+      },
+    });
+  };
+
   return (
     <View style={styles.mainDrawerContainer}>
       <DrawerContentScrollView {...props}>
@@ -119,6 +131,14 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
           isFocused={activeRouteName === 'TellAFriendScreen'}
           label={'Tell a Friend'}
         /> */}
+        <BottomButton
+          iconType={'FontAwesome6'}
+          iconName={'star'}
+          iconColor={styles.footerButtonText.color}
+          iconSize={styles.footerButtonText.fontSize + 4}
+          label={t('components.drawer.rateUs')}
+          onPress={onRateUsPress}
+        />
         <BottomButton
           iconType={'FontAwesome6'}
           iconName={'circle-info'}

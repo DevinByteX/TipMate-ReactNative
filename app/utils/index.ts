@@ -35,3 +35,4 @@ export type {
 export { getDeviceCurrency } from './deviceCurrency';
 export { buildSplitSignature, findDuplicateTip } from './duplicateDetection';
 export type { DuplicateCheckCandidate } from './duplicateDetection';
+export { handleRateUs } from './rateUs';
