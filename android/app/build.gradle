@@ -82,8 +82,8 @@ android {
         applicationId "com.devinapps.tips.tipcalculator"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 17
-        versionName "1.8.0"
+        versionCode 18
+        versionName "2.0.0"
     }
     signingConfigs {
         debug {
