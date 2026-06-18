@@ -1,7 +1,7 @@
 # BEGIN Generated NPM license entries
 rename:
   "@miblanchard_react-native-slider@2.6.0": '@miblanchard/react-native-slider'
-  "@react-native-async-storage_async-storage@3.0.1": '@react-native-async-storage/async-storage'
+  "@react-native-async-storage_async-storage@3.1.1": '@react-native-async-storage/async-storage'
   "idb@8.0.3": idb
   "@react-native-vector-icons_ant-design@12.4.1": '@react-native-vector-icons/ant-design'
   "@react-native-vector-icons_common@12.4.0": '@react-native-vector-icons/common'
@@ -24,13 +24,13 @@ rename:
   "@react-native-vector-icons_lucide@12.4.1": '@react-native-vector-icons/lucide'
   "@react-native-vector-icons_material-design-icons@12.4.1": '@react-native-vector-icons/material-design-icons'
   "@react-native-vector-icons_octicons@20.4.1": '@react-native-vector-icons/octicons'
-  "@react-navigation_devtools@7.0.50": '@react-navigation/devtools'
+  "@react-navigation_devtools@7.0.62": '@react-navigation/devtools'
   "fast-deep-equal@3.1.3": fast-deep-equal
   "nanoid@3.3.11": nanoid
   "stacktrace-parser@0.1.11": stacktrace-parser
   "type-fest@0.7.1": type-fest
-  "@react-navigation_drawer@7.9.2": '@react-navigation/drawer'
-  "@react-navigation_elements@2.9.8": '@react-navigation/elements'
+  "@react-navigation_drawer@7.12.0": '@react-navigation/drawer'
+  "@react-navigation_elements@2.9.23": '@react-navigation/elements'
   "color@4.2.3": color
   "color-convert@2.0.1": color-convert
   "color-name@1.1.4": color-name
@@ -39,18 +39,19 @@ rename:
   "is-arrayish@0.3.2": is-arrayish
   "use-latest-callback@0.2.4": use-latest-callback
   "use-sync-external-store@1.6.0": use-sync-external-store
-  "react-native-drawer-layout@4.2.2": react-native-drawer-layout
-  "@react-navigation_native@7.1.31": '@react-navigation/native'
-  "@react-navigation_core@7.15.1": '@react-navigation/core'
-  "@react-navigation_routers@7.5.3": '@react-navigation/routers'
+  "react-native-drawer-layout@4.2.5": react-native-drawer-layout
+  "@react-navigation_native@7.3.1": '@react-navigation/native'
+  "@react-navigation_core@7.20.0": '@react-navigation/core'
+  "@react-navigation_routers@7.6.0": '@react-navigation/routers'
   "escape-string-regexp@4.0.0": escape-string-regexp
   "query-string@7.1.3": query-string
   "decode-uri-component@0.2.2": decode-uri-component
   "filter-obj@1.1.0": filter-obj
   "split-on-first@1.1.0": split-on-first
   "strict-uri-encode@2.0.0": strict-uri-encode
-  "react-is@19.2.4": react-is
-  "@react-navigation_native-stack@7.14.2": '@react-navigation/native-stack'
+  "react-is@19.2.7": react-is
+  "standard-navigation@0.0.7": standard-navigation
+  "@react-navigation_native-stack@7.17.3": '@react-navigation/native-stack'
   "sf-symbols-typescript@2.2.0": sf-symbols-typescript
   "warn-once@0.1.1": warn-once
   "i18next@25.8.13": i18next
@@ -59,41 +60,26 @@ rename:
   "react-i18next@16.5.4": react-i18next
   "html-parse-stringify@3.0.1": html-parse-stringify
   "void-elements@3.1.0": void-elements
-  "react-native@0.84.1": react-native
-  "@jest_create-cache-key-function@29.7.0": '@jest/create-cache-key-function'
-  "@jest_types@29.6.3": '@jest/types'
-  "@jest_schemas@29.6.3": '@jest/schemas'
-  "@sinclair_typebox@0.27.8": '@sinclair/typebox'
-  "@types_istanbul-lib-coverage@2.0.6": '@types/istanbul-lib-coverage'
-  "@types_istanbul-reports@3.0.4": '@types/istanbul-reports'
-  "@types_istanbul-lib-report@3.0.3": '@types/istanbul-lib-report'
-  "@types_node@22.10.7": '@types/node'
-  "undici-types@6.20.0": undici-types
-  "@types_yargs@17.0.33": '@types/yargs'
-  "@types_yargs-parser@21.0.3": '@types/yargs-parser'
-  "chalk@4.1.2": chalk
-  "ansi-styles@4.3.0": ansi-styles
-  "supports-color@7.2.0": supports-color
-  "has-flag@4.0.0": has-flag
-  "@react-native_assets-registry@0.84.1": '@react-native/assets-registry'
-  "@react-native_codegen@0.84.1": '@react-native/codegen'
+  "react-native@0.86.0": react-native
+  "@react-native_assets-registry@0.86.0": '@react-native/assets-registry'
+  "@react-native_codegen@0.86.0": '@react-native/codegen'
   "@babel_core@7.26.10": '@babel/core'
   "@ampproject_remapping@2.3.0": '@ampproject/remapping'
   "@jridgewell_gen-mapping@0.3.12": '@jridgewell/gen-mapping'
   "@jridgewell_sourcemap-codec@1.5.0": '@jridgewell/sourcemap-codec'
   "@jridgewell_trace-mapping@0.3.29": '@jridgewell/trace-mapping'
   "@jridgewell_resolve-uri@3.1.2": '@jridgewell/resolve-uri'
-  "@babel_code-frame@7.29.0": '@babel/code-frame'
-  "@babel_helper-validator-identifier@7.28.5": '@babel/helper-validator-identifier'
+  "@babel_code-frame@7.29.7": '@babel/code-frame'
+  "@babel_helper-validator-identifier@7.29.7": '@babel/helper-validator-identifier'
   "js-tokens@4.0.0": js-tokens
-  "@babel_generator@7.29.1": '@babel/generator'
-  "@babel_parser@7.29.0": '@babel/parser'
-  "@babel_types@7.29.0": '@babel/types'
-  "@babel_helper-string-parser@7.27.1": '@babel/helper-string-parser'
+  "@babel_generator@7.29.7": '@babel/generator'
+  "@babel_parser@7.29.7": '@babel/parser'
+  "@babel_types@7.29.7": '@babel/types'
+  "@babel_helper-string-parser@7.29.7": '@babel/helper-string-parser'
   "jsesc@3.1.0": jsesc
-  "@babel_helper-compilation-targets@7.28.6": '@babel/helper-compilation-targets'
-  "@babel_compat-data@7.29.0": '@babel/compat-data'
-  "@babel_helper-validator-option@7.27.1": '@babel/helper-validator-option'
+  "@babel_helper-compilation-targets@7.29.7": '@babel/helper-compilation-targets'
+  "@babel_compat-data@7.29.7": '@babel/compat-data'
+  "@babel_helper-validator-option@7.29.7": '@babel/helper-validator-option'
   "browserslist@4.24.4": browserslist
   "caniuse-lite@1.0.30001695": caniuse-lite
   "electron-to-chromium@1.5.84": electron-to-chromium
@@ -103,19 +89,19 @@ rename:
   "lru-cache@5.1.1": lru-cache
   "yallist@3.1.1": yallist
   "semver@6.3.1": semver
-  "@babel_helper-module-transforms@7.28.6": '@babel/helper-module-transforms'
-  "@babel_helper-module-imports@7.28.6": '@babel/helper-module-imports'
-  "@babel_traverse@7.29.0": '@babel/traverse'
-  "@babel_helper-globals@7.28.0": '@babel/helper-globals'
-  "@babel_template@7.28.6": '@babel/template'
+  "@babel_helper-module-transforms@7.29.7": '@babel/helper-module-transforms'
+  "@babel_helper-module-imports@7.29.7": '@babel/helper-module-imports'
+  "@babel_traverse@7.29.7": '@babel/traverse'
+  "@babel_helper-globals@7.29.7": '@babel/helper-globals'
+  "@babel_template@7.29.7": '@babel/template'
   "debug@4.4.0": debug
   "ms@2.1.3": ms
   "@babel_helpers@7.27.0": '@babel/helpers'
   "convert-source-map@2.0.0": convert-source-map
   "gensync@1.0.0-beta.2": gensync
   "json5@2.2.3": json5
-  "hermes-parser@0.32.0": hermes-parser
-  "hermes-estree@0.32.0": hermes-estree
+  "hermes-parser@0.36.0": hermes-parser
+  "hermes-estree@0.36.0": hermes-estree
   "invariant@2.2.4": invariant
   "loose-envify@1.4.0": loose-envify
   "nullthrows@1.1.1": nullthrows
@@ -130,15 +116,16 @@ rename:
   "strip-ansi@6.0.1": strip-ansi
   "ansi-regex@5.0.1": ansi-regex
   "wrap-ansi@7.0.0": wrap-ansi
+  "ansi-styles@4.3.0": ansi-styles
   "get-caller-file@2.0.5": get-caller-file
   "require-directory@2.1.1": require-directory
   "y18n@5.0.8": y18n
   "yargs-parser@21.1.1": yargs-parser
-  "@react-native_community-cli-plugin@0.84.1": '@react-native/community-cli-plugin'
-  "@react-native_dev-middleware@0.84.1": '@react-native/dev-middleware'
+  "@react-native_community-cli-plugin@0.86.0": '@react-native/community-cli-plugin'
+  "@react-native_dev-middleware@0.86.0": '@react-native/dev-middleware'
   "@isaacs_ttlcache@1.4.1": '@isaacs/ttlcache'
-  "@react-native_debugger-frontend@0.84.1": '@react-native/debugger-frontend'
-  "@react-native_debugger-shell@0.84.1": '@react-native/debugger-shell'
+  "@react-native_debugger-frontend@0.86.0": '@react-native/debugger-frontend'
+  "@react-native_debugger-shell@0.86.0": '@react-native/debugger-shell'
   "cross-spawn@7.0.6": cross-spawn
   "path-key@3.1.1": path-key
   "shebang-command@2.0.0": shebang-command
@@ -147,26 +134,16 @@ rename:
   "isexe@2.0.0": isexe
   "fb-dotslash@0.5.8": fb-dotslash
   "chrome-launcher@0.15.2": chrome-launcher
+  "@types_node@22.10.7": '@types/node'
+  "undici-types@6.20.0": undici-types
   "is-wsl@2.2.0": is-wsl
   "is-docker@2.2.1": is-docker
   "lighthouse-logger@1.4.2": lighthouse-logger
   "debug@2.6.9": debug
   "ms@2.0.0": ms
   "marky@1.3.0": marky
-  "chromium-edge-launcher@0.2.0": chromium-edge-launcher
+  "chromium-edge-launcher@0.3.0": chromium-edge-launcher
   "mkdirp@1.0.4": mkdirp
-  "rimraf@3.0.2": rimraf
-  "glob@7.2.3": glob
-  "fs.realpath@1.0.0": fs.realpath
-  "inflight@1.0.6": inflight
-  "once@1.4.0": once
-  "wrappy@1.0.2": wrappy
-  "inherits@2.0.4": inherits
-  "minimatch@3.1.5": minimatch
-  "brace-expansion@1.1.13": brace-expansion
-  "balanced-match@1.0.2": balanced-match
-  "concat-map@0.0.1": concat-map
-  "path-is-absolute@1.0.1": path-is-absolute
   "connect@3.7.0": connect
   "finalhandler@1.1.2": finalhandler
   "encodeurl@1.0.2": encodeurl
@@ -186,14 +163,15 @@ rename:
   "etag@1.8.1": etag
   "fresh@0.5.2": fresh
   "http-errors@2.0.1": http-errors
+  "inherits@2.0.4": inherits
   "setprototypeof@1.2.0": setprototypeof
   "statuses@2.0.2": statuses
   "toidentifier@1.0.1": toidentifier
   "mime@1.6.0": mime
   "on-finished@2.4.1": on-finished
   "range-parser@1.2.1": range-parser
-  "ws@7.5.10": ws
-  "metro@0.83.4": metro
+  "ws@7.5.11": ws
+  "metro@0.84.4": metro
   "accepts@2.0.0": accepts
   "mime-types@3.0.2": mime-types
   "mime-db@1.54.0": mime-db
@@ -203,27 +181,38 @@ rename:
   "stackframe@1.3.4": stackframe
   "flow-enums-runtime@0.0.6": flow-enums-runtime
   "graceful-fs@4.2.11": graceful-fs
-  "hermes-parser@0.33.3": hermes-parser
-  "hermes-estree@0.33.3": hermes-estree
+  "hermes-parser@0.35.0": hermes-parser
+  "hermes-estree@0.35.0": hermes-estree
   "image-size@1.2.1": image-size
   "queue@6.0.2": queue
   "jest-worker@29.7.0": jest-worker
   "jest-util@29.7.0": jest-util
+  "@jest_types@29.6.3": '@jest/types'
+  "@jest_schemas@29.6.3": '@jest/schemas'
+  "@sinclair_typebox@0.27.8": '@sinclair/typebox'
+  "@types_istanbul-lib-coverage@2.0.6": '@types/istanbul-lib-coverage'
+  "@types_istanbul-reports@3.0.4": '@types/istanbul-reports'
+  "@types_istanbul-lib-report@3.0.3": '@types/istanbul-lib-report'
+  "@types_yargs@17.0.33": '@types/yargs'
+  "@types_yargs-parser@21.0.3": '@types/yargs-parser'
+  "chalk@4.1.2": chalk
+  "supports-color@7.2.0": supports-color
+  "has-flag@4.0.0": has-flag
   "ci-info@3.9.0": ci-info
   "picomatch@2.3.2": picomatch
   "merge-stream@2.0.0": merge-stream
   "supports-color@8.1.1": supports-color
   "jsc-safe-url@0.2.4": jsc-safe-url
   "lodash.throttle@4.1.1": lodash.throttle
-  "metro-babel-transformer@0.83.4": metro-babel-transformer
-  "metro-cache@0.83.4": metro-cache
+  "metro-babel-transformer@0.84.4": metro-babel-transformer
+  "metro-cache-key@0.84.4": metro-cache-key
+  "metro-cache@0.84.4": metro-cache
   "exponential-backoff@3.1.3": exponential-backoff
   "https-proxy-agent@7.0.6": https-proxy-agent
   "agent-base@7.1.4": agent-base
-  "metro-core@0.83.4": metro-core
-  "metro-resolver@0.83.4": metro-resolver
-  "metro-cache-key@0.83.4": metro-cache-key
-  "metro-config@0.83.4": metro-config
+  "metro-core@0.84.4": metro-core
+  "metro-resolver@0.84.4": metro-resolver
+  "metro-config@0.84.4": metro-config
   "jest-validate@29.7.0": jest-validate
   "camelcase@6.3.0": camelcase
   "jest-get-type@29.6.3": jest-get-type
@@ -231,7 +220,7 @@ rename:
   "pretty-format@29.7.0": pretty-format
   "ansi-styles@5.2.0": ansi-styles
   "react-is@18.3.1": react-is
-  "metro-file-map@0.83.4": metro-file-map
+  "metro-file-map@0.84.4": metro-file-map
   "fb-watchman@2.0.2": fb-watchman
   "bser@2.1.1": bser
   "node-int64@0.4.0": node-int64
@@ -243,16 +232,16 @@ rename:
   "walker@1.0.8": walker
   "makeerror@1.0.12": makeerror
   "tmpl@1.0.5": tmpl
-  "metro-runtime@0.83.4": metro-runtime
-  "metro-source-map@0.83.4": metro-source-map
-  "metro-symbolicate@0.83.4": metro-symbolicate
+  "metro-runtime@0.84.4": metro-runtime
+  "metro-source-map@0.84.4": metro-source-map
+  "metro-symbolicate@0.84.4": metro-symbolicate
   "source-map@0.5.7": source-map
   "vlq@1.0.1": vlq
-  "ob1@0.83.4": ob1
-  "metro-transform-plugins@0.83.4": metro-transform-plugins
-  "metro-transform-worker@0.83.4": metro-transform-worker
-  "metro-minify-terser@0.83.4": metro-minify-terser
-  "terser@5.46.0": terser
+  "ob1@0.84.4": ob1
+  "metro-transform-plugins@0.84.4": metro-transform-plugins
+  "metro-transform-worker@0.84.4": metro-transform-worker
+  "metro-minify-terser@0.84.4": metro-minify-terser
+  "terser@5.48.0": terser
   "@jridgewell_source-map@0.3.11": '@jridgewell/source-map'
   "acorn@8.16.0": acorn
   "commander@2.20.3": commander
@@ -262,93 +251,35 @@ rename:
   "serialize-error@2.1.0": serialize-error
   "throat@5.0.0": throat
   "yaml@2.9.0": yaml
-  "semver@7.7.4": semver
-  "@react-native_gradle-plugin@0.84.1": '@react-native/gradle-plugin'
-  "@react-native_js-polyfills@0.84.1": '@react-native/js-polyfills'
-  "@react-native_normalize-colors@0.84.1": '@react-native/normalize-colors'
-  "@react-native_virtualized-lists@0.84.1": '@react-native/virtualized-lists'
+  "semver@7.8.4": semver
+  "@react-native_gradle-plugin@0.86.0": '@react-native/gradle-plugin'
+  "@react-native_js-polyfills@0.86.0": '@react-native/js-polyfills'
+  "@react-native_normalize-colors@0.86.0": '@react-native/normalize-colors'
+  "@react-native_virtualized-lists@0.86.0": '@react-native/virtualized-lists'
   "abort-controller@3.0.0": abort-controller
   "event-target-shim@5.0.1": event-target-shim
   "anser@1.4.10": anser
-  "babel-jest@29.7.0": babel-jest
-  "@jest_transform@29.7.0": '@jest/transform'
-  "babel-plugin-istanbul@6.1.1": babel-plugin-istanbul
-  "@babel_helper-plugin-utils@7.28.6": '@babel/helper-plugin-utils'
-  "@istanbuljs_load-nyc-config@1.1.0": '@istanbuljs/load-nyc-config'
-  "camelcase@5.3.1": camelcase
-  "find-up@4.1.0": find-up
-  "get-package-type@0.1.0": get-package-type
-  "js-yaml@3.14.2": js-yaml
-  "argparse@1.0.10": argparse
-  "sprintf-js@1.0.3": sprintf-js
-  "esprima@4.0.1": esprima
-  "resolve-from@5.0.0": resolve-from
-  "@istanbuljs_schema@0.1.3": '@istanbuljs/schema'
-  "istanbul-lib-instrument@5.2.1": istanbul-lib-instrument
-  "istanbul-lib-coverage@3.2.2": istanbul-lib-coverage
-  "test-exclude@6.0.0": test-exclude
-  "fast-json-stable-stringify@2.1.0": fast-json-stable-stringify
-  "jest-haste-map@29.7.0": jest-haste-map
-  "@types_graceful-fs@4.1.9": '@types/graceful-fs'
-  "anymatch@3.1.3": anymatch
-  "normalize-path@3.0.0": normalize-path
-  "jest-regex-util@29.6.3": jest-regex-util
-  "fsevents@2.3.3": fsevents
-  "pirates@4.0.6": pirates
-  "slash@3.0.0": slash
-  "write-file-atomic@4.0.2": write-file-atomic
-  "imurmurhash@0.1.4": imurmurhash
-  "signal-exit@3.0.7": signal-exit
-  "@types_babel__core@7.20.5": '@types/babel__core'
-  "@types_babel__generator@7.6.8": '@types/babel__generator'
-  "@types_babel__template@7.4.4": '@types/babel__template'
-  "@types_babel__traverse@7.20.6": '@types/babel__traverse'
-  "babel-preset-jest@29.6.3": babel-preset-jest
-  "babel-plugin-jest-hoist@29.6.3": babel-plugin-jest-hoist
-  "babel-preset-current-node-syntax@1.1.0": babel-preset-current-node-syntax
-  "@babel_plugin-syntax-async-generators@7.8.4": '@babel/plugin-syntax-async-generators'
-  "@babel_plugin-syntax-bigint@7.8.3": '@babel/plugin-syntax-bigint'
-  "@babel_plugin-syntax-class-properties@7.12.13": '@babel/plugin-syntax-class-properties'
-  "@babel_plugin-syntax-class-static-block@7.14.5": '@babel/plugin-syntax-class-static-block'
-  "@babel_plugin-syntax-import-attributes@7.26.0": '@babel/plugin-syntax-import-attributes'
-  "@babel_plugin-syntax-import-meta@7.10.4": '@babel/plugin-syntax-import-meta'
-  "@babel_plugin-syntax-json-strings@7.8.3": '@babel/plugin-syntax-json-strings'
-  "@babel_plugin-syntax-logical-assignment-operators@7.10.4": '@babel/plugin-syntax-logical-assignment-operators'
-  "@babel_plugin-syntax-nullish-coalescing-operator@7.8.3": '@babel/plugin-syntax-nullish-coalescing-operator'
-  "@babel_plugin-syntax-numeric-separator@7.10.4": '@babel/plugin-syntax-numeric-separator'
-  "@babel_plugin-syntax-object-rest-spread@7.8.3": '@babel/plugin-syntax-object-rest-spread'
-  "@babel_plugin-syntax-optional-catch-binding@7.8.3": '@babel/plugin-syntax-optional-catch-binding'
-  "@babel_plugin-syntax-optional-chaining@7.8.3": '@babel/plugin-syntax-optional-chaining'
-  "@babel_plugin-syntax-private-property-in-object@7.14.5": '@babel/plugin-syntax-private-property-in-object'
-  "@babel_plugin-syntax-top-level-await@7.14.5": '@babel/plugin-syntax-top-level-await'
-  "babel-plugin-syntax-hermes-parser@0.32.0": babel-plugin-syntax-hermes-parser
+  "babel-plugin-syntax-hermes-parser@0.36.0": babel-plugin-syntax-hermes-parser
   "commander@12.1.0": commander
-  "hermes-compiler@250829098.0.9": hermes-compiler
-  "jest-environment-node@29.7.0": jest-environment-node
-  "@jest_environment@29.7.0": '@jest/environment'
-  "@jest_fake-timers@29.7.0": '@jest/fake-timers'
-  "@sinonjs_fake-timers@10.3.0": '@sinonjs/fake-timers'
-  "@sinonjs_commons@3.0.1": '@sinonjs/commons'
-  "type-detect@4.0.8": type-detect
-  "jest-message-util@29.7.0": jest-message-util
-  "@types_stack-utils@2.0.3": '@types/stack-utils'
-  "stack-utils@2.0.6": stack-utils
-  "escape-string-regexp@2.0.0": escape-string-regexp
-  "jest-mock@29.7.0": jest-mock
+  "hermes-compiler@250829098.0.14": hermes-compiler
   "memoize-one@5.2.1": memoize-one
   "promise@8.3.0": promise
   "asap@2.0.6": asap
   "react-devtools-core@6.1.5": react-devtools-core
-  "shell-quote@1.8.3": shell-quote
+  "shell-quote@1.8.4": shell-quote
+  "ws@7.5.10": ws
   "react-refresh@0.14.2": react-refresh
   "regenerator-runtime@0.13.11": regenerator-runtime
   "scheduler@0.27.0": scheduler
   "whatwg-fetch@3.6.20": whatwg-fetch
   "react-native-bootsplash@7.3.1": react-native-bootsplash
-  "@expo_config-plugins@55.0.8": '@expo/config-plugins'
-  "@expo_config-types@55.0.5": '@expo/config-types'
-  "@expo_json-file@10.0.13": '@expo/json-file'
-  "@expo_plist@0.5.2": '@expo/plist'
+  "@expo_config-plugins@56.0.8": '@expo/config-plugins'
+  "@expo_config-types@56.0.5": '@expo/config-types'
+  "@expo_json-file@10.2.0": '@expo/json-file'
+  "@expo_plist@0.7.0": '@expo/plist'
+  "@expo_require-utils@56.1.3": '@expo/require-utils'
+  "@babel_plugin-transform-modules-commonjs@7.29.7": '@babel/plugin-transform-modules-commonjs'
+  "@babel_helper-plugin-utils@7.29.7": '@babel/helper-plugin-utils'
   "@expo_sdk-runtime-versions@1.0.0": '@expo/sdk-runtime-versions'
   "getenv@2.0.0": getenv
   "glob@13.0.0": glob
@@ -404,39 +335,51 @@ rename:
   "ts-dedent@2.2.0": ts-dedent
   "xml-formatter@3.7.0": xml-formatter
   "xml-parser-xo@4.1.5": xml-parser-xo
-  "react-native-gesture-handler@2.30.0": react-native-gesture-handler
+  "react-native-gesture-handler@2.32.0": react-native-gesture-handler
   "@egjs_hammerjs@2.0.17": '@egjs/hammerjs'
   "@types_hammerjs@2.0.46": '@types/hammerjs'
+  "@types_react-test-renderer@19.1.0": '@types/react-test-renderer'
+  "@types_react@19.2.14": '@types/react'
+  "csstype@3.2.3": csstype
   "hoist-non-react-statics@3.3.2": hoist-non-react-statics
   "react-is@16.13.1": react-is
   "react-native-html-to-pdf@1.3.0": react-native-html-to-pdf
   "react-native-legal@1.6.3": react-native-legal
   "@callstack_licenses@0.3.1": '@callstack/licenses'
+  "glob@7.2.3": glob
+  "fs.realpath@1.0.0": fs.realpath
+  "inflight@1.0.6": inflight
+  "once@1.4.0": once
+  "wrappy@1.0.2": wrappy
+  "minimatch@3.1.5": minimatch
+  "brace-expansion@1.1.13": brace-expansion
+  "balanced-match@1.0.2": balanced-match
+  "concat-map@0.0.1": concat-map
+  "path-is-absolute@1.0.1": path-is-absolute
   "xml2js@0.6.2": xml2js
   "react-native-localize@3.7.0": react-native-localize
-  "react-native-reanimated@4.2.2": react-native-reanimated
-  "react-native-is-edge-to-edge@1.2.1": react-native-is-edge-to-edge
-  "react-native-safe-area-context@5.7.0": react-native-safe-area-context
-  "react-native-screens@4.24.0": react-native-screens
+  "react-native-reanimated@4.4.1": react-native-reanimated
+  "react-native-safe-area-context@5.8.0": react-native-safe-area-context
+  "react-native-screens@4.25.2": react-native-screens
   "react-freeze@1.0.4": react-freeze
-  "react-native-share@12.0.11": react-native-share
-  "react-native-svg@15.15.3": react-native-svg
+  "react-native-share@12.3.1": react-native-share
+  "react-native-svg@15.15.5": react-native-svg
   "css-tree@1.1.3": css-tree
   "mdn-data@2.0.14": mdn-data
   "react-native-toast-message@2.3.3": react-native-toast-message
   "react-native-unistyles@2.43.0": react-native-unistyles
-  "react-native-worklets@0.7.4": react-native-worklets
+  "react-native-worklets@0.9.2": react-native-worklets
   "@babel_plugin-transform-arrow-functions@7.27.1": '@babel/plugin-transform-arrow-functions'
-  "@babel_plugin-transform-class-properties@7.27.1": '@babel/plugin-transform-class-properties'
-  "@babel_helper-create-class-features-plugin@7.28.6": '@babel/helper-create-class-features-plugin'
-  "@babel_helper-annotate-as-pure@7.27.3": '@babel/helper-annotate-as-pure'
-  "@babel_helper-member-expression-to-functions@7.28.5": '@babel/helper-member-expression-to-functions'
-  "@babel_helper-optimise-call-expression@7.27.1": '@babel/helper-optimise-call-expression'
-  "@babel_helper-replace-supers@7.28.6": '@babel/helper-replace-supers'
-  "@babel_helper-skip-transparent-expression-wrappers@7.27.1": '@babel/helper-skip-transparent-expression-wrappers'
-  "@babel_plugin-transform-classes@7.28.4": '@babel/plugin-transform-classes'
-  "@babel_plugin-transform-nullish-coalescing-operator@7.27.1": '@babel/plugin-transform-nullish-coalescing-operator'
-  "@babel_plugin-transform-optional-chaining@7.27.1": '@babel/plugin-transform-optional-chaining'
+  "@babel_plugin-transform-class-properties@7.29.7": '@babel/plugin-transform-class-properties'
+  "@babel_helper-create-class-features-plugin@7.29.7": '@babel/helper-create-class-features-plugin'
+  "@babel_helper-annotate-as-pure@7.29.7": '@babel/helper-annotate-as-pure'
+  "@babel_helper-member-expression-to-functions@7.29.7": '@babel/helper-member-expression-to-functions'
+  "@babel_helper-optimise-call-expression@7.29.7": '@babel/helper-optimise-call-expression'
+  "@babel_helper-replace-supers@7.29.7": '@babel/helper-replace-supers'
+  "@babel_helper-skip-transparent-expression-wrappers@7.29.7": '@babel/helper-skip-transparent-expression-wrappers'
+  "@babel_plugin-transform-classes@7.29.7": '@babel/plugin-transform-classes'
+  "@babel_plugin-transform-nullish-coalescing-operator@7.29.7": '@babel/plugin-transform-nullish-coalescing-operator'
+  "@babel_plugin-transform-optional-chaining@7.29.7": '@babel/plugin-transform-optional-chaining'
   "@babel_plugin-transform-shorthand-properties@7.27.1": '@babel/plugin-transform-shorthand-properties'
   "@babel_plugin-transform-template-literals@7.27.1": '@babel/plugin-transform-template-literals'
   "@babel_plugin-transform-unicode-regex@7.27.1": '@babel/plugin-transform-unicode-regex'
@@ -450,18 +393,17 @@ rename:
   "unicode-canonical-property-names-ecmascript@2.0.1": unicode-canonical-property-names-ecmascript
   "unicode-property-aliases-ecmascript@2.2.0": unicode-property-aliases-ecmascript
   "unicode-match-property-value-ecmascript@2.2.1": unicode-match-property-value-ecmascript
-  "@babel_preset-typescript@7.27.1": '@babel/preset-typescript'
-  "@babel_plugin-syntax-jsx@7.28.6": '@babel/plugin-syntax-jsx'
-  "@babel_plugin-transform-modules-commonjs@7.28.6": '@babel/plugin-transform-modules-commonjs'
-  "@babel_plugin-transform-typescript@7.28.6": '@babel/plugin-transform-typescript'
-  "@babel_plugin-syntax-typescript@7.28.6": '@babel/plugin-syntax-typescript'
+  "@babel_preset-typescript@7.29.7": '@babel/preset-typescript'
+  "@babel_plugin-syntax-jsx@7.29.7": '@babel/plugin-syntax-jsx'
+  "@babel_plugin-transform-typescript@7.29.7": '@babel/plugin-transform-typescript'
+  "@babel_plugin-syntax-typescript@7.29.7": '@babel/plugin-syntax-typescript'
 manual:
   - name: '@miblanchard_react-native-slider@2.6.0'
     version: '2.6.0'
     source: https://github.com/miblanchard/react-native-slider
     file: '../node_modules/@miblanchard/react-native-slider/LICENSE'
-  - name: '@react-native-async-storage_async-storage@3.0.1'
-    version: '3.0.1'
+  - name: '@react-native-async-storage_async-storage@3.1.1'
+    version: '3.1.1'
     source: https://github.com/react-native-async-storage/async-storage
     body: MIT
   - name: idb@8.0.3
@@ -552,8 +494,8 @@ manual:
     version: '20.4.1'
     source: https://github.com/oblador/react-native-vector-icons
     file: '../node_modules/@react-native-vector-icons/octicons/LICENSE'
-  - name: '@react-navigation_devtools@7.0.50'
-    version: '7.0.50'
+  - name: '@react-navigation_devtools@7.0.62'
+    version: '7.0.62'
     source: https://github.com/react-navigation/react-navigation
     file: '../node_modules/@react-navigation/devtools/LICENSE'
   - name: fast-deep-equal@3.1.3
@@ -572,12 +514,12 @@ manual:
     version: '0.7.1'
     source: sindresorhus/type-fest
     file: '../node_modules/stacktrace-parser/node_modules/type-fest/license'
-  - name: '@react-navigation_drawer@7.9.2'
-    version: '7.9.2'
+  - name: '@react-navigation_drawer@7.12.0'
+    version: '7.12.0'
     source: https://github.com/react-navigation/react-navigation
     file: '../node_modules/@react-navigation/drawer/LICENSE'
-  - name: '@react-navigation_elements@2.9.8'
-    version: '2.9.8'
+  - name: '@react-navigation_elements@2.9.23'
+    version: '2.9.23'
     source: https://github.com/react-navigation/react-navigation
     file: '../node_modules/@react-navigation/elements/LICENSE'
   - name: color@4.2.3
@@ -612,20 +554,20 @@ manual:
     version: '1.6.0'
     source: https://github.com/facebook/react
     file: '../node_modules/use-sync-external-store/LICENSE'
-  - name: react-native-drawer-layout@4.2.2
-    version: '4.2.2'
+  - name: react-native-drawer-layout@4.2.5
+    version: '4.2.5'
     source: https://github.com/react-navigation/react-navigation
     file: '../node_modules/react-native-drawer-layout/LICENSE'
-  - name: '@react-navigation_native@7.1.31'
-    version: '7.1.31'
+  - name: '@react-navigation_native@7.3.1'
+    version: '7.3.1'
     source: https://github.com/react-navigation/react-navigation
     file: '../node_modules/@react-navigation/native/LICENSE'
-  - name: '@react-navigation_core@7.15.1'
-    version: '7.15.1'
+  - name: '@react-navigation_core@7.20.0'
+    version: '7.20.0'
     source: https://github.com/react-navigation/react-navigation
     file: '../node_modules/@react-navigation/core/LICENSE'
-  - name: '@react-navigation_routers@7.5.3'
-    version: '7.5.3'
+  - name: '@react-navigation_routers@7.6.0'
+    version: '7.6.0'
     source: https://github.com/react-navigation/react-navigation
     file: '../node_modules/@react-navigation/routers/LICENSE'
   - name: escape-string-regexp@4.0.0
@@ -652,12 +594,16 @@ manual:
     version: '2.0.0'
     source: kevva/strict-uri-encode
     file: '../node_modules/strict-uri-encode/license'
-  - name: react-is@19.2.4
-    version: '19.2.4'
+  - name: react-is@19.2.7
+    version: '19.2.7'
     source: https://github.com/facebook/react
-    file: '../node_modules/@react-navigation/core/node_modules/react-is/LICENSE'
-  - name: '@react-navigation_native-stack@7.14.2'
-    version: '7.14.2'
+    file: '../node_modules/react-is/LICENSE'
+  - name: standard-navigation@0.0.7
+    version: '0.0.7'
+    source: https://github.com/react-navigation/standard-navigation
+    body: MIT
+  - name: '@react-navigation_native-stack@7.17.3'
+    version: '7.17.3'
     source: https://github.com/react-navigation/react-navigation
     file: '../node_modules/@react-navigation/native-stack/LICENSE'
   - name: sf-symbols-typescript@2.2.0
@@ -692,76 +638,16 @@ manual:
     version: '3.1.0'
     source: pugjs/void-elements
     file: '../node_modules/void-elements/LICENSE'
-  - name: react-native@0.84.1
-    version: '0.84.1'
+  - name: react-native@0.86.0
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     file: '../node_modules/react-native/LICENSE'
-  - name: '@jest_create-cache-key-function@29.7.0'
-    version: '29.7.0'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/@jest/create-cache-key-function/LICENSE'
-  - name: '@jest_types@29.6.3'
-    version: '29.6.3'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/@jest/types/LICENSE'
-  - name: '@jest_schemas@29.6.3'
-    version: '29.6.3'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/@jest/schemas/LICENSE'
-  - name: '@sinclair_typebox@0.27.8'
-    version: '0.27.8'
-    source: https://github.com/sinclairzx81/typebox
-    file: '../node_modules/@sinclair/typebox/license'
-  - name: '@types_istanbul-lib-coverage@2.0.6'
-    version: '2.0.6'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/istanbul-lib-coverage/LICENSE'
-  - name: '@types_istanbul-reports@3.0.4'
-    version: '3.0.4'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/istanbul-reports/LICENSE'
-  - name: '@types_istanbul-lib-report@3.0.3'
-    version: '3.0.3'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/istanbul-lib-report/LICENSE'
-  - name: '@types_node@22.10.7'
-    version: '22.10.7'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/node/LICENSE'
-  - name: undici-types@6.20.0
-    version: '6.20.0'
-    source: https://github.com/nodejs/undici
-    file: '../node_modules/undici-types/LICENSE'
-  - name: '@types_yargs@17.0.33'
-    version: '17.0.33'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/yargs/LICENSE'
-  - name: '@types_yargs-parser@21.0.3'
-    version: '21.0.3'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/yargs-parser/LICENSE'
-  - name: chalk@4.1.2
-    version: '4.1.2'
-    source: chalk/chalk
-    file: '../node_modules/chalk/license'
-  - name: ansi-styles@4.3.0
-    version: '4.3.0'
-    source: chalk/ansi-styles
-    file: '../node_modules/ansi-styles/license'
-  - name: supports-color@7.2.0
-    version: '7.2.0'
-    source: chalk/supports-color
-    file: '../node_modules/supports-color/license'
-  - name: has-flag@4.0.0
-    version: '4.0.0'
-    source: sindresorhus/has-flag
-    file: '../node_modules/has-flag/license'
-  - name: '@react-native_assets-registry@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_assets-registry@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: MIT
-  - name: '@react-native_codegen@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_codegen@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: MIT
   - name: '@babel_core@7.26.10'
@@ -788,48 +674,48 @@ manual:
     version: '3.1.2'
     source: https://github.com/jridgewell/resolve-uri
     file: '../node_modules/@jridgewell/resolve-uri/LICENSE'
-  - name: '@babel_code-frame@7.29.0'
-    version: '7.29.0'
+  - name: '@babel_code-frame@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/code-frame/LICENSE'
-  - name: '@babel_helper-validator-identifier@7.28.5'
-    version: '7.28.5'
+  - name: '@babel_helper-validator-identifier@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-validator-identifier/LICENSE'
   - name: js-tokens@4.0.0
     version: '4.0.0'
     source: lydell/js-tokens
     file: '../node_modules/js-tokens/LICENSE'
-  - name: '@babel_generator@7.29.1'
-    version: '7.29.1'
+  - name: '@babel_generator@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/generator/LICENSE'
-  - name: '@babel_parser@7.29.0'
-    version: '7.29.0'
+  - name: '@babel_parser@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/parser/LICENSE'
-  - name: '@babel_types@7.29.0'
-    version: '7.29.0'
+  - name: '@babel_types@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/types/LICENSE'
-  - name: '@babel_helper-string-parser@7.27.1'
-    version: '7.27.1'
+  - name: '@babel_helper-string-parser@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-string-parser/LICENSE'
   - name: jsesc@3.1.0
     version: '3.1.0'
     source: https://github.com/mathiasbynens/jsesc
     body: MIT
-  - name: '@babel_helper-compilation-targets@7.28.6'
-    version: '7.28.6'
+  - name: '@babel_helper-compilation-targets@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-compilation-targets/LICENSE'
-  - name: '@babel_compat-data@7.29.0'
-    version: '7.29.0'
+  - name: '@babel_compat-data@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/compat-data/LICENSE'
-  - name: '@babel_helper-validator-option@7.27.1'
-    version: '7.27.1'
+  - name: '@babel_helper-validator-option@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-validator-option/LICENSE'
   - name: browserslist@4.24.4
@@ -868,24 +754,24 @@ manual:
     version: '6.3.1'
     source: https://github.com/npm/node-semver
     file: '../node_modules/semver/LICENSE'
-  - name: '@babel_helper-module-transforms@7.28.6'
-    version: '7.28.6'
+  - name: '@babel_helper-module-transforms@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-module-transforms/LICENSE'
-  - name: '@babel_helper-module-imports@7.28.6'
-    version: '7.28.6'
+  - name: '@babel_helper-module-imports@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-module-imports/LICENSE'
-  - name: '@babel_traverse@7.29.0'
-    version: '7.29.0'
+  - name: '@babel_traverse@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/traverse/LICENSE'
-  - name: '@babel_helper-globals@7.28.0'
-    version: '7.28.0'
+  - name: '@babel_helper-globals@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-globals/LICENSE'
-  - name: '@babel_template@7.28.6'
-    version: '7.28.6'
+  - name: '@babel_template@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/template/LICENSE'
   - name: debug@4.4.0
@@ -912,12 +798,12 @@ manual:
     version: '2.2.3'
     source: https://github.com/json5/json5
     file: '../node_modules/json5/LICENSE.md'
-  - name: hermes-parser@0.32.0
-    version: '0.32.0'
+  - name: hermes-parser@0.36.0
+    version: '0.36.0'
     source: https://github.com/facebook/hermes
     file: '../node_modules/hermes-parser/LICENSE'
-  - name: hermes-estree@0.32.0
-    version: '0.32.0'
+  - name: hermes-estree@0.36.0
+    version: '0.36.0'
     source: https://github.com/facebook/hermes
     file: '../node_modules/hermes-estree/LICENSE'
   - name: invariant@2.2.4
@@ -976,6 +862,10 @@ manual:
     version: '7.0.0'
     source: chalk/wrap-ansi
     file: '../node_modules/wrap-ansi/license'
+  - name: ansi-styles@4.3.0
+    version: '4.3.0'
+    source: chalk/ansi-styles
+    file: '../node_modules/ansi-styles/license'
   - name: get-caller-file@2.0.5
     version: '2.0.5'
     source: https://github.com/stefanpenner/get-caller-file
@@ -992,24 +882,24 @@ manual:
     version: '21.1.1'
     source: https://github.com/yargs/yargs-parser
     body: ISC
-  - name: '@react-native_community-cli-plugin@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_community-cli-plugin@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: MIT
-  - name: '@react-native_dev-middleware@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_dev-middleware@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: MIT
   - name: '@isaacs_ttlcache@1.4.1'
     version: '1.4.1'
     source: https://github.com/isaacs/ttlcache
     file: '../node_modules/@isaacs/ttlcache/LICENSE'
-  - name: '@react-native_debugger-frontend@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_debugger-frontend@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: BSD-3-Clause
-  - name: '@react-native_debugger-shell@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_debugger-shell@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: MIT
   - name: cross-spawn@7.0.6
@@ -1044,6 +934,14 @@ manual:
     version: '0.15.2'
     source: https://github.com/GoogleChrome/chrome-launcher/
     file: '../node_modules/chrome-launcher/LICENSE'
+  - name: '@types_node@22.10.7'
+    version: '22.10.7'
+    source: https://github.com/DefinitelyTyped/DefinitelyTyped
+    file: '../node_modules/@types/node/LICENSE'
+  - name: undici-types@6.20.0
+    version: '6.20.0'
+    source: https://github.com/nodejs/undici
+    file: '../node_modules/undici-types/LICENSE'
   - name: is-wsl@2.2.0
     version: '2.2.0'
     source: sindresorhus/is-wsl
@@ -1067,62 +965,14 @@ manual:
     version: '1.3.0'
     source: https://github.com/nolanlawson/marky
     file: '../node_modules/marky/LICENSE'
-  - name: chromium-edge-launcher@0.2.0
-    version: '0.2.0'
+  - name: chromium-edge-launcher@0.3.0
+    version: '0.3.0'
     source: https://github.com/cezaraugusto/chromium-edge-launcher/
     file: '../node_modules/chromium-edge-launcher/LICENSE'
   - name: mkdirp@1.0.4
     version: '1.0.4'
     source: https://github.com/isaacs/node-mkdirp
     file: '../node_modules/mkdirp/LICENSE'
-  - name: rimraf@3.0.2
-    version: '3.0.2'
-    source: https://github.com/isaacs/rimraf
-    file: '../node_modules/rimraf/LICENSE'
-  - name: glob@7.2.3
-    version: '7.2.3'
-    source: https://github.com/isaacs/node-glob
-    file: '../node_modules/glob/LICENSE'
-  - name: fs.realpath@1.0.0
-    version: '1.0.0'
-    source: https://github.com/isaacs/fs.realpath
-    file: '../node_modules/fs.realpath/LICENSE'
-  - name: inflight@1.0.6
-    version: '1.0.6'
-    source: https://github.com/npm/inflight
-    file: '../node_modules/inflight/LICENSE'
-  - name: once@1.4.0
-    version: '1.4.0'
-    source: https://github.com/isaacs/once
-    file: '../node_modules/once/LICENSE'
-  - name: wrappy@1.0.2
-    version: '1.0.2'
-    source: https://github.com/npm/wrappy
-    file: '../node_modules/wrappy/LICENSE'
-  - name: inherits@2.0.4
-    version: '2.0.4'
-    source: https://github.com/isaacs/inherits
-    file: '../node_modules/inherits/LICENSE'
-  - name: minimatch@3.1.5
-    version: '3.1.5'
-    source: https://github.com/isaacs/minimatch
-    file: '../node_modules/minimatch/LICENSE'
-  - name: brace-expansion@1.1.13
-    version: '1.1.13'
-    source: https://github.com/juliangruber/brace-expansion
-    file: '../node_modules/minimatch/node_modules/brace-expansion/LICENSE'
-  - name: balanced-match@1.0.2
-    version: '1.0.2'
-    source: https://github.com/juliangruber/balanced-match
-    file: '../node_modules/balanced-match/LICENSE.md'
-  - name: concat-map@0.0.1
-    version: '0.0.1'
-    source: https://github.com/substack/node-concat-map
-    file: '../node_modules/concat-map/LICENSE'
-  - name: path-is-absolute@1.0.1
-    version: '1.0.1'
-    source: sindresorhus/path-is-absolute
-    file: '../node_modules/path-is-absolute/license'
   - name: connect@3.7.0
     version: '3.7.0'
     source: senchalabs/connect
@@ -1199,6 +1049,10 @@ manual:
     version: '2.0.1'
     source: jshttp/http-errors
     file: '../node_modules/http-errors/LICENSE'
+  - name: inherits@2.0.4
+    version: '2.0.4'
+    source: https://github.com/isaacs/inherits
+    file: '../node_modules/inherits/LICENSE'
   - name: setprototypeof@1.2.0
     version: '1.2.0'
     source: https://github.com/wesleytodd/setprototypeof
@@ -1223,12 +1077,12 @@ manual:
     version: '1.2.1'
     source: jshttp/range-parser
     file: '../node_modules/range-parser/LICENSE'
-  - name: ws@7.5.10
-    version: '7.5.10'
+  - name: ws@7.5.11
+    version: '7.5.11'
     source: websockets/ws
     file: '../node_modules/@react-native/dev-middleware/node_modules/ws/LICENSE'
-  - name: metro@0.83.4
-    version: '0.83.4'
+  - name: metro@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
   - name: accepts@2.0.0
@@ -1267,12 +1121,12 @@ manual:
     version: '4.2.11'
     source: https://github.com/isaacs/node-graceful-fs
     file: '../node_modules/graceful-fs/LICENSE'
-  - name: hermes-parser@0.33.3
-    version: '0.33.3'
+  - name: hermes-parser@0.35.0
+    version: '0.35.0'
     source: https://github.com/facebook/hermes
     file: '../node_modules/metro/node_modules/hermes-parser/LICENSE'
-  - name: hermes-estree@0.33.3
-    version: '0.33.3'
+  - name: hermes-estree@0.35.0
+    version: '0.35.0'
     source: https://github.com/facebook/hermes
     file: '../node_modules/metro/node_modules/hermes-estree/LICENSE'
   - name: image-size@1.2.1
@@ -1291,6 +1145,50 @@ manual:
     version: '29.7.0'
     source: https://github.com/jestjs/jest
     file: '../node_modules/jest-util/LICENSE'
+  - name: '@jest_types@29.6.3'
+    version: '29.6.3'
+    source: https://github.com/jestjs/jest
+    file: '../node_modules/@jest/types/LICENSE'
+  - name: '@jest_schemas@29.6.3'
+    version: '29.6.3'
+    source: https://github.com/jestjs/jest
+    file: '../node_modules/@jest/schemas/LICENSE'
+  - name: '@sinclair_typebox@0.27.8'
+    version: '0.27.8'
+    source: https://github.com/sinclairzx81/typebox
+    file: '../node_modules/@sinclair/typebox/license'
+  - name: '@types_istanbul-lib-coverage@2.0.6'
+    version: '2.0.6'
+    source: https://github.com/DefinitelyTyped/DefinitelyTyped
+    file: '../node_modules/@types/istanbul-lib-coverage/LICENSE'
+  - name: '@types_istanbul-reports@3.0.4'
+    version: '3.0.4'
+    source: https://github.com/DefinitelyTyped/DefinitelyTyped
+    file: '../node_modules/@types/istanbul-reports/LICENSE'
+  - name: '@types_istanbul-lib-report@3.0.3'
+    version: '3.0.3'
+    source: https://github.com/DefinitelyTyped/DefinitelyTyped
+    file: '../node_modules/@types/istanbul-lib-report/LICENSE'
+  - name: '@types_yargs@17.0.33'
+    version: '17.0.33'
+    source: https://github.com/DefinitelyTyped/DefinitelyTyped
+    file: '../node_modules/@types/yargs/LICENSE'
+  - name: '@types_yargs-parser@21.0.3'
+    version: '21.0.3'
+    source: https://github.com/DefinitelyTyped/DefinitelyTyped
+    file: '../node_modules/@types/yargs-parser/LICENSE'
+  - name: chalk@4.1.2
+    version: '4.1.2'
+    source: chalk/chalk
+    file: '../node_modules/chalk/license'
+  - name: supports-color@7.2.0
+    version: '7.2.0'
+    source: chalk/supports-color
+    file: '../node_modules/supports-color/license'
+  - name: has-flag@4.0.0
+    version: '4.0.0'
+    source: sindresorhus/has-flag
+    file: '../node_modules/has-flag/license'
   - name: ci-info@3.9.0
     version: '3.9.0'
     source: https://github.com/watson/ci-info
@@ -1315,12 +1213,16 @@ manual:
     version: '4.1.1'
     source: lodash/lodash
     file: '../node_modules/lodash.throttle/LICENSE'
-  - name: metro-babel-transformer@0.83.4
-    version: '0.83.4'
+  - name: metro-babel-transformer@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: metro-cache@0.83.4
-    version: '0.83.4'
+  - name: metro-cache-key@0.84.4
+    version: '0.84.4'
+    source: https://github.com/facebook/metro
+    body: MIT
+  - name: metro-cache@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
   - name: exponential-backoff@3.1.3
@@ -1335,20 +1237,16 @@ manual:
     version: '7.1.4'
     source: https://github.com/TooTallNate/proxy-agents
     file: '../node_modules/agent-base/LICENSE'
-  - name: metro-core@0.83.4
-    version: '0.83.4'
+  - name: metro-core@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: metro-resolver@0.83.4
-    version: '0.83.4'
+  - name: metro-resolver@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: metro-cache-key@0.83.4
-    version: '0.83.4'
-    source: https://github.com/facebook/metro
-    body: MIT
-  - name: metro-config@0.83.4
-    version: '0.83.4'
+  - name: metro-config@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
   - name: jest-validate@29.7.0
@@ -1379,8 +1277,8 @@ manual:
     version: '18.3.1'
     source: https://github.com/facebook/react
     file: '../node_modules/pretty-format/node_modules/react-is/LICENSE'
-  - name: metro-file-map@0.83.4
-    version: '0.83.4'
+  - name: metro-file-map@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
   - name: fb-watchman@2.0.2
@@ -1427,16 +1325,16 @@ manual:
     version: '1.0.5'
     source: https://github.com/daaku/nodejs-tmpl
     file: '../node_modules/tmpl/license'
-  - name: metro-runtime@0.83.4
-    version: '0.83.4'
+  - name: metro-runtime@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: metro-source-map@0.83.4
-    version: '0.83.4'
+  - name: metro-source-map@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: metro-symbolicate@0.83.4
-    version: '0.83.4'
+  - name: metro-symbolicate@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
   - name: source-map@0.5.7
@@ -1447,24 +1345,24 @@ manual:
     version: '1.0.1'
     source: https://github.com/Rich-Harris/vlq
     file: '../node_modules/vlq/LICENSE'
-  - name: ob1@0.83.4
-    version: '0.83.4'
+  - name: ob1@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: metro-transform-plugins@0.83.4
-    version: '0.83.4'
+  - name: metro-transform-plugins@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: metro-transform-worker@0.83.4
-    version: '0.83.4'
+  - name: metro-transform-worker@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: metro-minify-terser@0.83.4
-    version: '0.83.4'
+  - name: metro-minify-terser@0.84.4
+    version: '0.84.4'
     source: https://github.com/facebook/metro
     body: MIT
-  - name: terser@5.46.0
-    version: '5.46.0'
+  - name: terser@5.48.0
+    version: '5.48.0'
     source: https://github.com/terser/terser
     file: '../node_modules/terser/LICENSE'
   - name: '@jridgewell_source-map@0.3.11'
@@ -1503,24 +1401,24 @@ manual:
     version: '2.9.0'
     source: https://github.com/eemeli/yaml
     file: '../node_modules/yaml/LICENSE'
-  - name: semver@7.7.4
-    version: '7.7.4'
+  - name: semver@7.8.4
+    version: '7.8.4'
     source: https://github.com/npm/node-semver
     file: '../node_modules/@react-native/community-cli-plugin/node_modules/semver/LICENSE'
-  - name: '@react-native_gradle-plugin@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_gradle-plugin@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: MIT
-  - name: '@react-native_js-polyfills@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_js-polyfills@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: MIT
-  - name: '@react-native_normalize-colors@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_normalize-colors@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: MIT
-  - name: '@react-native_virtualized-lists@0.84.1'
-    version: '0.84.1'
+  - name: '@react-native_virtualized-lists@0.86.0'
+    version: '0.86.0'
     source: https://github.com/facebook/react-native
     body: MIT
   - name: abort-controller@3.0.0
@@ -1535,266 +1433,18 @@ manual:
     version: '1.4.10'
     source: https://github.com/IonicaBizau/anser
     file: '../node_modules/anser/LICENSE'
-  - name: babel-jest@29.7.0
-    version: '29.7.0'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/babel-jest/LICENSE'
-  - name: '@jest_transform@29.7.0'
-    version: '29.7.0'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/@jest/transform/LICENSE'
-  - name: babel-plugin-istanbul@6.1.1
-    version: '6.1.1'
-    source: https://github.com/istanbuljs/babel-plugin-istanbul
-    file: '../node_modules/babel-plugin-istanbul/LICENSE'
-  - name: '@babel_helper-plugin-utils@7.28.6'
-    version: '7.28.6'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/helper-plugin-utils/LICENSE'
-  - name: '@istanbuljs_load-nyc-config@1.1.0'
-    version: '1.1.0'
-    source: https://github.com/istanbuljs/load-nyc-config
-    file: '../node_modules/@istanbuljs/load-nyc-config/LICENSE'
-  - name: camelcase@5.3.1
-    version: '5.3.1'
-    source: sindresorhus/camelcase
-    file: '../node_modules/camelcase/license'
-  - name: find-up@4.1.0
-    version: '4.1.0'
-    source: sindresorhus/find-up
-    file: '../node_modules/find-up/license'
-  - name: get-package-type@0.1.0
-    version: '0.1.0'
-    source: https://github.com/cfware/get-package-type
-    file: '../node_modules/get-package-type/LICENSE'
-  - name: js-yaml@3.14.2
-    version: '3.14.2'
-    source: nodeca/js-yaml
-    file: '../node_modules/@istanbuljs/load-nyc-config/node_modules/js-yaml/LICENSE'
-  - name: argparse@1.0.10
-    version: '1.0.10'
-    source: nodeca/argparse
-    file: '../node_modules/@istanbuljs/load-nyc-config/node_modules/argparse/LICENSE'
-  - name: sprintf-js@1.0.3
-    version: '1.0.3'
-    source: https://github.com/alexei/sprintf.js
-    file: '../node_modules/sprintf-js/LICENSE'
-  - name: esprima@4.0.1
-    version: '4.0.1'
-    source: https://github.com/jquery/esprima
-    body: BSD-2-Clause
-  - name: resolve-from@5.0.0
-    version: '5.0.0'
-    source: sindresorhus/resolve-from
-    file: '../node_modules/resolve-from/license'
-  - name: '@istanbuljs_schema@0.1.3'
-    version: '0.1.3'
-    source: https://github.com/istanbuljs/schema
-    file: '../node_modules/@istanbuljs/schema/LICENSE'
-  - name: istanbul-lib-instrument@5.2.1
-    version: '5.2.1'
-    source: https://github.com/istanbuljs/istanbuljs
-    file: '../node_modules/istanbul-lib-instrument/LICENSE'
-  - name: istanbul-lib-coverage@3.2.2
-    version: '3.2.2'
-    source: https://github.com/istanbuljs/istanbuljs
-    file: '../node_modules/istanbul-lib-coverage/LICENSE'
-  - name: test-exclude@6.0.0
-    version: '6.0.0'
-    source: https://github.com/istanbuljs/test-exclude
-    body: ISC
-  - name: fast-json-stable-stringify@2.1.0
-    version: '2.1.0'
-    source: https://github.com/epoberezkin/fast-json-stable-stringify
-    file: '../node_modules/fast-json-stable-stringify/LICENSE'
-  - name: jest-haste-map@29.7.0
-    version: '29.7.0'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/jest-haste-map/LICENSE'
-  - name: '@types_graceful-fs@4.1.9'
-    version: '4.1.9'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/graceful-fs/LICENSE'
-  - name: anymatch@3.1.3
-    version: '3.1.3'
-    source: https://github.com/micromatch/anymatch
-    file: '../node_modules/anymatch/LICENSE'
-  - name: normalize-path@3.0.0
-    version: '3.0.0'
-    source: jonschlinkert/normalize-path
-    file: '../node_modules/normalize-path/LICENSE'
-  - name: jest-regex-util@29.6.3
-    version: '29.6.3'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/jest-regex-util/LICENSE'
-  - name: fsevents@2.3.3
-    version: '2.3.3'
-    source: https://github.com/fsevents/fsevents
-    file: '../node_modules/fsevents/LICENSE'
-  - name: pirates@4.0.6
-    version: '4.0.6'
-    source: https://github.com/danez/pirates
-    file: '../node_modules/pirates/LICENSE'
-  - name: slash@3.0.0
-    version: '3.0.0'
-    source: sindresorhus/slash
-    file: '../node_modules/slash/license'
-  - name: write-file-atomic@4.0.2
-    version: '4.0.2'
-    source: https://github.com/npm/write-file-atomic
-    file: '../node_modules/write-file-atomic/LICENSE.md'
-  - name: imurmurhash@0.1.4
-    version: '0.1.4'
-    source: https://github.com/jensyt/imurmurhash-js
-    body: MIT
-  - name: signal-exit@3.0.7
-    version: '3.0.7'
-    source: https://github.com/tapjs/signal-exit
-    body: ISC
-  - name: '@types_babel__core@7.20.5'
-    version: '7.20.5'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/babel__core/LICENSE'
-  - name: '@types_babel__generator@7.6.8'
-    version: '7.6.8'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/babel__generator/LICENSE'
-  - name: '@types_babel__template@7.4.4'
-    version: '7.4.4'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/babel__template/LICENSE'
-  - name: '@types_babel__traverse@7.20.6'
-    version: '7.20.6'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/babel__traverse/LICENSE'
-  - name: babel-preset-jest@29.6.3
-    version: '29.6.3'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/babel-preset-jest/LICENSE'
-  - name: babel-plugin-jest-hoist@29.6.3
-    version: '29.6.3'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/babel-plugin-jest-hoist/LICENSE'
-  - name: babel-preset-current-node-syntax@1.1.0
-    version: '1.1.0'
-    source: https://github.com/nicolo-ribaudo/babel-preset-current-node-syntax
-    file: '../node_modules/babel-preset-current-node-syntax/LICENSE'
-  - name: '@babel_plugin-syntax-async-generators@7.8.4'
-    version: '7.8.4'
-    source: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-async-generators
-    file: '../node_modules/@babel/plugin-syntax-async-generators/LICENSE'
-  - name: '@babel_plugin-syntax-bigint@7.8.3'
-    version: '7.8.3'
-    source: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-bigint
-    file: '../node_modules/@babel/plugin-syntax-bigint/LICENSE'
-  - name: '@babel_plugin-syntax-class-properties@7.12.13'
-    version: '7.12.13'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/plugin-syntax-class-properties/LICENSE'
-  - name: '@babel_plugin-syntax-class-static-block@7.14.5'
-    version: '7.14.5'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/plugin-syntax-class-static-block/LICENSE'
-  - name: '@babel_plugin-syntax-import-attributes@7.26.0'
-    version: '7.26.0'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/plugin-syntax-import-attributes/LICENSE'
-  - name: '@babel_plugin-syntax-import-meta@7.10.4'
-    version: '7.10.4'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/plugin-syntax-import-meta/LICENSE'
-  - name: '@babel_plugin-syntax-json-strings@7.8.3'
-    version: '7.8.3'
-    source: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-json-strings
-    file: '../node_modules/@babel/plugin-syntax-json-strings/LICENSE'
-  - name: '@babel_plugin-syntax-logical-assignment-operators@7.10.4'
-    version: '7.10.4'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/plugin-syntax-logical-assignment-operators/LICENSE'
-  - name: '@babel_plugin-syntax-nullish-coalescing-operator@7.8.3'
-    version: '7.8.3'
-    source: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-nullish-coalescing-operator
-    file: '../node_modules/@babel/plugin-syntax-nullish-coalescing-operator/LICENSE'
-  - name: '@babel_plugin-syntax-numeric-separator@7.10.4'
-    version: '7.10.4'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/plugin-syntax-numeric-separator/LICENSE'
-  - name: '@babel_plugin-syntax-object-rest-spread@7.8.3'
-    version: '7.8.3'
-    source: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-object-rest-spread
-    file: '../node_modules/@babel/plugin-syntax-object-rest-spread/LICENSE'
-  - name: '@babel_plugin-syntax-optional-catch-binding@7.8.3'
-    version: '7.8.3'
-    source: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-optional-catch-binding
-    file: '../node_modules/@babel/plugin-syntax-optional-catch-binding/LICENSE'
-  - name: '@babel_plugin-syntax-optional-chaining@7.8.3'
-    version: '7.8.3'
-    source: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-optional-chaining
-    file: '../node_modules/@babel/plugin-syntax-optional-chaining/LICENSE'
-  - name: '@babel_plugin-syntax-private-property-in-object@7.14.5'
-    version: '7.14.5'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/plugin-syntax-private-property-in-object/LICENSE'
-  - name: '@babel_plugin-syntax-top-level-await@7.14.5'
-    version: '7.14.5'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/plugin-syntax-top-level-await/LICENSE'
-  - name: babel-plugin-syntax-hermes-parser@0.32.0
-    version: '0.32.0'
+  - name: babel-plugin-syntax-hermes-parser@0.36.0
+    version: '0.36.0'
     source: https://github.com/facebook/hermes
     file: '../node_modules/babel-plugin-syntax-hermes-parser/LICENSE'
   - name: commander@12.1.0
     version: '12.1.0'
     source: https://github.com/tj/commander.js
     file: '../node_modules/commander/LICENSE'
-  - name: hermes-compiler@250829098.0.9
-    version: '250829098.0.9'
+  - name: hermes-compiler@250829098.0.14
+    version: '250829098.0.14'
     source: https://github.com/facebook/hermes
     body: MIT
-  - name: jest-environment-node@29.7.0
-    version: '29.7.0'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/jest-environment-node/LICENSE'
-  - name: '@jest_environment@29.7.0'
-    version: '29.7.0'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/@jest/environment/LICENSE'
-  - name: '@jest_fake-timers@29.7.0'
-    version: '29.7.0'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/@jest/fake-timers/LICENSE'
-  - name: '@sinonjs_fake-timers@10.3.0'
-    version: '10.3.0'
-    source: https://github.com/sinonjs/fake-timers
-    file: '../node_modules/@sinonjs/fake-timers/LICENSE'
-  - name: '@sinonjs_commons@3.0.1'
-    version: '3.0.1'
-    source: https://github.com/sinonjs/commons
-    file: '../node_modules/@sinonjs/commons/LICENSE'
-  - name: type-detect@4.0.8
-    version: '4.0.8'
-    source: https://github.com/chaijs/type-detect
-    file: '../node_modules/type-detect/LICENSE'
-  - name: jest-message-util@29.7.0
-    version: '29.7.0'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/jest-message-util/LICENSE'
-  - name: '@types_stack-utils@2.0.3'
-    version: '2.0.3'
-    source: https://github.com/DefinitelyTyped/DefinitelyTyped
-    file: '../node_modules/@types/stack-utils/LICENSE'
-  - name: stack-utils@2.0.6
-    version: '2.0.6'
-    source: tapjs/stack-utils
-    file: '../node_modules/stack-utils/LICENSE.md'
-  - name: escape-string-regexp@2.0.0
-    version: '2.0.0'
-    source: sindresorhus/escape-string-regexp
-    file: '../node_modules/stack-utils/node_modules/escape-string-regexp/license'
-  - name: jest-mock@29.7.0
-    version: '29.7.0'
-    source: https://github.com/jestjs/jest
-    file: '../node_modules/jest-mock/LICENSE'
   - name: memoize-one@5.2.1
     version: '5.2.1'
     source: https://github.com/alexreardon/memoize-one
@@ -1811,10 +1461,14 @@ manual:
     version: '6.1.5'
     source: https://github.com/facebook/react
     body: MIT
-  - name: shell-quote@1.8.3
-    version: '1.8.3'
+  - name: shell-quote@1.8.4
+    version: '1.8.4'
     source: http://github.com/ljharb/shell-quote
     file: '../node_modules/shell-quote/LICENSE'
+  - name: ws@7.5.10
+    version: '7.5.10'
+    source: websockets/ws
+    file: '../node_modules/react-devtools-core/node_modules/ws/LICENSE'
   - name: react-refresh@0.14.2
     version: '0.14.2'
     source: https://github.com/facebook/react
@@ -1835,22 +1489,34 @@ manual:
     version: '7.3.1'
     source: https://github.com/zoontek/react-native-bootsplash
     file: '../node_modules/react-native-bootsplash/LICENSE'
-  - name: '@expo_config-plugins@55.0.8'
-    version: '55.0.8'
+  - name: '@expo_config-plugins@56.0.8'
+    version: '56.0.8'
     source: https://github.com/expo/expo
     file: '../node_modules/@expo/config-plugins/LICENSE'
-  - name: '@expo_config-types@55.0.5'
-    version: '55.0.5'
+  - name: '@expo_config-types@56.0.5'
+    version: '56.0.5'
     source: https://github.com/expo/expo
     file: '../node_modules/@expo/config-types/LICENSE'
-  - name: '@expo_json-file@10.0.13'
-    version: '10.0.13'
+  - name: '@expo_json-file@10.2.0'
+    version: '10.2.0'
     source: https://github.com/expo/expo
     file: '../node_modules/@expo/json-file/LICENSE'
-  - name: '@expo_plist@0.5.2'
-    version: '0.5.2'
+  - name: '@expo_plist@0.7.0'
+    version: '0.7.0'
     source: https://github.com/expo/expo
-    body: MIT
+    file: '../node_modules/@expo/plist/LICENSE'
+  - name: '@expo_require-utils@56.1.3'
+    version: '56.1.3'
+    source: https://github.com/expo/expo
+    file: '../node_modules/@expo/require-utils/LICENSE'
+  - name: '@babel_plugin-transform-modules-commonjs@7.29.7'
+    version: '7.29.7'
+    source: https://github.com/babel/babel
+    file: '../node_modules/@babel/plugin-transform-modules-commonjs/LICENSE'
+  - name: '@babel_helper-plugin-utils@7.29.7'
+    version: '7.29.7'
+    source: https://github.com/babel/babel
+    file: '../node_modules/@babel/helper-plugin-utils/LICENSE'
   - name: '@expo_sdk-runtime-versions@1.0.0'
     version: '1.0.0'
     body: MIT
@@ -2037,7 +1703,7 @@ manual:
   - name: react-native-is-edge-to-edge@1.3.1
     version: '1.3.1'
     source: https://github.com/zoontek/react-native-edge-to-edge
-    file: '../node_modules/react-native-bootsplash/node_modules/react-native-is-edge-to-edge/LICENSE'
+    file: '../node_modules/react-native-is-edge-to-edge/LICENSE'
   - name: sharp@0.34.5
     version: '0.34.5'
     source: https://github.com/lovell/sharp
@@ -2070,8 +1736,8 @@ manual:
     version: '4.1.5'
     source: https://github.com/chrisbottin/xml-parser
     file: '../node_modules/xml-parser-xo/LICENSE'
-  - name: react-native-gesture-handler@2.30.0
-    version: '2.30.0'
+  - name: react-native-gesture-handler@2.32.0
+    version: '2.32.0'
     source: https://github.com/software-mansion/react-native-gesture-handler
     file: '../node_modules/react-native-gesture-handler/LICENSE'
   - name: '@egjs_hammerjs@2.0.17'
@@ -2082,6 +1748,18 @@ manual:
     version: '2.0.46'
     source: https://github.com/DefinitelyTyped/DefinitelyTyped
     file: '../node_modules/@types/hammerjs/LICENSE'
+  - name: '@types_react-test-renderer@19.1.0'
+    version: '19.1.0'
+    source: https://github.com/DefinitelyTyped/DefinitelyTyped
+    file: '../node_modules/@types/react-test-renderer/LICENSE'
+  - name: '@types_react@19.2.14'
+    version: '19.2.14'
+    source: https://github.com/DefinitelyTyped/DefinitelyTyped
+    file: '../node_modules/@types/react/LICENSE'
+  - name: csstype@3.2.3
+    version: '3.2.3'
+    source: https://github.com/frenic/csstype
+    file: '../node_modules/csstype/LICENSE'
   - name: hoist-non-react-statics@3.3.2
     version: '3.3.2'
     source: https://github.com/mridgway/hoist-non-react-statics
@@ -2089,7 +1767,7 @@ manual:
   - name: react-is@16.13.1
     version: '16.13.1'
     source: https://github.com/facebook/react
-    file: '../node_modules/react-is/LICENSE'
+    file: '../node_modules/hoist-non-react-statics/node_modules/react-is/LICENSE'
   - name: react-native-html-to-pdf@1.3.0
     version: '1.3.0'
     source: https://github.com/christopherdro/react-native-html-to-pdf
@@ -2102,6 +1780,46 @@ manual:
     version: '0.3.1'
     source: https://github.com/callstackincubator/react-native-legal
     file: '../node_modules/@callstack/licenses/LICENSE'
+  - name: glob@7.2.3
+    version: '7.2.3'
+    source: https://github.com/isaacs/node-glob
+    file: '../node_modules/glob/LICENSE'
+  - name: fs.realpath@1.0.0
+    version: '1.0.0'
+    source: https://github.com/isaacs/fs.realpath
+    file: '../node_modules/fs.realpath/LICENSE'
+  - name: inflight@1.0.6
+    version: '1.0.6'
+    source: https://github.com/npm/inflight
+    file: '../node_modules/inflight/LICENSE'
+  - name: once@1.4.0
+    version: '1.4.0'
+    source: https://github.com/isaacs/once
+    file: '../node_modules/once/LICENSE'
+  - name: wrappy@1.0.2
+    version: '1.0.2'
+    source: https://github.com/npm/wrappy
+    file: '../node_modules/wrappy/LICENSE'
+  - name: minimatch@3.1.5
+    version: '3.1.5'
+    source: https://github.com/isaacs/minimatch
+    file: '../node_modules/minimatch/LICENSE'
+  - name: brace-expansion@1.1.13
+    version: '1.1.13'
+    source: https://github.com/juliangruber/brace-expansion
+    file: '../node_modules/minimatch/node_modules/brace-expansion/LICENSE'
+  - name: balanced-match@1.0.2
+    version: '1.0.2'
+    source: https://github.com/juliangruber/balanced-match
+    file: '../node_modules/balanced-match/LICENSE.md'
+  - name: concat-map@0.0.1
+    version: '0.0.1'
+    source: https://github.com/substack/node-concat-map
+    file: '../node_modules/concat-map/LICENSE'
+  - name: path-is-absolute@1.0.1
+    version: '1.0.1'
+    source: sindresorhus/path-is-absolute
+    file: '../node_modules/path-is-absolute/license'
   - name: xml2js@0.6.2
     version: '0.6.2'
     source: https://github.com/Leonidas-from-XIV/node-xml2js
@@ -2110,33 +1828,29 @@ manual:
     version: '3.7.0'
     source: https://github.com/zoontek/react-native-localize
     file: '../node_modules/react-native-localize/LICENSE'
-  - name: react-native-reanimated@4.2.2
-    version: '4.2.2'
+  - name: react-native-reanimated@4.4.1
+    version: '4.4.1'
     source: https://github.com/software-mansion/react-native-reanimated
     file: '../node_modules/react-native-reanimated/LICENSE'
-  - name: react-native-is-edge-to-edge@1.2.1
-    version: '1.2.1'
-    source: https://github.com/zoontek/react-native-edge-to-edge
-    file: '../node_modules/react-native-is-edge-to-edge/LICENSE'
-  - name: react-native-safe-area-context@5.7.0
-    version: '5.7.0'
+  - name: react-native-safe-area-context@5.8.0
+    version: '5.8.0'
     source: https://github.com/AppAndFlow/react-native-safe-area-context
     file: '../node_modules/react-native-safe-area-context/LICENSE'
-  - name: react-native-screens@4.24.0
-    version: '4.24.0'
+  - name: react-native-screens@4.25.2
+    version: '4.25.2'
     source: https://github.com/software-mansion/react-native-screens
     file: '../node_modules/react-native-screens/LICENSE'
   - name: react-freeze@1.0.4
     version: '1.0.4'
     source: software-mansion/react-freeze
     file: '../node_modules/react-freeze/LICENSE'
-  - name: react-native-share@12.0.11
-    version: '12.0.11'
-    source: https://github.com/react-native-community/react-native-share
+  - name: react-native-share@12.3.1
+    version: '12.3.1'
+    source: https://github.com/react-native-share/react-native-share
     file: '../node_modules/react-native-share/LICENSE'
-  - name: react-native-svg@15.15.3
-    version: '15.15.3'
-    source: https://github.com/react-native-community/react-native-svg
+  - name: react-native-svg@15.15.5
+    version: '15.15.5'
+    source: https://github.com/software-mansion/react-native-svg
     file: '../node_modules/react-native-svg/LICENSE'
   - name: css-tree@1.1.3
     version: '1.1.3'
@@ -2154,52 +1868,52 @@ manual:
     version: '2.43.0'
     source: https://github.com/jpudysz/react-native-unistyles
     file: '../node_modules/react-native-unistyles/LICENSE'
-  - name: react-native-worklets@0.7.4
-    version: '0.7.4'
+  - name: react-native-worklets@0.9.2
+    version: '0.9.2'
     source: https://github.com/software-mansion/react-native-reanimated
     file: '../node_modules/react-native-worklets/LICENSE'
   - name: '@babel_plugin-transform-arrow-functions@7.27.1'
     version: '7.27.1'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/plugin-transform-arrow-functions/LICENSE'
-  - name: '@babel_plugin-transform-class-properties@7.27.1'
-    version: '7.27.1'
+  - name: '@babel_plugin-transform-class-properties@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/plugin-transform-class-properties/LICENSE'
-  - name: '@babel_helper-create-class-features-plugin@7.28.6'
-    version: '7.28.6'
+  - name: '@babel_helper-create-class-features-plugin@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-create-class-features-plugin/LICENSE'
-  - name: '@babel_helper-annotate-as-pure@7.27.3'
-    version: '7.27.3'
+  - name: '@babel_helper-annotate-as-pure@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-annotate-as-pure/LICENSE'
-  - name: '@babel_helper-member-expression-to-functions@7.28.5'
-    version: '7.28.5'
+  - name: '@babel_helper-member-expression-to-functions@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-member-expression-to-functions/LICENSE'
-  - name: '@babel_helper-optimise-call-expression@7.27.1'
-    version: '7.27.1'
+  - name: '@babel_helper-optimise-call-expression@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-optimise-call-expression/LICENSE'
-  - name: '@babel_helper-replace-supers@7.28.6'
-    version: '7.28.6'
+  - name: '@babel_helper-replace-supers@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-replace-supers/LICENSE'
-  - name: '@babel_helper-skip-transparent-expression-wrappers@7.27.1'
-    version: '7.27.1'
+  - name: '@babel_helper-skip-transparent-expression-wrappers@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/helper-skip-transparent-expression-wrappers/LICENSE'
-  - name: '@babel_plugin-transform-classes@7.28.4'
-    version: '7.28.4'
+  - name: '@babel_plugin-transform-classes@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/plugin-transform-classes/LICENSE'
-  - name: '@babel_plugin-transform-nullish-coalescing-operator@7.27.1'
-    version: '7.27.1'
+  - name: '@babel_plugin-transform-nullish-coalescing-operator@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/plugin-transform-nullish-coalescing-operator/LICENSE'
-  - name: '@babel_plugin-transform-optional-chaining@7.27.1'
-    version: '7.27.1'
+  - name: '@babel_plugin-transform-optional-chaining@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/plugin-transform-optional-chaining/LICENSE'
   - name: '@babel_plugin-transform-shorthand-properties@7.27.1'
@@ -2254,24 +1968,20 @@ manual:
     version: '2.2.1'
     source: https://github.com/mathiasbynens/unicode-match-property-value-ecmascript
     body: MIT
-  - name: '@babel_preset-typescript@7.27.1'
-    version: '7.27.1'
+  - name: '@babel_preset-typescript@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/preset-typescript/LICENSE'
-  - name: '@babel_plugin-syntax-jsx@7.28.6'
-    version: '7.28.6'
+  - name: '@babel_plugin-syntax-jsx@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/plugin-syntax-jsx/LICENSE'
-  - name: '@babel_plugin-transform-modules-commonjs@7.28.6'
-    version: '7.28.6'
-    source: https://github.com/babel/babel
-    file: '../node_modules/@babel/plugin-transform-modules-commonjs/LICENSE'
-  - name: '@babel_plugin-transform-typescript@7.28.6'
-    version: '7.28.6'
+  - name: '@babel_plugin-transform-typescript@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/plugin-transform-typescript/LICENSE'
-  - name: '@babel_plugin-syntax-typescript@7.28.6'
-    version: '7.28.6'
+  - name: '@babel_plugin-syntax-typescript@7.29.7'
+    version: '7.29.7'
     source: https://github.com/babel/babel
     file: '../node_modules/@babel/plugin-syntax-typescript/LICENSE'
 exclude:
