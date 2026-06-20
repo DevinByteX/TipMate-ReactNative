@@ -250,7 +250,8 @@
       "paletteDescription": "Pick a colour palette — Dark Mode applies to whichever you choose.",
       "paletteDefault": "Default",
       "paletteSky": "Sky",
-      "paletteRose": "Rose"
+      "paletteRose": "Rose",
+      "paletteElectric": "Electric"
     }
   },
   "navigation": {

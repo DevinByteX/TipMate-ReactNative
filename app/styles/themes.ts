@@ -61,6 +61,15 @@ const sharedColors = {
   rose_disable_text_dark: '#f9a8d4',
   rose_disable_button_light: '#fbcfe8',
   rose_disable_button_dark: '#831843',
+  // Electric theme palette (from provided CSS display-p3 -> sRGB: --bg #3c519b / --fg #dbfc00)
+  electric_bg: '#3c519b',
+  electric_fg: '#dbfc00',
+  electric_card_light: '#4a61b5',
+  electric_card_dark: '#c2e000',
+  electric_disable_text_light: '#9fb0dd',
+  electric_disable_text_dark: '#7a86b0',
+  electric_disable_button_light: '#2f4080',
+  electric_disable_button_dark: '#e8ff66',
 };
 
 const hexToRGBA = (hex: string, opacity: number) => {
@@ -273,6 +282,80 @@ export const roseDarkTheme = {
     warning: sharedColors.warning_dark,
     // Custom theming
     accent_first: sharedColors.rose_bg,
+    accent_second: sharedColors.primary_accent_dark_second,
+    accent_third: sharedColors.primary_accent_dark_third,
+    accent_forth: sharedColors.primary_accent_dark_fourth,
+  },
+  margins: {
+    sm: 2,
+    md: 4,
+    lg: 8,
+    xl: 12,
+  },
+  fonts: {
+    ...sharedFonts,
+  },
+  utils: {
+    hexToRGBA,
+  },
+  typography,
+  // add any keys/functions/objects/arrays you want!
+} as const;
+
+// Electric theme — combo-1 (lime foreground on indigo background)
+export const electricTheme = {
+  colors: {
+    ...sharedColors,
+    backgroundColor: sharedColors.electric_bg,
+    headerBGColor: sharedColors.electric_bg,
+    accent: sharedColors.electric_fg,
+    card_typography: sharedColors.electric_fg,
+    card: sharedColors.electric_card_light,
+    devider: sharedColors.electric_fg,
+    disable_text: sharedColors.electric_disable_text_light,
+    disable_button: sharedColors.electric_disable_button_light,
+    error_toast: sharedColors.error_toast_light,
+    success: sharedColors.success_light,
+    warning: sharedColors.warning_light,
+    // Custom theming
+    accent_first: sharedColors.electric_fg,
+    accent_second: sharedColors.primary_accent_light_second,
+    accent_third: sharedColors.primary_accent_light_third,
+    accent_forth: sharedColors.primary_accent_light_fourth,
+  },
+  margins: {
+    sm: 2,
+    md: 4,
+    lg: 8,
+    xl: 12,
+  },
+  fonts: {
+    ...sharedFonts,
+  },
+  utils: {
+    hexToRGBA,
+  },
+  typography,
+  // add any keys/functions/objects/arrays you want!
+} as const;
+
+// Electric theme — combo-2 (indigo foreground on lime background)
+export const electricDarkTheme = {
+  colors: {
+    ...sharedColors,
+    backgroundColor: sharedColors.electric_fg,
+    headerBGColor: sharedColors.electric_fg,
+    accent: sharedColors.electric_bg,
+    card_typography: sharedColors.electric_bg,
+    card: sharedColors.electric_card_dark,
+    devider: sharedColors.electric_bg,
+    disable_text: sharedColors.electric_disable_text_dark,
+    disable_button: sharedColors.electric_disable_button_dark,
+    error_toast: sharedColors.error_toast_dark,
+    success: sharedColors.success_dark,
+    warning: sharedColors.warning_dark,
+    // Custom theming
+    accent_first: sharedColors.electric_bg,
     accent_second: sharedColors.primary_accent_dark_second,
     accent_third: sharedColors.primary_accent_dark_third,
     accent_forth: sharedColors.primary_accent_dark_fourth,

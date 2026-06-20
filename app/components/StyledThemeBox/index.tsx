@@ -41,7 +41,7 @@ export const StyledThemeBox = ({
     await setUserPreferredTheme(themeName);
   };
 
-  // Dark-mode toggle keeps the current palette (default, sky or rose).
+  // Dark-mode toggle keeps the current palette (default, sky, rose or electric).
   const onToggleDarkMode = (value: boolean) => {
     applyBaseTheme(composeThemeName(getThemePalette(currentTheme), value));
   };
@@ -51,11 +51,21 @@ export const StyledThemeBox = ({
     applyBaseTheme(composeThemeName(palette, isDarkThemeName(currentTheme)));
   };
 
+  // Pick a black/white check that stays legible on top of a given swatch colour.
+  const contrastingCheck = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.6 ? '#000000' : '#ffffff';
+  };
+
   const activePalette = getThemePalette(currentTheme);
   const palettes: { key: ThemePalette; label: string; color: string }[] = [
     { key: 'default', label: t('components.themeBox.paletteDefault'), color: '#009688' },
     { key: 'sky', label: t('components.themeBox.paletteSky'), color: '#0369a1' },
     { key: 'rose', label: t('components.themeBox.paletteRose'), color: '#db2777' },
+    { key: 'electric', label: t('components.themeBox.paletteElectric'), color: '#dbfc00' },
   ];
 
   const ThemeColorBox = ({
@@ -160,7 +170,11 @@ export const StyledThemeBox = ({
             >
               <View style={[styles.paletteSwatch, { backgroundColor: color }]}>
                 {active ? (
-                  <StyledIcons type={'Octicons'} name={'check'} style={styles.paletteSwatchIcon} />
+                  <StyledIcons
+                    type={'Octicons'}
+                    name={'check'}
+                    style={[styles.paletteSwatchIcon, { color: contrastingCheck(color) }]}
+                  />
                 ) : null}
               </View>
               <Text style={styles.paletteLabel}>{label}</Text>
