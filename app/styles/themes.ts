@@ -52,6 +52,15 @@ const sharedColors = {
   sky_disable_text_dark: '#7dd3fc',
   sky_disable_button_light: '#cfe8fb',
   sky_disable_button_dark: '#0c4a6e',
+  // Rose theme palette (from provided CSS: --bg #f9fafb / --fg #db2777)
+  rose_bg: '#f9fafb',
+  rose_fg: '#db2777',
+  rose_card_light: '#fce7f3',
+  rose_card_dark: '#9d174d',
+  rose_disable_text_light: '#ec6fb0',
+  rose_disable_text_dark: '#f9a8d4',
+  rose_disable_button_light: '#fbcfe8',
+  rose_disable_button_dark: '#831843',
 };
 
 const hexToRGBA = (hex: string, opacity: number) => {
@@ -190,6 +199,80 @@ export const skyDarkTheme = {
     warning: sharedColors.warning_dark,
     // Custom theming
     accent_first: sharedColors.sky_bg,
+    accent_second: sharedColors.primary_accent_dark_second,
+    accent_third: sharedColors.primary_accent_dark_third,
+    accent_forth: sharedColors.primary_accent_dark_fourth,
+  },
+  margins: {
+    sm: 2,
+    md: 4,
+    lg: 8,
+    xl: 12,
+  },
+  fonts: {
+    ...sharedFonts,
+  },
+  utils: {
+    hexToRGBA,
+  },
+  typography,
+  // add any keys/functions/objects/arrays you want!
+} as const;
+
+// Rose theme — combo-1 (pink foreground on near-white background)
+export const roseTheme = {
+  colors: {
+    ...sharedColors,
+    backgroundColor: sharedColors.rose_bg,
+    headerBGColor: sharedColors.rose_bg,
+    accent: sharedColors.rose_fg,
+    card_typography: sharedColors.rose_fg,
+    card: sharedColors.rose_card_light,
+    devider: sharedColors.rose_fg,
+    disable_text: sharedColors.rose_disable_text_light,
+    disable_button: sharedColors.rose_disable_button_light,
+    error_toast: sharedColors.error_toast_light,
+    success: sharedColors.success_light,
+    warning: sharedColors.warning_light,
+    // Custom theming
+    accent_first: sharedColors.rose_fg,
+    accent_second: sharedColors.primary_accent_light_second,
+    accent_third: sharedColors.primary_accent_light_third,
+    accent_forth: sharedColors.primary_accent_light_fourth,
+  },
+  margins: {
+    sm: 2,
+    md: 4,
+    lg: 8,
+    xl: 12,
+  },
+  fonts: {
+    ...sharedFonts,
+  },
+  utils: {
+    hexToRGBA,
+  },
+  typography,
+  // add any keys/functions/objects/arrays you want!
+} as const;
+
+// Rose theme — combo-2 (near-white foreground on pink background)
+export const roseDarkTheme = {
+  colors: {
+    ...sharedColors,
+    backgroundColor: sharedColors.rose_fg,
+    headerBGColor: sharedColors.rose_fg,
+    accent: sharedColors.rose_bg,
+    card_typography: sharedColors.rose_bg,
+    card: sharedColors.rose_card_dark,
+    devider: sharedColors.rose_bg,
+    disable_text: sharedColors.rose_disable_text_dark,
+    disable_button: sharedColors.rose_disable_button_dark,
+    error_toast: sharedColors.error_toast_dark,
+    success: sharedColors.success_dark,
+    warning: sharedColors.warning_dark,
+    // Custom theming
+    accent_first: sharedColors.rose_bg,
     accent_second: sharedColors.primary_accent_dark_second,
     accent_third: sharedColors.primary_accent_dark_third,
     accent_forth: sharedColors.primary_accent_dark_fourth,

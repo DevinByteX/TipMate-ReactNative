@@ -12,6 +12,7 @@ import {
   getThemePalette,
   isDarkThemeName,
   ThemeName,
+  ThemePalette,
 } from '@utils';
 import { useCustomThemesConfig } from '@configs';
 import { useScaleSpring } from '@hooks';
@@ -40,15 +41,22 @@ export const StyledThemeBox = ({
     await setUserPreferredTheme(themeName);
   };
 
-  // Dark-mode toggle keeps the current palette (default or sky).
+  // Dark-mode toggle keeps the current palette (default, sky or rose).
   const onToggleDarkMode = (value: boolean) => {
     applyBaseTheme(composeThemeName(getThemePalette(currentTheme), value));
   };
 
-  // Sky-theme toggle keeps the current dark/light state.
-  const onToggleSkyTheme = (value: boolean) => {
-    applyBaseTheme(composeThemeName(value ? 'sky' : 'default', isDarkThemeName(currentTheme)));
+  // Palette selector keeps the current dark/light state.
+  const onSelectPalette = (palette: ThemePalette) => {
+    applyBaseTheme(composeThemeName(palette, isDarkThemeName(currentTheme)));
   };
+
+  const activePalette = getThemePalette(currentTheme);
+  const palettes: { key: ThemePalette; label: string; color: string }[] = [
+    { key: 'default', label: t('components.themeBox.paletteDefault'), color: '#009688' },
+    { key: 'sky', label: t('components.themeBox.paletteSky'), color: '#0369a1' },
+    { key: 'rose', label: t('components.themeBox.paletteRose'), color: '#db2777' },
+  ];
 
   const ThemeColorBox = ({
     buttonColor,
@@ -136,18 +144,29 @@ export const StyledThemeBox = ({
           size={styles.toggleInstructionText?.fontSize}
           color={styles.toggleInstructionText?.color}
         />
-        {` ${t('components.themeBox.skyThemeDescription')}`}
+        {` ${t('components.themeBox.paletteDescription')}`}
       </Text>
-      <View style={styles.mainThemeToggleContainer}>
-        <View style={styles.toggleTextContainer}>
-          <Text style={styles.toggleText}>{t('components.themeBox.skyThemeLabel')}</Text>
-        </View>
-        <View style={styles.toggleButtonContainer}>
-          <StyledToggle
-            value={getThemePalette(currentTheme) === 'sky'}
-            onValueChange={onToggleSkyTheme}
-          />
-        </View>
+      <View style={styles.paletteRow}>
+        {palettes.map(({ key, label, color }) => {
+          const active = activePalette === key;
+          return (
+            <Pressable
+              key={key}
+              style={[
+                styles.paletteItem,
+                { borderColor: active ? theme.colors.accent : 'transparent' },
+              ]}
+              onPress={() => onSelectPalette(key)}
+            >
+              <View style={[styles.paletteSwatch, { backgroundColor: color }]}>
+                {active ? (
+                  <StyledIcons type={'Octicons'} name={'check'} style={styles.paletteSwatchIcon} />
+                ) : null}
+              </View>
+              <Text style={styles.paletteLabel}>{label}</Text>
+            </Pressable>
+          );
+        })}
       </View>
     </View>
   );
@@ -211,6 +230,39 @@ const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   toggleButtonContainer: {
     flex: 2,
     alignItems: 'flex-end',
+  },
+  paletteRow: {
+    flexDirection: 'row',
+    marginTop: (UnistylesRuntime.screen.height * 0.5) / 100,
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+    columnGap: (UnistylesRuntime.screen.width * 2) / 100,
+  },
+  paletteItem: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: (UnistylesRuntime.screen.height * 1) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
+    borderWidth: UnistylesRuntime.hairlineWidth * 6,
+    backgroundColor: colors.backgroundColor,
+  },
+  paletteSwatch: {
+    width: (UnistylesRuntime.screen.height * 3.5) / 100,
+    height: (UnistylesRuntime.screen.height * 3.5) / 100,
+    borderRadius: (UnistylesRuntime.screen.height * 3.5) / 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  paletteSwatchIcon: {
+    color: colors.white,
+    fontSize: typography.fontSize.md,
+    lineHeight: typography.lineHeight.md,
+  },
+  paletteLabel: {
+    marginTop: (UnistylesRuntime.screen.height * 0.5) / 100,
+    color: colors.card_typography,
+    fontSize: typography.fontSize.xs,
+    lineHeight: typography.lineHeight.xs,
+    fontFamily: fonts.Nunito_Bold,
   },
   themeColorBox: {
     flex: 1,

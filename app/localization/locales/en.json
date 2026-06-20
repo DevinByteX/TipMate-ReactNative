@@ -247,8 +247,10 @@
       "darkModeLabel": "Toggle Dark Mode",
       "description": "Switch Up Your Style: Choose from our vibrant themes to make your app experience uniquely yours!",
       "darkModeDescription": "Enjoy a sleek, comfortable view by enabling Dark Mode.",
-      "skyThemeLabel": "Sky Theme",
-      "skyThemeDescription": "Switch to the calming Sky palette of deep and light blues."
+      "paletteDescription": "Pick a colour palette — Dark Mode applies to whichever you choose.",
+      "paletteDefault": "Default",
+      "paletteSky": "Sky",
+      "paletteRose": "Rose"
     }
   },
   "navigation": {

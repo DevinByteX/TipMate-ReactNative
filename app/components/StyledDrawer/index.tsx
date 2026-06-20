@@ -8,7 +8,13 @@ import {
 } from '@react-navigation/drawer';
 import { UnistylesRuntime, createStyleSheet, useStyles } from 'react-native-unistyles';
 import { IconTypeMap, StyledIcons, StyledIconTypesKey, StyledToggle } from '@components';
-import { setUserPreferredTheme, composeThemeName, getThemePalette, ThemeName } from '@utils';
+import {
+  setUserPreferredTheme,
+  composeThemeName,
+  getThemePalette,
+  isDarkThemeName,
+  ThemeName,
+} from '@utils';
 import { getFocusedRouteNameFromRoute, Route } from '@react-navigation/native';
 
 interface StyledDrawerProps extends DrawerContentComponentProps {}
@@ -79,7 +85,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
   const activeRouteName = getActiveRouteName(props.state.routes[props.state.index]);
   console.log('Active Route Name:', activeRouteName);
 
-  // Dark-mode toggle keeps the current palette (default or sky).
+  // Dark-mode toggle keeps the current palette (default, sky or rose).
   const onToggleDarkMode = (value: boolean) => {
     const currentTheme = UnistylesRuntime.themeName as ThemeName;
     const next = composeThemeName(getThemePalette(currentTheme), value);
@@ -105,9 +111,7 @@ export const StyledDrawer: React.FC<StyledDrawerProps> = props => {
         <View style={styles.themePrefContainer}>
           <Text style={styles.themePrefText}>{t('components.drawer.toggleDarkMode')}</Text>
           <StyledToggle
-            value={
-              UnistylesRuntime.themeName === 'dark' || UnistylesRuntime.themeName === 'skyDark'
-            }
+            value={isDarkThemeName(UnistylesRuntime.themeName as ThemeName)}
             onValueChange={onToggleDarkMode}
           />
         </View>
