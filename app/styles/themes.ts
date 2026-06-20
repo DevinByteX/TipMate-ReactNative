@@ -70,6 +70,17 @@ const sharedColors = {
   electric_disable_text_dark: '#7a86b0',
   electric_disable_button_light: '#2f4080',
   electric_disable_button_dark: '#e8ff66',
+  // Mocha theme palette (from provided CSS display-p3 -> sRGB: brown #7a5b4c / cream #f6efe9).
+  // Named by colour value rather than light/dark: the CSS --bg is the dark colour, so for this
+  // neutral palette the cream is used as the light-mode background and the brown as dark-mode.
+  mocha_brown: '#7a5b4c',
+  mocha_cream: '#f6efe9',
+  mocha_card_on_cream: '#ece1d8',
+  mocha_card_on_brown: '#8c6c5b',
+  mocha_muted_on_cream: '#a8917f',
+  mocha_muted_on_brown: '#c9b8ad',
+  mocha_button_on_cream: '#e4d5c9',
+  mocha_button_on_brown: '#5f4639',
 };
 
 const hexToRGBA = (hex: string, opacity: number) => {
@@ -356,6 +367,80 @@ export const electricDarkTheme = {
     warning: sharedColors.warning_dark,
     // Custom theming
     accent_first: sharedColors.electric_bg,
+    accent_second: sharedColors.primary_accent_dark_second,
+    accent_third: sharedColors.primary_accent_dark_third,
+    accent_forth: sharedColors.primary_accent_dark_fourth,
+  },
+  margins: {
+    sm: 2,
+    md: 4,
+    lg: 8,
+    xl: 12,
+  },
+  fonts: {
+    ...sharedFonts,
+  },
+  utils: {
+    hexToRGBA,
+  },
+  typography,
+  // add any keys/functions/objects/arrays you want!
+} as const;
+
+// Mocha theme — light mode (brown foreground on cream background)
+export const mochaTheme = {
+  colors: {
+    ...sharedColors,
+    backgroundColor: sharedColors.mocha_cream,
+    headerBGColor: sharedColors.mocha_cream,
+    accent: sharedColors.mocha_brown,
+    card_typography: sharedColors.mocha_brown,
+    card: sharedColors.mocha_card_on_cream,
+    devider: sharedColors.mocha_brown,
+    disable_text: sharedColors.mocha_muted_on_cream,
+    disable_button: sharedColors.mocha_button_on_cream,
+    error_toast: sharedColors.error_toast_light,
+    success: sharedColors.success_light,
+    warning: sharedColors.warning_light,
+    // Custom theming
+    accent_first: sharedColors.mocha_brown,
+    accent_second: sharedColors.primary_accent_light_second,
+    accent_third: sharedColors.primary_accent_light_third,
+    accent_forth: sharedColors.primary_accent_light_fourth,
+  },
+  margins: {
+    sm: 2,
+    md: 4,
+    lg: 8,
+    xl: 12,
+  },
+  fonts: {
+    ...sharedFonts,
+  },
+  utils: {
+    hexToRGBA,
+  },
+  typography,
+  // add any keys/functions/objects/arrays you want!
+} as const;
+
+// Mocha theme — dark mode (cream foreground on brown background)
+export const mochaDarkTheme = {
+  colors: {
+    ...sharedColors,
+    backgroundColor: sharedColors.mocha_brown,
+    headerBGColor: sharedColors.mocha_brown,
+    accent: sharedColors.mocha_cream,
+    card_typography: sharedColors.mocha_cream,
+    card: sharedColors.mocha_card_on_brown,
+    devider: sharedColors.mocha_cream,
+    disable_text: sharedColors.mocha_muted_on_brown,
+    disable_button: sharedColors.mocha_button_on_brown,
+    error_toast: sharedColors.error_toast_dark,
+    success: sharedColors.success_dark,
+    warning: sharedColors.warning_dark,
+    // Custom theming
+    accent_first: sharedColors.mocha_cream,
     accent_second: sharedColors.primary_accent_dark_second,
     accent_third: sharedColors.primary_accent_dark_third,
     accent_forth: sharedColors.primary_accent_dark_fourth,

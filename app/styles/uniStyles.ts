@@ -10,6 +10,8 @@ import {
   roseDarkTheme,
   electricTheme,
   electricDarkTheme,
+  mochaTheme,
+  mochaDarkTheme,
 } from './themes';
 
 type AppBreakpoints = typeof breakpoints;
@@ -23,6 +25,8 @@ type AppThemes = {
   roseDark: typeof roseDarkTheme;
   electric: typeof electricTheme;
   electricDark: typeof electricDarkTheme;
+  mocha: typeof mochaTheme;
+  mochaDark: typeof mochaDarkTheme;
 };
 
 declare module 'react-native-unistyles' {
@@ -40,6 +44,8 @@ UnistylesRegistry.addThemes({
   roseDark: roseDarkTheme,
   electric: electricTheme,
   electricDark: electricDarkTheme,
+  mocha: mochaTheme,
+  mochaDark: mochaDarkTheme,
 })
   .addBreakpoints(breakpoints)
   .addConfig({

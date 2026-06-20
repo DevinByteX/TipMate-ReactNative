@@ -251,7 +251,8 @@
       "paletteDefault": "Default",
       "paletteSky": "Sky",
       "paletteRose": "Rose",
-      "paletteElectric": "Electric"
+      "paletteElectric": "Electric",
+      "paletteMocha": "Mocha"
     }
   },
   "navigation": {

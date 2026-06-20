@@ -19,7 +19,9 @@ export const getUserPreferredTheme = async (): Promise<keyof UnistylesThemes> =>
       theme === 'rose' ||
       theme === 'roseDark' ||
       theme === 'electric' ||
-      theme === 'electricDark'
+      theme === 'electricDark' ||
+      theme === 'mocha' ||
+      theme === 'mochaDark'
     ) {
       return theme as keyof UnistylesThemes;
     }

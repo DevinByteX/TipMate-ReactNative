@@ -66,6 +66,7 @@ export const StyledThemeBox = ({
     { key: 'sky', label: t('components.themeBox.paletteSky'), color: '#0369a1' },
     { key: 'rose', label: t('components.themeBox.paletteRose'), color: '#db2777' },
     { key: 'electric', label: t('components.themeBox.paletteElectric'), color: '#dbfc00' },
+    { key: 'mocha', label: t('components.themeBox.paletteMocha'), color: '#7a5b4c' },
   ];
 
   const ThemeColorBox = ({
@@ -177,7 +178,9 @@ export const StyledThemeBox = ({
                   />
                 ) : null}
               </View>
-              <Text style={styles.paletteLabel}>{label}</Text>
+              <Text style={styles.paletteLabel} numberOfLines={1} adjustsFontSizeToFit>
+                {label}
+              </Text>
             </Pressable>
           );
         })}
