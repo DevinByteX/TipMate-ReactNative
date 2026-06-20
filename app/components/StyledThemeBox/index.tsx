@@ -61,8 +61,12 @@ export const StyledThemeBox = ({
   };
 
   const activePalette = getThemePalette(currentTheme);
+  // The default palette's accent is user-customisable (via the swatches above), so read it
+  // live from the default theme rather than hard-coding it, keeping the swatch in sync.
+  const defaultThemeName = composeThemeName('default', isDarkThemeName(currentTheme));
+  const defaultAccent = (UnistylesRuntime.getTheme(defaultThemeName) as typeof theme).colors.accent;
   const palettes: { key: ThemePalette; label: string; color: string }[] = [
-    { key: 'default', label: t('components.themeBox.paletteDefault'), color: '#009688' },
+    { key: 'default', label: t('components.themeBox.paletteDefault'), color: defaultAccent },
     { key: 'sky', label: t('components.themeBox.paletteSky'), color: '#0369a1' },
     { key: 'rose', label: t('components.themeBox.paletteRose'), color: '#db2777' },
     { key: 'electric', label: t('components.themeBox.paletteElectric'), color: '#dbfc00' },
