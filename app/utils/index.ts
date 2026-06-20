@@ -25,6 +25,8 @@ export {
 export type { CustomisedTheme } from './themeStorage';
 export { validateOptionValues, areOptionArraysSame } from './optionsValidation';
 export { applyThemeColors } from './themeCustomization';
+export { isDarkThemeName, getThemePalette, composeThemeName } from './themeMode';
+export type { ThemeName, ThemePalette } from './themeMode';
 export { shareTipText, shareTipPDF, formatTipDetailsPreview } from './tipSharing';
 export type {
   ShareTipDetailsParams,

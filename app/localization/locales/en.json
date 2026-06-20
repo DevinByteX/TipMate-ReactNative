@@ -246,7 +246,9 @@
       "title": "CUSTOMISE YOUR THEME",
       "darkModeLabel": "Toggle Dark Mode",
       "description": "Switch Up Your Style: Choose from our vibrant themes to make your app experience uniquely yours!",
-      "darkModeDescription": "Enjoy a sleek, comfortable view by enabling Dark Mode."
+      "darkModeDescription": "Enjoy a sleek, comfortable view by enabling Dark Mode.",
+      "skyThemeLabel": "Sky Theme",
+      "skyThemeDescription": "Switch to the calming Sky palette of deep and light blues."
     }
   },
   "navigation": {

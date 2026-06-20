@@ -1,12 +1,14 @@
 import { UnistylesRegistry } from 'react-native-unistyles';
 import { breakpoints } from './breakpoints';
-import { lightTheme, darkTheme, premiumTheme } from './themes';
+import { lightTheme, darkTheme, premiumTheme, skyTheme, skyDarkTheme } from './themes';
 
 type AppBreakpoints = typeof breakpoints;
 type AppThemes = {
   light: typeof lightTheme;
   dark: typeof darkTheme;
   premium: typeof premiumTheme;
+  sky: typeof skyTheme;
+  skyDark: typeof skyDarkTheme;
 };
 
 declare module 'react-native-unistyles' {
@@ -18,6 +20,8 @@ UnistylesRegistry.addThemes({
   light: lightTheme,
   dark: darkTheme,
   premium: premiumTheme,
+  sky: skyTheme,
+  skyDark: skyDarkTheme,
 })
   .addBreakpoints(breakpoints)
   .addConfig({

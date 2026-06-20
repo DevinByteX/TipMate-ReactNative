@@ -43,6 +43,15 @@ const sharedColors = {
   primary_accent_dark_third: '#7FA3FA',
   primary_accent_light_fourth: '#E94B7C',
   primary_accent_dark_fourth: '#FE68A6',
+  // Sky theme palette (from provided CSS: --bg #e0f2fe / --fg #0369a1)
+  sky_bg: '#e0f2fe',
+  sky_fg: '#0369a1',
+  sky_card_light: '#bae6fd',
+  sky_card_dark: '#075985',
+  sky_disable_text_light: '#3aa3d4',
+  sky_disable_text_dark: '#7dd3fc',
+  sky_disable_button_light: '#cfe8fb',
+  sky_disable_button_dark: '#0c4a6e',
 };
 
 const hexToRGBA = (hex: string, opacity: number) => {
@@ -107,6 +116,80 @@ export const darkTheme = {
     warning: sharedColors.warning_dark,
     // Custom theming
     accent_first: sharedColors.primary_accent_dark,
+    accent_second: sharedColors.primary_accent_dark_second,
+    accent_third: sharedColors.primary_accent_dark_third,
+    accent_forth: sharedColors.primary_accent_dark_fourth,
+  },
+  margins: {
+    sm: 2,
+    md: 4,
+    lg: 8,
+    xl: 12,
+  },
+  fonts: {
+    ...sharedFonts,
+  },
+  utils: {
+    hexToRGBA,
+  },
+  typography,
+  // add any keys/functions/objects/arrays you want!
+} as const;
+
+// Sky theme — combo-1 (deep blue foreground on light blue background)
+export const skyTheme = {
+  colors: {
+    ...sharedColors,
+    backgroundColor: sharedColors.sky_bg,
+    headerBGColor: sharedColors.sky_bg,
+    accent: sharedColors.sky_fg,
+    card_typography: sharedColors.sky_fg,
+    card: sharedColors.sky_card_light,
+    devider: sharedColors.sky_fg,
+    disable_text: sharedColors.sky_disable_text_light,
+    disable_button: sharedColors.sky_disable_button_light,
+    error_toast: sharedColors.error_toast_light,
+    success: sharedColors.success_light,
+    warning: sharedColors.warning_light,
+    // Custom theming
+    accent_first: sharedColors.sky_fg,
+    accent_second: sharedColors.primary_accent_light_second,
+    accent_third: sharedColors.primary_accent_light_third,
+    accent_forth: sharedColors.primary_accent_light_fourth,
+  },
+  margins: {
+    sm: 2,
+    md: 4,
+    lg: 8,
+    xl: 12,
+  },
+  fonts: {
+    ...sharedFonts,
+  },
+  utils: {
+    hexToRGBA,
+  },
+  typography,
+  // add any keys/functions/objects/arrays you want!
+} as const;
+
+// Sky theme — combo-2 (light blue foreground on deep blue background)
+export const skyDarkTheme = {
+  colors: {
+    ...sharedColors,
+    backgroundColor: sharedColors.sky_fg,
+    headerBGColor: sharedColors.sky_fg,
+    accent: sharedColors.sky_bg,
+    card_typography: sharedColors.sky_bg,
+    card: sharedColors.sky_card_dark,
+    devider: sharedColors.sky_bg,
+    disable_text: sharedColors.sky_disable_text_dark,
+    disable_button: sharedColors.sky_disable_button_dark,
+    error_toast: sharedColors.error_toast_dark,
+    success: sharedColors.success_dark,
+    warning: sharedColors.warning_dark,
+    // Custom theming
+    accent_first: sharedColors.sky_bg,
     accent_second: sharedColors.primary_accent_dark_second,
     accent_third: sharedColors.primary_accent_dark_third,
     accent_forth: sharedColors.primary_accent_dark_fourth,

@@ -3,7 +3,16 @@ import { View, Text, Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { createStyleSheet, UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import { StyledIcons, StyledToggle } from '@components';
-import { setUserPreferredTheme, setUserUpdatedThemeOption, applyThemeColors } from '@utils';
+import { useTranslation } from 'react-i18next';
+import {
+  setUserPreferredTheme,
+  setUserUpdatedThemeOption,
+  applyThemeColors,
+  composeThemeName,
+  getThemePalette,
+  isDarkThemeName,
+  ThemeName,
+} from '@utils';
 import { useCustomThemesConfig } from '@configs';
 import { useScaleSpring } from '@hooks';
 
@@ -19,11 +28,26 @@ export const StyledThemeBox = ({
   toggleText?: string;
 }) => {
   const { styles, theme } = useStyles(stylesheet);
+  const { t } = useTranslation();
 
   const CustomThemesData = useCustomThemesConfig();
 
-  const persistUserPreferredTheme = async (value: boolean) => {
-    await setUserPreferredTheme(value ? 'dark' : 'light');
+  const currentTheme = UnistylesRuntime.themeName as ThemeName;
+
+  // Applies a base theme and persists it as the user's preference.
+  const applyBaseTheme = async (themeName: ThemeName) => {
+    UnistylesRuntime.setTheme(themeName);
+    await setUserPreferredTheme(themeName);
+  };
+
+  // Dark-mode toggle keeps the current palette (default or sky).
+  const onToggleDarkMode = (value: boolean) => {
+    applyBaseTheme(composeThemeName(getThemePalette(currentTheme), value));
+  };
+
+  // Sky-theme toggle keeps the current dark/light state.
+  const onToggleSkyTheme = (value: boolean) => {
+    applyBaseTheme(composeThemeName(value ? 'sky' : 'default', isDarkThemeName(currentTheme)));
   };
 
   const ThemeColorBox = ({
@@ -102,12 +126,26 @@ export const StyledThemeBox = ({
           <Text style={styles.toggleText}>{`${toggleText}`}</Text>
         </View>
         <View style={styles.toggleButtonContainer}>
+          <StyledToggle value={isDarkThemeName(currentTheme)} onValueChange={onToggleDarkMode} />
+        </View>
+      </View>
+      <Text style={styles.toggleInstructionText}>
+        <StyledIcons
+          type={'FontAwesome6'}
+          name={'circle-info'}
+          size={styles.toggleInstructionText?.fontSize}
+          color={styles.toggleInstructionText?.color}
+        />
+        {` ${t('components.themeBox.skyThemeDescription')}`}
+      </Text>
+      <View style={styles.mainThemeToggleContainer}>
+        <View style={styles.toggleTextContainer}>
+          <Text style={styles.toggleText}>{t('components.themeBox.skyThemeLabel')}</Text>
+        </View>
+        <View style={styles.toggleButtonContainer}>
           <StyledToggle
-            value={UnistylesRuntime.themeName === 'dark'}
-            onValueChange={value => {
-              persistUserPreferredTheme(value);
-              UnistylesRuntime.setTheme(value ? 'dark' : 'light');
-            }}
+            value={getThemePalette(currentTheme) === 'sky'}
+            onValueChange={onToggleSkyTheme}
           />
         </View>
       </View>
