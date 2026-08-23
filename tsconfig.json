@@ -1,7 +1,8 @@
 {
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
-    "types": ["jest"],
+    // TypeScript 6 deprecates bare `baseUrl`; the repo's "@/*"-style path aliases below still need it.
+    "ignoreDeprecations": "6.0",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "baseUrl": ".", // if i'm not using baseUrl option i have to add . in every single path beginning as EX : "paths":{ "@/":["./app/*"]} || see no dot in /app/*
