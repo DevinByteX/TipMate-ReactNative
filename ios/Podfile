@@ -30,5 +30,16 @@ target 'TipCalculator' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+
+    # Some pods (e.g. AsyncStorage, RNSVG) ship podspecs with iOS targets below
+    # the Xcode 27 simulator minimum, so raise every pod target to the RN floor.
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        current = config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']
+        if current.nil? || current.to_f < min_ios_version_supported.to_f
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = min_ios_version_supported
+        end
+      end
+    end
   end
 end
