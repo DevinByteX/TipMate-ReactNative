@@ -177,7 +177,6 @@
     },
     "roundOptions": {
       "roundValue": "VALEUR D’ARRONDI",
-      "no": "NON",
       "up": "PLUS",
       "down": "MOINS",
       "description": "Vous préférez un chiffre net ? Arrondissez vers le haut ou vers le bas pour un total parfait."

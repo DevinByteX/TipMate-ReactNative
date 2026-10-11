@@ -177,7 +177,6 @@
     },
     "roundOptions": {
       "roundValue": "VALOR DE REDONDEO",
-      "no": "NO",
       "up": "ARRIBA",
       "down": "ABAJO",
       "description": "¿Prefieres un número redondo? Redondea hacia arriba o hacia abajo para que tu total sea perfecto."

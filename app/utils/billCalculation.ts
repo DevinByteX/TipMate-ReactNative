@@ -23,7 +23,6 @@ export type BillCalculationType = {
   disabledRoundingMethods: {
     UP: boolean;
     DOWN: boolean;
-    NO: boolean;
   };
 };
 
@@ -34,7 +33,6 @@ export type RoundingMethodType = 'UP' | 'DOWN' | 'NO';
 export type DisabledRoundingMethodsType = {
   UP: boolean;
   DOWN: boolean;
-  NO: boolean;
 };
 
 // Rounding method enum
@@ -87,7 +85,6 @@ export const calculateBillValues = (
       disabledRoundingMethods: {
         UP: false,
         DOWN: false,
-        NO: false,
       },
     };
   }
@@ -96,8 +93,7 @@ export const calculateBillValues = (
   //                 Tip is calculated on the pre-tax subtotal (industry standard).
   // 'after' mode:  bill already includes tax — no extra tax calculation needed.
   //                This mode is a UI signal only; calculation is identical to no-tax.
-  const isBeforeTax =
-    taxConfig && taxConfig.mode === 'before' && taxConfig.value > 0;
+  const isBeforeTax = taxConfig && taxConfig.mode === 'before' && taxConfig.value > 0;
 
   const taxAmount = isBeforeTax
     ? taxConfig!.type === 'percentage'
@@ -126,7 +122,6 @@ export const calculateBillValues = (
   const disabledRoundingMethods: DisabledRoundingMethodsType = {
     UP: totalBill === Math.ceil(totalBill),
     DOWN: totalBill === Math.floor(totalBill) || numberOfPeople === 1 || tipPercentage === 0,
-    NO: false,
   };
 
   return {
@@ -179,19 +174,20 @@ export const calculateBillValuesCustomSplit = (
     return {
       overall: { total: '0.00', tip: '0.00', subtotal: '0.00' },
       individuals: [],
-      disabledRoundingMethods: { UP: false, DOWN: false, NO: false },
+      disabledRoundingMethods: { UP: false, DOWN: false },
     };
   }
 
   // Filter out any invalid splits to be extra safe
-  const validSplits = individualSplits.filter(s => s && typeof s === 'object' && 'id' in s && 'name' in s);
+  const validSplits = individualSplits.filter(
+    s => s && typeof s === 'object' && 'id' in s && 'name' in s,
+  );
 
   // 'before' mode: bill is pre-tax — tax is calculated and added as a separate line item.
   //                 Tip is calculated on the pre-tax subtotal (industry standard).
   // 'after' mode:  bill already includes tax — no extra tax calculation needed.
   //                This mode is a UI signal only; calculation is identical to no-tax.
-  const isBeforeTax =
-    taxConfig && taxConfig.mode === 'before' && taxConfig.value > 0;
+  const isBeforeTax = taxConfig && taxConfig.mode === 'before' && taxConfig.value > 0;
 
   const taxAmount = isBeforeTax
     ? taxConfig!.type === 'percentage'
@@ -327,7 +323,6 @@ export const calculateBillValuesCustomSplit = (
   const disabledRoundingMethods: DisabledRoundingMethodsType = {
     UP: totalBill === Math.ceil(totalBill),
     DOWN: totalBill === Math.floor(totalBill) || tipPercentage === 0,
-    NO: false,
   };
 
   return {

@@ -88,7 +88,7 @@ export const StyledRoundBox = ({
   const { styles, theme } = useStyles(styleSheet);
   const { t } = useTranslation();
 
-  const isResetDisabled = roundMethod === RoundingMethod.NO || !!disablingRoundingMethod?.NO;
+  const isResetDisabled = roundMethod === RoundingMethod.NO;
 
   return (
     <View style={styles.mainContainer}>

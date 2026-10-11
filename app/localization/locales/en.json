@@ -178,7 +178,6 @@
     },
     "roundOptions": {
       "roundValue": "ROUND VALUE",
-      "no": "NO",
       "up": "UP",
       "down": "DOWN",
       "description": "Prefer a neat number? Round up or down to make your total picture-perfect."
