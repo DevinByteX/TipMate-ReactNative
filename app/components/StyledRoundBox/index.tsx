@@ -20,8 +20,8 @@ const RoundCapsule = ({
   active = false,
   textValue,
   textLabel,
-  iconType: _iconType = 'FontAwesome6',
-  iconName: _iconName = 'circle',
+  iconType = 'FontAwesome6',
+  iconName = 'circle',
   disabled = false,
   onRoundCapsulePress,
 }: RoundCapsuleProps) => {
@@ -62,8 +62,8 @@ const RoundCapsule = ({
       >
         {`${textLabel ?? textValue} `}
         <StyledIcons
-          type={'FontAwesome6'}
-          name={'sliders'}
+          type={iconType}
+          name={iconName}
           size={styles.roundCapsuleText?.fontSize - 4}
           color={TextColor}
         />
