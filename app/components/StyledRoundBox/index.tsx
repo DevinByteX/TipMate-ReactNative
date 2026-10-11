@@ -85,12 +85,31 @@ export const StyledRoundBox = ({
   disablingRoundingMethod?: DisabledRoundingMethodsType;
   onSelectedRound?: (value: RoundingMethodType) => void;
 }) => {
-  const { styles } = useStyles(styleSheet);
+  const { styles, theme } = useStyles(styleSheet);
   const { t } = useTranslation();
+
+  const isResetDisabled = roundMethod === RoundingMethod.NO || !!disablingRoundingMethod?.NO;
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.titleText}>{`${titleText}`}</Text>
+      <View style={styles.titleRow}>
+        <Text style={styles.titleText}>{`${titleText}`}</Text>
+        <Pressable
+          style={styles.resetButton}
+          onPress={() => onSelectedRound && onSelectedRound(RoundingMethod.NO)}
+          disabled={isResetDisabled}
+          hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel="Reset rounding"
+        >
+          <StyledIcons
+            type={'FontAwesome6'}
+            name={'rotate-left'}
+            size={styles.titleText?.fontSize}
+            color={isResetDisabled ? theme.colors.disable_button : theme.colors.accent}
+          />
+        </Pressable>
+      </View>
       <Text style={styles.instructionText}>
         <StyledIcons
           type={'FontAwesome6'}
@@ -101,17 +120,6 @@ export const StyledRoundBox = ({
         {` ${description}`}
       </Text>
       <View style={styles.mainInnerContainer}>
-        <RoundCapsule
-          textValue="NO"
-          textLabel={t('components.roundOptions.no')}
-          disabled={disablingRoundingMethod?.NO}
-          active={roundMethod == RoundingMethod.NO}
-          iconType="FontAwesome6"
-          iconName={'circle-dot'}
-          onRoundCapsulePress={value => {
-            onSelectedRound && onSelectedRound(value);
-          }}
-        />
         <RoundCapsule
           textValue="UP"
           textLabel={t('components.roundOptions.up')}
@@ -148,12 +156,21 @@ const styleSheet = createStyleSheet(({ colors, fonts, typography }) => ({
     paddingBottom: (UnistylesRuntime.screen.height * 1) / 100,
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
   },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
   titleText: {
     color: colors.accent,
     fontSize: typography.fontSize.md,
     lineHeight: typography.lineHeight.md,
     fontFamily: fonts.Nunito_Black,
-    marginHorizontal: (UnistylesRuntime.screen.width * 5) / 100,
+  },
+  resetButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   instructionText: {
     fontSize: typography.fontSize.xs,
