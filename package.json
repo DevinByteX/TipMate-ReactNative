@@ -82,6 +82,7 @@
     "node": ">= 22.11.0"
   },
   "allowScripts": {
-    "sharp@0.34.5": true
+    "sharp@0.34.5": true,
+    "fsevents@2.3.3": true
   }
 }
