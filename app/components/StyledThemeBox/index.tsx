@@ -172,7 +172,9 @@ const stylesheet = createStyleSheet(({ colors, fonts, typography }) => ({
   },
   toggleButtonContainer: {
     flex: 2,
-    alignItems: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   themeColorBox: {
     flex: 1,
