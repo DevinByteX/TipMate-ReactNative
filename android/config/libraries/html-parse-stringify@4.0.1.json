@@ -1,0 +1,12 @@
+{
+  "artifactVersion": "4.0.1",
+  "description": "Parses well-formed HTML (meaning all tags closed) into an AST and back. quickly.",
+  "developers": [{ "name": "Henrik Joreteg <henrik@joreteg.com>", "organisationUrl": "" }],
+  "licenses": [
+    "MIT_5e627c2cc8412e6a1c96931dc068d7ea54398574c05579f428d7fb64d8524485865663c08f83343e7b90d978132789aeb0297c008c195e9aa8123e60ac61c037"
+  ],
+  "name": "html-parse-stringify",
+  "tag": "",
+  "uniqueId": "html-parse-stringify@4.0.1",
+  "website": "https://github.com/i18next/html-parse-stringify"
+}
