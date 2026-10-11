@@ -385,7 +385,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/LicensePlist/license-plist --add-version-numbers --output-path ./Settings.bundle";
+			shellScript = "set -e\n\nif [[ -n ${PODS_ROOT} ]]; then ${PODS_ROOT}/LicensePlist/license-plist --add-version-numbers --output-path ./Settings.bundle; else /usr/bin/env xcrun --sdk macosx swift run -c release --package-path ./build/generated/autolinking/libs/ReactNativeLegal/swift-tools license-plist --add-version-numbers --output-path ./Settings.bundle; fi\n";
 		};
 		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
