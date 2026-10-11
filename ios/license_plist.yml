@@ -6,10 +6,10 @@ rename:
   "@react-native-vector-icons_ant-design@13.1.4": '@react-native-vector-icons/ant-design'
   "@react-native-vector-icons_common@13.0.3": '@react-native-vector-icons/common'
   "find-up@8.0.0": find-up
-  "locate-path@5.0.0": locate-path
-  "p-locate@4.1.0": p-locate
-  "p-limit@2.3.0": p-limit
-  "p-try@2.2.0": p-try
+  "locate-path@6.0.0": locate-path
+  "p-locate@5.0.0": p-locate
+  "p-limit@3.1.0": p-limit
+  "yocto-queue@0.1.0": yocto-queue
   "unicorn-magic@0.3.0": unicorn-magic
   "picocolors@1.1.1": picocolors
   "plist@3.1.0": plist
@@ -396,22 +396,22 @@ manual:
     version: '8.0.0'
     source: sindresorhus/find-up
     file: '../node_modules/@react-native-vector-icons/common/node_modules/find-up/LICENSE'
-  - name: locate-path@5.0.0
-    version: '5.0.0'
+  - name: locate-path@6.0.0
+    version: '6.0.0'
     source: sindresorhus/locate-path
     file: '../node_modules/locate-path/LICENSE'
-  - name: p-locate@4.1.0
-    version: '4.1.0'
+  - name: p-locate@5.0.0
+    version: '5.0.0'
     source: sindresorhus/p-locate
     file: '../node_modules/p-locate/LICENSE'
-  - name: p-limit@2.3.0
-    version: '2.3.0'
+  - name: p-limit@3.1.0
+    version: '3.1.0'
     source: sindresorhus/p-limit
-    file: '../node_modules/p-locate/node_modules/p-limit/LICENSE'
-  - name: p-try@2.2.0
-    version: '2.2.0'
-    source: sindresorhus/p-try
-    file: '../node_modules/p-try/LICENSE'
+    file: '../node_modules/p-limit/LICENSE'
+  - name: yocto-queue@0.1.0
+    version: '0.1.0'
+    source: sindresorhus/yocto-queue
+    file: '../node_modules/yocto-queue/LICENSE'
   - name: unicorn-magic@0.3.0
     version: '0.3.0'
     source: sindresorhus/unicorn-magic
@@ -435,7 +435,7 @@ manual:
   - name: xmlbuilder@15.1.1
     version: '15.1.1'
     source: https://github.com/oozcitak/xmlbuilder-js
-    file: '../node_modules/plist/node_modules/xmlbuilder/LICENSE'
+    file: '../node_modules/xmlbuilder/LICENSE'
   - name: '@react-native-vector-icons_feather@13.1.4'
     version: '13.1.4'
     source: https://github.com/oblador/react-native-vector-icons
@@ -515,7 +515,7 @@ manual:
   - name: is-arrayish@0.3.2
     version: '0.3.2'
     source: https://github.com/qix-/node-is-arrayish
-    file: '../node_modules/is-arrayish/LICENSE'
+    file: '../node_modules/simple-swizzle/node_modules/is-arrayish/LICENSE'
   - name: use-latest-callback@0.2.4
     version: '0.2.4'
     source: https://github.com/satya164/use-latest-callback
@@ -551,7 +551,7 @@ manual:
   - name: react-is@19.3.0
     version: '19.3.0'
     source: https://github.com/react/react
-    file: '../node_modules/@react-navigation/core/node_modules/react-is/LICENSE'
+    file: '../node_modules/react-is/LICENSE'
   - name: standard-navigation@0.0.8
     version: '0.0.8'
     source: https://github.com/react-navigation/standard-navigation
@@ -803,7 +803,7 @@ manual:
   - name: is-fullwidth-code-point@3.0.0
     version: '3.0.0'
     source: sindresorhus/is-fullwidth-code-point
-    file: '../node_modules/is-fullwidth-code-point/LICENSE'
+    file: '../node_modules/string-width/node_modules/is-fullwidth-code-point/LICENSE'
   - name: strip-ansi@6.0.1
     version: '6.0.1'
     source: chalk/strip-ansi
@@ -899,7 +899,7 @@ manual:
   - name: is-wsl@2.2.0
     version: '2.2.0'
     source: sindresorhus/is-wsl
-    file: '../node_modules/is-wsl/LICENSE'
+    file: '../node_modules/chrome-launcher/node_modules/is-wsl/LICENSE'
   - name: is-docker@2.2.1
     version: '2.2.1'
     source: sindresorhus/is-docker
@@ -938,7 +938,7 @@ manual:
   - name: encodeurl@1.0.2
     version: '1.0.2'
     source: pillarjs/encodeurl
-    file: '../node_modules/finalhandler/node_modules/encodeurl/LICENSE'
+    file: '../node_modules/encodeurl/LICENSE'
   - name: escape-html@1.0.3
     version: '1.0.3'
     source: component/escape-html
@@ -958,7 +958,7 @@ manual:
   - name: statuses@1.5.0
     version: '1.5.0'
     source: jshttp/statuses
-    file: '../node_modules/finalhandler/node_modules/statuses/LICENSE'
+    file: '../node_modules/statuses/LICENSE'
   - name: unpipe@1.0.0
     version: '1.0.0'
     source: stream-utils/unpipe
@@ -978,7 +978,7 @@ manual:
   - name: encodeurl@2.0.0
     version: '2.0.0'
     source: pillarjs/encodeurl
-    file: '../node_modules/encodeurl/LICENSE'
+    file: '../node_modules/serve-static/node_modules/encodeurl/LICENSE'
   - name: send@0.19.2
     version: '0.19.2'
     source: pillarjs/send
@@ -1014,7 +1014,7 @@ manual:
   - name: statuses@2.0.2
     version: '2.0.2'
     source: jshttp/statuses
-    file: '../node_modules/statuses/LICENSE'
+    file: '../node_modules/http-errors/node_modules/statuses/LICENSE'
   - name: toidentifier@1.0.1
     version: '1.0.1'
     source: component/toidentifier
@@ -1034,7 +1034,7 @@ manual:
   - name: ws@7.5.13
     version: '7.5.13'
     source: websockets/ws
-    file: '../node_modules/ws/LICENSE'
+    file: '../node_modules/@react-native/dev-middleware/node_modules/ws/LICENSE'
   - name: metro@0.87.0
     version: '0.87.0'
     source: https://github.com/react/metro
@@ -1042,11 +1042,11 @@ manual:
   - name: accepts@2.0.0
     version: '2.0.0'
     source: jshttp/accepts
-    file: '../node_modules/accepts/LICENSE'
+    file: '../node_modules/metro/node_modules/accepts/LICENSE'
   - name: mime-types@3.0.2
     version: '3.0.2'
     source: jshttp/mime-types
-    file: '../node_modules/mime-types/LICENSE'
+    file: '../node_modules/metro/node_modules/mime-types/LICENSE'
   - name: mime-db@1.54.0
     version: '1.54.0'
     source: jshttp/mime-db
@@ -1054,7 +1054,7 @@ manual:
   - name: negotiator@1.1.0
     version: '1.1.0'
     source: jshttp/negotiator
-    file: '../node_modules/accepts/node_modules/negotiator/LICENSE'
+    file: '../node_modules/metro/node_modules/negotiator/LICENSE'
   - name: content-type@2.1.0
     version: '2.1.0'
     source: jshttp/content-type
@@ -1374,7 +1374,7 @@ manual:
   - name: commander@12.1.0
     version: '12.1.0'
     source: https://github.com/tj/commander.js
-    file: '../node_modules/commander/LICENSE'
+    file: '../node_modules/react-native/node_modules/commander/LICENSE'
   - name: hermes-compiler@250829098.0.17
     version: '250829098.0.17'
     source: https://github.com/facebook/hermes
@@ -1461,19 +1461,19 @@ manual:
   - name: minimatch@10.2.6
     version: '10.2.6'
     source: https://github.com/isaacs/minimatch
-    file: '../node_modules/@expo/config-plugins/node_modules/minimatch/LICENSE.md'
+    file: '../node_modules/minimatch/LICENSE.md'
   - name: brace-expansion@5.0.12
     version: '5.0.12'
     source: https://github.com/juliangruber/brace-expansion
-    file: '../node_modules/@expo/config-plugins/node_modules/brace-expansion/LICENSE'
+    file: '../node_modules/brace-expansion/LICENSE'
   - name: balanced-match@4.0.4
     version: '4.0.4'
     source: https://github.com/juliangruber/balanced-match
-    file: '../node_modules/@expo/config-plugins/node_modules/balanced-match/LICENSE.md'
+    file: '../node_modules/balanced-match/LICENSE.md'
   - name: minipass@7.1.3
     version: '7.1.3'
     source: https://github.com/isaacs/minipass
-    file: '../node_modules/minipass/LICENSE.md'
+    file: '../node_modules/@expo/config-plugins/node_modules/minipass/LICENSE.md'
   - name: path-scurry@2.0.2
     version: '2.0.2'
     source: https://github.com/isaacs/path-scurry
@@ -1513,7 +1513,7 @@ manual:
   - name: xml2js@0.6.0
     version: '0.6.0'
     source: https://github.com/Leonidas-from-XIV/node-xml2js
-    file: '../node_modules/@expo/config-plugins/node_modules/xml2js/LICENSE'
+    file: '../node_modules/xml2js/LICENSE'
   - name: sax@1.4.1
     version: '1.4.1'
     source: https://github.com/isaacs/sax-js
@@ -1521,7 +1521,7 @@ manual:
   - name: xmlbuilder@11.0.1
     version: '11.0.1'
     source: https://github.com/oozcitak/xmlbuilder-js
-    file: '../node_modules/xmlbuilder/LICENSE'
+    file: '../node_modules/xml2js/node_modules/xmlbuilder/LICENSE'
   - name: commander@14.0.3
     version: '14.0.3'
     source: https://github.com/tj/commander.js
@@ -1693,7 +1693,7 @@ manual:
   - name: xml2js@0.6.2
     version: '0.6.2'
     source: https://github.com/Leonidas-from-XIV/node-xml2js
-    file: '../node_modules/xml2js/LICENSE'
+    file: '../node_modules/react-native-legal/node_modules/xml2js/LICENSE'
   - name: react-native-localize@3.7.2
     version: '3.7.2'
     source: https://github.com/zoontek/react-native-localize

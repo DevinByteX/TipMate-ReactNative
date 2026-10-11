@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "26.4.3",
+  "description": "i18next internationalization framework",
+  "developers": [
+    {
+      "name": "Jan Mühlemann <jan.muehlemann@gmail.com> (https://github.com/jamuhl)",
+      "organisationUrl": ""
+    }
+  ],
+  "licenses": [
+    "MIT_b274a1c7a9be813025b50e0e5d14843286210432632efad4109526dd0d022f3fe4b69585693df56d849a2a30cad4bb53fe006db11348a2f208def94db027597b"
+  ],
+  "name": "i18next",
+  "tag": "",
+  "uniqueId": "i18next@26.4.3",
+  "website": "https://github.com/i18next/i18next"
+}
