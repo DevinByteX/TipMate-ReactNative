@@ -60,14 +60,14 @@ const RoundCapsule = ({
         adjustsFontSizeToFit={true}
         numberOfLines={1}
       >
-        {`${textLabel ?? textValue} `}
-        <StyledIcons
-          type={iconType}
-          name={iconName}
-          size={styles.roundCapsuleText?.fontSize - 4}
-          color={TextColor}
-        />
+        {textLabel ?? textValue}
       </Text>
+      <StyledIcons
+        type={iconType}
+        name={iconName}
+        size={styles.roundCapsuleText?.fontSize - 4}
+        color={TextColor}
+      />
     </Pressable>
   );
 };
@@ -174,6 +174,7 @@ const styleSheet = createStyleSheet(({ colors, fonts, typography }) => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    columnGap: (UnistylesRuntime.screen.width * 1) / 100,
     width: '100%',
     borderRadius: (UnistylesRuntime.screen.height * 1) / 100,
     height: (UnistylesRuntime.screen.height * 4) / 100,
